@@ -27,9 +27,10 @@ namespace Seruichi.Seller.Web
             //          "~/Content/site.css"));
 
 
+            //The bundle hierarchy and the physical folder hierarchy must match
             bundles.Add(new StyleBundle("~/Content/css/application").Include(
-                      "~/Content/css/Soft-UI-Aside-Navbar.css",
-                      "~/Content/css/typeahead.custom.css",
+                      "~/Content/bootstrap/Soft-UI-Aside-Navbar.css",
+                      "~/Content/typeahead/typeahead.custom.css",
                       "~/Content/css/loading.css",
                       "~/Content/css/validation.css"));
 

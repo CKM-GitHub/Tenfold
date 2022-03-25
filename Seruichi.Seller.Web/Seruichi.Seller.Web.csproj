@@ -167,11 +167,11 @@
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\bootstrap\bootstrap.min.js" />
     <Content Include="Content\css\a_index.css" />
-    <Content Include="Content\css\typeahead.custom.css" />
+    <Content Include="Content\typeahead\typeahead.custom.css" />
     <Content Include="Content\css\validation.css" />
     <Content Include="Content\css\loading.css" />
     <Content Include="Content\css\errorpage.css" />
-    <Content Include="Content\css\Soft-UI-Aside-Navbar.css" />
+    <Content Include="Content\bootstrap\Soft-UI-Aside-Navbar.css" />
     <Content Include="Content\fonts\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\modernizr\modernizr-2.8.3.js" />

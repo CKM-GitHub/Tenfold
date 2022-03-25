@@ -89,8 +89,14 @@ namespace Seruichi.BL
 
         public decimal[] GetLongitudeAndLatitude(params string[] address)
         {
+            string param = "";
+            if (address != null)
+            {
+                param = String.Join("", address);
+            }
+
             string url = string.Format("{0}?{1}={2}",
-                "https://msearch.gsi.go.jp/address-search/AddressSearch", "q", System.Net.WebUtility.UrlEncode(String.Join("", address)));
+                "https://msearch.gsi.go.jp/address-search/AddressSearch", "q", System.Net.WebUtility.UrlEncode(param));
 
             string responseBody = "";
             using (System.Net.Http.HttpClient client = new System.Net.Http.HttpClient())
@@ -111,7 +117,7 @@ namespace Seruichi.BL
             };
 
             var deserialized = Newtonsoft.Json.JsonConvert.DeserializeAnonymousType(responseBody, def);
-            if (deserialized.Length == 0)
+            if (deserialized == null || deserialized.Length == 0)
             {
                 return new decimal[] { 0, 0 };
             }
@@ -128,7 +134,6 @@ namespace Seruichi.BL
             if (startDate > endDate) return 0;
 
             int diffMonth = (endDate.Month + (endDate.Year - startDate.Year) * 12) - startDate.Month;
-            decimal test = diffMonth % 12 > 0 ? diffMonth / 12 + 1 : diffMonth / 12;
             return diffMonth % 12 > 0 ? diffMonth / 12 + 1 : diffMonth / 12;
         }
     }
