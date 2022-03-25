@@ -1,6 +1,6 @@
 ﻿(function ($) {
 
-    $.fn.hideChildrenError = function () {
+    $.fn.hideChildErrors = function () {
         const $this = this;
         $this.find('.cap-is-invalid').each(function () {
             $(this).hideError();

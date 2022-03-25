@@ -7,7 +7,7 @@ namespace Seruichi.Common
 {
     public class AESCryption
     {
-        public static readonly string DefaultKey = "W7grxf9";
+        public static readonly string DefaultKey = "10_4_Ld";
 
         private const int keySize = 256;
         private const int blockSize = 128;
@@ -62,26 +62,26 @@ namespace Seruichi.Common
             using (var aes = CreateAesCng(aesKey, aesIv))
             using (var encryptor = aes.CreateEncryptor())
             {
-                byte[] encryptValue = encryptor.TransformFinalBlock(byteValue, 0, byteLength);
-                byte[] byteData = new byte[salt.Length + aesIv.Length + encryptValue.Length];
+                byte[] encryptedValue = encryptor.TransformFinalBlock(byteValue, 0, byteLength);
+                byte[] byteData = new byte[salt.Length + aesIv.Length + encryptedValue.Length];
 
                 int len1 = Buffer.ByteLength(salt);
                 int len2 = Buffer.ByteLength(aesIv);
-                int len3 = Buffer.ByteLength(encryptValue);
+                int len3 = Buffer.ByteLength(encryptedValue);
 
                 Buffer.BlockCopy(salt, 0, byteData, 0, len1);
                 Buffer.BlockCopy(aesIv, 0, byteData, len1, len2);
-                Buffer.BlockCopy(encryptValue, 0, byteData, len1 + len2, len3);
+                Buffer.BlockCopy(encryptedValue, 0, byteData, len1 + len2, len3);
                 return Convert.ToBase64String(byteData);
             }
         }
 
-        public string DecryptFromBase64(string encryptValue, string key)
+        public string DecryptFromBase64(string encryptedValue, string key)
         {
-            byte[] byteData = Convert.FromBase64String(encryptValue);
+            byte[] byteData = Convert.FromBase64String(encryptedValue);
             byte[] salt = byteData.Take(saltSize).ToArray();
             byte[] aesIv = byteData.Skip(saltSize).Take(ivSize).ToArray();
-            byte[] byteEncrypt = byteData.Skip(saltSize + ivSize).ToArray();
+            byte[] byteEncrypted = byteData.Skip(saltSize + ivSize).ToArray();
             byte[] aesKey = CreateAesKey(key, salt);
 
             var saltString = Convert.ToBase64String(salt);
@@ -91,8 +91,8 @@ namespace Seruichi.Common
             using (var aes = CreateAesCng(aesKey, aesIv))
             using (var decryptor = aes.CreateDecryptor())
             {
-                byte[] decryptValue = decryptor.TransformFinalBlock(byteEncrypt, 0, byteEncrypt.Length);
-                return encoding.GetString(decryptValue);
+                byte[] decryptedValue = decryptor.TransformFinalBlock(byteEncrypted, 0, byteEncrypted.Length);
+                return encoding.GetString(decryptedValue);
             }
         }
 

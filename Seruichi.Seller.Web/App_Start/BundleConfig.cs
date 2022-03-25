@@ -28,8 +28,8 @@ namespace Seruichi.Seller.Web
 
 
             bundles.Add(new StyleBundle("~/Content/css/application").Include(
-                      "~/Content/css/typeahead.custom.css",
                       "~/Content/css/Soft-UI-Aside-Navbar.css",
+                      "~/Content/css/typeahead.custom.css",
                       "~/Content/css/loading.css",
                       "~/Content/css/validation.css"));
 

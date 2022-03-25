@@ -308,7 +308,7 @@ function addEvents() {
 
     //登録
     $('#btnProcess').on('click', function () {
-        $form = $('#form1').hideChildrenError();
+        $form = $('#form1').hideChildErrors();
 
         if (!common.checkValidityOnSave('#form1')) {
             $form.getInvalidItems().get(0).focus();
@@ -404,7 +404,7 @@ function displayMansionData(mansionCD) {
 
                         if (data.PrefCD) {
                             setLineList('add', data.PrefCD, '_' + index, data.LineCD);
-                            setStationList('add', data.LineCD, '_' + index, data.StationCD);
+                            if (data.LineCD) setStationList('add', data.LineCD, '_' + index, data.StationCD);
                         }
                         $('#Distance_' + index).val(data.Distance).hideError();
                     }

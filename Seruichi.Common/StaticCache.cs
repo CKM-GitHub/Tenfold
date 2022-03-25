@@ -19,8 +19,8 @@ namespace Seruichi.Common
         public static void SetIniInfo()
         {
             ReadIni ini = new ReadIni();
-            DBInfo = ini.GetDBInfo();
             LogInfo = ini.GetLogInfo();
+            DBInfo = ini.GetDBInfo();
         }
 
         public static void SetMessageCache()
