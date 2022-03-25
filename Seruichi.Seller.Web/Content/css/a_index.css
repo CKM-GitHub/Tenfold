@@ -1,0 +1,135 @@
+.kanekisatei {
+    background: #f1f7fc;
+    padding: 50px 0 10px 0;
+}
+
+    .kanekisatei .fudousanjyouhou {
+        display: table-cell;
+        width: auto;
+        background: #ffffff;
+        background-size: cover;
+    }
+
+    .kanekisatei .form-container {
+        display: table;
+        max-width: 900px;
+        width: 90%;
+        margin: 0 auto;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .kanekisatei .form-container .siroeria {
+            background-color: #ffffff;
+            padding: 40px 60px;
+            color: #505e6c;
+        }
+
+
+.cap-min-w200 {
+    min-width: 200px;
+}
+
+.cap-min-w40 {
+    min-width: 40px;
+}
+
+.cap-max-w80 {
+    max-width: 80px;
+}
+
+.cap-max-w160 {
+    max-width: 160px;
+}
+
+.cap-max-w200 {
+    max-width: 200px;
+}
+
+.cap-h50 {
+    height: 50px;
+}
+
+.cap-f30 {
+    font-size: 30px;
+}
+
+
+.cap-w-40 {
+    width: 40%;
+}
+
+
+
+.cap-header {
+    /*height: 340px;*/
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background: #6792da;
+}
+
+
+
+.tatemonokouzou .form-check {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 24px;
+    font-size: 16px;
+}
+
+
+.cap-red-money {
+    font-size: 1.5em;
+    color: red;
+    font-weight: 600;
+    line-height: 16px;
+    padding: 0 3px 30px 3px;
+}
+
+@media screen and (min-width: 641px) {
+    .cap-pt0-pl0 {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .cap-yubin {
+        margin-left: -30px;
+    }
+}
+
+@media (max-width:640px) {
+
+
+
+    .kanekisatei .form-container > .siroeria {
+        padding: 40px;
+    }
+
+    .cap-h50 {
+        height: auto;
+    }
+
+
+    .cap-header {
+        height: 100%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .cap-f30 {
+        font-size: 1.2em;
+    }
+
+    .access-time {
+        box-shadow: 1px 1px 5px rgb(0 0 0 / 10%);
+    }
+
+        .access-time > div:last-child {
+            max-width: 50%;
+            margin: 0 auto;
+        }
+
+    .kanekisatei {
+        background: none;
+        padding: 10px 0 10px 0;
+    }
+}
