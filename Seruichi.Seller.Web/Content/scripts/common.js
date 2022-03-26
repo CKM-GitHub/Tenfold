@@ -197,6 +197,11 @@ const common = {
         }, delaytime || 500);
     },
 
+    getStringByteCount: function getStringByteCount(str) {
+        var blob = new Blob([str], { type: 'text/plain' });
+        return blob.size;
+    },
+
     replaceDoubleToSingle: function replaceDoubleToSingle(str) {
         return str.replace(/[！-～]/g, function (s) {
             return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
@@ -277,7 +282,14 @@ const common = {
 
         if (inputValue) {
             if (isSingleDoubleByte) {
-                //check bytecount
+                const maxLength = $ctrl.attr('maxlength');
+                if (maxLength) {
+                    const byteLength = this.getStringByteCount(inputValue);
+                    if (byteLength > parseInt(maxLength)) {
+                        $ctrl.showError(this.getMessage('E105'));
+                        return;
+                    }
+                }
             }
 
             if (isDoubleByte) {
@@ -285,6 +297,15 @@ const common = {
                 if (!regex.test(inputValue)) {
                     $ctrl.showError(this.getMessage('E107'));
                     return;
+                }
+
+                const maxLength = $ctrl.attr('maxlength');
+                if (maxLength) {
+                    const byteLength = this.getStringByteCount(inputValue);
+                    if (byteLength > parseInt(maxLength)) {
+                        $ctrl.showError(this.getMessage('E105'));
+                        return;
+                    }
                 }
             }
 
