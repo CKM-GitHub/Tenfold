@@ -155,6 +155,10 @@
     <Compile Include="Controllers\Common\BaseApiController.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
     <Compile Include="Controllers\Common\UserController.cs" />
+    <Compile Include="Controllers\t_dashboardController.cs" />
+    <Compile Include="Controllers\t_loginController.cs" />
+    <Compile Include="Controllers\t_mansionController.cs" />
+    <Compile Include="Controllers\t_seller_listController.cs" />
     <Compile Include="Filters\BrowsingHistoryAttribute.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
     <Compile Include="Filters\CustomHandleErrorAttribute.cs" />
@@ -210,6 +214,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
+    <Folder Include="Views\t_dashboard\" />
+    <Folder Include="Views\t_login\" />
+    <Folder Include="Views\t_mansion\" />
+    <Folder Include="Views\t_seller_list\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
