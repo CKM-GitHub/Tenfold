@@ -168,6 +168,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\t_dashboard\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\t_dashboard\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\t_dashboard\css\index.css" />
+    <Content Include="Content\t_dashboard\css\jquery.dataTables.min.css" />
+    <Content Include="Content\t_dashboard\css\style.css" />
     <Content Include="Content\t_login\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\t_login\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\t_login\css1\Bootstrap-Chat-1.css" />
@@ -261,6 +266,7 @@
     <Content Include="Content\scripts\validation_jqueryextend.js" />
     <Content Include="Content\scripts\common.js" />
     <Content Include="Scripts\t_login.js" />
+    <Content Include="Scripts\t_seller_list.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -280,8 +286,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
-    <Folder Include="Views\t_dashboard\" />
-    <Folder Include="Views\t_seller_list\" />
     <Folder Include="Views\t_seller_mansion\" />
   </ItemGroup>
   <ItemGroup>
@@ -304,6 +308,13 @@
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <Content Include="Views\Shared\_loginLayout.cshtml" />
     <Content Include="Views\t_login\Index.cshtml" />
+    <Content Include="Views\Shared\t_dashboard\_t_dashboardLayout.cshtml" />
+    <Content Include="Views\t_dashboard\Index.cshtml" />
+    <Content Include="Views\Shared\t_dashboard\_t_dashboard_sellerPartial.cshtml" />
+    <Content Include="Views\Shared\t_seller_list\_t_seller_list_sellerPartial.cshtml" />
+    <Content Include="Views\Shared\t_seller_list\_t_seller_listLayout.cshtml" />
+    <Content Include="Views\Shared\t_seller_list\_t_seller_list_menuPartial.cshtml" />
+    <Content Include="Views\t_seller_list\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

@@ -411,6 +411,7 @@ const common = {
     bindValidationEvent: function bindValidationEvent(selector, exceptSelector) {
         var selector = selector + ' :input:not(button):not(:hidden):not(:disabled):not([readonly])' + exceptSelector;
         $(document).on('blur', selector, function (e) {
+            alert(selector);
             return common.checkValidityInput(this);
         });
     },
