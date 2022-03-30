@@ -286,7 +286,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
-    <Folder Include="Views\t_seller_mansion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\t_login\fonts\fontawesome-webfont.eot" />
@@ -315,6 +314,10 @@
     <Content Include="Views\Shared\t_seller_list\_t_seller_listLayout.cshtml" />
     <Content Include="Views\Shared\t_seller_list\_t_seller_list_menuPartial.cshtml" />
     <Content Include="Views\t_seller_list\Index.cshtml" />
+    <Content Include="Views\t_seller_mansion\Index.cshtml" />
+    <Content Include="Views\Shared\t_seller_mansion\_t_seller_mansion_menuPartial.cshtml" />
+    <Content Include="Views\Shared\t_seller_mansion\_t_seller_mansion_sellerPartial.cshtml" />
+    <Content Include="Views\Shared\t_seller_mansion\_t_seller_mansionLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
