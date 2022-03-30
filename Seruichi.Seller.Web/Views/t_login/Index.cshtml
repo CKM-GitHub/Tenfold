@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_loginLayout.cshtml";
+    ViewBag.Title = "ログイン";
+}
+
+<form id="form1" method="post">
+    <h2 class="visually-hidden">管理者ログイン</h2>
+    <div class="illustration"><i class="icon fa fa-user"></i></div>
+
+    <div class="mb-3">
+
+        <p class="text-center">管理者ログイン</p>
+        <div class="d-flex">
+            <input class="form-control cap-fon-form-w250"
+                   type="email" name="email" id="email" placeholder="管理者ID">
+
+
+        </div>  <span class="cap-errormsg-right" id="erroremail"></span>
+
+    </div>
+    <div class="mb-3">
+        <input class="form-control" type="password" name="password" id="password"
+               placeholder="パスワード">
+    </div>
+    <div class="mb-5">
+        <button class="btn btn-primary d-block w-100" type="submit">
+            ログイン
+        </button>
+    </div>
+
+</form>
+@section Scripts{
+    @Scripts.Render("~/bundles/t_login")
+}

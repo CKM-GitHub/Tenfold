@@ -46,6 +46,10 @@ namespace Seruichi.Seller.Web
             bundles.Add(new ScriptBundle("~/bundles/a_index").Include(
                       "~/Scripts/a_index.js"));
 
+            //t_login
+            bundles.Add(new ScriptBundle("~/bundles/t_login").Include(
+                     "~/Scripts/t_login.js"));
+
 
         }
     }
