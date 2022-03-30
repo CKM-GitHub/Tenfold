@@ -45,6 +45,7 @@
     <Compile Include="Common\DropDownListItem.cs" />
     <Compile Include="Common\Enumrators.cs" />
     <Compile Include="Common\MessageModel.cs" />
+    <Compile Include="Login\t_loginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\UserModel.cs" />
     <Compile Include="Common\ValidationModel.cs" />

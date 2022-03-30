@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonBL.cs" />
+    <Compile Include="Login\t_loginBL.cs" />
     <Compile Include="Seller\a_indexBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
