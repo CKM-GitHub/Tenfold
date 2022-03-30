@@ -50,6 +50,10 @@ namespace Seruichi.Seller.Web
             bundles.Add(new ScriptBundle("~/bundles/t_login").Include(
                      "~/Scripts/t_login.js"));
 
+            //t_seller_list
+            bundles.Add(new ScriptBundle("~/bundles/t_seller_list").Include(
+                     "~/Scripts/t_seller_list.js"));
+
 
         }
     }
