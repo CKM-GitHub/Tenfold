@@ -12,22 +12,24 @@
 
         <p class="text-center">管理者ログイン</p>
         <div class="d-flex">
+        @*<div class="mb-3">*@
             <input class="form-control cap-fon-form-w250"
-                   type="email" name="email" id="email" placeholder="管理者ID">
+                   type="email" name="email" id="email" placeholder="管理者ID"><span class="cap-errormsg-right" id="erroremail"></span>
+            </div>
 
-
-        </div>  <span class="cap-errormsg-right" id="erroremail"></span>
-
-    </div>
-    <div class="mb-3">
-        <input class="form-control" type="password" name="password" id="password"
-               placeholder="パスワード">
-    </div>
-    <div class="mb-5">
-        <button class="btn btn-primary d-block w-100" type="submit">
-            ログイン
-        </button>
-    </div>
+        </div>
+        <div class="mb-3">
+        <div class="d-flex">
+            @*<div class="mb-3">*@
+                <input class="form-control" type="password" name="password" id="password"
+                       placeholder="パスワード"><span class="cap-errormsg-right" id="errorpassword"></span>
+            </div>
+        </div>
+        <div class="mb-5">
+            <button class="btn btn-primary d-block w-100" type="submit">
+                ログイン
+            </button>
+        </div>
 
 </form>
 @section Scripts{
