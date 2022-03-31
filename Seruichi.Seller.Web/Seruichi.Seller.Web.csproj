@@ -156,6 +156,10 @@
     <Compile Include="Controllers\Common\BaseApiController.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
     <Compile Include="Controllers\Common\UserController.cs" />
+    <Compile Include="Controllers\t_dashboardController.cs" />
+    <Compile Include="Controllers\t_loginController.cs" />
+    <Compile Include="Controllers\t_seller_listController.cs" />
+    <Compile Include="Controllers\t_seller_mansionController.cs" />
     <Compile Include="Filters\BrowsingHistoryAttribute.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
     <Compile Include="Filters\CustomHandleErrorAttribute.cs" />
@@ -167,6 +171,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\t_dashboard\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\t_dashboard\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\t_dashboard\css\index.css" />
+    <Content Include="Content\t_dashboard\css\jquery.dataTables.min.css" />
+    <Content Include="Content\t_dashboard\css\style.css" />
+    <Content Include="Content\t_login\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\t_login\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\t_login\css\Clients-UI.css" />
+    <Content Include="Content\t_login\css\Contact-Form-Clean.css" />
+    <Content Include="Content\t_login\css\Login-Form-Clean.css" />
+    <Content Include="Content\t_login\css\Soft-UI-Aside-Navbar.css" />
+    <Content Include="Content\t_login\css\style.css" />
+    <Content Include="Content\t_login\fonts\font-awesome.min.css" />
+    <Content Include="Content\fonts\ionicons.min.css" />
+    <Content Include="Content\fonts\ionicons.svg" />
+    <Content Include="Content\t_login\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\t_login\fonts\ionicons.min.css" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\bootstrap\bootstrap.min.js" />
     <Content Include="Content\css\auctor-index.css" />
@@ -190,6 +211,7 @@
     <Content Include="Content\typeahead\typeahead.bundle.min.js" />
     <Content Include="Content\typeahead\typeahead.jquery.js" />
     <Content Include="Content\typeahead\typeahead.jquery.min.js" />
+    <Content Include="Content\t_login\fonts\ionicons.svg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
@@ -201,6 +223,8 @@
     <Content Include="Scripts\a_index.js" />
     <Content Include="Content\scripts\validation_jqueryextend.js" />
     <Content Include="Content\scripts\common.js" />
+    <Content Include="Scripts\t_login.js" />
+    <Content Include="Scripts\t_seller_list.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -224,6 +248,16 @@
   <ItemGroup>
     <Content Include="Content\fonts\ionicons.eot" />
     <Content Include="Content\fonts\ionicons.ttf" />
+    <Content Include="Content\t_login\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\t_login\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\t_login\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\t_login\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\t_login\fonts\FontAwesome.otf" />
+    <Content Include="Content\t_login\fonts\ionicons.eot" />
+    <Content Include="Content\t_login\fonts\ionicons.ttf" />
+    <Content Include="Content\t_login\fonts\ionicons.woff" />
+    <Content Include="Content\fonts\ionicons.eot" />
+    <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
     <None Include="packages.config" />
     <Content Include="Views\a_index\Index.cshtml" />
@@ -234,7 +268,6 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
-    <Content Include="Views\a_login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
