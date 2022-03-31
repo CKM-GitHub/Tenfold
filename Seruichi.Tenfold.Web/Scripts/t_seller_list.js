@@ -8,6 +8,9 @@ function setValidation() {
     //階
     $('#inlineFormInput')
         .addvalidation_reqired(true)
+
+    $('#startdate')
+        .addvalidation_datecheck()
    
 }
 function addEvents() {

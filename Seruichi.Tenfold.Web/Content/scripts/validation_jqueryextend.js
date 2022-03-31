@@ -11,7 +11,7 @@
     $.fn.isInvalid = function () {
         return this.hasClass('cap-is-invalid');
     };
-
+    
     $.fn.getInvalidItems = function () {
         return this.find('.cap-is-invalid');
     };
@@ -102,6 +102,17 @@
     $.fn.removeValidation_singlebyte_number = function () {
         return this.removeAttr('data-validation-singlebyte-number')
     };
+
+    //test --validation
+    $.fn.addvalidation_datecheck = function () {
+        return this
+            .attr('data-validation-datecheck', 'true')
+            .attr('inputmode', 'numeric');
+    };
+    $.fn.removeValidation_datecheck = function () {
+        return this.removeAttr('data-validation-datecheck')
+    };
+
 
 
     $.fn.addvalidation_singlebyte_numberAlphabet = function () {

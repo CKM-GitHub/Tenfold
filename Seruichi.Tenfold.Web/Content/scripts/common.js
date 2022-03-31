@@ -231,6 +231,8 @@ const common = {
         const isNumeric = $ctrl.attr("data-validation-numeric");
         const isMoney = $ctrl.attr("data-validation-money");
         const customValidation = $ctrl.attr("data-validation-custom");
+        const isDate = $ctrl.attr("data-validation-datecheck");
+        
 
         let inputValue = "";
         if (type === 'radio') {
@@ -239,6 +241,12 @@ const common = {
             inputValue = $ctrl.val().trimEnd();
             $ctrl.val(inputValue);
         }
+
+        if (type == 'date') {
+            inputValue = $ctrl.val().trimEnd();
+            $ctrl.val(inputValue);
+        }
+       
 
         //replace text
         if (isSingleByte || isSingleByteNumber || isSingleByteNumberAlpha || isNumeric || isMoney) {
@@ -256,7 +264,7 @@ const common = {
             && !isSingleDoubleByte
             && !isDoubleByte
             && !isSingleByte && !isSingleByteNumber && !isSingleByteNumberAlpha
-            && !isNumeric && !isMoney
+            && !isNumeric && !isMoney && !isDate
             && !customValidation) return true;
 
         if (isRequired) {
@@ -382,6 +390,10 @@ const common = {
                     return;
                 }
                 $ctrl.val(Number(inputValue).toLocaleString());
+            }
+
+            if (isDate) {
+                alert("Error Occur");
             }
         }
 
