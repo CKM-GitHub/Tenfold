@@ -1,10 +1,14 @@
 ﻿using System.Text;
+using System.IO;
 
 namespace Seruichi.Common
 {
     public class ReadIni
     {
         private readonly string InifilePath = @"C:\Tenfold\Seruichi.ini";
+
+        private static readonly Encoding encoding = Encoding.GetEncoding("Shift_JIS");
+
 
         public string GetValue(string category, string key)
         {
@@ -20,14 +24,11 @@ namespace Seruichi.Common
             if (string.IsNullOrEmpty(iniString_Encrypted))
             {
                 iniString = GetValue("Database", "Seruichi_DEBUG");
-
-                var crypt = new AESCryption();
-                //string crypted = crypt.EncryptToBase64(iniString, AESCryption.DefaultKey);
             }
             else
             {
                 var crypt = new AESCryption();
-                iniString = crypt.DecryptFromBase64(iniString_Encrypted, AESCryption.DefaultKey);
+                iniString = crypt.DecryptFromBase64(iniString_Encrypted, AESCryption.DefaultKey2);
             }
 
             string[] dbconfig = iniString.Split(',');
@@ -50,6 +51,22 @@ namespace Seruichi.Common
                 Path = GetValue("Log", "LOG_PATH").ToStringOrEmpty(),
                 Level = GetValue("Log", "LOG_LEVEL").ToInt32(3) //未指定時、3:Error
             };
+        }
+
+        public string GetDataCryptionKey()
+        {
+            string dataKeyPath = GetValue("PATH", "DATA_KEY").ToStringOrEmpty();
+            string encryptedDataCryptionKey = "";
+
+            if (!string.IsNullOrEmpty(dataKeyPath) && File.Exists(dataKeyPath))
+            {
+                using (StreamReader sr = new StreamReader(dataKeyPath, encoding))
+                {
+                    encryptedDataCryptionKey = sr.ReadToEnd();
+                }
+            }
+
+            return encryptedDataCryptionKey;
         }
     }
 }

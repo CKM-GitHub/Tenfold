@@ -8,6 +8,8 @@ namespace Seruichi.Common
         private Validator validator = new Validator();
         private Dictionary<string, string> result = new Dictionary<string, string>();
 
+        public bool IsValid { get { return result.Count == 0; } }
+
         public Dictionary<string, string> GetValidationResult()
         {
             return result;

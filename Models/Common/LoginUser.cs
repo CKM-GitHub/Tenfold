@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 namespace Models
 {
     [Serializable]
-    public class SessionAuthenticationInfo
+    public class LoginUser
     {
         public string UserID { get; set; }
+        public string UserName { get; set; }
         public string VerificationToken { get; set; }
     }
 }

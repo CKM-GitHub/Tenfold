@@ -1,6 +1,5 @@
 ﻿using Models;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Seruichi.Common
 {
@@ -13,8 +12,9 @@ namespace Seruichi.Common
         public static Dictionary<string, MessageModel> MessageDictionary { get; private set; } 
             = new Dictionary<string, MessageModel>();
 
-        private static readonly object _lockObject = new object();
+        private static string _encryptedDataCryptionKey = "";
 
+        private static readonly object _lockObject = new object();
 
 
         public static void SetIniInfo()
@@ -22,6 +22,7 @@ namespace Seruichi.Common
             ReadIni ini = new ReadIni();
             LogInfo = ini.GetLogInfo();
             DBInfo = ini.GetDBInfo();
+            _encryptedDataCryptionKey = ini.GetDataCryptionKey();
         }
 
         public static void SetMessageCache()
@@ -65,6 +66,12 @@ namespace Seruichi.Common
                 dic.Add(item.Key, item.Value.MessageText1);
             }
             return dic;
+        }
+
+        public static string GetDataCryptionKey()
+        {
+            AESCryption cypt = new AESCryption();
+            return cypt.DecryptFromBase64(_encryptedDataCryptionKey, AESCryption.DefaultKey);
         }
     }
 }

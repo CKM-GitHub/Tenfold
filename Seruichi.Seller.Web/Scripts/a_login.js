@@ -1,7 +1,7 @@
 ﻿const _url = {};
 
 $(function () {
-    _url.login = common.appPath + '/a_login/login';
+    _url.validateLogin = common.appPath + '/a_login/ValidateLogin';
 
     setValidation();
     addEvents();
@@ -9,8 +9,8 @@ $(function () {
 
 function setValidation() {
     //ログイン
-    $('#UserID')
-        .addvalidation_errorElement("#errorUserID")
+    $('#MailAddress')
+        .addvalidation_errorElement("#errorMailAddress")
         .addvalidation_custom("customValidation_checkMailAddress");
     $('#Password')
         .addvalidation_errorElement("#errorPassword")
@@ -51,6 +51,28 @@ function addEvents() {
     common.bindValidationEvent('#formTemporaryRegistration');
     common.bindValidationEvent('#formForgotMailAddress');
     common.bindValidationEvent('#formForgotPassword');
+
+    $('#btnLogin').on('click', function () {
+        var model = {
+            mailAddress: $('#MailAddress').val(),
+            password: $('#Password').val()
+        };
+        common.callAjax(_url.validateLogin, model, this, function (result) {
+            if (result && result.isOK) {
+                //sucess
+                document.formLogin.submit();
+            }
+            else if (result && result.data) {
+                //server validation error
+                const errors = result.data;
+                for (key in errors) {
+                    const target = document.getElementById(key);
+                    $(target).showError(errors[key]);
+                    $form.getInvalidItems().get(0).focus();
+                }
+            }
+        });
+    });
 
 }
 

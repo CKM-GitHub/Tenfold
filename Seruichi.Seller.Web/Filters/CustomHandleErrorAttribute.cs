@@ -34,8 +34,7 @@ namespace Seruichi.Seller.Web
                 }
             }
 
-            string userInfo = "LoginUser:" + HttpContext.Current.Session["UserInfo"].ToStringOrEmpty();
-            Logger.GetInstance().Error(filterContext.Exception, userInfo);
+            Logger.GetInstance().Error(filterContext.Exception);
 
             if (filterContext.HttpContext.Request.IsAjaxRequest())
             {

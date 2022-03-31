@@ -1,7 +1,7 @@
 ﻿using Models;
 using System;
-using System.Security.Cryptography;
 using System.Web;
+using Seruichi.Common;
 
 namespace Seruichi.Seller.Web
 {
@@ -10,7 +10,12 @@ namespace Seruichi.Seller.Web
         public static string SESSION_KEY = "USER_AUTHENTICATION";
         public static string COOKIE_NAME = "ASP.NET_SessionId";
 
-        public static string NewVerificationToken { get { return GenerateRandomDataBase64(32); } }
+        public static string NewVerificationToken {
+            get
+            {
+                return new AESCryption().GenerateRandomDataBase64(32);
+            }
+        }
 
         public static void ReCreateSession()
         {
@@ -18,32 +23,36 @@ namespace Seruichi.Seller.Web
             HttpContext.Current.Response.Cookies.Add(new HttpCookie(COOKIE_NAME, ""));
         }
 
-        public static SessionAuthenticationInfo CreateAnonymousUser()
+        public static void CreateAnonymousUser()
         {
-            var userInfo = new SessionAuthenticationInfo()
+            var userInfo = new LoginUser()
             {
                 UserID = "unknown",
                 VerificationToken = NewVerificationToken
             };
             HttpContext.Current.Session[SESSION_KEY] = userInfo;
-            return userInfo;
         }
 
-        public static SessionAuthenticationInfo CreateLoginUser(string id)
+        public static void CreateLoginUser(string id)
         {
-            var userInfo = new SessionAuthenticationInfo()
+            var userInfo = new LoginUser()
             {
                 UserID = id,
                 VerificationToken = NewVerificationToken
             };
 
             HttpContext.Current.Session[SESSION_KEY] = userInfo;
-            return userInfo;
         }
 
-        public static SessionAuthenticationInfo GetUserFromSession()
+        public static void CreateLoginUser(LoginUser user)
         {
-            return HttpContext.Current.Session[SESSION_KEY] as SessionAuthenticationInfo;
+            user.VerificationToken = NewVerificationToken;
+            HttpContext.Current.Session[SESSION_KEY] = user;
+        }
+
+        public static LoginUser GetUserFromSession()
+        {
+            return HttpContext.Current.Session[SESSION_KEY] as LoginUser;
         }
 
         public static string GetVerificationToken()
@@ -58,16 +67,5 @@ namespace Seruichi.Seller.Web
                 return userAuth.VerificationToken;
             }
         }
-
-        public static string GenerateRandomDataBase64(int length)
-        {
-            var rnd = new byte[length];
-            using (var rng = new RNGCryptoServiceProvider())
-            {
-                rng.GetBytes(rnd);
-            }
-            return Convert.ToBase64String(rnd);
-        }
-
     }
 }

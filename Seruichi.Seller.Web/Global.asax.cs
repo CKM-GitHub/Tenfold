@@ -51,18 +51,11 @@ namespace Seruichi.Seller.Web
                         return; // IniÉtÉ@ÉCÉãê›íË
                     }
 
-                    try
-                    {
-                        string userInfo = "LoginUser:" + HttpContext.Current.Session["UserInfo"].ToStringOrEmpty();
-                        Logger.GetInstance().Error(ex, userInfo);
+                    Logger.GetInstance().Error(ex);
 
-                        if (ex.InnerException != null)
-                        {
-                            Logger.GetInstance().Error(ex.InnerException, userInfo);
-                        }
-                    }
-                    catch (Exception)
+                    if (ex.InnerException != null)
                     {
+                        Logger.GetInstance().Error(ex.InnerException);
                     }
                 }
             }

@@ -28,6 +28,10 @@ namespace Seruichi.Seller.Web
 
 
             //The bundle hierarchy and the physical folder hierarchy must match
+            bundles.Add(new StyleBundle("~/Content/css/error").Include(
+                      "~/Content/bootstrap/Soft-UI-Aside-Navbar.css",
+                      "~/Content/css/errorpage.css"));
+
             bundles.Add(new StyleBundle("~/Content/css/application").Include(
                       "~/Content/bootstrap/Soft-UI-Aside-Navbar.css",
                       "~/Content/typeahead/typeahead.custom.css",

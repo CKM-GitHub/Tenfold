@@ -8,12 +8,13 @@ namespace Seruichi.Common
     public class AESCryption
     {
         public static readonly string DefaultKey = "10_4_Ld";
+        public static readonly string DefaultKey2 = "1433";
 
         private const int keySize = 256;
         private const int blockSize = 128;
         private const int saltSize = 25;
         private const int ivSize = blockSize / 8;
-        private readonly Encoding encoding = Encoding.GetEncoding("ISO-2022-JP");
+        private readonly Encoding encoding = Encoding.GetEncoding("Shift_JIS");
 
         public AESCryption()
         {
@@ -46,8 +47,18 @@ namespace Seruichi.Common
             return rnd;
         }
 
+        public string GenerateRandomDataBase64(int length)
+        {
+            return Convert.ToBase64String(GenerateRandomData(length));
+        }
+
         public string EncryptToBase64(string plainText, string key)
         {
+            if (string.IsNullOrEmpty(plainText) || string.IsNullOrEmpty(key))
+            {
+                return "";
+            }
+
             byte[] salt = CreateSalt();
             byte[] aesKey = CreateAesKey(key, salt);
             byte[] aesIv = CreateAesIV();
@@ -78,6 +89,11 @@ namespace Seruichi.Common
 
         public string DecryptFromBase64(string encryptedValue, string key)
         {
+            if (string.IsNullOrEmpty(encryptedValue) || string.IsNullOrEmpty(key))
+            {
+                return "";
+            }
+
             byte[] byteData = Convert.FromBase64String(encryptedValue);
             byte[] salt = byteData.Take(saltSize).ToArray();
             byte[] aesIv = byteData.Skip(saltSize).Take(ivSize).ToArray();
