@@ -1,0 +1,44 @@
+﻿
+@model Models.Tenfold.Login.t_loginModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "ログイン";
+}
+@section styles{
+    @Styles.Render("~/Content/t_login")
+}
+
+<form id="form1" method="post" style="max-width:900px;">
+    <h2 class="visually-hidden">管理者ログイン</h2>
+    <div class="illustration"><i class="icon fa fa-user"></i></div>
+
+    <div class="mb-3">
+        <p class="text-center">管理者ログイン</p>
+    </div>
+    <div class="mb-3" style="margin-left:130px;">
+        <div class="d-flex">
+            <input class="form-control cap-fon-form-w250" style="width:210px;height:38px;"
+                   type="email" name="email" id="email" placeholder="管理者ID">
+            <span class="cap-errormsg-right" id="erroremail"></span>
+        </div>
+    </div>
+
+    <div class="mb-3" style="margin-left:130px;">
+        <div class="d-flex">
+            <input class="form-control" style="width:210px;height:38px;"
+                   type="password" name="password" id="password" placeholder="パスワード">
+            <span class="cap-errormsg-right" id="errorpassword"></span>
+
+        </div>
+    </div>
+    <div class="mb-5" style="margin-left:130px;">
+        <div class="d-flex">
+            <button class="btn btn-primary d-block" type="button" id="btnLogin" style="width:210px;height:38px;">
+                ログイン
+            </button><span class="cap-errormsg-right" id="errorbtnLogin"></span>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    @Scripts.Render("~/bundles/t_login")
+}

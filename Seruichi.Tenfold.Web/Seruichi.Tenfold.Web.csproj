@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -7,17 +8,17 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1458B5EA-09EB-47D3-B0A1-439D425EA204}</ProjectGuid>
+    <ProjectGuid>{03265EE9-F7F0-4AE0-BE6C-77A4B1548EA9}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Seruichi.Seller.Web</RootNamespace>
-    <AssemblyName>Seruichi.Seller.Web</AssemblyName>
+    <RootNamespace>Seruichi.Tenfold.Web</RootNamespace>
+    <AssemblyName>Seruichi.Tenfold.Web</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44355</IISExpressSSLPort>
+    <IISExpressSSLPort>44345</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -44,41 +45,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encodings.Web.6.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -86,31 +57,24 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -135,6 +99,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -145,104 +112,184 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\a_loginController.cs" />
-    <Compile Include="Controllers\Common\CommonApiController.cs" />
-    <Compile Include="Controllers\a_indexController.cs" />
-    <Compile Include="Controllers\Common\BaseController.cs" />
     <Compile Include="Controllers\Common\BaseApiController.cs" />
+    <Compile Include="Controllers\Common\BaseController.cs" />
+    <Compile Include="Controllers\Common\CommonApiController.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
-    <Compile Include="Filters\BrowsingHistoryAttribute.cs" />
+    <Compile Include="Controllers\t_dashboardController.cs" />
+    <Compile Include="Controllers\t_loginController.cs" />
+    <Compile Include="Controllers\t_seller_listController.cs" />
+    <Compile Include="Controllers\t_seller_mansionController.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
+    <Compile Include="Filters\BrowsingHistoryAttribute.cs" />
     <Compile Include="Filters\CustomHandleErrorAttribute.cs" />
-    <Compile Include="Filters\SessionAuthenticationHelper.cs" />
     <Compile Include="Filters\SessionAuthenticationAttribute.cs" />
+    <Compile Include="Filters\SessionAuthenticationHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\t_login\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\t_login\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\t_login\css1\Bootstrap-Chat-1.css" />
+    <Content Include="Content\t_login\css1\Bootstrap-Chat.css" />
+    <Content Include="Content\t_login\css1\Clients-UI.css" />
+    <Content Include="Content\t_login\css1\Contact-Form-Clean.css" />
+    <Content Include="Content\t_login\css1\Contact-FormModal-Contact-Form-with-Google-Map.css" />
+    <Content Include="Content\t_login\css1\Highlight-Blue.css" />
+    <Content Include="Content\t_login\css1\Highlight-Clean.css" />
+    <Content Include="Content\t_login\css1\Login-Form-Clean.css" />
+    <Content Include="Content\t_login\css1\Ludens-Users---2-Register.css" />
+    <Content Include="Content\t_login\css1\Ludens-Users---25-After-Register.css" />
+    <Content Include="Content\t_login\css1\Newsletter-Subscription-Form.css" />
+    <Content Include="Content\t_login\css1\Profile-Edit-Form-1.css" />
+    <Content Include="Content\t_login\css1\Profile-Edit-Form.css" />
+    <Content Include="Content\t_login\css1\Registration-Form-with-Photo.css" />
+    <Content Include="Content\t_login\css1\Sidebar-1.css" />
+    <Content Include="Content\t_login\css1\Sidebar-Menu-1.css" />
+    <Content Include="Content\t_login\css1\Sidebar-Menu.css" />
+    <Content Include="Content\t_login\css1\Sidebar.css" />
+    <Content Include="Content\t_login\css1\Simple-Bootstrap-Chat.css" />
+    <Content Include="Content\t_login\css1\Soft-UI-Aside-Navbar.css" />
+    <Content Include="Content\t_login\css\Bootstrap-Chat-1.css" />
+    <Content Include="Content\t_login\css\Bootstrap-Chat.css" />
+    <Content Include="Content\t_login\css\Clients-UI.css" />
+    <Content Include="Content\t_login\css\Contact-Form-Clean.css" />
+    <Content Include="Content\t_login\css\Contact-FormModal-Contact-Form-with-Google-Map.css" />
+    <Content Include="Content\t_login\css\Highlight-Blue.css" />
+    <Content Include="Content\t_login\css\Highlight-Clean.css" />
+    <Content Include="Content\t_login\css\Login-Form-Clean.css" />
+    <Content Include="Content\t_login\css\Ludens-Users---2-Register.css" />
+    <Content Include="Content\t_login\css\Ludens-Users---25-After-Register.css" />
+    <Content Include="Content\t_login\css\Newsletter-Subscription-Form.css" />
+    <Content Include="Content\t_login\css\Profile-Edit-Form-1.css" />
+    <Content Include="Content\t_login\css\Profile-Edit-Form.css" />
+    <Content Include="Content\t_login\css\Registration-Form-with-Photo.css" />
+    <Content Include="Content\t_login\css\Sidebar-1.css" />
+    <Content Include="Content\t_login\css\Sidebar-Menu-1.css" />
+    <Content Include="Content\t_login\css\Sidebar-Menu.css" />
+    <Content Include="Content\t_login\css\Sidebar.css" />
+    <Content Include="Content\t_login\css\Simple-Bootstrap-Chat.css" />
+    <Content Include="Content\t_login\css\Soft-UI-Aside-Navbar.css" />
+    <Content Include="Content\t_login\css\style.css" />
+    <Content Include="Content\t_login\fonts\font-awesome.min.css" />
+    <Content Include="Content\t_login\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\t_login\fonts\ionicons.min.css" />
+    <Content Include="Content\t_login\fonts\ionicons.svg" />
+    <Content Include="Content\t_login\img\bg-masthead.jpg" />
+    <Content Include="Content\t_login\img\bg-showcase-1.jpg" />
+    <Content Include="Content\t_login\img\bg-showcase-2.jpg" />
+    <Content Include="Content\t_login\img\bg-showcase-3.jpg" />
+    <Content Include="Content\t_login\img\condominium_1.jpeg" />
+    <Content Include="Content\t_login\img\IINET-DOSAGE-1.jpg" />
+    <Content Include="Content\t_login\img\logo-ct.png" />
+    <Content Include="Content\t_login\img\meeting.jpg" />
+    <Content Include="Content\t_login\img\residential-building_mansion_8243.png" />
+    <Content Include="Content\t_login\img\sadpanda_vector.svg" />
+    <Content Include="Content\t_login\img\ten.png" />
+    <Content Include="Content\t_login\img\testimonials-1.jpg" />
+    <Content Include="Content\t_login\img\testimonials-2.jpg" />
+    <Content Include="Content\t_login\img\testimonials-3.jpg" />
+    <Content Include="Content\t_login\img\スクリーンショット_2022-03-07_14.54.57-removebg-preview.png" />
+    <Content Include="Content\t_login\js\Contact-FormModal-Contact-Form-with-Google-Map.js" />
+    <Content Include="Content\t_login\js\Profile-Edit-Form.js" />
+    <Content Include="Content\t_login\js\Sidebar-Menu.js" />
+    <Content Include="Content\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\bootstrap.min.js" />
+    <Content Include="Content\bootstrap\Soft-UI-Aside-Navbar.css" />
+    <Content Include="Content\css\errorpage.css" />
+    <Content Include="Content\css\loading.css" />
+    <Content Include="Content\css\Login-Form-Clean.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\validation.css" />
+    <Content Include="Content\fonts\font-awesome.min.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\ionicons.min.css" />
+    <Content Include="Content\fonts\ionicons.svg" />
+    <Content Include="Content\modernizr\modernizr-2.8.3.js" />
+    <Content Include="Content\scripts\common.js" />
+    <Content Include="Content\scripts\validation_jqueryextend.js" />
+    <Content Include="Content\typeahead\bloodhound.js" />
+    <Content Include="Content\typeahead\bloodhound.min.js" />
+    <Content Include="Content\typeahead\typeahead.bundle.js" />
+    <Content Include="Content\typeahead\typeahead.bundle.min.js" />
+    <Content Include="Content\typeahead\typeahead.custom.css" />
+    <Content Include="Content\typeahead\typeahead.jquery.js" />
+    <Content Include="Content\typeahead\typeahead.jquery.min.js" />
     <Content Include="Content\t_dashboard\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\t_dashboard\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\t_dashboard\css\index.css" />
     <Content Include="Content\t_dashboard\css\jquery.dataTables.min.css" />
     <Content Include="Content\t_dashboard\css\style.css" />
-    <Content Include="Content\t_login\bootstrap\css\bootstrap.min.css" />
-    <Content Include="Content\t_login\bootstrap\js\bootstrap.min.js" />
-    <Content Include="Content\t_login\css\Clients-UI.css" />
-    <Content Include="Content\t_login\css\Contact-Form-Clean.css" />
-    <Content Include="Content\t_login\css\Login-Form-Clean.css" />
-    <Content Include="Content\t_login\css\Soft-UI-Aside-Navbar.css" />
-    <Content Include="Content\t_login\css\style.css" />
-    <Content Include="Content\t_login\fonts\font-awesome.min.css" />
-    <Content Include="Content\fonts\ionicons.min.css" />
-    <Content Include="Content\fonts\ionicons.svg" />
-    <Content Include="Content\t_login\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\t_login\fonts\ionicons.min.css" />
-    <Content Include="Content\bootstrap\bootstrap.min.css" />
-    <Content Include="Content\bootstrap\bootstrap.min.js" />
-    <Content Include="Content\css\auctor-index.css" />
-    <Content Include="Content\css\Clients-UI.css" />
-    <Content Include="Content\css\Contact-Form-Clean.css" />
-    <Content Include="Content\css\Login-Form-Clean.css" />
-    <Content Include="Content\css\style.css" />
-    <Content Include="Content\fonts\ionicons.min.css" />
-    <Content Include="Content\fonts\ionicons.svg" />
-    <Content Include="Content\typeahead\typeahead.custom.css" />
-    <Content Include="Content\css\validation.css" />
-    <Content Include="Content\css\loading.css" />
-    <Content Include="Content\css\errorpage.css" />
-    <Content Include="Content\bootstrap\Soft-UI-Aside-Navbar.css" />
-    <Content Include="Content\fonts\font-awesome.min.css" />
-    <Content Include="Content\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\modernizr\modernizr-2.8.3.js" />
-    <Content Include="Content\typeahead\bloodhound.js" />
-    <Content Include="Content\typeahead\bloodhound.min.js" />
-    <Content Include="Content\typeahead\typeahead.bundle.js" />
-    <Content Include="Content\typeahead\typeahead.bundle.min.js" />
-    <Content Include="Content\typeahead\typeahead.jquery.js" />
-    <Content Include="Content\typeahead\typeahead.jquery.min.js" />
-    <Content Include="Content\t_login\fonts\ionicons.svg" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
-    <Content Include="Scripts\a_login.js" />
-    <Content Include="Scripts\a_index.js" />
-    <Content Include="Content\scripts\validation_jqueryextend.js" />
-    <Content Include="Content\scripts\common.js" />
+    <Content Include="Content\fonts\ionicons.eot" />
+    <Content Include="Content\fonts\ionicons.ttf" />
+    <Content Include="Content\fonts\ionicons.woff" />
     <Content Include="Scripts\t_login.js" />
     <Content Include="Scripts\t_seller_list.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Error\BadRequest.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\Unauthorized.cshtml" />
+    <Content Include="Views\Shared\t_dashboard\_t_dashboardLayout.cshtml" />
+    <Content Include="Views\Shared\t_dashboard\_t_dashboard_sellerPartial.cshtml" />
+    <Content Include="Views\Shared\t_seller_list\_t_seller_listLayout.cshtml" />
+    <Content Include="Views\Shared\t_seller_list\_t_seller_list_menuPartial.cshtml" />
+    <Content Include="Views\Shared\t_seller_list\_t_seller_list_sellerPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\t_dashboard\Index.cshtml" />
+    <Content Include="Views\t_login\Index.cshtml" />
+    <Content Include="Views\t_seller_list\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\img\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\fonts\ionicons.eot" />
-    <Content Include="Content\fonts\ionicons.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\t_login\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\t_login\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\t_login\fonts\fontawesome-webfont.woff" />
@@ -251,19 +298,11 @@
     <Content Include="Content\t_login\fonts\ionicons.eot" />
     <Content Include="Content\t_login\fonts\ionicons.ttf" />
     <Content Include="Content\t_login\fonts\ionicons.woff" />
-    <Content Include="Content\fonts\ionicons.eot" />
-    <Content Include="Content\fonts\ionicons.ttf" />
-    <Content Include="Content\fonts\ionicons.woff" />
     <None Include="packages.config" />
-    <Content Include="Views\a_index\Index.cshtml" />
-    <Content Include="Views\Error\Index.cshtml" />
-    <Content Include="Views\Error\BadRequest.cshtml" />
-    <Content Include="Views\Error\Unauthorized.cshtml" />
-    <Content Include="Views\Error\Forbidden.cshtml" />
-    <Content Include="Views\Error\NotFound.cshtml" />
-    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
-    <Content Include="Views\a_login\Index.cshtml" />
-    <Content Include="Views\Shared\_ErrorLayout.cshtml" />
+    <Content Include="Views\Shared\t_seller_mansion\_t_seller_mansionLayout.cshtml" />
+    <Content Include="Views\Shared\t_seller_mansion\_t_seller_mansion_menuPartial.cshtml" />
+    <Content Include="Views\Shared\t_seller_mansion\_t_seller_mansion_sellerPartial.cshtml" />
+    <Content Include="Views\t_seller_mansion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
@@ -295,9 +334,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>62738</DevelopmentServerPort>
+          <DevelopmentServerPort>56148</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44355/</IISUrl>
+          <IISUrl>https://localhost:44345/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -309,13 +348,10 @@
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
-      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
-  <Import Project="..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets')" />
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

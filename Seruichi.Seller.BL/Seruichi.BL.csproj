@@ -71,10 +71,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonBL.cs" />
-    <Compile Include="Login\t_loginBL.cs" />
     <Compile Include="Seller\a_loginBL.cs" />
     <Compile Include="Seller\a_indexBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tenfold\Login\t_loginBL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

@@ -1,0 +1,20 @@
+.cap-errormsg-right {
+    color: red;
+    font-size: .875em;
+    padding-left: 10px;
+    display: none;
+}
+
+.cap-errormsg-bottom {
+    color: red;
+    font-size: .875em;
+    display: none;
+}
+
+input.cap-is-invalid:not([type="radio"]) {
+    border-color: #dc3545;
+}
+
+select.cap-is-invalid {
+    border-color: #dc3545;
+}

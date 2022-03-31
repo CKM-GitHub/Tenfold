@@ -46,11 +46,11 @@
     <Compile Include="Common\Enumrators.cs" />
     <Compile Include="Common\MessageModel.cs" />
     <Compile Include="Common\SendMailInfo.cs" />
-    <Compile Include="Login\t_loginModel.cs" />
     <Compile Include="Common\LoginUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ValidationModel.cs" />
     <Compile Include="Seller\a_indexModel.cs" />
+    <Compile Include="Tenfold\Login\t_loginModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

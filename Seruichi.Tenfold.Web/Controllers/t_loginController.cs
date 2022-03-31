@@ -6,7 +6,7 @@ using Models;
 using Seruichi.Common;
 using Seruichi.BL;
 using System.Web.Mvc;
-using Models.Login;
+using Models.Tenfold.Login;
 
 namespace Seruichi.Seller.Web.Controllers
 {
