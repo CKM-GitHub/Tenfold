@@ -1,5 +1,6 @@
 ﻿using Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Seruichi.Common
 {
@@ -54,6 +55,16 @@ namespace Seruichi.Common
         {
             var message = GetMessage(id);
             return message.MessageText1;
+        }
+
+        public static Dictionary<string, string> GetClientMessages()
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            foreach (var item in MessageDictionary)
+            {
+                dic.Add(item.Key, item.Value.MessageText1);
+            }
+            return dic;
         }
     }
 }

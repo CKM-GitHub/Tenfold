@@ -31,6 +31,7 @@ namespace Seruichi.Seller.Web
             bundles.Add(new StyleBundle("~/Content/css/application").Include(
                       "~/Content/bootstrap/Soft-UI-Aside-Navbar.css",
                       "~/Content/typeahead/typeahead.custom.css",
+                      "~/Content/css/style.css",
                       "~/Content/css/loading.css",
                       "~/Content/css/validation.css"));
 
@@ -40,12 +41,21 @@ namespace Seruichi.Seller.Web
                       "~/Content/scripts/common.js"));
 
             //a_index
-            bundles.Add(new StyleBundle("~/Content/css/bundle_a_index").Include(
-                      "~/Content/css/a_index.css"));
+            bundles.Add(new StyleBundle("~/Content/css/a_index").Include(
+                      "~/Content/css/auctor-index.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/a_index").Include(
                       "~/Scripts/a_index.js"));
 
+
+            //a_login
+            bundles.Add(new StyleBundle("~/Content/css/a_login").Include(
+                      "~/Content/css/Clients-UI.css",
+                      "~/Content/css/Contact-Form-Clean.css",
+                      "~/Content/css/Login-Form-Clean.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/a_login").Include(
+                      "~/Scripts/a_login.js"));
 
         }
     }

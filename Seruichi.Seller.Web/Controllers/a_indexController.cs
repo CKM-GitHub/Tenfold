@@ -1,23 +1,30 @@
 ﻿using Models;
-using Seruichi.Common;
 using Seruichi.BL;
+using Seruichi.Common;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Seruichi.Seller.Web.Controllers
 {
     public class a_indexController : BaseController
     {
-        // GET: a_index
-        //[SessionFilter(false)]
+        [SessionAuthentication(Enabled = false)]
+        [AllowAnonymous]
         public ActionResult Index()
         {
+            if (SessionAuthenticationHelper.GetUserFromSession() == null)
+            {
+                Session.Clear();
+                SessionAuthenticationHelper.CreateAnonymousUser();
+            }
+
             CommonBL bl = new CommonBL();
             ViewBag.PrefDropDownListItems = bl.GetDropDownListItemsOfPrefecture();
             return View();
         }
 
-
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult CheckZipCode(a_indexModel model)
         {
@@ -52,6 +59,7 @@ namespace Seruichi.Seller.Web.Controllers
             return OKResult(new { PrefCD = outPrefCD, CityCD = outCityCD, TownCD = outTownCD });
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult GetMansionListByMansionWord(string prefCD, string searchWord)
         {
@@ -64,6 +72,7 @@ namespace Seruichi.Seller.Web.Controllers
             return OKResult(DataTableToJSON(dt));
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult GetMansionData(string mansionCD)
         {
@@ -76,6 +85,7 @@ namespace Seruichi.Seller.Web.Controllers
             return OKResult(DataTableToJSON(dt));
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult InsertSellerMansionData(a_indexModel model)
         {
@@ -106,6 +116,5 @@ namespace Seruichi.Seller.Web.Controllers
 
             return OKResult();
         }
-
     }
 }

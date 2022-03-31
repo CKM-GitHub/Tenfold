@@ -7,8 +7,10 @@ using System.Net;
 
 namespace Seruichi.Seller.Web.Controllers
 {
-    [BrowsingHistory(false)]
-    //[SessionFilter(false)]
+    [CustomHandleError(Enabled = false)]
+    [BrowsingHistory(Enabled = false)]
+    [SessionAuthentication(Enabled = false)]
+    [AllowAnonymous]
     public class ErrorController : Controller
     {
         public ActionResult Index()

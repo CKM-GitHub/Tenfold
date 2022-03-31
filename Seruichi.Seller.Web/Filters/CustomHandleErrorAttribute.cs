@@ -8,16 +8,10 @@ namespace Seruichi.Seller.Web
 {
     public class CustomHandleErrorAttribute : HandleErrorAttribute
     {
-        public bool Enabled { get; private set; }
+        public bool Enabled { get; set; } = true;
 
         public CustomHandleErrorAttribute()
         {
-            Enabled = true;
-        }
-
-        public CustomHandleErrorAttribute(bool enable)
-        {
-            Enabled = enable;
         }
 
         public override void OnException(ExceptionContext filterContext)

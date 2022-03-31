@@ -8,11 +8,7 @@ using System.Web.Http;
 
 namespace Seruichi.Seller.Web.Controllers
 {
-    public class testtest
-    {
-        public string PrefCD { get; set; }
-    }
-
+    [AllowAnonymous]
     public class CommonApiController : BaseApiController
     {
         [HttpPost]
@@ -20,26 +16,6 @@ namespace Seruichi.Seller.Web.Controllers
         {
             if (model == null) return BadRequestResult();
             return OKResult(StaticCache.GetMessage(model.MessageID));
-        }
-
-        [HttpPost]
-        public HttpResponseMessage GetMessageAll()
-        {
-            return OKResult(StaticCache.MessageDictionary);
-
-            //Dictionary<string, string> dictionary = new Dictionary<string, string>();
-            //dictionary.Add("E101", StaticCache.GetMessage("E101").MessageText1);
-            //dictionary.Add("E102", StaticCache.GetMessage("E102").MessageText1);
-            //dictionary.Add("E103", StaticCache.GetMessage("E103").MessageText1);
-            //dictionary.Add("E104", StaticCache.GetMessage("E104").MessageText1);
-            //dictionary.Add("E105", StaticCache.GetMessage("E105").MessageText1);
-            //dictionary.Add("E106", StaticCache.GetMessage("E106").MessageText1);
-            //dictionary.Add("E107", StaticCache.GetMessage("E107").MessageText1);
-            //dictionary.Add("E108", StaticCache.GetMessage("E108").MessageText1);
-            //dictionary.Add("E109", StaticCache.GetMessage("E109").MessageText1);
-            //dictionary.Add("E201", StaticCache.GetMessage("E201").MessageText1);
-
-            //return OKResult(dictionary);
         }
 
         [HttpPost]

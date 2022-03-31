@@ -12,7 +12,15 @@ namespace Seruichi.Seller.Web.Controllers
     {
         protected string GetOperator()
         {
-            return "unknown";
+            var user = SessionAuthenticationHelper.GetUserFromSession();
+            if (user == null)
+            {
+                return "unknown";
+            }
+            else
+            {
+                return user.UserID;
+            }
         }
 
         protected string GetClientIP()

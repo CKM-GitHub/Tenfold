@@ -4,20 +4,7 @@
     }
 });
 
-$(function () {
-    common.appPath = $('#path').val();
-
-    common.callAjax(common.appPath + commonApiUrl.getMessageAll, {}, function (result) {
-        if (result && result.isOK) {
-            const data = result.data;
-            for (const key in data)
-            {
-                messageConst[key] = data[key].MessageText1;
-            }
-        }
-    });
-});
-
+//in Layout.cshtml, the database values are set
 const messageConst = {
     E101: '入力が必要です',
     E102: '必ず１つ選択してください',
@@ -28,12 +15,21 @@ const messageConst = {
     E107: '全角文字で入力してください',
     E108: '正しい日付を入力してください',
     E109: 'パスワードが違います',
+    E110: '入力すべき文字数を満たしていません',
+    E111: '日付の大小が不正です',
+    E112: '１つ以上選択してください',
+
     E201: '査定サービスの対象外地域です',
+    E202: 'メールアドレスが入力されていません',
+    E203: '既に登録済のメールアドレスです',
+    E204: 'メールアドレスを正しく入力してください',
+    E205: 'パスワードが入力されていません',
+    E206: 'メールアドレスとパスワードの組合せが正しくありません',
+    E207: 'この情報での登録はありません',
 }
 
 const commonApiUrl = {
     getMessage: "/api/CommonApi/GetMessage",
-    getMessageAll: "/api/CommonApi/GetMessageAll",
     getBuildingAge: "/api/CommonApi/GetBuildingAge",
     getDropDownListItemsOfPrefecture: "/api/CommonApi/GetDropDownListItemsOfPrefecture",
     getDropDownListItemsOfCity: "/api/CommonApi/GetDropDownListItemsOfCity",
@@ -53,7 +49,7 @@ const regexPattern = {
 
 const common = {
 
-    appPath: "",
+    appPath: "", //set in Layout.cshtml
 
     getMessage: function getMessage(id) {
         let msg = messageConst[id];
@@ -121,6 +117,9 @@ const common = {
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             data: JSON.stringify(model),
+            headers: {
+                RequestVerificationToken: $("#_RequestVerificationToken").val(),
+            },
             async: true,
             timeout: 30000,
         }).done(function (data) {
@@ -130,7 +129,7 @@ const common = {
             }
         }).fail(function (XMLHttpRequest, status, e) {
             common.hideLoading(disableSelector);
-            //alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.status);
             if (failCallback) {
                 failCallback();
             }
@@ -144,6 +143,9 @@ const common = {
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             data: JSON.stringify(model),
+            headers: {
+                RequestVerificationToken: $("#_RequestVerificationToken").val(),
+            },
             async: true,
             timeout: 100000,
         }).done(function (data) {
@@ -151,7 +153,7 @@ const common = {
                 successCallback(data);
             }
         }).fail(function (XMLHttpRequest, status, e) {
-            //alert(XMLHttpRequest.status);
+            alert(XMLHttpRequest.status);
             if (failCallback) {
                 failCallback();
             }
@@ -409,7 +411,10 @@ const common = {
     },
     
     bindValidationEvent: function bindValidationEvent(selector, exceptSelector) {
-        var selector = selector + ' :input:not(button):not(:hidden):not(:disabled):not([readonly])' + exceptSelector;
+        var selector = selector + ' :input:not(button):not(:hidden):not(:disabled):not([readonly])';
+        if (exceptSelector) {
+            selector = selector + exceptSelector;
+        }
         $(document).on('blur', selector, function (e) {
             return common.checkValidityInput(this);
         });

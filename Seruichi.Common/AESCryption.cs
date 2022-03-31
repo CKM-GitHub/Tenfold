@@ -52,9 +52,9 @@ namespace Seruichi.Common
             byte[] aesKey = CreateAesKey(key, salt);
             byte[] aesIv = CreateAesIV();
 
-            var saltString = Convert.ToBase64String(salt);
-            var aesKeyString = Convert.ToBase64String(aesKey);
-            var aesIvString = Convert.ToBase64String(aesIv);
+            //var saltString = Convert.ToBase64String(salt);
+            //var aesKeyString = Convert.ToBase64String(aesKey);
+            //var aesIvString = Convert.ToBase64String(aesIv);
 
             byte[] byteValue = encoding.GetBytes(plainText);
             int byteLength = byteValue.Length;
@@ -84,9 +84,9 @@ namespace Seruichi.Common
             byte[] byteEncrypted = byteData.Skip(saltSize + ivSize).ToArray();
             byte[] aesKey = CreateAesKey(key, salt);
 
-            var saltString = Convert.ToBase64String(salt);
-            var aesKeyString = Convert.ToBase64String(aesKey);
-            var aesIvString = Convert.ToBase64String(aesIv);
+            //var saltString = Convert.ToBase64String(salt);
+            //var aesKeyString = Convert.ToBase64String(aesKey);
+            //var aesIvString = Convert.ToBase64String(aesIv);
 
             using (var aes = CreateAesCng(aesKey, aesIv))
             using (var decryptor = aes.CreateDecryptor())

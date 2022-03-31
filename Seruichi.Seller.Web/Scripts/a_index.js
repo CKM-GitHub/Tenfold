@@ -422,7 +422,6 @@ function displayMansionData(mansionCD) {
 
 var bloodhoundSuggestions;
 function createBloodhound() {
-
     bloodhoundSuggestions = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('DisplayText'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -436,7 +435,10 @@ function createBloodhound() {
                 settings.type = 'POST';
                 settings.contentType = 'application/json';
                 settings.xhrFields = {
-                    withCredentials: false
+                    withCredentials: false,
+                };
+                settings.headers = {
+                    'RequestVerificationToken': $("#_RequestVerificationToken").val(),
                 };
                 settings.data = JSON.stringify(data);
                 return settings;

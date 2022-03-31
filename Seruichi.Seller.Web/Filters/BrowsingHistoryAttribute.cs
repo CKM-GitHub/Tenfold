@@ -10,16 +10,11 @@ namespace Seruichi.Seller.Web
         public static string PREVIOUS_URL = "PREVIOUS_URL";
         public static string CURRENT_URL = "CURRENT_URL";
 
-        public bool Enabled { get; private set; }
+        public bool Enabled { get; set; }
 
         public BrowsingHistoryAttribute()
         {
             Enabled = true;
-        }
-
-        public BrowsingHistoryAttribute(bool enable)
-        {
-            Enabled = enable;
         }
 
         public void OnActionExecuted(ActionExecutedContext filterContext)
