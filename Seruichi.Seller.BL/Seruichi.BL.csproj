@@ -77,16 +77,6 @@
     <Compile Include="Tenfold\Login\t_loginBL.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{dc43a405-2700-495f-8e91-7e1dd6804cf7}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Seruichi.Common\Seruichi.Common.csproj">
-      <Project>{94fcc438-8b11-4348-8e01-098e92a57e5a}</Project>
-      <Name>Seruichi.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Database\Function\fn_GetBuildingAge.sql" />
     <Content Include="Database\StoredProcedure\pr_a_index_Insert_SellerMansionData.sql" />
     <Content Include="Database\StoredProcedure\pr_a_index_Select_CitiesByZipCode.sql" />
@@ -110,7 +100,16 @@
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfStation.sql" />
     <Content Include="Database\TableType\T_MansionStation.sql" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{dc43a405-2700-495f-8e91-7e1dd6804cf7}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Seruichi.Common\Seruichi.Common.csproj">
+      <Project>{94fcc438-8b11-4348-8e01-098e92a57e5a}</Project>
+      <Name>Seruichi.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
