@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models.Login
+namespace Models.Tenfold.Login
 {
-   public class t_loginModel : BaseModel
+    public class t_loginModel
     {
         public string TenStaffCD { get; set; }
         public string TenStaffPW { get; set; }

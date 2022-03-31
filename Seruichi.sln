@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1622
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seruichi.Seller.Web", "Seruichi.Seller.Web\Seruichi.Seller.Web.csproj", "{1458B5EA-09EB-47D3-B0A1-439D425EA204}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{DC43A405-2700-495F-8E91-7E1DD6804CF7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seruichi.BL", "Seruichi.Seller.BL\Seruichi.BL.csproj", "{99062FAC-2619-4BDB-A75F-6B90F7742F7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seruichi.Tenfold.Web", "Seruichi.Tenfold.Web\Seruichi.Tenfold.Web.csproj", "{03265EE9-F7F0-4AE0-BE6C-77A4B1548EA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{99062FAC-2619-4BDB-A75F-6B90F7742F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99062FAC-2619-4BDB-A75F-6B90F7742F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99062FAC-2619-4BDB-A75F-6B90F7742F7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03265EE9-F7F0-4AE0-BE6C-77A4B1548EA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03265EE9-F7F0-4AE0-BE6C-77A4B1548EA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03265EE9-F7F0-4AE0-BE6C-77A4B1548EA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03265EE9-F7F0-4AE0-BE6C-77A4B1548EA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
