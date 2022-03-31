@@ -9,7 +9,8 @@
         <li>
             <div class="text-center px-xl-3">
                 <div class="mb-3 text-start">
-                    <label for="disabledSelect" class="form-label">居住地</label> <select id="disabledSelect" class="form-select">
+                    <label for="locationSelect" class="form-label">居住地</label> 
+                    <select id="locationSelect" class="form-select">
                         <option>全国</option>
                         <option>北海道</option>
                         <option>青森県</option>
@@ -61,28 +62,31 @@
                     </select>
                 </div>
                 <div class="mb-3 text-start">
-                    <label for="disabledSelect" class="form-label">売主名</label> <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="売主CD、売主名">
+                    <label for="SellerName" class="form-label">売主名</label> 
+                    <input type="text" class="form-control mb-2" id="SellerName" placeholder="売主CD、売主名">
                 </div>
             </div>
         </li>
         <li>
             <div class="text-center px-xl-3">
                 <div class="mb-3 text-start">
-                    <label for="disabledSelect" class="form-label">範囲指定</label> <select id="disabledSelect" class="form-select mb-2">
+                    <label for="RangeSelect" class="form-label">範囲指定</label>
+                    <select id="RangeSelect" class="form-select mb-2">
                         <option>登録日</option>
                         <option>査定依頼日</option>
                         <option>買取依頼日</option>
-                    </select> <label for="disabledSelect" class="form-label">開始日</label>
+                    </select> 
+                    <label for="startdate" class="form-label">開始日</label>
                     <input class="form-control mb-2" type="date" id="startdate"> 
-                    <label for="disabledSelect" class="form-label">終了日</label>
-                    <input class="form-control mb-2" required="" type="date">
+                    <label for="enddate" class="form-label">終了日</label>
+                    <input class="form-control mb-2" required="" type="date" id="enddate">
                     <div class="row mb-3">
-                        <div class="col-6"> <button type="button" class="btn btn-primary w-100">今日</button></div>
-                        <div class="col-6"><button type="button" class="btn btn-primary w-100">今週</button></div>
+                        <div class="col-6"> <button type="button" class="btn btn-primary w-100" id="btnToday">今日</button></div>
+                        <div class="col-6"><button type="button" class="btn btn-primary w-100" id="btnThisWeek">今週</button></div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-6"><button type="button" class="btn btn-primary w-100">今月</button></div>
-                        <div class="col-6"><button type="button" class="btn btn-primary w-100">先月</button></div>
+                        <div class="col-6"><button type="button" class="btn btn-primary w-100" id="btnThisMonth">今月</button></div>
+                        <div class="col-6"><button type="button" class="btn btn-primary w-100" id="btnLastMonth">先月</button></div>
                     </div>
                 </div>
             </div>
@@ -90,29 +94,32 @@
         <li>
             <div class="text-center px-xl-3">
                 <div class="mb-3 text-start">
-                    <label for="disabledSelect" class="form-label">会員状態</label>
+                    <label for="ValidCheck" class="form-label">会員状態</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
-                               checked> <label class="form-check-label" for="defaultCheck1"> 有効会員 </label>
+                        <input class="form-check-input" type="checkbox" value="" id="ValidCheck"
+                               checked> <label class="form-check-label" for="ValidCheck"> 有効会員 </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
-                               checked> <label class="form-check-label" for="defaultCheck1"> 無効会員 </label>
+                        <input class="form-check-input" type="checkbox" value="" id="InValidCheck"
+                               checked> <label class="form-check-label" for="InValidCheck"> 無効会員 </label>
                     </div>
                 </div>
                 <div class="mb-3 text-start">
-                    <label for="disabledSelect" class="form-label">ステータス</label>
+                    <label for="StatusSelect" class="form-label">ステータス</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
-                               checked> <label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white">見</span> ⾒込</label>
+                        <input class="form-check-input" type="checkbox" value="" id="StatusCheck1"
+                               checked> <label class="form-check-label" for="StatusCheck1">
+                        <span class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white">見</span> ⾒込</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
-                               checked> <label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark">交</span> 交渉中</label>
+                        <input class="form-check-input" type="checkbox" value="" id="StatusCheck2"
+                               checked> <label class="form-check-label" for="StatusCheck2"> 
+                        <span class="ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark">交</span> 交渉中</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="ms-1 ps-1 pe-1 rounded-circle defaultCheck1"
-                               checked> <label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-secondary">終</span> 終了</label>
+                        <input class="form-check-input" type="checkbox" value="" id="ms-1 ps-1 pe-1 rounded-circle StatusCheck3"
+                               checked> <label class="form-check-label" for="StatusCheck3"> 
+                        <span class="ms-1 ps-1 pe-1 rounded-circle bg-secondary">終</span> 終了</label>
                     </div>
 
                 </div>
@@ -121,13 +128,13 @@
         <li>
             <div class="form-group ps-3 pe-3">
                 <button type="button"
-                        class="btn btn-primary w-100 w-100 mb-3">
+                        class="btn btn-primary w-100 w-100 mb-3" id="btnDisplay">
                     表示
                 </button>
             </div>
             <div class="form-group ps-3 pe-3">
                 <button type="button"
-                        class="btn btn-primary w-100 w-100">
+                        class="btn btn-primary w-100 w-100" id="btnCSV">
                     CSVダウンロード
                 </button>
             </div>
@@ -135,8 +142,8 @@
         <hr class="navbar-divider my-5 opacity-20">
         <li>
             <div class="form-group ps-3 pe-3">
-                <button type="button" class="btn btn-primary w-100 mb-3">新規登録 </button>
-                <button type="button" class="btn btn-primary w-100">査定枠追加料金設定 </button>
+                <button type="button" class="btn btn-primary w-100 mb-3" id="btnSignUp">新規登録 </button>
+                <button type="button" class="btn btn-primary w-100" id="btnSetting">査定枠追加料金設定 </button>
             </div>
         </li>
     </ul>
