@@ -14,8 +14,6 @@ namespace Seruichi.Tenfold.Web.Controllers
         // GET: t_seller_mansion
         public ActionResult Index()
         {
-            DBAccess db = new DBAccess();
-            string a = "a";
             return View();
         }
 
