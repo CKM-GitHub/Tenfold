@@ -48,7 +48,6 @@
     <Compile Include="Seller\a_loginBL.cs" />
     <Compile Include="Seller\a_indexBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tenfold\Login\testBL.cs" />
     <Compile Include="Tenfold\Login\t_loginBL.cs" />
     <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionBL.cs" />
   </ItemGroup>

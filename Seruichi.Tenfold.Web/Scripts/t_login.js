@@ -14,21 +14,15 @@ function setValidation() {
 
     $('#email')
         .addvalidation_errorElement("#erroremail")
-        .addvalidation_reqired(true)
-        .addvalidation_singlebyte()
+        .addvalidation_reqired()
+        .addvalidation_onebyte_character()
         .addvalidation_MaxLength(10);
-    //.addvalidation_singlebyte_number();
-    //.addvalidation_singlebyte_doublebyte;
-
-
-
+   
     $('#password')
         .addvalidation_errorElement("#errorpassword")
-        .addvalidation_reqired(true)
-        .addvalidation_singlebyte()
+        .addvalidation_reqired()
+        .addvalidation_onebyte_character()
         .addvalidation_MaxLength(10);
-    // .addvalidation_singlebyte_doublebyte;
-    //.addvalidation_singlebyte_number();
 
 
     $('#btnLogin')
@@ -86,29 +80,13 @@ function addEvents() {
         common.callAjaxWithLoading(_url.select_M_TenfoldStaff, model1, this, function (result) {
             if (result && result.isOK) {
                 //sucess
-                window.location.reload();
+               // window.location.reload();
+                window.location.href = '/t_dashboard/Index';    
             }
-            //////if (result && result.isOK) {
-            //////    $($email).hideError();
-            //////    $($password).hideError();
-            //////    const data = result.data;
-            //////}
-
             if (result && !result.isOK) {
                 const message = result.message;
                 $this.showError(message.MessageText1);
             }
-
-            //////if (result && result.data) {
-            //////    ////server validation error
-            //////    const errors = result.data;
-            //////    for (key in errors) {
-            //////        const target = document.getElementById(key);
-            //////        $(target).showError(errors[key]);
-            //////        $form.getInvalidItems().get(0).focus();
-            //////    }
-            //////}
         });
     });
-
 }

@@ -233,6 +233,7 @@ const common = {
         const customValidation = $ctrl.attr("data-validation-custom");
         const isDate = $ctrl.attr("data-validation-datecheck");
         const isMaxlengthCheck = $ctrl.attr("data-validation-MaxLength");
+        const isOneByteCharacter = $ctrl.attr("data-validation-onebyte-character");
         
 
         let inputValue = "";
@@ -265,7 +266,7 @@ const common = {
             && !isSingleDoubleByte
             && !isDoubleByte
             && !isSingleByte && !isSingleByteNumber && !isSingleByteNumberAlpha
-            && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck
+            && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter
             && !customValidation) return true;
 
         if (isRequired) {
@@ -393,6 +394,16 @@ const common = {
                 $ctrl.val(Number(inputValue).toLocaleString());
             }
 
+
+            if (isOneByteCharacter) {
+                const strByte = this.getStringByteCount(inputValue);
+                if (strByte != inputValue.length) {
+                    $ctrl.showError(this.getMessage('E104'));
+                    return;
+                }
+            }
+
+
             if (isMaxlengthCheck) {
                 const maxLength = $ctrl.data('digits');
                 if (maxLength) {
@@ -403,7 +414,7 @@ const common = {
                     }
                 }
             }
-
+            
             if (isDate) {
                 alert("Error Occur");
             }

@@ -13,7 +13,6 @@ namespace Seruichi.Tenfold.Web.Controllers
 {
     public class t_loginController : BaseController
     {
-
         private Encoding encoding = Encoding.GetEncoding("Shift_JIS");
         // GET: t_login
         public ActionResult Index()
@@ -26,7 +25,7 @@ namespace Seruichi.Tenfold.Web.Controllers
             return View();
         }
 
-        
+
         [HttpPost]
         public ActionResult CheckId(string TenStaffCD)
         {
@@ -74,7 +73,6 @@ namespace Seruichi.Tenfold.Web.Controllers
             var validationResult = bl.ValidateAll(model);
             if (validationResult.Count > 0)
             {
-                //return ErrorResult(validationResult);
                 return ErrorMessageResult("E207");
             }
 
@@ -83,11 +81,11 @@ namespace Seruichi.Tenfold.Web.Controllers
             {
                 HttpCookie cookie = new HttpCookie("TenStaffCD", model.TenStaffCD);
                 Response.Cookies.Add(cookie);
-                return RedirectToAction("t_dashboard", "Index");
+                return OKResult();
             }
             else
             {
-                return ErrorMessageResult("E207");
+               return ErrorMessageResult("E207");
             }
         }
     }
