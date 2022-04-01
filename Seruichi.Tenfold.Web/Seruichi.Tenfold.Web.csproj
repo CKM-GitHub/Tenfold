@@ -265,6 +265,7 @@
     <Content Include="Content\fonts\ionicons.woff" />
     <Content Include="Scripts\t_login.js" />
     <Content Include="Scripts\t_seller_list.js" />
+    <Content Include="Scripts\t_seller_mansion.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

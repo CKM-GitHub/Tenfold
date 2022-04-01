@@ -4,7 +4,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Seruichi.Seller.Web
+namespace Seruichi.Tenfold.Web
 {
     public class CustomHandleErrorAttribute : HandleErrorAttribute
     {

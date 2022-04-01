@@ -8,7 +8,7 @@ using Seruichi.BL;
 using System.Web.Mvc;
 using Models.Tenfold.Login;
 
-namespace Seruichi.Seller.Web.Controllers
+namespace Seruichi.Tenfold.Web.Controllers
 {
     public class t_loginController : BaseController
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Seruichi.Seller.Web.Controllers
+namespace Seruichi.Tenfold.Web.Controllers
 {
     public class t_dashboardController : Controller
     {

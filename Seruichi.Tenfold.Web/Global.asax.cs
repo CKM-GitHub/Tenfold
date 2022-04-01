@@ -1,3 +1,4 @@
+using Seruichi.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,9 @@ namespace Seruichi.Tenfold.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            StaticCache.SetIniInfo();
+            StaticCache.SetMessageCache();
         }
     }
 }

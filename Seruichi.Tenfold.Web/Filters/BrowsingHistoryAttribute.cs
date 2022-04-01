@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Seruichi.Seller.Web
+namespace Seruichi.Tenfold.Web
 {
     public class BrowsingHistoryAttribute : FilterAttribute, IActionFilter
     {
