@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 
-namespace Seruichi.Seller.Web.Controllers
+namespace Seruichi.Tenfold.Web.Controllers
 {
     public class BaseApiController : ApiController
     {

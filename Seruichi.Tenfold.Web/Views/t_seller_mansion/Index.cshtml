@@ -1,6 +1,9 @@
 ﻿@{
     Layout = "~/Views/Shared/t_seller_mansion/_t_seller_mansionLayout.cshtml";
 }
+@section styles{
+    @Styles.Render("~/Content/t_seller_mansion")
+}
 <header class="bg-surface-primary border-bottom pt-6">
     <div class="container-fluid">
         <div class="mb-npx">
@@ -8,7 +11,7 @@
                 <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                     <h1 class="h2 mb-0 ls-tight">管理 － 物件(部屋)</h1>
                 </div>
-                <div class="col-sm-6 col-12 text-sm-end">                  
+                <div class="col-sm-6 col-12 text-sm-end">
                 </div>
             </div>
             <ul class="nav nav-tabs mt-4 overflow-x border-0">
@@ -240,3 +243,7 @@
         </div>
     </div>
 </main>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/t_seller_mansion")
+}
