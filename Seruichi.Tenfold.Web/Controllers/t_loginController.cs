@@ -2,56 +2,93 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Models;
 using Seruichi.Common;
-using Seruichi.BL;
 using System.Web.Mvc;
 using Models.Tenfold.Login;
+using System.Text;
+using System.Data;
+using Seruichi.BL.Tenfold.Login;
 
-namespace Seruichi.Seller.Web.Controllers
+namespace Seruichi.Tenfold.Web.Controllers
 {
     public class t_loginController : BaseController
     {
+
+        private Encoding encoding = Encoding.GetEncoding("Shift_JIS");
         // GET: t_login
         public ActionResult Index()
         {
+            string[] myCookies = Request.Cookies.AllKeys;
+            foreach (string cookie in myCookies)
+            {
+                Response.Cookies[cookie].Expires = DateTime.Now.AddDays(-1);
+            }
             return View();
         }
 
-
+        
         [HttpPost]
-        public ActionResult checkIDpsw(t_loginModel model)
+        public ActionResult CheckId(string TenStaffCD)
         {
-            if (model == null)
+            if (TenStaffCD == null)
             {
                 return BadRequestResult();
             }
 
             Validator validator = new Validator();
             string errorcd = "";
-            string outPrefCD = "";
+            if (!validator.CheckIsHalfWidth(TenStaffCD, 10, out errorcd))
+            {
+                return ErrorMessageResult(errorcd);
+            }
+            return OKResult();
+        }
+        
+        [HttpPost]
+        public ActionResult checkPassword(string TenStaffPW)
+        {
+            if (TenStaffPW == null)
+            {
+                return BadRequestResult();
+            }
 
-            if (!validator.CheckIsHalfWidth(model.TenStaffCD, 10, RegexFormat.Number, out errorcd))
+            Validator validator = new Validator();
+            string errorcd = "";
+            if (!validator.CheckIsHalfWidth(TenStaffPW, 10, out errorcd))
             {
                 return ErrorMessageResult(errorcd);
             }
 
-            if (!validator.CheckIsHalfWidth(model.TenStaffPW, 10, RegexFormat.Number, out errorcd))
+            return OKResult();
+        }
+        
+        [HttpPost]
+        public ActionResult select_M_TenfoldStaff(t_loginModel model)
+        {
+            if (model == null)
             {
-                return ErrorMessageResult(errorcd);
+                return BadRequestResult();
             }
 
             t_loginBL bl = new t_loginBL();
-            if (!bl.CheckPrefecturesByIdpsw(model.TenStaffCD, model.TenStaffPW, out errorcd, out outPrefCD))
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
             {
-                return ErrorMessageResult(errorcd);
+                //return ErrorResult(validationResult);
+                return ErrorMessageResult("E207");
+            }
+
+            DataTable dt = bl.GetM_TenfoldStaff(model);
+            if (dt.Rows.Count > 0)
+            {
+                HttpCookie cookie = new HttpCookie("TenStaffCD", model.TenStaffCD);
+                Response.Cookies.Add(cookie);
+                return RedirectToAction("t_dashboard", "Index");
             }
             else
             {
-                return OKResult();
+                return ErrorMessageResult("E207");
             }
-
-
-            }
+        }
     }
 }
