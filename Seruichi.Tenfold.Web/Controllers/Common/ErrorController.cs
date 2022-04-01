@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Net;
 
-namespace Seruichi.Seller.Web.Controllers
+namespace Seruichi.Tenfold.Web.Controllers
 {
     [CustomHandleError(Enabled = false)]
     [BrowsingHistory(Enabled = false)]

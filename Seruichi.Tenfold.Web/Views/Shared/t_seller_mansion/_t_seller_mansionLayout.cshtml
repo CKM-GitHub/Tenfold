@@ -18,11 +18,13 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>セルイチ管理機能</title>
-    <link rel="stylesheet" href="~/Content/t_dashboard/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/Content/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="~/Content/t_dashboard/css/style.css">
-    <link rel="stylesheet" href="~/Content/t_dashboard/css/index.css">
-    <link href="~/Content/css/validation.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="~/Content/t_dashboard/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="~/Content/fonts/font-awesome.min.css">
+        <link rel="stylesheet" href="~/Content/t_dashboard/css/style.css">
+        <link rel="stylesheet" href="~/Content/t_dashboard/css/index.css">
+        <link href="~/Content/css/validation.css" rel="stylesheet" />*@
+
+    @RenderSection("styles", required: false)
 </head>
 
 <body>
