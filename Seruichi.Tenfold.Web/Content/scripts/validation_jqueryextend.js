@@ -153,6 +153,14 @@
             .removeAttr('data-digits')
     };
 
+    $.fn.addvalidation_MaxLength = function (digits) {
+        return this
+            .attr('data-validation-MaxLength', 'true')
+            .attr('data-digits', digits)
+            .attr('inputmode', 'text')
+            .attr('autocomplete', 'off');
+    };
+
 
     $.fn.addvalidation_custom = function (validationName) {
         return this
