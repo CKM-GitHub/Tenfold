@@ -1,5 +1,7 @@
 ﻿$(function () {
 
+    _url.GetM_SellerMansionList = common.appPath + '/t_seller_mansion/GetM_SellerMansionList'; 
+
     setValidation();
     addEvents();
 });
