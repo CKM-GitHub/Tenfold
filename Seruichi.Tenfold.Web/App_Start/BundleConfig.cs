@@ -58,6 +58,18 @@ namespace Seruichi.Tenfold.Web
             bundles.Add(new ScriptBundle("~/bundles/t_seller_list").Include(
                      "~/Scripts/t_seller_list.js"));
 
+            //t_dashboard
+            bundles.Add(new StyleBundle("~/Content/t_dashboard").Include(
+                      "~/Content/t_dashboard/bootstrap/css/bootstrap.min.css",
+                      "~/Content/fonts/font-awesome.min.css",
+                      "~/Content/t_dashboard/css/style.css",
+                      "~/Content/t_dashboard/css/index.css",
+                      "~/Content/t_dashboard/css/jquery.dataTables.min.css"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/t_dashboard").Include(
+                     "~/Scripts/t_dashboard.js"));
+
         }
     }
 }
