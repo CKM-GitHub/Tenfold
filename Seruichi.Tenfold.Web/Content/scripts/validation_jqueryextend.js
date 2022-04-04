@@ -141,12 +141,20 @@
             .removeAttr('data-digits')
     };
 
+
+    //add by ct
     $.fn.addvalidation_MaxLength = function (digits) {
         return this
             .attr('data-validation-MaxLength', 'true')
             .attr('data-digits', digits)
             .attr('inputmode', 'text')
             .attr('autocomplete', 'off');
+    };
+
+    $.fn.addvalidation_onebyte_character = function () {
+        return this
+            .attr('data-validation-onebyte-character', 'true')
+            .attr('inputmode', 'text');
     };
 
     //--validation
