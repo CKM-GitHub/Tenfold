@@ -8,20 +8,24 @@ using Models.Tenfold.Login;
 using System.Text;
 using System.Data;
 using Seruichi.BL.Tenfold.Login;
+using System.Web.Security;
 
 namespace Seruichi.Tenfold.Web.Controllers
 {
+    [SessionAuthentication(Enabled = false)]
+    [AllowAnonymous]
     public class t_loginController : BaseController
     {
         private Encoding encoding = Encoding.GetEncoding("Shift_JIS");
         // GET: t_login
         public ActionResult Index()
         {
-            string[] myCookies = Request.Cookies.AllKeys;
-            foreach (string cookie in myCookies)
-            {
-                Response.Cookies[cookie].Expires = DateTime.Now.AddDays(-1);
-            }
+            ////string[] myCookies = Request.Cookies.AllKeys;
+            ////foreach (string cookie in myCookies)
+            ////{
+            ////    Response.Cookies[cookie].Expires = DateTime.Now.AddDays(-1);
+            ////}
+            SessionAuthenticationHelper.ReCreateSession();
             return View();
         }
 
@@ -36,7 +40,7 @@ namespace Seruichi.Tenfold.Web.Controllers
 
             Validator validator = new Validator();
             string errorcd = "";
-            if (!validator.CheckIsHalfWidth(TenStaffCD, 10, out errorcd))
+            if (!validator.CheckIsidAndpsw(TenStaffCD, 10, out errorcd))
             {
                 return ErrorMessageResult(errorcd);
             }
@@ -53,7 +57,7 @@ namespace Seruichi.Tenfold.Web.Controllers
 
             Validator validator = new Validator();
             string errorcd = "";
-            if (!validator.CheckIsHalfWidth(TenStaffPW, 10, out errorcd))
+            if (!validator.CheckIsidAndpsw(TenStaffPW, 10, out errorcd))
             {
                 return ErrorMessageResult(errorcd);
             }
@@ -79,8 +83,10 @@ namespace Seruichi.Tenfold.Web.Controllers
             DataTable dt = bl.GetM_TenfoldStaff(model);
             if (dt.Rows.Count > 0)
             {
-                HttpCookie cookie = new HttpCookie("TenStaffCD", model.TenStaffCD);
-                Response.Cookies.Add(cookie);
+                ////HttpCookie cookie = new HttpCookie("TenStaffCD", model.TenStaffCD);
+                ////Response.Cookies.Add(cookie);
+                FormsAuthentication.SetAuthCookie(model.TenStaffCD, false);
+                SessionAuthenticationHelper.CreateLoginUser(model.TenStaffCD);
                 return OKResult();
             }
             else
