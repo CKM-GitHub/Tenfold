@@ -1,24 +1,87 @@
 ﻿$(function () {
 
-    _url.GetM_SellerMansionList = common.appPath + '/t_seller_mansion/GetM_SellerMansionList'; 
-
     setValidation();
     addEvents();
 });
 
 function setValidation() {
-    //階
-    //$('#inlineFormInput')
-    //    .addvalidation_reqired(true)
+
+    $('#SellerName')
+        .addvalidation_errorElement("#errorSeller")
+        //.addvalidation_MaxLengthForSingleDouble(10);
+        .addvalidation_MaxLength(10);
 
     $('#startdate')
-        .addvalidation_datecheck()
+        .addvalidation_datecheck();
+
+    $('#enddate')
+        .addvalidation_datecheck();
+        //.addvalidation_custom('CompareDate');
    
 }
 function addEvents() {
 
-    //共通チェック処理
-    common.bindValidationEvent('#form1', "");
+    //common.bindValidationEvent('#form1', "");
+
+    //const $locationSelect = $("#locationSelect").val(),$SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(),
+    //    $startdate = $("#startdate").val(), $enddate = $("#enddate").val(), $ValidCheck = $("#ValidCheck").val(),
+    //    $InValidCheck = $("#InValidCheck").val(), $StatusCheck1 = $("#StatusCheck1").val(), $StatusCheck2 = $("#StatusCheck2").val(),
+    //    $StatusCheck3 = $("#StatusCheck3").val()
+
+    //$('#SellerName').on('change', function () {
+    //    const $this = $(this), $SellerName = $('#SellerName')
+    //    let model = {
+    //        SellerName: $SellerName.val()
+    //    };
+    //    common.callAjax(model,
+    //        function (result) {
+    //            if (result && result.isOK) {
+    //                const data = result.data;
+    //            }
+    //            if (result && !result.isOK) {
+    //                const message = result.message;
+    //                $this.showError(message.MessageText1);
+    //            }
+    //        });
+    //});
+
+    $('#enddate').on('change', function () {
+        const $this = $(this), $enddate = $('#enddate'), $startdate = $('#startdate')
+        let model = {
+            startDate: $startdate.val(),
+            endDate: $enddate.val()
+        };
+        //alert(model.startDate);
+        //alert(model.endDate);
+        if (model.startDate > model.endDate) {
+            $this.showError(common.getMessage('E111'));
+        }
+    });
+
+    
+    $('#InValidCheck').on('change', function () {
+        const $this = $(this)
+        //    $valid = $('#ValidCheck'), $invalid = $('#InValidCheck')
+        //let model = {
+        //    ValidCheck: $valid.val(),
+        //    InValidCheck: $invalid.val()
+        //};
+        alert("aa");
+        if ($('#ValidCheck').prop('checked', false) && $('#InValidCheck').prop('checked', false)) {
+            alert("bb");
+            $this.showError(common.getMessage('E112'));
+        }
+        
+    });
+
+    $('#checkbox1').change(function () {
+        if ($(this).is(":checked")) {
+            var returnVal = confirm("Are you sure?");
+            $(this).attr("checked", returnVal);
+        }
+        $('#textbox1').val($(this).is(':checked'));
+    });
+
 
     $('#btnToday').on('click', function () {
         var now = new Date();
@@ -86,4 +149,21 @@ function addEvents() {
 
     });
 
+}
+
+//function CompareDate() {
+//    const $this = $(this), $enddate = $('#enddate'), $startdate = $('#startdate')
+//    let model = {
+//        startDate: $startdate.val(),
+//        endDate: $enddate.val()
+//    };
+
+//    //alert(model.startDate);
+//    //alert(model.endDate);
+//    if (model.startDate > model.endDate) {
+//        $this.showError(common.getMessage('E111'));
+//        return false;
+//    }
+
+//    return true;
 }
