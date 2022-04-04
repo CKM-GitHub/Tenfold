@@ -236,17 +236,10 @@ namespace Seruichi.Common
         }
 
 
-        public bool CheckIsidAndpsw(string inputText, int maxLength, out string errorcd)
+        public bool CheckIsOnlyOneCharacter(string inputText,out string errorcd)
         {
             errorcd = "";
-
-            if (string.IsNullOrEmpty(inputText)) return true;
-
-            if (!CheckByteCount(inputText, maxLength, out errorcd, out string dummy))
-            {
-                return false;
-            }
-
+            
             if (encoding.GetByteCount(inputText) != inputText.Length)
             {
                 errorcd = "E104"; //入力できない文字です。
@@ -258,8 +251,6 @@ namespace Seruichi.Common
                 errorcd = "E104"; //入力できない文字です。
                 return false;
             }
-
-
             return true;
         }
         public bool CheckIsHalfWidth(string inputText, int maxLength, out string errorcd)

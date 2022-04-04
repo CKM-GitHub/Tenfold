@@ -69,6 +69,13 @@ namespace Seruichi.Common
                 AddValidationResult(elementId, errorcd);
         }
 
+        public void CheckIsOnlyOneCharacter(string elementId, string inputText)
+        {
+            if (!validator.CheckIsOnlyOneCharacter(inputText,out string errorcd))
+                AddValidationResult(elementId, errorcd);
+        }
+
+
         public void CheckIsHalfWidth(string elementId, string inputText, int maxLength)
         {
             if (!validator.CheckIsHalfWidth(inputText, maxLength, out string errorcd))
