@@ -103,18 +103,6 @@
         return this.removeAttr('data-validation-singlebyte-number')
     };
 
-    //test --validation
-    $.fn.addvalidation_datecheck = function () {
-        return this
-            .attr('data-validation-datecheck', 'true')
-            .attr('inputmode', 'numeric');
-    };
-    $.fn.removeValidation_datecheck = function () {
-        return this.removeAttr('data-validation-datecheck')
-    };
-
-
-
     $.fn.addvalidation_singlebyte_numberAlphabet = function () {
         this.attr('data-validation-singlebyte-numberalpha', 'true')
             .attr('inputmode', 'text');
@@ -159,6 +147,23 @@
             .attr('data-digits', digits)
             .attr('inputmode', 'text')
             .attr('autocomplete', 'off');
+    };
+
+    //--validation
+    $.fn.addvalidation_datecheck = function () {
+        return this
+            .attr('data-validation-datecheck', 'true')
+    };
+    $.fn.removeValidation_datecheck = function () {
+        return this.removeAttr('data-validation-datecheck')
+    };
+
+    $.fn.addvalidation_datecompare = function () {
+        return this
+            .attr('data-validation-datecompare', 'true')
+    };
+    $.fn.removeValidation_datecompare = function () {
+        return this.removeAttr('data-validation-datecompare')
     };
 
 

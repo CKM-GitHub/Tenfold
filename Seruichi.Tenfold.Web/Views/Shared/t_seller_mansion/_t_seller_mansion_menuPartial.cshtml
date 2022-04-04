@@ -12,39 +12,39 @@
                     <div class="mb-3 text-start">
                         <label for="disabledSelect" class="form-label">ステータス</label>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="Chk_Blue" name="Chk_Blue"  checked> 
+                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Blue" name="Chk_Blue"  checked> 
                             <label class="form-check-label" for="Chk_Blue"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white">未</span> 未処理</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="Chk_Sky" name="Chk_Sky"
+                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Sky" name="Chk_Sky"
                                    checked> <label class="form-check-label" for="Chk_Sky"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-info text-white">簡</span> 簡易査定</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="Chk_Orange" name="Chk_Orange"
+                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Orange" name="Chk_Orange"
                                    checked> <label class="form-check-label" for="Chk_Orange"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-warning text-white">査</span> 査定依頼</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="Chk_Green" name="Chk_Green"
+                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Green" name="Chk_Green"
                                    checked> <label class="form-check-label" for="Chk_Green"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white">買</span> 買取依頼</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="Chk_Brown" name="Chk_Brown"
+                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Brown" name="Chk_Brown"
                                    checked> <label class="form-check-label" for="Chk_Brown"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark">確</span> 確認中</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="Chk_Dark_Sky" name="Chk_Dark_Sky"
+                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Dark_Sky" name="Chk_Dark_Sky"
                                    checked> <label class="form-check-label" for="Chk_Dark_Sky"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark">交</span> 交渉中</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="ms-1 ps-1 pe-1 rounded-circle Chk_Gray" name="Chk_Gray"
+                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Gray" name="Chk_Gray"
                                    checked> <label class="form-check-label" for="Chk_Gray"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-secondary">成</span> 成約</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="Chk_Black" name="Chk_Black"
+                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Black" name="Chk_Black"
                                    checked> <label class="form-check-label" for="Chk_Black"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-dark text-white">売辞</span> 売主辞退</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="Chk_Pink" name="Chk_Pink"
+                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Pink" name="Chk_Pink"
                                    checked> <label class="form-check-label" for="Chk_Pink"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-danger text-white">買辞</span> 買主辞退</label>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
             <div class="text-center px-xl-3">
 
                 <div class="mb-3 text-start">
-                    <label for="MansionName" class="form-label">マンション</label> <input type="text" class="form-control mb-2" id="MansionName" name="MansionName" placeholder="マンション名
+                    <label for="MansionName" class="form-label">マンション</label> <input type="text" class="form-control mb-2" id="MansionName" name="MansionName"  placeholder="マンション名
                     ">
                 </div>
             </div>
@@ -71,10 +71,12 @@
                         <option value="送客日">送客日</option>
                         <option value="成約日">成約日</option>
                         <option value="辞退日">辞退日</option>
-                    </select> 
+                    </select>
                     <label for="StartDate" class="form-label">開始日</label>
+                    <span class="cap-errormsg-right" id="errorStartDate"></span>
                     <input class="form-control mb-2" id="StartDate" name="StartDate" type="date">
                     <label for="EndDate" class="form-label">終了日</label>
+                    <span class="cap-errormsg-right" id="errorEndDate"></span>
                     <input class="form-control mb-2" id="EndDate" name="EndDate" type="date">
                     <div class="row mb-3">
                         <div class="col-6"> <button type="button" class="btn btn-primary w-100">今日</button></div>

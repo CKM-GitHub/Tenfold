@@ -45,6 +45,7 @@ const regexPattern = {
     singlebyte_numberAlpha: "^[0-9a-zA-Z]+$",
     moeney: "^[0-9,]+$",
     numeric: "^[0-9.]+$",
+    dateformat : /^\d{4}-\d{2}-\d{2}$/,
 }
 
 const common = {
@@ -233,6 +234,7 @@ const common = {
         const customValidation = $ctrl.attr("data-validation-custom");
         const isDate = $ctrl.attr("data-validation-datecheck");
         const isMaxlengthCheck = $ctrl.attr("data-validation-MaxLength");
+        const isDateCompare = $ctrl.attr("data-validation-datecompare");
         
 
         let inputValue = "";
@@ -242,12 +244,6 @@ const common = {
             inputValue = $ctrl.val().trimEnd();
             $ctrl.val(inputValue);
         }
-
-        if (type == 'date') {
-            inputValue = $ctrl.val().trimEnd();
-            $ctrl.val(inputValue);
-        }
-       
 
         //replace text
         if (isSingleByte || isSingleByteNumber || isSingleByteNumberAlpha || isNumeric || isMoney) {
@@ -405,7 +401,10 @@ const common = {
             }
 
             if (isDate) {
-                alert("Error Occur");
+                if (!inputValue.match(regexPattern.dateformat)) {                   
+                    $ctrl.showError(this.getMessage('E108'));
+                    return;
+                }
             }
         }
 
