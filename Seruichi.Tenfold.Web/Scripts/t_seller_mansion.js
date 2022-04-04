@@ -1,4 +1,5 @@
-﻿const _url = {};
+﻿
+const _url = {};
 
 $(function () {
     setValidation();
@@ -64,11 +65,36 @@ function addEvents()
         }
     }).change();
 
+    $('#btnToday').on('click', function () {   
+        let today = common.getToday();
+        $('#StartDate').val(today);
+        $('#EndDate').val(today);
+    });
+
+    $('#btnThisMonth').on('click', function () {
+        let today = common.getToday();
+        let firstDay = common.getFirstDayofMonth();
+        $('#StartDate').val(firstDay);
+        $('#EndDate').val(today);
+    });
+    $('#btnLastMonth').on('click', function () {
+        let firstdaypremonth = common.getFirstDayofPreviousMonth();
+        let lastdaypremonth = common.getLastDayofPreviousMonth();
+        $('#StartDate').val(firstdaypremonth);
+        $('#EndDate').val(lastdaypremonth);
+
+    });
 
 }
 
 
-
+function Get_Today() {
+    var now = new Date();
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    var today = now.getFullYear() + "-" + (month) + "-" + (day);
+    return today;
+}
 function Bind_tbody(data) {
    
     for (var i = 0; i < data.count; i++) {
