@@ -8,7 +8,7 @@ namespace Seruichi.Common
     public class Validator
     {
         private Encoding encoding = Encoding.GetEncoding("Shift_JIS");
-
+        private Encoding encodingMyan = Encoding.GetEncoding("UTF-8");
         public bool CheckRequired(string inputText, out string errorcd)
         {
             errorcd = "";
@@ -235,6 +235,33 @@ namespace Seruichi.Common
             return true;
         }
 
+
+        public bool CheckIsidAndpsw(string inputText, int maxLength, out string errorcd)
+        {
+            errorcd = "";
+
+            if (string.IsNullOrEmpty(inputText)) return true;
+
+            if (!CheckByteCount(inputText, maxLength, out errorcd, out string dummy))
+            {
+                return false;
+            }
+
+            if (encoding.GetByteCount(inputText) != inputText.Length)
+            {
+                errorcd = "E104"; //入力できない文字です。
+                return false;
+            }
+
+            if (encodingMyan.GetByteCount(inputText) != inputText.Length)
+            {
+                errorcd = "E104"; //入力できない文字です。
+                return false;
+            }
+
+
+            return true;
+        }
         public bool CheckIsHalfWidth(string inputText, int maxLength, out string errorcd)
         {
             return CheckIsHalfWidth(inputText, maxLength, RegexFormat.None, out errorcd);
