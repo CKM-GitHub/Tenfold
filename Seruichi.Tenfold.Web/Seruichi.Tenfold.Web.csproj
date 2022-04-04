@@ -264,6 +264,7 @@
     <Content Include="Content\fonts\ionicons.eot" />
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
+    <Content Include="Scripts\t_dashboard.js" />
     <Content Include="Scripts\t_login.js" />
     <Content Include="Scripts\t_seller_list.js" />
     <Content Include="Scripts\t_seller_mansion.js" />

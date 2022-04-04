@@ -84,10 +84,12 @@
                         <option>登録日</option>
                         <option>査定依頼日</option>
                         <option>買取依頼日</option>
-                    </select> 
+                    </select>
                     <label for="startdate" class="form-label">開始日</label>
-                    <input class="form-control mb-2" type="date" id="startdate"> 
+                    <span class="cap-errormsg-right" id="errorStartDate"></span>
+                    <input class="form-control mb-2" type="date" id="startdate">
                     <label for="enddate" class="form-label">終了日</label>
+                    <span class="cap-errormsg-right" id="errorEndDate"></span>
                     <input class="form-control mb-2" required="" type="date" id="enddate">
                     <div class="row mb-3">
                         <div class="col-6"> <button type="button" class="btn btn-primary w-100" id="btnToday">今日</button></div>
