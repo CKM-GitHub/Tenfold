@@ -5,7 +5,10 @@ $(function () {
     _url.getM_SellerMansionList = common.appPath + '/t_seller_mansion/GetM_SellerMansionList';  
     addEvents();
 });
-function setValidation() {    
+function setValidation() {
+    $('.form-check-input')
+        .addvalidation_checkboxlenght()
+
     $('#StartDate')
         .addvalidation_errorElement("#errorStartDate")
         .addvalidation_datecheck()
@@ -19,7 +22,6 @@ function setValidation() {
 }
 function addEvents()
 {
-
     common.bindValidationEvent('#form1', '');
 
     const $Chk_Blue = $("#Chk_Blue").val(), $Chk_Sky = $("#Chk_Sky").val(), $Chk_Orange = $("#Chk_Orange").val(),
@@ -53,9 +55,9 @@ function addEvents()
                 const message = result.message;
             }
         });
-    
-
 }
+
+
 
 function Bind_tbody(data) {
    

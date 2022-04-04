@@ -236,11 +236,13 @@ const common = {
         const isMaxlengthCheck = $ctrl.attr("data-validation-MaxLength");
         const isDateCompare = $ctrl.attr("data-validation-datecompare");
         const isOneByteCharacter = $ctrl.attr("data-validation-onebyte-character");
+        const ischeckboxLenght = $ctrl.attr("data-validation-checkboxlenght");
 
         let inputValue = "";
         if (type === 'radio') {
             inputValue = $('input[name="' + name + '"]:radio:checked').val();
-        } else {
+        }
+        else {
             inputValue = $ctrl.val().trimEnd();
             $ctrl.val(inputValue);
         }
@@ -288,6 +290,7 @@ const common = {
         }
 
         if (inputValue) {
+            alert("enter");
             if (isSingleDoubleByte) {
                 const maxLength = $ctrl.attr('maxlength');
                 if (maxLength) {
@@ -416,6 +419,21 @@ const common = {
                     return;
                 }
             }
+
+            if (isDateCompare) {
+                if (!common.compareDate($("#StartDate").val(), $("#EndDate").val())) {
+                    $ctrl.showError(this.getMessage('E111'));
+                    return;
+                }
+            }
+            if (ischeckboxLenght) {
+                alert("enter");
+                if ($(".form-check-input:checkbox:checked").length === 0) {
+                    $ctrl.showError(this.getMessage('E112'));
+                    return ;
+                }
+                
+            }
         }
 
         if (customValidation) {
@@ -431,6 +449,26 @@ const common = {
             $ctrl.hideError();
 
         return true;
+    },
+
+    compareDate: function compareTwoDate(d1, d2) {
+        const date1 = new Date(d1);
+        const date2 = new Date(d2);
+        let success = true;
+        if (date1 > date2) {
+            success = false;
+        }
+        return success;
+    },
+    checkboxlength: function check_CheckboxLenght() {
+        let success = true;
+        $('input:checkbox').each(function () {
+            if ($(this).is(':checked')) {
+                atLeastOneIsChecked = true;
+                // Stop .each from processing any more items
+                return false;
+            }
+        });
     },
 
     checkValidityOnSave: function checkValidityOnSave(selector) {
