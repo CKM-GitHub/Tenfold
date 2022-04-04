@@ -19,8 +19,8 @@ namespace Models.Tenfold.t_seller_mansion
         public byte Chk_Pink { get; set; }
         public string MansionName { get; set; }
         public string Range { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public Nullable<DateTime> StartDate { get; set; }
+        public Nullable<DateTime> EndDate { get; set; }
 
     }
 }
