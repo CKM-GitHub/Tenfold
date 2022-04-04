@@ -263,7 +263,7 @@ const common = {
             && !isSingleDoubleByte
             && !isDoubleByte
             && !isSingleByte && !isSingleByteNumber && !isSingleByteNumberAlpha
-            && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter
+            && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter && !ischeckboxLenght
             && !customValidation) return true;
 
         if (isRequired) {
@@ -290,7 +290,6 @@ const common = {
         }
 
         if (inputValue) {
-            alert("enter");
             if (isSingleDoubleByte) {
                 const maxLength = $ctrl.attr('maxlength');
                 if (maxLength) {
@@ -412,9 +411,9 @@ const common = {
                     }
                 }
             }
-            
+
             if (isDate) {
-                if (!inputValue.match(regexPattern.dateformat)) {                   
+                if (!inputValue.match(regexPattern.dateformat)) {
                     $ctrl.showError(this.getMessage('E108'));
                     return;
                 }
@@ -427,12 +426,10 @@ const common = {
                 }
             }
             if (ischeckboxLenght) {
-                alert("enter");
-                if ($(".form-check-input:checkbox:checked").length === 0) {
+                if (!common.checkboxlengthCheck()) {
                     $ctrl.showError(this.getMessage('E112'));
-                    return ;
+                    return;
                 }
-                
             }
         }
 
@@ -448,6 +445,11 @@ const common = {
         else
             $ctrl.hideError();
 
+        if (type === 'checkbox')
+            $('input[name="' + name + '"]:checkbox').hideError();
+        else
+            $ctrl.hideError();
+
         return true;
     },
 
@@ -460,15 +462,13 @@ const common = {
         }
         return success;
     },
-    checkboxlength: function check_CheckboxLenght() {
+    checkboxlengthCheck: function checkboxlengthCheck() {
         let success = true;
-        $('input:checkbox').each(function () {
-            if ($(this).is(':checked')) {
-                atLeastOneIsChecked = true;
-                // Stop .each from processing any more items
-                return false;
-            }
-        });
+        let checked = $("input[type=checkbox]:checked").length;
+        if (!checked) {
+            success = false;
+        }
+        return success;
     },
 
     checkValidityOnSave: function checkValidityOnSave(selector) {

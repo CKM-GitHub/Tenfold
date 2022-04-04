@@ -7,7 +7,8 @@ $(function () {
 });
 function setValidation() {
     $('.form-check-input')
-        .addvalidation_checkboxlenght()
+        .addvalidation_errorElement("#errorChkLenght")
+        .addvalidation_checkboxlenght();
 
     $('#StartDate')
         .addvalidation_errorElement("#errorStartDate")
@@ -55,6 +56,15 @@ function addEvents()
                 const message = result.message;
             }
         });
+   
+    $('.form-check-input').on('change', function () {
+        this.value = this.checked ? 1 : 0;
+        if ($("input[type=checkbox]:checked").length > 0) {
+            $('.form-check-input').hideError();
+        }
+    }).change();
+
+
 }
 
 
