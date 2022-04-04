@@ -236,11 +236,13 @@ const common = {
         const isMaxlengthCheck = $ctrl.attr("data-validation-MaxLength");
         const isDateCompare = $ctrl.attr("data-validation-datecompare");
         const isOneByteCharacter = $ctrl.attr("data-validation-onebyte-character");
+        const ischeckboxLenght = $ctrl.attr("data-validation-checkboxlenght");
 
         let inputValue = "";
         if (type === 'radio') {
             inputValue = $('input[name="' + name + '"]:radio:checked').val();
-        } else {
+        }
+        else {
             inputValue = $ctrl.val().trimEnd();
             $ctrl.val(inputValue);
         }
@@ -261,7 +263,7 @@ const common = {
             && !isSingleDoubleByte
             && !isDoubleByte
             && !isSingleByte && !isSingleByteNumber && !isSingleByteNumberAlpha
-            && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter
+            && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter && !ischeckboxLenght
             && !customValidation) return true;
 
         if (isRequired) {
@@ -409,10 +411,23 @@ const common = {
                     }
                 }
             }
-            
+
             if (isDate) {
-                if (!inputValue.match(regexPattern.dateformat)) {                   
+                if (!inputValue.match(regexPattern.dateformat)) {
                     $ctrl.showError(this.getMessage('E108'));
+                    return;
+                }
+            }
+
+            if (isDateCompare) {
+                if (!common.compareDate($("#StartDate").val(), $("#EndDate").val())) {
+                    $ctrl.showError(this.getMessage('E111'));
+                    return;
+                }
+            }
+            if (ischeckboxLenght) {
+                if (!common.checkboxlengthCheck()) {
+                    $ctrl.showError(this.getMessage('E112'));
                     return;
                 }
             }
@@ -430,7 +445,30 @@ const common = {
         else
             $ctrl.hideError();
 
+        if (type === 'checkbox')
+            $('input[name="' + name + '"]:checkbox').hideError();
+        else
+            $ctrl.hideError();
+
         return true;
+    },
+
+    compareDate: function compareTwoDate(d1, d2) {
+        const date1 = new Date(d1);
+        const date2 = new Date(d2);
+        let success = true;
+        if (date1 > date2) {
+            success = false;
+        }
+        return success;
+    },
+    checkboxlengthCheck: function checkboxlengthCheck() {
+        let success = true;
+        let checked = $("input[type=checkbox]:checked").length;
+        if (!checked) {
+            success = false;
+        }
+        return success;
     },
 
     checkValidityOnSave: function checkValidityOnSave(selector) {
