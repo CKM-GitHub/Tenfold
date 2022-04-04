@@ -234,8 +234,8 @@ const common = {
         const customValidation = $ctrl.attr("data-validation-custom");
         const isDate = $ctrl.attr("data-validation-datecheck");
         const isMaxlengthCheck = $ctrl.attr("data-validation-MaxLength");
+        const isDateCompare = $ctrl.attr("data-validation-datecompare");
         const isOneByteCharacter = $ctrl.attr("data-validation-onebyte-character");
-        
 
         let inputValue = "";
         if (type === 'radio') {
