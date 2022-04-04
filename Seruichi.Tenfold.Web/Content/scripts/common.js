@@ -492,6 +492,13 @@ const common = {
         let ldaypremonth = new Date(date.getFullYear(), date.getMonth(), 0);
         return ldaypremonth.getFullYear() + "-" + ("0" + (ldaypremonth.getMonth() + 1)).slice(-2) + "-" + ("0" + ldaypremonth.getDate()).slice(-2);
     },
+    getDayaweekbeforetoday: function getDayaweekbeforetoday() {
+        var date = new Date();
+        date.setDate(date.getDate() - 7);
+        let data = date.toISOString().slice(0, 10);
+        return data;
+    },
+
     checkValidityOnSave: function checkValidityOnSave(selector) {
         let success = true;
         $(selector + ' :input:not(button):not(:hidden):not(:disabled):not([readonly])').each(function () {
