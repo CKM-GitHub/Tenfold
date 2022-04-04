@@ -19,56 +19,24 @@ namespace Seruichi.Tenfold.Web.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult CheckSellerName(string SellerName)
-        {
-            if (SellerName == null)
-            {
-                return BadRequestResult();
-            }
+        //[HttpPost]
+        //public ActionResult CheckSellerName(string SellerName)
+        //{
+        //    if (SellerName == null)
+        //    {
+        //        return BadRequestResult();
+        //    }
 
-            //Validator validator = new Validator();
-            //string errorcd = "";
-            //if (!validator.CheckIsHalfWidth(SellerName, 10, out errorcd))
-            //{
-            //    return ErrorMessageResult(errorcd);
-            //}
-            return OKResult();
-        }
+        //    //Validator validator = new Validator();
+        //    //string errorcd = "";
+        //    //if (!validator.CheckIsHalfWidth(SellerName, 10, out errorcd))
+        //    //{
+        //    //    return ErrorMessageResult(errorcd);
+        //    //}
+        //    return OKResult();
+        //}
 
-        [HttpPost]
-        public ActionResult CheckDate(string sdate)
-        {
-            if (sdate == null)
-            {
-                return BadRequestResult();
-            }
-
-            Validator validator = new Validator();
-            string errorcd = "";
-            if (!validator.CheckAndFormatDate(sdate, out errorcd, out string correctFromDate))
-            {
-                return ErrorMessageResult(errorcd);
-            }
-            return OKResult();
-        }
-
-        [HttpPost]
-        public ActionResult DateCompare(string data)
-        {
-            //if (data.s == null)
-            //{
-            //    return BadRequestResult();
-            //}
-
-            //Validator validator = new Validator();
-            //string errorcd = "";
-            //if (!validator.CheckCompareDate(sdate,edate, out errorcd))
-            //{
-            //    return ErrorMessageResult(errorcd);
-            //}
-            return OKResult();
-        }
+       
 
     }
 }
