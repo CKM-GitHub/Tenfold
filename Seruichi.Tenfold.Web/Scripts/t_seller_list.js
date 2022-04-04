@@ -1,4 +1,9 @@
-﻿$(function () {
+﻿const _url = {};
+$(function () {
+
+    _url.CheckSellerName = common.appPath + '/t_Seller_list/CheckSellerName';
+    _url.CheckDate = common.appPath + '/t_Seller_list/CheckDate';
+    _url.DateCompare = common.appPath + '/t_Seller_list/DateCompare';
 
     setValidation();
     addEvents();
@@ -8,42 +13,64 @@ function setValidation() {
 
     $('#SellerName')
         .addvalidation_errorElement("#errorSeller")
-        //.addvalidation_MaxLengthForSingleDouble(10);
+        .addvalidation_singlebyte_doublebyte()
         .addvalidation_MaxLength(10);
 
-    $('#startdate')
-        .addvalidation_datecheck();
+    //$('#startdate')
+    //    .addvalidation_errorElement("#errorStartDate")
+    //    .addvalidation_datecheck()
+    //    .addvalidation_datecompare();
 
-    $('#enddate')
-        .addvalidation_datecheck();
-        //.addvalidation_custom('CompareDate');
+    //$('#enddate')
+    //    .addvalidation_errorElement("#errorEndDate")
+    //    .addvalidation_datecheck()
+    //    .addvalidation_datecompare();
    
 }
 function addEvents() {
 
-    //common.bindValidationEvent('#form1', "");
+    common.bindValidationEvent('#form1', "");
 
     //const $locationSelect = $("#locationSelect").val(),$SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(),
     //    $startdate = $("#startdate").val(), $enddate = $("#enddate").val(), $ValidCheck = $("#ValidCheck").val(),
     //    $InValidCheck = $("#InValidCheck").val(), $StatusCheck1 = $("#StatusCheck1").val(), $StatusCheck2 = $("#StatusCheck2").val(),
     //    $StatusCheck3 = $("#StatusCheck3").val()
 
-    //$('#SellerName').on('change', function () {
-    //    const $this = $(this), $SellerName = $('#SellerName')
-    //    let model = {
-    //        SellerName: $SellerName.val()
-    //    };
-    //    common.callAjax(model,
-    //        function (result) {
-    //            if (result && result.isOK) {
-    //                const data = result.data;
-    //            }
-    //            if (result && !result.isOK) {
-    //                const message = result.message;
-    //                $this.showError(message.MessageText1);
-    //            }
-    //        });
-    //});
+    $('#SellerName').on('change', function () {
+        const $this = $(this), $SellerName = $('#SellerName')
+        let model = {
+            SellerName: $SellerName.val()
+        };
+        common.callAjax(_url.CheckSellerName,model,
+            function (result) {
+                if (result && result.isOK) {
+                    $($email).hideError();
+                    const data = result.data;
+                }
+                if (result && !result.isOK) {
+                    const message = result.message;
+                    $this.showError(message.MessageText1);
+                }
+            });
+    });
+
+    $('#StartDate').on('change', function () {
+        const $this = $(this),  $startdate = $('#startdate')
+        let model = {
+            startDate: $startdate.val(),
+        };
+        common.callAjax(_url.CheckDate, model,
+            function (result) {
+                if (result && result.isOK) {
+                    $($email).hideError();
+                    const data = result.data;
+                }
+                if (result && !result.isOK) {
+                    const message = result.message;
+                    $this.showError(message.MessageText1);
+                }
+            });
+    });
 
     $('#enddate').on('change', function () {
         const $this = $(this), $enddate = $('#enddate'), $startdate = $('#startdate')
@@ -51,11 +78,28 @@ function addEvents() {
             startDate: $startdate.val(),
             endDate: $enddate.val()
         };
-        //alert(model.startDate);
-        //alert(model.endDate);
-        if (model.startDate > model.endDate) {
-            $this.showError(common.getMessage('E111'));
-        }
+        common.callAjax(_url.CheckDate, model.endDate,
+            function (result) {
+                if (result && result.isOK) {
+                    $($email).hideError();
+                    const data = result.data;
+                }
+                if (result && !result.isOK) {
+                    const message = result.message;
+                    $this.showError(message.MessageText1);
+                }
+            });
+        common.callAjax(_url.DateCompare, model,
+            function (result) {
+                if (result && result.isOK) {
+                    $($email).hideError();
+                    const data = result.data;
+                }
+                if (result && !result.isOK) {
+                    const message = result.message;
+                    $this.showError(message.MessageText1);
+                }
+            });
     });
 
     
@@ -166,4 +210,4 @@ function addEvents() {
 //    }
 
 //    return true;
-}
+//}
