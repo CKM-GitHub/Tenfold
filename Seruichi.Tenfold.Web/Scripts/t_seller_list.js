@@ -1,4 +1,4 @@
-﻿
+﻿const _url = {};
 $(function () {
 
     //_url.CheckSellerName = common.appPath + '/t_Seller_list/CheckSellerName';
@@ -6,6 +6,7 @@ $(function () {
     //_url.DateCompare = common.appPath + '/t_Seller_list/DateCompare';
 
     setValidation();
+    _url.getM_SellerList = common.appPath + '/t_seller_list/GetM_SellerList';
     addEvents();
 });
 
@@ -39,10 +40,33 @@ function addEvents() {
 
     common.bindValidationEvent('#form1', '');
 
-    //const $locationSelect = $("#locationSelect").val(),$SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(),
-    //    $startdate = $("#startdate").val(), $enddate = $("#enddate").val(), $ValidCheck = $("#ValidCheck").val(),
-    //    $InValidCheck = $("#InValidCheck").val(), $StatusCheck1 = $("#StatusCheck1").val(), $StatusCheck2 = $("#StatusCheck2").val(),
-    //    $StatusCheck3 = $("#StatusCheck3").val()
+    const $SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(),
+        $startdate = $("#StartDate").val(), $enddate = $("#EndDate").val(), $ValidCheck = $("#ValidCheck").val(),
+        $InValidCheck = $("#InValidCheck").val(), $StatusCheck1 = $("#StatusCheck1").val(), $StatusCheck2 = $("#StatusCheck2").val(),
+        $StatusCheck3 = $("#StatusCheck3").val()
+
+    let model = {
+        SellerName: $SellerName,
+        RangeSelect: $RangeSelect,
+        StartDate: $startdate,
+        EndDate: $enddate,
+        ValidCheck: $ValidCheck,
+        InValidCheck: $InValidCheck,
+        expectedCheck: $StatusCheck1,
+        negtiatioinsCheck: $StatusCheck2,
+        endCheck: $StatusCheck3,
+    };
+    common.callAjax(_url.getM_SellerList, model,
+        function (result) {
+            if (result && result.isOK) {
+                const data = result.data;
+                Bind_tbody(data);
+            }
+            if (result && !result.isOK) {
+                const message = result.message;
+            }
+        });
+
 
     //$('#SellerName').on('change', function () {
     //    const $this = $(this), $SellerName = $('#SellerName')
