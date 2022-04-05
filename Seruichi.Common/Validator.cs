@@ -1,6 +1,8 @@
 ﻿using Models;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace Seruichi.Common
@@ -213,7 +215,7 @@ namespace Seruichi.Common
 
             if (correctFromDate.ToDateTime() > correctToDate.ToDateTime())
             {
-                errorcd = "E103"; //入力された値が正しくありません ★エラーメッセージ未定
+                errorcd = "E111"; //入力された値が正しくありません ★エラーメッセージ未定
                 return false;
             }
             return true;
@@ -236,17 +238,11 @@ namespace Seruichi.Common
         }
 
 
-        public bool CheckIsidAndpsw(string inputText, int maxLength, out string errorcd)
+        public bool CheckIsOnlyOneCharacter(string inputText,out string errorcd)
         {
             errorcd = "";
 
             if (string.IsNullOrEmpty(inputText)) return true;
-
-            if (!CheckByteCount(inputText, maxLength, out errorcd, out string dummy))
-            {
-                return false;
-            }
-
             if (encoding.GetByteCount(inputText) != inputText.Length)
             {
                 errorcd = "E104"; //入力できない文字です。
@@ -258,8 +254,6 @@ namespace Seruichi.Common
                 errorcd = "E104"; //入力できない文字です。
                 return false;
             }
-
-
             return true;
         }
         public bool CheckIsHalfWidth(string inputText, int maxLength, out string errorcd)
@@ -391,6 +385,17 @@ namespace Seruichi.Common
                 outVal = decimalValue.ToString(format);
             }
 
+            return true;
+        }
+        public bool CheckCheckBoxLenght(List<string> inputText, out string errorcd)
+        {
+            errorcd = "";
+            int total = inputText.Sum(x => Convert.ToInt32(x));
+            if(total == 0)
+            {
+                errorcd = "E112"; //'１つ以上選択してください'
+                return false;
+            }            
             return true;
         }
     }

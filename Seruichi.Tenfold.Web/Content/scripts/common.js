@@ -236,11 +236,13 @@ const common = {
         const isMaxlengthCheck = $ctrl.attr("data-validation-MaxLength");
         const isDateCompare = $ctrl.attr("data-validation-datecompare");
         const isOneByteCharacter = $ctrl.attr("data-validation-onebyte-character");
+        const ischeckboxLenght = $ctrl.attr("data-validation-checkboxlenght");
 
         let inputValue = "";
         if (type === 'radio') {
             inputValue = $('input[name="' + name + '"]:radio:checked').val();
-        } else {
+        }
+        else {
             inputValue = $ctrl.val().trimEnd();
             $ctrl.val(inputValue);
         }
@@ -261,7 +263,7 @@ const common = {
             && !isSingleDoubleByte
             && !isDoubleByte
             && !isSingleByte && !isSingleByteNumber && !isSingleByteNumberAlpha
-            && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter
+            && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter && !ischeckboxLenght
             && !customValidation) return true;
 
         if (isRequired) {
@@ -409,10 +411,23 @@ const common = {
                     }
                 }
             }
-            
+
             if (isDate) {
-                if (!inputValue.match(regexPattern.dateformat)) {                   
+                if (!inputValue.match(regexPattern.dateformat)) {
                     $ctrl.showError(this.getMessage('E108'));
+                    return;
+                }
+            }
+
+            if (isDateCompare) {
+                if (!common.compareDate($("#StartDate").val(), $("#EndDate").val())) {
+                    $ctrl.showError(this.getMessage('E111'));
+                    return;
+                }
+            }
+            if (ischeckboxLenght) {                
+                if (!common.checkboxlengthCheck($ctrl.attr('class'))) {
+                    $ctrl.showError(this.getMessage('E112'));
                     return;
                 }
             }
@@ -430,7 +445,60 @@ const common = {
         else
             $ctrl.hideError();
 
+        if (type === 'checkbox')
+            $('input[name="' + name + '"]:checkbox').hideError();
+        else
+            $ctrl.hideError();
+
         return true;
+    },
+
+    compareDate: function compareTwoDate(d1, d2) {
+        const date1 = new Date(d1);
+        const date2 = new Date(d2);
+        let success = true;
+        if (date1 > date2) {
+            success = false;
+        }
+        return success;
+    },
+    checkboxlengthCheck: function checkboxlengthCheck(className) {
+        if (className.includes(" "))
+            className = className.split(" ")[0];
+        let success = true;
+        let checked = $("." + className + ":checked").length;
+        if (!checked) {
+            success = false;
+        }
+        return success;
+    },
+    getToday: function getToday() {
+        let now = new Date();
+        let day = ("0" + now.getDate()).slice(-2);
+        let month = ("0" + (now.getMonth() + 1)).slice(-2);
+        let today = now.getFullYear() + "-" + (month) + "-" + (day);
+        return today;
+    },
+    getFirstDayofMonth: function getFirstDayofMonth() {
+        let date = new Date();
+        let firstDay = new Date(date.getFullYear(), date.getMonth(), 1);        
+        return firstDay.getFullYear() + "-" + ("0" + (firstDay.getMonth() + 1)).slice(-2) + "-" + ("0" + firstDay.getDate()).slice(-2);
+    },
+    getFirstDayofPreviousMonth: function getFirstDayofPreviousMonth() {
+        let date = new Date();
+        let fdaypremonth = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+        return fdaypremonth.getFullYear() + "-" + ("0" + (fdaypremonth.getMonth() + 1)).slice(-2) + "-" + ("0" + fdaypremonth.getDate()).slice(-2);
+    },
+    getLastDayofPreviousMonth: function getLastDayofPreviousMonth() {
+        let date = new Date();
+        let ldaypremonth = new Date(date.getFullYear(), date.getMonth(), 0);
+        return ldaypremonth.getFullYear() + "-" + ("0" + (ldaypremonth.getMonth() + 1)).slice(-2) + "-" + ("0" + ldaypremonth.getDate()).slice(-2);
+    },
+    getDayaweekbeforetoday: function getDayaweekbeforetoday() {
+        var date = new Date();
+        date.setDate(date.getDate() - 7);
+        let data = date.toISOString().slice(0, 10);
+        return data;
     },
 
     checkValidityOnSave: function checkValidityOnSave(selector) {

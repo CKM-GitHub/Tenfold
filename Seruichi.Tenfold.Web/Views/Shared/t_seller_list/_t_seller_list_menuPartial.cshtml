@@ -84,11 +84,13 @@
                         <option>登録日</option>
                         <option>査定依頼日</option>
                         <option>買取依頼日</option>
-                    </select> 
+                    </select>
                     <label for="startdate" class="form-label">開始日</label>
-                    <input class="form-control mb-2" type="date" id="startdate"> 
+                    <span class="cap-errormsg-right" id="errorStartDate"></span>
+                    <input class="form-control mb-2" type="date" id="StartDate">
                     <label for="enddate" class="form-label">終了日</label>
-                    <input class="form-control mb-2" required="" type="date" id="enddate">
+                    <span class="cap-errormsg-right" id="errorEndDate"></span>
+                    <input class="form-control mb-2" required="" type="date" id="EndDate">
                     <div class="row mb-3">
                         <div class="col-6"> <button type="button" class="btn btn-primary w-100" id="btnToday">今日</button></div>
                         <div class="col-6"><button type="button" class="btn btn-primary w-100" id="btnThisWeek">今週</button></div>
@@ -103,32 +105,37 @@
         <li>
             <div class="text-center px-xl-3">
                 <div class="mb-3 text-start">
-                    <label for="ValidCheck" class="form-label">会員状態</label>
+                    <label for="DisableSelect" class="form-label">会員状態</label>
+                    <span class="cap-errormsg-right" id="errorValidChkLenght"></span>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="ValidCheck"
+                        <input class="myvalidcheck form-check-input" type="checkbox" value="1" id="ValidCheck" name="ValidCheck"
                                checked> <label class="form-check-label" for="ValidCheck"> 有効会員 </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="InValidCheck"
+                        <input class="myvalidcheck form-check-input" type="checkbox" value="1" id="InValidCheck" name="InValidCheck"
                                checked> <label class="form-check-label" for="InValidCheck"> 無効会員 </label>
                     </div>
                 </div>
                 <div class="mb-3 text-start">
-                    <label for="StatusSelect" class="form-label">ステータス</label>
+                    <label for="DisableSelect" class="form-label">ステータス</label>
+                    <span class="cap-errormsg-right" id="errorStatusChkLenght"></span>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="StatusCheck1"
+                        <input class="mystscheck form-check-input" type="checkbox" value="1" id="StatusCheck1" name="StatusCheck1"
                                checked> <label class="form-check-label" for="StatusCheck1">
-                        <span class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white">見</span> ⾒込</label>
+                            <span class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white">見</span> ⾒込
+                        </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="StatusCheck2"
-                               checked> <label class="form-check-label" for="StatusCheck2"> 
-                        <span class="ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark">交</span> 交渉中</label>
+                        <input class="mystscheck form-check-input" type="checkbox" value="1" id="StatusCheck2" name="StatusCheck2"
+                               checked> <label class="form-check-label" for="StatusCheck2">
+                            <span class="ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark">交</span> 交渉中
+                        </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="StatusCheck3"
-                               checked> <label class="form-check-label" for="StatusCheck3"> 
-                        <span class="ms-1 ps-1 pe-1 rounded-circle bg-secondary">終</span> 終了</label>
+                        <input class="mystscheck form-check-input" type="checkbox" value="1" id="StatusCheck3" name="StatusCheck3"
+                               checked> <label class="form-check-label" for="StatusCheck3">
+                            <span class="ms-1 ps-1 pe-1 rounded-circle bg-secondary">終</span> 終了
+                        </label>
                     </div>
 
                 </div>

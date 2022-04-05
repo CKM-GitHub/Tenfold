@@ -11,8 +11,9 @@
                 <div class="mb-3 text-start">
                     <div class="mb-3 text-start">
                         <label for="disabledSelect" class="form-label">ステータス</label>
+                        <span class="cap-errormsg-right" id="errorChkLenght" name="CheckBoxError"></span>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Blue" name="Chk_Blue"  checked> 
+                            <input class="form-check-input mycheckbox" type="checkbox" value="1" id="Chk_Blue" name="Chk_Blue" checked>
                             <label class="form-check-label" for="Chk_Blue"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white">未</span> 未処理</label>
                         </div>
                         <div class="form-check">
@@ -79,12 +80,12 @@
                     <span class="cap-errormsg-right" id="errorEndDate"></span>
                     <input class="form-control mb-2" id="EndDate" name="EndDate" type="date">
                     <div class="row mb-3">
-                        <div class="col-6"> <button type="button" class="btn btn-primary w-100">今日</button></div>
-                        <div class="col-6"><button type="button" class="btn btn-primary w-100">今週</button></div>
+                        <div class="col-6"> <button type="button" id="btnToday"  name="btnToday" class="btn btn-primary w-100">今日</button></div>
+                        <div class="col-6"><button type="button" id="btnThisWeek" name="btnThisWeek" class="btn btn-primary w-100">今週</button></div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-6"><button type="button" class="btn btn-primary w-100">今月</button></div>
-                        <div class="col-6"><button type="button" class="btn btn-primary w-100">先月</button></div>
+                        <div class="col-6"><button type="button" id="btnThisMonth" name="btnThisMonth" class="btn btn-primary w-100">今月</button></div>
+                        <div class="col-6"><button type="button" id="btnLastMonth" name="btnLastMonth" class="btn btn-primary w-100">先月</button></div>
                     </div>
                 </div>
             </div>
@@ -92,12 +93,14 @@
 
         <li>
             <div class="form-group ps-3 pe-3">
-                <button type="button"
+                <button type="button" id="btnProcess"
                         class="btn btn-primary w-100 w-100 mb-3">
                     表示
                 </button>
             </div>
-
+            <div class="text-center">
+                <span class="cap-errormsg-bottom" id="errorProcess"></span>
+            </div>
             <div class="form-group ps-3 pe-3">
                 <button type="button"
                         class="btn btn-primary w-100 w-100 mb-3">

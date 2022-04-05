@@ -13,10 +13,15 @@ namespace Seruichi.BL.Tenfold.Login
         {
             ValidatorAllItems validator = new ValidatorAllItems();
 
-            validator.CheckRequired("TenStaffCD", model.TenStaffCD);
-            validator.CheckRequired("TenStaffPW", model.TenStaffPW);
-            validator.CheckIsHalfWidth("TenStaffCD", model.TenStaffCD, 10);
-            validator.CheckIsHalfWidth("TenStaffPW", model.TenStaffPW, 10);
+            validator.CheckRequired("email", model.TenStaffCD);//E101
+            validator.CheckRequired("password", model.TenStaffPW);//E101
+
+            validator.CheckIsOnlyOneCharacter("email", model.TenStaffCD);//E104
+            validator.CheckIsOnlyOneCharacter("password", model.TenStaffPW);//E104
+           
+            validator.CheckByteCount("email", model.TenStaffCD, 10);  //E105
+            validator.CheckByteCount("password", model.TenStaffPW, 10);  //E105
+            
             return validator.GetValidationResult();
         }
 

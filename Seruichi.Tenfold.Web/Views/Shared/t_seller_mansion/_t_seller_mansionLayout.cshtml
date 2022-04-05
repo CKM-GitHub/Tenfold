@@ -23,13 +23,14 @@
         <link rel="stylesheet" href="~/Content/t_dashboard/css/style.css">
         <link rel="stylesheet" href="~/Content/t_dashboard/css/index.css">
         <link href="~/Content/css/validation.css" rel="stylesheet" />*@
+    
 
     @RenderSection("styles", required: false)
 </head>
 
 <body>
     <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
-        @Html.Partial("t_seller_mansion/_t_seller_mansion_sellerPartial")        
+        @Html.Partial("t_seller_mansion/_t_seller_mansion_sellerPartial")
         <div class="h-screen flex-grow-1 overflow-y-lg-auto">
             <hidden>
                 <input type="hidden" id="path" value=@appPath>
