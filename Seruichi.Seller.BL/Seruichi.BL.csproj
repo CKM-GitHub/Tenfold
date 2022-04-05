@@ -81,6 +81,12 @@
     <Content Include="Database\StoredProcedure\pr_M_Message_Select_ByID.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfPref.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfStation.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForContract.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForCustomerInfo.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForDecline.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForDuringnegotiations.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForNewRequest.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_ConsultationForChatConfirmation.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_list_Select_DropDownlistofPref.sql" />
     <Content Include="Database\TableType\T_MansionStation.sql" />
   </ItemGroup>
