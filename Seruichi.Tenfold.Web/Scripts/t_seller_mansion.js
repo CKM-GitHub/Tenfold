@@ -2,7 +2,7 @@
 const _url = {};
 
 $(function () {
-   // setValidation();
+    setValidation();
     _url.getM_SellerMansionList = common.appPath + '/t_seller_mansion/GetM_SellerMansionList';  
     addEvents();
 });
