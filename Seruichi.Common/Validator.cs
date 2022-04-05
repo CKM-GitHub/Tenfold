@@ -241,7 +241,8 @@ namespace Seruichi.Common
         public bool CheckIsOnlyOneCharacter(string inputText,out string errorcd)
         {
             errorcd = "";
-            
+
+            if (string.IsNullOrEmpty(inputText)) return true;
             if (encoding.GetByteCount(inputText) != inputText.Length)
             {
                 errorcd = "E104"; //入力できない文字です。

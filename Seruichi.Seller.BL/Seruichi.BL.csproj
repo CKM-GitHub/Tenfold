@@ -81,6 +81,7 @@
     <Content Include="Database\StoredProcedure\pr_M_Message_Select_ByID.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfPref.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfStation.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_login_Select_M_TenfoldStaff.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_list_Select_DropDownlistofPref.sql" />
     <Content Include="Database\TableType\T_MansionStation.sql" />
   </ItemGroup>
