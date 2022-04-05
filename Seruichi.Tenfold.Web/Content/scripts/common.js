@@ -425,8 +425,8 @@ const common = {
                     return;
                 }
             }
-            if (ischeckboxLenght) {
-                if (!common.checkboxlengthCheck()) {
+            if (ischeckboxLenght) {                
+                if (!common.checkboxlengthCheck($ctrl.attr('class'))) {
                     $ctrl.showError(this.getMessage('E112'));
                     return;
                 }
@@ -462,9 +462,11 @@ const common = {
         }
         return success;
     },
-    checkboxlengthCheck: function checkboxlengthCheck() {
+    checkboxlengthCheck: function checkboxlengthCheck(className) {
+        if (className.includes(" "))
+            className = className.split(" ")[0];
         let success = true;
-        let checked = $("input[type=checkbox]:checked").length;
+        let checked = $("." + className + ":checked").length;
         if (!checked) {
             success = false;
         }

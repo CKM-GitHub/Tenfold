@@ -8,35 +8,26 @@
     @Styles.Render("~/Content/t_login")
 }
 
-<form id="form1" method="post" style="max-width:900px;">
+<form id="form1" method="post">
+   
     <h2 class="visually-hidden">管理者ログイン</h2>
     <div class="illustration"><i class="icon fa fa-user"></i></div>
 
     <div class="mb-3">
-        <p class="text-center">管理者ログイン</p>
+        <p class="text-center">管理者ログイン</p><input class="form-control cap-fon-form-w250"
+                                                 type="email" name="email" id="email" placeholder="管理者ID">
+        <p class="text-danger text-nowrap text-center" id="erroremail" ></p>
     </div>
-    <div class="mb-3" style="margin-left:130px;">
-        <div class="d-flex">
-            <input class="form-control cap-fon-form-w250" style="width:210px;height:38px;"
-                   type="email" name="email" id="email" placeholder="管理者ID">
-            <span class="cap-errormsg-right" id="erroremail"></span>
-        </div>
+    <div class="mb-3">
+        <input class="form-control" type="password" name="password" id="password"
+               placeholder="パスワード">
+        <p class="text-danger text-nowrap text-center" id="errorpassword"></p>
     </div>
-
-    <div class="mb-3" style="margin-left:130px;">
-        <div class="d-flex">
-            <input class="form-control" style="width:210px;height:38px;"
-                   type="password" name="password" id="password" placeholder="パスワード">
-            <span class="cap-errormsg-right" id="errorpassword"></span>
-
-        </div>
-    </div>
-    <div class="mb-5" style="margin-left:130px;">
-        <div class="d-flex">
-            <button class="btn btn-primary d-block" type="button" id="btnLogin" style="width:210px;height:38px;">
-                ログイン
-            </button><span class="cap-errormsg-right" id="errorbtnLogin" style="width:130px;"></span>
-        </div>
+    <div class="mb-5">
+        <button class="btn btn-primary d-block w-100" type="button" id="btnLogin">
+            ログイン
+        </button>
+        <p class="text-danger text-nowrap text-center" id="errorbtnLogin"></p>
     </div>
 </form>
 @section Scripts{
