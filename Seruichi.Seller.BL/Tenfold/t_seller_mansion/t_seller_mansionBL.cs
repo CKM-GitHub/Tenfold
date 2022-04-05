@@ -15,13 +15,13 @@ namespace Seruichi.BL.Tenfold.t_seller_mansion
             validator.CheckByteCount("MansionName",model.MansionName,50);//E105
             validator.CheckIsDoubleByte("MansionName", model.MansionName, 50);//E107
 
-            validator.CheckDate("StartDate", model.StartDate.ToString());//E108
-            validator.CheckDate("EndDate", model.EndDate.ToString());//E108
+            validator.CheckDate("StartDate", model.StartDate);//E108
+            validator.CheckDate("EndDate", model.EndDate);//E108
 
-            validator.CheckCompareDate("StartDate", model.StartDate.ToString(), model.EndDate.ToString());//E111
-            validator.CheckCompareDate("EndDate", model.StartDate.ToString(), model.EndDate.ToString());//E111
+            validator.CheckCompareDate("StartDate", model.StartDate, model.EndDate);//E111
+            validator.CheckCompareDate("EndDate", model.StartDate, model.EndDate);//E111
 
-            validator.CheckCheckboxLenght("CheckBoxError", lst_checkBox);//E112
+            validator.CheckCheckboxLenght("Chk_Blue", lst_checkBox);//E112
 
             return validator.GetValidationResult();
         }

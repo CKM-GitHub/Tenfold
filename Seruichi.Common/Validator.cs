@@ -149,11 +149,11 @@ namespace Seruichi.Common
 
             if (string.IsNullOrEmpty(inputText)) return true;
 
-            if (!CheckIsHalfWidth(inputText, 10, out errorcd))
-            {
-                return false;
+            //if (!CheckIsHalfWidth(inputText, 10, out errorcd))
+            //{
+            //    return false;
 
-            }
+            //}
 
             if (inputText.Length > 10)
             {
@@ -203,17 +203,21 @@ namespace Seruichi.Common
         {
             errorcd = "";
 
-            if (!CheckAndFormatDate(fromDate, out errorcd, out string correctFromDate))
-            {
-                return false;
-            }
+            //if (!CheckAndFormatDate(fromDate, out errorcd, out string correctFromDate))
+            //{
+            //    return false;
+            //}
 
-            if (!CheckAndFormatDate(toDate, out errorcd, out string correctToDate))
-            {
-                return false;
-            }
+            //if (!CheckAndFormatDate(toDate, out errorcd, out string correctToDate))
+            //{
+            //    return false;
+            //}
 
-            if (correctFromDate.ToDateTime() > correctToDate.ToDateTime())
+            if (string.IsNullOrEmpty(fromDate) || string.IsNullOrEmpty(toDate)) return true;
+            
+            if (fromDate.Length>10 || toDate.Length > 10) return true;
+
+            if (fromDate.ToDateTime() > toDate.ToDateTime())
             {
                 errorcd = "E111"; //入力された値が正しくありません ★エラーメッセージ未定
                 return false;
