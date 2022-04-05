@@ -1,11 +1,16 @@
-﻿const _url = {};
+﻿
+const _url = {};
 
 $(function () {
     setValidation();
     _url.getM_SellerMansionList = common.appPath + '/t_seller_mansion/GetM_SellerMansionList';  
     addEvents();
 });
-function setValidation() {    
+function setValidation() {
+    $('.form-check-input')
+        .addvalidation_errorElement("#errorChkLenght")
+        .addvalidation_checkboxlenght();
+
     $('#StartDate')
         .addvalidation_errorElement("#errorStartDate")
         .addvalidation_datecheck()
@@ -16,10 +21,12 @@ function setValidation() {
         .addvalidation_datecheck()
         .addvalidation_datecompare();
 
+    $('#btnProcess')
+        .addvalidation_errorElement("#errorProcess");
+
 }
 function addEvents()
 {
-
     common.bindValidationEvent('#form1', '');
 
     const $Chk_Blue = $("#Chk_Blue").val(), $Chk_Sky = $("#Chk_Sky").val(), $Chk_Orange = $("#Chk_Orange").val(),
@@ -43,20 +50,83 @@ function addEvents()
         StartDate: $StartDate,
         EndDate: $EndDate,
     };
-    common.callAjax(_url.getM_SellerMansionList, model,
-        function (result) {
-            if (result && result.isOK) {
-                const data = result.data;
-                Bind_tbody(data);
-            }
-            if (result && !result.isOK) {
-                const message = result.message;
-            }
-        });
-    
+    getM_SellerMansionList(model);
+    //common.callAjax(_url.getM_SellerMansionList, model,
+    //    function (result) {
+    //        if (result && result.isOK) {
+    //            const data = result.data;
+    //            Bind_tbody(data);
+    //        }
+    //        if (result && !result.isOK) {
+    //            const message = result.message;
+    //        }
+    //    });
+   
+    $('.form-check-input').on('change', function () {
+        this.value = this.checked ? 1 : 0;
+        if ($("input[type=checkbox]:checked").length > 0) {
+            $('.form-check-input').hideError();
+        }
+    }).change();
+
+    $('#btnToday').on('click', function () {   
+        let today = common.getToday();
+        $('#StartDate').val(today);
+        $('#EndDate').val(today);
+    });
+
+    $('#btnThisMonth').on('click', function () {
+        let today = common.getToday();
+        let firstDay = common.getFirstDayofMonth();
+        $('#StartDate').val(firstDay);
+        $('#EndDate').val(today);
+    });
+    $('#btnLastMonth').on('click', function () {
+        let firstdaypremonth = common.getFirstDayofPreviousMonth();
+        let lastdaypremonth = common.getLastDayofPreviousMonth();
+        $('#StartDate').val(firstdaypremonth);
+        $('#EndDate').val(lastdaypremonth);
+
+    });
+
+    $('#btnProcess').on('click', function () {
+        $form = $('#form1').hideChildErrors();
+
+        //if (!common.checkValidityOnSave('#form1')) {
+        //    $form.getInvalidItems().get(0).focus();
+        //    return false;
+        //}
+        const fd = new FormData(document.forms.form1);
+        const model = Object.fromEntries(fd);
+        getM_SellerMansionList(model,this);
+    });
 
 }
 
+
+function getM_SellerMansionList(model,selector) {   
+    common.callAjaxWithLoading(_url.getM_SellerMansionList, model, selector, function (result) {
+        if (result && result.isOK) {
+            //sucess
+            const data = result.data;
+            Bind_tbody(data);
+        }
+        if (result && !result.isOK) {
+            if (result.message != null) {
+                const message = result.message;
+                $selector.showError(message.MessageText1);
+            }
+            else {
+                const errors = result.data;
+                for (key in errors) {
+                    const target = document.getElementById(key);
+                    $(target).showError(errors[key]);
+                    $form.getInvalidItems().get(0).focus();
+                }
+            }
+        }
+    });
+}
 function Bind_tbody(data) {
    
     for (var i = 0; i < data.count; i++) {

@@ -174,6 +174,15 @@
         return this.removeAttr('data-validation-datecompare')
     };
 
+    $.fn.addvalidation_checkboxlenght = function () {
+        return this
+            .attr('data-validation-checkboxlenght', 'true')
+    };
+    $.fn.removeValidation_checkboxlenght = function () {
+        return this.removeAttr('data-validation-checkboxlenght')
+    };
+    
+
 
     $.fn.addvalidation_custom = function (validationName) {
         return this

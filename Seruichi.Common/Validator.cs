@@ -1,6 +1,8 @@
 ﻿using Models;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace Seruichi.Common
@@ -213,7 +215,7 @@ namespace Seruichi.Common
 
             if (correctFromDate.ToDateTime() > correctToDate.ToDateTime())
             {
-                errorcd = "E103"; //入力された値が正しくありません ★エラーメッセージ未定
+                errorcd = "E111"; //入力された値が正しくありません ★エラーメッセージ未定
                 return false;
             }
             return true;
@@ -382,6 +384,17 @@ namespace Seruichi.Common
                 outVal = decimalValue.ToString(format);
             }
 
+            return true;
+        }
+        public bool CheckCheckBoxLenght(List<string> inputText, out string errorcd)
+        {
+            errorcd = "";
+            int total = inputText.Sum(x => Convert.ToInt32(x));
+            if(total == 0)
+            {
+                errorcd = "E112"; //'１つ以上選択してください'
+                return false;
+            }            
             return true;
         }
     }

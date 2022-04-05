@@ -105,5 +105,11 @@ namespace Seruichi.Common
             if (!validator.CheckIsNumeric(inputText, integerdigits, decimaldigits, out string errorcd, out string outVal))
                 AddValidationResult(elementId, errorcd);
         }
+        public void CheckCheckboxLenght(string elementId,List<string> lstInputText)
+        {
+            if (!validator.CheckCheckBoxLenght(lstInputText, out string errorcd))
+                 AddValidationResult(elementId, errorcd);
+
+        }
     }
 }
