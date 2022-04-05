@@ -2,7 +2,7 @@
 const _url = {};
 
 $(function () {
-    setValidation();
+   // setValidation();
     _url.getM_SellerMansionList = common.appPath + '/t_seller_mansion/GetM_SellerMansionList';  
     addEvents();
 });
@@ -20,6 +20,9 @@ function setValidation() {
         .addvalidation_errorElement("#errorEndDate")
         .addvalidation_datecheck()
         .addvalidation_datecompare();
+
+    $('#btnProcess')
+        .addvalidation_errorElement("#errorProcess");
 
 }
 function addEvents()
@@ -47,16 +50,17 @@ function addEvents()
         StartDate: $StartDate,
         EndDate: $EndDate,
     };
-    common.callAjax(_url.getM_SellerMansionList, model,
-        function (result) {
-            if (result && result.isOK) {
-                const data = result.data;
-                Bind_tbody(data);
-            }
-            if (result && !result.isOK) {
-                const message = result.message;
-            }
-        });
+    getM_SellerMansionList(model);
+    //common.callAjax(_url.getM_SellerMansionList, model,
+    //    function (result) {
+    //        if (result && result.isOK) {
+    //            const data = result.data;
+    //            Bind_tbody(data);
+    //        }
+    //        if (result && !result.isOK) {
+    //            const message = result.message;
+    //        }
+    //    });
    
     $('.form-check-input').on('change', function () {
         this.value = this.checked ? 1 : 0;
@@ -85,15 +89,43 @@ function addEvents()
 
     });
 
+    $('#btnProcess').on('click', function () {
+        $form = $('#form1').hideChildErrors();
+
+        //if (!common.checkValidityOnSave('#form1')) {
+        //    $form.getInvalidItems().get(0).focus();
+        //    return false;
+        //}
+        const fd = new FormData(document.forms.form1);
+        const model = Object.fromEntries(fd);
+        getM_SellerMansionList(model,this);
+    });
+
 }
 
 
-function Get_Today() {
-    var now = new Date();
-    var day = ("0" + now.getDate()).slice(-2);
-    var month = ("0" + (now.getMonth() + 1)).slice(-2);
-    var today = now.getFullYear() + "-" + (month) + "-" + (day);
-    return today;
+function getM_SellerMansionList(model,selector) {   
+    common.callAjaxWithLoading(_url.getM_SellerMansionList, model, selector, function (result) {
+        if (result && result.isOK) {
+            //sucess
+            const data = result.data;
+            Bind_tbody(data);
+        }
+        if (result && !result.isOK) {
+            if (result.message != null) {
+                const message = result.message;
+                $selector.showError(message.MessageText1);
+            }
+            else {
+                const errors = result.data;
+                for (key in errors) {
+                    const target = document.getElementById(key);
+                    $(target).showError(errors[key]);
+                    $form.getInvalidItems().get(0).focus();
+                }
+            }
+        }
+    });
 }
 function Bind_tbody(data) {
    

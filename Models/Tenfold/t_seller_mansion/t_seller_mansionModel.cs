@@ -17,10 +17,12 @@ namespace Models.Tenfold.t_seller_mansion
         public byte Chk_Gray { get; set; }
         public byte Chk_Black { get; set; }
         public byte Chk_Pink { get; set; }
+        public string CheckBoxError { get; set; }
         public string MansionName { get; set; }
         public string Range { get; set; }
         public Nullable<DateTime> StartDate { get; set; }
         public Nullable<DateTime> EndDate { get; set; }
-
+        
     }
+   
 }

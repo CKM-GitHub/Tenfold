@@ -8,6 +8,23 @@ namespace Seruichi.BL.Tenfold.t_seller_mansion
 {
     public class t_seller_mansionBL
     {
+        public Dictionary<string, string> ValidateAll(t_seller_mansionModel model,List<string> lst_checkBox)
+        {
+            ValidatorAllItems validator = new ValidatorAllItems();
+
+            validator.CheckByteCount("MansionName",model.MansionName,50);//E105
+            validator.CheckIsDoubleByte("MansionName", model.MansionName, 50);//E107
+
+            validator.CheckDate("StartDate", model.StartDate.ToString());//E108
+            validator.CheckDate("EndDate", model.EndDate.ToString());//E108
+
+            validator.CheckCompareDate("StartDate", model.StartDate.ToString(), model.EndDate.ToString());//E111
+            validator.CheckCompareDate("EndDate", model.StartDate.ToString(), model.EndDate.ToString());//E111
+
+            validator.CheckCheckboxLenght("CheckBoxError", lst_checkBox);//E112
+
+            return validator.GetValidationResult();
+        }
         public DataTable GetM_SellerMansionList(t_seller_mansionModel model)
         {
             var sqlParams = new SqlParameter[]

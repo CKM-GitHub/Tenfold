@@ -21,6 +21,23 @@ namespace Seruichi.Tenfold.Web.Controllers
         public ActionResult GetM_SellerMansionList(t_seller_mansionModel model)
         {
             t_seller_mansionBL bl = new t_seller_mansionBL();
+
+            List<string> chk_lst = new List<string>();
+            chk_lst.Add(model.Chk_Blue.ToString());
+            chk_lst.Add(model.Chk_Sky.ToString());
+            chk_lst.Add(model.Chk_Orange.ToString());
+            chk_lst.Add(model.Chk_Green.ToString());
+            chk_lst.Add(model.Chk_Brown.ToString());
+            chk_lst.Add(model.Chk_Dark_Sky.ToString());
+            chk_lst.Add(model.Chk_Gray.ToString());
+            chk_lst.Add(model.Chk_Black.ToString());
+            chk_lst.Add(model.Chk_Pink.ToString());
+
+            var validationResult = bl.ValidateAll(model,chk_lst);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
             var dt = bl.GetM_SellerMansionList(model);
             return OKResult(DataTableToJSON(dt));
         }
