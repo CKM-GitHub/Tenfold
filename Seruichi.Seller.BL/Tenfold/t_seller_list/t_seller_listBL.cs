@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using Seruichi.Common;
 using System.Data;
+using Models.Tenfold.t_seller_list;
 
 
 namespace Seruichi.BL.Tenfold.t_seller_list
@@ -33,6 +34,28 @@ namespace Seruichi.BL.Tenfold.t_seller_list
             }
 
             return items;
+        }
+
+        public DataTable GetM_SellerList(t_seller_listModel model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@ValidCheck", SqlDbType.TinyInt){ Value = model.ValidCheck.ToByte(0) },
+                new SqlParameter("@InValidCheck", SqlDbType.TinyInt){ Value = model.InValidCheck.ToByte(0) },
+                new SqlParameter("@SellerName", SqlDbType.TinyInt){ Value = model.SellerName.ToStringOrNull() },
+                new SqlParameter("@PrefNameSelect", SqlDbType.TinyInt){ Value = model.PrefNameSelect.ToString() },
+                new SqlParameter("@RangeSelect", SqlDbType.TinyInt){ Value = model.RangeSelect.ToByte(0) },
+                new SqlParameter("@StartDate", SqlDbType.TinyInt){ Value =  model.StartDate.ToStringOrNull() },
+                new SqlParameter("@EndDate", SqlDbType.TinyInt){ Value = model.EndDate.ToStringOrNull()},
+                new SqlParameter("@expectedCheck", SqlDbType.TinyInt){ Value = model.expectedCheck.ToByte(0) },
+                new SqlParameter("@negtiatioinsCheck", SqlDbType.TinyInt){ Value = model.negtiatioinsCheck.ToByte(0) },
+                new SqlParameter("@endCheck", SqlDbType.TinyInt){ Value = model.endCheck.ToByte(0) }
+
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_seller_List_Select_M_SellerData", sqlParams);
+            return dt;
         }
     }
 }
