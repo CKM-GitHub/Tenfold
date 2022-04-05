@@ -118,7 +118,7 @@ function addEvents() {
 
     $('.myvalidcheck').on('change', function () {
         this.value = this.checked ? 1 : 0;
-        if ($(".myvalidcheck:checked").length > 0) {
+        if ($("input[type=checkbox]:checked").length > 0) {
             $('.myvalidcheck').hideError();
         }
     }).change();
