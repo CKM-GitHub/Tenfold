@@ -7,6 +7,7 @@ using Models.Tenfold.t_seller_list;
 using Seruichi.BL.Tenfold.t_seller_list;
 using Seruichi.Common;
 
+
 namespace Seruichi.Tenfold.Web.Controllers
 {
     public class t_seller_listController : BaseController
@@ -36,7 +37,14 @@ namespace Seruichi.Tenfold.Web.Controllers
         //    return OKResult();
         //}
 
-       
+        [HttpPost]
+        public ActionResult GetM_SellerList(t_seller_listModel model)
+        {
+            t_seller_listBL bl = new t_seller_listBL();
+            var dt = bl.GetM_SellerList(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
 
     }
 }
