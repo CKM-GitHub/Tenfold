@@ -237,6 +237,7 @@ const common = {
         const isDateCompare = $ctrl.attr("data-validation-datecompare");
         const isOneByteCharacter = $ctrl.attr("data-validation-onebyte-character");
         const ischeckboxLenght = $ctrl.attr("data-validation-checkboxlenght");
+        const isMaxlengthCheckforsellerlist = $ctrl.attr("data-validation-MaxLengthforsellerlist");
 
         let inputValue = "";
         if (type === 'radio') {
@@ -263,7 +264,7 @@ const common = {
             && !isSingleDoubleByte
             && !isDoubleByte
             && !isSingleByte && !isSingleByteNumber && !isSingleByteNumberAlpha
-            && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter && !ischeckboxLenght
+            && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter && !ischeckboxLenght && !isMaxlengthCheckforsellerlist
             && !customValidation) return true;
 
         if (isRequired) {
@@ -405,6 +406,17 @@ const common = {
                 const maxLength = $ctrl.data('digits');
                 if (maxLength) {
                     const byteLength = this.getStringByteCount(inputValue);
+                    if (byteLength > parseInt(maxLength)) {
+                        $ctrl.showError(this.getMessage('E105'));
+                        return;
+                    }
+                }
+            }
+
+            if (isMaxlengthCheckforsellerlist) {
+                const maxLength = $ctrl.data('digits');
+                if (maxLength) {
+                    const byteLength = inputValue.length;
                     if (byteLength > parseInt(maxLength)) {
                         $ctrl.showError(this.getMessage('E105'));
                         return;

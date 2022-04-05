@@ -151,6 +151,15 @@
             .attr('autocomplete', 'off');
     };
 
+    //add by pnz
+    $.fn.addvalidation_MaxLengthforSellerlist = function (digits) {
+        return this
+            .attr('data-validation-MaxLengthforsellerlist', 'true')
+            .attr('data-digits', digits)
+            .attr('inputmode', 'text')
+            .attr('autocomplete', 'off');
+    };
+
     $.fn.addvalidation_onebyte_character = function () {
         return this
             .attr('data-validation-onebyte-character', 'true')

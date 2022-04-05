@@ -7,6 +7,7 @@ using Models.Tenfold.t_seller_list;
 using Seruichi.BL.Tenfold.t_seller_list;
 using Seruichi.Common;
 
+
 namespace Seruichi.Tenfold.Web.Controllers
 {
     public class t_seller_listController : BaseController
@@ -36,7 +37,28 @@ namespace Seruichi.Tenfold.Web.Controllers
         //    return OKResult();
         //}
 
-       
+        [HttpPost]
+        public ActionResult GetM_SellerList(t_seller_listModel model)
+        {
+            t_seller_listBL bl = new t_seller_listBL();
+
+            List<string> chk_lst = new List<string>();
+            chk_lst.Add(model.ValidCheck.ToString());
+            chk_lst.Add(model.InValidCheck.ToString());
+            chk_lst.Add(model.expectedCheck.ToString());
+            chk_lst.Add(model.negtiatioinsCheck.ToString());
+            chk_lst.Add(model.endCheck.ToString());
+            
+            var validationResult = bl.ValidateAll(model, chk_lst);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+            
+            var dt = bl.GetM_SellerList(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
 
     }
 }

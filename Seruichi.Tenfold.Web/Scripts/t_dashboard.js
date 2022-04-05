@@ -30,7 +30,7 @@ $(document).ready(function () {
             const length = dataArray.length;
 
             if (length > 0) {
-                let data = dataArray[0];
+                let data = dataArray[0];            
                 $('#Chat_Confirmation_Waiting_Count').text(data.Chat_Confirmation_Waiting_Count + "件待ち");
             }
         }

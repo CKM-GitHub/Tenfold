@@ -1,4 +1,4 @@
-﻿
+﻿//const _url = {};
 $(function () {
 
     //_url.CheckSellerName = common.appPath + '/t_Seller_list/CheckSellerName';
@@ -6,6 +6,7 @@ $(function () {
     //_url.DateCompare = common.appPath + '/t_Seller_list/DateCompare';
 
     setValidation();
+    //_url.getM_SellerList = common.appPath + '/t_seller_list/GetM_SellerList';
     addEvents();
 });
 
@@ -13,8 +14,7 @@ function setValidation() {
 
     $('#SellerName')
         .addvalidation_errorElement("#errorSeller")
-        .addvalidation_singlebyte_doublebyte()
-        .addvalidation_MaxLength(10);
+        .addvalidation_MaxLengthforSellerlist(10);    
 
     $('#StartDate')
         .addvalidation_errorElement("#errorStartDate")
@@ -39,10 +39,33 @@ function addEvents() {
 
     common.bindValidationEvent('#form1', '');
 
-    //const $locationSelect = $("#locationSelect").val(),$SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(),
-    //    $startdate = $("#startdate").val(), $enddate = $("#enddate").val(), $ValidCheck = $("#ValidCheck").val(),
-    //    $InValidCheck = $("#InValidCheck").val(), $StatusCheck1 = $("#StatusCheck1").val(), $StatusCheck2 = $("#StatusCheck2").val(),
-    //    $StatusCheck3 = $("#StatusCheck3").val()
+    const $SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(),
+        $startdate = $("#StartDate").val(), $enddate = $("#EndDate").val(), $ValidCheck = $("#ValidCheck").val(),
+        $InValidCheck = $("#InValidCheck").val(), $StatusCheck1 = $("#StatusCheck1").val(), $StatusCheck2 = $("#StatusCheck2").val(),
+        $StatusCheck3 = $("#StatusCheck3").val()
+
+    //let model = {
+    //    SellerName: $SellerName,
+    //    RangeSelect: $RangeSelect,
+    //    StartDate: $startdate,
+    //    EndDate: $enddate,
+    //    ValidCheck: $ValidCheck,
+    //    InValidCheck: $InValidCheck,
+    //    expectedCheck: $StatusCheck1,
+    //    negtiatioinsCheck: $StatusCheck2,
+    //    endCheck: $StatusCheck3,
+    //};
+    //common.callAjax(_url.getM_SellerList, model,
+    //    function (result) {
+    //        if (result && result.isOK) {
+    //            const data = result.data;
+    //            Bind_tbody(data);
+    //        }
+    //        if (result && !result.isOK) {
+    //            const message = result.message;
+    //        }
+    //    });
+
 
     //$('#SellerName').on('change', function () {
     //    const $this = $(this), $SellerName = $('#SellerName')
@@ -94,7 +117,7 @@ function addEvents() {
 
     $('.myvalidcheck').on('change', function () {
         this.value = this.checked ? 1 : 0;
-        if ($(".myvalidcheck:checked").length > 0) {
+        if ($("input[type=checkbox]:checked").length > 0) {
             $('.myvalidcheck').hideError();
         }
     }).change();
@@ -106,21 +129,58 @@ function addEvents() {
         }
     }).change();
 
+    $('#btnDisplay').on('click', function () {
+        $form = $('#form1').hideChildErrors();
+
+        const fd = new FormData(document.forms.form1);
+        const model = Object.fromEntries(fd);
+        getM_SellerList(model, this);
+
+    });
+
 }
 
-//function CompareDate() {
-//    const $this = $(this), $enddate = $('#enddate'), $startdate = $('#startdate')
-//    let model = {
-//        startDate: $startdate.val(),
-//        endDate: $enddate.val()
-//    };
+function getM_SellerList(model, selector) {
+    common.callAjaxWithLoading(_url.getM_SellerList, model, selector, function (result) {
+        if (result && result.isOK) {
+            //sucess
+            const data = result.data;
+            Bind_tbody(data);
+        }
+        if (result && !result.isOK) {
+            if (result.message != null) {
+                const message = result.message;
+                $selector.showError(message.MessageText1);
+            }
+            else {
+                const errors = result.data;
+                for (key in errors) {
+                    const target = document.getElementById(key);
+                    $(target).showError(errors[key]);
+                    $form.getInvalidItems().get(0).focus();
+                }
+            }
+        }
+    });
+}
 
-//    //alert(model.startDate);
-//    //alert(model.endDate);
-//    if (model.startDate > model.endDate) {
-//        $this.showError(common.getMessage('E111'));
-//        return false;
-//    }
+function Bind_tbody(data) {
 
-//    return true;
-//}
+    for (var i = 0; i < data.count; i++) {
+        $('.tbody_t_seller_Mansion_List').append(
+            '<tr>\
+            <td class= "text-end" > ' + data[i]["NO"] + '</td>\
+            <td><i class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal">未</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
+            <td class="text-center"> ' + data[i]["無効会員"] + ' </td>\
+            < td> ' + data[i]["売主CD"] + ' </td>\
+            <td> <a class="text-heading font-semibold text-decoration-underline" href="#">' + data[i]["売主名"] + '</a> </td>\
+            <td> ' + data[i]["居住地"] + ' </td>\
+            <td> ' + data[i]["登録日時"] + ' </td>\
+            <td> ' + data[i]["査定依頼日時"] + ' </td >\
+            <td> ' + data[i]["買取依頼日時"] + ' </td>\
+            <td class="text-end"> '+ data[i]["登録数"] + ' </td>\
+            <td class="text-end"> '+ data[i]["成約数"] + ' </td>\
+            </tr>'
+        )
+    }
+}

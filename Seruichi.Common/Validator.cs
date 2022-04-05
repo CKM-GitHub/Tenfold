@@ -245,7 +245,8 @@ namespace Seruichi.Common
         public bool CheckIsOnlyOneCharacter(string inputText,out string errorcd)
         {
             errorcd = "";
-            
+
+            if (string.IsNullOrEmpty(inputText)) return true;
             if (encoding.GetByteCount(inputText) != inputText.Length)
             {
                 errorcd = "E104"; //入力できない文字です。
@@ -401,5 +402,22 @@ namespace Seruichi.Common
             }            
             return true;
         }
+
+        //add by pnz
+        public bool CheckMaxLenghtForHalfWidthandFullwidth(string inputText, int maxLength, out string errorcd)
+        {
+            errorcd = "";
+
+            if (string.IsNullOrEmpty(inputText)) return true;
+
+            if (inputText.Length > maxLength)
+            {
+                errorcd = "E105"; //入力できる桁数を超えています。
+                return false;
+            }
+            return true;
+        }
+
+        
     }
 }

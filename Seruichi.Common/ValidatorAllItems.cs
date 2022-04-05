@@ -111,5 +111,12 @@ namespace Seruichi.Common
                  AddValidationResult(elementId, errorcd);
 
         }
+
+        public void CheckMaxLenghtForHalfWidthandFullwidth(string elementId, string inputText, int maxLength)
+        {
+            if (!validator.CheckMaxLenghtForHalfWidthandFullwidth(inputText, maxLength, out string errorcd))
+                AddValidationResult(elementId, errorcd);
+
+        }
     }
 }
