@@ -57,5 +57,22 @@ namespace Seruichi.BL.Tenfold.t_seller_list
             var dt = db.SelectDatatable("pr_t_seller_List_Select_M_SellerData", sqlParams);
             return dt;
         }
+
+        public Dictionary<string, string> ValidateAll(t_seller_listModel model, List<string> lst_checkBox)
+        {
+            ValidatorAllItems validator = new ValidatorAllItems();
+
+            validator.CheckMaxLenghtForHalfWidthandFullwidth("SellerName", model.SellerName, 10);//E105
+
+            validator.CheckDate("StartDate", model.StartDate.ToString());//E108
+            validator.CheckDate("EndDate", model.EndDate.ToString());//E108
+
+            validator.CheckCompareDate("StartDate", model.StartDate.ToString(), model.EndDate.ToString());//E111
+            validator.CheckCompareDate("EndDate", model.StartDate.ToString(), model.EndDate.ToString());//E111
+
+            validator.CheckCheckboxLenght("CheckBoxError", lst_checkBox);//E112
+
+            return validator.GetValidationResult();
+        }
     }
 }

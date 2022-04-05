@@ -397,5 +397,22 @@ namespace Seruichi.Common
             }            
             return true;
         }
+
+        //add by pnz
+        public bool CheckMaxLenghtForHalfWidthandFullwidth(string inputText, int maxLength, out string errorcd)
+        {
+            errorcd = "";
+
+            if (string.IsNullOrEmpty(inputText)) return true;
+
+            if (inputText.Length > maxLength)
+            {
+                errorcd = "E105"; //入力できる桁数を超えています。
+                return false;
+            }
+            return true;
+        }
+
+        
     }
 }
