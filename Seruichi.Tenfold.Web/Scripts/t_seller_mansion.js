@@ -2,24 +2,29 @@
 const _url = {};
 
 $(function () {
-    setValidation();
+     setValidation();
     _url.getM_SellerMansionList = common.appPath + '/t_seller_mansion/GetM_SellerMansionList';  
     addEvents();
 });
 function setValidation() {
     $('.form-check-input')
-        .addvalidation_errorElement("#errorChkLenght")
-        .addvalidation_checkboxlenght();
+        .addvalidation_errorElement("#CheckBoxError")
+       /* .addvalidation_checkboxlenght();*/
+
+    $('#MansionName')
+        .addvalidation_errorElement("#errorMansionName")
+        /*.addvalidation_doublebyte();*/
+        
 
     $('#StartDate')
         .addvalidation_errorElement("#errorStartDate")
-        .addvalidation_datecheck()
-        .addvalidation_datecompare();
+        //.addvalidation_datecheck()
+        //.addvalidation_datecompare();
 
     $('#EndDate')
         .addvalidation_errorElement("#errorEndDate")
-        .addvalidation_datecheck()
-        .addvalidation_datecompare();
+        //.addvalidation_datecheck()
+        //.addvalidation_datecompare();
 
     $('#btnProcess')
         .addvalidation_errorElement("#errorProcess");
@@ -27,7 +32,7 @@ function setValidation() {
 }
 function addEvents()
 {
-    common.bindValidationEvent('#form1', '');
+   // common.bindValidationEvent('#form1', '');
 
     const $Chk_Blue = $("#Chk_Blue").val(), $Chk_Sky = $("#Chk_Sky").val(), $Chk_Orange = $("#Chk_Orange").val(),
         $Chk_Green = $("#Chk_Green").val(), $Chk_Brown = $("#Chk_Brown").val(), $Chk_Dark_Sky = $("#Chk_Dark_Sky").val(),
@@ -50,7 +55,7 @@ function addEvents()
         StartDate: $StartDate,
         EndDate: $EndDate,
     };
-    getM_SellerMansionList(model);
+    getM_SellerMansionList(model,this);
     //common.callAjax(_url.getM_SellerMansionList, model,
     //    function (result) {
     //        if (result && result.isOK) {
@@ -98,7 +103,22 @@ function addEvents()
         //}
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
-        getM_SellerMansionList(model,this);
+       // getM_SellerMansionList(model,this);
+        common.callAjaxWithLoading(_url.getM_SellerMansionList, model, this, function (result) {
+            if (result && result.isOK) {
+                //sucess
+                const data = result.data;
+                Bind_tbody(data);
+            }
+            if (result && !result.isOK) {
+                const errors = result.data;
+                for (key in errors) {
+                    const target = document.getElementById(key);
+                    $(target).showError(errors[key]);
+                    $form.getInvalidItems().get(0).focus();
+                }
+            }
+        });
     });
 
 }
@@ -111,18 +131,14 @@ function getM_SellerMansionList(model,selector) {
             const data = result.data;
             Bind_tbody(data);
         }
-        if (result && !result.isOK) {
-            if (result.message != null) {
-                const message = result.message;
-                $selector.showError(message.MessageText1);
-            }
-            else {
-                const errors = result.data;
-                for (key in errors) {
-                    const target = document.getElementById(key);
-                    $(target).showError(errors[key]);
-                    $form.getInvalidItems().get(0).focus();
-                }
+        if (result && result.data) {
+            //server validation error
+            const errors = result.data;
+            
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+               // $('#form1').getInvalidItems().get(0).focus();
             }
         }
     });
