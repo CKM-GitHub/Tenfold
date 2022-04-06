@@ -120,9 +120,20 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult InsertM_SellerMansion_L_Log(t_seller_mansion_l_log_Model model)
+        public ActionResult InsertM_Seller_L_Log(t_seller_mansion_l_log_Model model)
         {
             t_seller_listBL bl = new t_seller_listBL();
+
+            model.LogDateTime = DateTime.Now.ToShortDateString();
+            model.LoginKBN = 3;
+            model.LoginID = base.GetOperator();
+            model.RealECD = null;
+            //model.LoginName =
+            model.IPAddress = base.GetClientIP();
+            model.PageID = "t_seller_list";
+            model.ProcessKBN = 1;
+            //model.Remarks = 
+            
             bl.InsertM_Seller_L_Log(model);
             return OKResult();
         }
