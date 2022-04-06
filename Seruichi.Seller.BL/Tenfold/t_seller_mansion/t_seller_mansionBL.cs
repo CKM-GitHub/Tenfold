@@ -48,5 +48,22 @@ namespace Seruichi.BL.Tenfold.t_seller_mansion
             var dt = db.SelectDatatable("pr_t_seller_mansion_Select_M_SellerMansionData", sqlParams);
             return dt;
         }
+        public void InsertM_SellerMansion_L_Log(t_seller_mansion_l_log_Model model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@LoginKBN", SqlDbType.TinyInt){ Value = model.LoginKBN },
+                new SqlParameter("@LoginID", SqlDbType.TinyInt){ Value = model.LoginID },
+                new SqlParameter("@RealECD", SqlDbType.TinyInt){ Value = model.RealECD },
+                new SqlParameter("@LoginName", SqlDbType.TinyInt){ Value = model.LoginName },
+                new SqlParameter("@IPAddress", SqlDbType.TinyInt){ Value = model.IPAddress },
+                new SqlParameter("@Page", SqlDbType.TinyInt){ Value = model.Page },
+                new SqlParameter("@Processing", SqlDbType.TinyInt){ Value = model.Processing },
+                new SqlParameter("@Remarks", SqlDbType.TinyInt){ Value = model.Remarks },
+             };
+
+            DBAccess db = new DBAccess();
+            db.InsertUpdateDeleteData("pr_t_seller_mansion_list_Insert_L_Log", false, sqlParams);
+        }
     }
 }
