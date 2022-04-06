@@ -21,7 +21,7 @@ namespace Seruichi.BL.Tenfold.t_seller_mansion
             validator.CheckCompareDate("StartDate", model.StartDate, model.EndDate);//E111
             validator.CheckCompareDate("EndDate", model.StartDate, model.EndDate);//E111
 
-            validator.CheckCheckboxLenght("Chk_Blue", lst_checkBox);//E112
+            validator.CheckCheckboxLenght("Chk_Mi", lst_checkBox);//E112
 
             return validator.GetValidationResult();
         }
@@ -29,16 +29,16 @@ namespace Seruichi.BL.Tenfold.t_seller_mansion
         {
             var sqlParams = new SqlParameter[]
              {
-                new SqlParameter("@Chk_Blue", SqlDbType.TinyInt){ Value = model.Chk_Blue.ToByte(0) },
-                new SqlParameter("@Chk_Sky", SqlDbType.TinyInt){ Value = model.Chk_Sky.ToByte(0) },
-                new SqlParameter("@Chk_Orange", SqlDbType.TinyInt){ Value = model.Chk_Orange.ToByte(0) },
-                new SqlParameter("@Chk_Green", SqlDbType.TinyInt){ Value = model.Chk_Green.ToByte(0) },
-                new SqlParameter("@Chk_Brown", SqlDbType.TinyInt){ Value = model.Chk_Brown.ToByte(0) },
-                new SqlParameter("@Chk_Dark_Sky", SqlDbType.TinyInt){ Value = model.Chk_Dark_Sky.ToByte(0) },
-                new SqlParameter("@Chk_Gray", SqlDbType.TinyInt){ Value = model.Chk_Gray.ToByte(0) },
-                new SqlParameter("@Chk_Black", SqlDbType.TinyInt){ Value = model.Chk_Black.ToByte(0) },
-                new SqlParameter("@Chk_Pink", SqlDbType.TinyInt){ Value = model.Chk_Pink.ToByte(0) },
-                new SqlParameter("@MansionName", SqlDbType.TinyInt){ Value = model.MansionName.ToByte(0) },
+                new SqlParameter("@Chk_Mi", SqlDbType.TinyInt){ Value = model.Chk_Mi.ToByte(0) },
+                new SqlParameter("@Chk_Kan", SqlDbType.TinyInt){ Value = model.Chk_Kan.ToByte(0) },
+                new SqlParameter("@Chk_Satei", SqlDbType.TinyInt){ Value = model.Chk_Satei.ToByte(0) },
+                new SqlParameter("@Chk_Kaitori", SqlDbType.TinyInt){ Value = model.Chk_Kaitori.ToByte(0) },
+                new SqlParameter("@Chk_Kakunin", SqlDbType.TinyInt){ Value = model.Chk_Kakunin.ToByte(0) },
+                new SqlParameter("@Chk_Kosho", SqlDbType.TinyInt){ Value = model.Chk_Kosho.ToByte(0) },
+                new SqlParameter("@Chk_Seiyaku", SqlDbType.TinyInt){ Value = model.Chk_Seiyaku.ToByte(0) },
+                new SqlParameter("@Chk_Urinushi", SqlDbType.TinyInt){ Value = model.Chk_Urinushi.ToByte(0) },
+                new SqlParameter("@Chk_Kainushi", SqlDbType.TinyInt){ Value = model.Chk_Kainushi.ToByte(0) },
+                new SqlParameter("@MansionName", SqlDbType.VarChar){ Value = model.MansionName.ToStringOrNull() },
                 new SqlParameter("@Range", SqlDbType.VarChar){ Value = model.Range.ToStringOrNull() },
                 new SqlParameter("@StartDate", SqlDbType.VarChar){ Value = model.StartDate.ToStringOrNull() },
                 new SqlParameter("@EndDate", SqlDbType.VarChar){ Value = model.EndDate.ToStringOrNull() }

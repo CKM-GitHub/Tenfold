@@ -21,17 +21,16 @@ namespace Seruichi.Tenfold.Web.Controllers
         public ActionResult GetM_SellerMansionList(t_seller_mansionModel model)
         {
             t_seller_mansionBL bl = new t_seller_mansionBL();
-
             List<string> chk_lst = new List<string>();
-            chk_lst.Add(model.Chk_Blue.ToString());
-            chk_lst.Add(model.Chk_Sky.ToString());
-            chk_lst.Add(model.Chk_Orange.ToString());
-            chk_lst.Add(model.Chk_Green.ToString());
-            chk_lst.Add(model.Chk_Brown.ToString());
-            chk_lst.Add(model.Chk_Dark_Sky.ToString());
-            chk_lst.Add(model.Chk_Gray.ToString());
-            chk_lst.Add(model.Chk_Black.ToString());
-            chk_lst.Add(model.Chk_Pink.ToString());
+            chk_lst.Add(model.Chk_Mi.ToString());
+            chk_lst.Add(model.Chk_Kan.ToString());
+            chk_lst.Add(model.Chk_Satei.ToString());
+            chk_lst.Add(model.Chk_Kaitori.ToString());
+            chk_lst.Add(model.Chk_Kakunin.ToString());
+            chk_lst.Add(model.Chk_Kosho.ToString());
+            chk_lst.Add(model.Chk_Seiyaku.ToString());
+            chk_lst.Add(model.Chk_Urinushi.ToString());
+            chk_lst.Add(model.Chk_Kainushi.ToString());
 
             var validationResult = bl.ValidateAll(model,chk_lst);
             if (validationResult.Count > 0)
