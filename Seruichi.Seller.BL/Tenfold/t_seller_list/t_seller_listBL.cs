@@ -42,11 +42,11 @@ namespace Seruichi.BL.Tenfold.t_seller_list
              {
                 new SqlParameter("@ValidCheck", SqlDbType.TinyInt){ Value = model.ValidCheck.ToByte(0) },
                 new SqlParameter("@InValidCheck", SqlDbType.TinyInt){ Value = model.InValidCheck.ToByte(0) },
-                new SqlParameter("@SellerName", SqlDbType.TinyInt){ Value = model.SellerName.ToStringOrNull() },
-                new SqlParameter("@PrefNameSelect", SqlDbType.TinyInt){ Value = model.PrefNameSelect.ToString() },
+                new SqlParameter("@SellerName", SqlDbType.VarChar){ Value = model.SellerName.ToStringOrNull() },
+                new SqlParameter("@PrefNameSelect", SqlDbType.VarChar){ Value = model.PrefNameSelect.ToString() },
                 new SqlParameter("@RangeSelect", SqlDbType.TinyInt){ Value = model.RangeSelect.ToByte(0) },
-                new SqlParameter("@StartDate", SqlDbType.TinyInt){ Value =  model.StartDate.ToStringOrNull() },
-                new SqlParameter("@EndDate", SqlDbType.TinyInt){ Value = model.EndDate.ToStringOrNull()},
+                new SqlParameter("@StartDate", SqlDbType.VarChar){ Value =  model.StartDate.ToStringOrNull() },
+                new SqlParameter("@EndDate", SqlDbType.VarChar){ Value = model.EndDate.ToStringOrNull()},
                 new SqlParameter("@expectedCheck", SqlDbType.TinyInt){ Value = model.expectedCheck.ToByte(0) },
                 new SqlParameter("@negtiatioinsCheck", SqlDbType.TinyInt){ Value = model.negtiatioinsCheck.ToByte(0) },
                 new SqlParameter("@endCheck", SqlDbType.TinyInt){ Value = model.endCheck.ToByte(0) }

@@ -118,6 +118,18 @@ function addEvents() {
 
     });
 
+    $('#btnSignUp').on('click', function () {
+        $form = $('#form1').hideChildErrors();
+
+        //window.location.href = '/t_seller_new/Index';
+    });
+
+    $('#btnSetting').on('click', function () {
+        $form = $('#form1').hideChildErrors();
+
+        //window.location.href = '/t_seller_billing/Index';
+    });
+
 }
 
 function getM_SellerList(model, selector) {
