@@ -41,5 +41,13 @@ namespace Seruichi.Tenfold.Web.Controllers
             var dt = bl.GetM_SellerMansionList(model);
             return OKResult(DataTableToJSON(dt));
         }
+
+        [HttpPost]
+        public ActionResult InsertM_SellerMansion_L_Log(t_seller_mansion_l_log_Model model)
+        {
+            t_seller_mansionBL bl = new t_seller_mansionBL();
+            bl.InsertM_SellerMansion_L_Log(model);
+            return OKResult();
+        }
     }
 }

@@ -14,7 +14,6 @@ namespace Models.Tenfold.t_seller_list
         public string RangeSelect { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public byte AccFlg { get; set; }
         public byte ValidCheck { get; set; }
         public byte InValidCheck { get; set; }
         public byte expectedCheck { get; set; }

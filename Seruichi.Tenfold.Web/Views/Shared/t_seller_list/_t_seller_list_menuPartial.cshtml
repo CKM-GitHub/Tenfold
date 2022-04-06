@@ -9,8 +9,8 @@
         <li>
             <div class="text-center px-xl-3">
                 <div class="mb-3 text-start">
-                    <label for="locationSelect" class="form-label">居住地</label>
-                    <select id="locationSelect" class="form-select">
+                    <label for="PrefNameSelect" class="form-label">居住地</label>
+                    <select id="PrefNameSelect" class="form-select">
                         <option selected value="00">全国</option>
                         @foreach (Models.DropDownListItem item in ViewBag.PrefDropDownListItems)
                         {
@@ -68,7 +68,7 @@
                 </div>
                 <div class="mb-3 text-start">
                     <label for="SellerName" class="form-label">売主名</label>
-                    <input type="text" class="form-control mb-2" id="SellerName" placeholder="売主CD、売主名">
+                    <input type="text" class="form-control mb-2" id="SellerName" name="SellerName" placeholder="売主CD、売主名">
                     <div class="text-start">
                         <span class="cap-errormsg-bottom" id="errorSeller"></span>
                     </div>
@@ -87,10 +87,10 @@
                     </select>
                     <label for="startdate" class="form-label">開始日</label>
                     <span class="cap-errormsg-right" id="errorStartDate"></span>
-                    <input class="form-control mb-2" type="date" id="StartDate">
+                    <input class="form-control mb-2" type="date" id="StartDate" name="StartDate">
                     <label for="enddate" class="form-label">終了日</label>
                     <span class="cap-errormsg-right" id="errorEndDate"></span>
-                    <input class="form-control mb-2" required="" type="date" id="EndDate">
+                    <input class="form-control mb-2" required="" type="date" id="EndDate" name="EndDate">
                     <div class="row mb-3">
                         <div class="col-6"> <button type="button" class="btn btn-primary w-100" id="btnToday">今日</button></div>
                         <div class="col-6"><button type="button" class="btn btn-primary w-100" id="btnThisWeek">今週</button></div>
@@ -105,7 +105,7 @@
         <li>
             <div class="text-center px-xl-3">
                 <div class="mb-3 text-start">
-                    <label for="DisableSelect" class="form-label">会員状態</label>
+                    <label for="ValidCheck" class="form-label">会員状態</label>
                     <span class="cap-errormsg-right" id="errorValidChkLenght"></span>
                     <div class="form-check">
                         <input class="myvalidcheck form-check-input" type="checkbox" value="1" id="ValidCheck" name="ValidCheck"
@@ -117,23 +117,23 @@
                     </div>
                 </div>
                 <div class="mb-3 text-start">
-                    <label for="DisableSelect" class="form-label">ステータス</label>
+                    <label for="expectedCheck" class="form-label">ステータス</label>
                     <span class="cap-errormsg-right" id="errorStatusChkLenght"></span>
                     <div class="form-check">
-                        <input class="mystscheck form-check-input" type="checkbox" value="1" id="StatusCheck1" name="StatusCheck1"
-                               checked> <label class="form-check-label" for="StatusCheck1">
+                        <input class="mystscheck form-check-input" type="checkbox" value="1" id="expectedCheck" name="expectedCheck"
+                               checked> <label class="form-check-label" for="expectedCheck">
                             <span class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white">見</span> ⾒込
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="mystscheck form-check-input" type="checkbox" value="1" id="StatusCheck2" name="StatusCheck2"
-                               checked> <label class="form-check-label" for="StatusCheck2">
+                        <input class="mystscheck form-check-input" type="checkbox" value="1" id="negtiatioinsCheck" name="negtiatioinsCheck"
+                               checked> <label class="form-check-label" for="negtiatioinsCheck">
                             <span class="ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark">交</span> 交渉中
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="mystscheck form-check-input" type="checkbox" value="1" id="StatusCheck3" name="StatusCheck3"
-                               checked> <label class="form-check-label" for="StatusCheck3">
+                        <input class="mystscheck form-check-input" type="checkbox" value="1" id="endCheck" name="endCheck"
+                               checked> <label class="form-check-label" for="endCheck">
                             <span class="ms-1 ps-1 pe-1 rounded-circle bg-secondary">終</span> 終了
                         </label>
                     </div>

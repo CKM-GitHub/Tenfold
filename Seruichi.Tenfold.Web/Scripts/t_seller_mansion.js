@@ -13,7 +13,7 @@ function setValidation() {
 
     $('#MansionName')
         .addvalidation_errorElement("#errorMansionName")
-        /*.addvalidation_doublebyte();*/
+       /* .addvalidation_doublebyte();*/
         
 
     $('#StartDate')
@@ -25,9 +25,6 @@ function setValidation() {
         .addvalidation_errorElement("#errorEndDate")
         //.addvalidation_datecheck()
         //.addvalidation_datecompare();
-
-    $('#btnProcess')
-        .addvalidation_errorElement("#errorProcess");
 
 }
 function addEvents()
@@ -79,7 +76,13 @@ function addEvents()
         $('#StartDate').val(today);
         $('#EndDate').val(today);
     });
+    $('#btnThisWeek').on('click', function () {
+        let start = common.getDayaweekbeforetoday();
+        let end = common.getToday();
+        $('#StartDate').val(start);
+        $('#EndDate').val(end);
 
+    });
     $('#btnThisMonth').on('click', function () {
         let today = common.getToday();
         let firstDay = common.getFirstDayofMonth();
@@ -103,42 +106,40 @@ function addEvents()
         //}
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
-       // getM_SellerMansionList(model,this);
-        common.callAjaxWithLoading(_url.getM_SellerMansionList, model, this, function (result) {
-            if (result && result.isOK) {
-                //sucess
-                const data = result.data;
-                Bind_tbody(data);
-            }
-            if (result && !result.isOK) {
-                const errors = result.data;
-                for (key in errors) {
-                    const target = document.getElementById(key);
-                    $(target).showError(errors[key]);
-                    $form.getInvalidItems().get(0).focus();
-                }
-            }
-        });
+        getM_SellerMansionList(model, $form);
+        //common.callAjaxWithLoading(_url.getM_SellerMansionList, model, this, function (result) {
+        //    if (result && result.isOK) {
+        //        //sucess
+        //        const data = result.data;
+        //        Bind_tbody(data);
+        //    }
+        //    if (result && !result.isOK) {
+        //        const errors = result.data;
+        //        for (key in errors) {
+        //            const target = document.getElementById(key);
+        //            $(target).showError(errors[key]);
+        //            $form.getInvalidItems().get(0).focus();
+        //        }
+        //    }
+        //});
     });
 
 }
 
 
-function getM_SellerMansionList(model,selector) {   
-    common.callAjaxWithLoading(_url.getM_SellerMansionList, model, selector, function (result) {
+function getM_SellerMansionList(model, $form) {
+    common.callAjaxWithLoading(_url.getM_SellerMansionList, model, this, function (result) {
         if (result && result.isOK) {
             //sucess
             const data = result.data;
-            Bind_tbody(data);
+           // Bind_tbody(data);
         }
-        if (result && result.data) {
-            //server validation error
+        if (result && !result.isOK) {
             const errors = result.data;
-            
             for (key in errors) {
                 const target = document.getElementById(key);
                 $(target).showError(errors[key]);
-               // $('#form1').getInvalidItems().get(0).focus();
+                $form.getInvalidItems().get(0).focus();
             }
         }
     });
