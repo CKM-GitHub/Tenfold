@@ -70,12 +70,14 @@ namespace Seruichi.Tenfold.Web.Controllers
             if (dt != null && dt.Rows.Count > 0)
             {
                 // Change encoding to Shift-JIS
-                var strFilePath = Server.MapPath("~/App_Data/");
+                string userProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                string strFilePath = userProfileFolder + "\\Downloads\\";
+ 
                 if (!Directory.Exists(strFilePath))
                 {
                     Directory.CreateDirectory(strFilePath);
                 }
-                var fileName = "t_seller_list" + System.DateTime.Now.ToString("ddMMyyyy_HHmmss");
+                var fileName = "売主リスト" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss");
                 var filePath = Path.Combine(strFilePath, fileName + ".csv");
                 StreamWriter sw = new StreamWriter(filePath, false);
                 //headers    
@@ -114,7 +116,15 @@ namespace Seruichi.Tenfold.Web.Controllers
                 }
                 sw.Close();
             }
-            return OKResult("");
+            return OKResult();
+        }
+
+        [HttpPost]
+        public ActionResult InsertM_SellerMansion_L_Log(t_seller_mansion_l_log_Model model)
+        {
+            t_seller_listBL bl = new t_seller_listBL();
+            bl.InsertM_Seller_L_Log(model);
+            return OKResult();
         }
     }
 }

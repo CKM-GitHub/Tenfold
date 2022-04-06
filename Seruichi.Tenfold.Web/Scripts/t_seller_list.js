@@ -5,9 +5,11 @@ $(function () {
     //_url.CheckDate = common.appPath + '/t_Seller_list/CheckDate';
     //_url.DateCompare = common.appPath + '/t_Seller_list/DateCompare';
 
-    setValidation();
     _url.getM_SellerList = common.appPath + '/t_seller_list/GetM_SellerList';
     _url.generate_CSV = common.appPath + '/t_seller_list/Generate_CSV';
+
+    setValidation();
+    
     addEvents();
 });
 
