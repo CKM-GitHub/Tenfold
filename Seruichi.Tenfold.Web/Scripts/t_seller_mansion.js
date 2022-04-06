@@ -124,7 +124,7 @@ function Bind_tbody(result) {
             <td class= "text-end" > ' + data[i]["NO"] + '</td>\
             <td><i class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal">未</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
             <td> ' + data[i]["物件CD"] + ' </td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" href="#" onclick="l_logfunction('+ data[i]["MansionCD"]+',' + data[i]["マンション名"] +')" > 物件名物件名物件名物件名物件名</a><p> <small class="text-wrap w-100">'+ data[i]["住所"] + '</small></p></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" href="#"  onclick="l_logfunction('+ data[i]["MansionCD"].ToString() + ',' + data[i]["マンション名"].ToString() +')" > 物件名物件名物件名物件名物件名</a><p> <small class="text-wrap w-100">'+ data[i]["住所"] + '</small></p></td>\
             <td> '+ data[i]["部屋"] + '</td>\
             <td class="text-end">'+ data[i]["階数"] + '</td>\
             <td class="text-end">'+ data[i]["面積"] + '</td>\
@@ -149,6 +149,6 @@ function Bind_tbody(result) {
     $('#mansiontable tbody').append(html);
 }
 
-function l_logfunction(id, name) {
+function l_logfunction( id, name) {
     alert(id + "," + name);
 }
