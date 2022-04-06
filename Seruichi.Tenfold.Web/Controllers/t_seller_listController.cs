@@ -65,9 +65,9 @@ namespace Seruichi.Tenfold.Web.Controllers
         public ActionResult Generate_CSV(t_seller_listModel model)
         {
             t_seller_listBL bl = new t_seller_listBL();
-            var dt = bl.Generate_CSV(model);
+            var dt1 = bl.Generate_CSV(model);
             //Generate CSV filel
-            if (dt != null && dt.Rows.Count > 0)
+            if (dt1 != null && dt1.Rows.Count > 0)
             {
                 // Change encoding to Shift-JIS
                 string userProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
@@ -81,18 +81,18 @@ namespace Seruichi.Tenfold.Web.Controllers
                 var filePath = Path.Combine(strFilePath, fileName + ".csv");
                 StreamWriter sw = new StreamWriter(filePath, false);
                 //headers    
-                for (int i = 0; i < dt.Columns.Count; i++)
+                for (int i = 0; i < dt1.Columns.Count; i++)
                 {
-                    sw.Write(dt.Columns[i]);
-                    if (i < dt.Columns.Count - 1)
+                    sw.Write(dt1.Columns[i]);
+                    if (i < dt1.Columns.Count - 1)
                     {
                         sw.Write(",");
                     }
                 }
                 sw.Write(sw.NewLine);
-                foreach (DataRow dr in dt.Rows)
+                foreach (DataRow dr in dt1.Rows)
                 {
-                    for (int i = 0; i < dt.Columns.Count; i++)
+                    for (int i = 0; i < dt1.Columns.Count; i++)
                     {
                         if (!Convert.IsDBNull(dr[i]))
                         {
@@ -107,7 +107,7 @@ namespace Seruichi.Tenfold.Web.Controllers
                                 sw.Write(dr[i].ToString());
                             }
                         }
-                        if (i < dt.Columns.Count - 1)
+                        if (i < dt1.Columns.Count - 1)
                         {
                             sw.Write(",");
                         }
