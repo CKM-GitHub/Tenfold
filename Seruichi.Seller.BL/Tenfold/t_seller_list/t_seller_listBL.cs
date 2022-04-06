@@ -57,7 +57,26 @@ namespace Seruichi.BL.Tenfold.t_seller_list
             var dt = db.SelectDatatable("pr_t_seller_List_Select_M_SellerData", sqlParams);
             return dt;
         }
+        public DataTable Generate_CSV(t_seller_listModel model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                  new SqlParameter("@ValidCheck", SqlDbType.TinyInt){ Value = model.ValidCheck.ToByte(0) },
+                new SqlParameter("@InValidCheck", SqlDbType.TinyInt){ Value = model.InValidCheck.ToByte(0) },
+                new SqlParameter("@SellerName", SqlDbType.VarChar){ Value = model.SellerName.ToStringOrNull() },
+                new SqlParameter("@PrefNameSelect", SqlDbType.VarChar){ Value = model.PrefNameSelect.ToString() },
+                new SqlParameter("@RangeSelect", SqlDbType.TinyInt){ Value = model.RangeSelect.ToByte(0) },
+                new SqlParameter("@StartDate", SqlDbType.VarChar){ Value =  model.StartDate.ToStringOrNull() },
+                new SqlParameter("@EndDate", SqlDbType.VarChar){ Value = model.EndDate.ToStringOrNull()},
+                new SqlParameter("@expectedCheck", SqlDbType.TinyInt){ Value = model.expectedCheck.ToByte(0) },
+                new SqlParameter("@negtiatioinsCheck", SqlDbType.TinyInt){ Value = model.negtiatioinsCheck.ToByte(0) },
+                new SqlParameter("@endCheck", SqlDbType.TinyInt){ Value = model.endCheck.ToByte(0) }
+             };
 
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_seller_List_csv_generate", sqlParams);
+            return dt;
+        }
         public Dictionary<string, string> ValidateAll(t_seller_listModel model, List<string> lst_checkBox)
         {
             ValidatorAllItems validator = new ValidatorAllItems();

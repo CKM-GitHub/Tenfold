@@ -7,6 +7,7 @@ $(function () {
 
     setValidation();
     _url.getM_SellerList = common.appPath + '/t_seller_list/GetM_SellerList';
+    _url.generate_CSV = common.appPath + '/t_seller_list/Generate_CSV';
     addEvents();
 });
 
@@ -40,7 +41,7 @@ function addEvents() {
     common.bindValidationEvent('#form1', '');
 
     const $SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(), $PrefNameSelect = $('#PrefNameSelect option:selected').text(),
-        $startdate = $("#StartDate").val().c, $enddate = $("#EndDate").text, $ValidCheck = $("#ValidCheck").val(),
+        $startdate = $("#StartDate").val(), $enddate = $("#EndDate").val(), $ValidCheck = $("#ValidCheck").val(),
         $InValidCheck = $("#InValidCheck").val(), $expectedCheck = $("#expectedCheck").val(), $negtiatioinsCheck = $("#negtiatioinsCheck").val(),
         $endCheck = $("#endCheck").val()
 
@@ -125,6 +126,34 @@ function addEvents() {
             endCheck: $endCheck,
         };
         getM_SellerList(model, this);
+
+    });
+
+    $('#btnCSV').on('click', function () {
+        const $SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(), $PrefNameSelect = $('#PrefNameSelect option:selected').text(),
+            $startdate = $("#StartDate").val(), $enddate = $("#EndDate").val(), $ValidCheck = $("#ValidCheck").val(),
+            $InValidCheck = $("#InValidCheck").val(), $expectedCheck = $("#expectedCheck").val(), $negtiatioinsCheck = $("#negtiatioinsCheck").val(),
+            $endCheck = $("#endCheck").val()
+
+        let model = {
+            PrefNameSelect: $PrefNameSelect,
+            SellerName: $SellerName,
+            RangeSelect: $RangeSelect,
+            StartDate: $startdate,
+            EndDate: $enddate,
+            ValidCheck: $ValidCheck,
+            InValidCheck: $InValidCheck,
+            expectedCheck: $expectedCheck,
+            negtiatioinsCheck: $negtiatioinsCheck,
+            endCheck: $endCheck,
+        };
+        common.callAjaxWithLoading(_url.generate_CSV, model,
+            function (result) {
+                if (result && result.isOK) {
+                    //sucess
+                    alert("Export Successfully!")
+                }
+            })
 
     });
 
