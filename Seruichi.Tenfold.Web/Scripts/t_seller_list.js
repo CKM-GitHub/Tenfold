@@ -39,32 +39,25 @@ function addEvents() {
 
     common.bindValidationEvent('#form1', '');
 
-    const $SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(),
-        $startdate = $("#StartDate").val(), $enddate = $("#EndDate").val(), $ValidCheck = $("#ValidCheck").val(),
-        $InValidCheck = $("#InValidCheck").val(), $StatusCheck1 = $("#StatusCheck1").val(), $StatusCheck2 = $("#StatusCheck2").val(),
-        $StatusCheck3 = $("#StatusCheck3").val()
+    const $SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(), $PrefNameSelect = $('#PrefNameSelect option:selected').text(),
+        $startdate = $("#StartDate").val().c, $enddate = $("#EndDate").text, $ValidCheck = $("#ValidCheck").val(),
+        $InValidCheck = $("#InValidCheck").val(), $expectedCheck = $("#expectedCheck").val(), $negtiatioinsCheck = $("#negtiatioinsCheck").val(),
+        $endCheck = $("#endCheck").val()
 
     let model = {
+        PrefNameSelect: $PrefNameSelect,
         SellerName: $SellerName,
         RangeSelect: $RangeSelect,
         StartDate: $startdate,
         EndDate: $enddate,
         ValidCheck: $ValidCheck,
         InValidCheck: $InValidCheck,
-        expectedCheck: $StatusCheck1,
-        negtiatioinsCheck: $StatusCheck2,
-        endCheck: $StatusCheck3,
+        expectedCheck: $expectedCheck,
+        negtiatioinsCheck: $negtiatioinsCheck,
+        endCheck: $endCheck,
     };
-    common.callAjax(_url.getM_SellerList, model,
-        function (result) {
-            if (result && result.isOK) {
-                const data = result.data;
-                Bind_tbody(data);
-            }
-            if (result && !result.isOK) {
-                const message = result.message;
-            }
-        });
+    //alert(model.SellerName);
+    getM_SellerList(model, this);
 
     $('#btnToday').on('click', function () {
         let today = common.getToday();
@@ -112,8 +105,25 @@ function addEvents() {
     $('#btnDisplay').on('click', function () {
         $form = $('#form1').hideChildErrors();
 
-        const fd = new FormData(document.forms.form1);
-        const model = Object.fromEntries(fd);
+        //const fd = new FormData(document.forms.form1);
+        //const model = Object.fromEntries(fd);
+        const $SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(), $PrefNameSelect = $('#PrefNameSelect option:selected').text(),
+            $startdate = $("#StartDate").val(), $enddate = $("#EndDate").val(), $ValidCheck = $("#ValidCheck").val(),
+            $InValidCheck = $("#InValidCheck").val(), $expectedCheck = $("#expectedCheck").val(), $negtiatioinsCheck = $("#negtiatioinsCheck").val(),
+            $endCheck = $("#endCheck").val()
+
+        let model = {
+            PrefNameSelect: $PrefNameSelect,
+            SellerName: $SellerName,
+            RangeSelect: $RangeSelect,
+            StartDate: $startdate,
+            EndDate: $enddate,
+            ValidCheck: $ValidCheck,
+            InValidCheck: $InValidCheck,
+            expectedCheck: $expectedCheck,
+            negtiatioinsCheck: $negtiatioinsCheck,
+            endCheck: $endCheck,
+        };
         getM_SellerList(model, this);
 
     });
