@@ -64,11 +64,11 @@ namespace Seruichi.BL.Tenfold.t_seller_list
 
             validator.CheckMaxLenghtForHalfWidthandFullwidth("SellerName", model.SellerName, 10);//E105
 
-            validator.CheckDate("StartDate", model.StartDate.ToString());//E108
-            validator.CheckDate("EndDate", model.EndDate.ToString());//E108
+            validator.CheckDate("StartDate", model.StartDate);//E108
+            validator.CheckDate("EndDate", model.EndDate);//E108
 
-            validator.CheckCompareDate("StartDate", model.StartDate.ToString(), model.EndDate.ToString());//E111
-            validator.CheckCompareDate("EndDate", model.StartDate.ToString(), model.EndDate.ToString());//E111
+            validator.CheckCompareDate("StartDate", model.StartDate, model.EndDate);//E111
+            validator.CheckCompareDate("EndDate", model.StartDate, model.EndDate);//E111
 
             validator.CheckCheckboxLenght("CheckBoxError", lst_checkBox);//E112
 
