@@ -1,4 +1,4 @@
-﻿IF EXISTS (select * from sys.objects where name = 'pr_M_Pref_Select_DropDownListOfPref')
+﻿IF EXISTS (select * from sys.objects where name = 'pr_t_seller_list_Select_DropDownlistofPref')
 BEGIN
     DROP PROCEDURE [pr_t_seller_list_Select_DropDownlistofPref]
 END
