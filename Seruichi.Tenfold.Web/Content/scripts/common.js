@@ -512,7 +512,6 @@ const common = {
         let data = date.toISOString().slice(0, 10);
         return data;
     },
-
     checkValidityOnSave: function checkValidityOnSave(selector) {
         let success = true;
         $(selector + ' :input:not(button):not(:hidden):not(:disabled):not([readonly])').each(function () {

@@ -6,97 +6,50 @@
                 <h5>メニュー</h5>
             </div>
         </li>
-        @*<li>
+        <li>
             <div class="text-center px-xl-3">
                 <div class="mb-3 text-start">
                     <div class="mb-3 text-start">
                         <label for="disabledSelect" class="form-label">ステータス</label>
                         <span class="cap-errormsg-right" id="CheckBoxError" name="CheckBoxError"></span>
                         <div class="form-check">
-                            <input class="form-check-input mycheckbox" type="checkbox" value="1" id="Chk_Blue" name="Chk_Blue" checked>
-                            <label class="form-check-label" for="Chk_Blue"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white">未</span> 未処理</label>
+                            <input class="form-check-input mycheckbox" type="checkbox" value="1" id="Chk_Mi" name="Chk_Mi" checked>
+                            <label class="form-check-label" for="Chk_Mi"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white">未</span> 未処理</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Sky" name="Chk_Sky"
-                                   checked> <label class="form-check-label" for="Chk_Sky"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-info text-white">簡</span> 簡易査定</label>
+                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Kan" name="Chk_Kan"
+                                   checked> <label class="form-check-label" for="Chk_Kan"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-info text-white">簡</span> 簡易査定</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Orange" name="Chk_Orange"
-                                   checked> <label class="form-check-label" for="Chk_Orange"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-warning text-white">査</span> 査定依頼</label>
+                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Satei" name="Chk_Satei"
+                                   checked> <label class="form-check-label" for="Chk_Satei"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-warning text-white">査</span> 査定依頼</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Green" name="Chk_Green"
-                                   checked> <label class="form-check-label" for="Chk_Green"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white">買</span> 買取依頼</label>
+                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Kaitori" name="Chk_Kaitori"
+                                   checked> <label class="form-check-label" for="Chk_Kaitori"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white">買</span> 買取依頼</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Brown" name="Chk_Brown"
-                                   checked> <label class="form-check-label" for="Chk_Brown"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark">確</span> 確認中</label>
+                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Kakunin" name="Chk_Kakunin"
+                                   checked> <label class="form-check-label" for="Chk_Kakunin"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark">確</span> 確認中</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Dark_Sky" name="Chk_Dark_Sky"
-                                   checked> <label class="form-check-label" for="Chk_Dark_Sky"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark">交</span> 交渉中</label>
+                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Kosho" name="Chk_Kosho"
+                                   checked> <label class="form-check-label" for="Chk_Kosho"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark">交</span> 交渉中</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Gray" name="Chk_Gray"
-                                   checked> <label class="form-check-label" for="Chk_Gray"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-secondary">成</span> 成約</label>
+                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Seiyaku" name="Chk_Seiyaku"
+                                   checked> <label class="form-check-label" for="Chk_Seiyaku"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-secondary">成</span> 成約</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Black" name="Chk_Black"
-                                   checked> <label class="form-check-label" for="Chk_Black"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-dark text-white">売辞</span> 売主辞退</label>
+                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Urinushi" name="Chk_Urinushi"
+                                   checked> <label class="form-check-label" for="Chk_Urinushi"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-light text-danger">辞</span> 売主辞退</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Pink" name="Chk_Pink"
-                                   checked> <label class="form-check-label" for="Chk_Pink"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-danger text-white">買辞</span> 買主辞退</label>
+                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Kainushi" name="Chk_Kainushi"
+                                   checked> <label class="form-check-label" for="Chk_Kainushi">  <span class="ms-1 ps-1 pe-1 rounded-circle bg-dark text-white">辞</span> 買主辞退</label>
                         </div>
                     </div>
                 </div>
-
-            </div>
-        </li>*@
-        <li>
-            <div class="text-center px-xl-3">
-                <div class="mb-3 text-start">
-                    <div class="mb-3 text-start">
-                        <label for="disabledSelect" class="form-label">ステータス</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
-                                   checked> <label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white">未</span> 未処理</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
-                                   checked> <label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-info text-white">簡</span> 簡易査定</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
-                                   checked> <label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-warning text-white">査</span> 査定依頼</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
-                                   checked> <label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white">買</span> 買取依頼</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
-                                   checked> <label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark">確</span> 確認中</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
-                                   checked> <label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark">交</span> 交渉中</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="ms-1 ps-1 pe-1 rounded-circle defaultCheck1"
-                                   checked> <label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-secondary">成</span> 成約</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
-                                   checked> <label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-light text-danger">辞</span> 売主辞退</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
-                                   checked> <label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-dark text-white">辞</span> 買主辞退</label>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </li>
         <li>
