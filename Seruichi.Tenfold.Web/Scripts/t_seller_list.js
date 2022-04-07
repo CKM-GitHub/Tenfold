@@ -132,16 +132,39 @@ function addEvents() {
             negtiatioinsCheck: $negtiatioinsCheck,
             endCheck: $endCheck,
         };
-        common.callAjaxWithLoading(_url.generate_CSV, model,
+        common.callAjax(_url.generate_CSV, model,
             function (result) {
-                if (result && result.isOK) {
-                    //sucess
-                    alert("Export Successfully!")
+                //sucess
+                var table_data = result.data;
+
+                var csv = common.getJSONtoCSV(table_data);
+                if (!(csv == "ERROR")) {
+                    var downloadLink = document.createElement("a");
+                    var blob = new Blob(["\ufeff", csv]);
+                    var url = URL.createObjectURL(blob);
+                    downloadLink.href = url;
+                    let m = new Date();
+                    var dateString =
+                        m.getUTCFullYear() + "" +
+                        ("0" + (m.getUTCMonth() + 1)).slice(-2) + "" +
+                        ("0" + m.getUTCDate()).slice(-2) + "_" +
+                        ("0" + m.getUTCHours()).slice(-2) + "" +
+                        ("0" + m.getUTCMinutes()).slice(-2) + "" +
+                        ("0" + m.getUTCSeconds()).slice(-2);
+                    downloadLink.download = "売主リスト" + dateString+".csv";
+
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
                 }
-            })
+                else {
+                    alert("There is no data!");
+                }
+            }
+        )
 
     });
-
+    
     $('#btnSignUp').on('click', function () {
         $form = $('#form1').hideChildErrors();
 
@@ -155,7 +178,6 @@ function addEvents() {
     });
 
 }
-
 function getM_SellerList(model, $form) {
     common.callAjaxWithLoading(_url.getM_SellerList, model, this, function (result) {
         if (result && result.isOK) {
