@@ -226,12 +226,12 @@ function l_logfunction(id) {
         Page: null,
         Processing: null,
         Remarks: null,
-        LogId: id
+        SellerCD: id
     }
     common.callAjax(_url.InsertL_Log, model,
         function (result) {
             if (result && result.isOK) {
-
+                //window.location.href = '/t_seller_assessment/Index';
             }
             if (result && !result.isOK) {
 
