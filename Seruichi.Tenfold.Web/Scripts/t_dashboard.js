@@ -13,7 +13,7 @@ $(document).ready(function () {
     let model = {
         Customer_waiting_count: null
     };
-    common.callAjax(_url.getCustomerInformationWaitingCount, model,
+    common.callAjaxWithLoading(_url.getCustomerInformationWaitingCount, model, this,
         function (result) {
             const dataArray = JSON.parse(result.data);
             const length = dataArray.length;
@@ -24,7 +24,7 @@ $(document).ready(function () {
             }
         }
     )
-    common.callAjax(_url.getChatConfirmationWaitingCount, model,
+    common.callAjaxWithLoading(_url.getChatConfirmationWaitingCount, model, this,
         function (result) {
             const dataArray = JSON.parse(result.data);
             const length = dataArray.length;
@@ -35,7 +35,7 @@ $(document).ready(function () {
             }
         }
     )
-    common.callAjax(_url.getNewRequestCasesCount, model,
+    common.callAjaxWithLoading(_url.getNewRequestCasesCount, model, this,
         function (result) {
             const dataArray = JSON.parse(result.data);
             const length = dataArray.length;
@@ -46,7 +46,7 @@ $(document).ready(function () {
             }
         }
     )
-    common.callAjax(_url.getDuringnegotiationsCasesCount, model,
+    common.callAjaxWithLoading(_url.getDuringnegotiationsCasesCount, model, this,
         function (result) {
             const dataArray = JSON.parse(result.data);
             const length = dataArray.length;
@@ -57,7 +57,7 @@ $(document).ready(function () {
             }
         }
     )
-    common.callAjax(_url.getContractCasesCount, model,
+    common.callAjaxWithLoading(_url.getContractCasesCount, model, this,
         function (result) {
             const dataArray = JSON.parse(result.data);
             const length = dataArray.length;
@@ -68,7 +68,7 @@ $(document).ready(function () {
             }
         }
     )
-    common.callAjax(_url.getDeclineCasesCount, model,
+    common.callAjaxWithLoading(_url.getDeclineCasesCount, model, this,
         function (result) {
             const dataArray = JSON.parse(result.data);
             const length = dataArray.length;

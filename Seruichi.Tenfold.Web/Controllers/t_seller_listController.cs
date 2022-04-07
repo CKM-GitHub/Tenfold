@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Models.Tenfold.t_seller_list;
 using Seruichi.BL.Tenfold.t_seller_list;
+using Seruichi.BL;
 using Seruichi.Common;
 
 
@@ -65,77 +66,34 @@ namespace Seruichi.Tenfold.Web.Controllers
         public ActionResult Generate_CSV(t_seller_listModel model)
         {
             t_seller_listBL bl = new t_seller_listBL();
-            var dt1 = bl.Generate_CSV(model);
-            //Generate CSV filel
-            if (dt1 != null && dt1.Rows.Count > 0)
-            {
-                // Change encoding to Shift-JIS
-                string userProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-                string strFilePath = userProfileFolder + "\\Downloads\\";
- 
-                if (!Directory.Exists(strFilePath))
-                {
-                    Directory.CreateDirectory(strFilePath);
-                }
-                var fileName = "売主リスト" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                var filePath = Path.Combine(strFilePath, fileName + ".csv");
-                StreamWriter sw = new StreamWriter(filePath, false);
-                //headers    
-                for (int i = 0; i < dt1.Columns.Count; i++)
-                {
-                    sw.Write(dt1.Columns[i]);
-                    if (i < dt1.Columns.Count - 1)
-                    {
-                        sw.Write(",");
-                    }
-                }
-                sw.Write(sw.NewLine);
-                foreach (DataRow dr in dt1.Rows)
-                {
-                    for (int i = 0; i < dt1.Columns.Count; i++)
-                    {
-                        if (!Convert.IsDBNull(dr[i]))
-                        {
-                            string value = dr[i].ToString();
-                            if (value.Contains(','))
-                            {
-                                value = String.Format("\"{0}\"", value);
-                                sw.Write(value);
-                            }
-                            else
-                            {
-                                sw.Write(dr[i].ToString());
-                            }
-                        }
-                        if (i < dt1.Columns.Count - 1)
-                        {
-                            sw.Write(",");
-                        }
-                    }
-                    sw.Write(sw.NewLine);
-                }
-                sw.Close();
-            }
-            return OKResult();
+            var dt = bl.Generate_CSV(model);
+            return OKResult(DataTableToJSON(dt));
         }
 
         [HttpPost]
-        public ActionResult InsertM_Seller_L_Log(t_seller_mansion_l_log_Model model)
+        public ActionResult InsertM_Seller_L_Log(t_seller_l_log_Model model)
         {
-            t_seller_listBL bl = new t_seller_listBL();
 
-            model.LogDateTime = DateTime.Now.ToShortDateString();
+            t_seller_listBL bl = new t_seller_listBL();
+            model = Getlogdata(model);
+            bl.InsertM_Seller_L_Log(model);
+            return OKResult();
+
+        }
+
+        public t_seller_l_log_Model Getlogdata(t_seller_l_log_Model model)
+        {
+            CommonBL bl = new CommonBL();
             model.LoginKBN = 3;
             model.LoginID = base.GetOperator();
             model.RealECD = null;
-            //model.LoginName =
+            model.LoginName = bl.GetTenstaffNamebyTenstaffcd(model.LoginID);
             model.IPAddress = base.GetClientIP();
-            model.PageID = "t_seller_list";
-            model.ProcessKBN = 1;
-            //model.Remarks = 
-            
-            bl.InsertM_Seller_L_Log(model);
-            return OKResult();
+            //if (model.LogStatus == "t_mansion_detail")
+            //    model.Page = model.LogStatus;
+            //model.Processing = "www.seruichi.com" + model.LogId;
+            //model.Remarks = model.LoginID + " " + bl.GetMansionNamebyMansioncd(model.LogId);
+            return model;
         }
     }
 }

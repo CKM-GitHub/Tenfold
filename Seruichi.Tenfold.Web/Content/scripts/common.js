@@ -532,4 +532,22 @@ const common = {
         });
     },
 
+    getJSONtoCSV: function JSON2CSV(objArray) {
+        if (!(objArray == "[]")) {
+            var array = typeof JSONString != 'object' ? JSON.parse(objArray) : JSONString;
+            var fields = Object.keys(array[0])
+            var replacer = function (key, value) { return value === null ? null : value }
+            var csv = array.map(function (row) {
+                return fields.map(function (fieldName) {
+                    return JSON.stringify(row[fieldName], replacer)
+                }).join(',')
+            })
+            csv.unshift(fields.join(',')) // add header column
+            csv = csv.join('\r\n');
+            return csv;
+        }
+        else {
+            return "ERROR";
+        }
+    }
 }
