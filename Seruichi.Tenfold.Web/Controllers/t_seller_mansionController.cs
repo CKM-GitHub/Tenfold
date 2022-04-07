@@ -71,11 +71,24 @@ namespace Seruichi.Tenfold.Web.Controllers
             if (model.LogStatus == "t_mansion_detail")
                 model.Remarks = model.LogId + " " + bl.GetMansionNamebyMansioncd(model.LogId);
             if (model.LogStatus == "t_seller_assessment")
-                model.Remarks = model.LogId + " " + bl.GetMansionNamebyMansioncd(model.LogId);
-            else if (model.LogStatus == "t_seller_assessment_detail")
-                model.Remarks = model.LogId; ;
-
-
+                model.Remarks = model.LogId + " " + bl.GetSellerNamebySellerCD(model.LogId);
+            if (model.LogStatus == "t_seller_assessment_detail")
+                model.Remarks = model.LogId;
+            if (model.LogStatus == "t_seller_assessment_detail_GReal")
+            {
+                model.Page = "t_seller_assessment_detail";
+                model.Remarks = model.LogId+" "+bl.GetRealEstateNamebyRealECD(model.LogId);
+            }
+            if (model.LogStatus == "t_seller_assessment_detail_EReal")
+            {
+                model.Page = "t_seller_assessment_detail";
+                model.Remarks = model.LogId + " " + bl.GetRealEstateNamebyRealECD(model.LogId);
+            }
+            if (model.LogStatus == "t_seller_assessment_detail_IRealECD")
+            {
+                model.Page = "t_seller_assessment_detail";
+                model.Remarks = model.LogId + " " + bl.GetRealEstateNamebyRealECD(model.LogId);
+            }
             return model;
         }
 
@@ -84,51 +97,8 @@ namespace Seruichi.Tenfold.Web.Controllers
         {
             t_seller_mansionBL bl = new t_seller_mansionBL();
             var dt = bl.Generate_M_SellerMansionCSV(model);
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                bool aa = Generate_CSV(dt);
-                string userProfileFolder = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-                string strFilePath = userProfileFolder + "\\Downloads\\";
-                CommonBL cBl = new CommonBL();
-            } 
-            return OKResult();
+            return OKResult(DataTableToJSON(dt));
         }
-        public bool Generate_CSV(DataTable dt)
-        {
-            //Build the CSV file data as a Comma separated string.
-            string csv = string.Empty;
-
-            foreach (DataColumn column in dt.Columns)
-            {
-                //Add the Header row for CSV file.
-                csv += column.ColumnName + ',';
-            }
-
-            //Add new line.
-            csv += "\r\n";
-
-            foreach (DataRow row in dt.Rows)
-            {
-                foreach (DataColumn column in dt.Columns)
-                {
-                    //Add the Data rows.
-                    csv += row[column.ColumnName].ToString().Replace(",", ";") + ',';
-                }
-
-                //Add new line.
-                csv += "\r\n";
-            }
-
-            //Download the CSV file.
-            Response.Clear();
-            Response.Buffer = true;
-            Response.AddHeader("content-disposition", "attachment;filename=SqlExport.csv");
-            Response.Charset = "";
-            Response.ContentType = "application/text";
-            Response.Output.Write(csv);
-            Response.Flush();
-            Response.End();
-            return true;
-        }
+        
     }
 }

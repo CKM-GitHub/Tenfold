@@ -178,6 +178,18 @@ namespace Seruichi.BL
             }
             return mansionName;
         }
+        public string GetRealEstateNamebyRealECD(string realECD)
+        {
+            string rename = string.Empty;
+            var sqlParm = new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = realECD };
 
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_common_tenfold_select_REName_by_RealECD", sqlParm);
+            if (dt.Rows.Count > 0)
+            {
+                rename = dt.Rows[0]["REName"].ToString();
+            }
+            return rename;
+        }
     }
 }

@@ -101,12 +101,36 @@ function addEvents()
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
 
-        common.callAjaxWithLoading(_url.generate_M_SellerMansionCSV, model,
+        common.callAjax(_url.generate_M_SellerMansionCSV, model,
             function (result) {
-                if (result && result.isOK) {
-                    alert("Export Successfully!")
+                //sucess
+                var table_data = result.data;
+
+                var csv = common.getJSONtoCSV(table_data);
+                if (!(csv == "ERROR")) {
+                    var downloadLink = document.createElement("a");
+                    var blob = new Blob(["\ufeff", csv]);
+                    var url = URL.createObjectURL(blob);
+                    downloadLink.href = url;
+                    let m = new Date();
+                    var dateString =
+                        m.getUTCFullYear() + "" +
+                        ("0" + (m.getUTCMonth() + 1)).slice(-2) + "" +
+                        ("0" + m.getUTCDate()).slice(-2) + "_" +
+                        ("0" + m.getUTCHours()).slice(-2) + "" +
+                        ("0" + m.getUTCMinutes()).slice(-2) + "" +
+                        ("0" + m.getUTCSeconds()).slice(-2);
+                    downloadLink.download = "売主リスト" + dateString + ".csv";
+
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
                 }
-            })
+                else {
+                    alert("There is no data!");
+                }
+            }
+        )
 
     });
     $('#mansiontable').find('td').click(function () {
@@ -148,14 +172,14 @@ function Bind_tbody(result) {
             <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["AssReqID"] +'&t_seller_assessment_detail'+' onclick="l_logfunction(this.id)"> '+ data[i]["詳細査定日時"] + ' </a> </td>\
             <td class="text-nowrap"> '+ data[i]["買取依頼日時"] + ' </td>\
             <td class="text-nowrap">\
-            <a class="text-heading font-semibold text-decoration-underline" href="#"> 不動産会社名不動産会社名 </a>\
+            <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["GRealECD"] + '&t_seller_assessment_detail_GReal' +' onclick="l_logfunction(this.id)" > 不動産会社名不動産会社名 </a>\
             <p class="text-end">'+ data[i]["マンション金額"] + '</p>\
              </td>\
              <td class="text-nowrap">\
-             <a class="text-heading font-semibold text-decoration-underline" href="#"> 不動産会社名不動産会社名 </a>\
+             <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["ERealECD"] + '&t_seller_assessment_detail_EReal' +' onclick="l_logfunction(this.id)"> 不動産会社名不動産会社名 </a>\
              <p class="text-end">'+ data[i]["エリア金額"] + '</p>\
              </td>\
-             <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#"> 不動産会社名不動産会社名 </a><p class="text-end">'+ data[i]["買取依頼金額"] + '</p> </td>\
+             <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["IRealECD"] + '&t_seller_assessment_detail_IRealECD' +' onclick="l_logfunction(this.id)"> 不動産会社名不動産会社名 </a><p class="text-end">'+ data[i]["買取依頼金額"] + '</p> </td>\
              <td class="text-nowrap"> '+ data[i]["送客日時"] + ' </td>\
              <td class="text-nowrap"> '+ data[i]["成約日時"] + ' </td>\
              <td class="text-nowrap"> '+ data[i]["辞退日時"] + '</td>\
