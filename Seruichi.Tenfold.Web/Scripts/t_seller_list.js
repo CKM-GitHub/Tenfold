@@ -1,15 +1,12 @@
-﻿const _url = {};
+﻿
+const _url = {};
+
 $(function () {
 
-    //_url.CheckSellerName = common.appPath + '/t_Seller_list/CheckSellerName';
-    //_url.CheckDate = common.appPath + '/t_Seller_list/CheckDate';
-    //_url.DateCompare = common.appPath + '/t_Seller_list/DateCompare';
-
+    setValidation();
     _url.getM_SellerList = common.appPath + '/t_seller_list/GetM_SellerList';
     _url.generate_CSV = common.appPath + '/t_seller_list/Generate_CSV';
-
-    setValidation();
-    
+    _url.InsertL_Log = common.appPath + '/t_seller_list/InsertM_Seller_L_Log';
     addEvents();
 });
 
@@ -59,7 +56,6 @@ function addEvents() {
         negtiatioinsCheck: $negtiatioinsCheck,
         endCheck: $endCheck,
     };
-    //alert(model.SellerName);
     getM_SellerList(model, this);
 
     $('#btnToday').on('click', function () {
@@ -108,26 +104,13 @@ function addEvents() {
     $('#btnDisplay').on('click', function () {
         $form = $('#form1').hideChildErrors();
 
-        //const fd = new FormData(document.forms.form1);
-        //const model = Object.fromEntries(fd);
-        const $SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(), $PrefNameSelect = $('#PrefNameSelect option:selected').text(),
-            $startdate = $("#StartDate").val(), $enddate = $("#EndDate").val(), $ValidCheck = $("#ValidCheck").val(),
-            $InValidCheck = $("#InValidCheck").val(), $expectedCheck = $("#expectedCheck").val(), $negtiatioinsCheck = $("#negtiatioinsCheck").val(),
-            $endCheck = $("#endCheck").val()
-
-        let model = {
-            PrefNameSelect: $PrefNameSelect,
-            SellerName: $SellerName,
-            RangeSelect: $RangeSelect,
-            StartDate: $startdate,
-            EndDate: $enddate,
-            ValidCheck: $ValidCheck,
-            InValidCheck: $InValidCheck,
-            expectedCheck: $expectedCheck,
-            negtiatioinsCheck: $negtiatioinsCheck,
-            endCheck: $endCheck,
-        };
-        getM_SellerList(model, this);
+        if (!common.checkValidityOnSave('#form1')) {
+            $form.getInvalidItems().get(0).focus();
+            return false;
+        }
+        const fd = new FormData(document.forms.form1);
+        const model = Object.fromEntries(fd);
+        getM_SellerList(model, $form);
 
     });
 
@@ -173,40 +156,33 @@ function addEvents() {
 
 }
 
-function getM_SellerList(model, selector) {
-    common.callAjaxWithLoading(_url.getM_SellerList, model, selector, function (result) {
+function getM_SellerList(model, $form) {
+    common.callAjaxWithLoading(_url.getM_SellerList, model, this, function (result) {
         if (result && result.isOK) {
-            //sucess
-            const data = result.data;
-            Bind_tbody(data);
+
+            Bind_tbody(result.data);
         }
         if (result && !result.isOK) {
-            if (result.message != null) {
-                const message = result.message;
-                $selector.showError(message.MessageText1);
-            }
-            else {
-                const errors = result.data;
-                for (key in errors) {
-                    const target = document.getElementById(key);
-                    $(target).showError(errors[key]);
-                    $form.getInvalidItems().get(0).focus();
-                }
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                $form.getInvalidItems().get(0).focus();
             }
         }
     });
 }
 
-function Bind_tbody(data) {
-
-    for (var i = 0; i < data.count; i++) {
-        $('.tbody_t_seller_Mansion_List').append(
-            '<tr>\
+function Bind_tbody(result) {
+    let data = JSON.parse(result);
+    let html = "";
+    for (var i = 0; i < data.length; i++) {
+        html += '<tr>\
             <td class= "text-end" > ' + data[i]["NO"] + '</td>\
             <td><i class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal">未</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
             <td class="text-center"> ' + data[i]["無効会員"] + ' </td>\
-            < td> ' + data[i]["売主CD"] + ' </td>\
-            <td> <a class="text-heading font-semibold text-decoration-underline" href="#">' + data[i]["売主名"] + '</a> </td>\
+            <td> ' + data[i]["売主CD"] + ' </td>\
+            <td> <a class="text-heading font-semibold text-decoration-underline" href="#" onclick="l_logfunction('+ data[i]["売主CD"] + ',' + data[i]["売主名"] + ')" >売主名売主名売主名売主名売主名</a><p> <small class="text-wrap w-100">' + data[i]["売主名"] + '</small></p></td>\
             <td> ' + data[i]["居住地"] + ' </td>\
             <td> ' + data[i]["登録日時"] + ' </td>\
             <td> ' + data[i]["査定依頼日時"] + ' </td >\
@@ -214,6 +190,10 @@ function Bind_tbody(data) {
             <td class="text-end"> '+ data[i]["登録数"] + ' </td>\
             <td class="text-end"> '+ data[i]["成約数"] + ' </td>\
             </tr>'
-        )
     }
+    $('#mansiontable tbody').append(html);
+}
+
+function l_logfunction(id, name) {
+    alert(id + "," + name);
 }

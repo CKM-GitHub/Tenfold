@@ -100,7 +100,7 @@ namespace Seruichi.BL.Tenfold.t_seller_list
              {
                 new SqlParameter("@LogDateTime", SqlDbType.VarChar){ Value = model.LogDateTime },
                 new SqlParameter("@LoginKBN", SqlDbType.TinyInt){ Value = model.LoginKBN },
-                new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.LoginID },
+                new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.Operator },
                 new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD },
                 new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.LoginName },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress },
