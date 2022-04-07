@@ -104,6 +104,8 @@ function addEvents() {
     $('#btnDisplay').on('click', function () {
         $form = $('#form1').hideChildErrors();
 
+        $('#mansiontable tbody').empty();
+
         const $SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(), $PrefNameSelect = $('#PrefNameSelect option:selected').text(),
             $startdate = $("#StartDate").val(), $enddate = $("#EndDate").val(), $ValidCheck = $("#ValidCheck").val(),
             $InValidCheck = $("#InValidCheck").val(), $expectedCheck = $("#expectedCheck").val(), $negtiatioinsCheck = $("#negtiatioinsCheck").val(),
