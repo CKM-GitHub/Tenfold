@@ -150,6 +150,21 @@ namespace Seruichi.BL
             }
             return staffName;
         }
+
+        public string GetSellerNamebySellerCD(string sellerCD)
+        {
+            string SellerName = string.Empty;
+            var sqlParm = new SqlParameter("@SellerCD", SqlDbType.VarChar) { Value = sellerCD };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_common_t_seller_select_SellerName_by_SellerCD", sqlParm);
+            if (dt.Rows.Count > 0)
+            {
+                SellerName = dt.Rows[0]["SellerName"].ToString();
+            }
+            return SellerName;
+        }
+
         public string GetMansionNamebyMansioncd(string mansionCD)
         {
             string mansionName = string.Empty;
