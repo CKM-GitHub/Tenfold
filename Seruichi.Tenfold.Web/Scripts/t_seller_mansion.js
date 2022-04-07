@@ -143,9 +143,9 @@ function Bind_tbody(result) {
             <td> '+ data[i]["部屋"] + '</td>\
             <td class="text-end">'+ data[i]["階数"] + '</td>\
             <td class="text-end">'+ data[i]["面積"] + '</td>\
-            <th class="text-decoration-underline text-nowrap">'+ data[i]["売主名"] + '</th>\
+            <th class="text-decoration-underline text-nowrap" id='+ data[i]["SellerCD"] + '&t_seller_assessment' + ' onclick="l_logfunction(this.id)">'+ data[i]["売主名"] + '</th>\
             <td class="text-nowrap"> '+ data[i]["登録日時"] + '</td>\
-            <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#"> '+ data[i]["詳細査定日時"] + ' </a> </td>\
+            <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["AssReqID"] +'&t_seller_assessment_detail'+' onclick="l_logfunction(this.id)"> '+ data[i]["詳細査定日時"] + ' </a> </td>\
             <td class="text-nowrap"> '+ data[i]["買取依頼日時"] + ' </td>\
             <td class="text-nowrap">\
             <a class="text-heading font-semibold text-decoration-underline" href="#"> 不動産会社名不動産会社名 </a>\

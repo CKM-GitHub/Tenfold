@@ -66,10 +66,16 @@ namespace Seruichi.Tenfold.Web.Controllers
             model.RealECD = null;
             model.LoginName = bl.GetTenstaffNamebyTenstaffcd(model.LoginID);
             model.IPAddress= base.GetClientIP();
+            model.Page = model.LogStatus;
+            model.Processing = "link";
             if (model.LogStatus == "t_mansion_detail")
-                model.Page = model.LogStatus;
-            model.Processing = "www.seruichi.com" + model.LogId;
-            model.Remarks = model.LogId + " " + bl.GetMansionNamebyMansioncd(model.LogId);
+                model.Remarks = model.LogId + " " + bl.GetMansionNamebyMansioncd(model.LogId);
+            if (model.LogStatus == "t_seller_assessment")
+                model.Remarks = model.LogId + " " + bl.GetMansionNamebyMansioncd(model.LogId);
+            else if (model.LogStatus == "t_seller_assessment_detail")
+                model.Remarks = model.LogId; ;
+
+
             return model;
         }
 
