@@ -104,12 +104,23 @@ function addEvents() {
     $('#btnDisplay').on('click', function () {
         $form = $('#form1').hideChildErrors();
 
-        if (!common.checkValidityOnSave('#form1')) {
-            $form.getInvalidItems().get(0).focus();
-            return false;
-        }
-        const fd = new FormData(document.forms.form1);
-        const model = Object.fromEntries(fd);
+        const $SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(), $PrefNameSelect = $('#PrefNameSelect option:selected').text(),
+            $startdate = $("#StartDate").val(), $enddate = $("#EndDate").val(), $ValidCheck = $("#ValidCheck").val(),
+            $InValidCheck = $("#InValidCheck").val(), $expectedCheck = $("#expectedCheck").val(), $negtiatioinsCheck = $("#negtiatioinsCheck").val(),
+            $endCheck = $("#endCheck").val()
+
+        let model = {
+            PrefNameSelect: $PrefNameSelect,
+            SellerName: $SellerName,
+            RangeSelect: $RangeSelect,
+            StartDate: $startdate,
+            EndDate: $enddate,
+            ValidCheck: $ValidCheck,
+            InValidCheck: $InValidCheck,
+            expectedCheck: $expectedCheck,
+            negtiatioinsCheck: $negtiatioinsCheck,
+            endCheck: $endCheck,
+        };
         getM_SellerList(model, $form);
 
     });
