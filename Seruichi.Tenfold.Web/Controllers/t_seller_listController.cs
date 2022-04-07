@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Models.Tenfold.t_seller_list;
 using Seruichi.BL.Tenfold.t_seller_list;
+using Seruichi.BL;
 using Seruichi.Common;
 
 
@@ -70,22 +71,29 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult InsertM_Seller_L_Log(t_seller_mansion_l_log_Model model)
+        public ActionResult InsertM_Seller_L_Log(t_seller_l_log_Model model)
         {
-            t_seller_listBL bl = new t_seller_listBL();
 
-            model.LogDateTime = DateTime.Now.ToShortDateString();
+            t_seller_listBL bl = new t_seller_listBL();
+            model = Getlogdata(model);
+            bl.InsertM_Seller_L_Log(model);
+            return OKResult();
+
+        }
+
+        public t_seller_l_log_Model Getlogdata(t_seller_l_log_Model model)
+        {
+            CommonBL bl = new CommonBL();
             model.LoginKBN = 3;
             model.LoginID = base.GetOperator();
             model.RealECD = null;
-            //model.LoginName =
+            model.LoginName = bl.GetTenstaffNamebyTenstaffcd(model.LoginID);
             model.IPAddress = base.GetClientIP();
-            model.PageID = "t_seller_list";
-            model.ProcessKBN = 1;
-            //model.Remarks = 
-            
-            bl.InsertM_Seller_L_Log(model);
-            return OKResult();
+            //if (model.LogStatus == "t_mansion_detail")
+            //    model.Page = model.LogStatus;
+            //model.Processing = "www.seruichi.com" + model.LogId;
+            //model.Remarks = model.LoginID + " " + bl.GetMansionNamebyMansioncd(model.LogId);
+            return model;
         }
     }
 }

@@ -94,7 +94,7 @@ namespace Seruichi.BL.Tenfold.t_seller_list
             return validator.GetValidationResult();
         }
 
-        public void InsertM_Seller_L_Log(t_seller_mansion_l_log_Model model)
+        public void InsertM_Seller_L_Log(t_seller_l_log_Model model)
         {
             var sqlParams = new SqlParameter[]
              {
@@ -112,5 +112,6 @@ namespace Seruichi.BL.Tenfold.t_seller_list
             DBAccess db = new DBAccess();
             db.InsertUpdateDeleteData("pr_L_Log_Insert", false, sqlParams);
         }
+
     }
 }

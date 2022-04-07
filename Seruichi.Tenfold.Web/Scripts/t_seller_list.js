@@ -204,7 +204,7 @@ function Bind_tbody(result) {
             <td><i class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal">未</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
             <td class="text-center"> ' + data[i]["無効会員"] + ' </td>\
             <td> ' + data[i]["売主CD"] + ' </td>\
-            <td> <a class="text-heading font-semibold text-decoration-underline" href="#" onclick="l_logfunction('+ data[i]["売主CD"] + ',' + data[i]["売主名"] + ')" >売主名売主名売主名売主名売主名</a><p> <small class="text-wrap w-100">' + data[i]["売主名"] + '</small></p></td>\
+            <td> <a class="text-heading font-semibold text-decoration-underline" id='+ data[i]["売主CD"] + ' href="#" onclick="l_logfunction(this.id)">売主名売主名売主名売主名売主名</a><p> <small class="text-wrap w-100">' + data[i]["売主名"] + '</small></p></td>\
             <td> ' + data[i]["居住地"] + ' </td>\
             <td> ' + data[i]["登録日時"] + ' </td>\
             <td> ' + data[i]["査定依頼日時"] + ' </td >\
@@ -216,6 +216,25 @@ function Bind_tbody(result) {
     $('#mansiontable tbody').append(html);
 }
 
-function l_logfunction(id, name) {
-    alert(id + "," + name);
+function l_logfunction(id) {
+    let model = {
+        LoginKBN: null,
+        LoginID: null,
+        RealECD: null,
+        LoginName: null,
+        IPAddress: null,
+        Page: null,
+        Processing: null,
+        Remarks: null,
+        LogId: id
+    }
+    common.callAjax(_url.InsertL_Log, model,
+        function (result) {
+            if (result && result.isOK) {
+
+            }
+            if (result && !result.isOK) {
+
+            }
+        });
 }

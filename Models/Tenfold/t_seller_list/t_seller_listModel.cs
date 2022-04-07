@@ -22,7 +22,7 @@ namespace Models.Tenfold.t_seller_list
 
     }
 
-    public class t_seller_mansion_l_log_Model: BaseModel
+    public class t_seller_l_log_Model: BaseModel
     {
         public string LogDateTime { get; set; }
         public byte LoginKBN { get; set; }
@@ -33,5 +33,7 @@ namespace Models.Tenfold.t_seller_list
         public string PageID { get; set; }
         public byte ProcessKBN { get; set; }
         public string Remarks { get; set; }
+        public string SellerCD { get; set; }
+        public string SellerName { get; set; }
     }
 }
