@@ -23,23 +23,6 @@ namespace Seruichi.Tenfold.Web.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult CheckSellerName(string SellerName)
-        //{
-        //    if (SellerName == null)
-        //    {
-        //        return BadRequestResult();
-        //    }
-
-        //    //Validator validator = new Validator();
-        //    //string errorcd = "";
-        //    //if (!validator.CheckIsHalfWidth(SellerName, 10, out errorcd))
-        //    //{
-        //    //    return ErrorMessageResult(errorcd);
-        //    //}
-        //    return OKResult();
-        //}
-
         [HttpPost]
         public ActionResult GetM_SellerList(t_seller_listModel model)
         {
@@ -89,10 +72,9 @@ namespace Seruichi.Tenfold.Web.Controllers
             model.RealECD = null;
             model.LoginName = bl.GetTenstaffNamebyTenstaffcd(model.LoginID);
             model.IPAddress = base.GetClientIP();
-            //if (model.LogStatus == "t_mansion_detail")
-            //    model.Page = model.LogStatus;
-            //model.Processing = "www.seruichi.com" + model.LogId;
-            //model.Remarks = model.LoginID + " " + bl.GetMansionNamebyMansioncd(model.LogId);
+            model.PageID = "t_seller_list";
+            model.ProcessKBN = "www.seruichi.com" + model.SellerCD;
+            model.Remarks = model.SellerCD + " " + bl.GetSellerNamebySellerCD(model.SellerCD);
             return model;
         }
     }

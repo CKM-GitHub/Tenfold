@@ -98,19 +98,19 @@ namespace Seruichi.BL.Tenfold.t_seller_list
         {
             var sqlParams = new SqlParameter[]
              {
-                new SqlParameter("@LogDateTime", SqlDbType.VarChar){ Value = model.LogDateTime },
-                new SqlParameter("@LoginKBN", SqlDbType.TinyInt){ Value = model.LoginKBN },
-                new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.Operator },
-                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD },
-                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.LoginName },
+                //new SqlParameter("@LogDateTime", SqlDbType.VarChar){ Value = model.LogDateTime },
+                new SqlParameter("@LoginKBN", SqlDbType.TinyInt){ Value = model.LoginKBN.ToByte(0) },
+                new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.SellerCD.ToStringOrNull() },
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.LoginName.ToStringOrNull() },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress },
                 new SqlParameter("@PageID", SqlDbType.VarChar){ Value = model.PageID },
-                new SqlParameter("@ProcessKBN", SqlDbType.TinyInt){ Value = model.ProcessKBN },
+                new SqlParameter("@ProcessKBN", SqlDbType.VarChar){ Value = model.ProcessKBN },
                 new SqlParameter("@Remarks", SqlDbType.VarChar){ Value = model.Remarks },
              };
 
             DBAccess db = new DBAccess();
-            db.InsertUpdateDeleteData("pr_L_Log_Insert", false, sqlParams);
+            db.InsertUpdateDeleteData("pr_t_seller_mansion_list_Insert_L_Log", false, sqlParams);
         }
 
     }

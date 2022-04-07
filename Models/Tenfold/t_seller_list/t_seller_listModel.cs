@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models.Tenfold.t_seller_list
 {
-    public class t_seller_listModel:BaseModel
+    public class t_seller_listModel
     {
        
         public string PrefNameSelect { get; set; }
@@ -22,7 +22,7 @@ namespace Models.Tenfold.t_seller_list
 
     }
 
-    public class t_seller_l_log_Model: BaseModel
+    public class t_seller_l_log_Model
     {
         public string LogDateTime { get; set; }
         public byte LoginKBN { get; set; }
@@ -31,9 +31,8 @@ namespace Models.Tenfold.t_seller_list
         public string LoginName { get; set; }
         public string IPAddress { get; set; }
         public string PageID { get; set; }
-        public byte ProcessKBN { get; set; }
+        public string ProcessKBN { get; set; }
         public string Remarks { get; set; }
         public string SellerCD { get; set; }
-        public string SellerName { get; set; }
     }
 }
