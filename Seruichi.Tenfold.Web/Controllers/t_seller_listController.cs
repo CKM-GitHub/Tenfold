@@ -73,7 +73,7 @@ namespace Seruichi.Tenfold.Web.Controllers
             model.LoginName = bl.GetTenstaffNamebyTenstaffcd(model.LoginID);
             model.IPAddress = base.GetClientIP();
             model.PageID = "t_seller_list";
-            model.ProcessKBN = "www.seruichi.com" + model.SellerCD;
+            model.ProcessKBN = "link";
             model.Remarks = model.SellerCD + " " + bl.GetSellerNamebySellerCD(model.SellerCD);
             return model;
         }

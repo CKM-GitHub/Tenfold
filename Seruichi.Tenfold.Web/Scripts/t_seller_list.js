@@ -18,8 +18,8 @@ function setValidation() {
 
     $('#StartDate')
         .addvalidation_errorElement("#errorStartDate")
-        .addvalidation_datecheck()
-        .addvalidation_datecompare();
+        .addvalidation_datecheck();
+        //.addvalidation_datecompare();
 
     $('#EndDate')
         .addvalidation_errorElement("#errorEndDate")
@@ -231,6 +231,7 @@ function Bind_tbody(result) {
 
 function l_logfunction(id) {
     let model = {
+        LogDateTime: null,
         LoginKBN: null,
         LoginID: null,
         RealECD: null,

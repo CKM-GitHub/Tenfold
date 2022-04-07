@@ -105,7 +105,7 @@ namespace Seruichi.BL.Tenfold.t_seller_list
                 new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.LoginName.ToStringOrNull() },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress },
                 new SqlParameter("@PageID", SqlDbType.VarChar){ Value = model.PageID },
-                new SqlParameter("@ProcessKBN", SqlDbType.VarChar){ Value = model.ProcessKBN },
+                new SqlParameter("@Processing", SqlDbType.VarChar){ Value = model.ProcessKBN },
                 new SqlParameter("@Remarks", SqlDbType.VarChar){ Value = model.Remarks },
              };
 
