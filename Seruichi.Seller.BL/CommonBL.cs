@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace Seruichi.BL
 {
@@ -136,5 +137,32 @@ namespace Seruichi.BL
             int diffMonth = (endDate.Month + (endDate.Year - startDate.Year) * 12) - startDate.Month;
             return diffMonth % 12 > 0 ? diffMonth / 12 + 1 : diffMonth / 12;
         }
+        public string GetTenstaffNamebyTenstaffcd(string staffcd)
+        {
+            string staffName = string.Empty;
+            var sqlParm = new SqlParameter("@TenStaffCD", SqlDbType.VarChar) { Value = staffcd };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_common_t_login_select_TenStaffName_by_TenStaffCD", sqlParm);
+            if (dt.Rows.Count > 0)
+            {
+                staffName = dt.Rows[0]["TenStaffName"].ToString();
+            }
+            return staffName;
+        }
+        public string GetMansionNamebyMansioncd(string mansionCD)
+        {
+            string mansionName = string.Empty;
+            var sqlParm = new SqlParameter("@MansionCD", SqlDbType.VarChar) { Value = mansionCD };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_common_tenfold_select_MansionName_by_MansionCD", sqlParm);
+            if (dt.Rows.Count > 0)
+            {
+                mansionName = dt.Rows[0]["MansionName"].ToString();
+            }
+            return mansionName;
+        }
+
     }
 }
