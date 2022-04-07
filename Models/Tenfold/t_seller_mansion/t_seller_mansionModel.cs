@@ -36,6 +36,8 @@ namespace Models.Tenfold.t_seller_mansion
          public string Page { get; set; }
          public string Processing { get; set; }
          public string Remarks { get; set; }
+         public string LogId { get; set; }
+        public string LogStatus { get; set; }
     }
    
 }
