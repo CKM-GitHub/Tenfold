@@ -152,14 +152,51 @@ function getM_SellerMansionList(model, $form) {
         }
     });
 }
-
+function isEmptyOrSpaces(str) {
+    return str === null || str.match(/^ *$/) !== null;
+}
 function Bind_tbody(result) {
     let data = JSON.parse(result);
     let html = "";
     for (var i = 0; i < data.length; i++) {
+        if (isEmptyOrSpaces(data[i]["ステータス"])) {
+            _letter = "";
+            _class = "ms-1 ps-1 pe-1 rounded-circle";
+        }
+        else {
+            _letter = data[i]["ステータス"].charAt(0);
+            if (_letter == "未") {
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal";
+            }
+            else if (_letter == "簡") {
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-info text-white fst-normal";
+            }
+            else if (_letter == "査") {
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal";
+            }
+            else if (_letter == "買" && data[i]["ステータス"] =="買取依頼") {
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal";
+            }
+            else if (_letter == "確") {
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark fst-normal";
+            }
+            else if (_letter == "交") {
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark fst-normal";
+            }
+            else if (_letter == "成") {
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary text-dark fst-normal";
+            }
+            else if (_letter == "辞") {
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger fst-normal";
+            }
+            else if (_letter == "買" && data[i]["ステータス"] == "買主辞退") {
+                _class = "ms-1 ps-1 pe-1 rounded-circle  bg-dark text-white fst-normal";
+            }
+
+        }
         html += '<tr>\
             <td class= "text-end" > ' + data[i]["NO"] + '</td>\
-            <td><i class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal">未</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
+            <td><i class="'+ _class + '">' + _letter +'</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
             <td> ' + data[i]["物件CD"] + ' </td>\
             <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["MansionCD"] +'&t_mansion_detail'+ '  href="#" onclick="l_logfunction(this.id)"> 物件名物件名物件名物件名物件名</a><p> <small class="text-wrap w-100">'+ data[i]["住所"] + '</small></p></td>\
             <td> '+ data[i]["部屋"] + '</td>\
