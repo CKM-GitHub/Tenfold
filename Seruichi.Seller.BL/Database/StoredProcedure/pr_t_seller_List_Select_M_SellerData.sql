@@ -72,7 +72,7 @@ BEGIN
 						Group by SellerMansionID ) G
 
     where ((@ValidCheck='1' and A.InvalidFLG = '0') or (@InValidCheck = '1' and A.InvalidFLG = '1')) 
-	AND (@SellerName is null or ((A.SellerName Like @SellerName) or (A.SellerCD Like @SellerName)))
+	AND (@SellerName is null or ((A.SellerName Like '%'+@SellerName+'%') or (A.SellerCD Like '%'+@SellerName+'%')))
 	AND ((@PrefNameSelect = N'全国' and (A.PrefName is not Null)) 
 		or (@PrefNameSelect != N'全国' and (A.PrefName = @PrefNameSelect )))
 	AND (@RangeSelect = '0'	and (@StartDate IS NULL OR CONVERT(DATE, A.InsertDateTime)  >= @StartDate)  and  ( CONVERT(DATE, A.InsertDateTime) <= @EndDate))
