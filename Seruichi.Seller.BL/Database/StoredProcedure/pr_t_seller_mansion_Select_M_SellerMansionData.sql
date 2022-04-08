@@ -106,8 +106,8 @@ BEGIN
 	left outer join 
 				M_RealEstate J 
 				on J.RealECD = I.RealECD
-	where ( A.MansionName like '%'+ @MansionName +'%') and A.DeleteDateTime IS NULL
-	and (@Range = '登録日'		and (@StartDate IS NULL OR CONVERT(DATE, A.InsertDateTime)  >= @StartDate)  and  ( CONVERT(DATE, A.InsertDateTime) <= @EndDate))
+	where ((@MansionName  IS NULL OR (A.MansionName like '%'+ @MansionName +'%')) and A.DeleteDateTime IS NULL)
+	and ((@Range = '登録日'		and (@StartDate IS NULL OR CONVERT(DATE, A.InsertDateTime)  >= @StartDate)  and  ( CONVERT(DATE, A.InsertDateTime) <= @EndDate))
 	OR (@Range = '詳細査定日'	and (@StartDate IS NULL OR CONVERT(DATE, D.DeepAssDateTime) >= @StartDate)  and  ( CONVERT(DATE, D.DeepAssDateTime) <= @EndDate)) 
 	OR (@Range	= '買取依頼日'	and (@StartDate IS NULL OR CONVERT(DATE, D.PurchReqDateTime) >= @StartDate) and ( CONVERT(DATE, D.PurchReqDateTime) <= @EndDate))
 	OR (@Range	= '送客日'		and (@StartDate IS NULL OR CONVERT(DATE, D.InsertDateTime) >= @StartDate)   and	( CONVERT(DATE, D.InsertDateTime)  <= @EndDate))
@@ -116,15 +116,16 @@ BEGIN
 					OR  ((@StartDate IS NULL OR CONVERT(DATE, D.BuyerTermDateTime) >= @StartDate)   and (CONVERT(DATE, D.BuyerTermDateTime)  <= @EndDate)))
 	OR (@Range	= '辞退日'		and 
 					((D.EndStatus = 2 OR D.EndStatus = 3 AND  @StartDate IS NULL OR CONVERT(DATE, D.SellerTermDateTime) >= @StartDate)   and (CONVERT(DATE, D.SellerTermDateTime)  <= @EndDate)) 
-					OR  ((@StartDate IS NULL OR CONVERT(DATE, D.BuyerTermDateTime) >= @StartDate)   and (CONVERT(DATE, D.BuyerTermDateTime)  <= @EndDate)))
-	and (@Chk_Mi = 1 and D.AssReqID IS NULL)
-	and ((@Chk_Kan  = 1 or D.EasyAssDateTime IS NOT NULL) and D.DeepAssDateTime IS NULL)
-	and ((@Chk_Satei = 1 or D.DeepAssDateTime IS NOT NULL) and D.PurchReqDateTime IS NULL)
-	and ((@Chk_Kaitori = 1 or D.PurchReqDateTime IS NOT NULL) and D.ConfirmDateTime IS NULL) 
-	and ((@Chk_Kakunin = 1 or D.ConfirmDateTime IS NOT NULL) and D.IntroDateTime IS NULL)
-	and ((@Chk_Kosho =1 or D.IntroDateTime IS NOT NULL) and D.SellerTermDateTime IS NULL and D.BuyerTermDateTime IS NULL)
-	and ((@Chk_Seiyaku = 1 or D.EndStatus = 1) and (D.SellerTermDateTime IS NOT NULL OR D.BuyerTermDateTime IS NOT NULL))
-	and ((@Chk_Urinushi = 1 or D.EndStatus = 2) and (D.SellerTermDateTime IS NOT NULL OR D.BuyerTermDateTime IS NOT NULL))
-	and ((@Chk_Kainushi = 1 or D.EndStatus = 3) and (D.SellerTermDateTime IS NOT NULL OR D.BuyerTermDateTime IS NOT NULL))
+					OR  ((@StartDate IS NULL OR CONVERT(DATE, D.BuyerTermDateTime) >= @StartDate)   and (CONVERT(DATE, D.BuyerTermDateTime)  <= @EndDate))))
+	 and ((@Chk_Mi = 1 and D.AssReqID IS NULL)
+	OR (@Chk_Kan  = 1 and D.EasyAssDateTime IS NOT NULL and D.DeepAssDateTime IS NULL)
+	OR (@Chk_Satei = 1 and D.DeepAssDateTime IS NOT NULL and D.PurchReqDateTime IS NULL)
+	OR (@Chk_Kaitori = 1 and D.PurchReqDateTime IS NOT NULL and D.ConfirmDateTime IS NULL) 
+	OR (@Chk_Kakunin = 1 and D.ConfirmDateTime IS NOT NULL and D.IntroDateTime IS NULL)
+	OR (@Chk_Kosho =1 and D.IntroDateTime IS NOT NULL and (D.SellerTermDateTime IS NULL and D.BuyerTermDateTime IS NULL))
+	OR (@Chk_Seiyaku = 1 and D.EndStatus = 1 and (D.SellerTermDateTime IS NOT NULL OR D.BuyerTermDateTime IS NOT NULL))
+	OR (@Chk_Urinushi = 1 and D.EndStatus = 2 and (D.SellerTermDateTime IS NOT NULL OR D.BuyerTermDateTime IS NOT NULL))
+	OR (@Chk_Kainushi = 1 and D.EndStatus = 3 and (D.SellerTermDateTime IS NOT NULL OR D.BuyerTermDateTime IS NOT NULL))
+	) 
 	Order by A.SellerMansionID
 END
