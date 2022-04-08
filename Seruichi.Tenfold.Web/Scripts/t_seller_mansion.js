@@ -93,6 +93,7 @@ function addEvents()
             $form.getInvalidItems().get(0).focus();
             return false;
         }
+        $('#mansiontable tbody').empty();
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         getM_SellerMansionList(model, $form);
@@ -131,11 +132,7 @@ function addEvents()
                 }
             }
         )
-
     });
-    $('#mansiontable').find('td').click(function () {
-        alert($(this).text());
-    })
 }
 
 
@@ -184,6 +181,14 @@ function Bind_tbody(result) {
              <td class="text-nowrap"> '+ data[i]["成約日時"] + ' </td>\
              <td class="text-nowrap"> '+ data[i]["辞退日時"] + '</td>\
             </tr>'
+    }
+    if (data.length > 0) {
+        $('#total_record').text("検索結果：" + data.length + "件")
+        $('#total_record_up').text("検索結果：" + data.length + "件")
+    }
+    else {
+        $('#total_record').text("検索結果： 0件")
+        $('#total_record_up').text("検索結果： 0件")
     }
     $('#mansiontable tbody').append(html);
 }
