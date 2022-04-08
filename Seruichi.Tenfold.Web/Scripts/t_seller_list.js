@@ -214,15 +214,27 @@ function Bind_tbody(result) {
     let data = JSON.parse(result);
     let html = "";
     let _letter = "";
+    let _class = "";
     for (var i = 0; i < data.length; i++) {
         if (isEmptyOrSpaces(data[i]["ステータス"])) {
             _letter = "";
+            _class = "ms-1 ps-1 pe-1 rounded-circle";
         } else {
             _letter = data[i]["ステータス"].charAt(0);
+            if (_letter == "見") {
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-info text-white fst-normal";
+            }
+            else if (_letter == "交") {
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark fst-normal";
+            }
+            else {
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary fst-normal";
+            }
+            
         }
         html += '<tr>\
             <td class= "text-end" > ' + data[i]["NO"] + '</td>\
-            <td><i class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal">'+ _letter+'</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
+            <td><i class="'+_class+'">'+ _letter+'</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
             <td class="text-center"> ' + data[i]["無効会員"] + ' </td>\
             <td> ' + data[i]["売主CD"] + ' </td>\
             <td> <a class="text-heading font-semibold text-decoration-underline" id='+ data[i]["売主CD"] + ' href="#" onclick="l_logfunction(this.id)">売主名売主名売主名売主名売主名</a><p> <small class="text-wrap w-100">' + data[i]["売主名"] + '</small></p></td>\
