@@ -215,7 +215,7 @@ function Bind_tbody(result) {
     let html = "";
     let _letter = "";
     for (var i = 0; i < data.length; i++) {
-        if (commom.isEmptyOrSpaces(data[i]["ステータス"])) {
+        if (isEmptyOrSpaces(data[i]["ステータス"])) {
             _letter = "";
         } else {
             _letter = data[i]["ステータス"].charAt(0);
