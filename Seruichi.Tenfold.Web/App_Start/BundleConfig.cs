@@ -40,7 +40,8 @@ namespace Seruichi.Tenfold.Web
                       "~/Content/fonts/font-awesome.min.css",
                       "~/Content/t_dashboard/css/style.css",
                       "~/Content/t_dashboard/css/index.css",
-                      "~/Content/css/validation.css"
+                      "~/Content/css/validation.css",
+                      "~/Content/css/loading.css"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/t_seller_mansion").Include(
