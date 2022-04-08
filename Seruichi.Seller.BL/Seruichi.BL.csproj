@@ -92,7 +92,10 @@
     <Content Include="Database\StoredProcedure\pr_t_seller_List_csv_generate.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_list_Select_DropDownlistofPref.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_List_Select_M_SellerData.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_seller_mansion_csv_generate.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_mansion_list_Insert_L_Log.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_seller_mansion_Select_M_SellerMansionData.sql" />
+    <Content Include="Database\StoredProcedure\UpdateMansionData.sql" />
     <Content Include="Database\TableType\T_MansionStation.sql" />
   </ItemGroup>
   <ItemGroup />

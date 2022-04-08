@@ -3,7 +3,6 @@ BEGIN
     DROP PROCEDURE [pr_t_seller_mansion_list_Insert_L_Log]
 END
 GO
-
 CREATE PROCEDURE [dbo].[pr_t_seller_mansion_list_Insert_L_Log]
 	 @LogDateTime   datetime        = NULL
     ,@LoginKBN      tinyint
