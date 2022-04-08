@@ -25,6 +25,9 @@ BEGIN
 
    IF @EndDate IS NULL set @EndDate='2099/12/31'
 
+   DECLARE @g INT
+		IF EXISTS (SELECT 1 FROM M_Seller A OUTER APPLY M_SellerMansion B WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null AND (B.HoldingStatus = 2 or B.HoldingStatus = 3))			SELECT @g = Count(SellerMansionID) FROM M_Seller A OUTER APPLY M_SellerMansion B WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null AND (B.HoldingStatus = 2 or B.HoldingStatus = 3) GROUP BY SellerMansionID 		ELSE			SELECT @g = 0
+
 	SELECT 
 		   Row_Number() Over (Order By A.SellerCD) As [NO],
 		   CASE   
@@ -45,31 +48,26 @@ BEGIN
 		   E.a as N'登録数',
 		   F.b as N'成約数'
 		   
-	From M_Seller A 
+		From M_Seller A 
 		outer apply (select top 1 C.DeepAssDateTime as DeepAssDateTime ,C.PurchReqDateTime as PurchReqDateTime
 						from D_AssReqProgress C
 						where C.SellerCD = A.SellerCD  
-						and C.DeepAssDateTime != null  
-						and C.DeleteDateTime = null 
+						and C.DeepAssDateTime is not null  
+						and C.DeleteDateTime is null 
 						Order by C.InsertDateTime desc) D
 		outer apply (select Count(SellerMansionID) as a
 						from M_SellerMansion B
 						where B.SellerCD = A.SellerCD
-						and B.DeleteDateTime = Null
+						and B.DeleteDateTime is Null
 						and B.HoldingStatus != 5
 						Group by SellerMansionID ) E
 		outer apply (select Count(SellerMansionID) as b
 						from M_SellerMansion B
 						where B.SellerCD = A.SellerCD
-						and B.DeleteDateTime = Null
+						and B.DeleteDateTime is Null
 						and B.HoldingStatus = 4
 						Group by SellerMansionID ) F
-		outer apply (select Count(SellerMansionID) as c
-						from M_SellerMansion B
-						where B.SellerCD = A.SellerCD
-						and B.DeleteDateTime = Null
-						and B.HoldingStatus = 2 or B.HoldingStatus = 3
-						Group by SellerMansionID ) G
+		outer apply (SELECT @g AS c) G
 
     where ((@ValidCheck='1' and A.InvalidFLG = '0') or (@InValidCheck = '1' and A.InvalidFLG = '1')) 
 	AND (@SellerName is null or ((A.SellerName Like '%'+@SellerName+'%') or (A.SellerCD Like '%'+@SellerName+'%')))
@@ -81,4 +79,6 @@ BEGIN
 	AND ((@negtiatioinsCheck ='1' and G.c > 0 ) 
 		or (@expectedCheck = '1' and (G.c = 0 and E.a != F.b)) 
 		or (@endCheck = '1' and (G.c = 0 and E.a = F.b)))
+
+		Order by A.SellerKana,A.SellerCD
 END
