@@ -226,6 +226,14 @@ function Bind_tbody(result) {
             <td class="text-end"> '+ data[i]["成約数"] + ' </td>\
             </tr>'
     }
+    if (data.length > 0) {
+        $('#total_record').text("検索結果：" + data.length + "件")
+        $('#total_record_up').text("検索結果：" + data.length + "件")
+    }
+    else {
+        $('#total_record').text("検索結果： 0件")
+        $('#total_record_up').text("検索結果： 0件")
+    }
     $('#mansiontable tbody').append(html);
 }
 
