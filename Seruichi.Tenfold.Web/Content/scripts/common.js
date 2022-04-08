@@ -130,7 +130,7 @@ const common = {
             }
         }).fail(function (XMLHttpRequest, status, e) {
             common.hideLoading(disableSelector);
-            alert(XMLHttpRequest.status);
+            //alert(XMLHttpRequest.status);
             if (failCallback) {
                 failCallback();
             }
@@ -154,7 +154,7 @@ const common = {
                 successCallback(data);
             }
         }).fail(function (XMLHttpRequest, status, e) {
-            alert(XMLHttpRequest.status);
+            //alert(XMLHttpRequest.status);
             if (failCallback) {
                 failCallback();
             }
