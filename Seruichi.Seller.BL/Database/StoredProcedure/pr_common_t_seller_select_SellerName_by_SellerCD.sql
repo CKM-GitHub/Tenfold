@@ -1,9 +1,8 @@
 ﻿IF EXISTS (select * from sys.objects where name = 'pr_common_t_seller_select_SellerName_by_SellerCD')
 BEGIN
-    DROP PROCEDURE [pr_common_t_seller_select_SellerName_by_SellerCD] 
+    DROP PROCEDURE [pr_common_t_seller_select_SellerName_by_SellerCD]
 END
 GO
-
 CREATE PROCEDURE [dbo].[pr_common_t_seller_select_SellerName_by_SellerCD] 
 	-- Add the parameters for the stored procedure here
 	@SellerCD as varchar(10)
