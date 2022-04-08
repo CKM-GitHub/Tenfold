@@ -182,12 +182,14 @@ function addEvents() {
         $form = $('#form1').hideChildErrors();
 
         //window.location.href = '/t_seller_new/Index';
+        alert("Go to t_seller_new Form")
     });
 
     $('#btnSetting').on('click', function () {
         $form = $('#form1').hideChildErrors();
 
         //window.location.href = '/t_seller_billing/Index';
+        alert("Go to t_seller_billing Form")
     });
 
 }
@@ -219,7 +221,9 @@ function Bind_tbody(result) {
         if (isEmptyOrSpaces(data[i]["ステータス"])) {
             _letter = "";
             _class = "ms-1 ps-1 pe-1 rounded-circle";
-        } else {
+        }
+        else
+        {
             _letter = data[i]["ステータス"].charAt(0);
             if (_letter == "見") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-info text-white fst-normal";
@@ -227,7 +231,7 @@ function Bind_tbody(result) {
             else if (_letter == "交") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark fst-normal";
             }
-            else {
+            else if (_letter == "終") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary fst-normal";
             }
             
@@ -274,6 +278,7 @@ function l_logfunction(id) {
         function (result) {
             if (result && result.isOK) {
                 //window.location.href = '/t_seller_assessment/Index';
+                alert("https://www.seruichi.com/t_seller_assessment?seller" + model.SellerCD);
             }
             if (result && !result.isOK) {
 
