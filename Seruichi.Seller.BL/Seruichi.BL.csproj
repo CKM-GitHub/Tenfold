@@ -71,6 +71,9 @@
     <Content Include="Database\StoredProcedure\pr_a_index_Select_MansionListByMansionWord.sql" />
     <Content Include="Database\StoredProcedure\pr_a_index_Select_PrefecturesByZipCode.sql" />
     <Content Include="Database\StoredProcedure\pr_a_index_Select_TownsByZipCode.sql" />
+    <Content Include="Database\StoredProcedure\pr_common_tenfold_select_MansionName_by_MansionCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_common_tenfold_select_REName_by_RealECD.sql" />
+    <Content Include="Database\StoredProcedure\pr_common_t_login_select_TenStaffName_by_TenStaffCD.sql" />
     <Content Include="Database\StoredProcedure\pr_common_t_seller_select_SellerName_by_SellerCD.sql" />
     <Content Include="Database\StoredProcedure\pr_L_Log_Insert.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfCity.sql" />
