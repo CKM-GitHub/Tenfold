@@ -103,6 +103,10 @@ function addEvents() {
 
     $('#btnDisplay').on('click', function () {
         $form = $('#form1').hideChildErrors();
+        if (!common.checkValidityOnSave('#form1')) {
+            $form.getInvalidItems().get(0).focus();
+            return false;
+        }
 
         $('#mansiontable tbody').empty();
 
