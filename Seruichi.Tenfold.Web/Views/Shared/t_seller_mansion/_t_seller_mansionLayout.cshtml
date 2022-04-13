@@ -4,6 +4,7 @@
     {
         appPath = "";
     }
+    string messageJson = Newtonsoft.Json.JsonConvert.SerializeObject(Seruichi.Common.StaticCache.GetClientMessages());
 }
 <!DOCTYPE html>
 <html>
@@ -47,6 +48,16 @@
     </div>
     <script src="~/Content/t_dashboard/bootstrap/js/bootstrap.min.js"></script>
     @Scripts.Render("~/Content/scripts/application")
+    <script>
+        $(function () {
+            common.appPath = '@appPath';
+            data = JSON.parse('@Html.Raw(messageJson)');
+            for (const key in data)
+            {
+                messageConst[key] = data[key];
+            }
+        });
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 
