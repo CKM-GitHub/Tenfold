@@ -159,12 +159,13 @@ function Bind_tbody(result) {
     let data = JSON.parse(result);
     let html = "";
     for (var i = 0; i < data.length; i++) {
+       
         if (isEmptyOrSpaces(data[i]["ステータス"])) {
             _letter = "";
             _class = "ms-1 ps-1 pe-1 rounded-circle";
         }
         else {
-            _letter = data[i]["ステータス"].charAt(0);
+            _letter = data[i]["ステータス"].charAt(0);            
             if (_letter == "未") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal";
             }
@@ -186,10 +187,13 @@ function Bind_tbody(result) {
             else if (_letter == "成") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary text-dark fst-normal";
             }
-            else if (_letter == "辞") {
+            else if (_letter == "売" && data[i]["EndStatus"] == 2 && data[i]["ステータス"] == "売主辞退") {
+                _letter = "辞";
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger fst-normal";
             }
-            else if (_letter == "買" && data[i]["ステータス"] == "買主辞退") {
+            else if (_letter == "売" && data[i]["EndStatus"] == 3 && data[i]["ステータス"] == "売主辞退") {
+                _letter = "辞";
+                data[i]["ステータス"] = "買主辞退";
                 _class = "ms-1 ps-1 pe-1 rounded-circle  bg-dark text-white fst-normal";
             }
 

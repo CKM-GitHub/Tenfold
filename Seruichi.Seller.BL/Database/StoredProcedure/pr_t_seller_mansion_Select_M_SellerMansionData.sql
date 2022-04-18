@@ -72,7 +72,8 @@ BEGIN
 	D.AssReqID  As 'AssReqID',
 	G.RealECD   As 'GRealECD',
 	E.RealECD As 'ERealECD',
-	E.RealECD As 'IRealECD'
+	E.RealECD As 'IRealECD',
+	D.EndStatus As 'EndStatus'
 	from M_SellerMansion A
 	left outer join M_Seller B on B.SellerCD = A.SellerCD
 	outer apply(
