@@ -1,0 +1,87 @@
+﻿@{
+    string appPath = System.Web.Hosting.HostingEnvironment.ApplicationVirtualPath;
+    if (appPath == "/")
+    {
+        appPath = "";
+    }
+    string messageJson = Newtonsoft.Json.JsonConvert.SerializeObject(Seruichi.Common.StaticCache.GetClientMessages());
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js"
+            integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>セルイチ管理機能</title>
+
+    @Styles.Render("~/Content/css/application")
+    @RenderSection("styles", required: false)
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
+        <div class="container">
+            <a class="navbar-brand" href="#">セルイチ</a><button data-bs-toggle="collapse"
+                                                             class="navbar-toggler" data-bs-target="#navcol-1"></button>
+
+        </div>
+    </nav>
+    <header class="text-center text-white masthead cap-header ">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto position-relative">
+                    <h1 class="mb-2">ログイン</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="cap-main">
+        <div class="container">
+            <div class="row pt-5 pb-5">
+                <div class="col">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-md-6 mx-auto pb-5">
+                                <div class="login-clean cap-card-shadow">
+                                    @RenderBody()
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-light footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 text-center text-lg-start my-auto h-100 w-100 pb-3 pt-2">
+
+                    <p class="text-muted small mb-4 mb-lg-0">© セルイチ 2022. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/Content/r_login/bootstrap/js/bootstrap.min.js"></script>
+    @Scripts.Render("~/Content/scripts/application")
+    <script>
+        $(function () {
+            common.appPath = '@appPath';
+            data = JSON.parse('@Html.Raw(messageJson)');
+            for (const key in data)
+            {
+                messageConst[key] = data[key];
+            }
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
