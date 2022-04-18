@@ -43,7 +43,7 @@ function addEvents() {
         common.callAjaxWithLoading(_url.select_M_TenfoldStaff, model1, this, function (result) {
             if (result && result.isOK) {
                 //sucess
-                window.location.href = '/t_dashboard/Index';    
+                window.location.href = './t_dashboard/Index';    
             }
             if (result && !result.isOK) {
                 if (result.message != null) {
