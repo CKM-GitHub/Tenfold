@@ -92,6 +92,6 @@ BEGIN
 	AND ((@negtiatioinsCheck ='1' and G.c > 0 ) 
 		or (@expectedCheck = '1' and (G.c = 0 and E.a != F.b)) 
 		or (@endCheck = '1' and (G.c = 0 and E.a = F.b)))
-		Order by A.SellerKana,A.SellerCD		
+		Order by A.SellerCD,A.SellerKana			
 
 END
