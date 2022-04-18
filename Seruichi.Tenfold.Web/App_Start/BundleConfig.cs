@@ -8,6 +8,7 @@ namespace Seruichi.Tenfold.Web
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            BundleTable.EnableOptimizations = false;
             //The bundle hierarchy and the physical folder hierarchy must match
             bundles.Add(new StyleBundle("~/Content/css/application").Include(                      
                       "~/Content/typeahead/typeahead.custom.css",
@@ -70,6 +71,7 @@ namespace Seruichi.Tenfold.Web
 
             bundles.Add(new ScriptBundle("~/bundles/t_dashboard").Include(
                      "~/Scripts/t_dashboard.js"));
+
 
         }
     }
