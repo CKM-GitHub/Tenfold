@@ -14,12 +14,12 @@ function setValidation() {
 
     $('#SellerName')
         .addvalidation_errorElement("#errorSeller")
-        .addvalidation_MaxLengthforSellerlist(10);    
+        .addvalidation_MaxLengthforSellerlist(10);
 
     $('#StartDate')
         .addvalidation_errorElement("#errorStartDate")
         .addvalidation_datecheck();
-        //.addvalidation_datecompare();
+    //.addvalidation_datecompare();
 
     $('#EndDate')
         .addvalidation_errorElement("#errorEndDate")
@@ -168,20 +168,21 @@ function addEvents() {
                         ("0" + m.getHours()).slice(-2) + "" +
                         ("0" + m.getMinutes()).slice(-2) + "" +
                         ("0" + m.getSeconds()).slice(-2);
-                    downloadLink.download = "売主リスト" + dateString+".csv";
+                    downloadLink.download = "売主リスト" + dateString + ".csv";
 
                     document.body.appendChild(downloadLink);
                     downloadLink.click();
                     document.body.removeChild(downloadLink);
                 }
                 else {
-                    alert("There is no data!");
+                    //alert("There is no data!");
+                    alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
                 }
             }
         )
 
     });
-    
+
     $('#btnSignUp').on('click', function () {
         $form = $('#form1').hideChildErrors();
 
@@ -226,8 +227,7 @@ function Bind_tbody(result) {
             _letter = "";
             _class = "ms-1 ps-1 pe-1 rounded-circle";
         }
-        else
-        {
+        else {
             _letter = data[i]["ステータス"].charAt(0);
             if (_letter == "見") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-info text-white fst-normal";
@@ -238,14 +238,14 @@ function Bind_tbody(result) {
             else if (_letter == "終") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary fst-normal";
             }
-            
+
         }
         html += '<tr>\
             <td class= "text-end" > ' + data[i]["NO"] + '</td>\
-            <td><i class="'+_class+'">'+ _letter+'</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
+            <td><i class="'+ _class + '">' + _letter + '</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
             <td class="text-center"> ' + data[i]["無効会員"] + ' </td>\
             <td> ' + data[i]["売主CD"] + ' </td>\
-            <td> <a class="text-heading font-semibold text-decoration-underline" id='+ data[i]["売主CD"] + ' href="#" onclick="l_logfunction(this.id)">売主名売主名売主名売主名売主名</a><p> <small class="text-wrap w-100">' + data[i]["売主名"] + '</small></p></td>\
+            <td> <a class="text-heading font-semibold text-decoration-underline" id='+ data[i]["売主CD"] + ' href="#" onclick="l_logfunction(this.id)">' + data[i]["売主名"] + '</a></td>\
             <td> ' + data[i]["居住地"] + ' </td>\
             <td> ' + data[i]["登録日時"] + ' </td>\
             <td> ' + data[i]["査定依頼日時"] + ' </td >\
