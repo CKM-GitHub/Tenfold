@@ -54,6 +54,7 @@
     <Compile Include="Seller\a_indexModel.cs" />
     <Compile Include="Tenfold\Login\t_loginModel.cs" />
     <Compile Include="Tenfold\t_dashboard\t_dashboardModel.cs" />
+    <Compile Include="Tenfold\t_seller_assessment\t_seller_assessmentModel.cs" />
     <Compile Include="Tenfold\t_seller_list\t_seller_listModel.cs" />
     <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionModel.cs" />
   </ItemGroup>
