@@ -15,7 +15,7 @@ namespace Cryption
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            txtKey.Text = AESCryption.DefaultKey;
+            txtKey.Text = "";
             txtValue.Text = "";
             txtResult.Text = "";
         }
@@ -49,6 +49,24 @@ namespace Cryption
         private void btnCopy_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(txtResult.Text);
+        }
+
+        private void btnKey1_Click(object sender, EventArgs e)
+        {
+            txtKey.Text = AESCryption.DefaultKey;
+        }
+
+        private void btnKey2_Click(object sender, EventArgs e)
+        {
+            txtKey.Text = AESCryption.DefaultKey2;
+        }
+
+        private void btnKey3_Click(object sender, EventArgs e)
+        {
+            ReadIni ini = new ReadIni();
+            string encryptedDataCryptionKey = ini.GetDataCryptionKey();
+            string cryptionKey = crypt.DecryptFromBase64(encryptedDataCryptionKey, AESCryption.DefaultKey);
+            txtKey.Text = cryptionKey;
         }
     }
 }
