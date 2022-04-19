@@ -73,14 +73,14 @@
                                     <div class="mb-3">
                                         <button type="button" class="btn btn-primary d-block w-100" id="btnLogin">ログイン</button>
                                     </div>
-                                    <a class="forgot pb-3" href="#" data-bs-target="#modal_verifyMailAddress" data-bs-toggle="modal">メールアドレスを忘れた場合はこちら</a>
-                                    <a class="forgot" href="#" data-bs-target="#modal_resetPassword" data-bs-toggle="modal">パスワードを忘れた場合はこちら</a>
+                                    <a class="forgot pb-3" href="#" id="linkVerifyMailAddress">メールアドレスを忘れた場合はこちら</a>
+                                    <a class="forgot" href="#" id="linkResetPassword">パスワードを忘れた場合はこちら</a>
                                     <hr>
                                     <div class="mb-3">
                                         <p class="text-center">セルイチ会員ではない方</p>
                                     </div>
                                     <div class="mb-3">
-                                        <button type="button" class="btn btn-primary d-block w-100" data-bs-target="#modal_temporaryRegistration" data-bs-toggle="modal">新規登録</button>
+                                        <button type="button" class="btn btn-primary d-block w-100" id="btnNew">新規登録</button>
                                     </div>
                                 </form>
                             </div>
@@ -152,7 +152,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-lg" data-bs-target="#modal_verifyMailAddress2" data-bs-toggle="modal">ログイン</button>
+                <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal">ログイン</button>
             </div>
         </div>
     </div>
@@ -218,7 +218,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-lg" data-bs-target="#modal_resetPassword2" data-bs-toggle="modal">ログイン</button>
+                <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal">ログイン</button>
             </div>
         </div>
     </div>

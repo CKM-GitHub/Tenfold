@@ -63,6 +63,26 @@ function addEvents() {
     //common.bindValidationEvent('#formVerifyMailAddress');
     //common.bindValidationEvent('#formResetPassword');
 
+    $('#linkVerifyMailAddress').on('click', function () {
+        $modal = $('#modal_verifyMailAddress').hideChildErrors();
+        $modal.find("input:not([type=hidden])").val('');
+        $modal.modal('show');
+        return false;
+    });
+
+    $('#linkResetPassword').on('click', function () {
+        $modal = $('#modal_resetPassword').hideChildErrors();
+        $modal.find("input:not([type=hidden])").val('');
+        $modal.modal('show');
+        return false;
+    });
+
+    $('#btnNew').on('click', function () {
+        $modal = $('#modal_temporaryRegistration').hideChildErrors();
+        $modal.find("input:not([type=hidden])").val('');
+        $modal.modal('show');
+    });
+
     $('#btnTemporaryRegistration').on('click', function () {
         const form = document.forms.formTemporaryRegistration;
 
@@ -105,6 +125,7 @@ function addEvents() {
     $('#btnVerifyMailAddress').on('click', function () {
         const form = document.forms.formVerifyMailAddress;
 
+        $('#modal_verifyMailAddress').hideChildErrors();
         if (!common.checkValidityOnSave('#formVerifyMailAddress')) {
             common.setFocusFirstError(form);
             return false;
@@ -129,6 +150,7 @@ function addEvents() {
     $('#btnResetPassword').on('click', function () {
         const form = document.forms.formResetPassword;
 
+        $('#modal_resetPassword').hideChildErrors();
         if (!common.checkValidityOnSave('#formResetPassword')) {
             common.setFocusFirstError(form);
             return false;
