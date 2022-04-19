@@ -118,6 +118,9 @@
     <Content Include="Database\StoredProcedure\pr_M_Message_Select_ByID.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfPref.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfStation.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_login_Insert_L_Login.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_login_Select_M_RealEstate_by_RealECD.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_login_Select_M_REStaff_by_RealECD_and_REStaffCD.sql" />
     <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForContract.sql" />
     <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForCustomerInfo.sql" />
     <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForDecline.sql" />
