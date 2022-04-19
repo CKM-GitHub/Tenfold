@@ -28,11 +28,16 @@ BEGIN
 
 	IF @EndDate IS NULL set @EndDate='2099/12/31'
 
-    DECLARE @g INT
-		IF EXISTS (SELECT 1 FROM M_Seller A OUTER APPLY M_SellerMansion B WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null AND (B.HoldingStatus = 2 or B.HoldingStatus = 3))			SELECT @g = Count(SellerMansionID) FROM M_Seller A OUTER APPLY M_SellerMansion B WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null AND (B.HoldingStatus = 2 or B.HoldingStatus = 3) GROUP BY SellerMansionID 		ELSE			SELECT @g = 0
+   DECLARE @g INT
+   IF EXISTS (SELECT 1 FROM M_Seller A OUTER APPLY M_SellerMansion B WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null AND (B.HoldingStatus = 2 or B.HoldingStatus = 3))			SELECT @g = Count(SellerMansionID) FROM M_Seller A OUTER APPLY M_SellerMansion B WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null AND (B.HoldingStatus = 2 or B.HoldingStatus = 3) GROUP BY SellerMansionID 		ELSE			SELECT @g = 0
 
+   DECLARE @e INT
+		IF EXISTS (SELECT 1 FROM M_Seller A OUTER APPLY M_SellerMansion B WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null AND B.HoldingStatus != 5)			SELECT @e = Count(SellerMansionID) FROM M_Seller A OUTER APPLY M_SellerMansion B WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null AND B.HoldingStatus != 5 GROUP BY SellerMansionID 		ELSE			SELECT @e = 0
 
-	SELECT
+   DECLARE @f INT
+		IF EXISTS (SELECT 1 FROM M_Seller A OUTER APPLY M_SellerMansion B WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null AND B.HoldingStatus = 4)			SELECT @f = Count(SellerMansionID) FROM M_Seller A OUTER APPLY M_SellerMansion B WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null AND B.HoldingStatus = 4 GROUP BY SellerMansionID 		ELSE			SELECT @f = 0
+
+	SELECT 
 		 Row_Number() Over (Order By A.SellerCD) As [NO],
 		 CASE
 		 	WHEN G.c > 0 THEN N'交渉中' 
@@ -60,7 +65,7 @@ BEGIN
 		 FORMAT (D.PurchReqDateTime, 'yyyy/MM/dd hh:mm:ss') as '買取依頼日時	',
 		 E.a as '登録数',
 		 F.b as'成約数'
-		 
+		   
 		From M_Seller A 
 		outer apply (select top 1 C.DeepAssDateTime as DeepAssDateTime ,C.PurchReqDateTime as PurchReqDateTime
 						from D_AssReqProgress C
@@ -68,18 +73,8 @@ BEGIN
 						and C.DeepAssDateTime is not null  
 						and C.DeleteDateTime is null 
 						Order by C.InsertDateTime desc) D
-		outer apply (select Count(SellerMansionID) as a
-						from M_SellerMansion B
-						where B.SellerCD = A.SellerCD
-						and B.DeleteDateTime is Null
-						and B.HoldingStatus != 5
-						Group by SellerMansionID ) E
-		outer apply (select Count(SellerMansionID) as b
-						from M_SellerMansion B
-						where B.SellerCD = A.SellerCD
-						and B.DeleteDateTime is Null
-						and B.HoldingStatus = 4
-						Group by SellerMansionID ) F
+		outer apply (select @e AS a ) E
+		outer apply (select @f As b ) F
 		outer apply (SELECT @g AS c) G
 
     where ((@ValidCheck='1' and A.InvalidFLG = '0') or (@InValidCheck = '1' and A.InvalidFLG = '1')) 
@@ -92,6 +87,7 @@ BEGIN
 	AND ((@negtiatioinsCheck ='1' and G.c > 0 ) 
 		or (@expectedCheck = '1' and (G.c = 0 and E.a != F.b)) 
 		or (@endCheck = '1' and (G.c = 0 and E.a = F.b)))
-		Order by A.SellerCD,A.SellerKana			
+
+		Order by A.SellerCD,A.SellerKana		
 
 END
