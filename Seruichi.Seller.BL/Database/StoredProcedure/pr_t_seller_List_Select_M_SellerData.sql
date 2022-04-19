@@ -11,7 +11,7 @@ CREATE PROCEDURE [dbo].[pr_t_seller_List_Select_M_SellerData]
 	--@SellerCD as varchar(10),
 	@SellerName as varchar(50),
 	@PrefNameSelect as varchar(10),
-	@RangeSelect as tinyint,
+	@RangeSelect as varchar(10),
 	@StartDate as Date,
 	@EndDate as Date,
 	@expectedCheck as tinyint,
@@ -70,9 +70,9 @@ BEGIN
 	AND (@SellerName is null or ((A.SellerName Like '%'+@SellerName+'%') or (A.SellerCD Like '%'+@SellerName+'%')))
 	AND ((@PrefNameSelect = N'全国' and (A.PrefName is not Null)) 
 		or (@PrefNameSelect != N'全国' and (A.PrefName = @PrefNameSelect )))
-	AND ((@RangeSelect = '0'	and (@StartDate IS NULL OR CONVERT(DATE, A.InsertDateTime)  >= @StartDate)  and  ( CONVERT(DATE, A.InsertDateTime) <= @EndDate))
-		OR (@RangeSelect = '1'	and (@StartDate IS NULL OR CONVERT(DATE, D.DeepAssDateTime) >= @StartDate)  and  ( CONVERT(DATE, D.DeepAssDateTime) <= @EndDate)) 
-		OR (@RangeSelect = '2'	and (@StartDate IS NULL OR CONVERT(DATE, D.PurchReqDateTime) >= @StartDate) and ( CONVERT(DATE, D.PurchReqDateTime) <= @EndDate)))
+	AND ((@RangeSelect = N'登録日'	and (@StartDate IS NULL OR CONVERT(DATE, A.InsertDateTime)  >= @StartDate)  and  ( CONVERT(DATE, A.InsertDateTime) <= @EndDate))
+		OR (@RangeSelect = N'詳細査定日'	and (@StartDate IS NULL OR CONVERT(DATE, D.DeepAssDateTime) >= @StartDate)  and  ( CONVERT(DATE, D.DeepAssDateTime) <= @EndDate)) 
+		OR (@RangeSelect = N'買取依頼日'	and (@StartDate IS NULL OR CONVERT(DATE, D.PurchReqDateTime) >= @StartDate) and ( CONVERT(DATE, D.PurchReqDateTime) <= @EndDate)))
 	AND ((@negtiatioinsCheck ='1' and G.c > 0 ) 
 		or (@expectedCheck = '1' and (G.c = 0 and E.a != F.b)) 
 		or (@endCheck = '1' and (G.c = 0 and E.a = F.b)))
