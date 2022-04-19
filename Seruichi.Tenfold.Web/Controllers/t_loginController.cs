@@ -12,14 +12,16 @@ using System.Web.Security;
 
 namespace Seruichi.Tenfold.Web.Controllers
 {
-    [SessionAuthentication(Enabled = false)]
+    
     [AllowAnonymous]
     public class t_loginController : BaseController
     {
         // GET: t_login
         public ActionResult Index()
         {
-            SessionAuthenticationHelper.ReCreateSession();
+            Session.Clear();
+            SessionAuthenticationHelper.CreateAnonymousUser();
+
             return View();
         }
         [HttpPost]

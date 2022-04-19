@@ -2,7 +2,6 @@
 using Newtonsoft.Json.Linq;
 using Seruichi.BL;
 using Seruichi.Common;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Http;
 
