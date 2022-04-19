@@ -21,7 +21,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" integrity="sha512-3n19xznO0ubPpSwYCRRBgHh63DrV+bdZfHK52b1esvId4GsfwStQNPJFjeQos2h3JwCmZl0/LgLxSKMAI55hgw==" crossorigin="anonymous"></script>
 </head>
 <body>
-    <input hidden id="_RequestVerificationToken" value="@SessionAuthenticationHelper.GetVerificationToken()" />
+    <input type="hidden" id="_RequestVerificationToken" value="@SessionAuthenticationHelper.GetVerificationToken()" />
     <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
         <div class="container">
             <a class="navbar-brand" href="#">セルイチ</a>
@@ -32,7 +32,7 @@
                         <a class="nav-link active" href="#"><i class="fa fa-building-o pe-2"></i>査定</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-user pe-2"></i>マイページ</a>
+                        <a class="nav-link" href="@Url.Action("Logout", "a_login")"><i class="fa fa-user pe-2"></i>マイページ</a>
                     </li>
                 </ul>
             </div>

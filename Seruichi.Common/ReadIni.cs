@@ -6,6 +6,7 @@ namespace Seruichi.Common
     public class ReadIni
     {
         private readonly string InifilePath = @"C:\Tenfold\Seruichi.ini";
+        private readonly string DefaultLogPath = @"C:\Tenfold\Log";
 
         private static readonly Encoding encoding = Encoding.GetEncoding("Shift_JIS");
 
@@ -48,7 +49,7 @@ namespace Seruichi.Common
         {
             return new LogInfoEntity()
             {
-                Path = GetValue("Log", "LOG_PATH").ToStringOrEmpty(),
+                Path = GetValue("Log", "LOG_PATH").ToStringOrNull()?? DefaultLogPath,
                 Level = GetValue("Log", "LOG_LEVEL").ToInt32(3) //未指定時、3:Error
             };
         }

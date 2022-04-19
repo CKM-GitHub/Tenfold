@@ -8,19 +8,12 @@ namespace Seruichi.Seller.Web
     public static class SessionAuthenticationHelper
     {
         public static string SESSION_KEY = "USER_AUTHENTICATION";
-        public static string COOKIE_NAME = "ASP.NET_SessionId";
 
         public static string NewVerificationToken { get { return GenerateRandomDataBase64(32); } }
 
-        public static void ReCreateSession()
+        public static LoginUser CreateAnonymousUser()
         {
-            HttpContext.Current.Session.Abandon();
-            HttpContext.Current.Response.Cookies.Add(new HttpCookie(COOKIE_NAME, ""));
-        }
-
-        public static SessionAuthenticationInfo CreateAnonymousUser()
-        {
-            var userInfo = new SessionAuthenticationInfo()
+            var userInfo = new LoginUser()
             {
                 UserID = "unknown",
                 VerificationToken = NewVerificationToken
@@ -29,9 +22,9 @@ namespace Seruichi.Seller.Web
             return userInfo;
         }
 
-        public static SessionAuthenticationInfo CreateLoginUser(string id)
+        public static LoginUser CreateLoginUser(string id)
         {
-            var userInfo = new SessionAuthenticationInfo()
+            var userInfo = new LoginUser()
             {
                 UserID = id,
                 VerificationToken = NewVerificationToken
@@ -41,9 +34,9 @@ namespace Seruichi.Seller.Web
             return userInfo;
         }
 
-        public static SessionAuthenticationInfo GetUserFromSession()
+        public static LoginUser GetUserFromSession()
         {
-            return HttpContext.Current.Session[SESSION_KEY] as SessionAuthenticationInfo;
+            return HttpContext.Current.Session[SESSION_KEY] as LoginUser;
         }
 
         public static string GetVerificationToken()

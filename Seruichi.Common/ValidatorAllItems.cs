@@ -33,7 +33,6 @@ namespace Seruichi.Common
                 AddValidationResult(elementId, errorcd);
         }
 
-        //CheckSelectionRequired ----->
         public void CheckSelectionRequired(string elementId, string inputText)
         {
             if (!validator.CheckSelectionRequired(inputText, out string errorcd))
@@ -45,7 +44,6 @@ namespace Seruichi.Common
             if (!validator.CheckSelectionRequired(inputValue, out string errorcd))
                 AddValidationResult(elementId, errorcd);
         }
-        //CheckSelectionRequired <-----
 
         public void CheckYMDate(string elementId, string inputText)
         {
@@ -89,6 +87,12 @@ namespace Seruichi.Common
                 AddValidationResult(elementId, errorcd);
         }
 
+        public void CheckIsDoubleByteKana(string elementId, string inputText, int maxLength)
+        {
+            if (!validator.CheckIsDoubleByteKana(inputText, maxLength, out string errorcd))
+                AddValidationResult(elementId, errorcd);
+        }
+
         public void CheckIsMoney(string elementId, string inputText, int digits)
         {
             if (!validator.CheckIsMoney(inputText, digits, out string errorcd, out string outVal))
@@ -98,6 +102,12 @@ namespace Seruichi.Common
         public void CheckIsNumeric(string elementId, string inputText, int integerdigits, int decimaldigits)
         {
             if (!validator.CheckIsNumeric(inputText, integerdigits, decimaldigits, out string errorcd, out string outVal))
+                AddValidationResult(elementId, errorcd);
+        }
+
+        public void CheckIsValidEmail(string elementId, string mailAddress)
+        {
+            if (!validator.CheckIsValidEmail(mailAddress, out string errorcd))
                 AddValidationResult(elementId, errorcd);
         }
     }

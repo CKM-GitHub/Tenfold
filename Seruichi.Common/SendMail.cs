@@ -1,30 +1,28 @@
-﻿using Models;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using Seruichi.Common;
+﻿using MimeKit;
+using Models;
 using System;
-using MimeKit;
 
 namespace Seruichi.Common
 {
     public static class SendMail
     {
-        public static async void SendSmtpAsync(SendMailInfo mailInfo)
+        public static void SendSmtp(SendMailInfo mailInfo)
         {
+            if (mailInfo == null) return;
+
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("", mailInfo.SenderAddress));
 
             foreach (var recipient in mailInfo.Recipients)
             {
-                if (recipient.SendType == SendTypeEnum.To)
-                    message.To.Add(new MailboxAddress("", recipient.Address));
+                if (recipient.SendType == SendMailInfo.SendTypes.To)
+                    message.To.Add(new MailboxAddress("", recipient.MailAddress));
 
-                if (recipient.SendType == SendTypeEnum.Cc)
-                    message.Cc.Add(new MailboxAddress("", recipient.Address));
+                if (recipient.SendType == SendMailInfo.SendTypes.Cc)
+                    message.Cc.Add(new MailboxAddress("", recipient.MailAddress));
 
-                if (recipient.SendType == SendTypeEnum.Bcc)
-                    message.Bcc.Add(new MailboxAddress("", recipient.Address));
+                if (recipient.SendType == SendMailInfo.SendTypes.Bcc)
+                    message.Bcc.Add(new MailboxAddress("", recipient.MailAddress));
             }
 
             message.Subject = mailInfo.Subject;
@@ -37,10 +35,10 @@ namespace Seruichi.Common
 
                 try
                 {
-                    await client.ConnectAsync(mailInfo.SenderServer);
-                    await client.AuthenticateAsync(mailInfo.SenderAccount, mailInfo.SenderPassword);
-                    await client.SendAsync(message);
-                    await client.DisconnectAsync(true);
+                    client.Connect(mailInfo.SenderServer, mailInfo.Port, MailKit.Security.SecureSocketOptions.Auto);
+                    client.Authenticate(mailInfo.SenderAccount, mailInfo.SenderPassword);
+                    client.Send(message);
+                    client.Disconnect(true);
                 }
                 catch (Exception ex)
                 {

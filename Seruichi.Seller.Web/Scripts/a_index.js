@@ -14,6 +14,7 @@ $(function () {
     _url.checkZipCode = common.appPath + '/a_index/CheckZipCode';
     _url.getMansionListByMansionWord = common.appPath + '/a_index/GetMansionListByMansionWord';
     _url.getMansinoData = common.appPath + '/a_index/GetMansionData';
+    _url.checkAll = common.appPath + '/a_index/CheckAll';
     _url.insertSellerMansionData = common.appPath + '/a_index/InsertSellerMansionData';
 
     setValidation();
@@ -57,10 +58,10 @@ function setValidation() {
     $('#LineCD_1')
         .addvalidation_errorElement("#errorMansionStationInfo")
         .addvalidation_reqired();
-    $('.js-StationCD')
+    $('.js-stationcd')
         .addvalidation_errorElement("#errorMansionStationInfo")
         .addvalidation_custom('customValidation_checkStation');
-    $('.js-Distance')
+    $('.js-distance')
         .addvalidation_errorElement("#errorMansionStationInfo")
         .addvalidation_singlebyte_number()
         .addvalidation_custom('customValidation_checkDistance');
@@ -155,12 +156,13 @@ function setValidation() {
         .addvalidation_reqired()
         .addvalidation_money(9);
 
-    $('#btnProcess')
+    $('#btnShowConfirmation')
         .addvalidation_errorElement("#errorProcess");
 
 }
 
 function addEvents() {
+    let updateData;
 
     //共通チェック処理
     common.bindValidationEvent('#form1', ':not(#ZipCode1,#ZipCode2)');
@@ -223,7 +225,7 @@ function addEvents() {
             setTownList('remove');
             setLineList('add', inputval);
             setStationList('remove');
-            $('.js-Distance').val('').hideError();
+            $('.js-distance').val('').hideError();
             setTypeahead('#MansionName');
         }
         else {
@@ -231,7 +233,7 @@ function addEvents() {
             setTownList('remove');
             setLineList('remove');
             setStationList('remove');
-            $('.js-Distance').val('').hideError();
+            $('.js-distance').val('').hideError();
             setTypeahead('#MansionName');
         }
     });
@@ -255,7 +257,7 @@ function addEvents() {
     });
 
     //路線選択
-    $('.js-LineCD').on('change', function () {
+    $('.js-linecd').on('change', function () {
         const id = $(this).attr('id');
         const suffix = id.slice(-2);
         setStationList('add', $(this).val(), suffix);
@@ -269,9 +271,9 @@ function addEvents() {
             const station = $('.js-station-template').find('.js-station').clone(true);
             index++;
             station.find('.js-paragraph-number').text(getParagraphNumber(index))
-            station.find('.js-LineCD').attr('id', 'LineCD_' + index);
-            station.find('.js-StationCD').attr('id', 'StationCD_' + index);
-            station.find('.js-Distance').attr('id', 'Distance_' + index);
+            station.find('.js-linecd').attr('id', 'LineCD_' + index);
+            station.find('.js-stationcd').attr('id', 'StationCD_' + index);
+            station.find('.js-distance').attr('id', 'Distance_' + index);
             stationContainer.append(station);
         }
     });
@@ -301,17 +303,17 @@ function addEvents() {
     //バルコニー面積
     $('#BalconyArea').on('change', function () {
         if ($(this).val()) {
-            $('#BalconyKBN_1').prop('checked', true).hideError();
+            $('#BalconyKBN1').prop('checked', true).hideError();
             $(this).addvalidation_reqired(true);
         }
     });
 
-    //登録
-    $('#btnProcess').on('click', function () {
+    //確認
+    $('#btnShowConfirmation').on('click', function () {
         $form = $('#form1').hideChildErrors();
 
         if (!common.checkValidityOnSave('#form1')) {
-            $form.getInvalidItems().get(0).focus();
+            common.setFocusFirstError($form);
             return false;
         }
 
@@ -323,21 +325,90 @@ function addEvents() {
         model.ConstYYYYMM = model.ConstYYYYMM.replace('-', '');
         model.MansionStationListJson = JSON.stringify(getMansionStationList());
 
-        common.callAjaxWithLoading(_url.insertSellerMansionData, model, this, function (result) {
+        common.callAjaxWithLoading(_url.checkAll, model, this, function (result) {
             if (result && result.isOK) {
                 //sucess
-                window.location.reload();
+                updateData = model;
+                setConfirmationScreen(updateData);
+                $('#modal_1').modal('show');
             }
             if (result && result.data) {
                 //server validation error
-                const errors = result.data;
-                for (key in errors) {
-                    const target = document.getElementById(key);
-                    $(target).showError(errors[key]);
-                    $form.getInvalidItems().get(0).focus();
-                }
+                common.setValidationErrors(result.data);
+                common.setFocusFirstError($form);
             }
         });
+    });
+
+    //登録
+    $('#btnRegistration').on('click', function () {
+        common.callAjaxWithLoading(_url.insertSellerMansionData, updateData, this, function (result) {
+            if (result && result.isOK) {
+                //sucess
+                $('#modal_1').modal('hide');
+                $('#modal_2').modal('show');
+            }
+            if (result && result.data) {
+                //server validation error
+                $('#modal_1').modal('hide');
+                common.setValidationErrors(result.data);
+                common.setFocusFirstError($form);
+            }
+        });
+    });
+
+    //閉じる（登録完了）
+    $('#btnCompleted').on('click', function () {
+        window.location.reload();
+    });
+}
+
+function setConfirmationScreen(data) {
+    for (key in data) {
+        const target = document.getElementById('confirm_' + key);
+        if (target) $(target).val(data[key]);
+    }
+
+    $('#confirm_PrefCD').val(data.PrefName);
+    $('#confirm_CityCD').val(data.CityName);
+    $('#confirm_TownCD').val(data.TownName);
+
+    $('#confirm_StructuralKBN').val($('input[name="StructuralKBN"]:radio:checked').next().text());
+
+    $('#confirm_ConstYYYYMM').val($('#ConstYYYYMM').val());
+    $('#confirm_BuildingAge').text($('#BuildingAge').text());
+
+    $('#confirm_BalconyKBN1').prop('checked', $('#BalconyKBN1').prop('checked'));
+    $('#confirm_BalconyKBN2').prop('checked', $('#BalconyKBN2').prop('checked'));
+
+    $('#confirm_Direction').val($('input[name="Direction"]:radio:checked').next().text());
+    $('#confirm_BathKBN').val($('input[name="BathKBN"]:radio:checked').next().text());
+    $('#confirm_RightKBN').val($('input[name="RightKBN"]:radio:checked').next().text());
+    $('#confirm_CurrentKBN').val($('input[name="CurrentKBN"]:radio:checked').next().text());
+    $('#confirm_ManagementKBN').val($('input[name="ManagementKBN"]:radio:checked').next().text());
+    $('#confirm_DesiredTime').val($('input[name="DesiredTime"]:radio:checked').next().text());
+
+    const stationContainer = $('.js-confirm-stationContainer');
+    stationContainer.children().remove();
+
+    let index = 0;
+    $('.js-stationContainer .js-station').each(function () {
+        const $this = $(this);
+        const data = {
+            LineCD: $this.find('.js-linecd').val(),
+            LineName: $this.find('.js-linecd option:selected').text(),
+            StationName: $this.find('.js-stationcd option:selected').text(),
+            Distance: $this.find('.js-distance').val()
+        }
+        if (data.LineName) {
+            const station = $('.js-confirm-station-template').find('.js-confirm-station').clone(true);
+            index++;
+            station.find('.js-paragraph-number').text(getParagraphNumber(index))
+            station.find('.js-linecd').attr('id', 'confirm_LineCD_' + index).val(data.LineName);
+            station.find('.js-stationcd').attr('id', 'confirm_StationCD_' + index).val(data.StationName);
+            station.find('.js-distance').attr('id', 'confirm_Distance_' + index).val(data.Distance);
+            stationContainer.append(station);
+        }
     });
 }
 
@@ -396,9 +467,9 @@ function displayMansionData(mansionCD) {
                         if (!document.getElementById('LineCD_' + index)) {
                             const station = $('.js-station-template').find('.js-station').clone(true);
                             station.find('.js-paragraph-number').text(getParagraphNumber(index))
-                            station.find('.js-LineCD').attr('id', 'LineCD_' + index);
-                            station.find('.js-StationCD').attr('id', 'StationCD_' + index);
-                            station.find('.js-Distance').attr('id', 'Distance_' + index);
+                            station.find('.js-linecd').attr('id', 'LineCD_' + index);
+                            station.find('.js-stationcd').attr('id', 'StationCD_' + index);
+                            station.find('.js-distance').attr('id', 'Distance_' + index);
                             $('.js-stationContainer').append(station);
                         }
 
@@ -409,7 +480,7 @@ function displayMansionData(mansionCD) {
                         $('#Distance_' + index).val(data.Distance).hideError();
                     }
                     $hdnMansionCD.val(mansionCD);
-                    $('#PrefCD, #CityCD, #TownCD, #MansionName, .js-LineCD, .js-StationCD').hideError();
+                    $('#PrefCD, #CityCD, #TownCD, #MansionName, .js-linecd, .js-stationcd').hideError();
                     common.hideLoading();
                 }
             }
@@ -507,7 +578,7 @@ function setTownList(mode, prefCd, cityCd, defaultValue) {
 }
 
 function setLineList(mode, prefCd, suffix, defaultValue) {
-    let selector = ".js-LineCD";
+    let selector = ".js-linecd";
     if (suffix) selector = '#LineCD' + suffix;
 
     if (mode === 'add') {
@@ -524,7 +595,7 @@ function setLineList(mode, prefCd, suffix, defaultValue) {
 }
 
 function setStationList(mode, lineCd, suffix, defaultValue) {
-    let selector = ".js-StationCD";
+    let selector = ".js-stationcd";
     if (suffix) selector = '#StationCD' + suffix;
 
     if (mode === 'add') {
@@ -569,12 +640,12 @@ function customValidation_checkDistance(e) {
 function getMansionStationList() {
     let array = [];
 
-    $('.js-station').each(function () {
+    $('.js-stationContainer .js-station').each(function () {
         const $this = $(this);
         const data = {
-            LineCD: $this.find('.js-LineCD').val(),
-            StationCD: $this.find('.js-StationCD').val(),
-            Distance: $this.find('.js-Distance').val()
+            LineCD: $this.find('.js-linecd').val(),
+            StationCD: $this.find('.js-stationcd').val(),
+            Distance: $this.find('.js-distance').val()
         }
         if (data.LineCD) {
             array[array.length] = data;

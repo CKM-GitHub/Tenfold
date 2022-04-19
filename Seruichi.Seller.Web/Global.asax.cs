@@ -46,11 +46,6 @@ namespace Seruichi.Seller.Web
                         }
                     }
 
-                    if (ex is InitialSetupException)
-                    {
-                        return; // IniÉtÉ@ÉCÉãê›íË
-                    }
-
                     Logger.GetInstance().Error(ex);
 
                     if (ex.InnerException != null)

@@ -62,6 +62,7 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonBL.cs" />
+    <Compile Include="Seller\a_registerBL.cs" />
     <Compile Include="Seller\a_loginBL.cs" />
     <Compile Include="Seller\a_indexBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,16 +86,26 @@
     <Content Include="Database\StoredProcedure\pr_a_index_Select_MansionListByMansionWord.sql" />
     <Content Include="Database\StoredProcedure\pr_a_index_Select_PrefecturesByZipCode.sql" />
     <Content Include="Database\StoredProcedure\pr_a_index_Select_TownsByZipCode.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_login_Insert_L_Login.sql" />
     <Content Include="Database\StoredProcedure\pr_a_login_Insert_D_Certification.sql" />
-    <Content Include="Database\StoredProcedure\pr_a_login_Select_M_Mail.sql" />
-    <Content Include="Database\StoredProcedure\pr_a_login_Select_M_Seller_AllMailAddress.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_register_Insert_M_Seller.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_register_Select_M_Address_ByZipCode.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_register_Update_D_Certification.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_login_Select_M_Seller_All.sql" />
     <Content Include="Database\StoredProcedure\pr_a_login_Select_M_Seller_ByPassword.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_register_Select_D_Certification_ByCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_login_Update_M_Seller_Password.sql" />
+    <Content Include="Database\StoredProcedure\pr_GetDate.sql" />
     <Content Include="Database\StoredProcedure\pr_L_Log_Insert.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfCity.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfTown.sql" />
+    <Content Include="Database\StoredProcedure\pr_L_Seller_Insert.sql" />
     <Content Include="Database\StoredProcedure\pr_M_Counter_Select_Exists.sql" />
     <Content Include="Database\StoredProcedure\pr_M_Counter_GetNewID.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfLine.sql" />
+    <Content Include="Database\StoredProcedure\pr_M_MailSendTo_Select_ByMailKBN.sql" />
+    <Content Include="Database\StoredProcedure\pr_M_MailText_Select_ByMailKBN.sql" />
+    <Content Include="Database\StoredProcedure\pr_M_Mail_Select_ByDataKey.sql" />
     <Content Include="Database\StoredProcedure\pr_M_Message_Select_AtApplicationStart.sql" />
     <Content Include="Database\StoredProcedure\pr_M_Message_Select_ByID.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfPref.sql" />

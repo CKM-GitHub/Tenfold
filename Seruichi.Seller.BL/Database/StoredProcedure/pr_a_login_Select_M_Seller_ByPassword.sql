@@ -6,14 +6,14 @@ GO
 
 CREATE PROCEDURE [dbo].[pr_a_login_Select_M_Seller_ByPassword]
 (
-    @Password            varchar(20)
+    @Password            varchar(300)
 )
 AS
 BEGIN
 
     SET NOCOUNT ON
 
-    SELECT SellerCD, MailAddress
+    SELECT SellerCD, SellerName, MailAddress
     FROM M_Seller
     WHERE Password = @Password
 

@@ -10,10 +10,12 @@ namespace Seruichi.Common
         public static readonly string DefaultKey = "10_4_Ld";
         public static readonly string DefaultKey2 = "1433";
 
-        private const int keySize = 256;
-        private const int blockSize = 128;
-        private const int saltSize = 25;
-        private const int ivSize = blockSize / 8;
+        private const int STRETCHING_TIMES = 1000;
+        private const int KEY_SIZE = 256;
+        private const int BLOCK_SIZE = 128;
+        private const int SALT_SIZE = 25;
+        private const int IV_SIZE = BLOCK_SIZE / 8;
+
         private readonly Encoding encoding = Encoding.GetEncoding("Shift_JIS");
 
         public AESCryption()
@@ -22,19 +24,19 @@ namespace Seruichi.Common
 
         private byte[] CreateSalt()
         {
-            return GenerateRandomData(saltSize);
+            return GenerateRandomData(SALT_SIZE);
         }
 
         private byte[] CreateAesIV()
         {
-            return GenerateRandomData(ivSize);
+            return GenerateRandomData(IV_SIZE);
         }
 
         private byte[] CreateAesKey(string keyName, byte[] salt)
         {
             Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(keyName, salt);
-            deriveBytes.IterationCount = 1000;
-            return deriveBytes.GetBytes(keySize / 8);
+            deriveBytes.IterationCount = STRETCHING_TIMES;
+            return deriveBytes.GetBytes(KEY_SIZE / 8);
         }
 
         private byte[] GenerateRandomData(int length)
@@ -63,10 +65,6 @@ namespace Seruichi.Common
             byte[] aesKey = CreateAesKey(key, salt);
             byte[] aesIv = CreateAesIV();
 
-            //var saltString = Convert.ToBase64String(salt);
-            //var aesKeyString = Convert.ToBase64String(aesKey);
-            //var aesIvString = Convert.ToBase64String(aesIv);
-
             byte[] byteValue = encoding.GetBytes(plainText);
             int byteLength = byteValue.Length;
 
@@ -91,32 +89,35 @@ namespace Seruichi.Common
         {
             if (string.IsNullOrEmpty(encryptedValue) || string.IsNullOrEmpty(key))
             {
-                return "";
+                return encryptedValue;
             }
 
-            byte[] byteData = Convert.FromBase64String(encryptedValue);
-            byte[] salt = byteData.Take(saltSize).ToArray();
-            byte[] aesIv = byteData.Skip(saltSize).Take(ivSize).ToArray();
-            byte[] byteEncrypted = byteData.Skip(saltSize + ivSize).ToArray();
-            byte[] aesKey = CreateAesKey(key, salt);
-
-            //var saltString = Convert.ToBase64String(salt);
-            //var aesKeyString = Convert.ToBase64String(aesKey);
-            //var aesIvString = Convert.ToBase64String(aesIv);
-
-            using (var aes = CreateAesCng(aesKey, aesIv))
-            using (var decryptor = aes.CreateDecryptor())
+            try
             {
-                byte[] decryptedValue = decryptor.TransformFinalBlock(byteEncrypted, 0, byteEncrypted.Length);
-                return encoding.GetString(decryptedValue);
+                byte[] byteData = Convert.FromBase64String(encryptedValue);
+                byte[] salt = byteData.Take(SALT_SIZE).ToArray();
+                byte[] aesIv = byteData.Skip(SALT_SIZE).Take(IV_SIZE).ToArray();
+                byte[] byteEncrypted = byteData.Skip(SALT_SIZE + IV_SIZE).ToArray();
+                byte[] aesKey = CreateAesKey(key, salt);
+
+                using (var aes = CreateAesCng(aesKey, aesIv))
+                using (var decryptor = aes.CreateDecryptor())
+                {
+                    byte[] decryptedValue = decryptor.TransformFinalBlock(byteEncrypted, 0, byteEncrypted.Length);
+                    return encoding.GetString(decryptedValue);
+                }
+            }
+            catch
+            {
+                return encryptedValue;
             }
         }
 
         private AesCng CreateAesCng(byte[] aesKey, byte[] aesIv)
         {
             var aes = new AesCng();
-            aes.KeySize = keySize;
-            aes.BlockSize = blockSize;
+            aes.KeySize = KEY_SIZE;
+            aes.BlockSize = BLOCK_SIZE;
             aes.Mode = CipherMode.CBC;
             aes.Key = aesKey;
             aes.IV = aesIv;

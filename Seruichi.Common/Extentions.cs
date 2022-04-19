@@ -12,6 +12,10 @@ namespace Seruichi.Common
     public static class DateTimeFormat
     {
         /// <summary>
+        /// yyyy年MM月dd日 HH時mm分ss秒
+        /// </summary>
+        public const string yyyyMdHmsJP = "yyyy年M月d日 H時m分s秒";
+        /// <summary>
         /// yyyy/MM/dd HH:mm:ss
         /// </summary>
         public const string yyyyMMddHHmmss = "yyyy/MM/dd HH:mm:ss";
@@ -255,6 +259,42 @@ namespace Seruichi.Common
             else
             {
                 return string.Format("{0:" + format + "}", o);
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="format"></param>
+        /// <returns></returns>
+        public static string ToDateString(this DateTime? d, string format = "")
+        {
+            if (d == null)
+            {
+                return "";
+            }
+            else
+            {
+                return ((DateTime)d).ToString(format);
+            }
+        }
+        /// <summary>
+        /// Convert string to DateTime. If it cannot be converted, it returns defaultValue.
+        /// Convertible formats is "yyyyMMdd","yyyyMMdd HHmmss","yyyy/MM/dd","yyyy/MM/dd HH:m:ss","yyyy-MM-dd","yyyy-MM-dd HH:mm:ss"
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="defaultValue"></param>
+        /// <param name="format"></param>
+        /// <returns></returns>
+        public static DateTime ToDateTime(this object o, DateTime defaultValue)
+        {
+            if (o == null)
+            {
+                return defaultValue;
+            }
+            else
+            {
+                return ToDateTime(o.ToString()) ?? defaultValue;
             }
         }
         /// <summary>

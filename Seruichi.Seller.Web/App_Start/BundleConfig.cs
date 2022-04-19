@@ -29,15 +29,16 @@ namespace Seruichi.Seller.Web
 
             //The bundle hierarchy and the physical folder hierarchy must match
             bundles.Add(new StyleBundle("~/Content/css/error").Include(
-                      "~/Content/bootstrap/Soft-UI-Aside-Navbar.css",
-                      "~/Content/css/errorpage.css"));
+                      "~/Content/css/Soft-UI-Aside-Navbar.css",
+                      "~/Content/css/style.css"));
 
             bundles.Add(new StyleBundle("~/Content/css/application").Include(
-                      "~/Content/bootstrap/Soft-UI-Aside-Navbar.css",
-                      "~/Content/typeahead/typeahead.custom.css",
+                      "~/Content/css/Soft-UI-Aside-Navbar.css",
                       "~/Content/css/style.css",
                       "~/Content/css/loading.css",
-                      "~/Content/css/validation.css"));
+                      "~/Content/css/validation.css",
+                      "~/Content/typeahead/typeahead.custom.css"
+                      ));
 
             bundles.Add(new ScriptBundle("~/Content/scripts/application").Include(
                       "~/Content/typeahead/typeahead.bundle.min.js",
@@ -51,15 +52,6 @@ namespace Seruichi.Seller.Web
             bundles.Add(new ScriptBundle("~/bundles/a_index").Include(
                       "~/Scripts/a_index.js"));
 
-            //t_login
-            bundles.Add(new ScriptBundle("~/bundles/t_login").Include(
-                     "~/Scripts/t_login.js"));
-
-            //t_seller_list
-            bundles.Add(new ScriptBundle("~/bundles/t_seller_list").Include(
-                     "~/Scripts/t_seller_list.js"));
-
-
             //a_login
             bundles.Add(new StyleBundle("~/Content/css/a_login").Include(
                       "~/Content/css/Clients-UI.css",
@@ -69,6 +61,23 @@ namespace Seruichi.Seller.Web
             bundles.Add(new ScriptBundle("~/bundles/a_login").Include(
                       "~/Scripts/a_login.js"));
 
+            //a_register
+            bundles.Add(new StyleBundle("~/Content/css/a_register").Include(
+                        "~/Content/css/Contact-Form-Clean.css",
+                        "~/Content/css/Contact-FormModal-Contact-Form-with-Google-Map.css",
+                        "~/Content/css/Highlight-Blue.css",
+                        "~/Content/css/Highlight-Clean.css",
+                        "~/Content/css/Login-Form-Clean.css",
+                        "~/Content/css/Ludens-Users---2-Register.css",
+                        "~/Content/css/Ludens-Users---25-After-Register.css",
+                        "~/Content/css/Newsletter-Subscription-Form.css",
+                        "~/Content/css/Profile-Edit-Form-1.css",
+                        "~/Content/css/Profile-Edit-Form.css",
+                        "~/Content/css/Registration-Form-with-Photo.css",
+                        "~/Content/css/Clients-UI.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/a_register").Include(
+                      "~/Scripts/a_register.js"));
         }
     }
 }

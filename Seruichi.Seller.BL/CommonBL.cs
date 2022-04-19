@@ -130,11 +130,83 @@ namespace Seruichi.BL
         public int GetBuildingAge(string yearMonth)
         {
             DateTime startDate = (yearMonth.Replace("/", "").Replace("-", "") + "01").ToDateTime(DateTime.MaxValue);
-            DateTime endDate = DateTime.Now;
+            DateTime endDate = Utilities.GetSysDateTime();
+
             if (startDate > endDate) return 0;
 
             int diffMonth = (endDate.Month + (endDate.Year - startDate.Year) * 12) - startDate.Month;
             return diffMonth % 12 > 0 ? diffMonth / 12 + 1 : diffMonth / 12;
+        }
+
+        public SendMailInfo GetMailSender(SendMailInfo mailInfo = null)
+        {
+            if (mailInfo == null)
+            {
+                mailInfo = new SendMailInfo();
+            }
+
+            var sqlParm = new SqlParameter("@DataKey", SqlDbType.Int) { Value = 1 };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_M_Mail_Select_ByDataKey", sqlParm);
+            if (dt.Rows.Count > 0)
+            {
+                var dr = dt.Rows[0];
+                mailInfo.SenderAddress = dr["SenderAddress"].ToStringOrEmpty();
+                mailInfo.SenderServer = dr["SenderServer"].ToStringOrEmpty();
+                mailInfo.SenderAccount = dr["SenderAccount"].ToStringOrEmpty();
+                mailInfo.SenderPassword = dr["SenderPassword"].ToStringOrEmpty();
+            }
+
+            return mailInfo;
+        }
+
+        public List<SendMailInfo.Recipient> GetMailRecipients(MailKBN mailKbn, SendMailInfo mailInfo = null)
+        {
+            List<SendMailInfo.Recipient> recipients = new List<SendMailInfo.Recipient>();
+            var sqlParm = new SqlParameter("@MailKBN", SqlDbType.Int) { Value = (int)mailKbn };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_M_MailSendTo_Select_ByMailKBN", sqlParm);
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                var dr = dt.Rows[i];
+                recipients.Add(new SendMailInfo.Recipient() {
+                    MailAddress = dr["SendToAddress"].ToStringOrEmpty(),
+                    SendType = (SendMailInfo.SendTypes)dr["SendType"].ToInt32(0)
+                });
+            }
+
+            if (mailInfo != null)
+            {
+                mailInfo.Recipients = recipients;
+            }
+            return recipients;
+        }
+
+        public SendMailInfo GetMailTitleAndText(MailKBN mailKbn, SendMailInfo mailInfo = null)
+        {
+            if (mailInfo == null)
+            {
+                mailInfo = new SendMailInfo();
+            }
+
+            var sqlParm = new SqlParameter("@MailKBN", SqlDbType.Int) { Value = (int)mailKbn };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_M_MailText_Select_ByMailKBN", sqlParm);
+            if (dt.Rows.Count > 0)
+            {
+                var dr = dt.Rows[0];
+                mailInfo.Subject = dr["MailTitle"].ToStringOrEmpty();
+                mailInfo.Text1 = dr["MailText01"].ToStringOrEmpty();
+                mailInfo.Text2 = dr["MailText02"].ToStringOrEmpty();
+                mailInfo.Text3 = dr["MailText03"].ToStringOrEmpty();
+                mailInfo.Text4 = dr["MailText04"].ToStringOrEmpty();
+                mailInfo.Text5 = dr["MailText05"].ToStringOrEmpty();
+            }
+
+            return mailInfo;
         }
     }
 }

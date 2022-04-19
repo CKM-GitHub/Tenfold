@@ -1,0 +1,586 @@
+﻿@model Models.a_registerModel
+
+@{
+    ViewBag.Title = "簡易査定 - セルイチ";
+}
+@section styles{
+    @Styles.Render("~/Content/css/a_register")
+}
+
+<header class="text-center text-white masthead cap-header">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto position-relative">
+                <h1 class="mb-2">新規登録</h1>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="clean-block clean-form dark h-100  pt-5 pb-5">
+    <div class="container">
+        <form class="cap-reg-form" id="form1">
+            <div class="d-flex justify-content-end">
+                <span>必須項目</span><span class="cap-font-blue">※</span>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">お名前</label><span class="cap-font-blue">※</span>
+                            <span class="cap-errormsg-right" id="errorSellerName"></span>
+                        </div>
+                        <input class="form-control cap-fon-form-w300" type="text" name="SellerName" id="SellerName" maxlength="25" autocomplete="name">
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">お名前(フリガナ)</label><span class="cap-font-blue">※</span>
+                            <span class="cap-errormsg-right" id="errorSellerKana"></span>
+                        </div>
+                        <input class="form-control cap-fon-form-w300" type="text" name="SellerKana" id="SellerKana" maxlength="25">
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">生年月日</label><span class="cap-font-blue">※</span>
+                            <span class="cap-errormsg-right" id="errorBirthday"></span>
+                        </div>
+                        <input class="form-control cap-fon-form-w200" type="date" min="1900-01-01" max="2100-12-31" name="Birthday" id="Birthday" autocomplete="bday">
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">郵便番号</label>
+                            <span class="cap-errormsg-right" id="errorZipCode"></span>
+                        </div>
+                        <div class="row cap-fon-form-w350">
+                            <div class="col-8 d-inline-flex">
+                                <span class="align-self-center pe-1">〒</span>
+                                <input class="form-control text-center w-25" type="text" name="ZipCode1" id="ZipCode1" maxlength="3">
+                                <span class="align-self-center pe-1 ps-1">-</span>
+                                <input class="form-control w-50 text-center" type="text" name="ZipCode2" id="ZipCode2" maxlength="4">
+                            </div>
+                            <div class="col d-flex justify-content-center">
+                                <button class="btn btn-primary btn-sm" type="button" id="btnAutoSet">自動変換</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" form-group mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">都道府県</label><span class="cap-font-blue">※</span>
+                            <span class="cap-errormsg-right" id="errorPrefCD"></span>
+                        </div>
+                        <select class="form-select" name="PrefCD" id="PrefCD">
+                            <option selected value="">都道府県</option>
+                            @foreach (Models.DropDownListItem item in ViewBag.PrefDropDownListItems)
+                            {
+                                <option class="js-selectable" value=@item.Value>@item.DisplayText</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">市町村区</label><span class="cap-font-blue">※</span>
+                            <span class="cap-errormsg-right" id="errorCityName"></span>
+                        </div>
+                        <input class="form-control" type="text" name="CityName" id="CityName" maxlength="50" autocomplete="address-level2">
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">町域名</label><span class="cap-font-blue">※</span>
+                            <span class="cap-errormsg-right" id="errorTownName"></span>
+                        </div>
+                        <input class="form-control" type="text" name="TownName" id="TownName" maxlength="50" autocomplete="address-level3">
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">町名・番地など</label><span class="cap-font-blue">※</span>
+                            <span class="cap-errormsg-right" id="errorAddress1"></span>
+                        </div>
+                        <input class="form-control" type="text" name="Address1" id="Address1" maxlength="50" autocomplete="address-level4">
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">建物名</label>
+                            <span class="cap-errormsg-right" id="errorAddress2"></span>
+                        </div>
+                        <input class="form-control" type="text" name="Address2" id="Address2" maxlength="50">
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">電話番号</label>
+                            <span class="cap-errormsg-right" id="errorHousePhone"></span>
+                        </div>
+                        <input class="form-control" type="tel" name="HousePhone" id="HousePhone" maxlength="15">
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">携帯番号</label><span class="cap-font-blue">※</span>
+                            <span class="cap-errormsg-right" id="errorHandyPhone"></span>
+                        </div>
+                        <input class="form-control" type="tel" name="HandyPhone" id="HandyPhone" maxlength="15" autocomplete="tel">
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">FAX番号</label>
+                            <span class="cap-errormsg-right" id="errorFax"></span>
+                        </div>
+                        <input class="form-control" type="tel" name="Fax" id="Fax" maxlength="15">
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">メールアドレス</label>
+                            <span class="cap-errormsg-right" id="errorMailAddress"></span>
+                        </div>
+                        <input readonly class="form-control" type="email" name="MailAddress" id="MailAddress" value="@Model.MailAddress">
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">パスワード</label><span class="cap-font-blue">※</span>
+                            <span class="cap-errormsg-right" id="errorPassword"></span>
+                        </div>
+                        <input class="form-control" type="password" name="Password" id="Password" autocomplete="new-password" minlength="8" maxlength="20">
+                        <span class="small">パスワードは8文字以上20文字以内で入力してください。</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">パスワード再確認</label><span class="cap-font-blue">※</span>
+                            <span class="cap-errormsg-right" id="errorConfirmPassword"></span>
+                        </div>
+                        <input class="form-control" type="password" name="ConfirmPassword" id="ConfirmPassword" autocomplete="new-password" minlength="8" maxlength="20">
+                    </div>
+                    <hr class="mt-4 mb-4">
+                    <div class="form-group pb-3 text-center">
+                        <button class="btn btn-primary btn-lg text-center" type="button" id="btnShowConfirmation">
+                            入力内容確認
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="modal_1">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><strong>サービスご利用／会員規約</strong></h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-container pt-2 col-md-10 mx-auto">
+                    <div class="image-holder">
+                        <div class="mb-2 mt-2">
+                            <h5 class="pb-3">プライバシーポリシー<br></h5>
+                            <div class="cap-div-scroll">
+                                プライバシーポリシー<br>
+                                ＿＿＿＿＿＿＿＿（以下，「当社」といいます。）は，本ウェブサイト上で提供するサービス（以下,「本サービス」といいます。）における，ユーザーの個人情報の取扱いについて，以下のとおりプライバシーポリシー（以下，「本ポリシー」といいます。）を定めます。<br>
+                                第1条（個人情報）<br>
+                                「個人情報」とは，個人情報保護法にいう「個人情報」を指すものとし，生存する個人に関する情報であって，当該情報に含まれる氏名，生年月日，住所，電話番号，連絡先その他の記述等により特定の個人を識別できる情報及び容貌，指紋，声紋にかかるデータ，及び健康保険証の保険者番号などの当該情報単体から特定の個人を識別できる情報（個人識別情報）を指します。<br>
+                                第2条（個人情報の収集方法）<br>
+                                当社は，ユーザーが利用登録をする際に氏名，生年月日，住所，電話番号，メールアドレス，銀行口座番号，クレジットカード番号，運転免許証番号などの個人情報をお尋ねすることがあります。また，ユーザーと提携先などとの間でなされたユーザーの個人情報を含む取引記録や決済に関する情報を,当社の提携先（情報提供元，広告主，広告配信先などを含みます。以下，｢提携先｣といいます。）などから収集することがあります。<br>
+                                第3条（個人情報を収集・利用する目的）<br>
+                                当社が個人情報を収集・利用する目的は，以下のとおりです。<br>
+                                <ul>
+                                    <li>当社サービスの提供・運営のため</li>
+                                    <li>ユーザーからのお問い合わせに回答するため（本人確認を行うことを含む）</li>
+                                    <li>ユーザーが利用中のサービスの新機能，更新情報，キャンペーン等及び当社が提供する他のサービスの案内のメールを送付するため</li>
+                                    <li>メンテナンス，重要なお知らせなど必要に応じたご連絡のため</li>
+                                    <li>利用規約に違反したユーザーや，不正・不当な目的でサービスを利用しようとするユーザーの特定をし，ご利用をお断りするため</li>
+                                    <li>ユーザーにご自身の登録情報の閲覧や変更，削除，ご利用状況の閲覧を行っていただくため</li>
+                                    <li>有料サービスにおいて，ユーザーに利用料金を請求するため</li>
+                                    <li>上記の利用目的に付随する目的</li>
+                                </ul>
+                                第4条（利用目的の変更）<br>
+                                <ul>
+                                    <li>当社は，利用目的が変更前と関連性を有すると合理的に認められる場合に限り，個人情報の利用目的を変更するものとします。</li>
+                                    <li>利用目的の変更を行った場合には，変更後の目的について，当社所定の方法により，ユーザーに通知し，または本ウェブサイト上に公表するものとします。</li>
+                                </ul>
+                                第5条（個人情報の第三者提供）<br>
+                                <ul>
+                                    <li>
+                                        当社は，次に掲げる場合を除いて，あらかじめユーザーの同意を得ることなく，第三者に個人情報を提供することはありません。ただし，個人情報保護法その他の法令で認められる場合を除きます。
+                                        <ul>
+                                            <li>人の生命，身体または財産の保護のために必要がある場合であって，本人の同意を得ることが困難であるとき</li>
+                                            <li>公衆衛生の向上または児童の健全な育成の推進のために特に必要がある場合であって，本人の同意を得ることが困難であるとき</li>
+                                            <li>
+                                                国の機関もしくは地方公共団体またはその委託を受けた者が法令の定める事務を遂行することに対して協力する必要がある場合であって，本人の同意を得ることにより当該事務の遂行に支障を及ぼすおそれがあるとき
+                                            </li>
+                                            <li>
+                                                予め次の事項を告知あるいは公表し，かつ当社が個人情報保護委員会に届出をしたとき
+                                                <ul>
+                                                    <li>利用目的に第三者への提供を含むこと</li>
+                                                    <li>第三者に提供されるデータの項目</li>
+                                                    <li>第三者への提供の手段または方法</li>
+                                                    <li>本人の求めに応じて個人情報の第三者への提供を停止すること</li>
+                                                    <li>本人の求めを受け付ける方法</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        前項の定めにかかわらず，次に掲げる場合には，当該情報の提供先は第三者に該当しないものとします。
+                                        <ul>
+                                            <li>当社が利用目的の達成に必要な範囲内において個人情報の取扱いの全部または一部を委託する場合</li>
+                                            <li>合併その他の事由による事業の承継に伴って個人情報が提供される場合</li>
+                                            <li>
+                                                個人情報を特定の者との間で共同して利用する場合であって，その旨並びに共同して利用される個人情報の項目，共同して利用する者の範囲，利用する者の利用目的および当該個人情報の管理について責任を有する者の氏名または名称について，あらかじめ本人に通知し，または本人が容易に知り得る状態に置いた場合
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                第6条（個人情報の開示）<br>
+                                <ul>
+                                    <li>
+                                        当社は，本人から個人情報の開示を求められたときは，本人に対し，遅滞なくこれを開示します。ただし，開示することにより次のいずれかに該当する場合は，その全部または一部を開示しないこともあり，開示しない決定をした場合には，その旨を遅滞なく通知します。なお，個人情報の開示に際しては，1件あたり1，000円の手数料を申し受けます。
+                                        <ul>
+                                            <li>本人または第三者の生命，身体，財産その他の権利利益を害するおそれがある場合</li>
+                                            <li>当社の業務の適正な実施に著しい支障を及ぼすおそれがある場合</li>
+                                            <li>その他法令に違反することとなる場合</li>
+                                        </ul>
+                                    </li>
+                                    <li>前項の定めにかかわらず，履歴情報および特性情報などの個人情報以外の情報については，原則として開示いたしません。</li>
+                                </ul>
+                                第7条（個人情報の訂正および削除）<br>
+                                <ul>
+                                    <li>
+                                        ユーザーは，当社の保有する自己の個人情報が誤った情報である場合には，当社が定める手続きにより，当社に対して個人情報の訂正，追加または削除（以下，「訂正等」といいます。）を請求することができます。
+                                    </li>
+                                    <li>当社は，ユーザーから前項の請求を受けてその請求に応じる必要があると判断した場合には，遅滞なく，当該個人情報の訂正等を行うものとします。</li>
+                                    <li>当社は，前項の規定に基づき訂正等を行った場合，または訂正等を行わない旨の決定をしたときは遅滞なく，これをユーザーに通知します。</li>
+                                </ul>
+                                第8条（個人情報の利用停止等）<br>
+                                <ul>
+                                    <li>
+                                        当社は，本人から，個人情報が，利用目的の範囲を超えて取り扱われているという理由，または不正の手段により取得されたものであるという理由により，その利用の停止または消去（以下，「利用停止等」といいます。）を求められた場合には，遅滞なく必要な調査を行います。
+                                    </li>
+                                    <li>前項の調査結果に基づき，その請求に応じる必要があると判断した場合には，遅滞なく，当該個人情報の利用停止等を行います。</li>
+                                    <li>当社は，前項の規定に基づき利用停止等を行った場合，または利用停止等を行わない旨の決定をしたときは，遅滞なく，これをユーザーに通知します。</li>
+                                    <li>
+                                        前2項にかかわらず，利用停止等に多額の費用を有する場合その他利用停止等を行うことが困難な場合であって，ユーザーの権利利益を保護するために必要なこれに代わるべき措置をとれる場合は，この代替策を講じるものとします。
+                                    </li>
+                                </ul>
+                                第9条（プライバシーポリシーの変更）<br>
+                                <ul>
+                                    <li>本ポリシーの内容は，法令その他本ポリシーに別段の定めのある事項を除いて，ユーザーに通知することなく，変更することができるものとします。</li>
+                                    <li>当社が別途定める場合を除いて，変更後のプライバシーポリシーは，本ウェブサイトに掲載したときから効力を生じるものとします。</li>
+                                </ul>
+                                第10条（お問い合わせ窓口）<br>
+                                本ポリシーに関するお問い合わせは，下記の窓口までお願いいたします。<br>
+                                住所：<br />
+                                社名：<br />
+                                担当部署：<br />
+                                Eメールアドレス：<br>
+                                以上<br>
+                            </div>
+                            <div class="text-center w-100 pt-3">
+                                <div class="form-check d-inline-flex">
+                                    <input class="form-check-input" type="checkbox" id="formCheckPolicy">
+                                    <label class="form-check-label ps-2" for="formCheckPolicy">プライバシーポリシーを理解しました</label>
+                                </div>
+                            </div>
+                            <div class="mb-2 mt-4">
+                                <h5 class="pb-3">会員規約<br></h5>
+                                <div class="cap-div-scroll">
+                                    <strong>第１条　定義</strong><br>
+                                    本規約において使用する用語の意義は、次の各号に定めるとおりとします。<br>
+                                    （１）「当社」とは、株式会社ヴァンクリーフをいいます。<br>
+                                    （２）「本規約」とは、「ひな形の知りたい！会員規約」をいいます。<br>
+                                    （３）「本サイト」とは、当社が運営する「ひな形の知りたい！」（その理由を問わずサービスの名称又は内容が変更された場合、当該変更後のサービスを含みます。）と称するウェブサイト（http://hinagata-shiritai.com/）をいいます。<br>
+                                    （４）「本サービス」とは、本サイトを通じて当社が提供するサービスをいいます。<br>
+                                    （５）「本契約」とは、本サービスの利用に関する当社との間の契約をいいます。<br>
+                                    （６）「事業者」とは、当社所定の手続に従い、事業者として登録された者をいいます。<br>
+                                    （７）「ユーザー」とは、事業者以外で本サイトを利用する者をいい、会員、非会員いずれも含みます。<br>
+                                    （８）「会員」とは、当社所定の手続に従い、会員として登録された者をいいます。<br>
+                                    （９）「送信情報」とは、事業者及び会員が本サービスに送信（一般に公開・特定の相手にのみ公開・非公開を問いません。）したテキスト、イラスト、画像、動画その他当社所定の情報（これを元に本サービス上で自動生成された情報や処理結果も含みます。）をいいます。<br>
+                                    <strong>第２条　適用範囲</strong><br>
+                                    １　本規約は、本契約において当社と会員とに適用されます。会員は、会員として登録されることにより、本規約の全ての内容に同意したものとみなされます。<br>
+                                    ２　本サイト上で、本サービスに関するその他の規程（以下「その他の規程」といいます。）が存在する場合に、その他の規程は、本規約の一部を構成するものとします。本規約の規定とその他の規程の内容が異なる場合は、本規約が優先して適用されます。<br>
+                                    <strong>第３条　本サービス</strong><br>
+                                    １　会員は、本契約の有効期間内に限り、本契約に違反しない範囲で、当社の定める方法に従い、本サービスを利用することができます。<br>
+                                    ２　本サービスの詳細な仕様は、本サービス上において別途定めるものとします。当社は、本サービスの仕様の改良、追加、削除等の変更を行うことがあり、会員は、これを予め承諾します。また、当社は、本サービスの遂行を、必要に応じて第三者に委託することができるものとします。<br>
+                                    ３　会員は、自らの責任と費用において、ハードウェア、ソフトウェア、インターネット接続回線、セキュリティの確保等、本サービスの利用に必要な環境（以下「利用環境」といいます。）を整備します。<br>
+                                    ４　会員は、本サービスの利用に関し、以下の事項を遵守するものとします。<br>
+                                    （１）サービスの購入希望の表明をする場合には、当社の定めるサービスジャンルに従うものとします。サービスジャンルが異なる場合には、当社において、当該サービスの購入希望の表明の掲載サービスジャンルを変更したり、当該サービスの購入希望の表明を削除したりする場合があります。<br>
+                                    （２）全ての事業者からの見積提案に対し、できる限り速やかに検討を行い、遅滞なく（遅くとも見積募集期間終了後一週間以内に）商談申込又はお断り（不採用）を通知するものとします。<br>
+                                    （３）事業者からの見積通知に対し、お断りの通知をする場合には、必ず当社の定める様式でそのお断りの理由を記載するものとします。<br>
+                                    （４）商談依頼を申し込んだ事業者に関しては、商談開始後適宜、当社の定める様式で当該事業者の評価を行うものとします。<br>
+                                    （５）会員サービスの利用の結果、事業者との間で契約（口頭、書面を問いません。）を締結した場合には、直ちに、当社の求めに応じ、事業者の名称、契約に関する代金の金額、支払方法その他当社の定める事項を当社の定める様式にしたがって当社に報告するものとします。<br>
+                                    （６）当社から個別的又は一般的要請があった場合には、会員が購入希望を表明した案件の状況につき当社の定める様式にしたがって当社に報告するものとします。<br>
+                                    ５　本サービスは、特定のサービスを購入したい会員に対して、当該サービスを販売したい事業者を紹介する場を提供するものであって、当社は、会員が本サービスを通じて希望するサービスを購入できること、又は、何らかの見積りその他の情報を得られることを保証するものではありません。また、当社は、本サービスに関連して、事業者が実在していること、権利能力及び行為能力を有していること、当該サービスを販売する権限を有していること、及び事業者の送信情報が正確であることにつき、いかなる保証も行うものではありません（これらの事項の調査は会員の自己責任とします。）。<br>
+                                    ６　当社は、次の各号につき、いかなる保証も行うものではありません。さらに、会員が当社から直接又は間接に、本サービスに関する情報を得た場合であっても、当社は、会員に対し、本規約において規定されている内容を超えて、いかなる保証も行うものではありません。<br>
+                                    （１）本サービスの利用に起因して利用環境に不具合や障害が生じないこと<br>
+                                    （２）本サービスの正確性、完全性、永続性、目的適合性、有用性<br>
+                                    （３）会員に適用のある法令、業界団体の内部規則等への適合性<br>
+                                    <strong>第４条　登録</strong><br>
+                                    １　本サービスの利用を希望する会員（以下「登録希望者」といいます。）は、本規約の内容に同意した上で、当社所定の方法により、登録の申込を行うものとします。登録希望者は、申込の際に登録する当社所定の情報（以下「登録事項」といます。）が、全て正確であることを保証します。<br>
+                                    ２　当社は、当社所定の基準により、登録希望者の登録の可否を判断し、登録を認める場合には、その旨及び本サービスを利用するために必要となるＩＤ・パスワード（以下「ＩＤ・パスワード」といいます。）等の情報を通知します。当社が当該通知を行なった時点で、登録希望者は会員として登録され、当該会員と当社との間に、本契約が成立します。<br>
+                                    ３　当社は、登録希望者が以下のいずれかに該当し又は該当すると当社が判断した場合は、理由を一切開示することなく、登録希望者の登録を認めないことができます。<br>
+                                    （１）当社所定の方法によらずに登録の申込を行った場合<br>
+                                    （２）登録事項の全部又は一部につき、虚偽、誤記又は記載漏れがあった場合<br>
+                                    （３）本規約に違反するおそれがあると当社が判断した場合<br>
+                                    （４）過去に本規約に違反した者又はその関係者であると当社が判断した場合<br>
+                                    （５）未成年者、成年被後見人、被保佐人、被補助人又は法人の代表権を有しない者のいずれかであり、法定代理人、後見人、保佐人、補助人又は代表権を有する者の同意等を得ていなかった場合<br>
+                                    （６）本サービスと同種又は類似するサービスを現に提供している場合又は将来提供する予定である場合<br>
+                                    （７）その他当社が登録を妥当でないと判断した場合<br>
+                                    <strong>第５条　登録事項の変更</strong><br>
+                                    会員は、登録事項に変更が生じた場合は、直ちに当社所定の方法により、登録事項の変更の手続きを行うものとします。<br>
+                                    <strong>第６条　ＩＤ・パスワードの管理</strong><br>
+                                    １　会員は、自己の責任において、ＩＤ・パスワードを適切に管理・保管するものとし、これを会員、他の会員又は第三者に開示・利用させたり、貸与、譲渡、売買、担保提供等をしてはならないものとします。<br>
+                                    ２　当社は、ログイン時に使用されたＩＤ・パスワードが登録されたものと一致することを所定の方法により確認した場合、当該ログインした者を真正な会員とみなします。<br>
+                                    ３　会員によるＩＤ・パスワードの管理不十分、使用上の過誤、不正使用等によって会員が損害を被ったとしても、当社は一切責任を負わないものとします。<br>
+                                    <strong>第７条　利用料金</strong><br>
+                                    本サービスの利用料金は、無料とします。但し、当社の裁量により、会員への事前の通知により、有料化することがあります。<br>
+                                    <strong>第８条　投稿物の投稿及び利用</strong><br>
+                                    １　投稿会員は、本サービスを利用して、投稿物を投稿することができます。当社は、当社所定の方式に従い、事前に投稿物の内容を審査の上、当社所定の基準を満たす投稿物のみを、本サイト上で公開するものとします。<br>
+                                    ２　投稿会員が、本会員規約に違反した又はそのおそれがあると当社が認めた場合、その他当社が必要であると判断した場合、当社は、当該会員に通知することなく、投稿物の全部又は一部の削除又は本サイト上における公開範囲の変更をすることができるものとし、それによって当該投稿会員が被った一切の損害について、責任を負わないものとします。<br>
+                                    ３　会員は、本サービスを利用して、本サイト上で公開された投稿物を、閲覧、印刷又はダウンロードし、印刷又はダウンロードした投稿物を、著作権法の定める私的使用の範囲で複製し、また、自己の宣伝に係るホームページ、ハガキ、その他自己の宣伝に係る広告物に利用・改変することができますが、投稿物に関するそれ以外の何らの権利（投稿物そのもの、または投稿物を利用した商品・サービス等を、有償・無償を問わずに、第三者に譲渡・販売・貸与し、または本サービスと同種・類似したサービス上でアップロード等を行う権利を含み、かつこれに限られません。）も取得しないものとします。ただし、当社が個別に許諾した場合は、この限りではありません。<br>
+                                    ４　投稿物に関する一切の責任は、当該投稿物を投稿した投稿会員が負います。当社は、投稿物の適法性、正確性、目的適合性等に関して一切保証しません。投稿物に関して生じた紛争は、当該投稿物を投稿した投稿会員が解決するものとし、当社は一切関知しないものとします。<br>
+                                    <strong>第９条　投稿物に係る権利義務</strong><br>
+                                    １　投稿会員は、投稿物及びその投稿に係る完全なる権利を有し、投稿物及びその投稿が第三者の権利を侵害するものでないこと保証します。万一、投稿した投稿物が第三者の権利を侵害するなど第三者との間で何らかの紛争が発生した場合、当該投稿会員は、自己の責任と費用においてこれを解決しなければならず、当社に一切の迷惑をかけないものとします。投稿会員は、かかる紛争が生じた場合、直ちに当該事実を当社に連絡するものとします。<br>
+                                    ２　投稿物に係る著作権は、当該投稿物の著作権者である投稿会員に帰属しますが、当該投稿物を投稿したことをもって、当社が当該投稿物を無償で複製、翻案その他あらゆる方法で利用することを許諾するものとします。また、当該投稿物の著作権者である投稿会員は、当社及び当社から正当に権利を付与され又は承継された第三者に対し、当該投稿物に係る著作者人格権を行使しないものとします。<br>
+                                    ３　当社は、投稿物を管理・保存する義務を負いません。当社は、事業上の理由、システムの過負荷・システムの不具合・メンテナンス・法令の制定改廃・天災地変・停電・通信障害・不正アクセス、その他の事由による、投稿物の破損・消失に関して、一切責任を負いません。<br>
+                                    <strong>第１０条　禁止行為</strong><br>
+                                    会員は、本サービスの利用にあたり、以下の各号に該当する行為を行ってはならないものとします。これに違反した又はそのおそれがあると当社が認めた場合、第８条２項による投稿物の全部又は一部の削除又は本サイト上における公開範囲の変更、第１４条による利用停止、第１４条２項による強制退会等の措置を採ることができるものとし、それによって当該会員が被った一切の損害について、責任を負わないものとします。<br>
+                                    １　第８条第３項で許された範囲を超える投稿物の利用行為<br>
+                                    当社又は第三者の権利を侵害し又はそのおそれのある行為<br>
+                                    ２　本サイト上で公開されている投稿物を、当該投稿物の著作権者の同意なく本サイトに投稿し又は他のサイトに転載する行為<br>
+                                    ３　事実に反し又は誤解を招く行為<br>
+                                    ４　犯罪に結びつく又はそのおそれのある行為<br>
+                                    ５　法令又は公序良俗に違反する又はそのおそれのある行為<br>
+                                    ６　わいせつ、差別的、宗教的又は政治的な行為<br>
+                                    ７　本サービス又はユーザーサービスの運営やネットワーク・システムに支障を与え又はそのおそれのある行為<br>
+                                    ８　その他、当社が不適切と判断する行為。<br>
+                                    <strong>第１１条　閲覧等</strong><br>
+                                    当社は、以下に掲げる場合には、投稿物の内容を閲覧したり、保存したり、第三者に開示すること（以下、本項において「閲覧等」といいます。）ができるものとし、それによって投稿会員が被った一切の損害について、責任を負わないものとします。<br>
+                                    １　当該投稿物を投稿した投稿会員が閲覧等に同意したとき。<br>
+                                    ２　当社が閲覧等の同意を求める電子メールを、当該投稿物を投稿した投稿会員に送信してから７日以内に、当該投稿会員の電子メールでの回答が当社のメールサーバに到達しなかったとき。<br>
+                                    ３　本サービス又はユーザーサービスの技術的不具合の原因を解明し、解消するため必要な場合。<br>
+                                    ４　裁判所、警察等の公的機関から、法令に基づく正式な照会を受けた場合。<br>
+                                    ５　本会員規約に違反し又はそのおそれのあり、閲覧等を行う必要があると当社が判断した場合。<br>
+                                    ６　その他本サイトを適切に運営するために必要が生じた場合。<br>
+                                    <strong>第１２条　権利帰属</strong><br>
+                                    １　本サービスに関する、特許権、実用新案権、意匠権、商標権、著作権、不正競争防止法上の権利、その他一切の財産的若しくは人格的権利（以下「知的財産権等」といいます。）は、全て当社又はそのライセンサーに帰属します。<br>
+                                    ２　本規約に定める本サービスの利用許諾は、本規約に明示的に規定される場合を除き、本サービスに関する当社又はそのライセンサーの知的財産権等に関し、いかなる権利も許諾するものではありません。会員は、本サービスが予定している利用態様を超えて、本サービスを利用することはできません。<br>
+                                    ３　会員は、本サービスに対して、リバースエンジニアリング、逆コンパイル、又は逆アセンブラ、その他本サービスを解析しようと試みてはならないものとします。<br>
+                                    <strong>第１３条　送信情報</strong><br>
+                                    １　会員は、送信情報について、自らが送信することについて適法な権利を有していること及び当社、会員、他の会員又は第三者の権利を侵害するものではないことを保証します。<br>
+                                    ２　会員は、送信情報に係る知的財産権等を、送信後も引き続き保有します。当社は、本サービスの運営のために必要な範囲に限って、送信情報を使用又は利用（複製、翻案、公衆送信及びそのために必要な送信可能化を含み、これに限りません。）することができるものとします。会員はこれに対し、当社並びに当社より正当に権利を取得した第三者及び当該第三者から権利を承継した者に対し、著作者人格権を行使しないことに同意します。<br>
+                                    ３　当社は、送信情報について、安全に管理するよう努めますが、本サービスが、本質的に情報の喪失、改変、破壊等の危険が内在する電磁的サービスであることに鑑みて、会員は、送信情報を自らの責任においてバックアップするものとします。当該バックアップを怠ったことによって会員が被った損害について、当社は、送信情報の復旧を含めて、一切責任を負いません。<br>
+                                    ４　当社は、以下のいずれかに該当し又は該当すると当社が判断した場合は、送信情報の全部又は一部を閲覧、保存し、または第三者へ開示することがあります。<br>
+                                    （１）会員の同意を得たとき<br>
+                                    （２）当社が閲覧等の同意を求める連絡を会員に行なってから７日以内に、当該会員からの回答がなかったとき<br>
+                                    （３）裁判所、警察等の公的機関から、法令に基づく正式な照会を受けたとき<br>
+                                    （４）法律に従い開示の義務を負うとき<br>
+                                    （５）会員が第１０条各号に該当する禁止行為を行ったとき<br>
+                                    （６）事業者、他の会員又は第三者の生命・身体・その他重要な権利を保護するために必要なとき<br>
+                                    （７）本サービスのメンテナンスや技術的不具合解消のために必要があるとき<br>
+                                    （８）上記各号に準じる必要性があるとき<br>
+                                    ５　当社は、以下のいずれかに該当し又は該当すると当社が判断した場合は、送信情報について、その全部又は一部を削除することができます。当社は、削除された送信情報について、当該情報の復旧を含めて一切責任を負いません。<br>
+                                    （１）会員の同意を得たとき<br>
+                                    （２）会員が第１０条各号に該当する禁止行為を行ったとき<br>
+                                    （３）その理由を問わず、本契約が終了したとき<br>
+                                    （４）第１３条によって本サービスが変更、中断、終了したとき<br>
+                                    （５）上記各号に準じる必要性があるとき<br>
+                                    ６　第４項及び前項に拘らず、当社は、送信情報を監視する義務は負いません。<br>
+                                    <strong>第１４条　禁止行為</strong><br>
+                                    会員は、本サービスの利用にあたり、以下の各号のいずれかに該当し又は該当すると当社が判断する行為をしてはなりません。<br>
+                                    （１）事業者に関する情報を本サービス以外の目的に利用する行為<br>
+                                    （２）購入の意図がないにもかかわらず事業者に対して購入希望を出すこと、その他公正な取引慣行に反する行為<br>
+                                    （３）事業者に対して行う自社営業もしくは営業目的と取れる行為<br>
+                                    （４）法令に違反する行為<br>
+                                    （５）犯罪に関連する行為<br>
+                                    （６）公序良俗に反する行為<br>
+                                    （７）所属する業界団体の内部規則に違反する行為<br>
+                                    （８）当社、事業者、他の会員又第三者の知的財産権等、プライバシー権、名誉権、信用、肖像権、その他一切の権利又は利益を侵害する行為<br>
+                                    （９）本サービスの運営・維持を妨げる行為<br>
+                                    （10）本サービスのネットワーク又はシステム等に過度の負担をかける行為<br>
+                                    （11）本サービスのネットワークに不正にアクセスする行為<br>
+                                    （12）第三者になりすます行為<br>
+                                    （13）第三者に本サービスを利用させる行為<br>
+                                    （14）当社が事前に承諾しない形での宣伝、広告、勧誘又は営業をする行為<br>
+                                    （15）事業者又は他の会員の情報を収集する行為<br>
+                                    （16）当社が本サービスの運営において必要な範囲で複製、改変、送信その他の行為を行うことが事業者、他の会員又は第三者の知的財産権等、プライバシー、名誉、信用、肖像、その他一切の権利又は利益の侵害に該当することとなる情報を、当社に送信する行為<br>
+                                    （17）本サービスにより利用しうる情報を改ざんする行為<br>
+                                    （18）反社会的勢力等（暴力団、暴力団員、右翼団体、反社会的勢力、その他これに準ずる者を意味します。以下同じ。）の維持、運営若しくは経営に協力若しくは関与する等反社会的勢力等との何らかの交流若しくは関与をする行為<br>
+                                    （19）前各号の行為を直接又は間接に惹起し又は容易にする行為<br>
+                                    （20）その他、当社が不適切と判断する行為<br>
+                                    <strong>第１５条　登録抹消等</strong><br>
+                                    １　当社は、会員が以下の各号のいずれかに該当し又は該当すると当社が判断した場合は、事前に通知することなく、送信情報を削除し若しくは会員について本サービスの利用を一時的に停止し又は会員としての登録を抹消して本契約を解除することができます。<br>
+                                    （１）会員がサービスを購入した事業者から会員に関する苦情が頻発したとき<br>
+                                    （２）本規約のいずれかの条項に違反した場合<br>
+                                    （３）第４条第３項各号に該当することが判明した場合<br>
+                                    （４）支払停止若しくは支払い不能となり、又は、破産、民事再生手続き開始、会社更生手続開始、特別清算手続開始もしくはこれらに類する手続きの開始の申立てがあった場合<br>
+                                    （５）自ら振出し、もしくは引受けた手形または小切手につき、不渡りの処分を受けた場合<br>
+                                    （６）差押、仮差押、仮処分、強制執行または競売の申立てがあった場合<br>
+                                    （７）租税公課を滞納し、その保全差押を受けた場合<br>
+                                    （８）解散または営業停止状態となった場合<br>
+                                    （９）第４乃至第８号の他、会員の信用状態に重大な変化が生じたと当社が判断した場合<br>
+                                    （10）１ヶ月以上本サービスの利用がなく、当社からの問い合わせに対して、１ヶ月以上応答がない場合<br>
+                                    （11）その他、当社が本サービスの利用を適当でないと判断した場合<br>
+                                    ２　会員は、前項各号のいずれかに該当し、又は、該当すると当社が判断した場合は、当社に対して負っている債務の一切について期限の利益を失い、直ちに当社に対する全ての債務の履行をしなければなりません。<br>
+                                    ３　当社は、本条に基づき当社が行った行為により会員に生じた損害について一切の責任を負いません。<br>
+                                    <strong>第１６条　有効期間</strong><br>
+                                    １　会員は、当社所定の方法により、いつでも会員登録の抹消を申し出ることができます。<br>
+                                    ２　本契約の有効期間は、会員登録が抹消されるまでとします。<br>
+                                    ３　本契約が終了した場合、当社は、送信情報を返還又は保管等する義務を負わず、会員に何らの通知等することなく、これを削除できるものとします。<br>
+                                    <strong>第１７条　本サービスの変更、中断、終了</strong><br>
+                                    当社は、事業上の理由、システムの過負荷・システムの不具合・メンテナンス・法令の制定改廃・天災地変・偶発的事故・停電・通信障害・不正アクセス、その他の事由により、事前の予告なくして、本サービスをいつでも変更、中断、終了することができます。当社は、上記各事由又はこれによる上記本サービスの変更、中断、終了によって会員に生じたいかなる損害についても、一切責任を負いません。<br>
+                                    <strong>第１８条　紛争処理及び損害賠償</strong><br>
+                                    １　会員は、本サービスの利用に関連して当社に損害を与えた場合、当社に対し、その損害を賠償するものとします。<br>
+                                    ２　会員が、本サービスに関連して事業者、他の会員又は第三者からクレームを受け又は事業者、他の会員又は第三者との間で紛争が生じた場合、会員は、直ちにその内容を当社に通知すると共に、会員の費用と責任において、当該クレーム又は紛争を処理し、その進捗及び結果を当社に報告するものとします。当社は、会員と事業者、他の会員又は第三者との間における交渉、取引、支払等には、一切関与しません。<br>
+                                    ３　当社が、会員による本サービスの利用に関連して事業者、他の会員又は第三者からクレームを受け又は事業者、他の会員又は第三者との間で紛争が生じた場合、会員は、会員の費用と責任において、当該クレーム又は紛争を処理し、その進捗及び結果を当社に報告すると共に、当社が支払いを余儀なくされた金額その他の損害を賠償するものとします。<br>
+                                    <strong>第１９条　秘密保持</strong><br>
+                                    会員は、本サービスに関連して当社が会員に対して秘密に扱うことを指定して開示した情報について、当社の事前の書面による承諾がある場合を除き、開示目的以外に利用せず、また、会員、他の会員又は第三者に開示しないものとします。<br>
+                                    <strong>第２０条　個人情報の取扱い</strong><br>
+                                    当社は、個人情報を、当社所定の「<a href="http://hinagata-shiritai.com/policy/privacy/">プライバシーポリシー</a>」に基づき、適切に取り扱うものとします。<br>
+                                    <strong>第２１条　本規約の変更</strong><br>
+                                    １　当社は、その理由を問わず本規約をいつでも任意に変更することができるものとし、会員はこれに同意します。<br>
+                                    ２　当社が別途定める場合を除き、本規約の変更は、本サイトに掲載する方法によって会員へ通知します。<br>
+                                    ３　本規約の変更は、前項の通知の時点より効力を生じるものとします。<br>
+                                    ４　会員が本規約の変更を同意しない場合、会員の唯一の対処方法は、会員登録を抹消するのみとなります。<br>
+                                    <strong>第２２条　連絡</strong><br>
+                                    １　当社から会員への連絡は、書面の送付、電子メールの送信、または本サービス若しくは本サイトへの掲載等、当社が適当と判断する手段によって行います。当該連絡が、電子メールの送信又は本サービス若しくは本サイトへの掲載によって行われる場合は、インターネット上に配信された時点で会員に到達したものとします。<br>
+                                    ２　会員から当社への連絡は、当社所定の問合せフォームから、又は問合せ用メールアドレス宛に行うものとします。当社は、問合せフォーム又は問合せ用メールアドレス以外からの問い合わせについては、対応できません。<br>
+                                    <strong>第２３条　権利義務の譲渡</strong><br>
+                                    １　当社は、会員に対する債権を第三者に譲渡できるものとし、会員は、そのために会員の個人情報等が当該第三者に提供されることを承諾するものとします。<br>
+                                    ２　会員は、当社の事前の書面による承諾なく、本契約上の地位又は本サービスに基づく権利義務につき、第三者に対し、譲渡、移転、担保設定、その他の処分をすることはできないこととします。<br>
+                                    <strong>第２４条　完全合意</strong><br>
+                                    本規約は、本契約に係る当事者間の完全な合意を構成し、口頭又は書面を問わず、本契約に係る当事者間の事前の合意、表明及び了解に優先します。<br>
+                                    <strong>第２５条　分離可能性</strong><br>
+                                    本規約の規定の一部が法令又は裁判所により違法、無効又は不能であるとされた場合においても、本規約のその他の規程は有効に存続します。<br>
+                                    <strong>第２６条　準拠法</strong><br>
+                                    本規約の準拠法は、日本法とします。<br>
+                                    <strong>第２７条　管轄</strong><br>
+                                    本サービスに関連して会員と当社の間で紛争が生じた場合、東京地方裁判所を第一審の専属的合意管轄裁判所とします。<br>
+                                    &nbsp;<br>
+                                    以上<br>
+                                    ２０１６年１２月２０日　制定<br>
+                                </div>
+                                <div class="text-center w-100 pt-3">
+                                    <div class="form-check d-inline-flex">
+                                        <input class="form-check-input" type="checkbox" id="formCheckRules">
+                                        <label class="form-check-label ps-2" for="formCheckRules">利用規約を理解しました</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <button disabled class="btn btn-primary btn-lg" type="button" data-bs-target="#modal1" data-bs-toggle="modal" id="btnAgree">
+                                    同意して会員登録へ
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="modal_2">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">入力内容確認</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>下記の内容で送信してもよろしいでしょうか？<br>よろしければ、一番下の「会員登録をする」ボタンをクリックしてください。</p>
+                <div class="col-md-8 mx-auto">
+                    <div class="block-heading"></div>
+                    <form id="form2">
+                        <div class="form-group mb-3">
+                            <label class="form-label">お名前</label>
+                            <input class="form-control" type="text" name="SellerName" id="confirm_SellerName" readonly>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">お名前(フリガナ)</label>
+                            <input class="form-control" type="text" name="SellerKana" id="confirm_SellerKana" readonly>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">生年月日</label>
+                            <input class="form-control cap-fon-form-w200" type="date" min="1900-01-01" max="2100-12-31" name="Birthday" id="confirm_Birthday" readonly>
+                        </div>
+                        <div class="form-group mb-3 cap-fon-form-w350">
+                            <label class="form-label">郵便番号</label>
+                            <div class="row">
+                                <div class="col-8 d-inline-flex">
+                                    <span class="align-self-center pe-2">〒</span>
+                                    <input class="form-control w-25 text-center" type="text" name="ZipCode1" id="confirm_ZipCode1" readonly>
+                                    <span class="align-self-center pe-2 pe-2">-</span>
+                                    <input class="form-control text-center w-50" type="text" name="ZipCode2" id="confirm_ZipCode2" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">都道府県</label>
+                            <input class="form-control" type="text" name="PrefName" id="confirm_PrefName" readonly>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">市町村区</label>
+                            <input class="form-control" type="text" name="CityName" id="confirm_CityName" readonly>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">町域名</label>
+                            <input class="form-control" type="text" name="TownName" id="confirm_TownName" readonly>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">町名・番地など</label>
+                            <input class="form-control" type="text" name="Address1" id="confirm_Address1" readonly>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">建物名</label>
+                            <input class="form-control" type="text" name="Address2" id="confirm_Address2" readonly>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">電話番号</label>
+                            <input class="form-control" type="tel" name="HousePhone" id="confirm_HousePhone" readonly>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">携帯番号</label>
+                            <input class="form-control" type="tel" name="HandyPhone" id="confirm_HandyPhone" readonly>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">FAX番号</label>
+                            <input class="form-control" type="tel" name="Fax" id="confirm_Fax" readonly>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">メールアドレス</label>
+                            <input class="form-control" type="email" name="MailAddress" id="confirm_MailAddress" readonly>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light btn-lg" type="button" data-bs-dismiss="modal">戻る</button>
+                <button class="btn btn-primary btn-lg" type="button" id="btnRegistration">
+                    会員を登録する
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="modal_3">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">会員登録完了</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <section class="newsletter-subscribe">
+                    <div class="container">
+                        <div class="intro"></div>
+                        <form class="d-flex justify-content-center flex-wrap mx-auto" style="text-align: center;" id="form3">
+                            <h1 class="cap-icon-h1"><i class="fa fa-user-circle-o cap-icon-i"></i></h1>
+                        </form>
+                    </div>
+                    <h4 class="text-center align-self-center pt-2">会員登録ありがとうございます。</h4>
+                </section>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary btn-lg" type="button" id="btnStartAssessment">査定開始</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/a_register")
+}

@@ -71,6 +71,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AESCryption.cs" />
+    <Compile Include="PasswordHash.cs" />
+    <Compile Include="Utilities.cs" />
     <Compile Include="MessageBL.cs" />
     <Compile Include="SendMail.cs" />
     <Compile Include="ValidatorAllItems.cs" />

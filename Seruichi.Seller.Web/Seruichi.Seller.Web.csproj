@@ -149,6 +149,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\a_registerController.cs" />
     <Compile Include="Controllers\a_loginController.cs" />
     <Compile Include="Controllers\Common\CommonApiController.cs" />
     <Compile Include="Controllers\a_indexController.cs" />
@@ -166,25 +167,27 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\t_dashboard\bootstrap\css\bootstrap.min.css" />
-    <Content Include="Content\t_dashboard\bootstrap\js\bootstrap.min.js" />
-    <Content Include="Content\t_dashboard\css\index.css" />
-    <Content Include="Content\t_dashboard\css\jquery.dataTables.min.css" />
-    <Content Include="Content\t_dashboard\css\style.css" />
-    <Content Include="Content\t_login\bootstrap\css\bootstrap.min.css" />
-    <Content Include="Content\t_login\bootstrap\js\bootstrap.min.js" />
-    <Content Include="Content\t_login\css\Clients-UI.css" />
-    <Content Include="Content\t_login\css\Contact-Form-Clean.css" />
-    <Content Include="Content\t_login\css\Login-Form-Clean.css" />
-    <Content Include="Content\t_login\css\Soft-UI-Aside-Navbar.css" />
-    <Content Include="Content\t_login\css\style.css" />
-    <Content Include="Content\t_login\fonts\font-awesome.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\css\Bootstrap-Chat-1.css" />
+    <Content Include="Content\css\Bootstrap-Chat.css" />
+    <Content Include="Content\css\Contact-FormModal-Contact-Form-with-Google-Map.css" />
+    <Content Include="Content\css\Highlight-Blue.css" />
+    <Content Include="Content\css\Highlight-Clean.css" />
+    <Content Include="Content\css\Ludens-Users---2-Register.css" />
+    <Content Include="Content\css\Ludens-Users---25-After-Register.css" />
+    <Content Include="Content\css\Newsletter-Subscription-Form.css" />
+    <Content Include="Content\css\Profile-Edit-Form-1.css" />
+    <Content Include="Content\css\Profile-Edit-Form.css" />
+    <Content Include="Content\css\Registration-Form-with-Photo.css" />
+    <Content Include="Content\css\Sidebar-1.css" />
+    <Content Include="Content\css\Sidebar-Menu-1.css" />
+    <Content Include="Content\css\Sidebar-Menu.css" />
+    <Content Include="Content\css\Sidebar.css" />
+    <Content Include="Content\css\Simple-Bootstrap-Chat.css" />
+    <Content Include="Content\css\Soft-UI-Aside-Navbar.css" />
     <Content Include="Content\fonts\ionicons.min.css" />
     <Content Include="Content\fonts\ionicons.svg" />
-    <Content Include="Content\t_login\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\t_login\fonts\ionicons.min.css" />
-    <Content Include="Content\bootstrap\bootstrap.min.css" />
-    <Content Include="Content\bootstrap\bootstrap.min.js" />
     <Content Include="Content\css\auctor-index.css" />
     <Content Include="Content\css\Clients-UI.css" />
     <Content Include="Content\css\Contact-Form-Clean.css" />
@@ -195,8 +198,6 @@
     <Content Include="Content\typeahead\typeahead.custom.css" />
     <Content Include="Content\css\validation.css" />
     <Content Include="Content\css\loading.css" />
-    <Content Include="Content\css\errorpage.css" />
-    <Content Include="Content\bootstrap\Soft-UI-Aside-Navbar.css" />
     <Content Include="Content\fonts\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\modernizr\modernizr-2.8.3.js" />
@@ -206,7 +207,6 @@
     <Content Include="Content\typeahead\typeahead.bundle.min.js" />
     <Content Include="Content\typeahead\typeahead.jquery.js" />
     <Content Include="Content\typeahead\typeahead.jquery.min.js" />
-    <Content Include="Content\t_login\fonts\ionicons.svg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
@@ -214,12 +214,11 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Scripts\a_register.js" />
     <Content Include="Scripts\a_login.js" />
     <Content Include="Scripts\a_index.js" />
     <Content Include="Content\scripts\validation_jqueryextend.js" />
     <Content Include="Content\scripts\common.js" />
-    <Content Include="Scripts\t_login.js" />
-    <Content Include="Scripts\t_seller_list.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -239,24 +238,17 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\ionicons.eot" />
     <Content Include="Content\fonts\ionicons.ttf" />
-    <Content Include="Content\t_login\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\t_login\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\t_login\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\t_login\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\t_login\fonts\FontAwesome.otf" />
-    <Content Include="Content\t_login\fonts\ionicons.eot" />
-    <Content Include="Content\t_login\fonts\ionicons.ttf" />
-    <Content Include="Content\t_login\fonts\ionicons.woff" />
     <Content Include="Content\fonts\ionicons.eot" />
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
     <None Include="packages.config" />
     <Content Include="Views\a_index\Index.cshtml" />
-    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Error\InternalServerError.cshtml" />
     <Content Include="Views\Error\BadRequest.cshtml" />
     <Content Include="Views\Error\Unauthorized.cshtml" />
     <Content Include="Views\Error\Forbidden.cshtml" />
@@ -264,6 +256,8 @@
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <Content Include="Views\a_login\Index.cshtml" />
     <Content Include="Views\Shared\_ErrorLayout.cshtml" />
+    <Content Include="Views\a_register\Index.cshtml" />
+    <Content Include="Views\Error\BusinessError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
