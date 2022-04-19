@@ -30,23 +30,24 @@ BEGIN
 
 	SELECT 
 		   Row_Number() Over (Order By A.SellerCD) As [NO],
-		   CASE   
+		   ISNULL(CASE   
 				WHEN G.c > 0 THEN N'交渉中' 
 				WHEN ((G.c = 0) and (E.a != F.b)) THEN N'見込'
 				WHEN ((G.c = 0) and (E.a = F.b)) THEN N'終了'
-		   END as N'ステータス',
+		   END,'') as N'ステータス',
 		   CASE   
 				WHEN A.InvalidFLG = 0 THEN ''
 				ELSE N'✓'
 		   END as N'無効会員',
-		   A.SellerCD as N'売主CD',
-		   A.SellerName as N'売主名',
-		   A.PrefName as N'居住地',
-		   FORMAT (A.InsertDateTime, 'yyyy/MM/dd hh:mm:ss') as N'登録日時',
-		   FORMAT (D.DeepAssDateTime, 'yyyy/MM/dd hh:mm:ss') as N'査定依頼日時',
-		   FORMAT (D.PurchReqDateTime, 'yyyy/MM/dd hh:mm:ss') as N'買取依頼日時',
-		   E.a as N'登録数',
-		   F.b as N'成約数'
+		   ISNULL(A.SellerCD,'') as N'売主CD',
+		   ISNULL(A.SellerName,'') as N'売主名',
+		   ISNULL(A.PrefName,'')as N'居住地',
+		   
+		   ISNULL(FORMAT (A.InsertDateTime, 'yyyy/MM/dd hh:mm:ss'),'') as N'登録日時',
+		   ISNULL(FORMAT (D.DeepAssDateTime, 'yyyy/MM/dd hh:mm:ss'),'') as N'査定依頼日時',
+		   ISNULL(FORMAT (D.PurchReqDateTime, 'yyyy/MM/dd hh:mm:ss'),'') as N'買取依頼日時',
+		   ISNULL(E.a,'') as N'登録数',
+		   ISNULL(F.b,'') as N'成約数'
 		   
 		From M_Seller A 
 		outer apply (select top 1 C.DeepAssDateTime as DeepAssDateTime ,C.PurchReqDateTime as PurchReqDateTime
