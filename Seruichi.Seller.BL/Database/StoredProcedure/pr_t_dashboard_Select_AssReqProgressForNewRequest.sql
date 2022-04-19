@@ -15,9 +15,9 @@ BEGIN
 	select FORMAT(count(AssReqID),'N0') as New_Request_Cases_Count																						
 	from D_AssReqProgress A														
 	left outer join M_SellerMansion B																							
-	on B.SellerMansionID =	A.SellerMansionID							
+	on	B.SellerMansionID =	A.SellerMansionID							
 	Where A.DeepAssDateTime	 is not	Null											
-	and A.IntroDateTime is Null											
+	and A.ConfirmDateTime is Null											
 	and A.DeleteDateTime is	Null											
 	and B.DeleteDateTime is	Null	
 END

@@ -17,12 +17,17 @@ namespace Seruichi.Tenfold.Web.Controllers
     public class t_loginController : BaseController
     {
         // GET: t_login
-        public ActionResult Index()
+        public ActionResult Login()
         {
             Session.Clear();
             SessionAuthenticationHelper.CreateAnonymousUser();
 
             return View();
+        }
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login", "t_login");
         }
         [HttpPost]
         public ActionResult select_M_TenfoldStaff(t_loginModel model)

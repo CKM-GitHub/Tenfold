@@ -290,7 +290,7 @@
     <Content Include="Views\Shared\t_seller_list\_t_seller_list_sellerPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\t_dashboard\Index.cshtml" />
-    <Content Include="Views\t_login\Index.cshtml" />
+    <Content Include="Views\t_login\Login.cshtml" />
     <Content Include="Views\t_seller_list\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
