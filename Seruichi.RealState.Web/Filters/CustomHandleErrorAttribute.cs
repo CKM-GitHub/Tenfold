@@ -22,25 +22,20 @@ namespace Seruichi.RealState.Web
             }
 
             var ex = filterContext.Exception;
-            if (ex is HttpException)
-            {
-                int statusCode = ((HttpException)ex).GetHttpCode();
-                if (statusCode == (int)HttpStatusCode.BadRequest ||
-                    statusCode == (int)HttpStatusCode.Unauthorized ||
-                    statusCode == (int)HttpStatusCode.Forbidden ||
-                    statusCode == (int)HttpStatusCode.NotFound)
-                {
-                    return;
-                }
-            }
 
-            string userInfo = "LoginUser:" + HttpContext.Current.Session["UserInfo"].ToStringOrEmpty();
-            Logger.GetInstance().Error(filterContext.Exception, userInfo);
+            int statusCode = ex is HttpException ? ((HttpException)ex).GetHttpCode() : 0;
+            if (statusCode != (int)HttpStatusCode.BadRequest &&
+                statusCode != (int)HttpStatusCode.Unauthorized &&
+                statusCode != (int)HttpStatusCode.Forbidden &&
+                statusCode != (int)HttpStatusCode.NotFound)
+            {
+                Logger.GetInstance().Error(filterContext.Exception);
+            }
 
             if (filterContext.HttpContext.Request.IsAjaxRequest())
             {
                 //Application_Errorは呼ばれない
-                HandleAjaxRequestException(filterContext);
+                HandleAjaxRequestException(filterContext, statusCode);
             }
             else
             {
@@ -49,13 +44,17 @@ namespace Seruichi.RealState.Web
             }
         }
 
-        private void HandleAjaxRequestException(ExceptionContext filterContext)
+        private void HandleAjaxRequestException(ExceptionContext filterContext, int statusCode)
         {
             if (filterContext.ExceptionHandled)
             {
                 return;
             }
 
+            filterContext.ExceptionHandled = true;
+            filterContext.HttpContext.Response.Clear();
+            filterContext.HttpContext.Response.StatusCode = statusCode == 0 ? (int)HttpStatusCode.InternalServerError: statusCode;
+            filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
             filterContext.Result = new JsonResult
             {
                 Data = new
@@ -65,10 +64,6 @@ namespace Seruichi.RealState.Web
                 },
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
-            filterContext.ExceptionHandled = true;
-            filterContext.HttpContext.Response.Clear();
-            filterContext.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
         }
     }
 }

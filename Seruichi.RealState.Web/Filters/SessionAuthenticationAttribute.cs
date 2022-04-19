@@ -1,68 +1,62 @@
-﻿using Models;
-using System;
+﻿using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
+//using System.Web.Security;
 
 namespace Seruichi.RealState.Web
 {
     public class SessionAuthenticationAttribute : FilterAttribute, IActionFilter
     {
-        public bool Enabled { get; set; } = true;
-
         public void OnActionExecuted(ActionExecutedContext filterContext)
         {
         }
 
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (!Enabled) return;
-
             var request = filterContext.HttpContext.Request;
-            var user = SessionAuthenticationHelper.GetUserFromSession();
 
-            if (user == null)
+            bool allowAnonymous = filterContext.ActionDescriptor.GetCustomAttributes(typeof(AllowAnonymousAttribute), true).Any()
+                                    || filterContext.ActionDescriptor.ControllerDescriptor.GetCustomAttributes(typeof(AllowAnonymousAttribute), true).Any();
+
+            var user = SessionAuthenticationHelper.GetUserFromSession();
+            if (!allowAnonymous && !SessionAuthenticationHelper.ValidateUser(user))
             {
                 SetUnauthorized(request, filterContext);
                 return;
             }
 
-            FormsIdentity identity = HttpContext.Current.User.Identity as FormsIdentity;
-            if (identity != null)
+            //FormsIdentity identity = HttpContext.Current.User.Identity as FormsIdentity;
+            //if (identity != null && identity.IsAuthenticated)
+            //{
+            //    FormsAuthenticationTicket ticket = identity.Ticket;
+            //    //if (ticket.Expired)
+            //    //{
+            //    //    SetUnauthorized(request, filterContext);
+            //    //    return;
+            //    //}
+            //    if (ticket.Name != user.UserID)
+            //    {
+            //        SetUnauthorized(request, filterContext);
+            //        return;
+            //    }
+            //}
+
+            if (request.HttpMethod == WebRequestMethods.Http.Post)
             {
-                FormsAuthenticationTicket ticket = identity.Ticket;
-                if (ticket.Expired)
+                if (user == null)
                 {
                     SetUnauthorized(request, filterContext);
                     return;
                 }
-                if (ticket.Name != user.UserID)
+
+                string requestVerificationToken = request.IsAjaxRequest() ?
+                    request.Headers["RequestVerificationToken"] : request.Form["RequestVerificationToken"];
+
+                if (user.VerificationToken != requestVerificationToken)
                 {
                     SetUnauthorized(request, filterContext);
                     return;
-                }
-            }
-            else
-            {
-                if (request.HttpMethod == WebRequestMethods.Http.Post)
-                {
-                    if (request.IsAjaxRequest())
-                    {
-                        if (user.VerificationToken != request.Headers["RequestVerificationToken"])
-                        {
-                            SetUnauthorized(request, filterContext);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        if (user.VerificationToken != request.Form["RequestVerificationToken"])
-                        {
-                            SetUnauthorized(request, filterContext);
-                            return;
-                        }
-                    }
                 }
             }
         }
@@ -71,13 +65,15 @@ namespace Seruichi.RealState.Web
         {
             if (request.IsAjaxRequest())
             {
+                filterContext.HttpContext.Response.Clear();
                 filterContext.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                filterContext.Result = new HttpStatusCodeResult((int)HttpStatusCode.Unauthorized);
             }
             else
             {
+                filterContext.HttpContext.Response.Clear();
                 filterContext.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                filterContext.Result = new RedirectResult("~/a_index/Index");
+                filterContext.Result = new RedirectResult("~/a_login/Index");
             }
         }
     }

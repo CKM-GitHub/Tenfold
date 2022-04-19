@@ -1,25 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Seruichi.Common;
+using System;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Net;
 
 namespace Seruichi.RealState.Web.Controllers
 {
     [CustomHandleError(Enabled = false)]
     [BrowsingHistory(Enabled = false)]
-    [SessionAuthentication(Enabled = false)]
     [AllowAnonymous]
     public class ErrorController : Controller
     {
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult BusinessError(string id)
+        {
+            Response.TrySkipIisCustomErrors = true;
+            var message = StaticCache.GetMessage(id);
+            ViewBag.ErrorTitle = message.MessageText1;
+            ViewBag.ErrorMessage = message.MessageText2;
+            ViewBag.ErrorDesctiption = message.MessageText3;
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult InternalServerError()
         {
             Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             Response.TrySkipIisCustomErrors = true;
             return View();
         }
 
+        [HttpGet]
         public ActionResult BadRequest()
         {
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
@@ -27,6 +38,7 @@ namespace Seruichi.RealState.Web.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Unauthorized()
         {
             Response.StatusCode = (int)HttpStatusCode.Unauthorized;
@@ -34,6 +46,7 @@ namespace Seruichi.RealState.Web.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Forbidden()
         {
             Response.StatusCode = (int)HttpStatusCode.Forbidden;
@@ -41,6 +54,7 @@ namespace Seruichi.RealState.Web.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult NotFound()
         {
             Response.StatusCode = (int)HttpStatusCode.NotFound;
@@ -48,18 +62,16 @@ namespace Seruichi.RealState.Web.Controllers
             return View();
         }
 
-        public ActionResult Raise(int? httpCode)
+        [HttpGet]
+        public ActionResult Test(int? httpCode)
         {
-            if (!httpCode.HasValue)
+            if (httpCode.HasValue)
             {
-                throw new ApplicationException("エラーテストです。");
-            }
-            else
-            {
-                //return new HttpStatusCodeResult((int)httpCode);
                 throw new HttpException(
                     httpCode.Value, string.Format("ステータスコード {0} のエラーテストです。", httpCode));
             }
+
+            throw new ApplicationException("エラーテストです。");
         }
     }
 }

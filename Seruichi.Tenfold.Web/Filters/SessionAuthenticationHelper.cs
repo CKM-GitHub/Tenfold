@@ -1,7 +1,7 @@
 ﻿using Models;
 using System;
-using System.Security.Cryptography;
 using System.Web;
+using Seruichi.Common;
 
 namespace Seruichi.Tenfold.Web
 {
@@ -9,9 +9,14 @@ namespace Seruichi.Tenfold.Web
     {
         public static string SESSION_KEY = "USER_AUTHENTICATION";
 
-        public static string NewVerificationToken { get { return GenerateRandomDataBase64(32); } }
+        public static string NewVerificationToken {
+            get
+            {
+                return new AESCryption().GenerateRandomDataBase64(32);
+            }
+        }
 
-        public static LoginUser CreateAnonymousUser()
+        public static void CreateAnonymousUser()
         {
             var userInfo = new LoginUser()
             {
@@ -19,10 +24,9 @@ namespace Seruichi.Tenfold.Web
                 VerificationToken = NewVerificationToken
             };
             HttpContext.Current.Session[SESSION_KEY] = userInfo;
-            return userInfo;
         }
 
-        public static LoginUser CreateLoginUser(string id)
+        public static void CreateLoginUser(string id)
         {
             var userInfo = new LoginUser()
             {
@@ -31,7 +35,12 @@ namespace Seruichi.Tenfold.Web
             };
 
             HttpContext.Current.Session[SESSION_KEY] = userInfo;
-            return userInfo;
+        }
+
+        public static void CreateLoginUser(LoginUser user)
+        {
+            user.VerificationToken = NewVerificationToken;
+            HttpContext.Current.Session[SESSION_KEY] = user;
         }
 
         public static LoginUser GetUserFromSession()
@@ -41,26 +50,24 @@ namespace Seruichi.Tenfold.Web
 
         public static string GetVerificationToken()
         {
-            var userAuth = GetUserFromSession();
-            if (userAuth == null)
+            var user = GetUserFromSession();
+            if (user == null)
             {
                 return "";
             }
             else
             {
-                return userAuth.VerificationToken;
+                return user.VerificationToken;
             }
         }
 
-        public static string GenerateRandomDataBase64(int length)
+        public static bool ValidateUser(LoginUser user)
         {
-            var rnd = new byte[length];
-            using (var rng = new RNGCryptoServiceProvider())
+            if (user == null || user.UserID == "unknown")
             {
-                rng.GetBytes(rnd);
+                return false;
             }
-            return Convert.ToBase64String(rnd);
+            return true;
         }
-
     }
 }
