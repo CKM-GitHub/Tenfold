@@ -45,6 +45,7 @@ const regexPattern = {
     singlebyte_numberAlpha: "^[0-9a-zA-Z]+$",
     moeney: "^[0-9,]+$",
     numeric: "^[0-9.]+$",
+    dateformat : /^\d{4}-\d{2}-\d{2}$/,
 }
 
 const common = {
@@ -129,7 +130,7 @@ const common = {
             }
         }).fail(function (XMLHttpRequest, status, e) {
             common.hideLoading(disableSelector);
-            alert(XMLHttpRequest.status);
+            //alert(XMLHttpRequest.status);
             if (failCallback) {
                 failCallback();
             }
@@ -153,7 +154,7 @@ const common = {
                 successCallback(data);
             }
         }).fail(function (XMLHttpRequest, status, e) {
-            alert(XMLHttpRequest.status);
+            //alert(XMLHttpRequest.status);
             if (failCallback) {
                 failCallback();
             }
@@ -232,21 +233,20 @@ const common = {
         const isMoney = $ctrl.attr("data-validation-money");
         const customValidation = $ctrl.attr("data-validation-custom");
         const isDate = $ctrl.attr("data-validation-datecheck");
-        
+        const isMaxlengthCheck = $ctrl.attr("data-validation-MaxLength");
+        const isDateCompare = $ctrl.attr("data-validation-datecompare");
+        const isOneByteCharacter = $ctrl.attr("data-validation-onebyte-character");
+        const ischeckboxLenght = $ctrl.attr("data-validation-checkboxlenght");
+        const isMaxlengthCheckforsellerlist = $ctrl.attr("data-validation-MaxLengthforsellerlist");
 
         let inputValue = "";
         if (type === 'radio') {
             inputValue = $('input[name="' + name + '"]:radio:checked').val();
-        } else {
+        }
+        else {
             inputValue = $ctrl.val().trimEnd();
             $ctrl.val(inputValue);
         }
-
-        if (type == 'date') {
-            inputValue = $ctrl.val().trimEnd();
-            $ctrl.val(inputValue);
-        }
-       
 
         //replace text
         if (isSingleByte || isSingleByteNumber || isSingleByteNumberAlpha || isNumeric || isMoney) {
@@ -264,7 +264,7 @@ const common = {
             && !isSingleDoubleByte
             && !isDoubleByte
             && !isSingleByte && !isSingleByteNumber && !isSingleByteNumberAlpha
-            && !isNumeric && !isMoney && !isDate
+            && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter && !ischeckboxLenght && !isMaxlengthCheckforsellerlist
             && !customValidation) return true;
 
         if (isRequired) {
@@ -392,8 +392,56 @@ const common = {
                 $ctrl.val(Number(inputValue).toLocaleString());
             }
 
+
+            if (isOneByteCharacter) {
+                const strByte = this.getStringByteCount(inputValue);
+                if (strByte != inputValue.length) {
+                    $ctrl.showError(this.getMessage('E104'));
+                    return;
+                }
+            }
+
+
+            if (isMaxlengthCheck) {
+                const maxLength = $ctrl.data('digits');
+                if (maxLength) {
+                    const byteLength = this.getStringByteCount(inputValue);
+                    if (byteLength > parseInt(maxLength)) {
+                        $ctrl.showError(this.getMessage('E105'));
+                        return;
+                    }
+                }
+            }
+
+            if (isMaxlengthCheckforsellerlist) {
+                const maxLength = $ctrl.data('digits');
+                if (maxLength) {
+                    const byteLength = inputValue.length;
+                    if (byteLength > parseInt(maxLength)) {
+                        $ctrl.showError(this.getMessage('E105'));
+                        return;
+                    }
+                }
+            }
+
             if (isDate) {
-                alert("Error Occur");
+                if (!inputValue.match(regexPattern.dateformat)) {
+                    $ctrl.showError(this.getMessage('E108'));
+                    return;
+                }
+            }
+
+            if (isDateCompare) {
+                if (!common.compareDate($("#StartDate").val(), $("#EndDate").val())) {
+                    $ctrl.showError(this.getMessage('E111'));
+                    return;
+                }
+            }
+            if (ischeckboxLenght) {                
+                if (!common.checkboxlengthCheck($ctrl.attr('class'))) {
+                    $ctrl.showError(this.getMessage('E112'));
+                    return;
+                }
             }
         }
 
@@ -409,9 +457,61 @@ const common = {
         else
             $ctrl.hideError();
 
+        if (type === 'checkbox')
+            $('input[name="' + name + '"]:checkbox').hideError();
+        else
+            $ctrl.hideError();
+
         return true;
     },
 
+    compareDate: function compareTwoDate(d1, d2) {
+        const date1 = new Date(d1);
+        const date2 = new Date(d2);
+        let success = true;
+        if (date1 > date2) {
+            success = false;
+        }
+        return success;
+    },
+    checkboxlengthCheck: function checkboxlengthCheck(className) {
+        if (className.includes(" "))
+            className = className.split(" ")[0];
+        let success = true;
+        let checked = $("." + className + ":checked").length;
+        if (!checked) {
+            success = false;
+        }
+        return success;
+    },
+    getToday: function getToday() {
+        let now = new Date();
+        let day = ("0" + now.getDate()).slice(-2);
+        let month = ("0" + (now.getMonth() + 1)).slice(-2);
+        let today = now.getFullYear() + "-" + (month) + "-" + (day);
+        return today;
+    },
+    getFirstDayofMonth: function getFirstDayofMonth() {
+        let date = new Date();
+        let firstDay = new Date(date.getFullYear(), date.getMonth(), 1);        
+        return firstDay.getFullYear() + "-" + ("0" + (firstDay.getMonth() + 1)).slice(-2) + "-" + ("0" + firstDay.getDate()).slice(-2);
+    },
+    getFirstDayofPreviousMonth: function getFirstDayofPreviousMonth() {
+        let date = new Date();
+        let fdaypremonth = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+        return fdaypremonth.getFullYear() + "-" + ("0" + (fdaypremonth.getMonth() + 1)).slice(-2) + "-" + ("0" + fdaypremonth.getDate()).slice(-2);
+    },
+    getLastDayofPreviousMonth: function getLastDayofPreviousMonth() {
+        let date = new Date();
+        let ldaypremonth = new Date(date.getFullYear(), date.getMonth(), 0);
+        return ldaypremonth.getFullYear() + "-" + ("0" + (ldaypremonth.getMonth() + 1)).slice(-2) + "-" + ("0" + ldaypremonth.getDate()).slice(-2);
+    },
+    getDayaweekbeforetoday: function getDayaweekbeforetoday() {
+        var date = new Date();
+        date.setDate(date.getDate() - 7);
+        let data = date.toISOString().slice(0, 10);
+        return data;
+    },
     checkValidityOnSave: function checkValidityOnSave(selector) {
         let success = true;
         $(selector + ' :input:not(button):not(:hidden):not(:disabled):not([readonly])').each(function () {
@@ -432,4 +532,22 @@ const common = {
         });
     },
 
+    getJSONtoCSV: function JSON2CSV(objArray) {
+        if (!(objArray == "[]")) {
+            var array = typeof JSONString != 'object' ? JSON.parse(objArray) : JSONString;
+            var fields = Object.keys(array[0])
+            var replacer = function (key, value) { return value === null ? null : value }
+            var csv = array.map(function (row) {
+                return fields.map(function (fieldName) {
+                    return JSON.stringify(row[fieldName], replacer)
+                }).join(',')
+            })
+            csv.unshift(fields.join(',')) // add header column
+            csv = csv.join('\r\n');
+            return csv;
+        }
+        else {
+            return "ERROR";
+        }
+    }
 }

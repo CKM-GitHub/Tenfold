@@ -1,61 +1,64 @@
 ﻿const _url = {};
 $(function () {
+    _url.select_M_TenfoldStaff = common.appPath + '/t_login/select_M_TenfoldStaff'
 
-    _url.checkIDpsw = common.appPath + '/t_login/CheckIdpsw';
     setValidation();
     addEvents();
     $('#email').focus();
 });
 
 function setValidation() {
-    //階
+
     $('#email')
         .addvalidation_errorElement("#erroremail")
-        .addvalidation_reqired(true)
-        .addvalidation_singlebyte_number();
-       
-    //階建て
+        .addvalidation_reqired()
+        .addvalidation_onebyte_character()
+        .addvalidation_MaxLength(10);
+   
     $('#password')
-       
         .addvalidation_errorElement("#errorpassword")
-        .addvalidation_reqired(true)
-        .addvalidation_singlebyte_number();
-       
+        .addvalidation_reqired()
+        .addvalidation_onebyte_character()
+        .addvalidation_MaxLength(10);
+
+
+    $('#btnLogin')
+        .addvalidation_errorElement("#errorbtnLogin");
 
 }
 function addEvents() {
+    common.bindValidationEvent('#form1', '');
+    $('#btnLogin').on('click', function () {
+        $form = $('#form1').hideChildErrors();
 
-    //共通チェック処理
-    common.bindValidationEvent('#form1', "");
-
-    $('#email,#password').on('change', function () {
-        const $this = $(this), $email = $('#email'), $password = $('#password')
-
-        if (!common.checkValidityInput($this)) {
+        if (!common.checkValidityOnSave('#form1')) {
+            $form.getInvalidItems().get(0).focus();
             return false;
         }
-
-        let model = {
+        const $this = $(this), $email = $('#email'), $password = $('#password')
+        let model1 = {
             TenStaffCD: $email.val(),
             TenStaffPW: $password.val()
         };
-
-        if (!model.TenStaffCD && !model.TenStaffPW) {
-            $($email, $password).hideError();
-            return;
-        }
-
-        common.callAjax(_url.checkIDpsw, model,
-            function (result) {
-                if (result && result.isOK) {
-                    $($email, $password).hideError();
-                    const data = result.data;
-                }
-                if (result && !result.isOK) {
+        common.callAjaxWithLoading(_url.select_M_TenfoldStaff, model1, this, function (result) {
+            if (result && result.isOK) {
+                //sucess
+                window.location.href = common.appPath +'/t_dashboard/Index';    
+            }
+            if (result && !result.isOK) {
+                if (result.message != null) {
                     const message = result.message;
                     $this.showError(message.MessageText1);
                 }
-            });
+                else {
+                    const errors = result.data;
+                    for (key in errors) {
+                        const target = document.getElementById(key);
+                        $(target).showError(errors[key]);
+                        $form.getInvalidItems().get(0).focus();
+                    }
+                }
+            }
+        });
     });
-    
 }

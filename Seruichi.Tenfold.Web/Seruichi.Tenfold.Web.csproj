@@ -49,6 +49,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -244,6 +245,14 @@
     <Content Include="Content\t_dashboard\css\index.css" />
     <Content Include="Content\t_dashboard\css\jquery.dataTables.min.css" />
     <Content Include="Content\t_dashboard\css\style.css" />
+    <Content Include="Content\t_seller_list\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\t_seller_list\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\t_seller_list\css\index.css" />
+    <Content Include="Content\t_seller_list\css\style.css" />
+    <Content Include="Content\t_seller_list\fonts\font-awesome.min.css" />
+    <Content Include="Content\t_seller_list\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\t_seller_list\fonts\ionicons.min.css" />
+    <Content Include="Content\t_seller_list\fonts\ionicons.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -255,8 +264,10 @@
     <Content Include="Content\fonts\ionicons.eot" />
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
+    <Content Include="Scripts\t_dashboard.js" />
     <Content Include="Scripts\t_login.js" />
     <Content Include="Scripts\t_seller_list.js" />
+    <Content Include="Scripts\t_seller_mansion.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -284,6 +295,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\t_seller_list\js\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -298,6 +310,14 @@
     <Content Include="Content\t_login\fonts\ionicons.eot" />
     <Content Include="Content\t_login\fonts\ionicons.ttf" />
     <Content Include="Content\t_login\fonts\ionicons.woff" />
+    <Content Include="Content\t_seller_list\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\t_seller_list\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\t_seller_list\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\t_seller_list\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\t_seller_list\fonts\FontAwesome.otf" />
+    <Content Include="Content\t_seller_list\fonts\ionicons.eot" />
+    <Content Include="Content\t_seller_list\fonts\ionicons.ttf" />
+    <Content Include="Content\t_seller_list\fonts\ionicons.woff" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\t_seller_mansion\_t_seller_mansionLayout.cshtml" />
     <Content Include="Views\Shared\t_seller_mansion\_t_seller_mansion_menuPartial.cshtml" />

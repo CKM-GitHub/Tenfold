@@ -1,6 +1,8 @@
 ﻿using Models;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace Seruichi.Common
@@ -8,7 +10,7 @@ namespace Seruichi.Common
     public class Validator
     {
         private Encoding encoding = Encoding.GetEncoding("Shift_JIS");
-
+        private Encoding encodingMyan = Encoding.GetEncoding("UTF-8");
         public bool CheckRequired(string inputText, out string errorcd)
         {
             errorcd = "";
@@ -149,11 +151,11 @@ namespace Seruichi.Common
 
             if (string.IsNullOrEmpty(inputText)) return true;
 
-            if (!CheckIsHalfWidth(inputText, 10, out errorcd))
-            {
-                return false;
+            //if (!CheckIsHalfWidth(inputText, 10, out errorcd))
+            //{
+            //    return false;
 
-            }
+            //}
 
             if (inputText.Length > 10)
             {
@@ -205,19 +207,23 @@ namespace Seruichi.Common
         {
             errorcd = "";
 
-            if (!CheckAndFormatDate(fromDate, out errorcd, out string correctFromDate))
-            {
-                return false;
-            }
+            //if (!CheckAndFormatDate(fromDate, out errorcd, out string correctFromDate))
+            //{
+            //    return false;
+            //}
 
-            if (!CheckAndFormatDate(toDate, out errorcd, out string correctToDate))
-            {
-                return false;
-            }
+            //if (!CheckAndFormatDate(toDate, out errorcd, out string correctToDate))
+            //{
+            //    return false;
+            //}
 
-            if (correctFromDate.ToDateTime() > correctToDate.ToDateTime())
+            if (string.IsNullOrEmpty(fromDate) || string.IsNullOrEmpty(toDate)) return true;
+            
+            if (fromDate.Length>10 || toDate.Length > 10) return true;
+
+            if (fromDate.ToDateTime() > toDate.ToDateTime())
             {
-                errorcd = "E103"; //入力された値が正しくありません ★エラーメッセージ未定
+                errorcd = "E111"; //入力された値が正しくありません ★エラーメッセージ未定
                 return false;
             }
             return true;
@@ -239,6 +245,25 @@ namespace Seruichi.Common
             return true;
         }
 
+
+        public bool CheckIsOnlyOneCharacter(string inputText,out string errorcd)
+        {
+            errorcd = "";
+
+            if (string.IsNullOrEmpty(inputText)) return true;
+            if (encoding.GetByteCount(inputText) != inputText.Length)
+            {
+                errorcd = "E104"; //入力できない文字です。
+                return false;
+            }
+
+            if (encodingMyan.GetByteCount(inputText) != inputText.Length)
+            {
+                errorcd = "E104"; //入力できない文字です。
+                return false;
+            }
+            return true;
+        }
         public bool CheckIsHalfWidth(string inputText, int maxLength, out string errorcd)
         {
             return CheckIsHalfWidth(inputText, maxLength, RegexFormat.None, out errorcd);
@@ -390,6 +415,34 @@ namespace Seruichi.Common
 
             return true;
         }
+        public bool CheckCheckBoxLenght(List<string> inputText, out string errorcd)
+        {
+            errorcd = "";
+            int total = inputText.Sum(x => Convert.ToInt32(x));
+            if(total == 0)
+            {
+                errorcd = "E112"; //'１つ以上選択してください'
+                return false;
+            }            
+            return true;
+        }
+
+        //add by pnz
+        public bool CheckMaxLenghtForHalfWidthandFullwidth(string inputText, int maxLength, out string errorcd)
+        {
+            errorcd = "";
+
+            if (string.IsNullOrEmpty(inputText)) return true;
+
+            if (inputText.Length > maxLength)
+            {
+                errorcd = "E105"; //入力できる桁数を超えています。
+                return false;
+            }
+            return true;
+        }
+
+        
 
         public bool CheckIsValidEmail(string mailAddress, out string errorcd)
         {

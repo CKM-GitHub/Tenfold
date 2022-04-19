@@ -1,0 +1,30 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "ログイン";
+}
+@section styles{
+    @Styles.Render("~/Content/r_login")
+}
+
+<form method="post">
+    <h2 class="visually-hidden ">不動産会社ログイン</h2>
+    <div class="illustration"><h1 class="display-1"><i class="icon fa fa-user"></i></h1></div>
+
+    <div class="mb-3 ">
+        <p class="text-center">不動産会社ログイン</p>
+        <input class="form-control cap-fon-form-w250 mx-auto" type="email" name="email" placeholder="会社ID">
+    </div> 
+    <div class="mb-3">
+        <input class="form-control cap-fon-form-w250 mx-auto" type="email" name="email" placeholder="スタッフID">
+    </div>
+    <div class="mb-3">
+        <input class="form-control mx-auto cap-fon-form-w250" type="password" name="password" placeholder="パスワード">
+    </div>
+    <div class="mb-5">
+        <button class="btn btn-primary d-block w-100  cap-fon-form-w250  mx-auto" type="submit">
+            ログイン
+        </button>
+    </div>
+</form>
+

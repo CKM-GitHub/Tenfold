@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace Seruichi.BL
 {
@@ -136,6 +137,60 @@ namespace Seruichi.BL
 
             int diffMonth = (endDate.Month + (endDate.Year - startDate.Year) * 12) - startDate.Month;
             return diffMonth % 12 > 0 ? diffMonth / 12 + 1 : diffMonth / 12;
+        }
+        public string GetTenstaffNamebyTenstaffcd(string staffcd)
+        {
+            string staffName = string.Empty;
+            var sqlParm = new SqlParameter("@TenStaffCD", SqlDbType.VarChar) { Value = staffcd };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_common_t_login_select_TenStaffName_by_TenStaffCD", sqlParm);
+            if (dt.Rows.Count > 0)
+            {
+                staffName = dt.Rows[0]["TenStaffName"].ToString();
+            }
+            return staffName;
+        }
+
+        public string GetSellerNamebySellerCD(string sellerCD)
+        {
+            string SellerName = string.Empty;
+            var sqlParm = new SqlParameter("@SellerCD", SqlDbType.VarChar) { Value = sellerCD };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_common_t_seller_select_SellerName_by_SellerCD", sqlParm);
+            if (dt.Rows.Count > 0)
+            {
+                SellerName = dt.Rows[0]["SellerName"].ToString();
+            }
+            return SellerName;
+        }
+
+        public string GetMansionNamebyMansioncd(string mansionCD)
+        {
+            string mansionName = string.Empty;
+            var sqlParm = new SqlParameter("@MansionCD", SqlDbType.VarChar) { Value = mansionCD };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_common_tenfold_select_MansionName_by_MansionCD", sqlParm);
+            if (dt.Rows.Count > 0)
+            {
+                mansionName = dt.Rows[0]["MansionName"].ToString();
+            }
+            return mansionName;
+        }
+        public string GetRealEstateNamebyRealECD(string realECD)
+        {
+            string rename = string.Empty;
+            var sqlParm = new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = realECD };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_common_tenfold_select_REName_by_RealECD", sqlParm);
+            if (dt.Rows.Count > 0)
+            {
+                rename = dt.Rows[0]["REName"].ToString();
+            }
+            return rename;
         }
 
         public SendMailInfo GetMailSender(SendMailInfo mailInfo = null)

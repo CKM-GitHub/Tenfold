@@ -3,7 +3,7 @@ using System;
 using System.Security.Cryptography;
 using System.Web;
 
-namespace Seruichi.Seller.Web
+namespace Seruichi.Tenfold.Web
 {
     public static class SessionAuthenticationHelper
     {

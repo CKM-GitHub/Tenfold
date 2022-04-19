@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http.Filters;
 
-namespace Seruichi.Seller.Web
+namespace Seruichi.Tenfold.Web
 {
     public class ApiExceptionAttribute : ExceptionFilterAttribute
     {

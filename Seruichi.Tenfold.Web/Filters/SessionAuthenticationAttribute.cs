@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
-namespace Seruichi.Seller.Web
+namespace Seruichi.Tenfold.Web
 {
     public class SessionAuthenticationAttribute : FilterAttribute, IActionFilter
     {

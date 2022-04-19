@@ -69,6 +69,13 @@ namespace Seruichi.Common
                 AddValidationResult(elementId, errorcd);
         }
 
+        public void CheckIsOnlyOneCharacter(string elementId, string inputText)
+        {
+            if (!validator.CheckIsOnlyOneCharacter(inputText,out string errorcd))
+                AddValidationResult(elementId, errorcd);
+        }
+
+
         public void CheckIsHalfWidth(string elementId, string inputText, int maxLength)
         {
             if (!validator.CheckIsHalfWidth(inputText, maxLength, out string errorcd))
@@ -103,6 +110,19 @@ namespace Seruichi.Common
         {
             if (!validator.CheckIsNumeric(inputText, integerdigits, decimaldigits, out string errorcd, out string outVal))
                 AddValidationResult(elementId, errorcd);
+        }
+        public void CheckCheckboxLenght(string elementId,List<string> lstInputText)
+        {
+            if (!validator.CheckCheckBoxLenght(lstInputText, out string errorcd))
+                 AddValidationResult(elementId, errorcd);
+
+        }
+
+        public void CheckMaxLenghtForHalfWidthandFullwidth(string elementId, string inputText, int maxLength)
+        {
+            if (!validator.CheckMaxLenghtForHalfWidthandFullwidth(inputText, maxLength, out string errorcd))
+                AddValidationResult(elementId, errorcd);
+
         }
 
         public void CheckIsValidEmail(string elementId, string mailAddress)
