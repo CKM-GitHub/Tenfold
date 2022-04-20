@@ -18,8 +18,8 @@ function setValidation() {
 
     $('#StartDate')
         .addvalidation_errorElement("#errorStartDate")
-        .addvalidation_datecheck();
-    //.addvalidation_datecompare();
+        .addvalidation_datecheck()
+        .addvalidation_datecompare();
 
     $('#EndDate')
         .addvalidation_errorElement("#errorEndDate")
