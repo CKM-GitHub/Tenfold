@@ -215,6 +215,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Scripts\a_mypage_uinfo.js" />
     <Content Include="Scripts\a_register.js" />
     <Content Include="Scripts\a_login.js" />
     <Content Include="Scripts\a_index.js" />

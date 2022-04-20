@@ -141,7 +141,7 @@ namespace Seruichi.BL
             };
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_a_index_Select_PrefecturesByZipCode", sqlParams);
+            var dt = db.SelectDatatable("pr_a_index_Select_Prefectures_by_ZipCode", sqlParams);
             if (dt.Rows.Count == 0)
             {
                 errorcd = "E103"; //入力された値が正しくありません
@@ -168,7 +168,7 @@ namespace Seruichi.BL
             };
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_a_index_Select_CitiesByZipCode", sqlParams);
+            var dt = db.SelectDatatable("pr_a_index_Select_Cities_by_ZipCode", sqlParams);
             if (dt.Rows.Count == 1)
             {
                 var dr = dt.Rows[0];
@@ -189,7 +189,7 @@ namespace Seruichi.BL
             };
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_a_index_Select_TownsByZipCode", sqlParams);
+            var dt = db.SelectDatatable("pr_a_index_Select_Towns_by_ZipCode", sqlParams);
             if (dt.Rows.Count == 1)
             {
                 var dr = dt.Rows[0];
@@ -210,7 +210,7 @@ namespace Seruichi.BL
             };
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_a_index_Select_MansionListByMansionWord", sqlParams);
+            var dt = db.SelectDatatable("pr_a_index_Select_MansionList_by_MansionWord", sqlParams);
             return dt;
         }
 

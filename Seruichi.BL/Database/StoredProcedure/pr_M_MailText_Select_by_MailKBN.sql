@@ -1,10 +1,10 @@
-IF EXISTS (select * from sys.objects where name = 'pr_M_MailText_Select_ByMailKBN')
+IF EXISTS (select * from sys.objects where name = 'pr_M_MailText_Select_by_MailKBN')
 BEGIN
-    DROP PROCEDURE [pr_M_MailText_Select_ByMailKBN]
+    DROP PROCEDURE [pr_M_MailText_Select_by_MailKBN]
 END
 GO
 
-CREATE PROCEDURE [dbo].[pr_M_MailText_Select_ByMailKBN]
+CREATE PROCEDURE [dbo].[pr_M_MailText_Select_by_MailKBN]
 (
     @MailKBN    int
 )

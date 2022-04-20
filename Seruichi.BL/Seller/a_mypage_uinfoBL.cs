@@ -7,82 +7,9 @@ using System.Data.SqlClient;
 
 namespace Seruichi.BL
 {
-    public class a_registerBL
+    public class a_mypage_uinfoBL
     {
-        public bool CheckAndUpdateCertification(string mailAddress, string certificationCD, out string errorcd)
-        {
-            errorcd = "";
-            decimal dataSeq = 0;
-
-            var sqlParams = new SqlParameter[]
-            {
-                new SqlParameter("@CertificationCD", SqlDbType.VarChar){ Value = certificationCD.ToStringOrNull() },
-            };
-
-            DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_a_register_Select_D_Certification_ByCD", sqlParams);
-            if (dt.Rows.Count == 0)
-            {
-                errorcd = "E901";
-                return false;
-            }
-
-            AESCryption crypt = new AESCryption();
-            string decryptionKey = StaticCache.GetDataCryptionKey();
-
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                var dr = dt.Rows[i];
-                var encryptedMailAddress = dr["MailAddress"].ToStringOrEmpty();
-                if (crypt.DecryptFromBase64(encryptedMailAddress, decryptionKey) != mailAddress)
-                {
-                    errorcd = "E901";
-                    return false;
-                }
-
-                if (!dr.IsNull("AccessDateTime"))
-                {
-                    errorcd = "E902";
-                    return false;
-                }
-
-                if (dr["EffectiveDateTime"].ToDateTime(DateTime.MinValue) < Utilities.GetSysDateTime())
-                {
-                    errorcd = "E903";
-                    return false;
-                }
-
-                dataSeq = dr["DataSEQ"].ToDecimal(0);
-            }
-
-            UpdateCertificationData(dataSeq);
-            return true;
-        }
-
-        private bool UpdateCertificationData(decimal dataSeq)
-        {
-            var sqlParams = new SqlParameter[]
-            {
-                new SqlParameter("@DataSEQ", SqlDbType.Decimal){ Value = dataSeq },
-            };
-
-            try
-            {
-                DBAccess db = new DBAccess();
-                return (db.InsertUpdateDeleteData("pr_register_Update_D_Certification", false, sqlParams));
-            }
-            catch (ExclusionException)
-            {
-                //msgid = "S004"; //他端末エラー
-                return false;
-            }
-        }
-
-
-
-
-
-        public Dictionary<string, string> ValidateAll(a_registerModel model)
+        public Dictionary<string, string> ValidateAll(a_mypage_uinfoModel model)
         {
             ValidatorAllItems validator = new ValidatorAllItems();
 
@@ -165,7 +92,7 @@ namespace Seruichi.BL
             };
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_a_register_Select_M_Address_ByZipCode", sqlParams);
+            var dt = db.SelectDatatable("pr_a_mypage_uinfo_Select_M_Address_by_ZipCode", sqlParams);
             if (dt.Rows.Count == 0)
             {
                 errorcd = "E103"; //入力された値が正しくありません
@@ -183,7 +110,7 @@ namespace Seruichi.BL
             return true;
         }
 
-        public bool InsertSellerData(a_registerModel model, out string msgid)
+        public bool UpdateSellerData(a_mypage_uinfoModel model, out string msgid)
         {
             msgid = "";
 
@@ -222,7 +149,7 @@ namespace Seruichi.BL
             try
             {
                 DBAccess db = new DBAccess();
-                return db.InsertUpdateDeleteData("pr_a_register_Insert_M_Seller", false, sqlParams);
+                return db.InsertUpdateDeleteData("pr_a_mypage_uinfo_Update_M_Seller", false, sqlParams);
             }
             catch (ExclusionException)
             {

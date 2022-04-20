@@ -85,8 +85,8 @@ namespace Seruichi.Seller.Web
                         "~/Content/css/Ludens-Users---25-After-Register.css",
                         "~/Content/css/Sidebar.css"));
 
-            //bundles.Add(new ScriptBundle("~/bundles/a_mypage_uinfo").Include(
-            //          "~/Scripts/a_mypage_uinfo.js"));
+            bundles.Add(new ScriptBundle("~/bundles/a_mypage_uinfo").Include(
+                      "~/Scripts/a_mypage_uinfo.js"));
         }
     }
 }

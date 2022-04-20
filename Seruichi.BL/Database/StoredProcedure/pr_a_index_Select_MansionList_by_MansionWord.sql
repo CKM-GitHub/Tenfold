@@ -1,10 +1,10 @@
-IF EXISTS (select * from sys.objects where name = 'pr_a_index_Select_MansionListByMansionWord')
+IF EXISTS (select * from sys.objects where name = 'pr_a_index_Select_MansionList_by_MansionWord')
 BEGIN
-    DROP PROCEDURE [pr_a_index_Select_MansionListByMansionWord]
+    DROP PROCEDURE [pr_a_index_Select_MansionList_by_MansionWord]
 END
 GO
 
-CREATE PROCEDURE [dbo].[pr_a_index_Select_MansionListByMansionWord]
+CREATE PROCEDURE [dbo].[pr_a_index_Select_MansionList_by_MansionWord]
 (
     @PrefCD varchar(2)
     ,@MansionWord varchar(100)

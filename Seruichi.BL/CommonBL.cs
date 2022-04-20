@@ -203,7 +203,7 @@ namespace Seruichi.BL
             var sqlParm = new SqlParameter("@DataKey", SqlDbType.Int) { Value = 1 };
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_M_Mail_Select_ByDataKey", sqlParm);
+            var dt = db.SelectDatatable("pr_M_Mail_Select_by_DataKey", sqlParm);
             if (dt.Rows.Count > 0)
             {
                 var dr = dt.Rows[0];
@@ -222,7 +222,7 @@ namespace Seruichi.BL
             var sqlParm = new SqlParameter("@MailKBN", SqlDbType.Int) { Value = (int)mailKbn };
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_M_MailSendTo_Select_ByMailKBN", sqlParm);
+            var dt = db.SelectDatatable("pr_M_MailSendTo_Select_by_MailKBN", sqlParm);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 var dr = dt.Rows[i];
@@ -249,7 +249,7 @@ namespace Seruichi.BL
             var sqlParm = new SqlParameter("@MailKBN", SqlDbType.Int) { Value = (int)mailKbn };
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_M_MailText_Select_ByMailKBN", sqlParm);
+            var dt = db.SelectDatatable("pr_M_MailText_Select_by_MailKBN", sqlParm);
             if (dt.Rows.Count > 0)
             {
                 var dr = dt.Rows[0];

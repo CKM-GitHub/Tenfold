@@ -50,7 +50,7 @@ namespace Seruichi.BL
             };
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_a_login_Select_M_Seller_ByPassword", sqlParams);
+            var dt = db.SelectDatatable("pr_a_login_Select_M_Seller_by_Password", sqlParams);
             if (dt.Rows.Count == 0)
             {
                 return user;

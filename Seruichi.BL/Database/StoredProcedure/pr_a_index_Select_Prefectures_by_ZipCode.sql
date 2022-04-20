@@ -1,10 +1,10 @@
-IF EXISTS (select * from sys.objects where name = 'pr_a_index_Select_PrefecturesByZipCode')
+IF EXISTS (select * from sys.objects where name = 'pr_a_index_Select_Prefectures_by_ZipCode')
 BEGIN
-    DROP PROCEDURE [pr_a_index_Select_PrefecturesByZipCode]
+    DROP PROCEDURE [pr_a_index_Select_Prefectures_by_ZipCode]
 END
 GO
 
-CREATE PROCEDURE [dbo].[pr_a_index_Select_PrefecturesByZipCode]
+CREATE PROCEDURE [dbo].[pr_a_index_Select_Prefectures_by_ZipCode]
 (
     @ZipCode1 varchar(3)
     ,@ZipCode2 varchar(4)

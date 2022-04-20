@@ -1,10 +1,10 @@
-IF EXISTS (select * from sys.objects where name = 'pr_a_register_Select_D_Certification_ByCD')
+IF EXISTS (select * from sys.objects where name = 'pr_a_register_Select_D_Certification_by_Key')
 BEGIN
-    DROP PROCEDURE [pr_a_register_Select_D_Certification_ByCD]
+    DROP PROCEDURE [pr_a_register_Select_D_Certification_by_Key]
 END
 GO
 
-CREATE PROCEDURE [dbo].[pr_a_register_Select_D_Certification_ByCD]
+CREATE PROCEDURE [dbo].[pr_a_register_Select_D_Certification_by_Key]
 (
     @CertificationCD            varchar(12)
 )
