@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Net;
 
-namespace Seruichi.RealState.Web.Controllers
+namespace Seruichi.RealEstate.Web.Controllers
 {
     [CustomHandleError(Enabled = false)]
     [BrowsingHistory(Enabled = false)]

@@ -3,7 +3,7 @@ using System;
 using System.Security.Cryptography;
 using System.Web;
 
-namespace Seruichi.RealState.Web
+namespace Seruichi.RealEstate.Web
 {
     public static class SessionAuthenticationHelper
     {

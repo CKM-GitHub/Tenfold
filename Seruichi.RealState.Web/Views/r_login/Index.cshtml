@@ -7,24 +7,30 @@
     @Styles.Render("~/Content/r_login")
 }
 
-<form method="post">
+<form id="form1" method="post">
     <h2 class="visually-hidden ">不動産会社ログイン</h2>
     <div class="illustration"><h1 class="display-1"><i class="icon fa fa-user"></i></h1></div>
 
     <div class="mb-3 ">
         <p class="text-center">不動産会社ログイン</p>
-        <input class="form-control cap-fon-form-w250 mx-auto" type="email" name="email" placeholder="会社ID">
-    </div> 
-    <div class="mb-3">
-        <input class="form-control cap-fon-form-w250 mx-auto" type="email" name="email" placeholder="スタッフID">
+        <input class="form-control cap-fon-form-w250 mx-auto" id="realECD" name="realECD" placeholder="会社ID">
+        <p class="text-danger text-nowrap text-center" id="errorrealECDd"></p>
     </div>
     <div class="mb-3">
-        <input class="form-control mx-auto cap-fon-form-w250" type="password" name="password" placeholder="パスワード">
+        <input class="form-control cap-fon-form-w250 mx-auto" id="reStaffCD" name="reStaffCD" placeholder="スタッフID">
+        <p class="text-danger text-nowrap text-center" id="errorreStaffCD"></p>
+    </div>
+    <div class="mb-3">
+        <input class="form-control mx-auto cap-fon-form-w250" id="rePassword" name="rePassword" placeholder="パスワード">
+        <p class="text-danger text-nowrap text-center" id="errorrePassword"></p>
     </div>
     <div class="mb-5">
-        <button class="btn btn-primary d-block w-100  cap-fon-form-w250  mx-auto" type="submit">
+        <button class="btn btn-primary d-block w-100  cap-fon-form-w250  mx-auto" type="submit" id="btnLogin">
             ログイン
         </button>
+        <p class="text-danger text-nowrap text-center" id="errorbtnLogin"></p>
     </div>
 </form>
-
+@section Scripts{
+    @Scripts.Render("~/bundles/r_login")
+}

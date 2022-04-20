@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.32112.339
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seruichi.Seller.Web", "Seruichi.Seller.Web\Seruichi.Seller.Web.csproj", "{1458B5EA-09EB-47D3-B0A1-439D425EA204}"
 EndProject
@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seruichi.BL", "Seruichi.Sel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seruichi.Tenfold.Web", "Seruichi.Tenfold.Web\Seruichi.Tenfold.Web.csproj", "{03265EE9-F7F0-4AE0-BE6C-77A4B1548EA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seruichi.RealState.Web", "Seruichi.RealState.Web\Seruichi.RealState.Web.csproj", "{E935BC7E-7837-4658-8915-F96633EAA3C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seruichi.RealEstate.Web", "Seruichi.RealState.Web\Seruichi.RealEstate.Web.csproj", "{E935BC7E-7837-4658-8915-F96633EAA3C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

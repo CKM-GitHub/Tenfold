@@ -26,6 +26,11 @@ const messageConst = {
     E205: 'パスワードが入力されていません',
     E206: 'メールアドレスとパスワードの組合せが正しくありません',
     E207: 'この情報での登録はありません',
+
+    E310: '会社IDが入力されていません',
+    E311: '会社IDが未登録です',
+    E312: 'スタッフIDが入力されていません',
+    E313: 'スタッフIDが未入力です。',
 }
 
 const commonApiUrl = {
@@ -207,6 +212,7 @@ const common = {
         const isOneByteCharacter = $ctrl.attr("data-validation-onebyte-character");
         const ischeckboxLenght = $ctrl.attr("data-validation-checkboxlenght");
         const isMaxlengthCheckforsellerlist = $ctrl.attr("data-validation-MaxLengthforsellerlist");
+        const isRequiredNullorempty = $ctrl.attr("data-validation-reqired-nullorempty");
 
         let inputValue = "";
         if (type === 'radio') {
@@ -420,7 +426,12 @@ const common = {
                 return false;
             }
         }
-
+        if (isRequiredNullorempty) {
+            if (!inputValue) {
+                $ctrl.showError(this.getMessage('E310'));
+                    return false;
+            }
+        }
         if (type === 'radio')
             $('input[name="' + name + '"]:radio').hideError();
         else
