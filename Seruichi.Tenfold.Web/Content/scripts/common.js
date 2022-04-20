@@ -507,9 +507,14 @@ const common = {
         return ldaypremonth.getFullYear() + "-" + ("0" + (ldaypremonth.getMonth() + 1)).slice(-2) + "-" + ("0" + ldaypremonth.getDate()).slice(-2);
     },
     getDayaweekbeforetoday: function getDayaweekbeforetoday() {
-        var date = new Date();
-        date.setDate(date.getDate() - 7);
-        let data = date.toISOString().slice(0, 10);
+        //var date = new Date();
+        //date.setDate(date.getDate() - 7);
+        //let data = date.toISOString().slice(0, 10);
+        let today = new Date();
+        let first = today.getDate() - today.getDay() + 1;
+
+        let monday = new Date(today.setDate(first));
+        let data = monday.toISOString().slice(0, 10);
         return data;
     },
     checkValidityOnSave: function checkValidityOnSave(selector) {
