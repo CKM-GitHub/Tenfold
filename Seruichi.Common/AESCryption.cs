@@ -7,8 +7,8 @@ namespace Seruichi.Common
 {
     public class AESCryption
     {
-        public static readonly string DefaultKey = "10_4_Ld";
-        public static readonly string DefaultKey2 = "1433";
+        public static readonly string DefaultKey = "10_4_Ld"; //Key to encrypt datakey
+        public static readonly string DefaultKey2 = "1433"; //Key to encrypt database connection string
 
         private const int STRETCHING_TIMES = 1000;
         private const int KEY_SIZE = 256;
