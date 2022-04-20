@@ -87,6 +87,8 @@ namespace Seruichi.Common
                 return false;
             }
 
+            var sysDateTime = Utilities.GetSysDateTime();
+
             if (inputText.Contains("/"))
             {
                 var split = inputText.Split('/');
@@ -116,17 +118,17 @@ namespace Seruichi.Common
                 else if (inputText.Length == 4)
                 {
                     //yyyy -> yyyyMMdd
-                    inputText = inputText.ToString() + "/" + DateTime.Now.Month.ToString().PadLeft(2, '0') + "/" + "01";
+                    inputText = inputText.ToString() + "/" + sysDateTime.Month.ToString().PadLeft(2, '0') + "/" + "01";
                 }
                 else if (inputText.Length == 2)
                 {
                     //mm -> yyyyMMdd
-                    inputText = DateTime.Now.Year.ToString().PadLeft(4, '0') + "/" + inputText.ToString() + "/" + "01";
+                    inputText = sysDateTime.Year.ToString().PadLeft(4, '0') + "/" + inputText.ToString() + "/" + "01";
                 }
                 else if (inputText.Length == 1)
                 {
                     //m -> yyyyMMdd
-                    inputText = DateTime.Now.Year.ToString().PadLeft(4, '0') + "/" + inputText.ToString().PadLeft(2, '0') + "/" + "01";
+                    inputText = sysDateTime.Year.ToString().PadLeft(4, '0') + "/" + inputText.ToString().PadLeft(2, '0') + "/" + "01";
                 }
             }
 
@@ -136,7 +138,7 @@ namespace Seruichi.Common
                 return false;
             }
 
-            outVal = inputText.ToDateTime(DateTime.Now).ToString(DateTimeFormat.yyyyMMdd);
+            outVal = inputText.ToDateTime(sysDateTime).ToString(DateTimeFormat.yyyyMMdd);
             outVal = outVal.Substring(0, 7).Replace("-", "/");
             return true;
         }
@@ -161,18 +163,20 @@ namespace Seruichi.Common
                 return false;
             }
 
+            var sysDateTime = Utilities.GetSysDateTime();
+
             if (inputText.Contains("/"))
             {
                 var split = inputText.Split('/');
                 if (split.Length <= 2)
                 {
                     //MM/dd -> yyyy/MM/dd
-                    inputText = DateTime.Now.Year.ToString() + "/" + inputText;
+                    inputText = sysDateTime.Year.ToString() + "/" + inputText;
                 }
                 else if (split.Length == 3)
                 {
                     //yy/MM/dd -> yyyy/MM/dd
-                    inputText = DateTime.Now.Year.ToString().Substring(0, 4 - split[0].Length) + inputText;
+                    inputText = sysDateTime.Year.ToString().Substring(0, 4 - split[0].Length) + inputText;
                 }
             }
             else
@@ -180,12 +184,12 @@ namespace Seruichi.Common
                 if (inputText.Length <= 4)
                 {
                     //MMdd -> yyyyMMdd
-                    inputText = DateTime.Now.Year.ToString() + inputText.PadLeft(4, '0');
+                    inputText = sysDateTime.Year.ToString() + inputText.PadLeft(4, '0');
                 }
                 else if (inputText.Length < 8)
                 {
                     //yyMMdd -> yyyyMMdd
-                    inputText = DateTime.Now.Year.ToString().Substring(0, 8 - inputText.Length) + inputText;
+                    inputText = sysDateTime.Year.ToString().Substring(0, 8 - inputText.Length) + inputText;
                 }
             }
 
@@ -195,7 +199,7 @@ namespace Seruichi.Common
                 return false;
             }
 
-            outVal = inputText.ToDateTime(DateTime.Now).ToString(DateTimeFormat.yyyyMMdd);
+            outVal = inputText.ToDateTime(sysDateTime).ToString(DateTimeFormat.yyyyMMdd);
             return true;
         }
 
@@ -321,6 +325,26 @@ namespace Seruichi.Common
             return true;
         }
 
+        public bool CheckIsDoubleByteKana(string inputText, int maxLength, out string errorcd)
+        {
+            errorcd = "";
+
+            if (string.IsNullOrEmpty(inputText)) return true;
+
+            if (!CheckIsDoubleByte(inputText, maxLength, out errorcd))
+            {
+                return false;
+            }
+
+            if (!System.Text.RegularExpressions.Regex.IsMatch(inputText, "^[ァ-ヶー　]+$"))
+            {
+                errorcd = "E104"; //入力できない文字です。
+                return false;
+            }
+
+            return true;
+        }
+
         public bool CheckIsMoney(string inputText, int digits, out string errorcd, out string outVal)
         {
             errorcd = "";
@@ -418,26 +442,18 @@ namespace Seruichi.Common
             return true;
         }
 
-        //add by ams
-        public bool CheckNullOrEmpty(string modelName, string inputText, out string errorcd)
+        
+
+        public bool CheckIsValidEmail(string mailAddress, out string errorcd)
         {
             errorcd = "";
 
-            if (string.IsNullOrEmpty(inputText) && modelName == "RealECD")
+            if (!Utilities.IsValidEmail(mailAddress))
             {
-                errorcd = "E310"; //会社IDが入力されていません
+                errorcd = "E204";
                 return false;
             }
-            if (string.IsNullOrEmpty(inputText) && modelName == "REStaffCD")
-            {
-                errorcd = "E312"; //スタッフIDが入力されていません
-                return false;
-            }
-            if (string.IsNullOrEmpty(inputText) && modelName == "REPassword")
-            {
-                errorcd = "E205"; //パスワードが入力されていません
-                return false;
-            }
+
             return true;
         }
     }

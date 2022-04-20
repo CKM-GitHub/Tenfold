@@ -1,4 +1,9 @@
-﻿@section styles{
+﻿@model Models.a_loginModel
+
+@{
+    ViewBag.Title = "簡易査定 - セルイチ";
+}
+@section styles{
     @Styles.Render("~/Content/css/a_login")
 }
 
@@ -18,8 +23,8 @@
             <div class="col">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12 col-md-6 modal fade cap-card-shadow" role="dialog" tabindex="-1" id="modal-temporaryregistration-1">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="col-12 col-md-6 modal fade cap-card-shadow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" id="modal_temporaryRegistration">
+                            <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h4 class="modal-title">新規登録</h4>
@@ -31,15 +36,15 @@
                                             <h2 class="text-center pt-3">すべての査定が、ここから。<br></h2>
                                             <p class="text-center pt-3 pb-3">セルイチを始めよう！</p>
                                         </div>
-                                        <form class="mx-auto cap-fon-form-w250" method="post" action="@Url.Action("SendTemporaryRegistrationMail", "a_login")" id="formTemporaryRegistration" novalidate>
-                                            <input hidden name="RequestVerificationToken" value="@SessionAuthenticationHelper.GetVerificationToken()" />
+                                        <form class="mx-auto cap-fon-form-w250" id="formTemporaryRegistration" novalidate>
                                             <div class="pb-3">
-                                                <input class="form-control " type="email" name="MailAddress" id="TemporaryRegistration_MailAddress" maxlength="100" placeholder="メールアドレス" autocomplete="username">
-                                                <span class="cap-errormsg-bottom" id="errorTemporaryRegistration_MailAddress"></span>
+                                                <input class="form-control " type="email" name="MailAddress" id="formTemporaryRegistration_MailAddress"
+                                                       maxlength="100" placeholder="メールアドレス" autocomplete="email">
+                                                <span class="cap-errormsg-bottom" id="formTemporaryRegistration_errorMailAddress"></span>
                                             </div>
                                             <div class="pb-3"></div>
                                             <div class="pb-5">
-                                                <button class="btn btn-primary d-block w-100" type="submit" id="btnTemporaryRegistration">仮登録メール送信</button>
+                                                <button type="button" class="btn btn-primary d-block w-100" id="btnTemporaryRegistration">仮登録メール送信</button>
                                             </div>
                                         </form>
                                     </div>
@@ -48,32 +53,34 @@
                         </div>
                         <div class="col-12 col-md-6 mx-auto pb-4">
                             <div class="login-clean cap-card-shadow">
-                                <form method="post" action="@Url.Action("Login", "a_login")" id="formLogin" novalidate>
-                                    <input hidden name="RequestVerificationToken" value="@SessionAuthenticationHelper.GetVerificationToken()" />
+                                <form id="formLogin" novalidate>
+                                    <input type="hidden" name="RequestVerificationToken" value="@SessionAuthenticationHelper.GetVerificationToken()" />
                                     <h2 class="visually-hidden">Login Form</h2>
                                     <div class="illustration">
                                         <i class="icon ion-log-in"></i>
                                     </div>
                                     <div class="mb-3">
                                         <p class="text-center">セルイチ会員の方</p>
-                                        <input class="form-control cap-fon-form-w250" type="email" name="UserID" id="UserID" maxlength="100" placeholder="メールアドレス" autocomplete="username">
-                                        <span class="cap-errormsg-bottom" id="errorUserID"></span>
+                                        <input class="form-control cap-fon-form-w250" type="email" name="MailAddress" id="MailAddress"
+                                               maxlength="100" placeholder="メールアドレス" autocomplete="username" value="@Request.Form["MailAddress"]">
+                                        <p class="cap-errormsg-bottom" id="errorMailAddress"></p>
                                     </div>
                                     <div class="mb-3">
-                                        <input class="form-control" type="password" name="Password" id="Password" maxlength="20" placeholder="パスワード" autocomplete="current-password">
-                                        <span class="cap-errormsg-bottom" id="errorPassword"></span>
+                                        <input class="form-control" type="password" name="Password" id="Password" minlength="8" maxlength="20" 
+                                               autocomplete="current-password" placeholder="パスワード">
+                                        <p class="cap-errormsg-bottom" id="errorPassword"></p>
                                     </div>
                                     <div class="mb-3">
-                                        <button class="btn btn-primary d-block w-100" type="submit" id="btnLogin">ログイン</button>
+                                        <button type="button" class="btn btn-primary d-block w-100" id="btnLogin">ログイン</button>
                                     </div>
-                                    <a class="forgot pb-3" href="#" data-bs-target="#modal-mailaddress-1" data-bs-toggle="modal">メールアドレスを忘れた場合はこちら</a>
-                                    <a class="forgot" href="#" data-bs-target="#modal-password-1" data-bs-toggle="modal">パスワードを忘れた場合はこちら</a>
+                                    <a class="forgot pb-3" href="#" id="linkVerifyMailAddress">メールアドレスを忘れた場合はこちら</a>
+                                    <a class="forgot" href="#" id="linkResetPassword">パスワードを忘れた場合はこちら</a>
                                     <hr>
                                     <div class="mb-3">
                                         <p class="text-center">セルイチ会員ではない方</p>
                                     </div>
                                     <div class="mb-3">
-                                        <button class="btn btn-primary d-block w-100" type="button" data-bs-target="#modal-temporaryregistration-1" data-bs-toggle="modal">新規登録</button>
+                                        <button type="button" class="btn btn-primary d-block w-100" id="btnNew">新規登録</button>
                                     </div>
                                 </form>
                             </div>
@@ -84,40 +91,50 @@
         </div>
     </div>
 </section>
-<div class="modal fade" role="dialog" tabindex="-1" id="modal-mailaddress-1">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" id="modal_verifyMailAddress">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">メールアドレスを忘れた方</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <section class="contact-clean"
-                         style="background: var(--bs-white);padding-top: 0;padding-bottom: 0;">
-                    <form id="formForgotMailAddress">
+                <section class="contact-clean" style="background: var(--bs-white);padding-top: 0;padding-bottom: 0;">
+                    <span class="cap-errormsg-top" id="errorVerifyMailAddress"></span>
+                    <form id="formVerifyMailAddress" novalidate>
                         <div class="form-group mb-3">
-                            <label class="form-label">お名前(フリガナ)</label><span class="cap-errormsg-right" id="ForgotMailAddress_SellerKana"></span>
-                            <input class="form-control" type="text" name="SellerKana" id="ForgotMailAddress_SellerKana" maxlength="50" style="max-width: 300px;" placeholder="例）セルイチ　タロウ" autocomplete="name">
+                            <div class="d-flex">
+                                <label class="form-label">お名前(フリガナ)</label>
+                                <span class="cap-errormsg-right" id="formVerifyMailAddress_errorSellerKana"></span>
+                            </div>
+                            <input class="form-control" type="text" name="SellerKana" id="formVerifyMailAddress_SellerKana" maxlength="50" style="max-width: 300px;">
                         </div>
                         <div class="form-group mb-3">
-                            <label class="form-label">生年月日</label><span class="cap-errormsg-right" id="errorForgotMailAddress_Birthday"></span>
-                            <input class="form-control countries order-alpha limit-pop-1000000 presel-MX group-continents group-order-na" type="date" name="Birthday" id="ForgotMailAddress_Birthday" style="max-width: 200px;">
+                            <div class="d-flex">
+                                <label class="form-label">生年月日</label>
+                                <span class="cap-errormsg-right" id="formVerifyMailAddress_errorBirthday"></span>
+                            </div>
+                            <input class="form-control" type="date" min="1900-01-01" max="2100-12-31" name="Birthday" id="formVerifyMailAddress_Birthday" style="max-width: 200px;" autocomplete="bday">
                         </div>
                         <div class="form-group mb-3">
-                            <label class="form-label">携帯番号</label><span class="cap-errormsg-right" id="errorForgotMailAddress_HandyPhone"></span>
-                            <input class="form-control" type="text" name="HandyPhone" id="ForgotMailAddress_HandyPhone" maxlength="15" style="max-width: 198px;" placeholder="例）09012345678" autocomplete="tel">
+                            <div class="d-flex">
+                                <label class="form-label">携帯番号</label>
+                                <span class="cap-errormsg-right" id="formVerifyMailAddress_errorHandyPhone"></span>
+                            </div>
+                            <input class="form-control" type="tel" name="HandyPhone" id="formVerifyMailAddress_HandyPhone"
+                                   maxlength="15" style="max-width: 198px;" autocomplete="tel">
                         </div>
                     </form>
                 </section>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary btn-lg" type="button" data-bs-target="#modal-mailaddress-2" data-bs-toggle="modal">メールアドレス表示</button>
+                <button type="button" class="btn btn-primary btn-lg" id="btnVerifyMailAddress">メールアドレス表示</button>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" role="dialog" tabindex="-1" id="modal-mailaddress-2">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" id="modal_verifyMailAddress2">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">メールアドレスを忘れた方</h4>
@@ -125,9 +142,9 @@
             </div>
             <div class="modal-body">
                 <div class="contact-clean" style="background: var(--bs-white);padding-top: 0;padding-bottom: 0;">
-                    <form id="formForgotMailAddress2">
+                    <form id="formVerifyMailAddress2" novalidate>
                         <h6><strong>登録されたメールアドレス</strong></h6>
-                        <h5 id="ForgotMailAddress_MailAddressForDisplay"></h5>
+                        <h5 id="formVerifyMailAddress2_MailAddress"></h5>
                         <hr>
                         <p style="font-size: 12px;">登録されたメールアドレスは大切に保管ください。</p>
                         <p style="font-size: 12px;">また、マイページの会員登録内容変更からご変更ができます。</p>
@@ -135,13 +152,13 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary btn-lg" type="button" data-bs-target="#modal-mailaddress-2" data-bs-toggle="modal">ログイン</button>
+                <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal">ログイン</button>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" role="dialog" tabindex="-1" id="modal-password-1">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" id="modal_resetPassword">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">パスワードを忘れた方</h4>
@@ -149,30 +166,41 @@
             </div>
             <div class="modal-body">
                 <div class="contact-clean" style="background: var(--bs-white);padding-top: 0;padding-bottom: 0;">
-                    <form id="formForgotPassword">
+                    <span class="cap-errormsg-top" id="errorResetPassword"></span>
+                    <form id="formResetPassword" novalidate>
                         <div class="form-group mb-3">
-                            <label class="form-label">お名前(フリガナ)</label>
-                            <input class="form-control" type="text" name="SellerKana" id="ForgotPassword_SellerKana" maxlength="50" style="max-width: 300px;" placeholder="例）セルイチ　タロウ" autocomplete="name">
+                            <div class="d-flex">
+                                <label class="form-label">お名前(フリガナ)</label>
+                                <span class="cap-errormsg-right" id="formResetPassword_errorSellerKana"></span>
+                            </div>
+                            <input class="form-control" type="text" name="SellerKana" id="formResetPassword_SellerKana" maxlength="50" style="max-width: 300px;">
                         </div>
                         <div class="form-group mb-3">
-                            <label class="form-label">生年月日</label>
-                            <input class="form-control countries order-alpha limit-pop-1000000 presel-MX group-continents group-order-na" type="date" name="Birthday" id="ForgotPassword_Birthday" style="max-width: 200px;">
+                            <div class="d-flex">
+                                <label class="form-label">生年月日</label>
+                                <span class="cap-errormsg-right" id="formResetPassword_errorBirthday"></span>
+                            </div>
+                            <input class="form-control" type="date" min="1900-01-01" max="2100-12-31" name="Birthday" id="formResetPassword_Birthday" style="max-width: 200px;" autocomplete="bday">
                         </div>
                         <div class="form-group mb-3">
-                            <label class="form-label">メールアドレス</label>
-                            <input class="form-control" type="text" name="MailAddress" id="ForgotPassword_MailAddress" maxlength="100" placeholder="例）sample@sample.jp" autocomplete="username" />
+                            <div class="d-flex">
+                                <label class="form-label">メールアドレス</label>
+                                <span class="cap-errormsg-right" id="formResetPassword_errorMailAddress"></span>
+                            </div>
+                            <input class="form-control" type="email" name="MailAddress" id="formResetPassword_MailAddress"
+                                   maxlength="100" autocomplete="username" />
                         </div>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary btn-lg" type="button" data-bs-target="#modal-password-2" data-bs-toggle="modal">パスワード再発行</button>
+                <button type="button" class="btn btn-primary btn-lg" id="btnResetPassword">パスワード再発行</button>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" role="dialog" tabindex="-1" id="modal-password-2">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" id="modal_resetPassword2">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">パスワードを忘れた方</h4>
@@ -180,9 +208,9 @@
             </div>
             <div class="modal-body">
                 <div class="contact-clean" style="background: var(--bs-white);padding-top: 0;padding-bottom: 0;">
-                    <form id="formForgotPassword2">
+                    <form id="formResetPassword2" novalidate>
                         <h6><strong>登録されたメールアドレス</strong></h6>
-                        <h5 id="ForgotPassword_MailAddressForDisplay"></h5>
+                        <h5 id="formResetPassword2_MailAddress"></h5>
                         <hr>
                         <p style="font-size: 12px;">仮パスワードを記載したメールが送信されました。<br></p>
                         <p style="font-size: 12px;">また、マイページの会員登録内容変更からご変更ができます。</p>
@@ -190,11 +218,43 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary btn-lg" type="button" data-bs-target="#modal-password-2" data-bs-toggle="modal">ログイン</button>
+                <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal">ログイン</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" id="modal_temporaryRegistration2">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">仮登録メールを送信しました</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="contact-clean" style="background: var(--bs-white);padding-top: 0;padding-bottom: 0;">
+                    <form method="post">
+                        <h6><strong>入力されたメールアドレス</strong></h6>
+                        <h5 id="formTemporaryRegistration2_MailAddress"></h5>
+                        <hr>
+                        <p style="font-size: 12px;">本登録用のURLを記載したメールを送信いたしました。<br> メールをご確認の上、本登録を行ってください。</p>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary btn-lg" type="button" data-bs-dismiss="modal">閉じる</button>
             </div>
         </div>
     </div>
 </div>
 @section Scripts{
     @Scripts.Render("~/bundles/a_login")
+    <script>
+        $(function () {
+            const validationResult = '@Html.Raw(@ViewBag.ValidationResult)';
+            if (validationResult) {
+                common.setValidationErrors(JSON.parse(validationResult));
+                common.setFocusFirstError(document.forms.formLogin);
+            }
+        });
+    </script>
 }

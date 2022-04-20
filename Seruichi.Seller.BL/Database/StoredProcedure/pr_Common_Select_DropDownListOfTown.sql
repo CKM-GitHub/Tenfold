@@ -1,4 +1,4 @@
-IF EXISTS (select * from sys.objects where name = 'pr_M_Address_Select_DropDownListOfTown')
+IF EXISTS (select * from sys.objects where name = 'pr_Common_Select_DropDownListOfTown')
 BEGIN
     DROP PROCEDURE [pr_Common_Select_DropDownListOfTown]
 END

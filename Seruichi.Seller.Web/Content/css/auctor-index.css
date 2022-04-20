@@ -61,7 +61,7 @@
 
 
 .cap-header {
-    /*height: 340px;*/
+    /*height: 300px;*/
     padding-top: 50px;
     padding-bottom: 50px;
     background: #6792da;
@@ -85,6 +85,10 @@
     padding: 0 3px 30px 3px;
 }
 
+
+
+
+
 @media screen and (min-width: 641px) {
     .cap-pt0-pl0 {
         padding-right: 0;
@@ -95,6 +99,7 @@
         margin-left: -30px;
     }
 }
+
 
 @media (max-width:640px) {
 

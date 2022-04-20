@@ -46,23 +46,11 @@ namespace Seruichi.Seller.Web
                         }
                     }
 
-                    if (ex is InitialSetupException)
-                    {
-                        return; // IniÉtÉ@ÉCÉãê›íË
-                    }
+                    Logger.GetInstance().Error(ex);
 
-                    try
+                    if (ex.InnerException != null)
                     {
-                        string userInfo = "LoginUser:" + HttpContext.Current.Session["UserInfo"].ToStringOrEmpty();
-                        Logger.GetInstance().Error(ex, userInfo);
-
-                        if (ex.InnerException != null)
-                        {
-                            Logger.GetInstance().Error(ex.InnerException, userInfo);
-                        }
-                    }
-                    catch (Exception)
-                    {
+                        Logger.GetInstance().Error(ex.InnerException);
                     }
                 }
             }

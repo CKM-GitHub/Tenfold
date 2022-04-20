@@ -8,7 +8,6 @@ CREATE PROCEDURE [dbo].[pr_a_index_Insert_SellerMansionData]
 (
     @SellerMansionID            varchar(10)
     ,@SellerCD                  varchar(10)
-    ,@SellerName                varchar(50)
     ,@MansionName               varchar(100)
     ,@MansionCD                 varchar(10)
     ,@LatestRequestDate         date            = NULL
@@ -48,6 +47,7 @@ CREATE PROCEDURE [dbo].[pr_a_index_Insert_SellerMansionData]
     ,@Latitude                  decimal(9,6)
     ,@Operator                  varchar(10)
     ,@IPAddress                 varchar(20)
+    ,@LoginName                 varchar(50)
     ,@MansionStationTable       T_MansionStation READONLY
 
 )
@@ -191,7 +191,7 @@ BEGIN
         ,@Operator
         ,@SysDatetime
         ,@IPAddress
-        ,@Operator
+        ,NULL
         ,NULL
         ,NULL
     )
@@ -242,7 +242,7 @@ BEGIN
     ,@LoginKBN      = 1
     ,@LoginID       = @Operator
     --,@RealECD       
-    ,@LoginName     = @SellerName
+    ,@LoginName     = @LoginName
     ,@IPAddress     = @IPAddress
     ,@PageID        = 'a_index'
     ,@ProcessKBN    = 1

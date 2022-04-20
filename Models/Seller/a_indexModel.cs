@@ -11,9 +11,7 @@ namespace Models
             public string Distance { get; set; }
         }
 
-        public string SellerMansionID { get; set; }
         public string SellerCD { get; set; }
-        public string SellerName { get; set; }
         public string MansionName { get; set; }
         public string MansionCD { get; set; }
         public string LatestRequestDate { get; set; }
@@ -51,6 +49,7 @@ namespace Models
         public string Remark { get; set; }
         public decimal Longitude { get; set; }
         public decimal Latitude { get; set; }
+        public string SellerName { get; set; }
 
         public List<MansionStation> MansionStationList { get; set; } = new List<MansionStation>();
         public string MansionStationListJson { get; set; }

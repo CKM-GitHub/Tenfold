@@ -1,4 +1,4 @@
-IF EXISTS (select * from sys.objects where name = 'pr_M_Pref_Select_DropDownListOfPref')
+IF EXISTS (select * from sys.objects where name = 'pr_Common_Select_DropDownListOfPref')
 BEGIN
     DROP PROCEDURE [pr_Common_Select_DropDownListOfPref]
 END

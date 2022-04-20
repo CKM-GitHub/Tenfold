@@ -44,7 +44,7 @@ namespace Seruichi.BL
                 }
             }
             //建物構造
-            validator.CheckSelectionRequired("StructuralKBN_1", model.StructuralKBN);
+            validator.CheckSelectionRequired("StructuralKBN", model.StructuralKBN);
             //築年月
             validator.CheckRequired("ConstYYYYMM", model.ConstYYYYMM);
             validator.CheckYMDate("ConstYYYYMM", model.ConstYYYYMM);
@@ -81,13 +81,13 @@ namespace Seruichi.BL
             validator.CheckRequiredNumber("FloorType", model.FloorType, true);
             validator.CheckIsNumeric("FloorType", model.FloorType, 2, 0);
             //バス・トイレ
-            validator.CheckSelectionRequired("BathKBN_1", model.BathKBN);
+            validator.CheckSelectionRequired("BathKBN", model.BathKBN);
             //土地・権利
-            validator.CheckSelectionRequired("RightKBN_1", model.RightKBN);
+            validator.CheckSelectionRequired("RightKBN", model.RightKBN);
             //現況
-            validator.CheckSelectionRequired("RightKBN_1", model.CurrentKBN);
+            validator.CheckSelectionRequired("CurrentKBN", model.CurrentKBN);
             //管理方式
-            validator.CheckSelectionRequired("ManagementKBN_1", model.ManagementKBN);
+            validator.CheckSelectionRequired("ManagementKBN", model.ManagementKBN);
             //月額家賃
             validator.CheckRequiredNumber("RentFee", model.RentFee, false);
             validator.CheckIsNumeric("RentFee", model.RentFee, 9, 0);
@@ -123,7 +123,7 @@ namespace Seruichi.BL
             //M_Counter
             if (!commonBL.CheckExistsCounterMaster(CounterKey.MansionID, out errorcd))
             {
-                validator.AddValidationResult("btnProcess", errorcd);
+                validator.AddValidationResult("btnShowConfirmation", errorcd);
             }
 
             return validator.GetValidationResult();
@@ -229,9 +229,8 @@ namespace Seruichi.BL
 
             var sqlParams = new SqlParameter[]
             {
-                new SqlParameter("@SellerMansionID", SqlDbType.VarChar){ Value = model.SellerMansionID.ToStringOrNull() },
+                new SqlParameter("@SellerMansionID", SqlDbType.VarChar){ Value = null },
                 new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD.ToStringOrNull() },
-                new SqlParameter("@SellerName", SqlDbType.VarChar){ Value = model.SellerName.ToStringOrNull() },
                 new SqlParameter("@MansionName", SqlDbType.VarChar){ Value = model.MansionName.ToStringOrNull() },
                 new SqlParameter("@MansionCD", SqlDbType.VarChar){ Value = model.MansionCD.ToStringOrNull() },
                 new SqlParameter("@LatestRequestDate", SqlDbType.DateTime){ Value = model.LatestRequestDate.ToDateTime() },
@@ -271,6 +270,7 @@ namespace Seruichi.BL
                 new SqlParameter("@Latitude", SqlDbType.Decimal){ Value = model.Latitude.ToDecimal(0) },
                 new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.Operator.ToStringOrNull() },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.SellerName.ToStringOrNull() },
                 new SqlParameter("@MansionStationTable", SqlDbType.Structured) { TypeName = "dbo.T_MansionStation", Value = model.MansionStationList.ToDataTable() },
             };
 

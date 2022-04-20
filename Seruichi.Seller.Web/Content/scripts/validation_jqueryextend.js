@@ -83,6 +83,17 @@
     };
 
 
+    $.fn.addvalidation_doublebyte_kana = function () {
+        return this
+            .attr('data-validation-doublebyte-kana', 'true')
+            .attr('inputmode', 'kana');
+    };
+    $.fn.removeValidation_doublebyte_kana = function () {
+        return this
+            .removeAttr('data-validation-doublebyte-kana');
+    };
+
+
     $.fn.addvalidation_singlebyte = function () {
         return this
             .attr('data-validation-singlebyte', 'true')

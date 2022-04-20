@@ -23,6 +23,19 @@ namespace Seruichi.RealEstate.Web.Controllers
             }
         }
 
+        protected string GetOperatorName()
+        {
+            var user = SessionAuthenticationHelper.GetUserFromSession();
+            if (user == null)
+            {
+                return "";
+            }
+            else
+            {
+                return user.UserName;
+            }
+        }
+
         protected string GetClientIP()
         {
             var clientIp = "";
@@ -69,6 +82,11 @@ namespace Seruichi.RealEstate.Web.Controllers
         {
             var message = string.IsNullOrEmpty(messageId) ? new MessageModel("Internal Server Error") : StaticCache.GetMessage(messageId);
             return Json(new { isOK = false, message, data });
+        }
+
+        protected ActionResult ErrorResult()
+        {
+            return Json(new { isOK = false });
         }
 
         protected ActionResult ErrorResult<T>(T data)

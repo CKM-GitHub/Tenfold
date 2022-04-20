@@ -7,10 +7,11 @@ using System.Web.Mvc;
 
 namespace Seruichi.Seller.Web.Controllers
 {
+    [AllowAnonymous]
     public class a_indexController : BaseController
     {
-        [SessionAuthentication(Enabled = false)]
-        [AllowAnonymous]
+        // GET: a_index
+        [HttpGet]
         public ActionResult Index()
         {
             if (SessionAuthenticationHelper.GetUserFromSession() == null)
@@ -24,7 +25,7 @@ namespace Seruichi.Seller.Web.Controllers
             return View();
         }
 
-        [AllowAnonymous]
+        // Ajax: CheckZipCode
         [HttpPost]
         public ActionResult CheckZipCode(a_indexModel model)
         {
@@ -59,7 +60,7 @@ namespace Seruichi.Seller.Web.Controllers
             return OKResult(new { PrefCD = outPrefCD, CityCD = outCityCD, TownCD = outTownCD });
         }
 
-        [AllowAnonymous]
+        // Ajax: GetMansionListByMansionWord
         [HttpPost]
         public ActionResult GetMansionListByMansionWord(string prefCD, string searchWord)
         {
@@ -72,7 +73,7 @@ namespace Seruichi.Seller.Web.Controllers
             return OKResult(DataTableToJSON(dt));
         }
 
-        [AllowAnonymous]
+        // Ajax: GetMansionData
         [HttpPost]
         public ActionResult GetMansionData(string mansionCD)
         {
@@ -85,7 +86,28 @@ namespace Seruichi.Seller.Web.Controllers
             return OKResult(DataTableToJSON(dt));
         }
 
-        [AllowAnonymous]
+        // Ajax: CheckAll
+        [HttpPost]
+        public ActionResult CheckAll(a_indexModel model)
+        {
+            if (model == null)
+            {
+                return BadRequestResult();
+            }
+
+            model.MansionStationList = ConvertJsonToObject<List<a_indexModel.MansionStation>>(model.MansionStationListJson);
+
+            a_indexBL bl = new a_indexBL();
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+
+            return OKResult();
+        }
+
+        // Ajax: InsertSellerMansionData
         [HttpPost]
         public ActionResult InsertSellerMansionData(a_indexModel model)
         {
@@ -99,6 +121,7 @@ namespace Seruichi.Seller.Web.Controllers
             model.Longitude = longitude_latitude[0];
             model.Latitude = longitude_latitude[1];
             model.SellerCD = base.GetOperator();
+            model.SellerName = base.GetOperatorName();
             model.Operator = base.GetOperator();
             model.IPAddress = base.GetClientIP();
             model.MansionStationList = ConvertJsonToObject<List<a_indexModel.MansionStation>>(model.MansionStationListJson);

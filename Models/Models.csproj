@@ -45,13 +45,17 @@
     <Compile Include="Common\DropDownListItem.cs" />
     <Compile Include="Common\Enumrators.cs" />
     <Compile Include="Common\MessageModel.cs" />
-    <Compile Include="Common\SessionAuthenticationInfo.cs" />
+    <Compile Include="Common\SendMailInfo.cs" />
+    <Compile Include="Common\LoginUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ValidationModel.cs" />
-    <Compile Include="RealEstate\r_login\r_loginModel.cs" />
+    <Compile Include="Seller\a_mypage_uinfoModel.cs" />
+    <Compile Include="Seller\a_registerModel.cs" />
+    <Compile Include="Seller\a_loginModel.cs" />
     <Compile Include="Seller\a_indexModel.cs" />
     <Compile Include="Tenfold\Login\t_loginModel.cs" />
     <Compile Include="Tenfold\t_dashboard\t_dashboardModel.cs" />
+    <Compile Include="Tenfold\t_seller_assessment\t_seller_assessmentModel.cs" />
     <Compile Include="Tenfold\t_seller_list\t_seller_listModel.cs" />
     <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionModel.cs" />
   </ItemGroup>
