@@ -1,5 +1,4 @@
 ﻿using Models.Tenfold.t_seller_assessment;
-using Seruichi.BL.Tenfold.t_seller_assessment;
 using Seruichi.Common;
 using System;
 using Seruichi.BL;
@@ -8,7 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Seruichi.BL.Tenfold.t_seller_assessment;
 
 namespace Seruichi.Tenfold.Web.Controllers
 {
