@@ -441,6 +441,20 @@ namespace Seruichi.Common
             }
             return true;
         }
+
+        public bool CheckIsValidEmail(string mailAddress, out string errorcd)
+        {
+            errorcd = "";
+
+            if (!Utilities.IsValidEmail(mailAddress))
+            {
+                errorcd = "E204";
+                return false;
+            }
+
+            return true;
+        }
+
         //add by ams
         public bool CheckNullOrEmpty(string modelName, string inputText, out string errorcd)
         {
