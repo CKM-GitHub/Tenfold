@@ -67,5 +67,36 @@ namespace Seruichi.BL.RealEstate.r_login
             rePassword = dr["REPassword"].ToStringOrEmpty();
             return true;
         }
+        public string GetREStaffNamebyREStaffCD(string REStaffCD)
+        {
+            string staffName = string.Empty;
+            var sqlParm = new SqlParameter("@REStaffCD", SqlDbType.VarChar) { Value = REStaffCD };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_login_select_REStaffName_by_REStaffCD", sqlParm);
+            if (dt.Rows.Count > 0)
+            {
+                staffName = dt.Rows[0]["REStaffName"].ToString();
+            }
+            return staffName;
+        }
+        public void Insert_L_Login(r_login_l_log_Model model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@LogDateTime", SqlDbType.VarChar){ Value = model.LogDateTime },
+                new SqlParameter("@LoginKBN", SqlDbType.TinyInt){ Value = model.LoginKBN.ToByte(0) },
+                new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.LoginID.ToStringOrNull() },
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.LoginName.ToStringOrNull() },
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress },
+                new SqlParameter("@PageID", SqlDbType.VarChar){ Value = model.PageID },
+                new SqlParameter("@Processing", SqlDbType.VarChar){ Value = model.ProcessKBN },
+                new SqlParameter("@Remarks", SqlDbType.VarChar){ Value = model.Remarks },
+             };
+
+            DBAccess db = new DBAccess();
+            db.InsertUpdateDeleteData("pr_r_login_Insert_L_Login", false, sqlParams);
+        }
     }
 }

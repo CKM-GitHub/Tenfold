@@ -13,14 +13,14 @@ using Seruichi.Common;
 
 namespace Seruichi.RealEstate.Web.Controllers
 {
-    [SessionAuthentication(Enabled = false)]
     [AllowAnonymous]
     public class r_loginController : BaseController
     {
         // GET: r_login
         public ActionResult Index()
         {
-            SessionAuthenticationHelper.ReCreateSession();
+            Session.Clear();
+            SessionAuthenticationHelper.CreateAnonymousUser();
             return View();
         }
         [AllowAnonymous]
@@ -141,6 +141,8 @@ namespace Seruichi.RealEstate.Web.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(model.REStaffCD, false);
                     SessionAuthenticationHelper.CreateLoginUser(model.REStaffCD);
+                    r_login_l_log_Model model1 = Getlogdata(model);
+                    bl.Insert_L_Login(model1);
                     return OKResult();
                 }
                 else
@@ -148,6 +150,20 @@ namespace Seruichi.RealEstate.Web.Controllers
                     return ErrorMessageResult("E109");
                 }
             }
+        }
+        public r_login_l_log_Model Getlogdata(r_loginModel model1)
+        {
+            r_loginBL bl = new r_loginBL();
+            r_login_l_log_Model model=new r_login_l_log_Model();
+            model.LoginKBN = 2;
+            model.LoginID = model1.REStaffCD;
+            model.RealECD = model1.RealECD;
+            model.LoginName = bl.GetREStaffNamebyREStaffCD(model1.REStaffCD);
+            model.IPAddress = base.GetClientIP(); 
+            model.PageID = "r_login";
+            model.ProcessKBN = "Insert";
+            model.Remarks = model.LoginName;
+            return model;
         }
     }
 }

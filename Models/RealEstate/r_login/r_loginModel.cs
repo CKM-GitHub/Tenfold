@@ -20,5 +20,8 @@ namespace Models.RealEstate.r_login
         public string RealECD { get; set; }
         public string LoginName { get; set; }
         public string IPAddress { get; set; }
+        public string PageID { get; set; }
+        public string ProcessKBN { get; set; }
+        public string Remarks { get; set; }
     }
 }
