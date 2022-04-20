@@ -1,0 +1,18 @@
+﻿<input type="hidden" id="_RequestVerificationToken" value="@SessionAuthenticationHelper.GetVerificationToken()" />
+<nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
+    <div class="container">
+        <a class="navbar-brand" href="@Url.Action("Index", "a_index")">セルイチ</a>
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"></button>
+        <div class="collapse navbar-collapse justify-content-end" id="navcol-1">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#"><i class="fa fa-building-o pe-2"></i>査定</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "a_mypage_uinfo")"><i class="fa fa-user pe-2"></i>マイページ</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+

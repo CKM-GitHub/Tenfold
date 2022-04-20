@@ -1,8 +1,5 @@
 ﻿using Models;
 using Seruichi.BL;
-using Seruichi.Common;
-using System.Collections.Generic;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Seruichi.Seller.Web.Controllers

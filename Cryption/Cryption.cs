@@ -68,5 +68,16 @@ namespace Cryption
             string cryptionKey = crypt.DecryptFromBase64(encryptedDataCryptionKey, AESCryption.DefaultKey);
             txtKey.Text = cryptionKey;
         }
+
+        private void btnPasswordHash_Click(object sender, EventArgs e)
+        {
+            PasswordHash pwhash = new PasswordHash();
+            txtResultPassword.Text = pwhash.GeneratePasswordHash(txtMailAddress.Text, txtPassword.Text);
+        }
+
+        private void btnCopyPassword_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(txtResultPassword.Text);
+        }
     }
 }

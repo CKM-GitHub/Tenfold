@@ -12,7 +12,7 @@ namespace Seruichi.Common
 
         private string GenerateSalt(string username)
         {
-            var data = encoding.GetBytes(username);
+            var data = encoding.GetBytes(username.ToLower());
             var sha256 = new SHA256CryptoServiceProvider();
             var hash = sha256.ComputeHash(data);
 

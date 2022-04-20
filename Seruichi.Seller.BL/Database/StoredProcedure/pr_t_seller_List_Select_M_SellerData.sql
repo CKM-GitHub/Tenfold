@@ -11,7 +11,7 @@ CREATE PROCEDURE [dbo].[pr_t_seller_List_Select_M_SellerData]
 	--@SellerCD as varchar(10),
 	@SellerName as varchar(50),
 	@PrefNameSelect as varchar(10),
-	@RangeSelect as varchar(10),
+	@RangeSelect as tinyint,
 	@StartDate as Date,
 	@EndDate as Date,
 	@expectedCheck as tinyint,
@@ -23,7 +23,7 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-   IF @EndDate IS NULL set @EndDate='2099/12/31'
+   --IF @EndDate IS NULL set @EndDate='2099/12/31'
 
    DECLARE @g INT
 		IF EXISTS (SELECT 1 FROM M_Seller A OUTER APPLY M_SellerMansion B WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null AND (B.HoldingStatus = 2 or B.HoldingStatus = 3))			SELECT @g = Count(SellerMansionID) FROM M_Seller A OUTER APPLY M_SellerMansion B WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null AND (B.HoldingStatus = 2 or B.HoldingStatus = 3) GROUP BY SellerMansionID 		ELSE			SELECT @g = 0
@@ -70,9 +70,9 @@ BEGIN
 	AND (@SellerName is null or ((A.SellerName Like '%'+@SellerName+'%') or (A.SellerCD Like '%'+@SellerName+'%')))
 	AND ((@PrefNameSelect = N'全国' and (A.PrefName is not Null)) 
 		or (@PrefNameSelect != N'全国' and (A.PrefName = @PrefNameSelect )))
-	AND ((@RangeSelect = N'登録日'	and (@StartDate IS NULL OR CONVERT(DATE, A.InsertDateTime)  >= @StartDate)  and  ( CONVERT(DATE, A.InsertDateTime) <= @EndDate))
-		OR (@RangeSelect = N'詳細査定日'	and (@StartDate IS NULL OR CONVERT(DATE, D.DeepAssDateTime) >= @StartDate)  and  ( CONVERT(DATE, D.DeepAssDateTime) <= @EndDate)) 
-		OR (@RangeSelect = N'買取依頼日'	and (@StartDate IS NULL OR CONVERT(DATE, D.PurchReqDateTime) >= @StartDate) and ( CONVERT(DATE, D.PurchReqDateTime) <= @EndDate)))
+	AND ((@RangeSelect = '0'	and (@StartDate IS NULL OR CONVERT(DATE, A.InsertDateTime)  >= @StartDate)  and  (@EndDate IS NULL OR CONVERT(DATE, A.InsertDateTime) <= @EndDate))
+		OR (@RangeSelect ='1'	and (@StartDate IS NULL OR CONVERT(DATE, D.DeepAssDateTime) >= @StartDate)  and  (@EndDate IS NULL OR CONVERT(DATE, D.DeepAssDateTime) <= @EndDate)) 
+		OR (@RangeSelect = '2'	and (@StartDate IS NULL OR CONVERT(DATE, D.PurchReqDateTime) >= @StartDate) and (@EndDate IS NULL OR CONVERT(DATE, D.PurchReqDateTime) <= @EndDate)))
 	AND ((@negtiatioinsCheck ='1' and G.c > 0 ) 
 		or (@expectedCheck = '1' and (G.c = 0 and E.a != F.b)) 
 		or (@endCheck = '1' and (G.c = 0 and E.a = F.b)))

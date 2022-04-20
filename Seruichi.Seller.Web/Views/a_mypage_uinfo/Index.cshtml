@@ -1,0 +1,280 @@
+﻿@model Models.a_mypage_uinfoModel
+
+@{
+    ViewBag.Title = "簡易査定 - セルイチ";
+}
+@section styles{
+    @Styles.Render("~/Content/css/a_mypage_uinfo")
+}
+
+<header class="text-center text-white masthead cap-header">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto position-relative">
+                <h1 class="mb-2">マイページ</h1>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="clean-block clean-form dark h-100 cap-main">
+    <div class="container">
+        <div class="row flex-column flex-sm-row wrapper min-vh-100 pt-5 pb-3">
+            <div class="col-12 col-sm-1 col-md-3">
+                @Html.Partial("_MyPageMenu")
+            </div>
+            <div class="col-12 col-sm-11 col-md-9 py-3 card cap-form">
+                <form class="mx-auto cap-con-form card-body" role="form">
+                    <h4 class="text-center"><strong>会員登録内容変更</strong></h4>
+                    <hr>
+                    <div class="m-auto">
+                        <div class="row">
+                            <div class="col">
+                                <div>
+                                    <div>
+                                        <p>
+                                            下記項目にご入力ください。<br>入力後、一番下の「確認ページへ」ボタンをクリックしてください。
+                                        </p>
+                                        <div class="form-group mb-3">
+                                            <div class="d-flex">
+                                                <label class="form-label">お名前</label>
+                                                <span class="cap-errormsg-right" id="errorSellerName"></span>
+                                            </div>
+                                            <input class="form-control cap-fon-form-w300" type="text" name="SellerName" id="SellerName" maxlength="25" autocomplete="name">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="d-flex">
+                                                <label class="form-label">お名前(フリガナ)</label>
+                                                <span class="cap-errormsg-right" id="errorSellerKana"></span>
+                                            </div>
+                                            <input class="form-control cap-fon-form-w300" type="text" name="SellerKana" id="SellerKana" maxlength="25">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="d-flex">
+                                                <label class="form-label">生年月日</label>
+                                                <span class="cap-errormsg-right" id="errorBirthday"></span>
+                                            </div>
+                                            <input class="form-control cap-fon-form-w200" type="date" min="1900-01-01" max="2100-12-31" name="Birthday" id="Birthday" autocomplete="bday">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="d-flex">
+                                                <label class="form-label">郵便番号</label>
+                                                <span class="cap-errormsg-right" id="errorZipCode"></span>
+                                            </div>
+                                            <div class="row cap-fon-form-w350 d-flex justify-content-center">
+                                                <div class="col-8 d-inline-flex">
+                                                    <span class="align-self-center pe-1">〒</span>
+                                                    <input class="form-control text-center w-25" type="text" name="ZipCode1" id="ZipCode1" maxlength="3">
+                                                    <span class="align-self-center pe-1 ps-1">-</span>
+                                                    <input class="form-control w-50 text-center" type="text" name="ZipCode2" id="ZipCode2" maxlength="4">
+                                                </div>
+                                                <div class="col d-flex justify-content-center">
+                                                    <button class="btn btn-primary btn-sm" type="button" id="btnAutoSet">自動変換</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="d-flex">
+                                                <label class="form-label">都道府県</label>
+                                                <span class="cap-errormsg-right" id="errorPrefCD"></span>
+                                            </div>
+                                            <select class="form-select cap-fon-form-w200" name="PrefCD" id="PrefCD">
+                                                <option selected value="">都道府県</option>
+                                                @foreach (Models.DropDownListItem item in ViewBag.PrefDropDownListItems)
+                                                {
+                                                    <option class="js-selectable" value=@item.Value>@item.DisplayText</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="d-flex">
+                                                <label class="form-label">市町村区</label>
+                                                <span class="cap-errormsg-right" id="errorCityName"></span>
+                                            </div>
+                                            <input class="form-control cap-fon-form-w200" type="text" name="CityName" id="CityName" maxlength="50" autocomplete="address-level2">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="d-flex">
+                                                <label class="form-label">町域名</label>
+                                                <span class="cap-errormsg-right" id="errorTownName"></span>
+                                            </div>
+                                            <input class="form-control w-100" type="text" name="TownName" id="TownName" maxlength="50" autocomplete="address-level3">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="d-flex">
+                                                <label class="form-label">町名・番地など</label>
+                                                <span class="cap-errormsg-right" id="errorAddress1"></span>
+                                            </div>
+                                            <input class="form-control w-100" type="text" name="Address1" id="Address1" maxlength="50" autocomplete="address-level4">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="d-flex">
+                                                <label class="form-label">建物名</label>
+                                                <span class="cap-errormsg-right" id="errorAddress2"></span>
+                                            </div>
+                                            <input class="form-control w-100" type="text" name="Address2" id="Address2" maxlength="50">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="d-flex">
+                                                <label class="form-label">電話番号</label>
+                                                <span class="cap-errormsg-right" id="errorHousePhone"></span>
+                                            </div>
+                                            <input class="form-control cap-fon-form-w200" type="tel" name="HousePhone" id="HousePhone" maxlength="15">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="d-flex">
+                                                <label class="form-label">携帯番号</label>
+                                                <span class="cap-errormsg-right" id="errorHandyPhone"></span>
+                                            </div>
+                                            <input class="form-control cap-fon-form-w200" type="tel" name="HandyPhone" id="HandyPhone" maxlength="15" autocomplete="tel">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="d-flex">
+                                                <label class="form-label">FAX番号</label>
+                                                <span class="cap-errormsg-right" id="errorFax"></span>
+                                            </div>
+                                            <input class="form-control cap-fon-form-w200" type="tel" name="Fax" id="Fax" maxlength="15">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="d-flex">
+                                                <label class="form-label">メールアドレス</label>
+                                                <span class="cap-errormsg-right" id="errorMailAddress"></span>
+                                            </div>
+                                            <input readonly class="form-control w-100" type="email" name="MailAddress" id="MailAddress" value="@Model.MailAddress">
+                                        </div>
+                                        <div class="form-group mb-3 w-100">
+                                            <div class="d-flex">
+                                                <label class="form-label w-100">パスワード</label>
+                                                <span class="cap-errormsg-right" id="errorPassword"></span>
+                                            </div>
+                                            <input class="form-control" type="password" name="Password" id="Password" autocomplete="new-password" minlength="8" maxlength="20">
+                                        </div>
+                                        <div class="form-group mb-3 w-100">
+                                            <div class="d-flex">
+                                                <label class="form-label w-100">パスワード再確認</label>
+                                                <span class="cap-errormsg-right" id="errorConfirmPassword"></span>
+                                            </div>
+                                            <input class="form-control" type="password" name="ConfirmPassword" id="ConfirmPassword" autocomplete="new-password" minlength="8" maxlength="20">
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="text-center">
+                                    <div class="d-inline-flex">
+                                        <button class="btn btn-primary btn-lg" type="button" data-bs-target="#modal-2" data-bs-toggle="modal">入力内容確認</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">入力内容確認</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body ">
+                <p class="text-center">下記の内容で送信してもよろしいでしょうか？<br>よろしければ、一番下の「完了ページへ」ボタンをクリックしてください。</p>
+                <div class="mx-auto" style="max-width: 500px;">
+                    <div class="block-heading" style="padding-top: 0px;"></div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">お名前</label>
+                        <input class="form-control cap-fon-form-w300" type="text" name="SellerName" id="confirm_SellerName" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">お名前(フリガナ)</label>
+                        <input class="form-control cap-fon-form-w300" type="text" name="SellerKana" id="confirm_SellerKana" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">生年月日</label>
+                        <input class="form-control cap-fon-form-w200" type="date" min="1900-01-01" max="2100-12-31" name="Birthday" id="confirm_Birthday" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">郵便番号</label>
+                        <div class="row cap-fon-form-w350">
+                            <div class="col-8 d-inline-flex">
+                                <span class="align-self-center pe-1">〒</span>
+                                <input class="form-control w-25 text-center" type="text" name="ZipCode1" id="confirm_ZipCode1" readonly>
+                                <span class="align-self-center pe-1 ps-1">-</span>
+                                <input class="form-control text-center w-50" type="text" name="ZipCode2" id="confirm_ZipCode2" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">都道府県</label>
+                        <input class="form-control cap-fon-form-w200" type="text" name="PrefName" id="confirm_PrefName" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">市町村区</label>
+                        <input class="form-control cap-fon-form-w200" type="text" name="CityName" id="confirm_CityName" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">町域名</label>
+                        <input class="form-control" type="text" name="TownName" id="confirm_TownName" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">町名・番地など</label>
+                        <input class="form-control w-100" type="text" name="Address1" id="confirm_Address1" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">建物名</label>
+                        <input class="form-control w-100" type="text" name="Address2" id="confirm_Address2" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">電話番号</label>
+                        <input class="form-control" type="tel" name="HousePhone" id="confirm_HousePhone" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">携帯番号</label>
+                        <input class="form-control cap-fon-form-w200" type="tel" name="HandyPhone" id="confirm_HandyPhone" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">FAX番号</label>
+                        <input class="form-control cap-fon-form-w200" type="tel" name="Fax" id="confirm_Fax" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">メールアドレス</label>
+                        <input class="form-control w-100" type="email" name="MailAddress" id="confirm_MailAddress" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light btn-lg" type="button" data-bs-dismiss="modal">戻る</button>
+                <button class="btn btn-primary btn-lg" type="button" data-bs-target="#modal-3" data-bs-toggle="modal">完了ページへ</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" role="dialog" tabindex="-1" id="modal-3">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">会員登録内容の変更完了</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <section class="newsletter-subscribe">
+                    <div class="container">
+                        <div class="intro"></div>
+                        <form class="d-flex justify-content-center flex-wrap mx-auto text-center" method="post">
+                            <h1 class="cap-icon-h1">
+                                <i class="fa fa-user-circle-o cap-icon-i"></i>
+                            </h1>
+                        </form>
+                    </div>
+                    <h4 class="text-center align-self-center mt-3">会員登録内容の変更が完了いたしました。</h4>
+                </section>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary btn-lg" type="button" data-bs-target="#modal-3" data-bs-toggle="modal">閉じる</button>
+            </div>
+        </div>
+    </div>
+</div>

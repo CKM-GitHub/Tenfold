@@ -78,6 +78,15 @@ namespace Seruichi.Seller.Web
 
             bundles.Add(new ScriptBundle("~/bundles/a_register").Include(
                       "~/Scripts/a_register.js"));
+
+            //a_mypage_uinfo
+            bundles.Add(new StyleBundle("~/Content/css/a_mypage_uinfo").Include(
+                        "~/Content/css/Clients-UI.css",
+                        "~/Content/css/Ludens-Users---25-After-Register.css",
+                        "~/Content/css/Sidebar.css"));
+
+            //bundles.Add(new ScriptBundle("~/bundles/a_mypage_uinfo").Include(
+            //          "~/Scripts/a_mypage_uinfo.js"));
         }
     }
 }
