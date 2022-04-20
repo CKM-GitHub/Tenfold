@@ -443,18 +443,5 @@ namespace Seruichi.Common
         }
 
         
-
-        public bool CheckIsValidEmail(string mailAddress, out string errorcd)
-        {
-            errorcd = "";
-
-            if (!Utilities.IsValidEmail(mailAddress))
-            {
-                errorcd = "E204";
-                return false;
-            }
-
-            return true;
-        }
     }
 }
