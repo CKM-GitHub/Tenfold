@@ -149,6 +149,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\a_mypage_uinfoController.cs" />
     <Compile Include="Controllers\a_registerController.cs" />
     <Compile Include="Controllers\a_loginController.cs" />
     <Compile Include="Controllers\Common\CommonApiController.cs" />
@@ -258,6 +259,10 @@
     <Content Include="Views\Shared\_ErrorLayout.cshtml" />
     <Content Include="Views\a_register\Index.cshtml" />
     <Content Include="Views\Error\BusinessError.cshtml" />
+    <Content Include="Views\a_mypage_uinfo\Index.cshtml" />
+    <Content Include="Views\Shared\_MyPageMenu.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
