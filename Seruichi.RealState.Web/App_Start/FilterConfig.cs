@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Seruichi.RealState.Web
+namespace Seruichi.RealEstate.Web
 {
     public class FilterConfig
     {

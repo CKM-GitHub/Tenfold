@@ -442,8 +442,6 @@ namespace Seruichi.Common
             return true;
         }
 
-        
-
         public bool CheckIsValidEmail(string mailAddress, out string errorcd)
         {
             errorcd = "";
@@ -456,5 +454,29 @@ namespace Seruichi.Common
 
             return true;
         }
+
+        //add by ams
+        public bool CheckNullOrEmpty(string modelName, string inputText, out string errorcd)
+        {
+            errorcd = "";
+
+            if (string.IsNullOrEmpty(inputText) && modelName == "RealECD")
+            {
+                errorcd = "E310"; //会社IDが入力されていません
+                return false;
+            }
+            if (string.IsNullOrEmpty(inputText) && modelName == "REStaffCD")
+            {
+                errorcd = "E312"; //スタッフIDが入力されていません
+                return false;
+            }
+            if (string.IsNullOrEmpty(inputText) && modelName == "REPassword")
+            {
+                errorcd = "E205"; //パスワードが入力されていません
+                return false;
+            }
+            return true;
+        }
+
     }
 }

@@ -18,8 +18,8 @@ function setValidation() {
 
     $('#StartDate')
         .addvalidation_errorElement("#errorStartDate")
-        .addvalidation_datecheck();
-    //.addvalidation_datecompare();
+        .addvalidation_datecheck()
+        .addvalidation_datecompare();
 
     $('#EndDate')
         .addvalidation_errorElement("#errorEndDate")
@@ -66,6 +66,13 @@ function addEvents() {
 
     $('#btnThisWeek').on('click', function () {
         let start = common.getDayaweekbeforetoday();
+        //let today = new Date();
+        //let first = today.getDate() - today.getDay() + 1;
+
+        //let monday = new Date(today.setDate(first));
+        //let data = monday.toISOString().slice(0, 10);
+        alert(start);
+        //alert(data);
         let end = common.getToday();
         $('#StartDate').val(start);
         $('#EndDate').val(end);

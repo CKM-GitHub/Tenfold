@@ -5,7 +5,7 @@ using Seruichi.Common;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace Seruichi.RealState.Web.Controllers
+namespace Seruichi.RealEstate.Web.Controllers
 {
     [AllowAnonymous]
     public class CommonApiController : BaseApiController
