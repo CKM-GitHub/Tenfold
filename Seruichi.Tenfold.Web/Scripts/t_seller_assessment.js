@@ -155,7 +155,6 @@ function isEmptyOrSpaces(str) {
     return str === null || str.match(/^ *$/) !== null;
 }
 function Bind_tbody(result) {
-    alert(result);
     let data = JSON.parse(result);
     let html = "";
     for (var i = 0; i < data.length; i++) {
@@ -204,8 +203,8 @@ function Bind_tbody(result) {
         }
         html += '<tr>\
             <td class= "text-end" > ' + data[i]["NO"] + '</td>\
-            <td><i class="'+ _class + '">' + _letter + '</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
-            <td><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["SellerMansionID"] + '&t_mansion_detail' + 'href="#" onclick="l_logfunction(this.id)">'+ data[i]["マンション名＆部屋番号"]+'</a></td>\
+            <td><i class="'+ _class + '">' + _letter + '</i><span class="font-semibold">' + data[i]["ステータス"] + '</span></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["SellerMansionID"] + '&t_mansion_detail' + ' onclick="l_logfunction(this.id)">'+ data[i]["マンション名＆部屋番号"]+'</a></td>\
             <td><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["RealECD"] + '&t_reale_purchase' + ' onclick="l_logfunction(this.id)">' + data[i]["不動産会社"] + '</a></td>\
             <td class="text-nowrap">' + data[i]["登録日時"] + '</td>\
             <td class="text-nowrap">' + data[i]["簡易査定日時"] + '</td>\
@@ -242,12 +241,15 @@ function l_logfunction(id) {
     common.callAjax(_url.insert_l_log, model,
         function (result) {
             if (result && result.isOK) {
-                if (model.LogStatus = "t_mansion_detail")
+                if (model.LogStatus = "t_mansion_detail") {
                     alert("https://www.seruichi.com/t_mansion_detail?ｍansionCD=" + model.LogId);
-                else if (model.LogStatus = "t_reale_purchase")
+                }
+                else if (model.LogStatus = "t_reale_purchase") {
                     alert("https://www.seruichi.com/t_reale_purchase?RealECD=" + model.LogId);
-                else if (model.LogStatus = "t_seller_assessment_detail")
+                }
+                else if (model.LogStatus = "t_seller_assessment_detail") {
                     alert("https://www.seruichi.com/t_seller_assessment_detail?AssReqID=" + model.LogId);
+                }
             }
             if (result && !result.isOK) {
             }

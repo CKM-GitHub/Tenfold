@@ -80,10 +80,11 @@ namespace Seruichi.BL.Tenfold.t_seller_assessment
             db.InsertUpdateDeleteData("pr_t_seller_assessment_list_Insert_L_Log", false, sqlParams);
         }
 
-        public DataTable Generate_M_SellerMansionCSV(t_seller_assessmentModel model)
+        public DataTable Generate_M_SellerMansionCSV(t_seller_assessmentModel model, string SellerCD)
         {
             var sqlParams = new SqlParameter[]
              {
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = SellerCD },
                 new SqlParameter("@Chk_Mi", SqlDbType.TinyInt){ Value = model.Chk_Mi.ToByte(0) },
                 new SqlParameter("@Chk_Kan", SqlDbType.TinyInt){ Value = model.Chk_Kan.ToByte(0) },
                 new SqlParameter("@Chk_Satei", SqlDbType.TinyInt){ Value = model.Chk_Satei.ToByte(0) },
