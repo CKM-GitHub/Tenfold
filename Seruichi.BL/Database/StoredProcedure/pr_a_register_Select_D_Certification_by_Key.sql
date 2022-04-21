@@ -6,7 +6,7 @@ GO
 
 CREATE PROCEDURE [dbo].[pr_a_register_Select_D_Certification_by_Key]
 (
-    @CertificationCD            varchar(12)
+    @CertificationCD            varchar(30)
 )
 AS
 BEGIN

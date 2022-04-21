@@ -2,9 +2,8 @@
 
 namespace Models
 {
-    public class a_mypage_uinfoModel : BaseModel
+    public class a_contactModel : BaseModel
     {
-        public string SellerCD { get; set; }
         public string SellerName { get; set; }
         public string SellerKana { get; set; }
         public string Birthday { get; set; }

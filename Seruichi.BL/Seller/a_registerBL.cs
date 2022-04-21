@@ -137,9 +137,12 @@ namespace Seruichi.BL
             if (validator.IsValid)
             {
                 //郵便番号
-                if (!CheckZipCode(model.ZipCode1, model.ZipCode2, out string errorcd, out string prefCD, out string cityName, out string townName))
+                if (!string.IsNullOrEmpty(model.ZipCode1) || !string.IsNullOrEmpty(model.ZipCode2))
                 {
-                    validator.AddValidationResult("ZipCode1", errorcd);
+                    if (!CheckZipCode(model.ZipCode1, model.ZipCode2, out string errorcd, out string prefCD, out string cityName, out string townName))
+                    {
+                        validator.AddValidationResult("ZipCode1", errorcd);
+                    }
                 }
                 //パスワード
                 if (model.Password.Length < 8 || model.Password.Length > 20)
@@ -193,8 +196,8 @@ namespace Seruichi.BL
             PasswordHash pwhash = new PasswordHash();
             string hashedPassword = pwhash.GeneratePasswordHash(model.MailAddress, model.Password);
 
-            //yyyy/MM/dd
-            model.Birthday = model.Birthday.ToDateTime().ToDateString(DateTimeFormat.yyyyMMdd);
+            //yyyy-MM-dd
+            model.Birthday = model.Birthday.ToDateTime().ToDateString(DateTimeFormat.yyyy_MM_dd);
 
             var sqlParams = new SqlParameter[]
             {
@@ -206,6 +209,7 @@ namespace Seruichi.BL
                 new SqlParameter("@Birthday", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.Birthday, cryptionKey).ToStringOrNull() },
                 new SqlParameter("@ZipCode1", SqlDbType.VarChar){ Value = model.ZipCode1.ToStringOrNull() },
                 new SqlParameter("@ZipCode2", SqlDbType.VarChar){ Value = model.ZipCode2.ToStringOrNull() },
+                new SqlParameter("@PrefCD", SqlDbType.VarChar){ Value = model.PrefCD.ToStringOrNull() },
                 new SqlParameter("@PrefName", SqlDbType.VarChar){ Value = model.PrefName.ToStringOrNull() },
                 new SqlParameter("@CityName", SqlDbType.VarChar){ Value = model.CityName.ToStringOrNull() },
                 new SqlParameter("@TownName", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.TownName, cryptionKey).ToStringOrNull() },

@@ -4,7 +4,7 @@ $(function () {
     _url.checkZipCode = common.appPath + '/a_mypage_uinfo/CheckZipCode';
     _url.checkAll = common.appPath + '/a_mypage_uinfo/CheckAll';
     _url.insertSellerData = common.appPath + '/a_mypage_uinfo/UpdateSellerData';
-    _url.gotoNextPage = common.appPath + '/a_mypage_uinfo/GotoNextPage';
+    //_url.gotoNextPage = common.appPath + '/a_mypage_uinfo/Index';
 
     $('#mypage_uinfo').addClass('active');
 
@@ -73,7 +73,11 @@ function addEvents()
     const $form = $('#form1');
     let updateData;
 
-    common.bindValidationEvent('#form1');
+    common.bindValidationEvent('#form1', ':not(#HousePhone, #HandyPhone, #Fax)');
+    $('#HousePhone, #HandyPhone, #Fax').on('blur', function (e) {
+        customValidation_checkPhone(this);
+        return common.checkValidityInput(this);
+    });
 
     $('#btnAutoSet').on('click', function () {
         const $ZipCode1 = $('#ZipCode1'), $ZipCode2 = $('#ZipCode2');
@@ -142,10 +146,22 @@ function addEvents()
         });
     });
 
-    $('#btnStartAssessment').on('click', function () {
-        const form = document.forms.form3;
-        form.method = "POST";
-        form.action = _url.gotoNextPage;
-        form.submit();
+    $('#btnCompleted').on('click', function () {
+        window.location.reload();
+        //const form = document.forms.form2;
+        //form.method = "POST";
+        //form.action = _url.gotoNextPage;
+        //form.submit();
     });
+}
+
+function customValidation_checkPhone(e) {
+    const $this = $(e)
+
+    let inputValue = $this.val();
+    inputValue = inputValue.replace(/-/g, "")
+    inputValue = inputValue.replace(/－/g, "")
+    $this.val(inputValue);
+
+    return true;
 }

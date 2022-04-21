@@ -163,62 +163,68 @@ function Bind_tbody(result) {
         if (isEmptyOrSpaces(data[i]["ステータス"])) {
             _letter = "";
             _class = "ms-1 ps-1 pe-1 rounded-circle";
+            _sort_checkbox = "";
         }
         else {
             _letter = data[i]["ステータス"].charAt(0);            
             if (_letter == "未") {
-                _class = "ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal";              
+                _sort_checkbox = "One";
             }
             else if (_letter == "簡") {
-                _class = "ms-1 ps-1 pe-1 rounded-circle bg-info text-white fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-info text-white fst-normal";                
+                _sort_checkbox = "Two";
             }
             else if (_letter == "査") {
-                _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal";               
+                _sort_checkbox = "Three";
             }
             else if (_letter == "買" && data[i]["ステータス"] =="買取依頼") {
-                _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal";               
+                _sort_checkbox = "Four";
             }
             else if (_letter == "確") {
-                _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark fst-normal";              
+                _sort_checkbox = "Five";
             }
             else if (_letter == "交") {
-                _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark fst-normal";               
+                _sort_checkbox = "Six";
             }
             else if (_letter == "成") {
-                _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary text-dark fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary text-dark fst-normal";              
+                _sort_checkbox = "Seven";
             }
             else if (_letter == "売" && data[i]["EndStatus"] == 2 && data[i]["ステータス"] == "売主辞退") {
                 _letter = "辞";
-                _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger fst-normal";               
+                _sort_checkbox = "Eight";
             }
             else if (_letter == "売" && data[i]["EndStatus"] == 3 && data[i]["ステータス"] == "売主辞退") {
                 _letter = "辞";
                 data[i]["ステータス"] = "買主辞退";
-                _class = "ms-1 ps-1 pe-1 rounded-circle  bg-dark text-white fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle  bg-dark text-white fst-normal";               
+                _sort_checkbox = "Nine";
             }
 
         }
         html += '<tr>\
-            <td class= "text-end" > ' + data[i]["NO"] + '</td>\
-            <td><i class="'+ _class + '">' + _letter +'</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
+            <td class= "text-end"> ' + data[i]["NO"] + '</td>\
+            <td class="'+ _sort_checkbox + '"><i class="' + _class + '">' + _letter + '</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
             <td> ' + data[i]["物件CD"] + ' </td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["MansionCD"] +'&t_mansion_detail'+ '  href="#" onclick="l_logfunction(this.id)"> 物件名物件名物件名物件名物件名</a><p> <small class="text-wrap w-100">'+ data[i]["住所"] + '</small></p></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["MansionCD"] + '&t_mansion_detail' + '  href="#" onclick="l_logfunction(this.id)">' + data[i]["住所"] + '</a></td>\
             <td> '+ data[i]["部屋"] + '</td>\
             <td class="text-end">'+ data[i]["階数"] + '</td>\
-            <td class="text-end">'+ data[i]["面積"] + '</td>\
-            <td> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["SellerCD"] + '&t_seller_assessment' + ' onclick="l_logfunction(this.id)">売主名売主名売主名</a><p> <small class="text-wrap w-100">' + data[i]["売主名"] + '</small></p></td>\
+            <td class="text-end">'+ data[i]["面積"].toFixed(2) + '</td>\
+            <td> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["SellerCD"] + '&t_seller_assessment' + ' onclick="l_logfunction(this.id)">' + data[i]["売主名"] + '</a></td>\
             <td class="text-nowrap"> '+ data[i]["登録日時"] + '</td>\
             <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["AssReqID"] +'&t_seller_assessment_detail'+' onclick="l_logfunction(this.id)"> '+ data[i]["詳細査定日時"] + ' </a> </td>\
             <td class="text-nowrap"> '+ data[i]["買取依頼日時"] + ' </td>\
             <td class="text-nowrap">\
-            <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["GRealECD"] + '&t_seller_assessment_detail_GReal' +' onclick="l_logfunction(this.id)" > 不動産会社名不動産会社名 </a>\
-            <p class="text-end">'+ data[i]["マンション金額"] + '</p>\
-             </td>\
+            <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["GRealECD"] + '&t_seller_assessment_detail_GReal' + ' onclick="l_logfunction(this.id)" >' + data[i]["マンション金額"] + ' </a> </td>\
              <td class="text-nowrap">\
-             <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["ERealECD"] + '&t_seller_assessment_detail_EReal' +' onclick="l_logfunction(this.id)"> 不動産会社名不動産会社名 </a>\
-             <p class="text-end">'+ data[i]["エリア金額"] + '</p>\
-             </td>\
-             <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["IRealECD"] + '&t_seller_assessment_detail_IRealECD' +' onclick="l_logfunction(this.id)"> 不動産会社名不動産会社名 </a><p class="text-end">'+ data[i]["買取依頼金額"] + '</p> </td>\
+             <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["ERealECD"] + '&t_seller_assessment_detail_EReal' + ' onclick="l_logfunction(this.id)">' + data[i]["エリア金額"] + ' </a> </td>\
+             <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["IRealECD"] + '&t_seller_assessment_detail_IRealECD' + ' onclick="l_logfunction(this.id)"> ' + data[i]["買取依頼金額"] + ' </a> </td>\
              <td class="text-nowrap"> '+ data[i]["送客日時"] + ' </td>\
              <td class="text-nowrap"> '+ data[i]["成約日時"] + ' </td>\
              <td class="text-nowrap"> '+ data[i]["辞退日時"] + '</td>\
@@ -235,11 +241,7 @@ function Bind_tbody(result) {
     $('#mansiontable tbody').append(html);
 
     sortTable.getSortingTable("mansiontable");
-    //const table = document.getElementById('mansiontable');
-    //const headers = table.querySelectorAll('th');
-    //const tableBody = table.querySelector('tbody');
-    //const rows = tableBody.querySelectorAll('tr');
-    //alert(tableBody.innerHTML);
+    
 }
 function l_logfunction(id) {   
     let model = {

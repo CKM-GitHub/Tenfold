@@ -433,7 +433,8 @@ const common = {
 
             if (isDateCompare) {
                 if (!common.compareDate($("#StartDate").val(), $("#EndDate").val())) {
-                    $ctrl.showError(this.getMessage('E111'));
+                    $("#StartDate").showError(this.getMessage('E111'));
+                    $("#EndDate").showError(this.getMessage('E111'));
                     return;
                 }
             }
