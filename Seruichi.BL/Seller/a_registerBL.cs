@@ -193,8 +193,8 @@ namespace Seruichi.BL
             PasswordHash pwhash = new PasswordHash();
             string hashedPassword = pwhash.GeneratePasswordHash(model.MailAddress, model.Password);
 
-            //yyyy/MM/dd
-            model.Birthday = model.Birthday.ToDateTime().ToDateString(DateTimeFormat.yyyyMMdd);
+            //yyyy-MM-dd
+            model.Birthday = model.Birthday.ToDateTime().ToDateString(DateTimeFormat.yyyy_MM_dd);
 
             var sqlParams = new SqlParameter[]
             {

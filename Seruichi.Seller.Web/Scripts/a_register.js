@@ -151,7 +151,7 @@ function addEvents()
         });
     });
 
-    $('#btnStartAssessment').on('click', function () {
+    $('#btnCompleted').on('click', function () {
         const form = document.forms.form3;
         form.method = "POST";
         form.action = _url.gotoNextPage;

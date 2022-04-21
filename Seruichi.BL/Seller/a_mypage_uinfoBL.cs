@@ -9,6 +9,47 @@ namespace Seruichi.BL
 {
     public class a_mypage_uinfoBL
     {
+        public a_mypage_uinfoModel GetSellerData(string sellerCD)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = sellerCD.ToStringOrNull() },
+            };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_a_mypage_uinfo_Select_M_Seller_by_Key", sqlParams);
+            if (dt.Rows.Count == 0)
+            {
+                return new a_mypage_uinfoModel() { SellerCD = sellerCD };
+            }
+
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+
+            var dr = dt.Rows[0];
+            var model = new a_mypage_uinfoModel()
+            {
+                SellerCD = sellerCD,
+                SellerName = crypt.DecryptFromBase64(dr["SellerName"].ToStringOrEmpty(), decryptionKey),
+                SellerKana = crypt.DecryptFromBase64(dr["SellerKana"].ToStringOrEmpty(), decryptionKey),
+                Birthday = crypt.DecryptFromBase64(dr["Birthday"].ToStringOrEmpty(), decryptionKey),
+                ZipCode1 = dr["ZipCode1"].ToStringOrEmpty(),
+                ZipCode2 = dr["ZipCode2"].ToStringOrEmpty(),
+                PrefName = dr["PrefName"].ToStringOrEmpty(),
+                CityName = crypt.DecryptFromBase64(dr["CityName"].ToStringOrEmpty(), decryptionKey),
+                TownName = crypt.DecryptFromBase64(dr["TownName"].ToStringOrEmpty(), decryptionKey),
+                Address1 = crypt.DecryptFromBase64(dr["Address1"].ToStringOrEmpty(), decryptionKey),
+                Address2 = crypt.DecryptFromBase64(dr["Address2"].ToStringOrEmpty(), decryptionKey),
+                HandyPhone = crypt.DecryptFromBase64(dr["HandyPhone"].ToStringOrEmpty(), decryptionKey),
+                HousePhone = crypt.DecryptFromBase64(dr["HousePhone"].ToStringOrEmpty(), decryptionKey),
+                Fax = crypt.DecryptFromBase64(dr["Fax"].ToStringOrEmpty(), decryptionKey),
+                MailAddress = crypt.DecryptFromBase64(dr["MailAddress"].ToStringOrEmpty(), decryptionKey),
+            };
+            model.Birthday = model.Birthday.ToDateTime().ToDateString(DateTimeFormat.yyyy_MM_dd);
+
+            return model;
+        }
+
         public Dictionary<string, string> ValidateAll(a_mypage_uinfoModel model)
         {
             ValidatorAllItems validator = new ValidatorAllItems();
@@ -47,10 +88,11 @@ namespace Seruichi.BL
             validator.CheckIsHalfWidth("Fax", model.Fax, 15, RegexFormat.Number);
             //メールアドレス
             validator.CheckRequired("MailAddress", model.MailAddress);
-            if (!new a_loginBL().CheckDuplicateMailAddresses(model.MailAddress))
-            {
-                validator.AddValidationResult("MailAddress", "E203"); //既に登録済みのメールアドレスです
-            }
+            //★仕様確認中
+            //if (!new a_loginBL().CheckDuplicateMailAddresses(model.MailAddress))
+            //{
+            //    validator.AddValidationResult("MailAddress", "E203"); //既に登録済みのメールアドレスです
+            //}
             //パスワード
             validator.CheckRequired("Password", model.Password);
             validator.CheckIsHalfWidth("Password", model.Password, 20);
@@ -120,12 +162,12 @@ namespace Seruichi.BL
             PasswordHash pwhash = new PasswordHash();
             string hashedPassword = pwhash.GeneratePasswordHash(model.MailAddress, model.Password);
 
-            //yyyy/MM/dd
-            model.Birthday = model.Birthday.ToDateTime().ToDateString(DateTimeFormat.yyyyMMdd);
+            //yyyy-MM-dd
+            model.Birthday = model.Birthday.ToDateTime().ToDateString(DateTimeFormat.yyyy_MM_dd);
 
             var sqlParams = new SqlParameter[]
             {
-                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = null },
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD },
                 new SqlParameter("@MailAddress", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.MailAddress, cryptionKey).ToStringOrNull() },
                 new SqlParameter("@Password", SqlDbType.VarChar){ Value = hashedPassword.ToStringOrNull() },
                 new SqlParameter("@SellerName", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.SellerName, cryptionKey).ToStringOrNull() },

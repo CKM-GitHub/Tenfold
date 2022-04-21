@@ -4,7 +4,7 @@ $(function () {
     _url.checkZipCode = common.appPath + '/a_mypage_uinfo/CheckZipCode';
     _url.checkAll = common.appPath + '/a_mypage_uinfo/CheckAll';
     _url.insertSellerData = common.appPath + '/a_mypage_uinfo/UpdateSellerData';
-    _url.gotoNextPage = common.appPath + '/a_mypage_uinfo/GotoNextPage';
+    //_url.gotoNextPage = common.appPath + '/a_mypage_uinfo/Index';
 
     $('#mypage_uinfo').addClass('active');
 
@@ -142,10 +142,11 @@ function addEvents()
         });
     });
 
-    $('#btnStartAssessment').on('click', function () {
-        const form = document.forms.form3;
-        form.method = "POST";
-        form.action = _url.gotoNextPage;
-        form.submit();
+    $('#btnCompleted').on('click', function () {
+        window.location.reload();
+        //const form = document.forms.form2;
+        //form.method = "POST";
+        //form.action = _url.gotoNextPage;
+        //form.submit();
     });
 }
