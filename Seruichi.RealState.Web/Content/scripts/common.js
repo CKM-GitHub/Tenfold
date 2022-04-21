@@ -195,6 +195,9 @@ const common = {
         const $ctrl = $(ctrl);
         const type = $ctrl.attr('type');
         const name = $ctrl.attr('name');
+        const isrequirednullorempty1 = $ctrl.attr("data-validation-requirednullorempty1");
+        const isrequirednullorempty2 = $ctrl.attr("data-validation-requirednullorempty2");
+        const isrequirednullorempty3 = $ctrl.attr("data-validation-requirednullorempty3");
 
         const isRequired = $ctrl.attr("data-validation-required");
         const isRequiredNotAllowZero = $ctrl.attr("data-validation-not-allow-zero");
@@ -211,8 +214,7 @@ const common = {
         const isDateCompare = $ctrl.attr("data-validation-datecompare");
         const isOneByteCharacter = $ctrl.attr("data-validation-onebyte-character");
         const ischeckboxLenght = $ctrl.attr("data-validation-checkboxlenght");
-        const isMaxlengthCheckforsellerlist = $ctrl.attr("data-validation-MaxLengthforsellerlist");
-        const isRequiredNullorempty = $ctrl.attr("data-validation-reqired-nullorempty");
+        const isMaxlengthCheckforsellerlist = $ctrl.attr("data-validation-MaxLengthforsellerlist");       
 
         let inputValue = "";
         if (type === 'radio') {
@@ -240,7 +242,7 @@ const common = {
             && !isDoubleByte
             && !isSingleByte && !isSingleByteNumber && !isSingleByteNumberAlpha
             && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter && !ischeckboxLenght && !isMaxlengthCheckforsellerlist
-            && !customValidation) return true;
+            && !customValidation && !isrequirednullorempty1 && !isrequirednullorempty2 && !isrequirednullorempty3) return true;
 
         if (isRequired) {
             if (!inputValue) {
@@ -264,7 +266,24 @@ const common = {
                 return false;
             }
         }
-
+        if (isrequirednullorempty1) {
+            if (!inputValue) {
+                $ctrl.showError(this.getMessage('E312'));
+                return false;
+            }
+        }
+        if (isrequirednullorempty2) {
+            if (!inputValue) {
+                $ctrl.showError(this.getMessage('E205'));
+                return false;
+            }
+        }
+        if (isrequirednullorempty3) {
+            if (!inputValue) {
+                $ctrl.showError(this.getMessage('E310'));
+                return false;
+            }
+        }
         if (inputValue) {
             if (isSingleDoubleByte) {
                 const maxLength = $ctrl.attr('maxlength');
@@ -424,12 +443,6 @@ const common = {
             func = new Function('arg1', 'return ' + customValidation + '(arg1)')
             if (!func($ctrl)) {
                 return false;
-            }
-        }
-        if (isRequiredNullorempty) {
-            if (!inputValue) {
-                $ctrl.showError(this.getMessage('E310'));
-                    return false;
             }
         }
         if (type === 'radio')

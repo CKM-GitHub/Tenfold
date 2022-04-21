@@ -60,6 +60,30 @@
             .removeAttr('data-validation-not-allow-zero');
     };
 
+    $.fn.addvalidation_requirednullorempty1 = function () {
+        this.attr('data-validation-requirednullorempty1', 'true');
+        return this;
+    };
+    $.fn.removeValidation_requirednullorempty1 = function () {
+        return this
+            .removeAttr('data-validation-requirednullorempty1')
+    };
+    $.fn.addvalidation_requirednullorempty2 = function () {
+        this.attr('data-validation-requirednullorempty2', 'true');
+        return this;
+    };
+    $.fn.removeValidation_requirednullorempty2 = function () {
+        return this
+            .removeAttr('data-validation-requirednullorempty2')
+    };
+    $.fn.addvalidation_requirednullorempty3 = function () {
+        this.attr('data-validation-requirednullorempty3', 'true');
+        return this;
+    };
+    $.fn.removeValidation_requirednullorempty3 = function () {
+        return this
+            .removeAttr('data-validation-requirednullorempty3')
+    };
 
     $.fn.addvalidation_singlebyte_doublebyte = function () {
         return this

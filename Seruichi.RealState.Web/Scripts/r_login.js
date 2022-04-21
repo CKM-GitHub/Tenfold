@@ -14,18 +14,15 @@ function setValidation() {
 
     $('#realECD')
         .addvalidation_errorElement("#errorrealECD")
-        .addvalidation_reqired_nullorempty()
-        .addvalidation_MaxLength(10);
+        .addvalidation_requirednullorempty1();
 
     $('#reStaffCD')
         .addvalidation_errorElement("#errorreStaffCD")
-        .addvalidation_reqired_nullorempty()
-        .addvalidation_MaxLength(10);
+        .addvalidation_requirednullorempty2();
    
     $('#rePassword')
         .addvalidation_errorElement("#errorrePassword")
-        .addvalidation_reqired_nullorempty()
-        .addvalidation_MaxLength(10);
+        .addvalidation_requirednullorempty3();
 
 
     $('#btnLogin')
@@ -57,6 +54,7 @@ function addEvents() {
                     const data = result.data;                  
                 }
                 if (result && !result.isOK) {
+                    alert(result.message);
                     const message = result.message;
                     $this.showError(message.MessageText1);
                 }

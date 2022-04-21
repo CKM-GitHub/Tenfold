@@ -233,6 +233,13 @@ function Bind_tbody(result) {
         $('#total_record_up').text("検索結果： 0件")
     }
     $('#mansiontable tbody').append(html);
+
+    sortTable.getSortingTable("mansiontable");
+    //const table = document.getElementById('mansiontable');
+    //const headers = table.querySelectorAll('th');
+    //const tableBody = table.querySelector('tbody');
+    //const rows = tableBody.querySelectorAll('tr');
+    //alert(tableBody.innerHTML);
 }
 function l_logfunction(id) {   
     let model = {
