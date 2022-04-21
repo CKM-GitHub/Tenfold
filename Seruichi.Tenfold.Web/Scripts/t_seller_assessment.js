@@ -5,6 +5,7 @@ $(function () {
     _url.getM_SellerMansionList = common.appPath + '/t_seller_assessment/GetM_SellerMansionList';
     _url.generate_M_SellerMansionCSV = common.appPath + '/t_seller_assessment/Generate_M_SellerMansionCSV';
     _url.insert_l_log = common.appPath + '/t_seller_assessment/Insert_l_log';
+    _url.Popup_Link = common.appPath + '/t_seller_assessment/PopUpPage_1';
     addEvents();
 });
 
@@ -126,7 +127,7 @@ function addEvents() {
                     document.body.removeChild(downloadLink);
                 }
                 else {
-                    alert("There is no data!");
+                    alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
                 }
             }
         )
@@ -204,7 +205,7 @@ function Bind_tbody(result) {
         html += '<tr>\
             <td class= "text-end" > ' + data[i]["NO"] + '</td>\
             <td><i class="'+ _class + '">' + _letter + '</i><span class="font-semibold">' + data[i]["ステータス"] + '</span></td>\
-            <td><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["SellerMansionID"] + '&t_mansion_detail' + ' onclick="l_logfunction(this.id)">'+ data[i]["マンション名＆部屋番号"]+'</a></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["SellerMansionID"] + ' onclick="Popup_function(this.id)">'+ data[i]["マンション名＆部屋番号"]+'</a></td>\
             <td><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["RealECD"] + '&t_reale_purchase' + ' onclick="l_logfunction(this.id)">' + data[i]["不動産会社"] + '</a></td>\
             <td class="text-nowrap">' + data[i]["登録日時"] + '</td>\
             <td class="text-nowrap">' + data[i]["簡易査定日時"] + '</td>\
@@ -223,6 +224,7 @@ function Bind_tbody(result) {
         $('#total_record_up').text("検索結果： 0件")
     }
     $('#mansiontable tbody').append(html);
+    sortTable.getSortingTable("mansiontable");
 }
 function l_logfunction(id) {
     let model = {
@@ -241,10 +243,10 @@ function l_logfunction(id) {
     common.callAjax(_url.insert_l_log, model,
         function (result) {
             if (result && result.isOK) {
-                if (model.LogStatus = "t_mansion_detail") {
-                    alert("https://www.seruichi.com/t_mansion_detail?ｍansionCD=" + model.LogId);
-                }
-                else if (model.LogStatus = "t_reale_purchase") {
+                //if (model.LogStatus = "t_mansion_detail") {
+                //    alert("https://www.seruichi.com/t_mansion_detail?ｍansionCD=" + model.LogId);
+                //}
+                if (model.LogStatus = "t_reale_purchase") {
                     alert("https://www.seruichi.com/t_reale_purchase?RealECD=" + model.LogId);
                 }
                 else if (model.LogStatus = "t_seller_assessment_detail") {
@@ -254,4 +256,12 @@ function l_logfunction(id) {
             if (result && !result.isOK) {
             }
         });
+
+    
+}
+
+function Popup_function(id) {
+    
+    var Popupurl = common.appPath+'/t_seller_assessment/PopUpPage?smID=' + id;
+    window.open(Popupurl, "WindowPopup", 'width=700px,height=700px,top=150,left=250');
 }

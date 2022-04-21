@@ -14,11 +14,11 @@ namespace Seruichi.Tenfold.Web.Controllers
     public class t_seller_assessmentController : BaseController
     {
         static string strSellerCD = string.Empty;
+        static string strSellerMansionID = string.Empty;
         // GET: t_seller_assessment
         public ActionResult Index(string SellerCD)
         {
-            strSellerCD = "0000001";
-            //TempData["SellerCD"] = SellerCD;
+            strSellerCD = SellerCD;
             t_seller_assessmentBL bl = new t_seller_assessmentBL();
             t_seller_assessment_header_Model model = bl.GetM_SellerBy_SellerCD(strSellerCD);
             ViewBag.SellerModel = model;
@@ -83,6 +83,12 @@ namespace Seruichi.Tenfold.Web.Controllers
             t_seller_assessmentBL bl = new t_seller_assessmentBL();
             var dt = bl.Generate_M_SellerMansionCSV(model, strSellerCD);
             return OKResult(DataTableToJSON(dt));
+        }
+        [HttpGet]
+        public ActionResult PopUpPage(string smID)
+        {
+            strSellerMansionID = smID;
+            return View();
         }
     }
 }
