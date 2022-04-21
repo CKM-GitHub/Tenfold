@@ -289,8 +289,11 @@ const common = {
         if (type === 'radio') {
             inputValue = $('input[name="' + name + '"]:radio:checked').val();
         } else {
-            inputValue = $ctrl.val().trimEnd();
-            $ctrl.val(inputValue);
+            inputValue = $ctrl.val();
+            if (inputValue) {
+                inputValue = inputValue.trimEnd();
+                $ctrl.val(inputValue);
+            }
         }
 
         //replace text

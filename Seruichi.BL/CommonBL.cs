@@ -136,8 +136,12 @@ namespace Seruichi.BL
             if (startDate > endDate) return 0;
 
             int diffMonth = (endDate.Month + (endDate.Year - startDate.Year) * 12) - startDate.Month;
-            return diffMonth % 12 > 0 ? diffMonth / 12 + 1 : diffMonth / 12;
+            if (diffMonth == 0)
+                return 1;
+            else
+                return diffMonth % 12 > 0 ? diffMonth / 12 + 1 : diffMonth / 12;
         }
+
         public string GetTenstaffNamebyTenstaffcd(string staffcd)
         {
             string staffName = string.Empty;

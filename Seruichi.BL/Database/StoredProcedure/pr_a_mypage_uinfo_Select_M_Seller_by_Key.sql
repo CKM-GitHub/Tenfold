@@ -14,7 +14,6 @@ BEGIN
     SELECT
         SellerCD
         ,MailAddress
-        ,[Password]
         ,SellerName
         ,SellerKana
         ,Birthday
