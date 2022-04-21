@@ -191,7 +191,9 @@ function addEvents() {
         common.callAjax(_url.checkZipCode, model,
             function (result) {
                 if (result && result.isOK) {
-                    $($zipCode1, $zipCode2).hideError();
+                    $($zipCode1).hideError();
+                    $($zipCode2).hideError();
+
                     const data = result.data;
 
                     if (data.PrefCD) {
@@ -260,7 +262,13 @@ function addEvents() {
     $('.js-linecd').on('change', function () {
         const id = $(this).attr('id');
         const suffix = id.slice(-2);
-        setStationList('add', $(this).val(), suffix);
+        const inputval = $(this).val();
+        if (inputval) {
+            setStationList('add', inputval, suffix);
+        }
+        else {
+            setStationList('remove', inputval, suffix);
+        }
     });
 
     //路線・駅追加

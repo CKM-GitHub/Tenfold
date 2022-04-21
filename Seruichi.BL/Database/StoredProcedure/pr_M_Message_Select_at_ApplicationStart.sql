@@ -1,10 +1,10 @@
-IF EXISTS (select * from sys.objects where name = 'pr_M_Message_Select_AtApplicationStart')
+IF EXISTS (select * from sys.objects where name = 'pr_M_Message_Select_at_ApplicationStart')
 BEGIN
-    DROP PROCEDURE [pr_M_Message_Select_AtApplicationStart]
+    DROP PROCEDURE [pr_M_Message_Select_at_ApplicationStart]
 END
 GO
 
-CREATE PROCEDURE [dbo].[pr_M_Message_Select_AtApplicationStart]
+CREATE PROCEDURE [dbo].[pr_M_Message_Select_at_ApplicationStart]
 AS
 BEGIN
     SET NOCOUNT ON;

@@ -1,4 +1,4 @@
-﻿<div id="sidebar-main" class="sidebar sidebar-default sidebar-separate">
+﻿<div id="mypage-sidebar-main" class="sidebar sidebar-default sidebar-separate">
     <div class="sidebar-category sidebar-default">
         <div class="category-title">
             <a class="btn" data-bs-toggle="collapse" href="#cap-collapse-sidemenu" role="button"
@@ -14,7 +14,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">
+                    <a href="@Url.Action("Index", "a_mypage_uinfo")" class="nav-link" id="mypage_uinfo">
                         <i class="fa fa-pencil-square-o me-2 text-info" aria-hidden="true"></i>会員登録内容変更
                     </a>
                 </li>
@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="@Url.Action("Logout", "a_login")" class="nav-link">
                         <i class="fa fa-sign-out me-2 text-info" aria-hidden="true"></i>ログアウト
                     </a>
                 </li>

@@ -12,7 +12,7 @@ namespace Seruichi.Seller.Web.Controllers
         public ActionResult Index(string mail, string setupid)
         {
             //mail = "sae.kotake@gmail.com";
-            //setupid = "WhrUvgYwFHYdPapu";
+            //setupid = "a75viVAiBMi7";
 
             if (string.IsNullOrEmpty(mail) || string.IsNullOrEmpty(setupid))
             {

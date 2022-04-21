@@ -215,6 +215,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Scripts\a_mypage_uinfo.js" />
     <Content Include="Scripts\a_register.js" />
     <Content Include="Scripts\a_login.js" />
     <Content Include="Scripts\a_index.js" />
@@ -269,13 +270,13 @@
       <Project>{dc43a405-2700-495f-8e91-7e1dd6804cf7}</Project>
       <Name>Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Seruichi.BL\Seruichi.BL.csproj">
+      <Project>{99062fac-2619-4bdb-a75f-6b90f7742f7a}</Project>
+      <Name>Seruichi.BL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Seruichi.Common\Seruichi.Common.csproj">
       <Project>{94fcc438-8b11-4348-8e01-098e92a57e5a}</Project>
       <Name>Seruichi.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Seruichi.Seller.BL\Seruichi.BL.csproj">
-      <Project>{99062fac-2619-4bdb-a75f-6b90f7742f7a}</Project>
-      <Name>Seruichi.BL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,10 +1,10 @@
-IF EXISTS (select * from sys.objects where name = 'pr_M_Message_Select_ByID')
+IF EXISTS (select * from sys.objects where name = 'pr_M_Message_Select_by_ID')
 BEGIN
-    DROP PROCEDURE [pr_M_Message_Select_ByID]
+    DROP PROCEDURE [pr_M_Message_Select_by_ID]
 END
 GO
 
-CREATE PROCEDURE [dbo].[pr_M_Message_Select_ByID](
+CREATE PROCEDURE [dbo].[pr_M_Message_Select_by_ID](
     @MessageID varchar(4)
 )AS
 BEGIN

@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,11 +47,14 @@
   <ItemGroup>
     <Compile Include="CommonBL.cs" />
     <Compile Include="RealEstate\r_login\r_loginBL.cs" />
+    <Compile Include="Seller\a_mypage_uinfoBL.cs" />
+    <Compile Include="Seller\a_registerBL.cs" />
     <Compile Include="Seller\a_loginBL.cs" />
     <Compile Include="Seller\a_indexBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tenfold\Login\t_loginBL.cs" />
     <Compile Include="Tenfold\t_dashboard\t_dashboardBL.cs" />
+    <Compile Include="Tenfold\t_seller_assessment\t_seller_assessmentBL.cs" />
     <Compile Include="Tenfold\t_seller_list\t_seller_listBL.cs" />
     <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionBL.cs" />
   </ItemGroup>
@@ -67,23 +71,39 @@
   <ItemGroup>
     <Content Include="Database\Function\fn_GetBuildingAge.sql" />
     <Content Include="Database\StoredProcedure\pr_a_index_Insert_SellerMansionData.sql" />
-    <Content Include="Database\StoredProcedure\pr_a_index_Select_CitiesByZipCode.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_index_Select_Cities_by_ZipCode.sql" />
     <Content Include="Database\StoredProcedure\pr_a_index_Select_MansionData.sql" />
-    <Content Include="Database\StoredProcedure\pr_a_index_Select_MansionListByMansionWord.sql" />
-    <Content Include="Database\StoredProcedure\pr_a_index_Select_PrefecturesByZipCode.sql" />
-    <Content Include="Database\StoredProcedure\pr_a_index_Select_TownsByZipCode.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_index_Select_MansionList_by_MansionWord.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_index_Select_Prefectures_by_ZipCode.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_index_Select_Towns_by_ZipCode.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Select_M_Address_by_ZipCode.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_mypage_Select_M_Seller_by_Key.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_mypage_Update_M_Seller.sql" />
     <Content Include="Database\StoredProcedure\pr_common_tenfold_select_MansionName_by_MansionCD.sql" />
     <Content Include="Database\StoredProcedure\pr_common_tenfold_select_REName_by_RealECD.sql" />
     <Content Include="Database\StoredProcedure\pr_common_t_login_select_TenStaffName_by_TenStaffCD.sql" />
     <Content Include="Database\StoredProcedure\pr_common_t_seller_select_SellerName_by_SellerCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_login_Insert_L_Login.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_login_Insert_D_Certification.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_register_Insert_M_Seller.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_register_Select_M_Address_by_ZipCode.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_register_Update_D_Certification.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_login_Select_M_Seller_All.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_login_Select_M_Seller_by_Password.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_register_Select_D_Certification_by_Key.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_login_Update_M_Seller_Password.sql" />
+    <Content Include="Database\StoredProcedure\pr_GetDate.sql" />
     <Content Include="Database\StoredProcedure\pr_L_Log_Insert.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfCity.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfTown.sql" />
     <Content Include="Database\StoredProcedure\pr_M_Counter_Select_Exists.sql" />
     <Content Include="Database\StoredProcedure\pr_M_Counter_GetNewID.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfLine.sql" />
-    <Content Include="Database\StoredProcedure\pr_M_Message_Select_AtApplicationStart.sql" />
-    <Content Include="Database\StoredProcedure\pr_M_Message_Select_ByID.sql" />
+    <Content Include="Database\StoredProcedure\pr_M_MailSendTo_Select_by_MailKBN.sql" />
+    <Content Include="Database\StoredProcedure\pr_M_MailText_Select_by_MailKBN.sql" />
+    <Content Include="Database\StoredProcedure\pr_M_Mail_Select_by_DataKey.sql" />
+    <Content Include="Database\StoredProcedure\pr_M_Message_Select_at_ApplicationStart.sql" />
+    <Content Include="Database\StoredProcedure\pr_M_Message_Select_by_ID.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfPref.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfStation.sql" />
     <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForContract.sql" />

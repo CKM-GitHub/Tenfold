@@ -12,7 +12,7 @@ namespace Seruichi.Common
             var result = new Dictionary<string, MessageModel>();
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_M_Message_Select_AtApplicationStart");
+            var dt = db.SelectDatatable("pr_M_Message_Select_at_ApplicationStart");
 
             //未登録
             if (dt.Rows.Count == 0)
@@ -47,7 +47,7 @@ namespace Seruichi.Common
             };
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_M_Message_Select_ByID", sqlParams);
+            var dt = db.SelectDatatable("pr_M_Message_Select_by_ID", sqlParams);
 
             //未登録
             if (dt.Rows.Count == 0)

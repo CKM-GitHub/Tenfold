@@ -15,7 +15,7 @@ namespace Seruichi.Seller.Web
 
         public static void RegisterWebApiFilters(System.Web.Http.Filters.HttpFilterCollection filters)
         {
-            filters.Add(new System.Web.Http.AuthorizeAttribute());
+            //filters.Add(new System.Web.Http.AuthorizeAttribute());
             filters.Add(new ApiExceptionAttribute());
         }
     }

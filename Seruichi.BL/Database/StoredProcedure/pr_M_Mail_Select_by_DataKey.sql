@@ -1,10 +1,10 @@
-IF EXISTS (select * from sys.objects where name = 'pr_M_Mail_Select_ByDataKey')
+IF EXISTS (select * from sys.objects where name = 'pr_M_Mail_Select_by_DataKey')
 BEGIN
-    DROP PROCEDURE [pr_M_Mail_Select_ByDataKey]
+    DROP PROCEDURE [pr_M_Mail_Select_by_DataKey]
 END
 GO
 
-CREATE PROCEDURE [dbo].[pr_M_Mail_Select_ByDataKey]
+CREATE PROCEDURE [dbo].[pr_M_Mail_Select_by_DataKey]
 (
     @DataKey    int
 )
