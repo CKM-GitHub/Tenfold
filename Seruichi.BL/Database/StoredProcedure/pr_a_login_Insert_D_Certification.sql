@@ -6,8 +6,8 @@ GO
 
 CREATE PROCEDURE [dbo].[pr_a_login_Insert_D_Certification]
 (
-    @CertificationCD        varchar(12)
-    ,@MailAddress           varchar(100)
+    @CertificationCD        varchar(30)
+    ,@MailAddress           varchar(300)
     ,@EffectiveDateTime     datetime OUTPUT
 )
 AS
