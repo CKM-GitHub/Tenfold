@@ -11,9 +11,6 @@ namespace Seruichi.Seller.Web.Controllers
         [HttpGet]
         public ActionResult Index(string mail, string setupid)
         {
-            //mail = "sae.kotake@gmail.com";
-            //setupid = "a75viVAiBMi7";
-
             if (string.IsNullOrEmpty(mail) || string.IsNullOrEmpty(setupid))
             {
                 return RedirectToAction("BadRequest", "Error");
