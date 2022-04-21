@@ -149,6 +149,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\a_mypage_uinfoController.cs" />
     <Compile Include="Controllers\a_registerController.cs" />
     <Compile Include="Controllers\a_loginController.cs" />
     <Compile Include="Controllers\Common\CommonApiController.cs" />
@@ -214,6 +215,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Scripts\a_mypage_uinfo.js" />
     <Content Include="Scripts\a_register.js" />
     <Content Include="Scripts\a_login.js" />
     <Content Include="Scripts\a_index.js" />
@@ -258,19 +260,23 @@
     <Content Include="Views\Shared\_ErrorLayout.cshtml" />
     <Content Include="Views\a_register\Index.cshtml" />
     <Content Include="Views\Error\BusinessError.cshtml" />
+    <Content Include="Views\a_mypage_uinfo\Index.cshtml" />
+    <Content Include="Views\Shared\_MyPageMenu.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{dc43a405-2700-495f-8e91-7e1dd6804cf7}</Project>
       <Name>Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Seruichi.BL\Seruichi.BL.csproj">
+      <Project>{99062fac-2619-4bdb-a75f-6b90f7742f7a}</Project>
+      <Name>Seruichi.BL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Seruichi.Common\Seruichi.Common.csproj">
       <Project>{94fcc438-8b11-4348-8e01-098e92a57e5a}</Project>
       <Name>Seruichi.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Seruichi.Seller.BL\Seruichi.BL.csproj">
-      <Project>{99062fac-2619-4bdb-a75f-6b90f7742f7a}</Project>
-      <Name>Seruichi.BL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

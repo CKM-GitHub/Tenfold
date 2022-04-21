@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Seruichi.RealState.Web
+namespace Seruichi.RealEstate.Web
 {
     public class RouteConfig
     {

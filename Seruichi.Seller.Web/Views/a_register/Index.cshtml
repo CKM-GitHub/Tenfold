@@ -68,7 +68,7 @@
                             <label class="form-label">都道府県</label><span class="cap-font-blue">※</span>
                             <span class="cap-errormsg-right" id="errorPrefCD"></span>
                         </div>
-                        <select class="form-select" name="PrefCD" id="PrefCD">
+                        <select class="form-select cap-fon-form-w200" name="PrefCD" id="PrefCD">
                             <option selected value="">都道府県</option>
                             @foreach (Models.DropDownListItem item in ViewBag.PrefDropDownListItems)
                             {
@@ -109,35 +109,35 @@
                             <label class="form-label">電話番号</label>
                             <span class="cap-errormsg-right" id="errorHousePhone"></span>
                         </div>
-                        <input class="form-control" type="tel" name="HousePhone" id="HousePhone" maxlength="15">
+                        <input class="form-control cap-fon-form-w200" type="tel" name="HousePhone" id="HousePhone" maxlength="15">
                     </div>
                     <div class="form-group mb-3">
                         <div class="d-flex">
                             <label class="form-label">携帯番号</label><span class="cap-font-blue">※</span>
                             <span class="cap-errormsg-right" id="errorHandyPhone"></span>
                         </div>
-                        <input class="form-control" type="tel" name="HandyPhone" id="HandyPhone" maxlength="15" autocomplete="tel">
+                        <input class="form-control cap-fon-form-w200" type="tel" name="HandyPhone" id="HandyPhone" maxlength="15" autocomplete="tel">
                     </div>
                     <div class="form-group mb-3">
                         <div class="d-flex">
                             <label class="form-label">FAX番号</label>
                             <span class="cap-errormsg-right" id="errorFax"></span>
                         </div>
-                        <input class="form-control" type="tel" name="Fax" id="Fax" maxlength="15">
+                        <input class="form-control cap-fon-form-w200" type="tel" name="Fax" id="Fax" maxlength="15">
                     </div>
                     <div class="form-group mb-3">
                         <div class="d-flex">
                             <label class="form-label">メールアドレス</label>
                             <span class="cap-errormsg-right" id="errorMailAddress"></span>
                         </div>
-                        <input readonly class="form-control" type="email" name="MailAddress" id="MailAddress" value="@Model.MailAddress">
+                        <input readonly class="form-control" type="email" name="MailAddress" id="MailAddress" maxlength="100" value="@Model.MailAddress">
                     </div>
                     <div class="form-group mb-3">
                         <div class="d-flex">
                             <label class="form-label">パスワード</label><span class="cap-font-blue">※</span>
                             <span class="cap-errormsg-right" id="errorPassword"></span>
                         </div>
-                        <input class="form-control" type="password" name="Password" id="Password" autocomplete="new-password" minlength="8" maxlength="20">
+                        <input class="form-control cap-fon-form-w200" type="password" name="Password" id="Password" autocomplete="new-password" minlength="8" maxlength="20">
                         <span class="small">パスワードは8文字以上20文字以内で入力してください。</span>
                     </div>
                     <div class="form-group mb-3">
@@ -145,7 +145,7 @@
                             <label class="form-label">パスワード再確認</label><span class="cap-font-blue">※</span>
                             <span class="cap-errormsg-right" id="errorConfirmPassword"></span>
                         </div>
-                        <input class="form-control" type="password" name="ConfirmPassword" id="ConfirmPassword" autocomplete="new-password" minlength="8" maxlength="20">
+                        <input class="form-control cap-fon-form-w200" type="password" name="ConfirmPassword" id="ConfirmPassword" autocomplete="new-password" minlength="8" maxlength="20">
                     </div>
                     <hr class="mt-4 mb-4">
                     <div class="form-group pb-3 text-center">
@@ -496,7 +496,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label">生年月日</label>
-                            <input class="form-control cap-fon-form-w200" type="date" min="1900-01-01" max="2100-12-31" name="Birthday" id="confirm_Birthday" readonly>
+                            <input class="form-control cap-fon-form-w200" type="text" min="1900-01-01" max="2100-12-31" name="Birthday" id="confirm_Birthday" readonly>
                         </div>
                         <div class="form-group mb-3 cap-fon-form-w350">
                             <label class="form-label">郵便番号</label>
@@ -511,7 +511,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label">都道府県</label>
-                            <input class="form-control" type="text" name="PrefName" id="confirm_PrefName" readonly>
+                            <input class="form-control cap-fon-form-w200" type="text" name="PrefName" id="confirm_PrefName" readonly>
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label">市町村区</label>
@@ -531,19 +531,19 @@
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label">電話番号</label>
-                            <input class="form-control" type="tel" name="HousePhone" id="confirm_HousePhone" readonly>
+                            <input class="form-control cap-fon-form-w200" type="text" name="HousePhone" id="confirm_HousePhone" readonly>
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label">携帯番号</label>
-                            <input class="form-control" type="tel" name="HandyPhone" id="confirm_HandyPhone" readonly>
+                            <input class="form-control cap-fon-form-w200" type="text" name="HandyPhone" id="confirm_HandyPhone" readonly>
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label">FAX番号</label>
-                            <input class="form-control" type="tel" name="Fax" id="confirm_Fax" readonly>
+                            <input class="form-control cap-fon-form-w200" type="text" name="Fax" id="confirm_Fax" readonly>
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label">メールアドレス</label>
-                            <input class="form-control" type="email" name="MailAddress" id="confirm_MailAddress" readonly>
+                            <input class="form-control" type="text" name="MailAddress" id="confirm_MailAddress" readonly>
                         </div>
                     </form>
                 </div>

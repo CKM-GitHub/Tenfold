@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{99062FAC-2619-4BDB-A75F-6B90F7742F7A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Seruichi.BL</RootNamespace>
+    <AssemblyName>Seruichi.BL</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommonBL.cs" />
+    <Compile Include="RealEstate\r_login\r_loginBL.cs" />
+    <Compile Include="Seller\a_mypage_uinfoBL.cs" />
+    <Compile Include="Seller\a_registerBL.cs" />
+    <Compile Include="Seller\a_loginBL.cs" />
+    <Compile Include="Seller\a_indexBL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tenfold\Login\t_loginBL.cs" />
+    <Compile Include="Tenfold\t_dashboard\t_dashboardBL.cs" />
+    <Compile Include="Tenfold\t_seller_assessment\t_seller_assessmentBL.cs" />
+    <Compile Include="Tenfold\t_seller_list\t_seller_listBL.cs" />
+    <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionBL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{dc43a405-2700-495f-8e91-7e1dd6804cf7}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Seruichi.Common\Seruichi.Common.csproj">
+      <Project>{94fcc438-8b11-4348-8e01-098e92a57e5a}</Project>
+      <Name>Seruichi.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Database\Function\fn_GetBuildingAge.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_index_Insert_SellerMansionData.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_index_Select_Cities_by_ZipCode.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_index_Select_MansionData.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_index_Select_MansionList_by_MansionWord.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_index_Select_Prefectures_by_ZipCode.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_index_Select_Towns_by_ZipCode.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Select_M_Address_by_ZipCode.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_mypage_Select_M_Seller_by_Key.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_mypage_Update_M_Seller.sql" />
+    <Content Include="Database\StoredProcedure\pr_common_tenfold_select_MansionName_by_MansionCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_common_tenfold_select_REName_by_RealECD.sql" />
+    <Content Include="Database\StoredProcedure\pr_common_t_login_select_TenStaffName_by_TenStaffCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_common_t_seller_select_SellerName_by_SellerCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_login_Insert_L_Login.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_login_Insert_D_Certification.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_register_Insert_M_Seller.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_register_Select_M_Address_by_ZipCode.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_register_Update_D_Certification.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_login_Select_M_Seller_All.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_login_Select_M_Seller_by_Password.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_register_Select_D_Certification_by_Key.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_login_Update_M_Seller_Password.sql" />
+    <Content Include="Database\StoredProcedure\pr_GetDate.sql" />
+    <Content Include="Database\StoredProcedure\pr_L_Log_Insert.sql" />
+    <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfCity.sql" />
+    <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfTown.sql" />
+    <Content Include="Database\StoredProcedure\pr_M_Counter_Select_Exists.sql" />
+    <Content Include="Database\StoredProcedure\pr_M_Counter_GetNewID.sql" />
+    <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfLine.sql" />
+    <Content Include="Database\StoredProcedure\pr_M_MailSendTo_Select_by_MailKBN.sql" />
+    <Content Include="Database\StoredProcedure\pr_M_MailText_Select_by_MailKBN.sql" />
+    <Content Include="Database\StoredProcedure\pr_M_Mail_Select_by_DataKey.sql" />
+    <Content Include="Database\StoredProcedure\pr_M_Message_Select_at_ApplicationStart.sql" />
+    <Content Include="Database\StoredProcedure\pr_M_Message_Select_by_ID.sql" />
+    <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfPref.sql" />
+    <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfStation.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForContract.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForCustomerInfo.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForDecline.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForDuringnegotiations.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForNewRequest.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_ConsultationForChatConfirmation.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_login_Select_M_TenfoldStaff.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_seller_List_csv_generate.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_seller_list_Select_DropDownlistofPref.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_seller_List_Select_M_SellerData.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_seller_mansion_csv_generate.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_seller_mansion_list_Insert_L_Log.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_seller_mansion_Select_M_SellerMansionData.sql" />
+    <Content Include="Database\StoredProcedure\UpdateMansionData.sql" />
+    <Content Include="Database\TableType\T_MansionStation.sql" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

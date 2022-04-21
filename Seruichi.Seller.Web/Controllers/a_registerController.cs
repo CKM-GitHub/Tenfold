@@ -1,8 +1,5 @@
 ﻿using Models;
 using Seruichi.BL;
-using Seruichi.Common;
-using System.Collections.Generic;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Seruichi.Seller.Web.Controllers
@@ -15,7 +12,7 @@ namespace Seruichi.Seller.Web.Controllers
         public ActionResult Index(string mail, string setupid)
         {
             //mail = "sae.kotake@gmail.com";
-            //setupid = "WhrUvgYwFHYdPapu";
+            //setupid = "a75viVAiBMi7";
 
             if (string.IsNullOrEmpty(mail) || string.IsNullOrEmpty(setupid))
             {
