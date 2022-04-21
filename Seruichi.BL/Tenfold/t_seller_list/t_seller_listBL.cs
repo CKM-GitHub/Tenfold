@@ -55,6 +55,14 @@ namespace Seruichi.BL.Tenfold.t_seller_list
 
             DBAccess db = new DBAccess();
             var dt = db.SelectDatatable("pr_t_seller_List_Select_M_SellerData", sqlParams);
+
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                string sellerName = dt.Rows[i]["売主名"].ToString();
+                dt.Rows[i]["売主名"] = !string.IsNullOrEmpty(sellerName) ? crypt.DecryptFromBase64(sellerName, decryptionKey) : sellerName;
+            }
             return dt;
         }
         public DataTable Generate_CSV(t_seller_listModel model)
