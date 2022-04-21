@@ -106,9 +106,12 @@ namespace Seruichi.BL
             if (validator.IsValid)
             {
                 //郵便番号
-                if (!CheckZipCode(model.ZipCode1, model.ZipCode2, out string errorcd, out string prefCD, out string cityName, out string townName))
+                if (!string.IsNullOrEmpty(model.ZipCode1) || !string.IsNullOrEmpty(model.ZipCode2))
                 {
-                    validator.AddValidationResult("ZipCode1", errorcd);
+                    if (!CheckZipCode(model.ZipCode1, model.ZipCode2, out string errorcd, out string prefCD, out string cityName, out string townName))
+                    {
+                        validator.AddValidationResult("ZipCode1", errorcd);
+                    }
                 }
                 //パスワード
                 if (model.Password.Length < 8 || model.Password.Length > 20)

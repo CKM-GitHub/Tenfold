@@ -73,7 +73,11 @@ function addEvents()
     const $form = $('#form1');
     let updateData;
 
-    common.bindValidationEvent('#form1');
+    common.bindValidationEvent('#form1', ':not(#HousePhone, #HandyPhone, #Fax)');
+    $('#HousePhone, #HandyPhone, #Fax').on('blur', function (e) {
+        customValidation_checkPhone(this);
+        return common.checkValidityInput(this);
+    });
 
     $('#btnAutoSet').on('click', function () {
         const $ZipCode1 = $('#ZipCode1'), $ZipCode2 = $('#ZipCode2');
@@ -149,4 +153,15 @@ function addEvents()
         //form.action = _url.gotoNextPage;
         //form.submit();
     });
+}
+
+function customValidation_checkPhone(e) {
+    const $this = $(e)
+
+    let inputValue = $this.val();
+    inputValue = inputValue.replace(/-/g, "")
+    inputValue = inputValue.replace(/－/g, "")
+    $this.val(inputValue);
+
+    return true;
 }

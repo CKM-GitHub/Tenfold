@@ -35,7 +35,7 @@ function setValidation() {
 
     $('#formVerifyMailAddress_HandyPhone')
         .addvalidation_errorElement("#formVerifyMailAddress_errorHandyPhone")
-        .addvalidation_custom("customValidation_checkHandyPhone");
+        .addvalidation_custom("customValidation_checkPhone");
 
     $('#btnVerifyMailAddress')
         .addvalidation_errorElement("#errorVerifyMailAddress");
@@ -206,10 +206,14 @@ function customValidation_checkSellerKana(e) {
     return true;
 }
 
-function customValidation_checkHandyPhone(e) {
+function customValidation_checkPhone(e) {
     const $this = $(e)
 
-    $this.val(common.replaceDoubleToSingle($this.val()));
+    let inputValue = $this.val();
+    inputValue = inputValue.replace(/-/g, "")
+    inputValue = inputValue.replace(/－/g, "")
+
+    $this.val(common.replaceDoubleToSingle(inputValue));
 
     return true;
 }
