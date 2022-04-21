@@ -24,6 +24,10 @@ namespace Seruichi.Common
         /// </summary>
         public const string yyyyMMdd = "yyyy/MM/dd";
         /// <summary>
+        /// yyyy-MM-dd
+        /// </summary>
+        public const string yyyy_MM_dd =  "yyyy-MM-dd";
+        /// <summary>
         /// HH:mm:ss
         /// </summary>
         public const string HHmmss = "HH:mm:ss";

@@ -163,44 +163,54 @@ function Bind_tbody(result) {
         if (isEmptyOrSpaces(data[i]["ステータス"])) {
             _letter = "";
             _class = "ms-1 ps-1 pe-1 rounded-circle";
+            _sort_checkbox = "";
         }
         else {
             _letter = data[i]["ステータス"].charAt(0);            
             if (_letter == "未") {
-                _class = "ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal";              
+                _sort_checkbox = "One";
             }
             else if (_letter == "簡") {
-                _class = "ms-1 ps-1 pe-1 rounded-circle bg-info text-white fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-info text-white fst-normal";                
+                _sort_checkbox = "Two";
             }
             else if (_letter == "査") {
-                _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal";               
+                _sort_checkbox = "Three";
             }
             else if (_letter == "買" && data[i]["ステータス"] =="買取依頼") {
-                _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal";               
+                _sort_checkbox = "Four";
             }
             else if (_letter == "確") {
-                _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark fst-normal";              
+                _sort_checkbox = "Five";
             }
             else if (_letter == "交") {
-                _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark fst-normal";               
+                _sort_checkbox = "Six";
             }
             else if (_letter == "成") {
-                _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary text-dark fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary text-dark fst-normal";              
+                _sort_checkbox = "Seven";
             }
             else if (_letter == "売" && data[i]["EndStatus"] == 2 && data[i]["ステータス"] == "売主辞退") {
                 _letter = "辞";
-                _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger fst-normal";               
+                _sort_checkbox = "Eight";
             }
             else if (_letter == "売" && data[i]["EndStatus"] == 3 && data[i]["ステータス"] == "売主辞退") {
                 _letter = "辞";
                 data[i]["ステータス"] = "買主辞退";
-                _class = "ms-1 ps-1 pe-1 rounded-circle  bg-dark text-white fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle  bg-dark text-white fst-normal";               
+                _sort_checkbox = "Nine";
             }
 
         }
         html += '<tr>\
-            <td class= "text-end" > ' + data[i]["NO"] + '</td>\
-            <td><i class="'+ _class + '">' + _letter +'</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
+            <td class= "text-end"> ' + data[i]["NO"] + '</td>\
+            <td class="'+ _sort_checkbox + '"><i class="' + _class + '">' + _letter + '</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
             <td> ' + data[i]["物件CD"] + ' </td>\
             <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["MansionCD"] + '&t_mansion_detail' + '  href="#" onclick="l_logfunction(this.id)">' + data[i]["住所"] + '</a></td>\
             <td> '+ data[i]["部屋"] + '</td>\
@@ -231,11 +241,7 @@ function Bind_tbody(result) {
     $('#mansiontable tbody').append(html);
 
     sortTable.getSortingTable("mansiontable");
-    //const table = document.getElementById('mansiontable');
-    //const headers = table.querySelectorAll('th');
-    //const tableBody = table.querySelector('tbody');
-    //const rows = tableBody.querySelectorAll('tr');
-    //alert(tableBody.innerHTML);
+    
 }
 function l_logfunction(id) {   
     let model = {
