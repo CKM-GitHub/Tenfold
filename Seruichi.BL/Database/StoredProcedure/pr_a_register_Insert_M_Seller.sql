@@ -14,6 +14,7 @@ CREATE PROCEDURE [dbo].[pr_a_register_Insert_M_Seller]
     ,@Birthday              varchar(100)
     ,@ZipCode1              varchar(3)
     ,@ZipCode2              varchar(4)
+    ,@PrefCD                varchar(2)
     ,@PrefName              varchar(10)
     ,@CityName              varchar(300)
     ,@TownName              varchar(300)
@@ -56,6 +57,7 @@ BEGIN
         ,Birthday
         ,ZipCode1
         ,ZipCode2
+        ,PrefCD
         ,PrefName
         ,CityName
         ,TownName
@@ -88,6 +90,7 @@ BEGIN
         ,@Birthday
         ,@ZipCode1
         ,@ZipCode2
+        ,@PrefCD
         ,@PrefName
         ,@CityName
         ,@TownName

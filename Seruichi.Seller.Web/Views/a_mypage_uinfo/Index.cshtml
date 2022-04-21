@@ -87,7 +87,7 @@
                                                 <option selected value="">都道府県</option>
                                                 @foreach (Models.DropDownListItem item in ViewBag.PrefDropDownListItems)
                                                 {
-                                                    if (Model.PrefName == item.DisplayText)
+                                                    if (Model.PrefCD == item.Value)
                                                     {
                                                         <option class="js-selectable" value=@item.Value selected>@item.DisplayText</option>
                                                     }

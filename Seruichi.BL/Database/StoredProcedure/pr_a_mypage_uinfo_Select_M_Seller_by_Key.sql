@@ -19,6 +19,7 @@ BEGIN
         ,Birthday
         ,ZipCode1
         ,ZipCode2
+		,PrefCD
         ,PrefName
         ,CityName
         ,TownName

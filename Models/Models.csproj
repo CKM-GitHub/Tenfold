@@ -51,6 +51,7 @@
     <Compile Include="Common\ValidationModel.cs" />
     <Compile Include="RealEstate\r_login\r_loginModel.cs" />
     <Compile Include="Seller\a_mypage_uinfoModel.cs" />
+    <Compile Include="Seller\a_contactModel.cs" />
     <Compile Include="Seller\a_registerModel.cs" />
     <Compile Include="Seller\a_loginModel.cs" />
     <Compile Include="Seller\a_indexModel.cs" />

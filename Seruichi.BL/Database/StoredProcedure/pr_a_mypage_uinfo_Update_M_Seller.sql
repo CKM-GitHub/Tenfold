@@ -14,6 +14,7 @@ CREATE PROCEDURE [dbo].[pr_a_mypage_uinfo_Update_M_Seller]
     ,@Birthday              varchar(100)
     ,@ZipCode1              varchar(3)
     ,@ZipCode2              varchar(4)
+    ,@PrefCD                varchar(2)
     ,@PrefName              varchar(10)
     ,@CityName              varchar(300)
     ,@TownName              varchar(300)
@@ -45,6 +46,7 @@ BEGIN
         ,Birthday           = @Birthday
         ,ZipCode1           = @ZipCode1
         ,ZipCode2           = @ZipCode2
+        ,PrefCD             = @PrefCD
         ,PrefName           = @PrefName
         ,CityName           = @CityName
         ,TownName           = @TownName
