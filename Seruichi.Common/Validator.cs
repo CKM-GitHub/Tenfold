@@ -519,6 +519,7 @@ namespace Seruichi.Common
                 return false;
             }
 
+            outVal = inputText.ToDateTime().ToDateString(DateTimeFormat.yyyyMMdd);
             return true;
         }
     }
