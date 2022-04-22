@@ -131,6 +131,13 @@ namespace Seruichi.BL
             cityName = "";
             townName = "";
 
+            Validator validator = new Validator();
+            if (!validator.CheckIsHalfWidth(zipCode1, 3, RegexFormat.Number, out errorcd) 
+                || !validator.CheckIsHalfWidth(zipCode2, 4, RegexFormat.Number, out errorcd))
+            {
+                return false;
+            }
+
             var sqlParams = new SqlParameter[]
             {
                 new SqlParameter("@ZipCode1", SqlDbType.VarChar){ Value = zipCode1.ToStringOrNull() },

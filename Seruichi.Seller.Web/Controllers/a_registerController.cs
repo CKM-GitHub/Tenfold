@@ -26,7 +26,7 @@ namespace Seruichi.Seller.Web.Controllers
             }
 
             CommonBL cmmbl = new CommonBL();
-            ViewBag.PrefDropDownListItems = cmmbl.GetDropDownListItemsOfPrefecture();
+            ViewBag.PrefDropDownListItems = cmmbl.GetDropDownListItemsOfAllPrefecture();
             return View(new a_registerModel() { MailAddress = mail });
         }
 

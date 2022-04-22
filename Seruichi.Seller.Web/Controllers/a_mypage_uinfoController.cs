@@ -21,7 +21,7 @@ namespace Seruichi.Seller.Web.Controllers
             a_mypage_uinfoModel model = bl.GetSellerData(user.UserID);
 
             CommonBL cmmbl = new CommonBL();
-            ViewBag.PrefDropDownListItems = cmmbl.GetDropDownListItemsOfPrefecture();
+            ViewBag.PrefDropDownListItems = cmmbl.GetDropDownListItemsOfAllPrefecture();
             return View(model);
         }
 

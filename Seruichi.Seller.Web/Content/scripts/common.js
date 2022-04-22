@@ -251,7 +251,7 @@ const common = {
             return;
         }
 
-        common.callAjax(commonApiUrl.checkBirthday, $ctrl.val(), function (result) {
+        common.callAjax(common.appPath + commonApiUrl.checkBirthday, $ctrl.val(), function (result) {
             if (result) {
                 if (result.data) $ctrl.val(result.data);
                 if (result.message) {
