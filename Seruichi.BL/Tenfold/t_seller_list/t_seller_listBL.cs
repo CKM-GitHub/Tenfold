@@ -60,8 +60,13 @@ namespace Seruichi.BL.Tenfold.t_seller_list
             string decryptionKey = StaticCache.GetDataCryptionKey();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                string sellerName = dt.Rows[i]["売主名"].ToString();
+                string sellerName = dt.Rows[i]["売主名"].ToString();                
                 dt.Rows[i]["売主名"] = !string.IsNullOrEmpty(sellerName) ? crypt.DecryptFromBase64(sellerName, decryptionKey) : sellerName;
+            }
+            if (!string.IsNullOrEmpty(model.SellerName))
+            {
+                var dtLinq = dt.AsEnumerable().Where(dr => dr.Field<string>("売主名").Contains(model.SellerName) || dr.Field<string>("売主CD").Contains(model.SellerName)).ToDataTable();
+                return dtLinq;
             }
             return dt;
         }
