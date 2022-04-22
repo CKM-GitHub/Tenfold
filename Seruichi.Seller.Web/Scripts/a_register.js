@@ -74,7 +74,7 @@ function addEvents()
     const $form = $('#form1');
     let updateData;
 
-    common.bindValidationEvent('#form1', ':not(#HousePhone, #HandyPhone, #Fax)');
+    common.bindValidationEvent('#form1', ':not(#ZipCode1, #ZipCode2, #HousePhone, #HandyPhone, #Fax)');
     $('#HousePhone, #HandyPhone, #Fax').on('blur', function (e) {
         customValidation_checkPhone(this);
         return common.checkValidityInput(this);
@@ -94,27 +94,35 @@ function addEvents()
     });
 
     $('#ZipCode1, #ZipCode2').on('change', function () {
-        const $ZipCode1 = $('#ZipCode1'), $ZipCode2 = $('#ZipCode2');
+        const $this = $(this), $zipCode1 = $('#ZipCode1'), $zipCode2 = $('#ZipCode2')
 
-        $ZipCode1.val(common.replaceDoubleToSingle($ZipCode1.val()));
-        $ZipCode2.val(common.replaceDoubleToSingle($ZipCode2.val()));
-
-        const model = {
-            zipCode1: $ZipCode1.val(),
-            zipCode2: $ZipCode2.val()
+        if (!common.checkValidityInput($this)) {
+            return false;
         }
+
+        let model = {
+            zipCode1: $zipCode1.val(),
+            zipCode2: $zipCode2.val()
+        };
+
+        if (!model.zipCode1 && !model.zipCode2) {
+            $($zipCode1, $zipCode2).hideError();
+            return;
+        }
+
         if (model.zipCode1) {
-            common.callAjaxWithLoading(_url.checkZipCode, model, this, function (result) {
+            common.callAjax(_url.checkZipCode, model, function (result) {
                 if (result && result.isOK) {
                     var data = result.data;
+                    $($zipCode1).hideError();
+                    $($zipCode2).hideError();
                     if (data.prefCD) $('#PrefCD').val(data.prefCD);
                     if (data.cityName) $('#CityName').val(data.cityName);
                     if (data.townName) $('#TownName').val(data.townName);
-                    $($ZipCode1).hideError();
-                    $($ZipCode2).hideError();
                 }
                 if (result && result.message) {
-                    $($ZipCode1, $ZipCode2).showError(result.message.MessageText1);
+                    $zipCode1.showError(result.message.MessageText1);
+                    if (model.zipCode2) $zipCode2.showError(result.message.MessageText1);
                 }
             });
         }
@@ -125,7 +133,6 @@ function addEvents()
 
         common.checkValidityOnSave('#form1');
         common.birthdayCheck('#Birthday');
-
         if (common.setFocusFirstError($form)) {
             return false;
         }
@@ -170,9 +177,7 @@ function addEvents()
 
     $('#btnCompleted').on('click', function () {
         const form = document.forms.form3;
-        form.method = "POST";
-        form.action = _url.gotoNextPage;
-        form.submit();
+        common.callSubmit(form, _url.gotoNextPage);
     });
 }
 
