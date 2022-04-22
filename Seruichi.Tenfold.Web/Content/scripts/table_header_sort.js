@@ -101,6 +101,43 @@
                 });
             }
         };
+
+        const sortStatusTSellerList = function (index) {
+
+            // Get the current direction
+            const direction = directions[index] || 'asc';
+
+            const sortOredrs = { "t_seller_list_one": 0, "t_seller_list_two": 1, "t_seller_list_three": 2};
+
+            const sortedRows = [...rows].sort((a, b) =>
+                sortOredrs[a.children[1].className] - sortOredrs[b.children[1].className]
+            );
+
+            const sortBackOredrs = { "t_seller_list_three": 0, "t_seller_list_two": 1, "t_seller_list_one": 2};
+            const sortedBackRows = [...rows].sort((a, b) =>
+                sortBackOredrs[a.children[1].className] - sortBackOredrs[b.children[1].className]
+            );
+
+            // Remove old rows
+            [].forEach.call(rows, function (row) {
+                tableBody.removeChild(row);
+            });
+
+            // Reverse the direction
+            directions[index] = direction === 'asc' ? 'desc' : 'asc';
+            if (direction === 'asc') {
+                // Append new row
+                sortedRows.forEach(function (newRow) {
+                    tableBody.appendChild(newRow);
+                });
+            }
+            else {
+                // Append new row
+                sortedBackRows.forEach(function (newRow) {
+                    tableBody.appendChild(newRow);
+                });
+            }
+        };
         //
         [].forEach.call(headers, function (header, index) {
             header.addEventListener('click', function () {
@@ -109,10 +146,11 @@
                 }
                 if ($(this).hasClass('sort-status')) {
                     sortStatus(index);
+                }
+                if ($(this).hasClass('sort-status-t-seller-list')) {
+                    sortStatusTSellerList(index);
                 }                
             });
         });
-    }
-
-   
+    }   
 }

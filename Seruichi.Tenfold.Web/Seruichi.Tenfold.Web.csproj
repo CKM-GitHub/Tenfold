@@ -154,6 +154,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap\jquery-3.3.1.min.js" />
     <Content Include="Content\scripts\table_header_sort.js" />
     <Content Include="Content\t_login\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\t_login\bootstrap\js\bootstrap.min.js" />
