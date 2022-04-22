@@ -223,6 +223,7 @@ function Bind_tbody(result) {
     let _letter = "";
     let _class = "";
     let _sort_checkbox = "";
+    alert(data.length);
     for (var i = 0; i < data.length; i++) {
         if (isEmptyOrSpaces(data[i]["ステータス"])) {
             _letter = "";
