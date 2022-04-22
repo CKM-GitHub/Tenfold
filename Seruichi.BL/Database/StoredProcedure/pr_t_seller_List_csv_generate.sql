@@ -26,26 +26,19 @@ BEGIN
 
     -- Insert statements for procedure here
 
-	IF @EndDate IS NULL set @EndDate='2099/12/31'
-
-   DECLARE @g INT
-   IF EXISTS (SELECT 1 FROM M_Seller A OUTER APPLY M_SellerMansion B WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null AND (B.HoldingStatus = 2 or B.HoldingStatus = 3))			SELECT @g = Count(SellerMansionID) FROM M_Seller A OUTER APPLY M_SellerMansion B WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null AND (B.HoldingStatus = 2 or B.HoldingStatus = 3) GROUP BY SellerMansionID 		ELSE			SELECT @g = 0
-
-   DECLARE @e INT
-		IF EXISTS (SELECT 1 FROM M_Seller A OUTER APPLY M_SellerMansion B WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null AND B.HoldingStatus != 5)			SELECT @e = Count(SellerMansionID) FROM M_Seller A OUTER APPLY M_SellerMansion B WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null AND B.HoldingStatus != 5 GROUP BY SellerMansionID 		ELSE			SELECT @e = 0
-
-   DECLARE @f INT
-		IF EXISTS (SELECT 1 FROM M_Seller A OUTER APPLY M_SellerMansion B WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null AND B.HoldingStatus = 4)			SELECT @f = Count(SellerMansionID) FROM M_Seller A OUTER APPLY M_SellerMansion B WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null AND B.HoldingStatus = 4 GROUP BY SellerMansionID 		ELSE			SELECT @f = 0
+	--IF @EndDate IS NULL set @EndDate='2099/12/31'
 
 	SELECT 
-		 Row_Number() Over (Order By A.SellerCD) As [NO],
-		 CASE
-		 	WHEN G.c > 0 THEN N'交渉中' 
-		 	WHEN ((G.c = 0) and (E.a != F.b)) THEN N'見込'
-		 	WHEN ((G.c = 0) and (E.a = F.b)) THEN N'終了' END as 'ステータス',
-		 CASE 
-		 	WHEN A.InvalidFLG=0 then ''  
-		 	WHEN A.InvalidFLG=1 then '無効' END as'無効会員',	
+		Row_Number() Over (Order By A.SellerCD) As [NO],
+		CASE   
+			WHEN ISNULL(G.c,0) > 0 THEN N'交渉中' 
+			WHEN ((ISNULL(G.c,0) = 0) and (ISNULL(E.a,0) != ISNULL(F.b,0))) THEN N'見込'
+			WHEN ((ISNULL(G.c,0) = 0) and (ISNULL(E.a,0) = ISNULL(F.b,0))) THEN N'終了'
+		 END as N'ステータス',
+		 CASE   
+			WHEN A.InvalidFLG = 0 THEN ''
+			ELSE N'✓'
+		 END as N'無効会員',
 		 ISNULL(A.SellerCD,'') as'売主CD',
 		 ISNULL(A.SellerName,'') as '売主名',
 		 ISNULL(A.SellerKana,'') as 'カナ名',
@@ -73,21 +66,25 @@ BEGIN
 						and C.DeepAssDateTime is not null  
 						and C.DeleteDateTime is null 
 						Order by C.InsertDateTime desc) D
-		outer apply (select @e AS a ) E
-		outer apply (select @f As b ) F
-		outer apply (SELECT @g AS c) G
+		outer apply (SELECT Count(SellerMansionID)as a
+					FROM M_SellerMansion B 
+					WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null 
+					AND (B.HoldingStatus <> 5) GROUP BY B.SellerCD ) E
+		outer apply (SELECT Count(SellerMansionID)as b
+					FROM  M_SellerMansion B 
+					WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null 
+					AND (B.HoldingStatus =4) GROUP BY B.SellerCD ) F
+		outer apply (Select Count(SellerMansionID) as c 					From M_SellerMansion B 					WHERE B.SellerCD = A.SellerCD AND B.DeleteDateTime is Null 					AND (B.HoldingStatus = 2 or B.HoldingStatus = 3)GROUP BY B.SellerCD ) G
 
-    where ((@ValidCheck='1' and A.InvalidFLG = '0') or (@InValidCheck = '1' and A.InvalidFLG = '1')) 
-	AND (@SellerName is null or ((A.SellerName Like '%'+@SellerName+'%') or (A.SellerCD Like '%'+@SellerName+'%')))
+    where ((@ValidCheck=1 and A.InvalidFLG = '0') or (@InValidCheck = 1 and A.InvalidFLG = '1')) 
+	--AND (@SellerName is null or ((A.SellerName Like '%'+@SellerName+'%') or (A.SellerCD Like '%'+@SellerName+'%')))
 	AND ((@PrefNameSelect = N'全国' and (A.PrefName is not Null)) 
 		or (@PrefNameSelect != N'全国' and (A.PrefName = @PrefNameSelect )))
-	AND ((@RangeSelect = '0'	and (@StartDate IS NULL OR CONVERT(DATE, A.InsertDateTime)  >= @StartDate)  and  (@EndDate IS NULL OR CONVERT(DATE, A.InsertDateTime) <= @EndDate))
-		OR (@RangeSelect ='1'	and (@StartDate IS NULL OR CONVERT(DATE, D.DeepAssDateTime) >= @StartDate)  and  (@EndDate IS NULL OR CONVERT(DATE, D.DeepAssDateTime) <= @EndDate)) 
-		OR (@RangeSelect = '2'	and (@StartDate IS NULL OR CONVERT(DATE, D.PurchReqDateTime) >= @StartDate) and (@EndDate IS NULL OR CONVERT(DATE, D.PurchReqDateTime) <= @EndDate)))
-	AND ((@negtiatioinsCheck ='1' and G.c > 0 ) 
-		or (@expectedCheck = '1' and (G.c = 0 and E.a != F.b)) 
-		or (@endCheck = '1' and (G.c = 0 and E.a = F.b)))
-
-		Order by A.SellerCD,A.SellerKana		
+	AND ((@RangeSelect = 0	and (@StartDate IS NULL OR CONVERT(DATE, A.InsertDateTime)  >= @StartDate)  and  (@EndDate IS NULL OR CONVERT(DATE, A.InsertDateTime) <= @EndDate))
+		OR (@RangeSelect =1	and (@StartDate IS NULL OR CONVERT(DATE, D.DeepAssDateTime) >= @StartDate)  and  (@EndDate IS NULL OR CONVERT(DATE, D.DeepAssDateTime) <= @EndDate)) 
+		OR (@RangeSelect = 2	and (@StartDate IS NULL OR CONVERT(DATE, D.PurchReqDateTime) >= @StartDate) and (@EndDate IS NULL OR CONVERT(DATE, D.PurchReqDateTime) <= @EndDate)))
+	AND ((@negtiatioinsCheck =1 and ISNUll(G.c,0) > 0 ) 
+		or (@expectedCheck = 1 and (ISNUll(G.c,0) = 0 and ISNULL(E.a,0) != ISNULL(F.b,0))) 
+		or (@endCheck = 1 and (ISNUll(G.c,0) = 0 and ISNULL(E.a,0) = ISNULL(F.b,0))))
 
 END
