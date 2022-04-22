@@ -126,6 +126,15 @@ namespace Seruichi.BL.Tenfold.t_seller_list
 
             }
 
+            if (!string.IsNullOrEmpty(model.SellerName))
+            {
+                var dtLinq = dt.AsEnumerable().Where(dr => dr.Field<string>("売主名").Contains(model.SellerName) || dr.Field<string>("売主CD").Contains(model.SellerName)).CopyToDataTable();
+                for (int i = 0; i < dtLinq.Rows.Count; i++)
+                {
+                    dtLinq.Rows[i]["NO"] = i + 1;
+                }
+                return dtLinq;
+            }
             return dt;
         }
         public Dictionary<string, string> ValidateAll(t_seller_listModel model, List<string> lst_checkBox)

@@ -435,6 +435,7 @@ const common = {
                 if (!common.compareDate($("#StartDate").val(), $("#EndDate").val())) {
                     $("#StartDate").showError(this.getMessage('E111'));
                     $("#EndDate").showError(this.getMessage('E111'));
+                    $("#StartDate").focus();
                     return;
                 }
             }
