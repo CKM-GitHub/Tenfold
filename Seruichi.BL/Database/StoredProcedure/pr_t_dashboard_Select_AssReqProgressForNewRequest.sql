@@ -17,7 +17,7 @@ BEGIN
 	left outer join M_SellerMansion B																							
 	on	B.SellerMansionID =	A.SellerMansionID							
 	Where A.DeepAssDateTime	 is not	Null											
-	and A.ConfirmDateTime is Null											
+	and A.IntroDateTime is Null											
 	and A.DeleteDateTime is	Null											
 	and B.DeleteDateTime is	Null	
 END
