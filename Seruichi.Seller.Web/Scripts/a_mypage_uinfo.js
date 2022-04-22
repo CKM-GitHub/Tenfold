@@ -23,7 +23,8 @@ function setValidation() {
         .addvalidation_doublebyte_kana();
     $('#Birthday')
         .addvalidation_errorElement("#errorBirthday")
-        .addvalidation_reqired();
+        .addvalidation_reqired()
+        .setInputModeNumber();
     $('#ZipCode1')
         .addvalidation_errorElement("#errorZipCode")
         .addvalidation_singlebyte_number();
@@ -74,13 +75,22 @@ function addEvents()
     let updateData;
 
     common.bindValidationEvent('#form1', ':not(#HousePhone, #HandyPhone, #Fax)');
+
     $('#HousePhone, #HandyPhone, #Fax').on('blur', function (e) {
         customValidation_checkPhone(this);
         return common.checkValidityInput(this);
     });
 
-    $('#btnAutoSet').on('click', function () {
+    $('#Birthday').on('blur', function () {
+        common.birthdayCheck(this);
+    });
+
+    $('#ZipCode1, #ZipCode2').on('change', function () {
         const $ZipCode1 = $('#ZipCode1'), $ZipCode2 = $('#ZipCode2');
+
+        $ZipCode1.val(common.replaceDoubleToSingle($ZipCode1.val()));
+        $ZipCode2.val(common.replaceDoubleToSingle($ZipCode2.val()));
+
         const model = {
             zipCode1: $ZipCode1.val(),
             zipCode2: $ZipCode2.val()
@@ -92,6 +102,8 @@ function addEvents()
                     if (data.prefCD) $('#PrefCD').val(data.prefCD);
                     if (data.cityName) $('#CityName').val(data.cityName);
                     if (data.townName) $('#TownName').val(data.townName);
+                    $($ZipCode1).hideError();
+                    $($ZipCode2).hideError();
                 }
                 if (result && result.message) {
                     $($ZipCode1, $ZipCode2).showError(result.message.MessageText1);
@@ -103,8 +115,10 @@ function addEvents()
     $('#btnShowConfirmation').on('click', function () {
         $form.hideChildErrors();
 
-        if (!common.checkValidityOnSave('#form1')) {
-            common.setFocusFirstError($form);
+        common.checkValidityOnSave('#form1');
+        common.birthdayCheck('#Birthday');
+
+        if (common.setFocusFirstError($form)) {
             return false;
         }
 

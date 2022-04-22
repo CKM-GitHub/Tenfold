@@ -18,6 +18,6 @@ BEGIN
       FROM M_ZipCode ZIP
      INNER JOIN M_Address ADR ON ADR.TownCD = ZIP.TownCD
      WHERE ZIP.ZipCode1 = @ZipCode1
-       AND ZIP.ZipCode1 = @ZipCode1
+       AND (@ZipCode2 IS NULL OR ZIP.ZipCode2 = @ZipCode2)
 
 END

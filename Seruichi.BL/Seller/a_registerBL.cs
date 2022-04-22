@@ -94,7 +94,7 @@ namespace Seruichi.BL
             validator.CheckIsDoubleByteKana("SellerKana", model.SellerKana, 50);
             //生年月日
             validator.CheckRequired("Birthday", model.Birthday);
-            validator.CheckDate("Birthday", model.Birthday);
+            validator.CheckBirthday("Birthday", model.Birthday);
             //郵便番号
             validator.CheckIsHalfWidth("ZipCode1", model.ZipCode1, 3, RegexFormat.Number);
             validator.CheckIsHalfWidth("ZipCode2", model.ZipCode2, 4, RegexFormat.Number);
@@ -160,6 +160,13 @@ namespace Seruichi.BL
             prefCD = "";
             cityName = "";
             townName = "";
+
+            Validator validator = new Validator();
+            if (!validator.CheckIsHalfWidth(zipCode1, 3, RegexFormat.Number, out errorcd)
+                || !validator.CheckIsHalfWidth(zipCode2, 4, RegexFormat.Number, out errorcd))
+            {
+                return false;
+            }
 
             var sqlParams = new SqlParameter[]
             {

@@ -268,19 +268,19 @@ const common = {
         }
         if (isrequirednullorempty1) {
             if (!inputValue) {
-                $ctrl.showError(this.getMessage('E312'));
+                $ctrl.showError(this.getMessage('E310'));
                 return false;
             }
         }
         if (isrequirednullorempty2) {
             if (!inputValue) {
-                $ctrl.showError(this.getMessage('E205'));
+                $ctrl.showError(this.getMessage('E312'));
                 return false;
             }
         }
         if (isrequirednullorempty3) {
             if (!inputValue) {
-                $ctrl.showError(this.getMessage('E310'));
+                $ctrl.showError(this.getMessage('E205'));
                 return false;
             }
         }

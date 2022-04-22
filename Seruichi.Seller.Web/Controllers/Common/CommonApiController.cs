@@ -87,5 +87,24 @@ namespace Seruichi.Seller.Web.Controllers
             CommonBL bl = new CommonBL();
             return OKResult(bl.GetBuildingAge(constYYYYMM).ToStringOrEmpty());
         }
+
+        [HttpPost]
+        public HttpResponseMessage CheckBirthday([FromBody]string birthday)
+        {
+            if (string.IsNullOrEmpty(birthday))
+            {
+                return OKResult();
+            }
+
+            Validator validator = new Validator();
+            if (!validator.CheckBirthday(birthday, out string errorcd, out string formattedDate))
+            {
+                return ErrorMessageResult(errorcd, formattedDate);
+            }
+            else
+            {
+                return OKResult(formattedDate);
+            }
+        }
     }
 }
