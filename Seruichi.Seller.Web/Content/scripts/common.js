@@ -36,6 +36,7 @@ const commonApiUrl = {
     getDropDownListItemsOfTown: "/api/CommonApi/GetDropDownListItemsOfTown",
     getDropDownListItemsOfLine: "/api/CommonApi/GetDropDownListItemsOfLine",
     getDropDownListItemsOfStation: "/api/CommonApi/GetDropDownListItemsOfStation",
+    checkBirthday: "/api/CommonApi/CheckBirthday",
 }
 
 const regexPattern = {
@@ -231,6 +232,35 @@ const common = {
             if (disableSelector) $(disableSelector).prop('disabled', false);
             $("#loadiong").fadeOut(300).remove();
         }, delaytime || 500);
+    },
+
+    birthdayCheck: function birthdayCheck(ctrl) {
+        const $ctrl = $(ctrl);
+
+        let inputValue = $ctrl.val();
+        if (!inputValue) return;
+
+        inputValue = common.replaceDoubleToSingle(inputValue);
+        inputValue = inputValue.replace('年', '/').replace('月', '/').replace('日', '');
+        inputValue = inputValue.replace(/-/g, '/');
+        $ctrl.val(inputValue);
+
+        const regex = new RegExp(regexPattern.singlebyte_number);
+        if (!regex.test(inputValue.replace(/\//g, ''))) {
+            $ctrl.showError(this.getMessage('E104'));
+            return;
+        }
+
+        common.callAjax(commonApiUrl.checkBirthday, $ctrl.val(), function (result) {
+            if (result) {
+                if (result.data) $ctrl.val(result.data);
+                if (result.message) {
+                    $ctrl.showError(result.message.MessageText1);
+                } else {
+                    $ctrl.hideError();
+                }
+            }
+        });
     },
 
     getStringByteCount: function getStringByteCount(str) {
@@ -506,7 +536,11 @@ const common = {
     {
         if (form) {
             const $target = $(form).getInvalidItems().get(0);
-            if ($target) $target.focus();
+            if ($target) {
+                $target.focus();
+                return true;
+            }
         }
+        return false;
     },
 }

@@ -5,7 +5,6 @@ $(function () {
     _url.getM_SellerMansionList = common.appPath + '/t_seller_assessment/GetM_SellerMansionList';
     _url.generate_M_SellerMansionCSV = common.appPath + '/t_seller_assessment/Generate_M_SellerMansionCSV';
     _url.insert_l_log = common.appPath + '/t_seller_assessment/Insert_l_log';
-    _url.Popup_Link = common.appPath + '/t_seller_assessment/PopUpPage_1';
     addEvents();
 });
 
@@ -163,48 +162,59 @@ function Bind_tbody(result) {
         if (isEmptyOrSpaces(data[i]["ステータス"])) {
             _letter = "";
             _class = "ms-1 ps-1 pe-1 rounded-circle";
+            _sort_checkbox = "";
         }
         else {
             _letter = data[i]["ステータス"].charAt(0);
             if (_letter == "未") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal";
+                _sort_checkbox = "One";
             }
             else if (_letter == "簡") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-info text-white fst-normal";
+                _sort_checkbox = "Two";
             }
             else if (_letter == "詳" && data[i]["ステータス"] == "詳細査定") {
                 _letter = "査";
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal";
+                _sort_checkbox = "Three";
             }
             else if (_letter == "買" && data[i]["ステータス"] == "買取依頼") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal";
+                _sort_checkbox = "Four";
             }
             else if (_letter == "確") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark fst-normal";
+                _sort_checkbox = "Five";
             }
             else if (_letter == "交") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark fst-normal";
+                _sort_checkbox = "Six";
             }
             else if (_letter == "成") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary fst-normal";
+                _sort_checkbox = "Seven";
             }
-            else if (_letter == "売" && data[i]["EndStatus"] == 2 && data[i]["ステータス"] == "売主辞退") {
+            else if (_letter == "売" && data[i]["ステータス"] == "売主辞退") {
                 _letter = "辞";
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger fst-normal";
+                _sort_checkbox = "Eight";
             }
-            else if (_letter == "買" && data[i]["EndStatus"] == 3 && data[i]["ステータス"] == "買主辞退") {
+            else if (_letter == "買"  && data[i]["ステータス"] == "買主辞退") {
                 _letter = "辞";
                 data[i]["ステータス"] = "買主辞退";
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-dark text-white fst-normal fst-normal";
+                _sort_checkbox = "Nine";
             }
             else if (_letter == "削") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-danger text-white fst-normal fst-normal";
+                _sort_checkbox = "Ten";
             }
 
         }
         html += '<tr>\
             <td class= "text-end" > ' + data[i]["NO"] + '</td>\
-            <td><i class="'+ _class + '">' + _letter + '</i><span class="font-semibold">' + data[i]["ステータス"] + '</span></td>\
+            <td class="'+ _sort_checkbox + '"><i class="'+ _class + '">' + _letter + '</i><span class="font-semibold">' + data[i]["ステータス"] + '</span></td>\
             <td><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["SellerMansionID"] + ' onclick="Popup_function(this.id)">'+ data[i]["マンション名＆部屋番号"]+'</a></td>\
             <td><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["RealECD"] + '&t_reale_purchase' + ' onclick="l_logfunction(this.id)">' + data[i]["不動産会社"] + '</a></td>\
             <td class="text-nowrap">' + data[i]["登録日時"] + '</td>\
@@ -246,18 +256,20 @@ function l_logfunction(id) {
                 //if (model.LogStatus = "t_mansion_detail") {
                 //    alert("https://www.seruichi.com/t_mansion_detail?ｍansionCD=" + model.LogId);
                 //}
-                if (model.LogStatus = "t_reale_purchase") {
-                    alert("https://www.seruichi.com/t_reale_purchase?RealECD=" + model.LogId);
+                var strlink2 = 't_seller_assessment_detail';
+                if (model.LogStatus = strlink) {
+                    //alert("https://www.seruichi.com/t_reale_purchase?RealECD=" + model.LogId);
+                   
                 }
-                else if (model.LogStatus = "t_seller_assessment_detail") {
-                    alert("https://www.seruichi.com/t_seller_assessment_detail?AssReqID=" + model.LogId);
+                else if (model.LogStatus = strlink2 ) {
+                    
+                    //alert("https://www.seruichi.com/t_seller_assessment_detail?AssReqID=" + model.LogId);
+                   
                 }
             }
             if (result && !result.isOK) {
             }
         });
-
-    
 }
 
 function Popup_function(id) {

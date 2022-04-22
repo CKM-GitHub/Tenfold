@@ -288,8 +288,9 @@ function l_logfunction(id) {
     common.callAjax(_url.InsertL_Log, model,
         function (result) {
             if (result && result.isOK) {
+                window.location.href = common.appPath +'/t_seller_assessment/Index?SellerCD=' + model.SellerCD;
                 //window.location.href = '/t_seller_assessment/Index';
-                alert("https://www.seruichi.com/t_seller_assessment?seller" + model.SellerCD);
+                //alert("https://www.seruichi.com/t_seller_assessment?seller" + model.SellerCD);
             }
             if (result && !result.isOK) {
 

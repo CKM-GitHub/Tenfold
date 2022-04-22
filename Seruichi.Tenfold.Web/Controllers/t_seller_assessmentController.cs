@@ -18,10 +18,14 @@ namespace Seruichi.Tenfold.Web.Controllers
         // GET: t_seller_assessment
         public ActionResult Index(string SellerCD)
         {
-            strSellerCD = SellerCD;
-            t_seller_assessmentBL bl = new t_seller_assessmentBL();
-            t_seller_assessment_header_Model model = bl.GetM_SellerBy_SellerCD(strSellerCD);
-            ViewBag.SellerModel = model;
+            if (!String.IsNullOrWhiteSpace(SellerCD))
+            {
+                strSellerCD = SellerCD;
+                t_seller_assessmentBL bl = new t_seller_assessmentBL();
+                t_seller_assessment_header_Model model = bl.GetM_SellerBy_SellerCD(strSellerCD);
+                ViewBag.SellerModel = model;
+                
+            }
             return View();
         }
         [HttpPost]
@@ -68,8 +72,8 @@ namespace Seruichi.Tenfold.Web.Controllers
             model.IPAddress = base.GetClientIP();
             model.Page = model.LogStatus;
             model.Processing = "link";
-            if (model.LogStatus == "t_mansion_detail")
-                model.Remarks = model.LogId;
+            //if (model.LogStatus == "t_mansion_detail")
+            //    model.Remarks = model.LogId;
             if (model.LogStatus == "t_reale_purchase")
                 model.Remarks = model.LogId;
             if (model.LogStatus == "t_seller_assessment_detail")
