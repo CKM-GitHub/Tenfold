@@ -214,9 +214,9 @@ function getM_SellerList(model, $form) {
         }
     });
 }
-//function isEmptyOrSpaces(str) {
-//    return str === null || str.match(/^ *$/) !== null;
-//}
+function isEmptyOrSpaces(str) {
+    return str === null || str.match(/^ *$/) !== null;
+}
 function Bind_tbody(result) {
     let data = JSON.parse(result);
     let html = "";
