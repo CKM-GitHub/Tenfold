@@ -123,9 +123,7 @@ function addEvents() {
             return false;
         }
 
-        form.method = "POST";
-        form.action = _url.login;
-        form.submit();
+        common.callSubmit(form, _url.login);
     });
 
     $('#btnVerifyMailAddress').on('click', function () {

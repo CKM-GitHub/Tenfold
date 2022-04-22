@@ -195,6 +195,18 @@ const common = {
         });
     },
 
+    callSubmit: function callSubmit(form, action) {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('name', 'RequestVerificationToken');
+        input.setAttribute('value', $("#_RequestVerificationToken").val());
+        form.appendChild(input);
+
+        form.method = "POST";
+        form.action = action;
+        form.submit();
+    },
+
     removeDropDownListItems: function removeDropDownListItems(selector, placeHolder) {
         const $ddl = $(selector);
         $ddl.children().remove();
