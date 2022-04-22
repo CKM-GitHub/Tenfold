@@ -232,7 +232,7 @@ function Bind_tbody(result) {
         else {
             _letter = data[i]["ステータス"].charAt(0);
             if (_letter == "見") {
-                _class = "ms-1 ps-1 pe-1 rounded-circle bg-info text-white fst-normal";
+                _class = "ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal";
                 _sort_checkbox = "t_seller_list_one";
             }
             else if (_letter == "交") {
@@ -247,7 +247,7 @@ function Bind_tbody(result) {
         }
         html += '<tr>\
             <td class= "text-end" > ' + data[i]["NO"] + '</td>\
-            <td class="'+ _sort_checkbox +'"><i class="'+ _class + '">' + _letter + '</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
+            <td class="'+ _sort_checkbox + '"><i class="' + _class + '">' + _letter + '</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td >\
             <td class="text-center"> ' + data[i]["無効会員"] + ' </td>\
             <td> ' + data[i]["売主CD"] + ' </td>\
             <td> <a class="text-heading font-semibold text-decoration-underline" id='+ data[i]["売主CD"] + ' href="#" onclick="l_logfunction(this.id)">' + data[i]["売主名"] + '</a></td>\
