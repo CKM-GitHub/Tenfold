@@ -2,7 +2,6 @@
     color: red;
     font-size: .875em;
     margin-left: 10px;
-    white-space: nowrap !important;
     display: none;
 }
 
@@ -10,7 +9,6 @@
     color: red;
     font-size: .875em;
     margin-top: 3px;
-    white-space: nowrap !important;
     display: none;
 }
 
@@ -18,7 +16,6 @@
     color: red;
     font-size: .875em;
     margin-bottom: 3px;
-    white-space: nowrap !important;
     display: none;
 }
 

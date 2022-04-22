@@ -14,15 +14,21 @@ function setValidation() {
 
     $('#realECD')
         .addvalidation_errorElement("#errorrealECD")
-        .addvalidation_requirednullorempty1();
+        .addvalidation_requirednullorempty1()
+        .addvalidation_onebyte_character()
+        .addvalidation_MaxLength(10);
 
     $('#reStaffCD')
         .addvalidation_errorElement("#errorreStaffCD")
-        .addvalidation_requirednullorempty2();
+        .addvalidation_requirednullorempty2()
+        .addvalidation_onebyte_character()
+        .addvalidation_MaxLength(10);
    
     $('#rePassword')
         .addvalidation_errorElement("#errorrePassword")
-        .addvalidation_requirednullorempty3();
+        .addvalidation_requirednullorempty3()
+        .addvalidation_onebyte_character()
+        .addvalidation_MaxLength(10);
 
 
     $('#btnLogin')
@@ -38,23 +44,22 @@ function addEvents() {
             return false;
         }
 
-        let model = {
+        let model1 = {
             RealECD: $realECD.val()
         };
 
-        if (!model.RealECD) {
+        if (!model1.RealECD) {
             $($realECD).hideError();
             return;
         }
 
-        common.callAjax(_url.checkRealECD, model,
+        common.callAjax(_url.checkRealECD, model1,
             function (result) {
                 if (result && result.isOK) {
                     $($realECD).hideError();
                     const data = result.data;                  
                 }
                 if (result && !result.isOK) {
-                    alert(result.message);
                     const message = result.message;
                     $this.showError(message.MessageText1);
                 }
@@ -67,16 +72,16 @@ function addEvents() {
             return false;
         }
 
-        let model = {
+        let model2 = {
             RealECD: $realECD.val(),
             REStaffCD: $reStaffCD.val()
         };
-        if (!model.RealECD && !model.REStaffCD) {
+        if (!model2.RealECD && !model2.REStaffCD) {
             $($realECD, $reStaffCD).hideError();
             return;
         }
 
-        common.callAjax(_url.checkREStaffCD, model,
+        common.callAjax(_url.checkREStaffCD, model2,
             function (result) {
                 if (result && result.isOK) {
                     $($reStaffCD).hideError();
@@ -95,17 +100,17 @@ function addEvents() {
             return false;
         }
 
-        let model = {
+        let model3 = {
             RealECD: $realECD.val(),
             REStaffCD: $reStaffCD.val(),
             REPassword: $rePassword.val()
         };
-        if (!model.RealECD && !model.REStaffCD && !model.REPassword) {
+        if (!model3.RealECD && !model3.REStaffCD && !model3.REPassword) {
             $($realECD, $reStaffCD, $rePassword).hideError();
             return;
         }
 
-        common.callAjax(_url.checkREPassword, model,
+        common.callAjax(_url.checkREPassword, model3,
             function (result) {
                 if (result && result.isOK) {
                     $($rePassword).hideError();
@@ -125,16 +130,30 @@ function addEvents() {
             return false;
         }
         const $this = $(this), $realECD = $('#realECD'), $reStaffCD = $('#reStaffCD'), $rePassword = $('#rePassword')
-        let model1 = {
+        let model4 = {
             RealECD: $realECD.val(),
             REStaffCD: $reStaffCD.val(),
             REPassword: $rePassword.val()
         };
-        common.callAjaxWithLoading(_url.select_M_RealEstateStaff, model1, this, function (result) {
+        if (!model4.RealECD && !model4.REStaffCD && !model4.REPassword) {
+            $($realECD, $reStaffCD, $rePassword).hideError();
+            return;
+        }
+        common.callAjaxWithLoading(_url.select_M_RealEstateStaff, model4, this, function (result) {
             if (result && result.isOK) {
                 //sucess
                 //window.location.href = './t_dashboard/Index'; 
-                alert("Success");
+                const data = result.data;
+                let model5 = {
+                    RealECD: data.RealECD,
+                    REStaffCD: data.REStaffCD,
+                    PermissionChat: data.PermissionChat,
+                    PermissionSetting: data.PermissionSetting,
+                    PermissionPlan: data.PermissionPlan,
+                    PermissionInvoice: data.PermissionInvoice
+                };
+                var link = './r_dashboard/Index/P会社ID=' + model5.RealECD + "&PスタッフID=" + model5.REStaffCD + "&P権限_チャット=" + model5.PermissionChat + "&P権限_設定=" + model5.PermissionSetting + "&P権限_プラン変更=" + model5.PermissionPlan + "&P権限_請求書=" + model5.PermissionInvoice;
+                alert(link);
             }
             if (result && !result.isOK) {
                 if (result.message != null) {

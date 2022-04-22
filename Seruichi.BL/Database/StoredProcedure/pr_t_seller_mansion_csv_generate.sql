@@ -33,43 +33,43 @@ BEGIN
 				when D.EndStatus=2 AND (D.SellerTermDateTime IS NOT NULL OR D.BuyerTermDateTime IS NOT NULL) then N'売主辞退'
 				when D.EndStatus=3 AND (D.SellerTermDateTime IS NOT NULL OR D.BuyerTermDateTime IS NOT NULL) then N'売主辞退'
 				END as N'ステータス',
-				A.SellerMansionID as N'物件CD',
-				A.MansionName as N'マンション名',
-				A.PrefName + A.CityName + A.TownName + A.[Address] as N'住所',
-				A.RoomNumber as N'部屋',
-				A.LocationFloor as N'階数',
-				A.RoomArea as N'面積',
-				A.SellerCD as N'売主CD',
-				B.SellerName as N'売主名',
-				FORMAT(A.InsertDateTime, 'yyyy/MM/dd HH:mm:ss')  as N'登録日時',
-				FORMAT(D.DeepAssDateTime, 'yyyy/MM/dd HH:mm:ss') as N'詳細査定日時',
-				FORMAT(D.PurchReqDateTime, 'yyyy/MM/dd HH:mm:ss') as N'買取依頼日時',
-				G.RealECD as N'マンション Top1業者CD',
-				H.REName as N'マンション Top1',
-				G.AssessAmount as N'マンション 金額',
-				E.RealECD as N'エリア Top1業者CD',
-				F.REName as N'エリア Top1',
-				E.AssessAmount as N'エリア 金額',
-				I.RealECD as N'買取依頼会社CD',
-				J.REName as N'買取依頼会社',
-				I.AssessAmount as N'買取依頼金額',
-				FORMAT(D.IntroDateTime, 'yyyy/MM/dd HH:mm:ss') as  N'送客日時',
-				CASE WHEN D.EndStatus =1 THEN
+				ISNULL(A.SellerMansionID,'') As '物件CD',
+				ISNULL(A.MansionName,'') As 'マンション名',
+				ISNULL(A.PrefName + A.CityName + A.TownName + A.[Address],'') As '住所',
+				ISNULL(A.RoomNumber,'0') As '部屋',
+				ISNULL(A.LocationFloor,'0') As '階数',
+				ISNULL(A.RoomArea,'0') As '面積',
+				ISNULL(A.SellerCD,'') as N'売主CD',
+				ISNULL(B.SellerName,'') As '売主名',
+				ISNULL(FORMAT(A.InsertDateTime, 'yyyy/MM/dd HH:mm:ss'),'') As '登録日時',
+				ISNULL(FORMAT(D.DeepAssDateTime, 'yyyy/MM/dd HH:mm:ss'),'') As '詳細査定日時',
+				ISNULL(FORMAT(D.PurchReqDateTime, 'yyyy/MM/dd HH:mm:ss'),'') As '買取依頼日時',
+				ISNULL(G.RealECD,'') as N'マンション Top1業者CD',
+				ISNULL(H.REName,'') As 'マンションTop1',
+				ISNULL(FORMAT(CONVERT(MONEY, G.AssessAmount), '###,###'),'0') +' '+N'円' As 'マンション金額',
+				ISNULL(E.RealECD,'') as N'エリア Top1業者CD',
+				ISNULL(F.REName,'') As 'エリアTop1',
+				ISNULL(FORMAT(CONVERT(MONEY, E.AssessAmount), '###,###'),'0') +' '+N'円' As 'エリア金額',
+				ISNULL(I.RealECD,'') as N'買取依頼会社CD',
+				ISNULL(J.REName,'') As '買取依頼会社',
+				ISNULL(FORMAT(CONVERT(MONEY, I.AssessAmount), '###,###'),'0') +' '+N'円' As '買取依頼金額',
+				ISNULL(FORMAT(D.IntroDateTime, 'yyyy/MM/dd HH:mm:ss'),'') As '送客日時',
+				ISNULL(CASE WHEN D.EndStatus =1 THEN
 						CASE WHEN D.SellerTermDateTime IS NOT NULL AND D.BuyerTermDateTime IS NOT NULL AND D.SellerTermDateTime <= D.BuyerTermDateTime  THEN FORMAT(D.SellerTermDateTime, 'yyyy/MM/dd HH:mm:ss')  
 							 WHEN D.SellerTermDateTime IS NOT NULL AND D.BuyerTermDateTime IS NOT NULL AND D.BuyerTermDateTime <= D.SellerTermDateTime  THEN FORMAT(D.BuyerTermDateTime, 'yyyy/MM/dd HH:mm:ss')   
 							 WHEN D.SellerTermDateTime IS NOT NULL AND D.BuyerTermDateTime  IS NULL THEN FORMAT(D.SellerTermDateTime, 'yyyy/MM/dd HH:mm:ss') 
 							 WHEN D.SellerTermDateTime IS NULL AND D.BuyerTermDateTime  IS NOT NULL THEN FORMAT(D.BuyerTermDateTime, 'yyyy/MM/dd HH:mm:ss') 
 							 WHEN D.SellerTermDateTime IS NULL AND D.BuyerTermDateTime  IS NULL THEN NULL 
 						END
-					END As '成約日時',
-					CASE WHEN D.EndStatus =2 OR D.EndStatus = 3 THEN  
+				END,'') As '成約日時',
+				ISNULL(CASE WHEN D.EndStatus =2 OR D.EndStatus = 3 THEN  
 						CASE WHEN D.SellerTermDateTime IS NOT NULL AND D.BuyerTermDateTime IS NOT NULL AND D.SellerTermDateTime <= D.BuyerTermDateTime  THEN FORMAT(D.SellerTermDateTime, 'yyyy/MM/dd HH:mm:ss')  
 							 WHEN D.SellerTermDateTime IS NOT NULL AND D.BuyerTermDateTime IS NOT NULL AND D.BuyerTermDateTime <= D.SellerTermDateTime  THEN FORMAT(D.BuyerTermDateTime, 'yyyy/MM/dd HH:mm:ss')   
 							 WHEN D.SellerTermDateTime IS NOT NULL AND D.BuyerTermDateTime  IS NULL THEN FORMAT(D.SellerTermDateTime, 'yyyy/MM/dd HH:mm:ss') 
 							 WHEN D.SellerTermDateTime IS NULL AND D.BuyerTermDateTime  IS NOT NULL THEN FORMAT(D.BuyerTermDateTime, 'yyyy/MM/dd HH:mm:ss') 
 							 WHEN D.SellerTermDateTime IS NULL AND D.BuyerTermDateTime  IS NULL THEN NULL 
 						END
-					END As '辞退日時'
+				END,'') As '辞退日時'
 	from M_SellerMansion A
 	left outer join M_Seller B on B.SellerCD = A.SellerCD
 	outer apply(

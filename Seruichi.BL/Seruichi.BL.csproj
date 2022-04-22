@@ -79,6 +79,7 @@
     <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Select_M_Address_by_ZipCode.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Select_M_Seller_by_Key.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Update_M_Seller.sql" />
+    <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfPrefAll.sql" />
     <Content Include="Database\StoredProcedure\pr_common_tenfold_select_MansionName_by_MansionCD.sql" />
     <Content Include="Database\StoredProcedure\pr_common_tenfold_select_REName_by_RealECD.sql" />
     <Content Include="Database\StoredProcedure\pr_common_t_login_select_TenStaffName_by_TenStaffCD.sql" />
@@ -110,6 +111,7 @@
     <Content Include="Database\StoredProcedure\pr_r_login_Insert_L_Login.sql" />
     <Content Include="Database\StoredProcedure\pr_r_login_Select_M_RealEstate_by_RealECD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_login_Select_M_REStaff_by_RealECD_and_REStaffCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_login_select_REStaffName_by_REStaffCD.sql" />
     <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForContract.sql" />
     <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForCustomerInfo.sql" />
     <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForDecline.sql" />
