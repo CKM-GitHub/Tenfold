@@ -1,0 +1,21 @@
+﻿@{
+    string appPath = System.Web.Hosting.HostingEnvironment.ApplicationVirtualPath;
+    if (appPath == "/")
+    {
+        appPath = "";
+    }
+    string messageJson = Newtonsoft.Json.JsonConvert.SerializeObject(Seruichi.Common.StaticCache.GetClientMessages());
+}
+
+@{
+    Layout = null;//"~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>セルイチ管理機能</title>
+</head>
+<body>
+    <h2>Popup Form</h2>
+</body>
+</html>
