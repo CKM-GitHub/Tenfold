@@ -139,6 +139,43 @@
             }
         };
         //
+        const sortStatusTAssessment = function (index) {
+
+            // Get the current direction
+            const direction = directions[index] || 'asc';
+
+            const sortOredrs = { "One": 0, "Two": 1, "Three": 2, "Four": 3, "Five": 4, "Six": 5, "Seven": 6, "Eight": 7, "Nine": 8, "Ten": 9 };
+
+            const sortedRows = [...rows].sort((a, b) =>
+                sortOredrs[a.children[1].className] - sortOredrs[b.children[1].className]
+            );
+
+            const sortBackOredrs = { "Ten": 0,"Nine": 1, "Eight": 2, "Seven": 3, "Six": 4, "Five": 5, "Four": 6, "Three": 7, "Two": 8, "One": 9 };
+            const sortedBackRows = [...rows].sort((a, b) =>
+                sortBackOredrs[a.children[1].className] - sortBackOredrs[b.children[1].className]
+            );
+
+            // Remove old rows
+            [].forEach.call(rows, function (row) {
+                tableBody.removeChild(row);
+            });
+
+            // Reverse the direction
+            directions[index] = direction === 'asc' ? 'desc' : 'asc';
+            if (direction === 'asc') {
+                // Append new row
+                sortedRows.forEach(function (newRow) {
+                    tableBody.appendChild(newRow);
+                });
+            }
+            else {
+                // Append new row
+                sortedBackRows.forEach(function (newRow) {
+                    tableBody.appendChild(newRow);
+                });
+            }
+        };
+
         [].forEach.call(headers, function (header, index) {
             header.addEventListener('click', function () {
                 if ($(this).hasClass('sort-by')) {
@@ -149,7 +186,10 @@
                 }
                 if ($(this).hasClass('sort-status-t-seller-list')) {
                     sortStatusTSellerList(index);
-                }                
+                }
+                if ($(this).hasClass('sort-status-t-seller-assessment')) {
+                    sortStatusTAssessment(index);
+                }
             });
         });
     }   
