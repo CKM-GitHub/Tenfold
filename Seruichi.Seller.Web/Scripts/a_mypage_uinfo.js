@@ -23,7 +23,8 @@ function setValidation() {
         .addvalidation_doublebyte_kana();
     $('#Birthday')
         .addvalidation_errorElement("#errorBirthday")
-        .addvalidation_reqired();
+        .addvalidation_reqired()
+        .setInputModeNumber();
     $('#ZipCode1')
         .addvalidation_errorElement("#errorZipCode")
         .addvalidation_singlebyte_number();
@@ -74,9 +75,14 @@ function addEvents()
     let updateData;
 
     common.bindValidationEvent('#form1', ':not(#HousePhone, #HandyPhone, #Fax)');
+
     $('#HousePhone, #HandyPhone, #Fax').on('blur', function (e) {
         customValidation_checkPhone(this);
         return common.checkValidityInput(this);
+    });
+
+    $('#Birthday').on('blur', function () {
+        common.birthdayCheck(this);
     });
 
     $('#btnAutoSet').on('click', function () {
@@ -103,8 +109,10 @@ function addEvents()
     $('#btnShowConfirmation').on('click', function () {
         $form.hideChildErrors();
 
-        if (!common.checkValidityOnSave('#form1')) {
-            common.setFocusFirstError($form);
+        common.checkValidityOnSave('#form1');
+        common.birthdayCheck('#Birthday');
+
+        if (common.setFocusFirstError($form)) {
             return false;
         }
 

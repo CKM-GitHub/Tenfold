@@ -56,8 +56,8 @@
                                                 <label class="form-label">生年月日</label>
                                                 <span class="cap-errormsg-right" id="errorBirthday"></span>
                                             </div>
-                                            <input class="form-control cap-fon-form-w200" type="date" min="1900-01-01" max="2100-12-31" 
-                                                   name="Birthday" id="Birthday" autocomplete="bday" value="@Model.Birthday">
+                                            <input class="form-control cap-fon-form-w200" type="text" name="Birthday" id="Birthday" 
+                                                   maxlength="10" autocomplete="bday" value="@Model.Birthday">
                                         </div>
                                         <div class="form-group mb-3">
                                             <div class="d-flex">
@@ -216,7 +216,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label">生年月日</label>
-                        <input class="form-control cap-fon-form-w200" type="date" min="1900-01-01" max="2100-12-31" name="Birthday" id="confirm_Birthday" readonly>
+                        <input class="form-control cap-fon-form-w200" type="text" name="Birthday" id="confirm_Birthday" readonly>
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label">郵便番号</label>

@@ -23,7 +23,8 @@ function setValidation() {
         .addvalidation_doublebyte_kana();
     $('#Birthday')
         .addvalidation_errorElement("#errorBirthday")
-        .addvalidation_reqired();
+        .addvalidation_reqired()
+        .setInputModeNumber();
     $('#ZipCode1')
         .addvalidation_errorElement("#errorZipCode")
         .addvalidation_singlebyte_number();
@@ -79,6 +80,10 @@ function addEvents()
         return common.checkValidityInput(this);
     });
 
+    $('#Birthday').on('blur', function () {
+        common.birthdayCheck(this);
+    });
+
     $('#formCheckPolicy, #formCheckRules').on('change', function () {
         if ($('#formCheckPolicy').is(':checked') && $('#formCheckRules').is(':checked')) {
             $('#btnAgree').prop('disabled', false);
@@ -112,8 +117,10 @@ function addEvents()
     $('#btnShowConfirmation').on('click', function () {
         $form.hideChildErrors();
 
-        if (!common.checkValidityOnSave('#form1')) {
-            common.setFocusFirstError($form);
+        common.checkValidityOnSave('#form1');
+        common.birthdayCheck('#Birthday');
+
+        if (common.setFocusFirstError($form)) {
             return false;
         }
 

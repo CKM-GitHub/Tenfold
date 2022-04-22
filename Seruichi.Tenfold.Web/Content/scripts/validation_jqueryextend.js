@@ -17,7 +17,7 @@
     };
 
     $.fn.showError = function (message) {
-        $this = this;
+        const $this = this;
         $this.addClass('cap-is-invalid').attr('data-errormsg', message);
         $this.each(function () {
             const selector = $(this).data('errormsg-target');
@@ -33,7 +33,7 @@
     };
 
     $.fn.hideError = function () {
-        $this = this;
+        const $this = this;
         $this.removeClass('cap-is-invalid').removeAttr('data-errormsg');
         $this.each(function () {
             const selector = $(this).data('errormsg-target');

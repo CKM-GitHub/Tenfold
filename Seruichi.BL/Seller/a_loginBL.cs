@@ -227,7 +227,10 @@ namespace Seruichi.BL
             ValidatorAllItems validator = new ValidatorAllItems();
             string elementId = "btnVerifyMailAddress";
 
-            if (string.IsNullOrEmpty(sellerKana) || string.IsNullOrEmpty(birthday) || string.IsNullOrEmpty(handyPhone))
+            //生年月日
+            validator.CheckBirthday("formVerifyMailAddress_Birthday", birthday);
+
+            if (validator.IsValid && (string.IsNullOrEmpty(sellerKana) || string.IsNullOrEmpty(birthday) || string.IsNullOrEmpty(handyPhone)))
             {
                 validator.AddValidationResult(elementId, "E207"); //この情報での登録はありません
             }
@@ -283,7 +286,10 @@ namespace Seruichi.BL
             ValidatorAllItems validator = new ValidatorAllItems();
             string elementId = "btnResetPassword";
 
-            if (string.IsNullOrEmpty(sellerKana) || string.IsNullOrEmpty(birthday) || string.IsNullOrEmpty(mailAddress))
+            //生年月日
+            validator.CheckBirthday("formResetPassword_Birthday", birthday);
+
+            if (validator.IsValid && (string.IsNullOrEmpty(sellerKana) || string.IsNullOrEmpty(birthday) || string.IsNullOrEmpty(mailAddress)))
             {
                 validator.AddValidationResult(elementId, "E207"); //この情報での登録はありません
             }

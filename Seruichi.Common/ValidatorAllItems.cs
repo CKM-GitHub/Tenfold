@@ -130,5 +130,11 @@ namespace Seruichi.Common
             if (!validator.CheckIsValidEmail(mailAddress, out string errorcd))
                 AddValidationResult(elementId, errorcd);
         }
+
+        public void CheckBirthday(string elementId, string birthday)
+        {
+            if (!validator.CheckBirthday(birthday, out string errorcd, out string outVal))
+                AddValidationResult(elementId, errorcd);
+        }
     }
 }

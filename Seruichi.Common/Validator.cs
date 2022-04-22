@@ -478,5 +478,48 @@ namespace Seruichi.Common
             return true;
         }
 
+        public bool CheckBirthday(string inputText, out string errorcd, out string outVal)
+        {
+            errorcd = "";
+            outVal = "";
+
+            if (string.IsNullOrEmpty(inputText)) return true;
+
+            inputText = inputText.Replace("-", "/").Replace("年", "/").Replace("月", "/").Replace("日", "");
+
+            if (!System.Text.RegularExpressions.Regex.IsMatch(inputText.Replace("/", ""), "^[0-9]+$"))
+            {
+                errorcd = "E104"; //入力できない文字です。
+                return false;
+            }
+
+            if (inputText.Length > 10)
+            {
+                errorcd = "E108"; //正しい日付を入力してください
+                return false;
+            }
+
+            if (!inputText.Contains("/"))
+            {
+                if (inputText.Length != 8)
+                {
+                    errorcd = "E108"; //正しい日付を入力してください
+                    return false;
+                }
+
+                inputText = string.Format("{0}/{1}/{2}", inputText.Substring(0, 4), inputText.Substring(4, 2), inputText.Substring(6, 2));
+            }
+
+            outVal = inputText;
+            DateTime? date = inputText.ToDateTime();
+
+            if (date == null)
+            {
+                errorcd = "E108"; //正しい日付を入力してください
+                return false;
+            }
+
+            return true;
+        }
     }
 }
