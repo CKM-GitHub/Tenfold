@@ -136,7 +136,7 @@ const common = {
     redirectErrorPage: function redirectErrorPage(status) {
         let url;
         if (status == 400) url = "/Error/BadRequest";
-        if (status == 401) url = "/a_login";
+        if (status == 401) url = "/Error/Unauthorized";
         if (status == 403) url = "/Error/Forbidden";
         if (status == 404) url = "/Error/NotFound";
         //if (status == 500) url = "/Error/InternalServerError";
