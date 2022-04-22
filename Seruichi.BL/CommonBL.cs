@@ -31,6 +31,12 @@ namespace Seruichi.BL
             return items;
         }
 
+        public List<DropDownListItem> GetDropDownListItemsOfAllPrefecture()
+        {
+            string spName = "pr_Common_Select_DropDownListOfPrefAll";
+            return GetDropDownListItems(spName);
+        }
+
         public List<DropDownListItem> GetDropDownListItemsOfPrefecture()
         {
             string spName = "pr_Common_Select_DropDownListOfPref";
