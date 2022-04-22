@@ -40,7 +40,7 @@ namespace Seruichi.RealEstate.Web.Controllers
             }
 
             r_loginBL bl = new r_loginBL();
-            if (!bl.checkRealECD(model.RealECD, out errorcd))
+            if (!bl.checkRealECD(model, out errorcd))
             {
                 return ErrorMessageResult(errorcd);
             }
@@ -58,9 +58,17 @@ namespace Seruichi.RealEstate.Web.Controllers
             Validator validator = new Validator();
             string errorcd = "";
             string rePassword = "";
+            if (!validator.CheckNullOrEmpty("RealECD", model.RealECD, out errorcd))
+            {
+                return ErrorMessageResult(errorcd);
+            }
+            if (!validator.CheckNullOrEmpty("REStaffCD", model.REStaffCD, out errorcd))
+            {
+                return ErrorMessageResult(errorcd);
+            }
 
             r_loginBL bl = new r_loginBL();
-            if (!bl.checkREStaffCD(model.RealECD, model.REStaffCD, out errorcd, out rePassword))
+            if (!bl.checkREStaffCD(model, out errorcd, out rePassword))
             {
                 return ErrorMessageResult(errorcd);
             }
@@ -87,9 +95,9 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return ErrorMessageResult(errorcd);
             }
             r_loginBL bl = new r_loginBL();
-            if (!bl.checkREStaffCD(model.RealECD, model.REStaffCD, out errorcd, out rePassword))
+            if (!bl.checkREStaffCD(model, out errorcd, out rePassword))
             {
-                return ErrorMessageResult(errorcd);
+                return ErrorMessageResult("E109");
             }
             else
             {
@@ -127,11 +135,11 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return ErrorMessageResult(errorcd);
             }
             r_loginBL bl = new r_loginBL();
-            if (!bl.checkRealECD(model.RealECD, out errorcd))
+            if (!bl.checkRealECD(model, out errorcd))
             {
                 return ErrorMessageResult(errorcd);
             }
-            if (!bl.checkREStaffCD(model.RealECD, model.REStaffCD, out errorcd, out rePassword))
+            if (!bl.checkREStaffCD(model, out errorcd, out rePassword))
             {
                 return ErrorMessageResult(errorcd);
             }
@@ -141,29 +149,15 @@ namespace Seruichi.RealEstate.Web.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(model.REStaffCD, false);
                     SessionAuthenticationHelper.CreateLoginUser(model.REStaffCD);
-                    r_login_l_log_Model model1 = Getlogdata(model);
-                    bl.Insert_L_Login(model1);
-                    return OKResult();
+                    model.REStaffName = bl.GetREStaffNamebyREStaffCD(model.REStaffCD);
+                    bl.Insert_L_Login(model, base.GetClientIP());
+                    return OKResult(new { RealECD = model.RealECD, REStaffCD = model.REStaffCD, PermissionChat = model.PermissionChat, PermissionSetting= model.PermissionSetting, PermissionPlan= model.PermissionPlan, PermissionInvoice= model.PermissionInvoice });
                 }
                 else
                 {
                     return ErrorMessageResult("E109");
                 }
             }
-        }
-        public r_login_l_log_Model Getlogdata(r_loginModel model1)
-        {
-            r_loginBL bl = new r_loginBL();
-            r_login_l_log_Model model=new r_login_l_log_Model();
-            model.LoginKBN = 2;
-            model.LoginID = model1.REStaffCD;
-            model.RealECD = model1.RealECD;
-            model.LoginName = bl.GetREStaffNamebyREStaffCD(model1.REStaffCD);
-            model.IPAddress = base.GetClientIP(); 
-            model.PageID = "r_login";
-            model.ProcessKBN = "Insert";
-            model.Remarks = model.LoginName;
-            return model;
         }
     }
 }
