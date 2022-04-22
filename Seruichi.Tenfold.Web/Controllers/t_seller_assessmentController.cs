@@ -18,6 +18,7 @@ namespace Seruichi.Tenfold.Web.Controllers
         // GET: t_seller_assessment
         public ActionResult Index(string SellerCD)
         {
+            SellerCD = "0000002";
             if (!String.IsNullOrWhiteSpace(SellerCD))
             {
                 strSellerCD = SellerCD;

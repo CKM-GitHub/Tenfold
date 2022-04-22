@@ -234,6 +234,7 @@ function Bind_tbody(result) {
         $('#total_record_up').text("検索結果： 0件")
     }
     $('#mansiontable tbody').append(html);
+
     sortTable.getSortingTable("mansiontable");
 }
 function l_logfunction(id) {
@@ -256,12 +257,12 @@ function l_logfunction(id) {
                 //if (model.LogStatus = "t_mansion_detail") {
                 //    alert("https://www.seruichi.com/t_mansion_detail?ｍansionCD=" + model.LogId);
                 //}
-                var strlink2 = 't_seller_assessment_detail';
-                if (model.LogStatus = strlink) {
+               
+                if (model.LogStatus = "t_reale_purchase") {
                     //alert("https://www.seruichi.com/t_reale_purchase?RealECD=" + model.LogId);
                    
                 }
-                else if (model.LogStatus = strlink2 ) {
+                else if (model.LogStatus = "t_seller_assessment_detail" ) {
                     
                     //alert("https://www.seruichi.com/t_seller_assessment_detail?AssReqID=" + model.LogId);
                    
