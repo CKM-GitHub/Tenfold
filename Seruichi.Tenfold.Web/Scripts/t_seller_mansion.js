@@ -221,10 +221,10 @@ function Bind_tbody(result) {
             <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["AssReqID"] +'&t_seller_assessment_detail'+' onclick="l_logfunction(this.id)"> '+ data[i]["詳細査定日時"] + ' </a> </td>\
             <td class="text-nowrap"> '+ data[i]["買取依頼日時"] + ' </td>\
             <td class="text-nowrap">\
-            <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["GRealECD"] + '&t_seller_assessment_detail_GReal' + ' onclick="l_logfunction(this.id)" >' + data[i]["マンション金額"] + ' </a> </td>\
+            <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["GRealECD"] + '&t_seller_assessment_detail_GReal' + ' onclick="l_logfunction(this.id)" >不動産会社名不動産会社名 </a><p class="text-end">' + data[i]["マンション金額"] + '</p> </td>\
              <td class="text-nowrap">\
-             <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["ERealECD"] + '&t_seller_assessment_detail_EReal' + ' onclick="l_logfunction(this.id)">' + data[i]["エリア金額"] + ' </a> </td>\
-             <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["IRealECD"] + '&t_seller_assessment_detail_IRealECD' + ' onclick="l_logfunction(this.id)"> ' + data[i]["買取依頼金額"] + ' </a> </td>\
+             <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["ERealECD"] + '&t_seller_assessment_detail_EReal' + ' onclick="l_logfunction(this.id)"> 不動産会社名不動産会社名</a> <p class="text-end">' + data[i]["エリア金額"] + '</p></td>\
+             <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["IRealECD"] + '&t_seller_assessment_detail_IRealECD' + ' onclick="l_logfunction(this.id)"> 不動産会社名不動産会社名 </a><p class="text-end">' + data[i]["買取依頼金額"] + '</p> </td>\
              <td class="text-nowrap"> '+ data[i]["送客日時"] + ' </td>\
              <td class="text-nowrap"> '+ data[i]["成約日時"] + ' </td>\
              <td class="text-nowrap"> '+ data[i]["辞退日時"] + '</td>\

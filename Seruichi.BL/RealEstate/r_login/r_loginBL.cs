@@ -66,7 +66,6 @@ namespace Seruichi.BL.RealEstate.r_login
             rePassword = dr["REPassword"].ToStringOrEmpty();
             if (dt.Rows.Count > 0)
             {
-                model.REPassword= dt.Rows[0]["REPassword"].ToString();
                 model.PermissionChat = dt.Rows[0]["PermissionChat"].ToByte();
                 model.PermissionSetting = dt.Rows[0]["PermissionChat"].ToByte();
                 model.PermissionPlan = dt.Rows[0]["PermissionChat"].ToByte();
