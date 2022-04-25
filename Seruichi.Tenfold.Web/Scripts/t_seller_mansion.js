@@ -159,6 +159,7 @@ function isEmptyOrSpaces(str) {
 function Bind_tbody(result) {
     let data = JSON.parse(result);
     let html = "";
+    if (data.length > 0 ) {
     for (var i = 0; i < data.length; i++) {
        
         if (isEmptyOrSpaces(data[i]["ステータス"])) {
@@ -213,7 +214,7 @@ function Bind_tbody(result) {
             <td class= "text-end"> ' + data[i]["NO"] + '</td>\
             <td class="'+ _sort_checkbox + '"><i class="' + _class + '">' + _letter + '</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
             <td> ' + data[i]["物件CD"] + ' </td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["MansionCD"] + '&t_mansion_detail' + '  href="#" onclick="l_logfunction(this.id)">' + data[i]["住所"] + '</a></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["MansionCD"] + '&t_mansion_detail' + '  href="#" onclick="l_logfunction(this.id)">' + data[i]["マンション名"] + '</a><p><small class="text-wrap w-100">' + data[i]["住所"]+'</small></p></td>\
             <td> '+ data[i]["部屋"] + '</td>\
             <td class="text-end">'+ data[i]["階数"] + '</td>\
             <td class="text-end">'+ data[i]["面積"].toFixed(2) + '</td>\
@@ -222,16 +223,16 @@ function Bind_tbody(result) {
             <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["AssReqID"] +'&t_seller_assessment_detail'+' onclick="l_logfunction(this.id)"> '+ data[i]["詳細査定日時"] + ' </a> </td>\
             <td class="text-nowrap"> '+ data[i]["買取依頼日時"] + ' </td>\
             <td class="text-nowrap">\
-            <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["GRealECD"] + '&t_seller_assessment_detail_GReal' + ' onclick="l_logfunction(this.id)" >不動産会社名不動産会社名 </a><p class="text-end">' + data[i]["マンション金額"] + '</p> </td>\
+            <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["GRealECD"] + '&t_seller_assessment_detail_GReal' + ' onclick="l_logfunction(this.id)" >' + data[i]["マンションTop1"] + ' </a><p class="text-end">' + data[i]["マンション金額"] + '</p> </td>\
              <td class="text-nowrap">\
-             <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["ERealECD"] + '&t_seller_assessment_detail_EReal' + ' onclick="l_logfunction(this.id)"> 不動産会社名不動産会社名</a> <p class="text-end">' + data[i]["エリア金額"] + '</p></td>\
-             <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["IRealECD"] + '&t_seller_assessment_detail_IRealECD' + ' onclick="l_logfunction(this.id)"> 不動産会社名不動産会社名 </a><p class="text-end">' + data[i]["買取依頼金額"] + '</p> </td>\
+             <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["ERealECD"] + '&t_seller_assessment_detail_EReal' + ' onclick="l_logfunction(this.id)"> ' + data[i]["エリアTop1"]+' </a> <p class="text-end">' + data[i]["エリア金額"] + '</p></td>\
+             <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["IRealECD"] + '&t_seller_assessment_detail_IRealECD' + ' onclick="l_logfunction(this.id)"> ' + data[i]["買取依頼会社"]+' </a><p class="text-end">' + data[i]["買取依頼金額"] + '</p> </td>\
              <td class="text-nowrap"> '+ data[i]["送客日時"] + ' </td>\
              <td class="text-nowrap"> '+ data[i]["成約日時"] + ' </td>\
              <td class="text-nowrap"> '+ data[i]["辞退日時"] + '</td>\
             </tr>'
     }
-    if (data.length > 0) {
+   
         $('#total_record').text("検索結果：" + data.length + "件")
         $('#total_record_up').text("検索結果：" + data.length + "件")
     }

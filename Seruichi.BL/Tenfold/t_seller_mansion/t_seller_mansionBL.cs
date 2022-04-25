@@ -71,7 +71,8 @@ namespace Seruichi.BL.Tenfold.t_seller_mansion
                 }
                 else
                 {
-                    return null;
+                    DataTable newTable = dt.Clone();
+                    return newTable;
                 }
             }
             return dt;

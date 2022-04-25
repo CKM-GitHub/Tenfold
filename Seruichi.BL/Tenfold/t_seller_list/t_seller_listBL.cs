@@ -79,7 +79,8 @@ namespace Seruichi.BL.Tenfold.t_seller_list
                 }
                 else
                 {
-                    return null;
+                    DataTable newTable = dt.Clone();
+                    return newTable;
                 }
             }
             return dt;

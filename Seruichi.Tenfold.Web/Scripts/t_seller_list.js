@@ -223,6 +223,7 @@ function Bind_tbody(result) {
     let _letter = "";
     let _class = "";
     let _sort_checkbox = "";
+    if (data.length > 0) {
     for (var i = 0; i < data.length; i++) {
         if (isEmptyOrSpaces(data[i]["ステータス"])) {
             _letter = "";
@@ -259,7 +260,7 @@ function Bind_tbody(result) {
             <td class="text-end"> '+ data[i]["成約数"] + ' </td>\
             </tr>'
     }
-    if (data.length > 0) {
+    
         $('#total_record').text("検索結果：" + data.length + "件")
         $('#total_record_up').text("検索結果：" + data.length + "件")
     }
