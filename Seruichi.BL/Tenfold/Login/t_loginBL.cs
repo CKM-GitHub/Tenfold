@@ -19,11 +19,8 @@ namespace Seruichi.BL.Tenfold.Login
             validator.CheckIsOnlyOneCharacter("email", model.TenStaffCD);//E104
             validator.CheckIsOnlyOneCharacter("password", model.TenStaffPW);//E104
            
-            validator.CheckByteCount("email", model.TenStaffCD, 10);  //E105
-            validator.CheckByteCount("password", model.TenStaffPW, 10);  //E105
-
-
-            
+            validator.CheckMaxLenght("email", model.TenStaffCD, 10);  //E105
+            validator.CheckMaxLenght("password", model.TenStaffPW, 10);  //E105
             return validator.GetValidationResult();
         }
 
