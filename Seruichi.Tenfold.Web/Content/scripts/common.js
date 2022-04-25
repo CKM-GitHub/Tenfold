@@ -308,15 +308,6 @@ const common = {
                     $ctrl.showError(this.getMessage('E107'));
                     return;
                 }
-
-                const maxLength = $ctrl.attr('maxlength');
-                if (maxLength) {
-                    const byteLength = this.getStringByteCount(inputValue);
-                    if (byteLength > parseInt(maxLength)) {
-                        $ctrl.showError(this.getMessage('E105'));
-                        return;
-                    }
-                }
             }
 
             if (isSingleByte) {
@@ -401,19 +392,7 @@ const common = {
                 }
             }
 
-
             if (isMaxlengthCheck) {
-                const maxLength = $ctrl.data('digits');
-                if (maxLength) {
-                    const byteLength = this.getStringByteCount(inputValue);
-                    if (byteLength > parseInt(maxLength)) {
-                        $ctrl.showError(this.getMessage('E105'));
-                        return;
-                    }
-                }
-            }
-
-            if (isMaxlengthCheckforsellerlist) {
                 const maxLength = $ctrl.data('digits');
                 if (maxLength) {
                     const byteLength = inputValue.length;

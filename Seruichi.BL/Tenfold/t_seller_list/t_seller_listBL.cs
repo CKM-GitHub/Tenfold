@@ -4,7 +4,8 @@ using System.Data.SqlClient;
 using Seruichi.Common;
 using System.Data;
 using Models.Tenfold.t_seller_list;
-
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace Seruichi.BL.Tenfold.t_seller_list
 {
@@ -58,19 +59,28 @@ namespace Seruichi.BL.Tenfold.t_seller_list
 
             AESCryption crypt = new AESCryption();
             string decryptionKey = StaticCache.GetDataCryptionKey();
-            for (int i = 0; i < dt.Rows.Count; i++)
+            var e = dt.AsEnumerable();
+            Parallel.ForEach(e, item =>
             {
-                string sellerName = dt.Rows[i]["売主名"].ToString();                
-                dt.Rows[i]["売主名"] = !string.IsNullOrEmpty(sellerName) ? crypt.DecryptFromBase64(sellerName, decryptionKey) : sellerName;
-            }
+                item["売主名"] = crypt.DecryptFromBase64(item.Field<string>("売主名"), decryptionKey);
+            });
             if (!string.IsNullOrEmpty(model.SellerName))
             {
-                var dtLinq = dt.AsEnumerable().Where(dr => dr.Field<string>("売主名").Contains(model.SellerName) || dr.Field<string>("売主CD").Contains(model.SellerName)).CopyToDataTable();
-                for(int i=0;i< dtLinq.Rows.Count; i++)
+                var query = e.Where(dr => dr.Field<string>("売主名").Contains(model.SellerName) || dr.Field<string>("売主CD").Contains(model.SellerName));
+                if (query.Any())
                 {
-                    dtLinq.Rows[i]["NO"] = i + 1;
+                    int i = 0;
+                    foreach (var row in query)
+                    {
+                        i++;
+                        row["NO"] = i;
+                    }
+                    return query.CopyToDataTable();
                 }
-                return dtLinq;
+                else
+                {
+                    return null;
+                }
             }
             return dt;
         }

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using Models.Tenfold.t_seller_mansion;
+using System.Threading.Tasks;
+using System.Linq;
+
 namespace Seruichi.BL.Tenfold.t_seller_mansion
 {
     public class t_seller_mansionBL
@@ -46,6 +49,31 @@ namespace Seruichi.BL.Tenfold.t_seller_mansion
 
             DBAccess db = new DBAccess();
             var dt = db.SelectDatatable("pr_t_seller_mansion_Select_M_SellerMansionData", sqlParams);
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+            var e = dt.AsEnumerable();
+            Parallel.ForEach(e, item =>
+            {
+                item["売主名"] = crypt.DecryptFromBase64(item.Field<string>("売主名"), decryptionKey);
+            });
+            if (!string.IsNullOrEmpty(model.MansionName))
+            {
+                var query = e.Where(dr => dr.Field<string>("マンション名").Contains(model.MansionName));
+                if (query.Any())
+                {
+                    int i = 0;
+                    foreach (var row in query)
+                    {
+                        i++;
+                        row["NO"] = i;
+                    }
+                    return query.CopyToDataTable();
+                }
+                else
+                {
+                    return null;
+                }
+            }
             return dt;
         }
         public void InsertM_SellerMansion_L_Log(t_seller_mansion_l_log_Model model)
