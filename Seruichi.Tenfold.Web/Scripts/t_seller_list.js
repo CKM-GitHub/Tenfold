@@ -14,7 +14,7 @@ function setValidation() {
 
     $('#SellerName')
         .addvalidation_errorElement("#errorSeller")
-        .addvalidation_MaxLengthforSellerlist(10);
+        .addvalidation_maxlengthCheck(10);
 
     $('#StartDate')
         .addvalidation_errorElement("#errorStartDate")
