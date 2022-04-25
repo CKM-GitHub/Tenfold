@@ -53,7 +53,6 @@
     <Compile Include="Seller\a_mypage_uinfoModel.cs" />
     <Compile Include="Seller\a_contactModel.cs" />
     <Compile Include="Seller\a_registerModel.cs" />
-    <Compile Include="Seller\a_loginModel.cs" />
     <Compile Include="Seller\a_indexModel.cs" />
     <Compile Include="Tenfold\Login\t_loginModel.cs" />
     <Compile Include="Tenfold\t_dashboard\t_dashboardModel.cs" />

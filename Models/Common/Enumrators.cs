@@ -12,6 +12,8 @@
         None = 0,
         MemberRegistration = 1,
         ResetPassword = 2,
+        ContactTenfold = 3,
+        ContactPerson = 4,
     }
 
     public enum RegexFormat : int

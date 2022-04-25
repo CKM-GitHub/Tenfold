@@ -3,7 +3,7 @@
 $(function () {
     _url.checkZipCode = common.appPath + '/a_mypage_uinfo/CheckZipCode';
     _url.checkAll = common.appPath + '/a_mypage_uinfo/CheckAll';
-    _url.insertSellerData = common.appPath + '/a_mypage_uinfo/UpdateSellerData';
+    _url.updateSellerData = common.appPath + '/a_mypage_uinfo/UpdateSellerData';
     _url.gotoNextPage = common.appPath + '/a_mypage_uinfo/GotoNextPage';
 
     $('#mypage_uinfo').addClass('active');
@@ -145,7 +145,7 @@ function addEvents()
                 $('#modal_2').modal('show');
             }
             if (result && result.data) {
-                //server validation error
+                //error
                 common.setValidationErrors(result.data);
                 common.setFocusFirstError($form);
             }
@@ -153,14 +153,14 @@ function addEvents()
     });
 
     $('#btnRegistration').on('click', function () {
-        common.callAjaxWithLoading(_url.insertSellerData, updateData, this, function (result) {
+        common.callAjaxWithLoading(_url.updateSellerData, updateData, this, function (result) {
             if (result && result.isOK) {
                 //sucess
                 $('#modal_2').modal('hide');
                 $('#modal_3').modal('show');
             }
             if (result && result.data) {
-                //server validation error
+                //error
                 $('#modal_2').modal('hide');
                 common.setValidationErrors(result.data);
                 common.setFocusFirstError($form);

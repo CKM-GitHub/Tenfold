@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="CommonBL.cs" />
     <Compile Include="RealEstate\r_login\r_loginBL.cs" />
+    <Compile Include="Seller\a_contactBL.cs" />
     <Compile Include="Seller\a_mypage_uinfoBL.cs" />
     <Compile Include="Seller\a_registerBL.cs" />
     <Compile Include="Seller\a_loginBL.cs" />

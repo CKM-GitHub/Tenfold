@@ -28,24 +28,24 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">お名前</label>
-                        <input class="form-control cap-fon-form-w60mw250" type="text">
+                        <input class="form-control cap-fon-form-w60mw250" type="text" name="ContactName" id="ContactName">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">お名前(フリガナ)</label>
-                        <input class="form-control cap-fon-form-w60mw250" type="text">
+                        <input class="form-control cap-fon-form-w60mw250" type="text" name="ContactKana" id="ContactKana">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">メールアドレス</label>
-                        <input class="form-control cap-fon-form-w350" type="email" required="" value="aaaaaaaaaa@mail.bbbbbb.cccc">
+                        <input class="form-control cap-fon-form-w350" type="email" name="ContactAddress" id="ContactAddress">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">電話番号</label>
-                        <input class="form-control cap-fon-form-w200" type="tel" required="" value="99999999999">
+                        <input class="form-control cap-fon-form-w200" type="tel" name="ContactPhone" id="ContactPhone">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">お問い合わせ種類</label>
                         <div class="dropdown w-100">
-                            <button class="btn btn-light dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown w-100 text-start" type="button">漢字漢字漢字漢字漢字漢字漢字漢字&nbsp;</button>
+                            <button class="btn btn-light dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown w-100 text-start" type="button"></button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">First Item</a>
                                 <a class="dropdown-item" href="#">Second Item</a>
@@ -55,18 +55,18 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">査定ID</label>
-                        <input class="form-control cap-fon-form-w200" type="tel" required="" value="ABC9999999999">
+                        <input class="form-control cap-fon-form-w200" type="text" name="ContactAssID" id="ContactAssID">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">件名</label>
-                        <input class="form-control" type="tel" required="" value="漢字漢字漢字漢字漢字漢字漢字漢字漢字">
+                        <input class="form-control" type="text" name="ContactSubject" id="ContactSubject">
                     </div>
                     <div class="mb-4">
                         <label class="form-label">お問い合わせ内容</label>
-                        <textarea class="form-control" required="" rows="4">漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字漢字</textarea>
+                        <textarea class="form-control" rows="4" name="ContactIssue" id="ContactIssue"></textarea>
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-primary w-100 mb-2" type="submit" data-bs-target="#modal-2" data-bs-toggle="modal">送信</button>
+                        <button class="btn btn-primary w-100 mb-2" id="btnRegistration">送信</button>
                         <p><small class="text-black-50 w-100"><a href="#">操作ガイド</a>を確認しましたか？<br></small></p>
                     </div>
                 </form>
@@ -74,7 +74,7 @@
         </div>
     </div>
 </section>
-<div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
+<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" id="modal_2">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">

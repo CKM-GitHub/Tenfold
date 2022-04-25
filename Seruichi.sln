@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32106.194
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1622
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seruichi.Seller.Web", "Seruichi.Seller.Web\Seruichi.Seller.Web.csproj", "{1458B5EA-09EB-47D3-B0A1-439D425EA204}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seruichi.RealEstate.Web", "Seruichi.RealState.Web\Seruichi.RealEstate.Web.csproj", "{E935BC7E-7837-4658-8915-F96633EAA3C0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cryption", "Cryption\Cryption.csproj", "{FDA3CA26-CCBA-4078-B443-31CFFE4BBF97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptionConvert", "ConvertData\CryptionConvert.csproj", "{12B68F60-B350-4825-B632-D8B99284FD46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{FDA3CA26-CCBA-4078-B443-31CFFE4BBF97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDA3CA26-CCBA-4078-B443-31CFFE4BBF97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDA3CA26-CCBA-4078-B443-31CFFE4BBF97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12B68F60-B350-4825-B632-D8B99284FD46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12B68F60-B350-4825-B632-D8B99284FD46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12B68F60-B350-4825-B632-D8B99284FD46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12B68F60-B350-4825-B632-D8B99284FD46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

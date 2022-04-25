@@ -3,7 +3,7 @@ using Seruichi.BL;
 using Seruichi.Common;
 using System;
 using System.Web.Mvc;
-using System.Web.Security;
+//using System.Web.Security;
 
 namespace Seruichi.Seller.Web.Controllers
 {

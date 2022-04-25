@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Web;
 
 namespace Seruichi.BL
@@ -59,18 +60,13 @@ namespace Seruichi.BL
             AESCryption crypt = new AESCryption();
             string decryptionKey = StaticCache.GetDataCryptionKey();
 
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                var dr = dt.Rows[i];
-                var encryptedMailAddress = dr["MailAddress"].ToStringOrEmpty();
+            var row = dt.AsEnumerable().AsParallel().FirstOrDefault(r =>
+                    crypt.DecryptFromBase64(r.Field<string>("MailAddress"), decryptionKey) == mailAddress);
 
-                if (!string.IsNullOrEmpty(encryptedMailAddress)
-                    && crypt.DecryptFromBase64(encryptedMailAddress, decryptionKey) == mailAddress)
-                {
-                    user.UserID = dr["SellerCD"].ToStringOrEmpty();
-                    user.UserName = crypt.DecryptFromBase64(dr["SellerName"].ToStringOrEmpty(), decryptionKey);
-                    break;
-                }
+            if (row != null)
+            {
+                user.UserID = row["SellerCD"].ToStringOrEmpty();
+                user.UserName = crypt.DecryptFromBase64(row["SellerName"].ToStringOrEmpty(), decryptionKey);
             }
 
             return user;
@@ -136,15 +132,10 @@ namespace Seruichi.BL
             AESCryption crypt = new AESCryption();
             string decryptionKey = StaticCache.GetDataCryptionKey();
 
-            for (int i = 0; i < dt.Rows.Count; i++)
+            if (dt.AsEnumerable().AsParallel()
+                .Any(r => crypt.DecryptFromBase64(r.Field<string>("MailAddress"), decryptionKey) == mailAddress))
             {
-                var dr = dt.Rows[i];
-                var decryptedMailAddress = crypt.DecryptFromBase64(dr["MailAddress"].ToStringOrEmpty(), decryptionKey);
-
-                if (decryptedMailAddress == mailAddress)
-                {
-                    return false;
-                }
+                return false;
             }
 
             return true;
@@ -254,20 +245,15 @@ namespace Seruichi.BL
             AESCryption crypt = new AESCryption();
             string decryptionKey = StaticCache.GetDataCryptionKey();
 
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                var dr = dt.Rows[i];
-                var decryptedSellerKana = crypt.DecryptFromBase64(dr["SellerKana"].ToStringOrEmpty(), decryptionKey);
-                var decryptedHandyPhone = crypt.DecryptFromBase64(dr["HandyPhone"].ToStringOrEmpty(), decryptionKey);
-                var decryptedBirthday = crypt.DecryptFromBase64(dr["Birthday"].ToStringOrEmpty(), decryptionKey);
+            var row = dt.AsEnumerable().AsParallel().FirstOrDefault(r =>
+                    crypt.DecryptFromBase64(r.Field<string>("SellerKana"), decryptionKey) == sellerKana
+                    && crypt.DecryptFromBase64(r.Field<string>("HandyPhone"), decryptionKey) == handyPhone
+                    && crypt.DecryptFromBase64(r.Field<string>("Birthday"), decryptionKey).ToDateTime(DateTime.MinValue) == birthday.ToDateTime(DateTime.MaxValue));
 
-                if (decryptedSellerKana == sellerKana
-                    && decryptedHandyPhone == handyPhone
-                    && decryptedBirthday.ToDateTime(DateTime.MinValue) == birthday.ToDateTime(DateTime.MaxValue))
-                {
-                    mailAddress = crypt.DecryptFromBase64(dr["MailAddress"].ToStringOrEmpty(), decryptionKey);
-                    return true;
-                }
+            if (row != null)
+            {
+                mailAddress = crypt.DecryptFromBase64(row["MailAddress"].ToStringOrEmpty(), decryptionKey);
+                return true;
             }
 
             return false;
@@ -314,22 +300,16 @@ namespace Seruichi.BL
             AESCryption crypt = new AESCryption();
             string decryptionKey = StaticCache.GetDataCryptionKey();
 
-            for (int i = 0; i < dt.Rows.Count; i++)
+            var row = dt.AsEnumerable().AsParallel().FirstOrDefault(r =>
+                    crypt.DecryptFromBase64(r.Field<string>("SellerKana"), decryptionKey) == sellerKana
+                    && crypt.DecryptFromBase64(r.Field<string>("MailAddress"), decryptionKey) == mailAddress
+                    && crypt.DecryptFromBase64(r.Field<string>("Birthday"), decryptionKey).ToDateTime(DateTime.MinValue) == birthday.ToDateTime(DateTime.MaxValue));
+
+            if (row != null)
             {
-                var dr = dt.Rows[i];
-                var decryptedSellerKana = crypt.DecryptFromBase64(dr["SellerKana"].ToStringOrEmpty(), decryptionKey);
-                var decryptedMailAddress = crypt.DecryptFromBase64(dr["MailAddress"].ToStringOrEmpty(), decryptionKey);
-                var decryptedBirthday = crypt.DecryptFromBase64(dr["Birthday"].ToStringOrEmpty(), decryptionKey);
-
-
-                if (decryptedSellerKana == sellerKana
-                    && decryptedMailAddress == mailAddress
-                    && decryptedBirthday.ToDateTime(DateTime.MinValue) == birthday.ToDateTime(DateTime.MaxValue))
-                {
-                    sellerCD = dr["SellerCD"].ToStringOrEmpty();
-                    sellerName = crypt.DecryptFromBase64(dr["SellerName"].ToStringOrEmpty(), decryptionKey);
-                    return true;
-                }
+                sellerCD = row["SellerCD"].ToStringOrEmpty();
+                sellerName = crypt.DecryptFromBase64(row["SellerName"].ToStringOrEmpty(), decryptionKey);
+                return true;
             }
 
             return false;

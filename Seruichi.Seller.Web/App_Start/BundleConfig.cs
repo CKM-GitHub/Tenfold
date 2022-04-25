@@ -59,6 +59,7 @@ namespace Seruichi.Seller.Web
                       "~/Content/css/Login-Form-Clean.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/a_login").Include(
+                      "~/Content/scripts/sha256.js",
                       "~/Scripts/a_login.js"));
 
             //a_register
