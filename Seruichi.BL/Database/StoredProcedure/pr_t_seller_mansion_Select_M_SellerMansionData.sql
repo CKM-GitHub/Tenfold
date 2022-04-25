@@ -108,7 +108,8 @@ BEGIN
 				M_RealEstate J 
 				on J.RealECD = I.RealECD
 	where 
-	((@MansionName  IS NULL OR (A.MansionName like '%'+ @MansionName +'%')) and A.DeleteDateTime IS NULL) 
+	--((@MansionName  IS NULL OR (A.MansionName like '%'+ @MansionName +'%')) and A.DeleteDateTime IS NULL) 
+	A.DeleteDateTime IS NULL
 	and ((@Range = '登録日'		and (@StartDate IS NULL OR CONVERT(DATE, A.InsertDateTime)  >= @StartDate)  and  (@EndDate IS NULL OR CONVERT(DATE, A.InsertDateTime) <= @EndDate))
 	OR (@Range = '詳細査定日'	and (@StartDate IS NULL OR CONVERT(DATE, D.DeepAssDateTime) >= @StartDate)  and  (@EndDate IS NULL OR CONVERT(DATE, D.DeepAssDateTime) <= @EndDate)) 
 	OR (@Range	= '買取依頼日'	and (@StartDate IS NULL OR CONVERT(DATE, D.PurchReqDateTime) >= @StartDate) and (@EndDate IS NULL OR CONVERT(DATE, D.PurchReqDateTime) <= @EndDate))

@@ -428,7 +428,7 @@ namespace Seruichi.Common
         }
 
         //add by pnz
-        public bool CheckMaxLenghtForHalfWidthandFullwidth(string inputText, int maxLength, out string errorcd)
+        public bool CheckMaxLenght(string inputText, int maxLength, out string errorcd)
         {
             errorcd = "";
 
