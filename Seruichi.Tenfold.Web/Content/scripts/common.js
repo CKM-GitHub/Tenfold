@@ -233,11 +233,11 @@ const common = {
         const isMoney = $ctrl.attr("data-validation-money");
         const customValidation = $ctrl.attr("data-validation-custom");
         const isDate = $ctrl.attr("data-validation-datecheck");
-        const isMaxlengthCheck = $ctrl.attr("data-validation-MaxLength");
+        const isMaxlengthCheck = $ctrl.attr("add-validation-maxlengthCheck");
         const isDateCompare = $ctrl.attr("data-validation-datecompare");
         const isOneByteCharacter = $ctrl.attr("data-validation-onebyte-character");
         const ischeckboxLenght = $ctrl.attr("data-validation-checkboxlenght");
-        const isMaxlengthCheckforsellerlist = $ctrl.attr("data-validation-MaxLengthforsellerlist");
+        
 
         let inputValue = "";
         if (type === 'radio') {
@@ -264,7 +264,7 @@ const common = {
             && !isSingleDoubleByte
             && !isDoubleByte
             && !isSingleByte && !isSingleByteNumber && !isSingleByteNumberAlpha
-            && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter && !ischeckboxLenght && !isMaxlengthCheckforsellerlist
+            && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter && !ischeckboxLenght 
             && !customValidation) return true;
 
         if (isRequired) {

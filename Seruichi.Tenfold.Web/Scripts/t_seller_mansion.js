@@ -9,7 +9,7 @@ $(function () {
 function setValidation() {
     $('#MansionName')
         .addvalidation_errorElement("#errorMansionName")
-        .addvalidation_isMaxlengthCheck()//E105
+        .addvalidation_maxlengthCheck(50)//E105
         .addvalidation_doublebyte(); //E107
 
     $('#StartDate')

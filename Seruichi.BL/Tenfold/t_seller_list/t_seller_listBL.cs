@@ -151,7 +151,7 @@ namespace Seruichi.BL.Tenfold.t_seller_list
         {
             ValidatorAllItems validator = new ValidatorAllItems();
 
-            validator.CheckMaxLenghtForHalfWidthandFullwidth("SellerName", model.SellerName, 10);//E105
+            validator.CheckMaxLenght("SellerName", model.SellerName, 10);//E105
 
             validator.CheckDate("StartDate", model.StartDate);//E108
             validator.CheckDate("EndDate", model.EndDate);//E108

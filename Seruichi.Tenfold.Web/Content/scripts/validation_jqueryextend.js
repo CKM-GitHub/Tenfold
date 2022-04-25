@@ -152,9 +152,9 @@
     };
 
     //add by pnz
-    $.fn.addvalidation_MaxLengthforSellerlist = function (digits) {
+    $.fn.addvalidation_maxlengthCheck = function (digits) {
         return this
-            .attr('data-validation-MaxLengthforsellerlist', 'true')
+            .attr('add-validation-maxlengthCheck', 'true')
             .attr('data-digits', digits)
             .attr('inputmode', 'text')
             .attr('autocomplete', 'off');
