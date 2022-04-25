@@ -118,7 +118,7 @@ namespace Seruichi.Common
 
         }
 
-        public void CheckMaxLenghtForHalfWidthandFullwidth(string elementId, string inputText, int maxLength)
+        public void CheckMaxLenght(string elementId, string inputText, int maxLength)
         {
             if (!validator.CheckMaxLenght(inputText, maxLength, out string errorcd))
                 AddValidationResult(elementId, errorcd);
