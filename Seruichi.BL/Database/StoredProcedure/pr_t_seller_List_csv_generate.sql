@@ -37,7 +37,7 @@ BEGIN
 		 END as N'ステータス',
 		 CASE   
 			WHEN A.InvalidFLG = 0 THEN ''
-			ELSE N'✓'
+			ELSE N'無効'
 		 END as N'無効会員',
 		 ISNULL(A.SellerCD,'') as'売主CD',
 		 ISNULL(A.SellerName,'') as '売主名',
@@ -53,9 +53,9 @@ BEGIN
 		 ISNULL(A.HandyPhone,'') as '携帯電話番号',
 		 ISNULL(A.HousePhone,'') as '固定電話番号',
 		 ISNULL(A.Fax,'') as 'FAX番号',
-		 ISNULL(FORMAT (A.InsertDateTime, 'yyyy/MM/dd hh:mm:ss'),'') as '登録日時',
-		 ISNULL(FORMAT (D.DeepAssDateTime, 'yyyy/MM/dd hh:mm:ss'),'') as '査定依頼日時',
-		 ISNULL(FORMAT (D.PurchReqDateTime, 'yyyy/MM/dd hh:mm:ss'),'') as '買取依頼日時	',
+		 ISNULL(FORMAT (A.InsertDateTime, 'yyyy/MM/dd HH:mm:ss'),'') as '登録日時',
+		 ISNULL(FORMAT (D.DeepAssDateTime, 'yyyy/MM/dd HH:mm:ss'),'') as '査定依頼日時',
+		 ISNULL(FORMAT (D.PurchReqDateTime, 'yyyy/MM/dd HH:mm:ss'),'') as '買取依頼日時	',
 		 ISNULL(E.a,'') as '登録数',
 		 ISNULL(F.b,'') as'成約数'
 		   

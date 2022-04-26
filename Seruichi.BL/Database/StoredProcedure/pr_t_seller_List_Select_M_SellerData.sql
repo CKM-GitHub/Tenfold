@@ -43,9 +43,9 @@ BEGIN
 		   ISNULL(A.SellerCD,'') as N'売主CD',
 		   ISNULL(A.SellerName,'') as N'売主名',
 		   ISNULL(A.PrefName,'')as N'居住地',
-		   ISNULL(FORMAT (A.InsertDateTime, 'yyyy/MM/dd hh:mm:ss'),'') as N'登録日時',
-		   ISNULL(FORMAT (D.DeepAssDateTime, 'yyyy/MM/dd hh:mm:ss'),'') as N'査定依頼日時',
-		   ISNULL(FORMAT (D.PurchReqDateTime, 'yyyy/MM/dd hh:mm:ss'),'') as N'買取依頼日時',
+		   ISNULL(FORMAT (A.InsertDateTime, 'yyyy/MM/dd HH:mm:ss'),'') as N'登録日時',
+		   ISNULL(FORMAT (D.DeepAssDateTime, 'yyyy/MM/dd HH:mm:ss'),'') as N'査定依頼日時',
+		   ISNULL(FORMAT (D.PurchReqDateTime, 'yyyy/MM/dd HH:mm:ss'),'') as N'買取依頼日時',
 		   ISNULL(E.a,0) as N'登録数',
 		   ISNULL(F.b,0) as N'成約数',
 		   A.PrefCD as PrefCD

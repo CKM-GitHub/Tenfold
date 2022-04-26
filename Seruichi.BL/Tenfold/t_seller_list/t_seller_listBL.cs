@@ -135,6 +135,9 @@ namespace Seruichi.BL.Tenfold.t_seller_list
                 string Fax = dt.Rows[i]["FAX番号"].ToString();
                 dt.Rows[i]["FAX番号"] = !string.IsNullOrEmpty(Fax) ? crypt.DecryptFromBase64(Fax, decryptionKey) : Fax;
 
+                string bd = dt.Rows[i]["生年月日"].ToString();
+                dt.Rows[i]["生年月日"] = !string.IsNullOrEmpty(bd) ? crypt.DecryptFromBase64(bd, decryptionKey) : bd;
+
             }
 
             if (!string.IsNullOrEmpty(model.SellerName))
