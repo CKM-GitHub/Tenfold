@@ -260,3 +260,5 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Seruichi.Seller.Web/a_mypage_uinfo (1).html
+/Seruichi.Seller.Web/a_contact.html

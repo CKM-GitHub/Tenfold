@@ -3,7 +3,7 @@ using Seruichi.BL;
 using Seruichi.Common;
 using System;
 using System.Web.Mvc;
-using System.Web.Security;
+//using System.Web.Security;
 
 namespace Seruichi.Seller.Web.Controllers
 {
@@ -31,7 +31,7 @@ namespace Seruichi.Seller.Web.Controllers
             //{
             //    FormsAuthentication.SignOut();
             //}
-            Session.Clear();
+            SessionAuthenticationHelper.Logout();
             return RedirectToAction("Index", "a_login");
         }
 

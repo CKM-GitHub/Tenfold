@@ -50,10 +50,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ValidationModel.cs" />
     <Compile Include="RealEstate\r_login\r_loginModel.cs" />
+    <Compile Include="Seller\a_mypage_uinfo_passwordModel.cs" />
     <Compile Include="Seller\a_mypage_uinfoModel.cs" />
+    <Compile Include="Seller\a_mypage_uinfo_emailModel.cs" />
     <Compile Include="Seller\a_contactModel.cs" />
     <Compile Include="Seller\a_registerModel.cs" />
-    <Compile Include="Seller\a_loginModel.cs" />
     <Compile Include="Seller\a_indexModel.cs" />
     <Compile Include="Tenfold\Login\t_loginModel.cs" />
     <Compile Include="Tenfold\t_dashboard\t_dashboardModel.cs" />

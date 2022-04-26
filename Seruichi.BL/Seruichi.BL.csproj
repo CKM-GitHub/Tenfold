@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="CommonBL.cs" />
     <Compile Include="RealEstate\r_login\r_loginBL.cs" />
+    <Compile Include="Seller\a_contactBL.cs" />
     <Compile Include="Seller\a_mypage_uinfoBL.cs" />
     <Compile Include="Seller\a_registerBL.cs" />
     <Compile Include="Seller\a_loginBL.cs" />
@@ -76,8 +77,11 @@
     <Content Include="Database\StoredProcedure\pr_a_index_Select_MansionList_by_MansionWord.sql" />
     <Content Include="Database\StoredProcedure\pr_a_index_Select_Prefectures_by_ZipCode.sql" />
     <Content Include="Database\StoredProcedure\pr_a_index_Select_Towns_by_ZipCode.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_login_Insert_D_Certification.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Select_M_Address_by_ZipCode.sql" />
-    <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Select_M_Seller_by_Key.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Select_M_Seller_Password_by_SellerCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Select_M_Seller_by_SellerCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Update_M_Seller_Password.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Update_M_Seller.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfPrefAll.sql" />
     <Content Include="Database\StoredProcedure\pr_common_tenfold_select_MansionName_by_MansionCD.sql" />
@@ -85,7 +89,7 @@
     <Content Include="Database\StoredProcedure\pr_common_t_login_select_TenStaffName_by_TenStaffCD.sql" />
     <Content Include="Database\StoredProcedure\pr_common_t_seller_select_SellerName_by_SellerCD.sql" />
     <Content Include="Database\StoredProcedure\pr_a_login_Insert_L_Login.sql" />
-    <Content Include="Database\StoredProcedure\pr_a_login_Insert_D_Certification.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Insert_D_Certification.sql" />
     <Content Include="Database\StoredProcedure\pr_a_register_Insert_M_Seller.sql" />
     <Content Include="Database\StoredProcedure\pr_a_register_Select_M_Address_by_ZipCode.sql" />
     <Content Include="Database\StoredProcedure\pr_a_register_Update_D_Certification.sql" />

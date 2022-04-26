@@ -270,6 +270,10 @@
     <Content Include="Scripts\t_seller_assessment.js" />
     <Content Include="Scripts\t_seller_list.js" />
     <Content Include="Scripts\t_seller_mansion.js" />
+    <Content Include="Views\Shared\t_seller_assessment\_t_seller_assessment_P_contact.cshtml" />
+    <Content Include="Views\Shared\t_seller_assessment\_t_seller_assessment_P_home.cshtml" />
+    <Content Include="Views\Shared\t_seller_assessment\_t_seller_assessment_P_profile.cshtml" />
+    <Content Include="Views\Shared\t_seller_assessment\_t_seller_assessment_P_result.cshtml" />
     <Content Include="Views\t_seller_assessment\PopUpPage.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

@@ -3,8 +3,11 @@
 $(function () {
     _url.checkZipCode = common.appPath + '/a_mypage_uinfo/CheckZipCode';
     _url.checkAll = common.appPath + '/a_mypage_uinfo/CheckAll';
-    _url.insertSellerData = common.appPath + '/a_mypage_uinfo/UpdateSellerData';
+    _url.updateSellerData = common.appPath + '/a_mypage_uinfo/UpdateSellerData';
     _url.gotoNextPage = common.appPath + '/a_mypage_uinfo/GotoNextPage';
+    _url.changeMailAddress = common.appPath + '/a_mypage_uinfo/ChangeMailAddress';
+    _url.changePassword = common.appPath + '/a_mypage_uinfo/ChangePassword';
+    _url.gotoLogin = common.appPath + '/a_mypage_uinfo/GotoLogin';
 
     $('#mypage_uinfo').addClass('active');
 
@@ -59,14 +62,29 @@ function setValidation() {
     $('#Fax')
         .addvalidation_errorElement("#errorFax")
         .addvalidation_singlebyte_number();
-    $('#MailAddress')
-        .addvalidation_errorElement("#errorMailAddress")
-    $('#Password')
-        .addvalidation_errorElement("#errorPassword")
-        .addvalidation_reqired()
     $('#ConfirmPassword')
         .addvalidation_errorElement("#errorConfirmPassword")
-        .addvalidation_reqired()
+        .addvalidation_reqired();
+
+    //メールアドレス変更
+    $('#formChangeMailAddress_NewMailAddress')
+        .addvalidation_errorElement("#formChangeMailAddress_errorNewMailAddress")
+        .addvalidation_reqired();
+    $('#formChangeMailAddress_Password')
+        .addvalidation_errorElement("#formChangeMailAddress_errorPassword")
+        .addvalidation_reqired();
+
+    //パスワード変更
+    $('#formChangePassword_Password')
+        .addvalidation_errorElement("#formChangePassword_errorPassword")
+        .addvalidation_reqired();
+    $('#formChangePassword_NewPassword')
+        .addvalidation_errorElement("#formChangePassword_errorNewPassword")
+        .addvalidation_reqired();
+    $('#formChangePassword_ConfirmNewPassword')
+        .addvalidation_errorElement("#formChangePassword_errorConfirmNewPassword")
+        .addvalidation_reqired();
+
 }
 
 function addEvents()
@@ -145,7 +163,7 @@ function addEvents()
                 $('#modal_2').modal('show');
             }
             if (result && result.data) {
-                //server validation error
+                //error
                 common.setValidationErrors(result.data);
                 common.setFocusFirstError($form);
             }
@@ -153,14 +171,14 @@ function addEvents()
     });
 
     $('#btnRegistration').on('click', function () {
-        common.callAjaxWithLoading(_url.insertSellerData, updateData, this, function (result) {
+        common.callAjaxWithLoading(_url.updateSellerData, updateData, this, function (result) {
             if (result && result.isOK) {
                 //sucess
                 $('#modal_2').modal('hide');
                 $('#modal_3').modal('show');
             }
             if (result && result.data) {
-                //server validation error
+                //error
                 $('#modal_2').modal('hide');
                 common.setValidationErrors(result.data);
                 common.setFocusFirstError($form);
@@ -171,6 +189,74 @@ function addEvents()
     $('#btnCompleted').on('click', function () {
         const form = document.forms.form2;
         common.callSubmit(form, _url.gotoNextPage);
+    });
+
+    $('#btnShowChangeMailAddress').on('click', function () {
+        $modal = $('#modal_mail').hideChildErrors();
+        $modal.find("input:not([type=hidden])").val('');
+        $modal.modal('show');
+    });
+
+    $('#btnChangeMailAddress').on('click', function () {
+        const form = document.forms.formChangeMailAddress;
+
+        $(form).hideChildErrors();
+        if (!common.checkValidityOnSave('#formChangeMailAddress')) {
+            common.setFocusFirstError(form);
+            return false;
+        }
+
+        const fd = new FormData(form);
+        const model = Object.fromEntries(fd);
+        model.MailAddress = $('#MailAddress').val();
+
+        common.callAjaxWithLoading(_url.changeMailAddress, model, this, function (result) {
+            if (result && result.isOK) {
+                $('#modal_mail').modal('hide');
+                $('#modal_mail2').modal('show');
+                $('#formChangeMailAddress2_MailAddress').text(model.NewMailAddress);
+            }
+            else if (result && result.data) {
+                common.setValidationErrors(result.data);
+                common.setFocusFirstError(form);
+            }
+        });
+    });
+
+    $('#btnShowChangePassword').on('click', function () {
+        $modal = $('#modal_pw').hideChildErrors();
+        $modal.find("input:not([type=hidden])").val('');
+        $modal.modal('show');
+    });
+
+    $('#btnChangePassword').on('click', function () {
+        const form = document.forms.formChangePassword;
+
+        $(form).hideChildErrors();
+        if (!common.checkValidityOnSave('#formChangePassword')) {
+            common.setFocusFirstError(form);
+            return false;
+        }
+
+        const fd = new FormData(form);
+        const model = Object.fromEntries(fd);
+        model.MailAddress = $('#MailAddress').val();
+
+        common.callAjaxWithLoading(_url.changePassword, model, this, function (result) {
+            if (result && result.isOK) {
+                $('#modal_pw').modal('hide');
+                $('#modal_pw2').modal('show');
+            }
+            else if (result && result.data) {
+                common.setValidationErrors(result.data);
+                common.setFocusFirstError(form);
+            }
+        });
+    });
+
+    $('#btnRelogin').on('click', function () {
+        const form = document.forms.formChangePassword2;
+        common.callSubmit(form, _url.gotoLogin);
     });
 }
 

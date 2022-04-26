@@ -195,12 +195,80 @@
                                 <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">終了日時</th>
                             </tr>
                         </thead>
-                        <tbody>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
                 <div class="card-footer border-0 py-5">
                     <span class="text-muted text-sm" id="total_record"></span>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- ポップアップ -->
+        <div class="modal fade" id="mansion" tabindex="-1" aria-labelledby="mansion" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl cap-modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="mansionLabel">査定結果 </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 col-md-5">
+
+                                <div class="col-12">
+                                    <div class="users-container">
+
+                                        <div class="users p-3">
+                                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                                                            data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                                                            aria-selected="true">
+                                                        物件情報
+                                                    </button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                                            data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                                                            aria-selected="false">
+                                                        詳細情報
+                                                    </button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                                                            data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                                                            aria-selected="false">
+                                                        売主情報
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content" id="pills-tabContent">
+
+                                                <!--here-->
+                                                @Html.Partial("t_seller_assessment/_t_seller_assessment_P_home")
+                                                @Html.Partial("t_seller_assessment/_t_seller_assessment_P_profile")
+                                                @Html.Partial("t_seller_assessment/_t_seller_assessment_P_contact")
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @Html.Partial("t_seller_assessment/_t_seller_assessment_P_result")
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#mansion">
+                            戻る
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </div>

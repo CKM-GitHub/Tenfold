@@ -149,7 +149,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\a_contact.cs" />
+    <Compile Include="Controllers\a_contactController.cs" />
     <Compile Include="Controllers\a_mypage_uinfoController.cs" />
     <Compile Include="Controllers\a_registerController.cs" />
     <Compile Include="Controllers\a_loginController.cs" />
@@ -197,6 +197,7 @@
     <Content Include="Content\css\style.css" />
     <Content Include="Content\fonts\ionicons.min.css" />
     <Content Include="Content\fonts\ionicons.svg" />
+    <Content Include="Content\scripts\sha256.js" />
     <Content Include="Content\typeahead\typeahead.custom.css" />
     <Content Include="Content\css\validation.css" />
     <Content Include="Content\css\loading.css" />
@@ -216,6 +217,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Scripts\a_contact.js" />
     <Content Include="Scripts\a_mypage_uinfo.js" />
     <Content Include="Scripts\a_register.js" />
     <Content Include="Scripts\a_login.js" />
@@ -241,7 +243,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\ionicons.eot" />

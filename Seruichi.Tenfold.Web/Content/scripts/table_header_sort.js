@@ -37,10 +37,10 @@
             newRows.sort(function (rowA, rowB) {
                 const cellA = rowA.querySelectorAll('td')[index].innerHTML;
                 const cellB = rowB.querySelectorAll('td')[index].innerHTML;               
-
+                
                 const a = transform(index, cellA);
                 const b = transform(index, cellB);
-
+                
                 switch (true) {
                     case a > b:
                         return 1 * multiplier;
@@ -100,6 +100,47 @@
                     tableBody.appendChild(newRow);
                 });
             }
+        };
+
+        const sortMix_td_aTag = function (index) {
+
+            // Get the current direction
+            const direction = directions[index] || 'asc';
+
+            // A factor based on the direction
+            const multiplier = direction === 'asc' ? 1 : -1;
+
+            const newRows = Array.from(rows);
+
+            newRows.sort(function (rowA, rowB) {
+                const cellA = rowA.querySelectorAll('td')[index].firstChild.nextSibling.innerHTML;
+                const cellB = rowB.querySelectorAll('td')[index].firstChild.nextSibling.innerHTML;                
+
+                const a = transform(index, cellA);
+                const b = transform(index, cellB);
+
+                switch (true) {
+                    case a > b:
+                        return 1 * multiplier;
+                    case a < b:
+                        return -1 * multiplier;
+                    case a === b:
+                        return 0;
+                }
+            });
+
+            // Remove old rows
+            [].forEach.call(rows, function (row) {
+                tableBody.removeChild(row);
+            });
+
+            // Reverse the direction
+            directions[index] = direction === 'asc' ? 'desc' : 'asc';
+
+            // Append new row
+            newRows.forEach(function (newRow) {
+                tableBody.appendChild(newRow);
+            });
         };
 
         const sortStatusTSellerList = function (index) {
@@ -181,6 +222,10 @@
                 if ($(this).hasClass('sort-by')) {
                     sortColumn(index);
                 }
+                if ($(this).hasClass('sort-mix-td-and-a')) {
+                    sortMix_td_aTag(index);
+                }
+                
                 if ($(this).hasClass('sort-status')) {
                     sortStatus(index);
                 }
