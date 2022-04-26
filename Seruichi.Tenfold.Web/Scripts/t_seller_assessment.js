@@ -215,7 +215,7 @@ function Bind_tbody(result) {
         html += '<tr>\
             <td class= "text-end" > ' + data[i]["NO"] + '</td>\
             <td class="'+ _sort_checkbox + '"><i class="'+ _class + '">' + _letter + '</i><span class="font-semibold">' + data[i]["ステータス"] + '</span></td>\
-            <td><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["SellerMansionID"] + ' onclick="Popup_function(this.id)">'+ data[i]["マンション名＆部屋番号"]+'</a></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal" data-bs-target="#mansion" id='+ data[i]["SellerMansionID"] + ' href="#">'+ data[i]["マンション名＆部屋番号"]+'</a></td>\
             <td><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["RealECD"] + '&t_reale_purchase' + ' onclick="l_logfunction(this.id)">' + data[i]["不動産会社"] + '</a></td>\
             <td class="text-nowrap">' + data[i]["登録日時"] + '</td>\
             <td class="text-nowrap">' + data[i]["簡易査定日時"] + '</td>\
@@ -254,10 +254,6 @@ function l_logfunction(id) {
     common.callAjax(_url.insert_l_log, model,
         function (result) {
             if (result && result.isOK) {
-                //if (model.LogStatus = "t_mansion_detail") {
-                //    alert("https://www.seruichi.com/t_mansion_detail?ｍansionCD=" + model.LogId);
-                //}
-               
                 if (model.LogStatus = "t_reale_purchase") {
                     //alert("https://www.seruichi.com/t_reale_purchase?RealECD=" + model.LogId);
                    
@@ -276,5 +272,6 @@ function l_logfunction(id) {
 function Popup_function(id) {
     
     var Popupurl = common.appPath+'/t_seller_assessment/PopUpPage?smID=' + id;
-    window.open(Popupurl, "WindowPopup", 'width=700px,height=700px,top=150,left=250');
+    //window.open(Popupurl, "WindowPopup", 'width=700px,height=700px,top=150,left=250');
+    window.location.href = Popupurl;
 }

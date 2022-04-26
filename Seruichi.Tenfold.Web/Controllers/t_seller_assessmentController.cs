@@ -93,7 +93,7 @@ namespace Seruichi.Tenfold.Web.Controllers
         public ActionResult PopUpPage(string smID)
         {
             strSellerMansionID = smID;
-            return View();
+            return PartialView("_t_seller_assessment_P_home", strSellerMansionID);
         }
     }
 }
