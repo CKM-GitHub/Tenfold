@@ -14,7 +14,7 @@ CREATE PROCEDURE [dbo].[pr_t_seller_mansion_Select_M_SellerMansionData]
 	,@Chk_Seiyaku			tinyint         = 0
 	,@Chk_Urinushi			tinyint         = 0
 	,@Chk_Kainushi			tinyint         = 0
-	,@MansionName			varchar(50)
+	--,@MansionName			varchar(50)
 	,@Range					varchar(50)
 	,@StartDate				date            = NULL
 	,@EndDate				date            = NULL

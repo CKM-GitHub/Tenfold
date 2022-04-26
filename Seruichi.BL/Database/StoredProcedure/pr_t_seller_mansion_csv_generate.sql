@@ -46,13 +46,13 @@ BEGIN
 				ISNULL(FORMAT(D.PurchReqDateTime, 'yyyy/MM/dd HH:mm:ss'),'') As '買取依頼日時',
 				ISNULL(G.RealECD,'') as N'マンション Top1業者CD',
 				ISNULL(H.REName,'') As 'マンションTop1',
-				ISNULL(FORMAT(CONVERT(MONEY, G.AssessAmount), '###,###'),'0') +' '+N'円' As 'マンション金額',
+				ISNULL(G.AssessAmount,'0')  As 'マンション金額',
 				ISNULL(E.RealECD,'') as N'エリア Top1業者CD',
 				ISNULL(F.REName,'') As 'エリアTop1',
-				ISNULL(FORMAT(CONVERT(MONEY, E.AssessAmount), '###,###'),'0') +' '+N'円' As 'エリア金額',
+				ISNULL(E.AssessAmount,'0')  As 'エリア金額',
 				ISNULL(I.RealECD,'') as N'買取依頼会社CD',
 				ISNULL(J.REName,'') As '買取依頼会社',
-				ISNULL(FORMAT(CONVERT(MONEY, I.AssessAmount), '###,###'),'0') +' '+N'円' As '買取依頼金額',
+				ISNULL(I.AssessAmount,'0')  As '買取依頼金額',
 				ISNULL(FORMAT(D.IntroDateTime, 'yyyy/MM/dd HH:mm:ss'),'') As '送客日時',
 				ISNULL(CASE WHEN D.EndStatus =1 THEN
 						CASE WHEN D.SellerTermDateTime IS NOT NULL AND D.BuyerTermDateTime IS NOT NULL AND D.SellerTermDateTime <= D.BuyerTermDateTime  THEN FORMAT(D.SellerTermDateTime, 'yyyy/MM/dd HH:mm:ss')  

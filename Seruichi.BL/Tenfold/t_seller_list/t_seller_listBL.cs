@@ -43,7 +43,7 @@ namespace Seruichi.BL.Tenfold.t_seller_list
              {
                 new SqlParameter("@ValidCheck", SqlDbType.TinyInt){ Value = model.ValidCheck.ToByte(0) },
                 new SqlParameter("@InValidCheck", SqlDbType.TinyInt){ Value = model.InValidCheck.ToByte(0) },
-                new SqlParameter("@SellerName", SqlDbType.VarChar){ Value = model.SellerName.ToStringOrNull() },
+               // new SqlParameter("@SellerName", SqlDbType.VarChar){ Value = model.SellerName.ToStringOrNull() },
                 new SqlParameter("@PrefNameSelect", SqlDbType.VarChar){ Value = model.PrefNameSelect.ToString() },
                 new SqlParameter("@RangeSelect", SqlDbType.TinyInt){ Value = model.RangeSelect.ToByte(0) },
                 new SqlParameter("@StartDate", SqlDbType.VarChar){ Value =  model.StartDate.ToStringOrNull() },
