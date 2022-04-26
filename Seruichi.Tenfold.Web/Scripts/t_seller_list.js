@@ -21,6 +21,7 @@ function setValidation() {
         .addvalidation_datecheck()
         .addvalidation_datecompare();
 
+
     $('#EndDate')
         .addvalidation_errorElement("#errorEndDate")
         .addvalidation_datecheck()
