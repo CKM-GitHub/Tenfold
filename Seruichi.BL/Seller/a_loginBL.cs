@@ -107,6 +107,11 @@ namespace Seruichi.BL
                 validator.AddValidationResult(elementId, "E202"); //メールアドレスが入力されていません
             }
 
+            if (validator.IsValid && mailAddress.Length > 100)
+            {
+                validator.AddValidationResult(elementId, "E105"); //入力できる桁数を超えています
+            }
+
             if (validator.IsValid && !CheckDuplicateMailAddresses(mailAddress))
             {
                 validator.AddValidationResult(elementId, "E203"); //既に登録済みのメールアドレスです

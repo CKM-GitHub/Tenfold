@@ -7,8 +7,6 @@ GO
 CREATE PROCEDURE [dbo].[pr_a_mypage_uinfo_Update_M_Seller]
 (
     @SellerCD               varchar(10)
-    ,@MailAddress           varchar(300)
-    ,@Password              varchar(300)
     ,@SellerName            varchar(300)
     ,@SellerKana            varchar(300)
     ,@Birthday              varchar(100)
@@ -39,9 +37,7 @@ BEGIN
     DECLARE @SysDatetime datetime = GETDATE()
 
     UPDATE M_Seller SET 
-         MailAddress        = @MailAddress
-        ,[Password]         = @Password
-        ,SellerName         = @SellerName
+        SellerName         = @SellerName
         ,SellerKana         = @SellerKana
         ,Birthday           = @Birthday
         ,ZipCode1           = @ZipCode1

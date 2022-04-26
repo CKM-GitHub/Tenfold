@@ -14,6 +14,7 @@
         ResetPassword = 2,
         ContactTenfold = 3,
         ContactPerson = 4,
+        ChangePassword = 5,
     }
 
     public enum RegexFormat : int

@@ -31,7 +31,7 @@ namespace Seruichi.Seller.Web.Controllers
             //{
             //    FormsAuthentication.SignOut();
             //}
-            Session.Clear();
+            SessionAuthenticationHelper.Logout();
             return RedirectToAction("Index", "a_login");
         }
 

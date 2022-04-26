@@ -18,7 +18,5 @@
         public string HousePhone { get; set; }
         public string Fax { get; set; }
         public string MailAddress { get; set; }
-        public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
     }
 }

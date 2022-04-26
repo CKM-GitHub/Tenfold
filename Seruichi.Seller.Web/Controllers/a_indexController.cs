@@ -25,6 +25,13 @@ namespace Seruichi.Seller.Web.Controllers
             return View();
         }
 
+        // POST: 
+        [HttpPost]
+        public ActionResult GotoNextPage()
+        {
+            return RedirectToAction("Index", "a_index");
+        }
+
         // Ajax: CheckZipCode
         [HttpPost]
         public ActionResult CheckZipCode(a_indexModel model)

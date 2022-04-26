@@ -16,6 +16,7 @@ $(function () {
     _url.getMansinoData = common.appPath + '/a_index/GetMansionData';
     _url.checkAll = common.appPath + '/a_index/CheckAll';
     _url.insertSellerMansionData = common.appPath + '/a_index/InsertSellerMansionData';
+    //_url.gotoNextPage = common.appPath + '/a_index/GotoNextPage';
 
     setValidation();
     addEvents();

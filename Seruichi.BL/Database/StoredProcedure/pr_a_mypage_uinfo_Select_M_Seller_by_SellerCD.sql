@@ -1,10 +1,10 @@
-IF EXISTS (select * from sys.objects where name = 'pr_a_mypage_uinfo_Select_M_Seller_by_Key')
+IF EXISTS (select * from sys.objects where name = 'pr_a_mypage_uinfo_Select_M_Seller_by_SellerCD')
 BEGIN
-    DROP PROCEDURE [pr_a_mypage_uinfo_Select_M_Seller_by_Key]
+    DROP PROCEDURE [pr_a_mypage_uinfo_Select_M_Seller_by_SellerCD]
 END
 GO
 
-CREATE PROCEDURE [dbo].[pr_a_mypage_uinfo_Select_M_Seller_by_Key]
+CREATE PROCEDURE [dbo].[pr_a_mypage_uinfo_Select_M_Seller_by_SellerCD]
 (
     @SellerCD               varchar(10)
 )
