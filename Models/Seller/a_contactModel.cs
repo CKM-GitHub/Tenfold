@@ -1,25 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
 namespace Models
 {
     public class a_contactModel : BaseModel
     {
-        public string SellerName { get; set; }
-        public string SellerKana { get; set; }
-        public string Birthday { get; set; }
-        public string ZipCode1 { get; set; }
-        public string ZipCode2 { get; set; }
-        public string PrefCD { get; set; }
-        public string PrefName { get; set; }
-        public string CityName { get; set; }
-        public string TownName { get; set; }
-        public string Address1 { get; set; }
-        public string Address2 { get; set; }
-        public string HandyPhone { get; set; }
-        public string HousePhone { get; set; }
-        public string Fax { get; set; }
-        public string MailAddress { get; set; }
-        public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
+        public int ContactSEQ { get; set; }
+        public DateTime ContactTime { get; set; }
+        public string ContactName { get; set; }
+        public string ContactKana { get; set; }
+        public string ContactAddress { get; set; }
+        public string ContactPhone { get; set; }
+        public string ContactType { get; set; }
+        public string ContactAssID { get; set; }
+        public string ContactSubject { get; set; }
+        public string ContactIssue { get; set; }
     }
 }

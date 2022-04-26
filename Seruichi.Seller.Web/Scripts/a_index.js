@@ -16,6 +16,7 @@ $(function () {
     _url.getMansinoData = common.appPath + '/a_index/GetMansionData';
     _url.checkAll = common.appPath + '/a_index/CheckAll';
     _url.insertSellerMansionData = common.appPath + '/a_index/InsertSellerMansionData';
+    //_url.gotoNextPage = common.appPath + '/a_index/GotoNextPage';
 
     setValidation();
     addEvents();
@@ -171,9 +172,6 @@ function addEvents() {
     $('#ZipCode1,#ZipCode2').on('change', function () {
         const $this = $(this), $zipCode1 = $('#ZipCode1'), $zipCode2 = $('#ZipCode2')
 
-        //if (!common.checkValidityInput($zipCode1) || !common.checkValidityInput($zipCode2)) {
-        //    return false;
-        //}
         if (!common.checkValidityInput($this)) {
             return false;
         }
@@ -337,11 +335,11 @@ function addEvents() {
             if (result && result.isOK) {
                 //sucess
                 updateData = model;
-                setConfirmationScreen(updateData);
+                setScreenComfirm(updateData);
                 $('#modal_1').modal('show');
             }
             if (result && result.data) {
-                //server validation error
+                //error
                 common.setValidationErrors(result.data);
                 common.setFocusFirstError($form);
             }
@@ -357,7 +355,7 @@ function addEvents() {
                 $('#modal_2').modal('show');
             }
             if (result && result.data) {
-                //server validation error
+                //error
                 $('#modal_1').modal('hide');
                 common.setValidationErrors(result.data);
                 common.setFocusFirstError($form);
@@ -371,7 +369,7 @@ function addEvents() {
     });
 }
 
-function setConfirmationScreen(data) {
+function setScreenComfirm(data) {
     for (key in data) {
         const target = document.getElementById('confirm_' + key);
         if (target) $(target).val(data[key]);

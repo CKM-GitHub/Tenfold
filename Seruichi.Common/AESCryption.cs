@@ -37,6 +37,16 @@ namespace Seruichi.Common
             Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(keyName, salt);
             deriveBytes.IterationCount = STRETCHING_TIMES;
             return deriveBytes.GetBytes(KEY_SIZE / 8);
+
+            //Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(keyName, salt, STRETCHING_TIMES, HashAlgorithmName.SHA256);
+            //return deriveBytes.GetBytes(KEY_SIZE / 8);
+
+            //★SHA256
+            //var keyAndSalt = String.Concat(keyName, salt);
+            //using (var csp = new SHA256CryptoServiceProvider())
+            //{
+            //    return csp.ComputeHash(encoding.GetBytes(keyAndSalt));
+            //}
         }
 
         private byte[] GenerateRandomData(int length)

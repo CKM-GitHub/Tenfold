@@ -75,6 +75,7 @@ function addEvents()
     let updateData;
 
     common.bindValidationEvent('#form1', ':not(#ZipCode1, #ZipCode2, #HousePhone, #HandyPhone, #Fax)');
+
     $('#HousePhone, #HandyPhone, #Fax').on('blur', function (e) {
         customValidation_checkPhone(this);
         return common.checkValidityInput(this);
@@ -82,15 +83,6 @@ function addEvents()
 
     $('#Birthday').on('blur', function () {
         common.birthdayCheck(this);
-    });
-
-    $('#formCheckPolicy, #formCheckRules').on('change', function () {
-        if ($('#formCheckPolicy').is(':checked') && $('#formCheckRules').is(':checked')) {
-            $('#btnAgree').prop('disabled', false);
-        }
-        else {
-            $('#btnAgree').prop('disabled', true);
-        }
     });
 
     $('#ZipCode1, #ZipCode2').on('change', function () {
@@ -128,6 +120,15 @@ function addEvents()
         }
     });
 
+    $('#formCheckPolicy, #formCheckRules').on('change', function () {
+        if ($('#formCheckPolicy').is(':checked') && $('#formCheckRules').is(':checked')) {
+            $('#btnAgree').prop('disabled', false);
+        }
+        else {
+            $('#btnAgree').prop('disabled', true);
+        }
+    });
+
     $('#btnShowConfirmation').on('click', function () {
         $form.hideChildErrors();
 
@@ -152,7 +153,7 @@ function addEvents()
                 $('#modal_2').modal('show');
             }
             if (result && result.data) {
-                //server validation error
+                //error
                 common.setValidationErrors(result.data);
                 common.setFocusFirstError($form);
             }
@@ -167,7 +168,7 @@ function addEvents()
                 $('#modal_3').modal('show');
             }
             if (result && result.data) {
-                //server validation error
+                //error
                 $('#modal_2').modal('hide');
                 common.setValidationErrors(result.data);
                 common.setFocusFirstError($form);
