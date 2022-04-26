@@ -45,23 +45,24 @@ namespace Seruichi.Seller.Web
                       "~/Content/scripts/validation_jqueryextend.js",
                       "~/Content/scripts/common.js"));
 
-            //a_index
+            //a_index ----------
             bundles.Add(new StyleBundle("~/Content/css/a_index").Include(
                       "~/Content/css/auctor-index.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/a_index").Include(
                       "~/Scripts/a_index.js"));
 
-            //a_login
+            //a_login ----------
             bundles.Add(new StyleBundle("~/Content/css/a_login").Include(
                       "~/Content/css/Clients-UI.css",
                       "~/Content/css/Contact-Form-Clean.css",
                       "~/Content/css/Login-Form-Clean.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/a_login").Include(
+                      "~/Content/scripts/sha256.js",
                       "~/Scripts/a_login.js"));
 
-            //a_register
+            //a_register ----------
             bundles.Add(new StyleBundle("~/Content/css/a_register").Include(
                         "~/Content/css/Contact-Form-Clean.css",
                         "~/Content/css/Contact-FormModal-Contact-Form-with-Google-Map.css",
@@ -79,7 +80,7 @@ namespace Seruichi.Seller.Web
             bundles.Add(new ScriptBundle("~/bundles/a_register").Include(
                       "~/Scripts/a_register.js"));
 
-            //a_mypage_uinfo
+            //a_mypage_uinfo ----------
             bundles.Add(new StyleBundle("~/Content/css/a_mypage_uinfo").Include(
                         "~/Content/css/Clients-UI.css",
                         "~/Content/css/Ludens-Users---25-After-Register.css",
@@ -87,6 +88,10 @@ namespace Seruichi.Seller.Web
 
             bundles.Add(new ScriptBundle("~/bundles/a_mypage_uinfo").Include(
                       "~/Scripts/a_mypage_uinfo.js"));
+
+            //a_contact ----------
+            bundles.Add(new ScriptBundle("~/bundles/a_contact").Include(
+                      "~/Scripts/a_contact.js"));
         }
     }
 }

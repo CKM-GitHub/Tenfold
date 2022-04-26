@@ -417,6 +417,7 @@ const common = {
                     $("#StartDate").focus();
                     return;
                 }
+                else {                    $("#StartDate").hideError(this.getMessage('E111'));                    $("#EndDate").hideError(this.getMessage('E111'));                    $("#EndDate").focus();                    return;                }
             }
             if (ischeckboxLenght) {                
                 if (!common.checkboxlengthCheck($ctrl.attr('class'))) {

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web;
 
 namespace Seruichi.BL
 {
@@ -17,7 +18,7 @@ namespace Seruichi.BL
             };
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_a_mypage_uinfo_Select_M_Seller_by_Key", sqlParams);
+            var dt = db.SelectDatatable("pr_a_mypage_uinfo_Select_M_Seller_by_SellerCD", sqlParams);
             if (dt.Rows.Count == 0)
             {
                 return new a_mypage_uinfoModel() { SellerCD = sellerCD };
@@ -87,22 +88,6 @@ namespace Seruichi.BL
             validator.CheckIsHalfWidth("HousePhone", model.HousePhone, 15, RegexFormat.Number);
             //FAX番号
             validator.CheckIsHalfWidth("Fax", model.Fax, 15, RegexFormat.Number);
-            //メールアドレス
-            validator.CheckRequired("MailAddress", model.MailAddress);
-            //★仕様確認中
-            //if (!new a_loginBL().CheckDuplicateMailAddresses(model.MailAddress))
-            //{
-            //    validator.AddValidationResult("MailAddress", "E203"); //既に登録済みのメールアドレスです
-            //}
-            //パスワード
-            validator.CheckRequired("Password", model.Password);
-            validator.CheckIsHalfWidth("Password", model.Password, 20);
-            //パスワード（確認）
-            validator.CheckRequired("ConfirmPassword", model.ConfirmPassword);
-            if (!string.IsNullOrEmpty(model.ConfirmPassword) && model.Password != model.ConfirmPassword)
-            {
-                validator.AddValidationResult("ConfirmPassword", "E109");
-            }
 
             if (validator.IsValid)
             {
@@ -113,11 +98,6 @@ namespace Seruichi.BL
                     {
                         validator.AddValidationResult("ZipCode1", errorcd);
                     }
-                }
-                //パスワード
-                if (model.Password.Length < 8 || model.Password.Length > 20)
-                {
-                    validator.AddValidationResult("Password", "E105");
                 }
             }
 
@@ -163,17 +143,12 @@ namespace Seruichi.BL
             AESCryption crypt = new AESCryption();
             string cryptionKey = StaticCache.GetDataCryptionKey();
 
-            PasswordHash pwhash = new PasswordHash();
-            string hashedPassword = pwhash.GeneratePasswordHash(model.MailAddress, model.Password);
-
             //yyyy-MM-dd
             model.Birthday = model.Birthday.ToDateTime().ToDateString(DateTimeFormat.yyyy_MM_dd);
 
             var sqlParams = new SqlParameter[]
             {
                 new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD },
-                new SqlParameter("@MailAddress", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.MailAddress, cryptionKey).ToStringOrNull() },
-                new SqlParameter("@Password", SqlDbType.VarChar){ Value = hashedPassword.ToStringOrNull() },
                 new SqlParameter("@SellerName", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.SellerName, cryptionKey).ToStringOrNull() },
                 new SqlParameter("@SellerKana", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.SellerKana, cryptionKey).ToStringOrNull() },
                 new SqlParameter("@Birthday", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.Birthday, cryptionKey).ToStringOrNull() },
@@ -203,6 +178,209 @@ namespace Seruichi.BL
                 //msgid = "S004"; //他端末エラー
                 return false;
             }
+        }
+
+
+
+
+
+        public Dictionary<string, string> ValidateChangeMailAddress(a_mypage_uinfo_emailModel model)
+        {
+            ValidatorAllItems validator = new ValidatorAllItems();
+            string elementId = "";
+
+            //新しいメールアドレス
+            elementId = "formChangeMailAddress_NewMailAddress";
+            if (string.IsNullOrEmpty(model.NewMailAddress))
+            {
+                validator.AddValidationResult(elementId, "E202"); //メールアドレスが入力されていません
+            }
+
+            if (validator.IsValid && model.NewMailAddress.Length > 100)
+            {
+                validator.AddValidationResult(elementId, "E105"); //入力できる桁数を超えています
+            }
+
+            if (validator.IsValid && !new a_loginBL().CheckDuplicateMailAddresses(model.NewMailAddress))
+            {
+                validator.AddValidationResult(elementId, "E203"); //既に登録済みのメールアドレスです
+            }
+
+            if (validator.IsValid)
+            {
+                validator.CheckIsValidEmail(elementId, model.NewMailAddress); //メールアドレスを正しく入力してください
+            }
+
+            //パスワード
+            elementId = "formChangeMailAddress_Password";
+            validator.CheckRequired(elementId, model.Password);
+            validator.CheckIsHalfWidth(elementId, model.Password, 20);
+            if (validator.IsValid && !CheckPasswordMatch(model.SellerCD, model.MailAddress, model.Password))
+            {
+                validator.AddValidationResult(elementId, "E207");
+            }
+
+            return validator.GetValidationResult();
+        }
+
+        public bool InsertCertificationData(a_mypage_uinfo_emailModel model, out string certificationCD, out DateTime effectiveDateTime)
+        {
+            certificationCD = new AESCryption().GenerateRandomDataBase64(12);
+            effectiveDateTime = DateTime.MinValue;
+
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@CertificationCD", SqlDbType.VarChar){ Value = certificationCD },
+                new SqlParameter("@MailAddress", SqlDbType.VarChar){ Value = new AESCryption().EncryptToBase64(model.NewMailAddress, StaticCache.GetDataCryptionKey()) },
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD },
+                new SqlParameter("@EffectiveDateTime", SqlDbType.DateTime){ Direction = ParameterDirection.Output },
+            };
+
+            try
+            {
+                DBAccess db = new DBAccess();
+                if (db.InsertUpdateDeleteData("pr_a_mypage_uinfo_Insert_D_Certification", false, sqlParams))
+                {
+                    effectiveDateTime = sqlParams[3].Value.ToDateTime(DateTime.MinValue);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            catch (ExclusionException)
+            {
+                //msgid = "S004"; //他端末エラー
+                return false;
+            }
+        }
+
+        public SendMailInfo GetChangeMailAddressMailInfo(string mailAddress, string CertificationCD, DateTime effectiveDateTime)
+        {
+            SendMailInfo mailInfo = new SendMailInfo();
+            try
+            {
+                CommonBL cmnBL = new CommonBL();
+                cmnBL.GetMailSender(mailInfo);
+                cmnBL.GetMailRecipients(MailKBN.ChangePassword, mailInfo);
+                cmnBL.GetMailTitleAndText(MailKBN.ChangePassword, mailInfo);
+
+                mailInfo.Recipients.Add(new SendMailInfo.Recipient()
+                {
+                    MailAddress = mailAddress,
+                    SendType = SendMailInfo.SendTypes.To
+                });
+
+                string url = string.Format("{0}?mail={1}&setupid={2}",
+                    mailInfo.Text2, HttpUtility.UrlEncode(mailAddress), HttpUtility.UrlEncode(CertificationCD));
+
+                mailInfo.BodyText = mailInfo.Text1.Replace("@@@@MailAddress", mailAddress)
+                    .Replace("@@@@URL", url)
+                    .Replace("@@@@validity", effectiveDateTime.ToString(DateTimeFormat.yyyyMdHmsJP));
+            }
+            catch (Exception ex)
+            {
+                Logger.GetInstance().Error(ex);
+                mailInfo = null;
+            }
+
+            return mailInfo;
+        }
+
+
+
+
+
+        public Dictionary<string, string> ValidateChangePassword(a_mypage_uinfo_passwordModel model)
+        {
+            ValidatorAllItems validator = new ValidatorAllItems();
+            string elementId = "";
+
+            //現在のパスワード
+            elementId = "formChangePassword_Password";
+            validator.CheckRequired(elementId, model.Password);
+            validator.CheckIsHalfWidth(elementId, model.Password, 20);
+            //新しいパスワード
+            elementId = "formChangePassword_NewPassword";
+            validator.CheckRequired(elementId, model.NewPassword);
+            validator.CheckIsHalfWidth(elementId, model.NewPassword, 20);
+            //新しいパスワード（確認）
+            elementId = "formChangePassword_ConfirmNewPassword";
+            validator.CheckRequired(elementId, model.ConfirmNewPassword);
+            if (!string.IsNullOrEmpty(model.ConfirmNewPassword) && model.NewPassword != model.ConfirmNewPassword)
+            {
+                validator.AddValidationResult(elementId, "E109");
+            }
+
+            if (validator.IsValid)
+            {
+                //現在のパスワード
+                if (!CheckPasswordMatch(model.SellerCD, model.MailAddress, model.Password))
+                {
+                    validator.AddValidationResult("formChangePassword_Password", "E207");
+                }
+                //新しいパスワード
+                if (model.NewPassword.Length < 8 || model.NewPassword.Length > 20)
+                {
+                    validator.AddValidationResult("formChangePassword_NewPassword", "E105");
+                }
+            }
+
+            return validator.GetValidationResult();
+        }
+
+        public bool UpdatePassword(a_mypage_uinfo_passwordModel model, out string msgid)
+        {
+            msgid = "";
+
+            PasswordHash pwhash = new PasswordHash();
+            string hashedPassword = pwhash.GeneratePasswordHash(model.MailAddress, model.NewPassword);
+
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD },
+                new SqlParameter("@Password", SqlDbType.VarChar){ Value = hashedPassword.ToStringOrNull() },
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.SellerName.ToStringOrNull() },
+            };
+
+            try
+            {
+                DBAccess db = new DBAccess();
+                return db.InsertUpdateDeleteData("pr_a_mypage_uinfo_Update_M_Seller_Password", false, sqlParams);
+            }
+            catch (ExclusionException)
+            {
+                //msgid = "S004"; //他端末エラー
+                return false;
+            }
+        }
+
+
+
+
+
+        public bool CheckPasswordMatch(string sellerCD, string mailAddress, string password)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = sellerCD.ToStringOrNull() },
+            };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_a_mypage_uinfo_Select_M_Seller_Password_by_SellerCD", sqlParams);
+            if (dt.Rows.Count == 0)
+            {
+                return false;
+            }
+
+            PasswordHash pwhash = new PasswordHash();
+            string hashedPassword = pwhash.GeneratePasswordHash(mailAddress, password);
+
+            var dr = dt.Rows[0];
+            return dr["Password"].ToStringOrEmpty() == hashedPassword;
         }
     }
 }

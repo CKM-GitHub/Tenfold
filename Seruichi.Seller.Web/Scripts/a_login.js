@@ -216,7 +216,6 @@ function customValidation_checkPhone(e) {
     let inputValue = $this.val();
     inputValue = inputValue.replace(/-/g, "")
     inputValue = inputValue.replace(/－/g, "")
-
     $this.val(common.replaceDoubleToSingle(inputValue));
 
     return true;
