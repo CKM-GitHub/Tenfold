@@ -10,7 +10,7 @@ CREATE PROCEDURE [dbo].[pr_t_seller_List_csv_generate]
 	@ValidCheck as tinyint,
 	@InValidCheck as tinyint,
 	--@SellerCD as varchar(10),
-	@SellerName as varchar(50),
+	--@SellerName as varchar(50),
 	@PrefNameSelect as varchar(10),
 	@RangeSelect as tinyint,
 	@StartDate as Date,
