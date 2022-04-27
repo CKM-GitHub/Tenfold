@@ -10,6 +10,7 @@ $(function () {
 
     setValidation();
     addEvents();
+    $('#SellerName').focus();
 });
 
 function setValidation() {

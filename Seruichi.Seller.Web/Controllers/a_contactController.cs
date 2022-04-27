@@ -18,7 +18,16 @@ namespace Seruichi.Seller.Web.Controllers
                 SessionAuthenticationHelper.CreateAnonymousUser();
             }
 
+            CommonBL bl = new CommonBL();
+            ViewBag.ContactTypeDropDownListItems = bl.GetDropDownListItemsOfContactType();
             return View();
+        }
+
+        // POST: 
+        [HttpPost]
+        public ActionResult GotoNextPage()
+        {
+            return RedirectToAction("Index", "a_index");
         }
 
         // Ajax: RegisterContact
@@ -29,19 +38,22 @@ namespace Seruichi.Seller.Web.Controllers
             {
                 return BadRequestResult();
             }
+            model.ContactTime = Utilities.GetSysDateTime();
+            model.Operator = base.GetOperator();
+            model.IPAddress = base.GetClientIP();
+            model.SellerName = base.GetOperatorName();
 
             a_contactBL bl = new a_contactBL();
-
             var validationResult = bl.ValidateAll(model);
             if (validationResult.Count > 0)
             {
                 return ErrorResult(validationResult);
             }
 
-            //if (!bl.InsertCertificationData(mailAddress, out string certificationCD, out DateTime effectiveDateTime))
-            //{
-            //    return ErrorResult();
-            //}
+            if (!bl.InsertContactData(model, out string errorcd))
+            {
+                return ErrorMessageResult(errorcd);
+            }
 
             SendMail.SendSmtp(bl.GetContactTenfoldMailInfo(model));
             SendMail.SendSmtp(bl.GetContactPersonMailInfo(model));

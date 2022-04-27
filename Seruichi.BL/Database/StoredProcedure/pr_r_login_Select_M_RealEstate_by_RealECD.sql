@@ -9,6 +9,7 @@ CREATE PROCEDURE [dbo].[pr_r_login_Select_M_RealEstate_by_RealECD]
 AS
 BEGIN
 	
-	Select * from M_RealEstate where RealECD = @RealECD;
+	Select * from M_RealEstate 
+	where RealECD = @RealECD COLLATE SQL_Latin1_General_CP1_CS_AS 
 
 END

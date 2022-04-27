@@ -211,14 +211,14 @@ namespace Seruichi.BL
                 validator.CheckIsValidEmail(elementId, model.NewMailAddress); //メールアドレスを正しく入力してください
             }
 
-            //パスワード
-            elementId = "formChangeMailAddress_Password";
-            validator.CheckRequired(elementId, model.Password);
-            validator.CheckIsHalfWidth(elementId, model.Password, 20);
-            if (validator.IsValid && !CheckPasswordMatch(model.SellerCD, model.MailAddress, model.Password))
-            {
-                validator.AddValidationResult(elementId, "E207");
-            }
+            ////パスワード
+            //elementId = "formChangeMailAddress_Password";
+            //validator.CheckRequired(elementId, model.Password);
+            //validator.CheckIsHalfWidth(elementId, model.Password, 20);
+            //if (validator.IsValid && !CheckPasswordMatch(model.SellerCD, model.MailAddress, model.Password))
+            //{
+            //    validator.AddValidationResult(elementId, "E207");
+            //}
 
             return validator.GetValidationResult();
         }
@@ -264,8 +264,8 @@ namespace Seruichi.BL
             {
                 CommonBL cmnBL = new CommonBL();
                 cmnBL.GetMailSender(mailInfo);
-                cmnBL.GetMailRecipients(MailKBN.ChangePassword, mailInfo);
-                cmnBL.GetMailTitleAndText(MailKBN.ChangePassword, mailInfo);
+                cmnBL.GetMailRecipients(MailKBN.ChangeMailAddress, mailInfo);
+                cmnBL.GetMailTitleAndText(MailKBN.ChangeMailAddress, mailInfo);
 
                 mailInfo.Recipients.Add(new SendMailInfo.Recipient()
                 {

@@ -17,29 +17,26 @@ function setValidation() {
         .addvalidation_errorElement("#errorContactKana")
         .addvalidation_reqired()
         .addvalidation_doublebyte_kana();
-    $('#MailAddress')
-        .addvalidation_errorElement("#errorMailAddress")
+    $('#ContactAddress')
+        .addvalidation_errorElement("#errorContactAddress")
         .addvalidation_reqired()
-        .addvalidation_custom("customValidation_checkMailAddress");
+        .addvalidation_custom("customValidation_checkContactAddress");
     $('#ContactPhone')
         .addvalidation_errorElement("#errorContactPhone")
         .addvalidation_reqired()
         .addvalidation_singlebyte_number();
-    $('#ContactType')
-        .addvalidation_errorElement("#errorContactType")
+    $('#ContactTypeCD')
+        .addvalidation_errorElement("#errorContactTypeCD")
         .addvalidation_reqired();
     $('#ContactAssID')
         .addvalidation_errorElement("#errorContactAssID")
-        .addvalidation_reqired()
         .addvalidation_singlebyte();
     $('#ContactSubject')
         .addvalidation_errorElement("#errorContactSubject")
-        .addvalidation_reqired()
-        .addvalidation_doublebyte();
+        .addvalidation_reqired();
     $('#ContactIssue')
         .addvalidation_errorElement("#errorContactIssue")
-        .addvalidation_reqired()
-        .addvalidation_doublebyte();
+        .addvalidation_reqired();
 }
 
 function addEvents()
@@ -53,8 +50,8 @@ function addEvents()
         return common.checkValidityInput(this);
     });
 
-    $('#ContactType').on('change', function (e) {
-        $('#ContactSubject').val($('#ContactType option:selected').data('subject'));
+    $('#ContactTypeCD').on('change', function (e) {
+        $('#ContactSubject').val($('#ContactTypeCD option:selected').data('subject'));
     });
 
     $('#btnRegistration').on('click', function () {
@@ -67,6 +64,7 @@ function addEvents()
 
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
+        model.ContactType = $('#ContactTypeCD option:selected').text();
 
         common.callAjaxWithLoading(_url.registerContact, model, this, function (result) {
             if (result && result.isOK) {
@@ -98,7 +96,7 @@ function customValidation_checkPhone(e) {
     return true;
 }
 
-function customValidation_checkMailAddress(e) {
+function customValidation_checkContactAddress(e) {
     const $this = $(e)
 
     if ($this.val().trim() == "") {

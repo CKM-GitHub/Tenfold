@@ -11,8 +11,10 @@ namespace Models
         public string ContactAddress { get; set; }
         public string ContactPhone { get; set; }
         public string ContactType { get; set; }
+        public string ContactTypeCD { get; set; }
         public string ContactAssID { get; set; }
         public string ContactSubject { get; set; }
         public string ContactIssue { get; set; }
+        public string SellerName { get; set; }
     }
 }

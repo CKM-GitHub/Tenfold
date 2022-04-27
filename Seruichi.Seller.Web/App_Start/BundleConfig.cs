@@ -89,6 +89,10 @@ namespace Seruichi.Seller.Web
             bundles.Add(new ScriptBundle("~/bundles/a_mypage_uinfo").Include(
                       "~/Scripts/a_mypage_uinfo.js"));
 
+            //a_mailregister ----------
+            bundles.Add(new ScriptBundle("~/bundles/a_mailregister").Include(
+                      "~/Scripts/a_mailregister.js"));
+
             //a_contact ----------
             bundles.Add(new ScriptBundle("~/bundles/a_contact").Include(
                       "~/Scripts/a_contact.js"));

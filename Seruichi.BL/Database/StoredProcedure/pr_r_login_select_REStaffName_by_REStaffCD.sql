@@ -13,6 +13,6 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT REStaffName from M_REStaff where REStaffCD = @REStaffCD
+	SELECT REStaffName from M_REStaff where REStaffCD = @REStaffCD COLLATE SQL_Latin1_General_CP1_CS_AS 
 END
 

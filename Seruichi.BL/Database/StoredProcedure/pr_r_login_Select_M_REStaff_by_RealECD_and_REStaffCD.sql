@@ -11,5 +11,6 @@ AS
 BEGIN
 	Select REPassword,PermissionChat,PermissionSetting,PermissionPlan,PermissionInvoice
 	from M_REStaff
-	where RealECD = @RealECD and REStaffCD = @REStaffCD
+	where RealECD = @RealECD COLLATE SQL_Latin1_General_CP1_CS_AS 
+	and REStaffCD = @REStaffCD COLLATE SQL_Latin1_General_CP1_CS_AS 
 END
