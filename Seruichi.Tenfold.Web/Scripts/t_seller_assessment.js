@@ -5,6 +5,9 @@ $(function () {
     _url.getM_SellerMansionList = common.appPath + '/t_seller_assessment/GetM_SellerMansionList';
     _url.generate_M_SellerMansionCSV = common.appPath + '/t_seller_assessment/Generate_M_SellerMansionCSV';
     _url.insert_l_log = common.appPath + '/t_seller_assessment/Insert_l_log';
+    _url.Get_PopupFor_Home = common.appPath + '/t_seller_assessment/Get_PopupFor_Home';
+    _url.Get_PopupFor_ResultType_1 = common.appPath + '/t_seller_assessment/Get_PopupFor_ResultType_1';
+    _url.Get_PopupFor_ResultType_2 = common.appPath + '/t_seller_assessment/Get_PopupFor_ResultType_2';
     addEvents();
 });
 
@@ -131,6 +134,24 @@ function addEvents() {
             }
         )
     });
+
+
+    $('#btnDownClose').on('click', function () {
+        $('#SNameAndRoomNo').empty();
+        $('#ekikoutsu').empty();
+        $('#ResultDate').empty();
+        $('#tableType1 tbody').empty();
+        $('#tableType2 tbody').empty();
+    });
+    $('#btnUpClose').on('click', function () {
+        $('#SNameAndRoomNo').empty();
+        $('#ekikoutsu').empty();
+        $('#ResultDate').empty();
+        $('#tableType1 tbody').empty();
+        $('#tableType2 tbody').empty();
+    });
+    
+
 }
 
 
@@ -212,10 +233,12 @@ function Bind_tbody(result) {
             }
 
         }
+
+        var DeepDatetime = data[i]["詳細査定日時"].replace(" ", "&");
         html += '<tr>\
             <td class= "text-end" > ' + data[i]["NO"] + '</td>\
-            <td class="'+ _sort_checkbox + '"><i class="'+ _class + '">' + _letter + '</i><span class="font-semibold">' + data[i]["ステータス"] + '</span></td>\
-            <td><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["SellerMansionID"] + ' onclick="Popup_function(this.id)">'+ data[i]["マンション名＆部屋番号"]+'</a></td>\
+            <td class="'+ _sort_checkbox + '"><i class="' + _class + '">' + _letter + '</i><span class="font-semibold">' + data[i]["ステータス"] + '</span></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal" data-bs-target="#mansion" href="#" id='+ data[i]["SellerMansionID"] + '&' + data[i]["AssReqID"] + '&' +DeepDatetime+' onclick="Get_PopupFor_Home(this.id)">' + data[i]["マンション名＆部屋番号"]+'</a></td>\
             <td><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["RealECD"] + '&t_reale_purchase' + ' onclick="l_logfunction(this.id)">' + data[i]["不動産会社"] + '</a></td>\
             <td class="text-nowrap">' + data[i]["登録日時"] + '</td>\
             <td class="text-nowrap">' + data[i]["簡易査定日時"] + '</td>\
@@ -254,10 +277,6 @@ function l_logfunction(id) {
     common.callAjax(_url.insert_l_log, model,
         function (result) {
             if (result && result.isOK) {
-                //if (model.LogStatus = "t_mansion_detail") {
-                //    alert("https://www.seruichi.com/t_mansion_detail?ｍansionCD=" + model.LogId);
-                //}
-               
                 if (model.LogStatus = "t_reale_purchase") {
                     //alert("https://www.seruichi.com/t_reale_purchase?RealECD=" + model.LogId);
                    
@@ -276,5 +295,132 @@ function l_logfunction(id) {
 function Popup_function(id) {
     
     var Popupurl = common.appPath+'/t_seller_assessment/PopUpPage?smID=' + id;
-    window.open(Popupurl, "WindowPopup", 'width=700px,height=700px,top=150,left=250');
+    //window.open(Popupurl, "WindowPopup", 'width=700px,height=700px,top=150,left=250');
+    window.location.href = Popupurl;
+}
+
+function Get_PopupFor_Home(id) {
+    var Date = id.split('&')[2];
+    var Time = id.split('&')[3];
+    var DeepAssDateTime = Date + ' ' + Time;
+
+    let model = {
+        SellerMansionID: id.split('&')[0],
+        AssReqID: id.split('&')[1]
+    };
+
+    common.callAjaxWithLoading(_url.Get_PopupFor_Home, model, this, function (result) {
+        if (result && result.isOK) {
+
+            Bind_Popup_Home(result.data);
+        }
+        if (result && !result.isOK) {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                $form.getInvalidItems().get(0).focus();
+            }
+        }
+    });
+
+    common.callAjaxWithLoading(_url.Get_PopupFor_ResultType_1, model, this, function (result) {
+        if (result && result.isOK) {
+
+            Bind_Popup_ResultType_1(result.data, DeepAssDateTime);
+        }
+        if (result && !result.isOK) {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                $form.getInvalidItems().get(0).focus();
+            }
+        }
+    });
+
+    common.callAjaxWithLoading(_url.Get_PopupFor_ResultType_2, model, this, function (result) {
+        if (result && result.isOK) {
+
+            Bind_Popup_ResultType_2(result.data);
+        }
+        if (result && !result.isOK) {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                $form.getInvalidItems().get(0).focus();
+            }
+        }
+    });
+}
+
+
+
+function Bind_Popup_Home(result) {
+    let data = JSON.parse(result);
+    let html_HomeList = "";
+    let html_Home_Menu = "";
+
+    html_Home_Menu = '<h4 class="text-center fw-bold">' + data[0]["MansionName"] + ' ' + data[0]["RoomNumber"]+'</h4>\
+        <p class="font-monospace small text-start pt-3">'+ data[0]["Address"]+'</p >'
+    for (var i = 0; i < data.length; i++) {
+        
+        html_HomeList += '<div class="card p-1 col-12 col-md-6 shadow-sm">\
+                                                    <div class="card-body p-2 row">\
+                                                        <div class="col-12">\
+                                                            <h5>'+data[i]["LineName"]+'</h5>\
+                                                        </div>\
+                                                        <div class="col-12">\
+                                                            <p class="text-dark">'+data[i]["StationName"]+'</p>\
+                                                        </div>\
+                                                        <div class="col-12 text-end">\
+                                                            <p class="text-dark">徒歩 '+data[i]["Distance"]+' 分</p>\
+                                                        </div>\
+                                                    </div>\
+                                                   </div>'
+    }
+    $('#SNameAndRoomNo').append(html_Home_Menu);
+    $('#ekikoutsu').append(html_HomeList);
+}
+
+
+function Bind_Popup_ResultType_1(result, DeepAssDateTime) {
+    let data = JSON.parse(result);
+    let html_Date = "";
+    let html_Type1 = "";
+    html_Date = '<h4 class="text-center fw-bold">査定日時</h4>\
+                 <p class="font-monospace small text-center pt-0">'+ DeepAssDateTime+'</p >'
+          
+            
+    for (var i = 0; i < data.length; i++) {
+
+        html_Type1 += '<tr>\
+                      <td>'+data[i]["Rank"] +'</td>\
+                      <td>'+data[i]["REName"]+'</td>\
+                      <td class="align-middle text-end">\
+                      <span class="text-danger">'+data[i]["AssessAmount"]+'</span>円\
+                       </td>\
+                       </tr>'
+    }
+    $('#ResultDate').append(html_Date);
+    $('#tableType1 tbody').append(html_Type1);
+}
+
+
+function Bind_Popup_ResultType_2(result) {
+    let data = JSON.parse(result);
+    let html_Type2 = "";
+    for (var i = 0; i < data.length; i++) {
+
+        html_Type2 += '<tr>\
+                      <td>'+ data[i]["Rank"] + '</td>\
+                      <td>'+ data[i]["REName"] + '</td>\
+                      <td class="align-middle text-end">\
+                      <span class="text-danger">'+ data[i]["AssessAmount"] + '</span>円\
+                       </td>\
+                       </tr>'
+    }
+   
+    $('#tableType2 tbody').append(html_Type2);
 }

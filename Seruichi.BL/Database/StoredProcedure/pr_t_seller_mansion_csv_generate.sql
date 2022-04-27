@@ -13,7 +13,7 @@ CREATE PROCEDURE [dbo].[pr_t_seller_mansion_csv_generate]
 	,@Chk_Seiyaku			tinyint         = 0
 	,@Chk_Urinushi			tinyint         = 0
 	,@Chk_Kainushi			tinyint         = 0
-	,@MansionName			varchar(50)
+	--,@MansionName			varchar(50)
 	,@Range					varchar(50)
 	,@StartDate				date            = NULL
 	,@EndDate				date            = NULL
@@ -46,13 +46,13 @@ BEGIN
 				ISNULL(FORMAT(D.PurchReqDateTime, 'yyyy/MM/dd HH:mm:ss'),'') As '買取依頼日時',
 				ISNULL(G.RealECD,'') as N'マンション Top1業者CD',
 				ISNULL(H.REName,'') As 'マンションTop1',
-				ISNULL(FORMAT(CONVERT(MONEY, G.AssessAmount), '###,###'),'0') +' '+N'円' As 'マンション金額',
+				ISNULL(G.AssessAmount,'0')  As 'マンション金額',
 				ISNULL(E.RealECD,'') as N'エリア Top1業者CD',
 				ISNULL(F.REName,'') As 'エリアTop1',
-				ISNULL(FORMAT(CONVERT(MONEY, E.AssessAmount), '###,###'),'0') +' '+N'円' As 'エリア金額',
+				ISNULL(E.AssessAmount,'0')  As 'エリア金額',
 				ISNULL(I.RealECD,'') as N'買取依頼会社CD',
 				ISNULL(J.REName,'') As '買取依頼会社',
-				ISNULL(FORMAT(CONVERT(MONEY, I.AssessAmount), '###,###'),'0') +' '+N'円' As '買取依頼金額',
+				ISNULL(I.AssessAmount,'0')  As '買取依頼金額',
 				ISNULL(FORMAT(D.IntroDateTime, 'yyyy/MM/dd HH:mm:ss'),'') As '送客日時',
 				ISNULL(CASE WHEN D.EndStatus =1 THEN
 						CASE WHEN D.SellerTermDateTime IS NOT NULL AND D.BuyerTermDateTime IS NOT NULL AND D.SellerTermDateTime <= D.BuyerTermDateTime  THEN FORMAT(D.SellerTermDateTime, 'yyyy/MM/dd HH:mm:ss')  
@@ -103,7 +103,9 @@ BEGIN
 	left outer join 
 				M_RealEstate J 
 				on J.RealECD = I.RealECD
-	where ((@MansionName  IS NULL OR (A.MansionName like '%'+ @MansionName +'%')) and A.DeleteDateTime IS NULL)
+	where 
+	--((@MansionName  IS NULL OR (A.MansionName like '%'+ @MansionName +'%')) and A.DeleteDateTime IS NULL)
+	A.DeleteDateTime IS NULL
 	and ((@Range = '登録日'		and (@StartDate IS NULL OR CONVERT(DATE, A.InsertDateTime)  >= @StartDate)  and  (@EndDate IS NULL OR CONVERT(DATE, A.InsertDateTime) <= @EndDate))
 	OR (@Range = '詳細査定日'	and (@StartDate IS NULL OR CONVERT(DATE, D.DeepAssDateTime) >= @StartDate)  and  (@EndDate IS NULL OR CONVERT(DATE, D.DeepAssDateTime) <= @EndDate)) 
 	OR (@Range	= '買取依頼日'	and (@StartDate IS NULL OR CONVERT(DATE, D.PurchReqDateTime) >= @StartDate) and (@EndDate IS NULL OR CONVERT(DATE, D.PurchReqDateTime) <= @EndDate))

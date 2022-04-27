@@ -41,7 +41,7 @@ namespace Seruichi.BL.Tenfold.t_seller_mansion
                 new SqlParameter("@Chk_Seiyaku", SqlDbType.TinyInt){ Value = model.Chk_Seiyaku.ToByte(0) },
                 new SqlParameter("@Chk_Urinushi", SqlDbType.TinyInt){ Value = model.Chk_Urinushi.ToByte(0) },
                 new SqlParameter("@Chk_Kainushi", SqlDbType.TinyInt){ Value = model.Chk_Kainushi.ToByte(0) },
-                new SqlParameter("@MansionName", SqlDbType.VarChar){ Value = model.MansionName.ToStringOrNull() },
+               // new SqlParameter("@MansionName", SqlDbType.VarChar){ Value = model.MansionName.ToStringOrNull() },
                 new SqlParameter("@Range", SqlDbType.VarChar){ Value = model.Range.ToStringOrNull() },
                 new SqlParameter("@StartDate", SqlDbType.VarChar){ Value = model.StartDate.ToStringOrNull() },
                 new SqlParameter("@EndDate", SqlDbType.VarChar){ Value = model.EndDate.ToStringOrNull() }
@@ -108,7 +108,7 @@ namespace Seruichi.BL.Tenfold.t_seller_mansion
                 new SqlParameter("@Chk_Seiyaku", SqlDbType.TinyInt){ Value = model.Chk_Seiyaku.ToByte(0) },
                 new SqlParameter("@Chk_Urinushi", SqlDbType.TinyInt){ Value = model.Chk_Urinushi.ToByte(0) },
                 new SqlParameter("@Chk_Kainushi", SqlDbType.TinyInt){ Value = model.Chk_Kainushi.ToByte(0) },
-                new SqlParameter("@MansionName", SqlDbType.VarChar){ Value = model.MansionName.ToStringOrNull() },
+                //new SqlParameter("@MansionName", SqlDbType.VarChar){ Value = model.MansionName.ToStringOrNull() },
                 new SqlParameter("@Range", SqlDbType.VarChar){ Value = model.Range.ToStringOrNull() },
                 new SqlParameter("@StartDate", SqlDbType.VarChar){ Value = model.StartDate.ToStringOrNull() },
                 new SqlParameter("@EndDate", SqlDbType.VarChar){ Value = model.EndDate.ToStringOrNull() }
@@ -116,6 +116,32 @@ namespace Seruichi.BL.Tenfold.t_seller_mansion
 
             DBAccess db = new DBAccess();
             var dt = db.SelectDatatable("pr_t_seller_mansion_csv_generate", sqlParams);
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+            var e = dt.AsEnumerable();
+            Parallel.ForEach(e, item =>
+            {
+                item["売主名"] = crypt.DecryptFromBase64(item.Field<string>("売主名"), decryptionKey);
+            });
+            if (!string.IsNullOrEmpty(model.MansionName))
+            {
+                var query = e.Where(dr => dr.Field<string>("マンション名").Contains(model.MansionName));
+                if (query.Any())
+                {
+                    int i = 0;
+                    foreach (var row in query)
+                    {
+                        i++;
+                        row["NO"] = i;
+                    }
+                    return query.CopyToDataTable();
+                }
+                else
+                {
+                    DataTable newTable = dt.Clone();
+                    return newTable;
+                }
+            }
             return dt;
         }
     }

@@ -103,7 +103,7 @@ namespace Seruichi.BL.Tenfold.t_seller_assessment
             DBAccess db = new DBAccess();
             db.InsertUpdateDeleteData("pr_t_seller_assessment_list_Insert_L_Log", false, sqlParams);
         }
-
+        
         public DataTable Generate_M_SellerMansionCSV(t_seller_assessmentModel model, string SellerCD)
         {
             var sqlParams = new SqlParameter[]
@@ -126,6 +126,40 @@ namespace Seruichi.BL.Tenfold.t_seller_assessment
 
             DBAccess db = new DBAccess();
             var dt = db.SelectDatatable("pr_t_seller_assessment_csv_generate", sqlParams);
+            return dt;
+        }
+
+        public DataTable Get_PopupFor_Home(t_seller_assessment_Popup_Model model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@SellerMansionID", SqlDbType.VarChar){ Value = model.SellerMansionID }
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_seller_assessment_Select_ForPopup_Home", sqlParams);
+            return dt;
+        }
+         public DataTable Get_PopupFor_ResultType_1(t_seller_assessment_Popup_Model model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@AssReqID", SqlDbType.VarChar){ Value = model.AssReqID }
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_seller_assessment_Select_ForPopup_ResultType_1", sqlParams);
+            return dt;
+        }
+        public DataTable Get_PopupFor_ResultType_2(t_seller_assessment_Popup_Model model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@AssReqID", SqlDbType.VarChar){ Value = model.AssReqID }
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_seller_assessment_Select_ForPopup_ResultType_2", sqlParams);
             return dt;
         }
     }

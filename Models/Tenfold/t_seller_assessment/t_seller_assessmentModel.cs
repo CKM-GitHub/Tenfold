@@ -62,4 +62,10 @@ namespace Models.Tenfold.t_seller_assessment
         public string LogId { get; set; }
         public string LogStatus { get; set; }
     }
+
+    public class t_seller_assessment_Popup_Model
+    {
+        public string SellerMansionID { get; set; }
+        public string AssReqID { get; set; }
+    }
 }

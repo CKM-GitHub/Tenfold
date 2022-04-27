@@ -14,6 +14,7 @@ BEGIN
 	SET NOCOUNT ON;
 
    
-   select * from  M_TenfoldStaff    where TenStaffCD = @TenStaffCD and TenStaffPW = @TenStaffPW
+   select * from  M_TenfoldStaff    where TenStaffCD = @TenStaffCD COLLATE SQL_Latin1_General_CP1_CS_AS 
+   and TenStaffPW = @TenStaffPW COLLATE SQL_Latin1_General_CP1_CS_AS
 
 END

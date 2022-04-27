@@ -253,7 +253,7 @@ function Bind_tbody(result) {
             <td class="text-center"> ' + data[i]["無効会員"] + ' </td>\
             <td> ' + data[i]["売主CD"] + ' </td>\
             <td> <a class="text-heading font-semibold text-decoration-underline" id='+ data[i]["売主CD"] + ' href="#" onclick="l_logfunction(this.id)">' + data[i]["売主名"] + '</a></td>\
-            <td> ' + data[i]["居住地"] + ' </td>\
+            <td> ' + data[i]["居住地"] + '<span style="display:none;">' + data[i]["PrefCD"] + ' </span> </td>\
             <td> ' + data[i]["登録日時"] + ' </td>\
             <td> ' + data[i]["査定依頼日時"] + ' </td >\
             <td> ' + data[i]["買取依頼日時"] + ' </td>\
