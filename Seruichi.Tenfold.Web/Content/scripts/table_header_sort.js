@@ -6,6 +6,8 @@
         const tableBody = table.querySelector('tbody');
         const rows = tableBody.querySelectorAll('tr');
 
+        const left_right_headers = table.querySelectorAll('th left_sort-by');
+
         // Track sort directions
         const directions = Array.from(headers).map(function (header) {
             return '';

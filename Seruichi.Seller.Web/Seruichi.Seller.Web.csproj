@@ -151,6 +151,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\a_contactController.cs" />
     <Compile Include="Controllers\a_mypage_uinfoController.cs" />
+    <Compile Include="Controllers\a_mailregisterController.cs" />
     <Compile Include="Controllers\a_registerController.cs" />
     <Compile Include="Controllers\a_loginController.cs" />
     <Compile Include="Controllers\Common\CommonApiController.cs" />
@@ -219,6 +220,7 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Scripts\a_contact.js" />
     <Content Include="Scripts\a_mypage_uinfo.js" />
+    <Content Include="Scripts\a_mailregister.js" />
     <Content Include="Scripts\a_register.js" />
     <Content Include="Scripts\a_login.js" />
     <Content Include="Scripts\a_index.js" />
@@ -267,6 +269,7 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\a_contact\Index.cshtml" />
+    <Content Include="Views\a_mailregister\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

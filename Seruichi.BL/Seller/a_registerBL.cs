@@ -14,13 +14,7 @@ namespace Seruichi.BL
             errorcd = "";
             decimal dataSeq = 0;
 
-            var sqlParams = new SqlParameter[]
-            {
-                new SqlParameter("@CertificationCD", SqlDbType.VarChar){ Value = certificationCD.ToStringOrNull() },
-            };
-
-            DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_a_register_Select_D_Certification_by_Key", sqlParams);
+            var dt = GetCertificationData(certificationCD);
             if (dt.Rows.Count == 0)
             {
                 errorcd = "E901";
@@ -52,6 +46,12 @@ namespace Seruichi.BL
                     return false;
                 }
 
+                if (!string.IsNullOrEmpty(dr["SellerCD"].ToStringOrEmpty()))
+                {
+                    errorcd = "E905";
+                    return false;
+                }
+
                 dataSeq = dr["DataSEQ"].ToDecimal(0);
             }
 
@@ -59,7 +59,18 @@ namespace Seruichi.BL
             return true;
         }
 
-        private bool UpdateCertificationData(decimal dataSeq)
+        public DataTable GetCertificationData(string certificationCD)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@CertificationCD", SqlDbType.VarChar){ Value = certificationCD.ToStringOrNull() },
+            };
+
+            DBAccess db = new DBAccess();
+            return db.SelectDatatable("pr_a_register_Select_D_Certification_by_CertificationCD", sqlParams);
+        }
+
+        public bool UpdateCertificationData(decimal dataSeq)
         {
             var sqlParams = new SqlParameter[]
             {

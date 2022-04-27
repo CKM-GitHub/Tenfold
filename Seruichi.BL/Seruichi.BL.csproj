@@ -49,6 +49,7 @@
     <Compile Include="RealEstate\r_login\r_loginBL.cs" />
     <Compile Include="Seller\a_contactBL.cs" />
     <Compile Include="Seller\a_mypage_uinfoBL.cs" />
+    <Compile Include="Seller\a_mailregisterBL.cs" />
     <Compile Include="Seller\a_registerBL.cs" />
     <Compile Include="Seller\a_loginBL.cs" />
     <Compile Include="Seller\a_indexBL.cs" />
@@ -79,10 +80,14 @@
     <Content Include="Database\StoredProcedure\pr_a_index_Select_Towns_by_ZipCode.sql" />
     <Content Include="Database\StoredProcedure\pr_a_login_Insert_D_Certification.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Select_M_Address_by_ZipCode.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_mailregister_Select_M_Seller_by_SellerCD.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Select_M_Seller_Password_by_SellerCD.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Select_M_Seller_by_SellerCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_mailregister_Update_M_Seller_MailAddress.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Update_M_Seller_Password.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Update_M_Seller.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_contact_Insert_D_Contact.sql" />
+    <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfContactType.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfPrefAll.sql" />
     <Content Include="Database\StoredProcedure\pr_common_tenfold_select_MansionName_by_MansionCD.sql" />
     <Content Include="Database\StoredProcedure\pr_common_tenfold_select_REName_by_RealECD.sql" />
@@ -95,7 +100,7 @@
     <Content Include="Database\StoredProcedure\pr_a_register_Update_D_Certification.sql" />
     <Content Include="Database\StoredProcedure\pr_a_login_Select_M_Seller_All.sql" />
     <Content Include="Database\StoredProcedure\pr_a_login_Select_M_Seller_by_Password.sql" />
-    <Content Include="Database\StoredProcedure\pr_a_register_Select_D_Certification_by_Key.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_register_Select_D_Certification_by_CertificationCD.sql" />
     <Content Include="Database\StoredProcedure\pr_a_login_Update_M_Seller_Password.sql" />
     <Content Include="Database\StoredProcedure\pr_GetDate.sql" />
     <Content Include="Database\StoredProcedure\pr_L_Log_Insert.sql" />

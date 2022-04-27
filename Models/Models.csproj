@@ -54,6 +54,7 @@
     <Compile Include="Seller\a_mypage_uinfoModel.cs" />
     <Compile Include="Seller\a_mypage_uinfo_emailModel.cs" />
     <Compile Include="Seller\a_contactModel.cs" />
+    <Compile Include="Seller\a_mailregisterModel.cs" />
     <Compile Include="Seller\a_registerModel.cs" />
     <Compile Include="Seller\a_indexModel.cs" />
     <Compile Include="Tenfold\Login\t_loginModel.cs" />
