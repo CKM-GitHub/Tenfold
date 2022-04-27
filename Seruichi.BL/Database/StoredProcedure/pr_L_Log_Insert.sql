@@ -13,7 +13,7 @@ CREATE PROCEDURE [dbo].[pr_L_Log_Insert]
     ,@LoginName     varchar(50)     = NULL
     ,@IPAddress     varchar(20)
     ,@PageID        varchar(100)
-    ,@ProcessKBN     tinyint         --1:INSERT 2:UPDATE 3:DELETE 
+    ,@ProcessKBN     tinyint         --1:INSERT 2:UPDATE 3:DELETE 4:Mail 
     ,@Remarks       varchar(100)
 )
 AS
@@ -39,7 +39,7 @@ BEGIN
         ,@LoginName
         ,@IPAddress
         ,@PageID
-        ,CASE @ProcessKBN WHEN 1 THEN 'INSERT' WHEN 2 THEN 'UPDATE' WHEN 3 THEN 'DELETE' ELSE '' END
+        ,CASE @ProcessKBN WHEN 1 THEN 'INSERT' WHEN 2 THEN 'UPDATE' WHEN 3 THEN 'DELETE' WHEN 4 THEN 'MAIL' ELSE '' END
         ,@Remarks
     )
 END

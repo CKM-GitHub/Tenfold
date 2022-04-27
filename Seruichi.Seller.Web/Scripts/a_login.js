@@ -8,6 +8,7 @@ $(function () {
 
     setValidation();
     addEvents();
+    $('#MailAddress').focus();
 });
 
 function setValidation() {

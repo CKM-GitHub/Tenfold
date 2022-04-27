@@ -86,11 +86,11 @@
                                                 {
                                                     if (Model.PrefCD == item.Value)
                                                     {
-                                                        <option class="js-selectable" value=@item.Value selected>@item.DisplayText</option>
+                                                        <option class="js-selectable" value="@item.Value" selected>@item.DisplayText</option>
                                                     }
                                                     else
                                                     {
-                                                        <option class="js-selectable" value=@item.Value>@item.DisplayText</option>
+                                                        <option class="js-selectable" value="@item.Value">@item.DisplayText</option>
                                                     }
                                                 }
                                             </select>
@@ -167,8 +167,7 @@
                                             <div class="d-flex">
                                                 <label class="form-label">
                                                     パスワード
-                                                    <button class="ms-2 pt-0 pb-0 btn btn-primary btn-sm" type="button"
-                                                            data-bs-target="#modal_pw" data-bs-toggle="modal">
+                                                    <button class="ms-2 pt-0 pb-0 btn btn-primary btn-sm" type="button" id="btnShowChangePassword">
                                                         パスワード変更
                                                     </button>
                                                 </label>
@@ -282,16 +281,17 @@
                 <section class="newsletter-subscribe">
                     <div class="container">
                         <div class="intro"></div>
-                        <form class="d-flex justify-content-center flex-wrap mx-auto text-center" id="form2">
+                        <div class="d-flex justify-content-center flex-wrap mx-auto text-center">
                             <h1 class="cap-icon-h1">
                                 <i class="fa fa-user-circle-o cap-icon-i"></i>
                             </h1>
-                        </form>
+                        </div>
                     </div>
                     <h4 class="text-center align-self-center mt-3">会員登録内容の変更が完了いたしました。</h4>
                 </section>
             </div>
             <div class="modal-footer">
+                <form id="form2"></form>
                 <button class="btn btn-primary btn-lg" type="button" id="btnCompleted">閉じる</button>
             </div>
         </div>
@@ -313,14 +313,14 @@
                         </div>
                         <input class="form-control " type="email" maxlength="100" name="NewMailAddress" id="formChangeMailAddress_NewMailAddress">
                     </div>
-                    <div class="form-group mb-3">
+                    @*<div class="form-group mb-3">
                         <div class="d-flex">
                             <label class="form-label">パスワード</label>
                             <span class="cap-errormsg-right" id="formChangeMailAddress_errorPassword"></span>
                         </div>
                         <input class="form-control cap-fon-form-w200" type="password" name="Password" id="formChangeMailAddress_Password"
                                minlength="8" maxlength="20" autocomplete="current-password">
-                    </div>
+                    </div>*@
                 </form>
             </div>
             <div class="modal-footer">
@@ -405,9 +405,9 @@
                 <h4 class="modal-title">パスワードを変更しました</h4>
             </div>
             <div class="modal-body">
-                <form class="d-flex justify-content-center flex-wrap mx-auto text-center" id="formChangePassword2">
+                <div class="d-flex justify-content-center flex-wrap mx-auto text-center">
                     <i class="fa fa-lock cap-icon-i pb-3"></i>
-                </form>
+                </div>
                 <div class="contact-clean">
                     <div>
                         <strong>パスワード変更を行いました。 マイページからログアウトしていますので、新しいパスワードでログインしてください。</strong>
@@ -415,6 +415,7 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <form id="formChangePassword2"></form>
                 <button class="btn btn-primary btn-lg" type="button" id="btnRelogin">再ログイン</button>
             </div>
         </div>

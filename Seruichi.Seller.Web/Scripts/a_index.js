@@ -16,7 +16,7 @@ $(function () {
     _url.getMansinoData = common.appPath + '/a_index/GetMansionData';
     _url.checkAll = common.appPath + '/a_index/CheckAll';
     _url.insertSellerMansionData = common.appPath + '/a_index/InsertSellerMansionData';
-    //_url.gotoNextPage = common.appPath + '/a_index/GotoNextPage';
+    _url.gotoNextPage = common.appPath + '/a_index/GotoNextPage';
 
     setValidation();
     addEvents();
@@ -365,7 +365,8 @@ function addEvents() {
 
     //閉じる（登録完了）
     $('#btnCompleted').on('click', function () {
-        window.location.reload();
+        const form = document.forms.formCompleted;
+        common.callSubmit(form, _url.gotoNextPage);
     });
 }
 

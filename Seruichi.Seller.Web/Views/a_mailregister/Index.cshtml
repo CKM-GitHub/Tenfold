@@ -1,0 +1,98 @@
+﻿@model Models.a_mailregisterModel
+
+@{
+    ViewBag.Title = "簡易査定 - セルイチ";
+}
+@section styles{
+    @Styles.Render("~/Content/css/a_mailregister")
+}
+
+<header class="text-center text-white masthead cap-header">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto position-relative">
+                <h1 class="mb-2">メールアドレス変更</h1>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="cap-main">
+    <div class="container w-100 h-100">
+        <section class="pt-5 pb-5">
+            <div class="text-center align-self-center pt-2 justify-content-center">
+                <h5>
+                    メールアドレスの確認ができました。<br>
+                    メールアドレスの変更を行いますか？
+                </h5>
+                <div class="row mt-3">
+                    <div class="col-12 col-sm-12 col-md-12">
+                        <form class="card mb-3 cap-fon-form-w350 mx-auto text-start" id="form1">
+                            <input type="hidden" name="SellerCD" id="SellerCD" value="@Model.SellerCD">
+                            <div class="card-header">
+                                現在のメールアドレス
+                            </div>
+                            <div class="card-body text-center">
+                                <span class="cap-errormsg-right" id="errorMailAddress"></span>
+                                <input readonly class="form-control" type="email" name="MailAddress" id="MailAddress"
+                                       maxlength="100" value="@Model.MailAddress">
+                            </div>
+
+                            <div class="card-header border-top">
+                                変更後のメールアドレス
+                            </div>
+                            <div class="card-body text-center">
+                                <span class="cap-errormsg-right" id="errorNewMailAddress"></span>
+                                <input readonly class="form-control" type="email" name="NewMailAddress" id="NewMailAddress"
+                                       maxlength="100" value="@Model.NewMailAddress">
+                            </div>
+                            <div class="card-header border-top">
+                                パスワード
+                            </div>
+                            <div class="card-body align-self-center">
+                                <span class="cap-errormsg-right" id="errorPassword"></span>
+                                <input class="form-control cap-fon-form-w200" type="password" name="Password" id="Password"
+                                       minlength="8" maxlength="20" autocomplete="current-password">
+                            </div>
+
+                            <div class="card-footer text-center">
+                                @*<button class="btn btn-secondary btn-lg" type="button" data-dismiss="modal">キャンセル</button>*@
+                                <button class="btn btn-primary btn-lg" type="button" id="btnRegistration">確定</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" id="modal_mailchanged">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">メールアドレスを変更しました</h4>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex justify-content-center flex-wrap mx-auto text-center" method="post">
+                    <h1 class="p-2"><i class="fa fa-check-square-o cap-icon-i"></i></h1>
+                </div>
+                <div class="contact-clean">
+                    <div>
+                        <h6><strong>下記のメールアドレスに変更しました</strong></h6>
+                        <h5 id="formMailChanged_MailAddress"></h5>
+                        <hr>
+                        <p>新しいメールアドレスでログインしてください。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <form id="form2"></form>
+                <button class="btn btn-primary btn-lg" type="button" id="btnRelogin">ログイン</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/a_mailregister")
+}

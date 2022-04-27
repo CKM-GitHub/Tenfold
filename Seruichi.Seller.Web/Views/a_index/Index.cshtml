@@ -36,7 +36,7 @@
                                     <option selected value="">都道府県</option>
                                     @foreach (Models.DropDownListItem item in ViewBag.PrefDropDownListItems)
                                     {
-                                        <option class="js-selectable" value=@item.Value>@item.DisplayText</option>
+                                        <option class="js-selectable" value="@item.Value">@item.DisplayText</option>
                                     }
                                 </select>
                                 <div class="text-start">
@@ -845,6 +845,7 @@
             </div>
             <div class="modal-footer">
                 <div class="text-nowrap d-md-inline-flex justify-content-center w-100">
+                    <form id="formCompleted"></form>
                     <button class="btn btn-light btn-lg m-2" type="button" id="btnCompleted">閉じる</button>
                     @*<button class="btn btn-primary btn-lg m-2" type="button" id="btnAssessment">簡易査定</button>*@
                 </div>
