@@ -17,14 +17,17 @@ namespace Seruichi.BL
             DBAccess db = new DBAccess();
             var dt = db.SelectDatatable(spName, sqlParams);
 
+            var hasHiddenItem = dt.Columns.Contains("HiddenItem");
+
             foreach (DataRow dr in dt.Rows)
             {
                 var option = new DropDownListItem()
                 {
                     Value = dr["Value"].ToStringOrEmpty(),
                     DisplayText = dr["DisplayText"].ToStringOrEmpty(),
-                    DisplayOrder = dr["DisplayOrder"].ToInt32(0)
-                };
+                    DisplayOrder = dr["DisplayOrder"].ToInt32(0),
+                    HiddenItem = hasHiddenItem ? dr["HiddenItem"].ToStringOrEmpty() : ""
+                };                
                 items.Add(option);
             }
 
@@ -76,6 +79,12 @@ namespace Seruichi.BL
             SqlParameter sqlParam = new SqlParameter("@LineCD", SqlDbType.VarChar) { Value = lineCD.ToStringOrNull() };
 
             return GetDropDownListItems(spName, sqlParam);
+        }
+
+        public List<DropDownListItem> GetDropDownListItemsOfContactType()
+        {
+            string spName = "pr_Common_Select_DropDownListOfContactType";
+            return GetDropDownListItems(spName);
         }
 
         public bool CheckExistsCounterMaster(CounterKey counterKey, out string errorID)

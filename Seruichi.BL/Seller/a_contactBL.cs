@@ -13,6 +13,29 @@ namespace Seruichi.BL
         {
             ValidatorAllItems validator = new ValidatorAllItems();
 
+            //名前
+            validator.CheckRequired("ContactName", model.ContactName);
+            validator.CheckIsDoubleByte("ContactName", model.ContactName, 50);
+            //名前カナ
+            validator.CheckRequired("ContactKana", model.ContactKana);
+            validator.CheckIsDoubleByteKana("ContactKana", model.ContactKana, 50);
+            //メールアドレス
+            validator.CheckRequired("ContactAddress", model.ContactAddress);
+            validator.CheckIsHalfWidth("ContactAddress", model.ContactAddress, 100);
+            if (validator.IsValid) validator.CheckIsValidEmail("ContactAddress", model.ContactAddress);
+            //電話番号
+            validator.CheckRequired("ContactPhone", model.ContactPhone);
+            validator.CheckIsHalfWidth("ContactPhone", model.ContactPhone, 15, RegexFormat.Number);
+            //お問い合わせ種類
+            validator.CheckSelectionRequired("ContactTypeCD", model.ContactTypeCD);
+            //査定ID
+            validator.CheckIsHalfWidth("ContactAssID", model.ContactAssID, 10);
+            //件名
+            validator.CheckRequired("ContactSubject", model.ContactSubject);
+            validator.CheckByteCount("ContactSubject", model.ContactSubject, 50);
+            //お問い合わせ内容
+            validator.CheckRequired("ContactIssue", model.ContactIssue);
+            validator.CheckByteCount("ContactIssue", model.ContactIssue, 1000);
 
             return validator.GetValidationResult();
         }
@@ -26,7 +49,6 @@ namespace Seruichi.BL
 
             var sqlParams = new SqlParameter[]
             {
-                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = null },
                 new SqlParameter("@ContactTime", SqlDbType.DateTime){ Value = model.ContactTime },
                 new SqlParameter("@ContactName", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.ContactName, cryptionKey).ToStringOrNull() },
                 new SqlParameter("@ContactKana", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.ContactKana, cryptionKey).ToStringOrNull() },
@@ -38,6 +60,7 @@ namespace Seruichi.BL
                 new SqlParameter("@ContactIssue", SqlDbType.VarChar){ Value = model.ContactIssue.ToStringOrNull() },
                 new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.Operator.ToStringOrNull() },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.SellerName.ToStringOrNull() },
             };
 
             try
@@ -62,12 +85,6 @@ namespace Seruichi.BL
                 cmnBL.GetMailRecipients(MailKBN.ContactTenfold, mailInfo);
                 cmnBL.GetMailTitleAndText(MailKBN.ContactTenfold, mailInfo);
 
-                mailInfo.Recipients.Add(new SendMailInfo.Recipient()
-                {
-                    MailAddress = model.ContactAddress,
-                    SendType = SendMailInfo.SendTypes.To
-                });
-
                 mailInfo.Subject = mailInfo.Subject.Replace("@@@@Title", model.ContactSubject);
 
                 mailInfo.BodyText = mailInfo.Text1
@@ -78,6 +95,8 @@ namespace Seruichi.BL
                     .Replace("@@@@Phone", model.ContactPhone)
                     .Replace("@@@@AssessID", model.ContactAssID)
                     .Replace("@@@@Subject", model.ContactType)
+                    + Environment.NewLine
+                    + Environment.NewLine
                     + model.ContactIssue;
             }
             catch (Exception ex)
@@ -114,6 +133,8 @@ namespace Seruichi.BL
                     .Replace("@@@@Phone", model.ContactPhone)
                     .Replace("@@@@AssessID", model.ContactAssID)
                     .Replace("@@@@Subject", model.ContactType)
+                    + Environment.NewLine
+                    + Environment.NewLine
                     + model.ContactIssue;
             }
             catch (Exception ex)

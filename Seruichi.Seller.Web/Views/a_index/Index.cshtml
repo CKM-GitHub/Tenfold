@@ -36,7 +36,7 @@
                                     <option selected value="">都道府県</option>
                                     @foreach (Models.DropDownListItem item in ViewBag.PrefDropDownListItems)
                                     {
-                                        <option class="js-selectable" value=@item.Value>@item.DisplayText</option>
+                                        <option class="js-selectable" value="@item.Value">@item.DisplayText</option>
                                     }
                                 </select>
                                 <div class="text-start">

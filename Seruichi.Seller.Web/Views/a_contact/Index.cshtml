@@ -3,9 +3,6 @@
 @{
     ViewBag.Title = "簡易査定 - セルイチ";
 }
-@section styles{
-    @Styles.Render("~/Content/css/a_contact")
-}
 
 <header class="text-center text-white masthead cap-header">
     <div class="overlay"></div>
@@ -20,53 +17,75 @@
 <section>
     <div class="container  col-xl-4 col-md-9  py-5">
         <div class="row justify-content-center align-items-center position-relative">
-
             <div class="col-12 position-relative">
-                <form class="bg-white shadow-sm p-4 rounded cap-con-form">
+                <form class="bg-white shadow-sm p-4 rounded cap-con-form" id="form1">
                     <div>
                         <p class="text-muted">以下の項目を入力いただき、<br>送信ボタンをクリックしてください。<br>英数字は半角での記入をお願いいたします。<br></p>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">お名前</label>
-                        <input class="form-control cap-fon-form-w60mw250" type="text" name="ContactName" id="ContactName">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">お名前(フリガナ)</label>
-                        <input class="form-control cap-fon-form-w60mw250" type="text" name="ContactKana" id="ContactKana">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">メールアドレス</label>
-                        <input class="form-control cap-fon-form-w350" type="email" name="ContactAddress" id="ContactAddress">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">電話番号</label>
-                        <input class="form-control cap-fon-form-w200" type="tel" name="ContactPhone" id="ContactPhone">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">お問い合わせ種類</label>
-                        <div class="dropdown w-100">
-                            <button class="btn btn-light dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown w-100 text-start" type="button"></button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">First Item</a>
-                                <a class="dropdown-item" href="#">Second Item</a>
-                                <a class="dropdown-item" href="#">Third Item</a>
-                            </div>
+                        <div class="d-flex">
+                            <label class="form-label">お名前</label>
+                            <span class="cap-errormsg-right" id="errorContactName"></span>
                         </div>
+                        <input class="form-control cap-fon-form-w60mw250" type="text" maxlength="25" name="ContactName" id="ContactName">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">査定ID</label>
-                        <input class="form-control cap-fon-form-w200" type="text" name="ContactAssID" id="ContactAssID">
+                        <div class="d-flex">
+                            <label class="form-label">お名前(フリガナ)</label>
+                            <span class="cap-errormsg-right" id="errorContactKana"></span>
+                        </div>
+                        <input class="form-control cap-fon-form-w60mw250" type="text" maxlength="25" name="ContactKana" id="ContactKana">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">件名</label>
-                        <input class="form-control" type="text" name="ContactSubject" id="ContactSubject">
+                        <div class="d-flex">
+                            <label class="form-label">メールアドレス</label>
+                            <span class="cap-errormsg-right" id="errorContactAddress"></span>
+                        </div>
+                        <input class="form-control" type="email" maxlength="100" name="ContactAddress" id="ContactAddress">
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">電話番号</label>
+                            <span class="cap-errormsg-right" id="errorContactPhone"></span>
+                            </div>
+                        <input class="form-control cap-fon-form-w200" type="tel" maxlength="15" name="ContactPhone" id="ContactPhone">
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">お問い合わせ種類</label>
+                            <span class="cap-errormsg-right" id="errorContactTypeCD"></span>
+                        </div>
+                        <select class="form-select w-100" name="ContactTypeCD" id="ContactTypeCD">
+                            <option selected value=""></option>
+                            @foreach (Models.DropDownListItem item in ViewBag.ContactTypeDropDownListItems)
+                            {
+                                <option class="js-selectable" value="@item.Value" data-subject="@item.HiddenItem">@item.DisplayText</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">査定ID</label>
+                            <span class="cap-errormsg-right" id="errorContactAssID"></span>
+                        </div>
+                        <input class="form-control cap-fon-form-w200" type="text" maxlength="10" name="ContactAssID" id="ContactAssID">
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex">
+                            <label class="form-label">件名</label>
+                            <span class="cap-errormsg-right" id="errorContactSubject"></span>
+                        </div>
+                        <input class="form-control" type="text" name="ContactSubject" maxlength="50" id="ContactSubject">
                     </div>
                     <div class="mb-4">
-                        <label class="form-label">お問い合わせ内容</label>
-                        <textarea class="form-control" rows="4" name="ContactIssue" id="ContactIssue"></textarea>
+                        <div class="d-flex">
+                            <label class="form-label">お問い合わせ内容</label>
+                            <span class="cap-errormsg-right" id="errorContactIssue"></span>
+                        </div>
+                        <textarea class="form-control" rows="4" name="ContactIssue" maxlength="1000" id="ContactIssue"></textarea>
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-primary w-100 mb-2" id="btnRegistration">送信</button>
+                        <button class="btn btn-primary w-100 mb-2" type="button" id="btnRegistration">送信</button>
                         <p><small class="text-black-50 w-100"><a href="#">操作ガイド</a>を確認しましたか？<br></small></p>
                     </div>
                 </form>
@@ -84,9 +103,9 @@
                 <section class="newsletter-subscribe pt-0 p-0">
                     <div class="container">
                         <div class="intro"></div>
-                        <form class="d-flex justify-content-center flex-wrap mx-auto" style="text-align: center;">
+                        <div class="d-flex justify-content-center flex-wrap mx-auto" style="text-align: center;">
                             <h1 class="cap-icon-h1"><i class="fa fa-check cap-icon-i"></i></h1>
-                        </form>
+                        </div>
                     </div>
                     <h4 class="text-center align-self-center"><strong>お問い合わせ</strong>が送信されました。</h4>
                     <p class="text-center">この度はお問い合わせいただきありがとうございます。<br>ご入力いただきましたメールアドレス宛に、問い合わせ完了メールをお送りさせていただきました。<br>後日、担当よりご連絡を差し上げます。</p>
@@ -94,7 +113,7 @@
             </div>
             <div class="modal-footer">
                 <form id="form2"></form>
-                <button class="btn btn-primary btn-lg" type="button">トップページ</button>
+                <button class="btn btn-primary btn-lg" type="button" id="btnCompleted">トップページ</button>
             </div>
         </div>
     </div>

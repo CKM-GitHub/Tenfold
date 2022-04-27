@@ -8,7 +8,7 @@ namespace Seruichi.Common
     {
         public static void SendSmtp(SendMailInfo mailInfo)
         {
-            if (mailInfo == null) return;
+            if (mailInfo == null || mailInfo.Recipients.Count == 0) return;
 
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("", mailInfo.SenderAddress));
