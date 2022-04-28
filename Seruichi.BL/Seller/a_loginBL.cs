@@ -28,7 +28,7 @@ namespace Seruichi.BL
             if (validator.IsValid)
             {
                 string hashedPassword = new PasswordHash().GeneratePasswordHash(mailAddress, password);
-                user = GetLoginUser(mailAddress, password);
+                user = GetLoginUser(mailAddress, hashedPassword);
                 if (string.IsNullOrEmpty(user.UserID))
                 {
                     validator.AddValidationResult("Password", "E206"); //メールアドレスとパスワードの組合せが正しくありません
