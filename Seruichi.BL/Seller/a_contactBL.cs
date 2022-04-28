@@ -20,9 +20,7 @@ namespace Seruichi.BL
             validator.CheckRequired("ContactKana", model.ContactKana);
             validator.CheckIsDoubleByteKana("ContactKana", model.ContactKana, 50);
             //メールアドレス
-            validator.CheckRequired("ContactAddress", model.ContactAddress);
-            validator.CheckIsHalfWidth("ContactAddress", model.ContactAddress, 100);
-            if (validator.IsValid) validator.CheckIsValidEmail("ContactAddress", model.ContactAddress);
+            validator.CheckSellerMailAddress("ContactAddress", model.ContactAddress);
             //電話番号
             validator.CheckRequired("ContactPhone", model.ContactPhone);
             validator.CheckIsHalfWidth("ContactPhone", model.ContactPhone, 15, RegexFormat.Number);
