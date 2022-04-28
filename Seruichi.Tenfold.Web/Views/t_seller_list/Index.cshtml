@@ -9,49 +9,37 @@
 }
 
 <form id="form1">
-    <header class="bg-surface-primary border-bottom pt-6">
+
+     <main class="py-6 bg-surface-secondary">
         <div class="container-fluid">
-            <div class="mb-npx">
-                <div class="row align-items-center">
-                    <div class="col-sm-6 col-12 mb-4 mb-sm-0">
-                        <h1 class="h2 mb-0 ls-tight">管理 － 売主</h1>
-                    </div>
-                    <div class="col-sm-6 col-12 text-sm-end">
-                        <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
-                              <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
-                    </div>
-                </div>
-                <ul class="nav nav-tabs mt-4 overflow-x border-0">
-                    <li class="nav-item"> <a href="#" class="nav-link font-regular">不動産会社</a> </li>
-                    <li class="nav-item"> <a href="#" class="nav-link active">売主</a> </li>
-                    <li class="nav-item "> <a href="@Url.Action("Index", "t_seller_mansion")" class="nav-link font-regular">物件</a> </li>
-                    <li class="nav-item"> <a href="#" class="nav-link font-regular">物件登録管理</a> </li>
-                    <li class="nav-item"> <a href="#" class="nav-link font-regular">集計</a> </li>
-                </ul>
-            </div>
-        </div>
-    </header>
-    <main class="py-6 bg-surface-secondary">
-        <div class="container-fluid">
+            
             <div class="card shadow border-0 mb-7">
-                <div class="card-header d-md-inline-flex">
-                    <h5 class="mb-0">売主一覧</h5><span class="ps-md-5 text-muted text-sm" id="total_record_up"></span>
+              
+                <div class="card-header">
+                  
+                    <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
+                      
+                     <h1 class="h2 mb-0 ls-tight"> 売主</h1>
+                      <span class="ps-2 text-muted small align-self-end">管理</span>
+                    </div>
+                    <hr class="navbar-divider my-5 opacity-20"><div class="d-inline-flex">
+              <h5 class="mb-0">売主一覧</h5><span class="ps-md-5 text-muted text-sm" id="total_record_up"></span>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover table-nowrap sortMe" id="mansiontable">
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col" class="text-end sort-by" style="width: 100px" data-type="number"><a class="text-decoration-underline" href="#">No.</a></th>
-                                <th scope="col" style="width: 150px" class="sort-status-t-seller-list"><a class="text-decoration-underline" href="#">ステータス</a></th>
-                                <th scope="col" style="width: 40px" class="sort-by"><a class="text-decoration-underline text-center" href="#">無効会員</a></th>
-                                <th scope="col" style="width: 200px" class="sort-by"><a class="text-decoration-underline" href="#">売主CD</a></th>
-                                <th scope="col" style="width: auto" class="sort-mix-td-and-a"><a class="text-decoration-underline" href="#">売主名</a></th>
-                                <th scope="col" style="width: 150px" class="sort-mix-td-and-a"><a class="text-decoration-underline" href="#">居住地</a></th>
+                                <th scope="col" style="width: 20px" class="sort-status-t-seller-list"><a class="text-decoration-underline" href="#">ステータス</a></th>
+                                <th scope="col" style="width: 60px" class="sort-by"><a class="text-decoration-underline text-center" href="#">無効会員</a></th>
+                                <th scope="col" style="width: 120px" class="sort-by"><a class="text-decoration-underline" href="#">売主CD</a></th>
+                                <th scope="col" style="width: 250px" class="sort-mix-td-and-a"><a class="text-decoration-underline" href="#">売主名</a></th>
+                                <th scope="col" style="width: 100px" class="sort-mix-td-and-a"><a class="text-decoration-underline" href="#">居住地</a></th>
                                 <th scope="col" style="width: 180px" class="sort-by"><a class="text-decoration-underline" href="#">登録日時</a></th>
-                                <th scope="col" style="width: 180px" class="sort-by"><a class="text-decoration-underline" href="#">査定依頼日時</a></th>
+                                <th scope="col" style="width: 180px" class="sort-by"><a class="text-decoration-underline" href="#">詳細査定日時</a></th>
                                 <th scope="col" style="width: 180px" class="sort-by"><a class="text-decoration-underline" href="#">買取依頼日時</a></th>
-                                <th scope="col" style="width: 40px" class="text-end sort-by" data-type="number"><a class="text-decoration-underline" href="#">登録数</a></th>
-                                <th scope="col" style="width: 40px" class="text-end sort-by" data-type="number"><a class="text-decoration-underline" href="#">成約数</a></th>
+                                <th scope="col" style="width: 50px" class="text-end sort-by" data-type="number"><a class="text-decoration-underline" href="#">登録数</a></th>
+                                <th scope="col" style="width: 100px" class="text-end sort-by" data-type="number"><a class="text-decoration-underline" href="#">成約数</a></th>
                             </tr>
                         </thead>
                         <tbody>

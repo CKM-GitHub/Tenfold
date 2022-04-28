@@ -10,42 +10,25 @@
 
 }
 
-<div class="h-screen flex-grow-1 overflow-y-lg-auto">
-    <header class="bg-surface-primary border-bottom pt-6">
-        <div class="container-fluid">
-            <div class="mb-npx">
-                <div class="row align-items-center">
-                    <div class="col-sm-6 col-12 mb-4 mb-sm-0">
-                        <h1 class="h2 mb-0 ls-tight">売主 － @lst.SellerName</h1>
-                        <span class="text-muted small">管理</span>
-                    </div>
-                    <div class="col-sm-6 col-12 text-sm-end">
-                        <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
-                              <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
-                    </div>
-                </div>
-                <ul class="nav nav-tabs mt-4 overflow-x border-0">
-                    <li class="nav-item"> <a href="#" class="nav-link font-regular">不動産会社</a> </li>
-                    <li class="nav-item"> <a href="#" class="nav-link active">売主</a> </li>
-                    <li class="nav-item "> <a href="#" class="nav-link font-regular">物件(部屋)</a> </li>
-                    <li class="nav-item"> <a href="#" class="nav-link font-regular">マンション</a> </li>
-                    <li class="nav-item"> <a href="#" class="nav-link font-regular">集計</a> </li>
-                </ul>
-
-            </div>
-        </div>
-    </header>
     <main class="py-6 bg-surface-secondary">
         <div class="container-fluid">
-            <!-- Card stats -->
-            <div class="row g-6 mb-6">
-                <div class="col-12">
-                    <div class="card shadow border-0">
-                        <div class="card-body ">
-                            <div class="justify-content-around align-items-center row">
-                                <div class="align-items-center col-sm-6 col-lg-3">
-                                    <div class="p-md-2 p-1" id="info">
-                                        <div class="text-muted"><span class="text-success">@lst.InvalidFLG</span></div>
+          <!-- Card stats -->
+          <div class="row g-6 mb-6">
+            <div class="col-12">
+              <div class="card shadow border-0">
+                <div class="card-body ">
+                  <div class="justify-content-around align-items-center row">
+                    <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
+                      
+                      <div class="border-end"><a type="button" href="@Url.Action("Index", "t_seller_list")" class="btn btn-secondary me-2">戻る</a></div><h1 class="ps-2 h2 mb-0 ls-tight">売主</h1>
+                      <span class="ps-2 text-muted small align-self-end">管理</span>
+                    </div>
+                    <hr class="navbar-divider my-5 opacity-20">
+                    <div class="align-items-center col-sm-6 col-lg-2  p-0 m-0 border-end">
+                      
+           
+                      <div class="p-md-2 p-1" id="info">
+                        <div class="text-muted"><span class="text-success">@lst.InvalidFLG</span></div>
                                         <div class="text-muted">@lst.SellerKana</div>
                                         <div class="text-muted">
                                             <h2>@lst.SellerName</h2>
@@ -56,7 +39,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-flex flex-column col-sm-6 col-lg-5" id="info">
+                                <div class="d-flex flex-column col-sm-6 col-lg-4  p-0 m-0" id="info">
 
                                     <div class="p-md-1 text-muted cap-fon-form-w500 ">
                                         <span class="fa fa-home bg-light p-1 rounded-circle"></span>
@@ -76,69 +59,69 @@
                                         @lst.MailAddress
                                     </div>
                                 </div>
-                                <div class="d-flex flex-column col-sm-6 col-lg-2 row" id="info">
+                                <div class="d-flex flex-column col-sm-6 col-lg-2 p-0 m-0" id="info">
                                     <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                        <div class="col-12 col-md-6"><span class="fa fa-money bg-light p-1 rounded-circle"></span><span class="text-nowrap">今月課金</span></div>
-                                        <div class="col-12 col-md-6 text-end"><span class="dark text-dark text-nowrap">@lst.BillingAmt 円</span></div>
+                                        <div class="col"><span class="fa fa-money bg-light p-1 rounded-circle"></span><span class="text-nowrap">今月課金</span></div>
+                                        <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.BillingAmt 円</span></div>
                                     </div>
                                     <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                        <div class="col-12 col-md-6">
+                                        <div class="col">
                                             <span class="fa fa-calculator bg-light p-1 rounded-circle"></span><span class="text-nowrap">査定数</span>
                                         </div>
-                                        <div class="col-12 col-md-6 text-end"><span class="dark text-dark text-nowrap">@lst.Assessment_constant 件</span></div>
+                                        <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.Assessment_constant 件</span></div>
                                     </div>
                                     <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                        <div class="col-12 col-md-6">
+                                        <div class="col">
                                             <span class="fa fa-thumbs-o-up bg-light p-1 rounded-circle"></span><span class="text-nowrap">成約数</span>
                                         </div>
-                                        <div class="col-12 col-md-6 text-end"><span class="dark text-dark text-nowrap">@lst.Num_contracts 件</span></div>
+                                        <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.Num_contracts 件</span></div>
                                     </div>
                                     <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                        <div class="col-12 col-md-6">
+                                        <div class="col">
                                             <span class="fa fa-thumbs-o-down bg-light p-1 rounded-circle"></span><span class="text-nowrap">売主辞退数</span>
                                         </div>
-                                        <div class="col-12 col-md-6 text-end"><span class="dark text-dark text-nowrap">@lst.Num_seller_declines 件</span></div>
+                                        <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.Num_seller_declines 件</span></div>
                                     </div>
                                     <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                        <div class="col-12 col-md-6">
+                                        <div class="col">
                                             <span class="fa fa-thumbs-o-down bg-light p-1 rounded-circle"></span><span class="text-nowrap">買主辞退数</span>
                                         </div>
-                                        <div class="col-12 col-md-6 text-end"><span class="dark text-dark text-nowrap">@lst.Num_buyer_declines 件</span></div>
+                                        <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.Num_buyer_declines 件</span></div>
                                     </div>
                                 </div>
 
 
 
-                                <div class="d-flex flex-column col-sm-6 col-lg-2" id="info">
+                                 <div class="d-flex flex-column col-sm-6 col-lg-2 p-0 m-0" id="info">
                                     <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                        <div class="col-12 col-md-6">
+                                        <div class="col">
                                             <span class="fa fa-calendar bg-light p-1 rounded-circle"></span>会員登録日</span>
                                         </div>
-                                        <div class="col-12 col-md-6 text-end"><span class="dark text-dark text-nowrap">@lst.InsertDateTime</span></div>
+                                        <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.InsertDateTime</span></div>
                                     </div>
                                     @*<div class="p-md-1 text-muted w-100 row text-nowrap">
-                                        <div class="col-12 col-md-6">
+                                        <div class="col">
                                             <span class="fa fa-calendar  bg-light p-1 rounded-circle"></span>SMS認証日</span>
                                         </div>
-                                        <div class="col-12 col-md-6 text-end"><span class="dark text-dark text-nowrap">2020/12/15</span></div>
+                                        <div class="col text-end"><span class="dark text-dark text-nowrap">2020/12/15</span></div>
                                     </div>*@
                                     <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                        <div class="col-12 col-md-6">
-                                            <span class="fa fa-calendar  bg-light p-1 rounded-circle"></span>査定依頼日</span>
+                                        <div class="col">
+                                            <span class="fa fa-calendar  bg-light p-1 rounded-circle"></span>詳細査定日</span>
                                         </div>
-                                        <div class="col-12 col-md-6 text-end"><span class="dark text-dark text-nowrap">@lst.DeepAssDateTime</span></div>
+                                        <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.DeepAssDateTime</span></div>
                                     </div>
                                     <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                        <div class="col-12 col-md-6">
+                                        <div class="col">
                                             <span class="fa fa-calendar  bg-light p-1 rounded-circle"></span>買取依頼日</span>
                                         </div>
-                                        <div class="col-12 col-md-6 text-end"><span class="dark text-dark text-nowrap">@lst.PurchReqDateTime</span></div>
+                                        <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.PurchReqDateTime</span></div>
                                     </div>
                                     <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                        <div class="col-12 col-md-6">
+                                        <div class="col">
                                             <span class="fa fa-calendar  bg-light p-1 rounded-circle"></span>最終ログイン日</span>
                                         </div>
-                                        <div class="col-12 col-md-6 text-end"><span class="dark text-dark text-nowrap">@lst.LoginDateTime</span></div>
+                                        <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.LoginDateTime</span></div>
                                     </div>
 
 
@@ -150,34 +133,29 @@
                 </div>
             </div>
             <!-- Card stats -->
-            <div class="row g-6 mb-6">
-                <div class="col-12">
-                    <div class="card shadow border-0">
-                        <div class="card-body">
-                            <ul class="nav nav-pills">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">査定管理</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">情報管理</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">課⾦履歴</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">アカウントフラグ</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">メモ</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="card shadow border-0 mb-7">
-                <div class="card-header d-md-inline-flex">
-                    <h5 class="mb-0">売主査定一覧</h5> <span class="ps-md-5 text-muted text-sm" id="total_record_up"></span>
+            <div class="card-header pt-2 pb-2 ps-4 pe-4">
+              <ul class="nav nav-tabs overflow-x border-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">査定管理</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">情報管理</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">課⾦履歴</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">アカウントフラグ</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">メモ</a>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="card-header d-md-inline-flex">
+                    <h5 class="mb-0">査定管理</h5> <span class="ps-md-5 text-muted text-sm" id="total_record_up"></span>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover table-nowrap sortMe" id="mansiontable">
@@ -189,7 +167,7 @@
                                 <th scope="col" style="width: 200px" class="text-decoration-underline sort-by">不動産会社</th>
                                 <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">登録日時</th>
                                 <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">簡易査定日時</th>
-                                <th scope="col" style="width: 180px" class="text-decoration-underline sort-mix-td-and-a">詳細依頼日時</th>
+                                <th scope="col" style="width: 180px" class="text-decoration-underline sort-mix-td-and-a">詳細査定日時</th>
                                 <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">買取依頼日時</th>
                                 <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">送客日時</th>
                                 <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">終了日時</th>
@@ -381,7 +359,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-12 col-md-6">
+                                                        <div class="col">
                                                             <div class="w-100 p-1 pt-3">
                                                                 <div class="w-100">
                                                                     <div class="row">
