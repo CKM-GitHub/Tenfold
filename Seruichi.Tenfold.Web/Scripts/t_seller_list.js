@@ -40,6 +40,31 @@ function addEvents() {
 
     common.bindValidationEvent('#form1', '');
 
+    $('#StartDate, #EndDate').on('change', function () {
+   
+        const $this = $(this), $start= $('#StartDate').val(), $end = $('#EndDate').val()
+
+        if (!common.checkValidityInput($this)) {
+            return false;
+        }
+
+        let model = {
+            StartDate: $start,
+            EndDate: $end
+        };
+
+        if (model.StartDate && model.EndDate) {
+            if (model.StartDate < model.EndDate) {
+                $("#StartDate").hideError();
+                $("#EndDate").hideError();
+                $("#EndDate").focus();
+                return;
+            }
+            
+        }
+
+    });
+
     const $SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(), $PrefNameSelect = $('#PrefNameSelect option:selected').text(),
         $startdate = $("#StartDate").val(), $enddate = $("#EndDate").val(), $ValidCheck = $("#ValidCheck").val(),
         $InValidCheck = $("#InValidCheck").val(), $expectedCheck = $("#expectedCheck").val(), $negtiatioinsCheck = $("#negtiatioinsCheck").val(),
