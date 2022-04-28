@@ -417,7 +417,7 @@ const common = {
                     $("#StartDate").focus();
                     return;
                 }
-                else {                    $("#StartDate").hideError(this.getMessage('E111'));                    $("#EndDate").hideError(this.getMessage('E111'));                    $("#EndDate").focus();                    return;                }
+                //else {                    //$("#StartDate").hideError(this.getMessage('E111'));                    //$("#EndDate").hideError(this.getMessage('E111'));                    //$("#EndDate").focus();                    //$("#StartDate").val('').removeValidation_required().hideError();                    //$("#EndDate").val('').removeValidation_required().hideError();                   // return;               // }
             }
             if (ischeckboxLenght) {                
                 if (!common.checkboxlengthCheck($ctrl.attr('class'))) {

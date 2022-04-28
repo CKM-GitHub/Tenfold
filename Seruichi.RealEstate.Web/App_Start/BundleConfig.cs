@@ -14,7 +14,10 @@ namespace Seruichi.RealEstate.Web
             bundles.Add(new StyleBundle("~/Content/css/application").Include(
                       "~/Content/typeahead/typeahead.custom.css",
                       "~/Content/css/loading.css",
-                      "~/Content/css/validation.css"));
+                      "~/Content/css/validation.css",
+                       "~/Content/bootstrap/bootstrap.min.css",
+                      "~/Content/fonts/font-awesome.min.css"
+                      ));
 
             bundles.Add(new ScriptBundle("~/Content/scripts/application").Include(
                       "~/Content/typeahead/typeahead.bundle.min.js",
@@ -23,14 +26,18 @@ namespace Seruichi.RealEstate.Web
 
             //t_login
             bundles.Add(new StyleBundle("~/Content/r_login").Include(
-                      "~/Content/r_login/bootstrap/css/bootstrap.min.css",
-                      "~/Content/r_login/fonts/font-awesome.min.css",
-                      "~/Content/r_login/fonts/ionicons.min.css",
-                      "~/Content/r_login/css/Clients-UI.css",
-                      "~/Content/r_login/css/Contact-Form-Clean.css",
-                      "~/Content/r_login/css/Login-Form-Clean.css",
-                      "~/Content/r_login/css/Soft-UI-Aside-Navbar.css",
-                      "~/Content/r_login/css/style.css"
+                       "~/Content/fonts/ionicons.min.css",
+                      "~/Content/css/Clients-UI.css",
+                      "~/Content/css/Contact-Form-Clean.css",
+                      "~/Content/css/Login-Form-Clean.css",
+                      "~/Content/css/Soft-UI-Aside-Navbar.css",
+                      "~/Content/css/style.css"
+                      ));
+
+            //css common
+            bundles.Add(new StyleBundle("~/Content/realEstate_css_common").Include(
+                      "~/Content/css/style.css",
+                      "~/Content/css/index.css"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/r_login").Include(
