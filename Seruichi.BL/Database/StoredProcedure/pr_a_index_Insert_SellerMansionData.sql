@@ -217,7 +217,7 @@ BEGIN
     )
     SELECT
          @SellerMansionID
-        ,ROW_NUMBER() OVER(ORDER BY A.StationCD)
+        ,ROW_NUMBER() OVER(ORDER BY A.RowNo)
         ,A.StationCD
         ,CASE WHEN B.StationCD IS NULL OR B.StationCD = A.StationCD THEN 0 ELSE 1 END
         ,A.Distance

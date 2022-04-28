@@ -1,8 +1,9 @@
 ﻿using Models;
+using Seruichi.Common;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using Seruichi.Common;
+using System.Linq;
 
 namespace Seruichi.BL
 {
@@ -103,6 +104,28 @@ namespace Seruichi.BL
             //固定資産税
             validator.CheckRequiredNumber("PropertyTax", model.PropertyTax, false);
             validator.CheckIsNumeric("PropertyTax", model.PropertyTax, 9, 0);
+
+            if (validator.IsValid)
+            {
+                foreach (var item in model.MansionStationList)
+                {
+                    if (!string.IsNullOrEmpty(item.StationCD))
+                    {
+                        if (model.MansionStationList.Any(r => r.LineCD == item.LineCD && r.StationCD == item.StationCD && r.RowNo < item.RowNo))
+                        {
+                            validator.AddValidationResult("StationCD_" + item.RowNo.ToStringOrEmpty(), "E210");
+                        }
+                    }
+                }
+                if (Utilities.GetSysDateTime().ToString("yyyyMM").ToInt32(0) < model.ConstYYYYMM.ToInt32(0))
+                {
+                    validator.AddValidationResult("ConstYYYYMM", "E208");
+                }
+                if (model.Floors.ToInt32(0) < model.LocationFloor.ToInt32(0))
+                {
+                    validator.AddValidationResult("LocationFloor", "E209");
+                }
+            }
 
             string errorcd = "";
 

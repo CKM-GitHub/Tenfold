@@ -130,7 +130,7 @@ namespace Seruichi.BL
             //FAX番号
             validator.CheckIsHalfWidth("Fax", model.Fax, 15, RegexFormat.Number);
             //メールアドレス
-            validator.CheckRequired("MailAddress", model.MailAddress);
+            validator.CheckSellerMailAddress("MailAddress", model.MailAddress);
             if (!new a_loginBL().CheckDuplicateMailAddresses(model.MailAddress))
             {
                 validator.AddValidationResult("MailAddress", "E203"); //既に登録済みのメールアドレスです

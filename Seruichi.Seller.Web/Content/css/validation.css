@@ -19,14 +19,10 @@
     display: none;
 }
 
-input.cap-is-invalid:not([type="radio"]) {
+input.cap-is-invalid:not([type="radio"]), select.cap-is-invalid, textarea.cap-is-invalid {
     border-color: #dc3545;
 }
 
-select.cap-is-invalid {
-    border-color: #dc3545;
-}
-
-textarea.cap-is-invalid {
-    border-color: #dc3545;
-}
+    select.cap-is-invalid:focus {
+        outline: solid 1px #dc3545;
+    }

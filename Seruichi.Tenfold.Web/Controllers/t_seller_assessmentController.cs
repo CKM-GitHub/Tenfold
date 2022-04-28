@@ -94,6 +94,7 @@ namespace Seruichi.Tenfold.Web.Controllers
         [HttpPost]
         public ActionResult Get_PopupFor_Home(t_seller_assessment_Popup_Model model)
         {
+            strSellerMansionID = model.SellerMansionID;
             t_seller_assessmentBL bl = new t_seller_assessmentBL();
             var dt = bl.Get_PopupFor_Home(model);
             return OKResult(DataTableToJSON(dt));
@@ -110,6 +111,21 @@ namespace Seruichi.Tenfold.Web.Controllers
         {
             t_seller_assessmentBL bl = new t_seller_assessmentBL();
             var dt = bl.Get_PopupFor_ResultType_2(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+        [HttpPost]
+        public ActionResult Get_PopupFor_Detail(t_seller_assessment_Popup_Model model)
+        {
+            t_seller_assessmentBL bl = new t_seller_assessmentBL();
+            var dt = bl.Get_PopupFor_Detail(strSellerMansionID);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult Get_PopupFor_Seller(t_seller_assessment_Popup_Model model)
+        {
+            t_seller_assessmentBL bl = new t_seller_assessmentBL();
+            var dt = bl.Get_PopupFor_Seller(strSellerCD);
             return OKResult(DataTableToJSON(dt));
         }
     }

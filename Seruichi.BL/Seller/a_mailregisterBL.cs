@@ -92,7 +92,7 @@ namespace Seruichi.BL
             ValidatorAllItems validator = new ValidatorAllItems();
 
             //メールアドレス
-            validator.CheckRequired("NewMailAddress", model.NewMailAddress);
+            validator.CheckSellerMailAddress("NewMailAddress", model.NewMailAddress);
             if (!new a_loginBL().CheckDuplicateMailAddresses(model.NewMailAddress))
             {
                 validator.AddValidationResult("NewMailAddress", "E203"); //既に登録済みのメールアドレスです
