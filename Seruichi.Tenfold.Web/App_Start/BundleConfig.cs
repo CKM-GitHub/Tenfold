@@ -13,7 +13,11 @@ namespace Seruichi.Tenfold.Web
             bundles.Add(new StyleBundle("~/Content/css/application").Include(                      
                       "~/Content/typeahead/typeahead.custom.css",
                       "~/Content/css/loading.css",
-                      "~/Content/css/validation.css"));
+                      "~/Content/css/validation.css",
+                       "~/Content/bootstrap/bootstrap.min.css",
+                      "~/Content/fonts/font-awesome.min.css",
+                      "~/Content/css/jquery.dataTables.min.css"
+                      ));
 
             bundles.Add(new ScriptBundle("~/Content/scripts/application").Include(
                       "~/Content/typeahead/typeahead.bundle.min.js",
@@ -22,65 +26,31 @@ namespace Seruichi.Tenfold.Web
 
             //t_login
             bundles.Add(new StyleBundle("~/Content/t_login").Include(
-                      "~/Content/t_login/bootstrap/css/bootstrap.min.css",
-                      "~/Content/t_login/fonts/font-awesome.min.css",
-                      "~/Content/t_login/fonts/ionicons.min.css",
-                      "~/Content/t_login/css/Clients-UI.css",
-                      "~/Content/t_login/css/Contact-Form-Clean.css",
-                      "~/Content/t_login/css/Login-Form-Clean.css",
-                      "~/Content/t_login/css/Soft-UI-Aside-Navbar.css",
-                      "~/Content/t_login/css/style.css"
+                      "~/Content/fonts/ionicons.min.css",
+                      "~/Content/css/Clients-UI.css",
+                      "~/Content/css/Contact-Form-Clean.css",
+                      "~/Content/css/Login-Form-Clean.css",
+                      "~/Content/css/Soft-UI-Aside-Navbar.css",
+                      "~/Content/css/style.css"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/t_login").Include(
                      "~/Scripts/t_login.js"));
 
-            //t_seller_mansion
-            bundles.Add(new StyleBundle("~/Content/t_seller_mansion").Include(
-                      "~/Content/t_dashboard/bootstrap/css/bootstrap.min.css",
-                      "~/Content/fonts/font-awesome.min.css",
-                      "~/Content/t_dashboard/css/style.css",
-                      "~/Content/t_dashboard/css/index.css",
-                      "~/Content/css/validation.css",
-                      "~/Content/css/loading.css"
+            //css common
+            bundles.Add(new StyleBundle("~/Content/tenfold_css_common").Include(
+                      "~/Content/css/style.css",
+                      "~/Content/css/index.css"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/t_seller_mansion").Include(
                      "~/Scripts/t_seller_mansion.js"));
 
-            //t_seller_list
-            bundles.Add(new StyleBundle("~/Content/t_seller_list").Include(
-                      "~/Content/t_seller_list/bootstrap/css/bootstrap.min.css",
-                      "~/Content/t_seller_list/fonts/font-awesome.min.css",
-                      "~/Content/t_seller_list/css/style.css",
-                      "~/Content/t_seller_list/css/index.css",
-                      "~/Content/css/validation.css"
-                      ));
-
             bundles.Add(new ScriptBundle("~/bundles/t_seller_list").Include(
                      "~/Scripts/t_seller_list.js"));
 
-            //t_dashboard
-            bundles.Add(new StyleBundle("~/Content/t_dashboard").Include(
-                      "~/Content/t_dashboard/bootstrap/css/bootstrap.min.css",
-                      "~/Content/fonts/font-awesome.min.css",
-                      "~/Content/t_dashboard/css/style.css",
-                      "~/Content/t_dashboard/css/index.css",
-                      "~/Content/t_dashboard/css/jquery.dataTables.min.css"
-                      ));
-
             bundles.Add(new ScriptBundle("~/bundles/t_dashboard").Include(
                      "~/Scripts/t_dashboard.js"));
-
-
-
-            //t_seller_assessment
-            bundles.Add(new StyleBundle("~/Content/t_seller_assessment").Include(
-                      "~/Content/t_dashboard/bootstrap/css/bootstrap.min.css",
-                      "~/Content/fonts/font-awesome.min.css",
-                      "~/Content/t_dashboard/css/style.css",
-                      "~/Content/t_dashboard/css/index.css"
-                      ));
 
             bundles.Add(new ScriptBundle("~/bundles/t_seller_assessment").Include(
                      "~/Scripts/t_seller_assessment.js"));

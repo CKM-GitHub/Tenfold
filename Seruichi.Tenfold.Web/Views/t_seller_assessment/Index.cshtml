@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/t_seller_assessment/_t_seller_assessmentLayout.cshtml";
 }
 @section styles{
-    @Styles.Render("~/Content/t_seller_assessment")
+    @Styles.Render("~/Content/tenfold_css_common")
 }
 
 @{
@@ -280,94 +280,143 @@
 
                                                     @*@Html.Partial("t_seller_assessment/_t_seller_assessment_P_home")*@
                                                 </div>
-                                                @Html.Partial("t_seller_assessment/_t_seller_assessment_P_profile")
-                                                @Html.Partial("t_seller_assessment/_t_seller_assessment_P_contact")
 
+                                                <!--Detail-->
+                                                <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                                                     aria-labelledby="pills-profile-tab">
+                                                    <hr class="navbar-divider my-5 opacity-20">
+                                                    <div class="card shadow border-0">
+                                                        <div class="card-body " id="SNameAndRoomNo1">
+                                                            <!--header here-->
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--Result Type-->
-                            <div class="col-12 col-md-7">
-                                <div class="card shadow border-0">
-                                    <div class="card-body " id="ResultDate">
-                                        <!--Asessment Date Time here-->
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 col-12">
-                                        <div class="w-100 p-1 pt-3">
-                                            <div class="w-100">
-                                                <div class="row">
-                                                    <div class="col-xl-12">
-                                                        <div class="card">
-                                                            <div class="card-header pb-0">
-                                                                <div class="card-actions float-right">
-
+                                                        </div>
+                                                    </div>
+                                                    <hr class="navbar-divider my-5 opacity-20">
+                                                    <div class="card shadow border-0">
+                                                        <div class="card-body ">
+                                                            <div class="row">
+                                                                <div class="col-4" id="Detail_1">
+                                                                    <!--data list here-->
                                                                 </div>
-                                                                <h5 class="card-title mb-0">マンション査定結果トップ５</h5>
-                                                            </div>
-                                                            <div class="card-body" style="width:100%;overflow-x: auto;max-height: 480px;">
-                                                                <table class="table table-striped" style="width:100%;overflow-x: auto;" id="tableType1">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th></th>
-                                                                            <th>不動産会社</th>
-                                                                            <th class="text-end">買取価格</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                      <!--here type 1-->
-                                                                    </tbody>
-                                                                </table>
+                                                                <div class="col-4" id="Detail_2">
+                                                                    <!--data list here-->
+                                                                </div>
+                                                                <div class="col-4" id="Detail_3">
+                                                                    <!--data list here-->
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
-
                                                 </div>
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="w-100 p-1 pt-3">
-                                            <div class="w-100">
-                                                <div class="row">
-                                                    <div class="col-xl-12">
-                                                        <div class="card">
-                                                            <div class="card-header pb-0">
-                                                                <div class="card-actions float-right">
+                                                @*@Html.Partial("t_seller_assessment/_t_seller_assessment_P_profile")*@
+                                                @*@Html.Partial("t_seller_assessment/_t_seller_assessment_P_contact")*@
+                                                <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+                                                     aria-labelledby="pills-contact-tab">
 
-                                                                </div>
-                                                                <h5 class="card-title mb-0">エリア査定結果トップ５</h5>
+                                                    <hr class="navbar-divider my-5 opacity-20">
+                                                    <div class="card shadow border-0">
+                                                        <div class="card-body ">
+                                                            <!--header here-->
+
+                                                        </div>
+                                                    </div>
+                                                    <hr class="navbar-divider my-3 opacity-20">
+                                                    <div class="card shadow border-0">
+                                                        <div class="card-body ">
+                                                            <div class="justify-content-around align-items-center row" id="Seller_1">
+                                                                <!--data list here-->
+
                                                             </div>
-                                                            <div class="card-body" style="width:100%;overflow-x: auto;max-height: 480px;">
-                                                                <table class="table table-striped" style="width:100%;overflow-x: auto;" id="tableType2">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th></th>
-                                                                            <th>不動産会社</th>
-                                                                            <th class="text-end">買取価格</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <!--here type 2-->
-                                                                    </tbody>
-                                                                </table>
+                                                            <hr class="navbar-divider my-5 opacity-20">
+                                                            <div class="justify-content-around align-items-center row" id="Seller_2">
+                                                                <!--data list here-->
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @*@Html.Partial("t_seller_assessment/_t_seller_assessment_P_result")*@
-                        </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Result Type-->
+                                                <div class="col-12 col-md-7">
+                                                    <div class="card shadow border-0">
+                                                        <div class="card-body " id="ResultDate">
+                                                            <!--Asessment Date Time here-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-12">
+                                                            <div class="w-100 p-1 pt-3">
+                                                                <div class="w-100">
+                                                                    <div class="row">
+                                                                        <div class="col-xl-12">
+                                                                            <div class="card">
+                                                                                <div class="card-header pb-0">
+                                                                                    <div class="card-actions float-right">
+
+                                                                                    </div>
+                                                                                    <h5 class="card-title mb-0">マンション査定結果トップ５</h5>
+                                                                                </div>
+                                                                                <div class="card-body" style="width:100%;overflow-x: auto;max-height: 480px;">
+                                                                                    <table class="table table-striped" style="width:100%;overflow-x: auto;" id="tableType1">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th></th>
+                                                                                                <th>不動産会社</th>
+                                                                                                <th class="text-end">買取価格</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <!--here type 1-->
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12 col-md-6">
+                                                            <div class="w-100 p-1 pt-3">
+                                                                <div class="w-100">
+                                                                    <div class="row">
+                                                                        <div class="col-xl-12">
+                                                                            <div class="card">
+                                                                                <div class="card-header pb-0">
+                                                                                    <div class="card-actions float-right">
+
+                                                                                    </div>
+                                                                                    <h5 class="card-title mb-0">エリア査定結果トップ５</h5>
+                                                                                </div>
+                                                                                <div class="card-body" style="width:100%;overflow-x: auto;max-height: 480px;">
+                                                                                    <table class="table table-striped" style="width:100%;overflow-x: auto;" id="tableType2">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th></th>
+                                                                                                <th>不動産会社</th>
+                                                                                                <th class="text-end">買取価格</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <!--here type 2-->
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @*@Html.Partial("t_seller_assessment/_t_seller_assessment_P_result")*@
+                                            </div>
 
                     </div>
                     <div class="modal-footer">

@@ -8,6 +8,8 @@ $(function () {
     _url.Get_PopupFor_Home = common.appPath + '/t_seller_assessment/Get_PopupFor_Home';
     _url.Get_PopupFor_ResultType_1 = common.appPath + '/t_seller_assessment/Get_PopupFor_ResultType_1';
     _url.Get_PopupFor_ResultType_2 = common.appPath + '/t_seller_assessment/Get_PopupFor_ResultType_2';
+    _url.Get_PopupFor_Detail = common.appPath + '/t_seller_assessment/Get_PopupFor_Detail';
+    _url.Get_PopupFor_Seller = common.appPath + '/t_seller_assessment/Get_PopupFor_Seller';
     addEvents();
 });
 
@@ -142,6 +144,11 @@ function addEvents() {
         $('#ResultDate').empty();
         $('#tableType1 tbody').empty();
         $('#tableType2 tbody').empty();
+        $('#html_Detail_1').empty();
+        $('#html_Detail_2').empty();
+        $('#html_Detail_3').empty();
+        $('#html_Seller_1').empty();
+        $('#html_Seller_2').empty();
     });
     $('#btnUpClose').on('click', function () {
         $('#SNameAndRoomNo').empty();
@@ -149,9 +156,62 @@ function addEvents() {
         $('#ResultDate').empty();
         $('#tableType1 tbody').empty();
         $('#tableType2 tbody').empty();
+        $('#html_Detail_1').empty();
+        $('#html_Detail_2').empty();
+        $('#html_Detail_3').empty();
+        $('#html_Seller_1').empty();
+        $('#html_Seller_2').empty();
+        
+    });
+
+
+    $('#pills-profile-tab').on('click', function () {
+        const fd = new FormData(document.forms.form1);
+        const model = Object.fromEntries(fd);
+        Get_PopupFor_Detail(model, $form);
+    });
+
+    $('#pills-contact-tab').on('click', function () {
+        const fd = new FormData(document.forms.form1);
+        const model = Object.fromEntries(fd);
+        Get_PopupFor_Seller(model, $form);
+          
+    });
+}
+
+function Get_PopupFor_Detail(model, $form){
+    common.callAjaxWithLoading(_url.Get_PopupFor_Detail, model, this, function (result) {
+        if (result && result.isOK) {
+
+            Bind_Popup_Detail(result.data);
+        }
+        if (result && !result.isOK) {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                $form.getInvalidItems().get(0).focus();
+            }
+        }
     });
     
+}
 
+function Get_PopupFor_Seller(model, $form) {
+    common.callAjaxWithLoading(_url.Get_PopupFor_Seller, model, this, function (result) {
+        if (result && result.isOK) {
+
+            Bind_Popup_Seller(result.data);
+        }
+        if (result && !result.isOK) {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                $form.getInvalidItems().get(0).focus();
+            }
+        }
+    });
 }
 
 
@@ -353,6 +413,7 @@ function Get_PopupFor_Home(id) {
             }
         }
     });
+
 }
 
 
@@ -424,3 +485,203 @@ function Bind_Popup_ResultType_2(result) {
    
     $('#tableType2 tbody').append(html_Type2);
 }
+
+
+function Bind_Popup_Detail(result) {
+    let data = JSON.parse(result);
+    let html_Detail_header = "";
+    let html_Detail_1 = "";
+    let html_Detail_2 = "";
+    let html_Detail_3 = "";
+    for (var i = 0; i < data.length; i++) {
+
+        html_Detail_1 = '<div class="d-inline-flex pb-1">\
+            <div class="row">\
+                <div class="">\
+                    <h6 class="align-self-center"><strong>建物構造</strong><br></h6>\
+                            </div>\
+                <div class=""><span class="align-self-start">'+dt.Row[0]["StructuralKBN"]+'<br></span></div>\
+                    </div>\
+                </div>\
+                <div class="d-inline-flex pb-1">\
+                    <div class="row">\
+                        <div class="">\
+                            <h6 class="align-self-center"><strong>築年月</strong><br></h6>\
+                            </div>\
+                            <div class=""><span class="align-self-start">'+ dt.Row[0]["ConstYYYYMM"] +'<br></span></div>\
+                            </div>\
+                        </div>\
+                        <div class="d-inline-flex pb-1">\
+                            <div class="row">\
+                                <div class="">\
+                                    <h6 class="align-self-center"><strong>部屋番号</strong><br></h6>\
+                            </div>\
+                                    <div class=""><span class="align-self-start">'+ dt.Row[0]["RoomNumber"] +'<br></span></div>\
+                                    </div>\
+                                </div>\
+                                <div class="d-inline-flex pb-1">\
+                                    <div class="row">\
+                                        <div class="">\
+                                            <h6 class="align-self-center"><strong>専有面積</strong><br></h6>\
+                            </div>\
+                                            <div class=""><span class="align-self-start">'+ dt.Row[0]["RoomNumber"].toFixed(2) +' ㎡<br></span></div>\
+                                            </div>\
+                                        </div>\
+                                        <div class="d-inline-flex pb-1">\
+                                            <div class="row">\
+                                                <div class="">\
+                                                    <h6 class="align-self-center"><strong>バルコニー面積　</strong><br></h6>\
+                            </div>\
+                                                    <div class=""><span class="align-self-start">'+ dt.Row[0]["BalconyArea"].toFixed(2) +' ㎡<br></span></div>\
+                                                    </div>\
+                                                </div>\
+                                                <div class="d-inline-flex pb-1">\
+                                                    <div class="row">\
+                                                        <div class="">\
+                                                            <h6 class="align-self-center"><strong>主採光</strong><br></h6>\
+                            </div>\
+                                                            <div class=""><span class="align-self-start">'+ dt.Row[0]["Direction"] +'<br></span></div>\
+                                                            </div>\
+                                                        </div>'
+
+
+        html_Detail_2 = '<div class="d-inline-flex pb-1">\
+            < div class="row" >\
+                <div class="">\
+                    <h6 class="align-self-center"><strong>部屋数</strong><br></h6>\
+                            </div>\
+                    <div class=""><span class="align-self-start">'+ dt.Row[0]["FloorType"] +'部屋数<br></span></div>\
+                    </div>\
+                </div>\
+                <div class="d-inline-flex pb-1">\
+                    <div class="row">\
+                        <div class="">\
+                            <h6 class="align-self-center"><strong>バス・トイレ　</strong><br></h6>\
+                            </div>\
+                            <div class=""><span class="align-self-start">'+ dt.Row[0]["BathKBN"] +'<br></span></div>\
+                            </div>\
+                        </div>\
+                        <div class="d-inline-flex pb-1">\
+                            <div class="row">\
+                                <div class="">\
+                                    <h6 class="align-self-center"><strong>土地権利　</strong><br></h6>\
+                            </div>\
+                                    <div class=""><span class="align-self-start">land rights<br></span></div>\
+                                    </div>\
+                                </div>\
+                                <div class="d-inline-flex pb-1">\
+                                    <div class="row">\
+                                        <div class="">\
+                                            <h6 class="align-self-center"><strong>現況</strong><br></h6>\
+                            </div>\
+                                            <div class=""><span class="align-self-start">'+ dt.Row[0]["CurrentKBN"] +'<br></span></div>\
+                                            </div>\
+                                        </div>\
+                                        <div class="d-inline-flex pb-1">\
+                                            <div class="row">\
+                                                <div class="">\
+                                                    <h6 class="align-self-center"><strong>管理方式</strong><br></h6>\
+                            </div>\
+                                                    <div class=""><span class="align-self-start">'+ dt.Row[0]["ManagementKBN"] +'<br></span></div>\
+                                                    </div>\
+                                                </div>\
+                                                <div class="d-inline-flex pb-1">\
+                                                    <div class="row">\
+                                                        <div class="">\
+                                                            <h6 class="align-self-center"><strong>売却希望時期　</strong><br></h6>\
+                            </div>\
+                                                            <div class=""><span class="align-self-start">'+ dt.Row[0]["DesiredTime"] +'<br></span></div>\
+                                                            </div>\
+                                                        </div>'
+
+
+        html_Detail_3 = '<div class="d-inline-flex pb-1">\
+            <div class="row">\
+                <div class="">\
+                    <h6 class="align-self-center"><strong>家賃</strong><br></h6>\
+                            </div>\
+                    <div class=""><span class="align-self-start">'+ dt.Row[0]["DesiredTime"] +'円<br></span></div>\
+                    </div>\
+                </div>\
+                <div class="d-inline-flex pb-1">\
+                    <div class="row">\
+                        <div class="">\
+                            <h6 class="align-self-center"><strong>管理賃</strong><br></h6>\
+                            </div>\
+                            <div class=""><span class="align-self-start">'+ dt.Row[0]["DesiredTime"] +'円<br></span></div>\
+                            </div>\
+                        </div>\
+                        <div class="d-inline-flex pb-1">\
+                            <div class="row">\
+                                <div class="">\
+                                    <h6 class="align-self-center"><strong>修繕積立金</strong><br></h6>\
+                            </div>\
+                                    <div class=""><span class="align-self-start">'+ dt.Row[0]["DesiredTime"] +'円<br></span></div>\
+                                    </div>\
+                                </div>\
+                                <div class="d-inline-flex pb-1">\
+                                    <div class="row">\
+                                        <div class="">\
+                                            <h6 class="align-self-center"><strong>その他費用</strong><br></h6>\
+                            </div>\
+                                            <div class=""><span class="align-self-start">'+ dt.Row[0]["DesiredTime"] +'円<br></span></div>\
+                                            </div>\
+                                        </div>\
+                                        <div class="d-inline-flex pb-1">\
+                                            <div class="row">\
+                                                <div class="">\
+                                                    <h6 class="align-self-center"><strong>固定資産税</strong><br></h6>\
+                            </div>\
+                                                    <div class=""><span class="align-self-start">'+ dt.Row[0]["DesiredTime"] +'円<br></span></div>\
+                                                    </div>\
+                                                </div>'
+    }
+    $('#Detail_1').append(html_Detail_1);
+    $('#Detail_2').append(html_Detail_2);
+    $('#Detail_3').append(html_Detail_3);
+}
+
+function Bind_Popup_Seller(result) {
+    let data = JSON.parse(result);
+    alert(data);
+    let html_Seller_1 = "";
+    let html_Seller_2 = "";
+    for (var i = 0; i < data.length; i++) {
+
+        html_Seller_1 = '<div class="align-items-center col-12">\
+            <div class="p-md-2 p-1" id = "info">\
+                <div class="text-muted"><span class="text-success">'+ dt.Row[0]["InvalidFLG"] +'</span></div>\
+                <div class="text-muted">'+ dt.Row[0]["InvalidFLG"] +'</div>\
+                <div class="text-muted">\
+                    <h2>'+ dt.Row[0]["SellerKana"] +'</h2>\
+                </div>\
+                <div class="p-md-1 text-muted">\
+                    <span class="fa fa-id-card bg-light p-1 rounded-circle"></span>'+ dt.Row[0]["SellerCD"] +'\
+                        </div>\
+                    </div>\
+                </div>'
+
+        html_Seller_2 = '<div class="d-flex flex-column col-12" id="info">\
+            <div class="p-md-1 text-muted cap-fon-form-w500 ">\
+                <span class="fa fa-home bg-light p-1 rounded-circle"></span>'+ dt.Row[0]["Address"] +'\
+                    </div>\
+            <div class="p-md-1 pt-sm-1 text-muted">\
+                <span class="fa fa-phone bg-light p-1 rounded-circle"></span> '+ dt.Row[0]["Phone"] +'\
+                    </div>\
+            <div class="p-md-1 pt-sm-1 text-muted">\
+                <span class="fa fa-mobile bg-light p-1 ps-2 pe-2 rounded-circle"></span> '+ dt.Row[0]["Mobile_Phone"] +'\
+                    </div>\
+            <div class="p-md-1 text-muted">\
+                <span class="fa fa-envelope-o bg-light p-1 rounded-circle"></span>'+ dt.Row[0]["MailAddress"] +'\
+                    </div>\
+                </div>'
+
+    }
+    $('#Seller_1').append(html_Seller_1);
+    $('#Seller_2').append(html_Seller_2);
+}
+
+
+
+
+
