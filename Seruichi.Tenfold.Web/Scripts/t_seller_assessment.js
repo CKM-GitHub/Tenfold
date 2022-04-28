@@ -1,4 +1,6 @@
 ﻿const _url = {};
+let html_Home_Menu = "";
+
 
 $(function () {
     setValidation();
@@ -139,47 +141,42 @@ function addEvents() {
 
 
     $('#btnDownClose').on('click', function () {
-        $('#SNameAndRoomNo').empty();
-        $('#ekikoutsu').empty();
-        $('#ResultDate').empty();
-        $('#tableType1 tbody').empty();
-        $('#tableType2 tbody').empty();
-        $('#html_Detail_1').empty();
-        $('#html_Detail_2').empty();
-        $('#html_Detail_3').empty();
-        $('#html_Seller_1').empty();
-        $('#html_Seller_2').empty();
+        //$('#SNameAndRoomNo').empty();
+        //$('#ekikoutsu').empty();
+        //$('#ResultDate').empty();
+        //$('#tableType1 tbody').empty();
+        //$('#tableType2 tbody').empty();
+        location.reload();
     });
     $('#btnUpClose').on('click', function () {
-        $('#SNameAndRoomNo').empty();
-        $('#ekikoutsu').empty();
-        $('#ResultDate').empty();
-        $('#tableType1 tbody').empty();
-        $('#tableType2 tbody').empty();
-        $('#html_Detail_1').empty();
-        $('#html_Detail_2').empty();
-        $('#html_Detail_3').empty();
-        $('#html_Seller_1').empty();
-        $('#html_Seller_2').empty();
-        
+        //$('#SNameAndRoomNo').empty();
+        //$('#ekikoutsu').empty();
+        //$('#ResultDate').empty();
+        //$('#tableType1 tbody').empty();
+        //$('#tableType2 tbody').empty();
+        location.reload();
     });
 
 
     $('#pills-profile-tab').on('click', function () {
-        const fd = new FormData(document.forms.form1);
-        const model = Object.fromEntries(fd);
-        Get_PopupFor_Detail(model, $form);
+        $('#header1').empty();
+        $('#Detail_1').empty();
+        $('#Detail_2').empty();
+        $('#Detail_3').empty();
+        Get_PopupFor_Detail();
     });
 
     $('#pills-contact-tab').on('click', function () {
-        const fd = new FormData(document.forms.form1);
-        const model = Object.fromEntries(fd);
-        Get_PopupFor_Seller(model, $form);
-          
+        $('#header2').empty();
+        $('#Seller_1').empty();
+        $('#Seller_2').empty();
+        Get_PopupFor_Seller();
+
     });
 }
 
-function Get_PopupFor_Detail(model, $form){
+function Get_PopupFor_Detail() {
+    let model = {};
     common.callAjaxWithLoading(_url.Get_PopupFor_Detail, model, this, function (result) {
         if (result && result.isOK) {
 
@@ -190,14 +187,13 @@ function Get_PopupFor_Detail(model, $form){
             for (key in errors) {
                 const target = document.getElementById(key);
                 $(target).showError(errors[key]);
-                $form.getInvalidItems().get(0).focus();
             }
         }
     });
-    
 }
 
-function Get_PopupFor_Seller(model, $form) {
+function Get_PopupFor_Seller() {
+    let model = {};
     common.callAjaxWithLoading(_url.Get_PopupFor_Seller, model, this, function (result) {
         if (result && result.isOK) {
 
@@ -208,7 +204,7 @@ function Get_PopupFor_Seller(model, $form) {
             for (key in errors) {
                 const target = document.getElementById(key);
                 $(target).showError(errors[key]);
-                $form.getInvalidItems().get(0).focus();
+
             }
         }
     });
@@ -281,7 +277,7 @@ function Bind_tbody(result) {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger fst-normal";
                 _sort_checkbox = "Eight";
             }
-            else if (_letter == "買"  && data[i]["ステータス"] == "買主辞退") {
+            else if (_letter == "買" && data[i]["ステータス"] == "買主辞退") {
                 _letter = "辞";
                 data[i]["ステータス"] = "買主辞退";
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-dark text-white fst-normal fst-normal";
@@ -298,7 +294,7 @@ function Bind_tbody(result) {
         html += '<tr>\
             <td class= "text-end" > ' + data[i]["NO"] + '</td>\
             <td class="'+ _sort_checkbox + '"><i class="' + _class + '">' + _letter + '</i><span class="font-semibold">' + data[i]["ステータス"] + '</span></td>\
-            <td><a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal" data-bs-target="#mansion" href="#" id='+ data[i]["SellerMansionID"] + '&' + data[i]["AssReqID"] + '&' +DeepDatetime+' onclick="Get_PopupFor_Home(this.id)">' + data[i]["マンション名＆部屋番号"]+'</a></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal" data-bs-target="#mansion" href="#" id='+ data[i]["SellerMansionID"] + '&' + data[i]["AssReqID"] + '&' + DeepDatetime + ' onclick="Get_PopupFor_Home(this.id)">' + data[i]["マンション名＆部屋番号"] + '</a></td>\
             <td><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["RealECD"] + '&t_reale_purchase' + ' onclick="l_logfunction(this.id)">' + data[i]["不動産会社"] + '</a></td>\
             <td class="text-nowrap">' + data[i]["登録日時"] + '</td>\
             <td class="text-nowrap">' + data[i]["簡易査定日時"] + '</td>\
@@ -339,12 +335,12 @@ function l_logfunction(id) {
             if (result && result.isOK) {
                 if (model.LogStatus = "t_reale_purchase") {
                     //alert("https://www.seruichi.com/t_reale_purchase?RealECD=" + model.LogId);
-                   
+
                 }
-                else if (model.LogStatus = "t_seller_assessment_detail" ) {
-                    
+                else if (model.LogStatus = "t_seller_assessment_detail") {
+
                     //alert("https://www.seruichi.com/t_seller_assessment_detail?AssReqID=" + model.LogId);
-                   
+
                 }
             }
             if (result && !result.isOK) {
@@ -353,16 +349,22 @@ function l_logfunction(id) {
 }
 
 function Popup_function(id) {
-    
-    var Popupurl = common.appPath+'/t_seller_assessment/PopUpPage?smID=' + id;
+
+    var Popupurl = common.appPath + '/t_seller_assessment/PopUpPage?smID=' + id;
     //window.open(Popupurl, "WindowPopup", 'width=700px,height=700px,top=150,left=250');
     window.location.href = Popupurl;
 }
 
 function Get_PopupFor_Home(id) {
-    var Date = id.split('&')[2];
-    var Time = id.split('&')[3];
-    var DeepAssDateTime = Date + ' ' + Time;
+    var DeepAssDateTime = '';
+    if (id.split('&')[2] =='')
+    {
+    }
+    else {
+        var Date = id.split('&')[2];
+        var Time = id.split('&')[3];
+        DeepAssDateTime = Date + ' ' + Time;
+    }
 
     let model = {
         SellerMansionID: id.split('&')[0],
@@ -371,7 +373,6 @@ function Get_PopupFor_Home(id) {
 
     common.callAjaxWithLoading(_url.Get_PopupFor_Home, model, this, function (result) {
         if (result && result.isOK) {
-
             Bind_Popup_Home(result.data);
         }
         if (result && !result.isOK) {
@@ -421,22 +422,22 @@ function Get_PopupFor_Home(id) {
 function Bind_Popup_Home(result) {
     let data = JSON.parse(result);
     let html_HomeList = "";
-    let html_Home_Menu = "";
+   
 
-    html_Home_Menu = '<h4 class="text-center fw-bold">' + data[0]["MansionName"] + ' ' + data[0]["RoomNumber"]+'</h4>\
-        <p class="font-monospace small text-start pt-3">'+ data[0]["Address"]+'</p >'
+    html_Home_Menu = '<h4 class="text-center fw-bold">' + data[0]["MansionName"] + ' ' + data[0]["RoomNumber"] + '</h4>\
+        <p class="font-monospace small text-start pt-3">'+ data[0]["Address"] + '</p >'
     for (var i = 0; i < data.length; i++) {
-        
+
         html_HomeList += '<div class="card p-1 col-12 col-md-6 shadow-sm">\
                                                     <div class="card-body p-2 row">\
                                                         <div class="col-12">\
-                                                            <h5>'+data[i]["LineName"]+'</h5>\
+                                                            <h5>'+ data[i]["LineName"] + '</h5>\
                                                         </div>\
                                                         <div class="col-12">\
-                                                            <p class="text-dark">'+data[i]["StationName"]+'</p>\
+                                                            <p class="text-dark">'+ data[i]["StationName"] + '</p>\
                                                         </div>\
                                                         <div class="col-12 text-end">\
-                                                            <p class="text-dark">徒歩 '+data[i]["Distance"]+' 分</p>\
+                                                            <p class="text-dark">徒歩 '+ data[i]["Distance"] + ' 分</p>\
                                                         </div>\
                                                     </div>\
                                                    </div>'
@@ -451,16 +452,16 @@ function Bind_Popup_ResultType_1(result, DeepAssDateTime) {
     let html_Date = "";
     let html_Type1 = "";
     html_Date = '<h4 class="text-center fw-bold">査定日時</h4>\
-                 <p class="font-monospace small text-center pt-0">'+ DeepAssDateTime+'</p >'
-          
-            
+                 <p class="font-monospace small text-center pt-0">'+ DeepAssDateTime + '</p >'
+
+
     for (var i = 0; i < data.length; i++) {
 
         html_Type1 += '<tr>\
-                      <td>'+data[i]["Rank"] +'</td>\
-                      <td>'+data[i]["REName"]+'</td>\
+                      <td>'+ data[i]["Rank"] + '</td>\
+                      <td>'+ data[i]["REName"] + '</td>\
                       <td class="align-middle text-end">\
-                      <span class="text-danger">'+data[i]["AssessAmount"]+'</span>円\
+                      <span class="text-danger">'+ data[i]["AssessAmount"] + '</span>円\
                        </td>\
                        </tr>'
     }
@@ -482,7 +483,7 @@ function Bind_Popup_ResultType_2(result) {
                        </td>\
                        </tr>'
     }
-   
+
     $('#tableType2 tbody').append(html_Type2);
 }
 
@@ -493,6 +494,7 @@ function Bind_Popup_Detail(result) {
     let html_Detail_1 = "";
     let html_Detail_2 = "";
     let html_Detail_3 = "";
+
     for (var i = 0; i < data.length; i++) {
 
         html_Detail_1 = '<div class="d-inline-flex pb-1">\
@@ -500,7 +502,7 @@ function Bind_Popup_Detail(result) {
                 <div class="">\
                     <h6 class="align-self-center"><strong>建物構造</strong><br></h6>\
                             </div>\
-                <div class=""><span class="align-self-start">'+dt.Row[0]["StructuralKBN"]+'<br></span></div>\
+                <div class=""><span class="align-self-start">'+ data[0]["StructuralKBN"] + '<br></span></div>\
                     </div>\
                 </div>\
                 <div class="d-inline-flex pb-1">\
@@ -508,7 +510,7 @@ function Bind_Popup_Detail(result) {
                         <div class="">\
                             <h6 class="align-self-center"><strong>築年月</strong><br></h6>\
                             </div>\
-                            <div class=""><span class="align-self-start">'+ dt.Row[0]["ConstYYYYMM"] +'<br></span></div>\
+                            <div class=""><span class="align-self-start">'+ data[0]["ConstYYYYMM"] + '<br></span></div>\
                             </div>\
                         </div>\
                         <div class="d-inline-flex pb-1">\
@@ -516,7 +518,7 @@ function Bind_Popup_Detail(result) {
                                 <div class="">\
                                     <h6 class="align-self-center"><strong>部屋番号</strong><br></h6>\
                             </div>\
-                                    <div class=""><span class="align-self-start">'+ dt.Row[0]["RoomNumber"] +'<br></span></div>\
+                                    <div class=""><span class="align-self-start">'+ data[0]["RoomNumber"] + '<br></span></div>\
                                     </div>\
                                 </div>\
                                 <div class="d-inline-flex pb-1">\
@@ -524,7 +526,7 @@ function Bind_Popup_Detail(result) {
                                         <div class="">\
                                             <h6 class="align-self-center"><strong>専有面積</strong><br></h6>\
                             </div>\
-                                            <div class=""><span class="align-self-start">'+ dt.Row[0]["RoomNumber"].toFixed(2) +' ㎡<br></span></div>\
+                                            <div class=""><span class="align-self-start">'+ data[0]["RoomArea"].toFixed(2) + ' ㎡<br></span></div>\
                                             </div>\
                                         </div>\
                                         <div class="d-inline-flex pb-1">\
@@ -532,7 +534,7 @@ function Bind_Popup_Detail(result) {
                                                 <div class="">\
                                                     <h6 class="align-self-center"><strong>バルコニー面積　</strong><br></h6>\
                             </div>\
-                                                    <div class=""><span class="align-self-start">'+ dt.Row[0]["BalconyArea"].toFixed(2) +' ㎡<br></span></div>\
+                                                    <div class=""><span class="align-self-start">'+ data[0]["BalconyArea"].toFixed(2) + ' ㎡<br></span></div>\
                                                     </div>\
                                                 </div>\
                                                 <div class="d-inline-flex pb-1">\
@@ -540,17 +542,17 @@ function Bind_Popup_Detail(result) {
                                                         <div class="">\
                                                             <h6 class="align-self-center"><strong>主採光</strong><br></h6>\
                             </div>\
-                                                            <div class=""><span class="align-self-start">'+ dt.Row[0]["Direction"] +'<br></span></div>\
+                                                            <div class=""><span class="align-self-start">'+ data[0]["Direction"] + '<br></span></div>\
                                                             </div>\
                                                         </div>'
 
 
         html_Detail_2 = '<div class="d-inline-flex pb-1">\
-            < div class="row" >\
+            <div class="row">\
                 <div class="">\
                     <h6 class="align-self-center"><strong>部屋数</strong><br></h6>\
                             </div>\
-                    <div class=""><span class="align-self-start">'+ dt.Row[0]["FloorType"] +'部屋数<br></span></div>\
+                    <div class=""><span class="align-self-start">'+ data[0]["FloorType"] + '部屋数<br></span></div>\
                     </div>\
                 </div>\
                 <div class="d-inline-flex pb-1">\
@@ -558,7 +560,7 @@ function Bind_Popup_Detail(result) {
                         <div class="">\
                             <h6 class="align-self-center"><strong>バス・トイレ　</strong><br></h6>\
                             </div>\
-                            <div class=""><span class="align-self-start">'+ dt.Row[0]["BathKBN"] +'<br></span></div>\
+                            <div class=""><span class="align-self-start">'+ data[0]["BathKBN"] + '<br></span></div>\
                             </div>\
                         </div>\
                         <div class="d-inline-flex pb-1">\
@@ -566,7 +568,7 @@ function Bind_Popup_Detail(result) {
                                 <div class="">\
                                     <h6 class="align-self-center"><strong>土地権利　</strong><br></h6>\
                             </div>\
-                                    <div class=""><span class="align-self-start">land rights<br></span></div>\
+                             <div class=""><span class="align-self-start">'+ data[0]["RightKBN"] + '<br></span></div>\
                                     </div>\
                                 </div>\
                                 <div class="d-inline-flex pb-1">\
@@ -574,7 +576,7 @@ function Bind_Popup_Detail(result) {
                                         <div class="">\
                                             <h6 class="align-self-center"><strong>現況</strong><br></h6>\
                             </div>\
-                                            <div class=""><span class="align-self-start">'+ dt.Row[0]["CurrentKBN"] +'<br></span></div>\
+                                            <div class=""><span class="align-self-start">'+ data[0]["CurrentKBN"] + '<br></span></div>\
                                             </div>\
                                         </div>\
                                         <div class="d-inline-flex pb-1">\
@@ -582,7 +584,7 @@ function Bind_Popup_Detail(result) {
                                                 <div class="">\
                                                     <h6 class="align-self-center"><strong>管理方式</strong><br></h6>\
                             </div>\
-                                                    <div class=""><span class="align-self-start">'+ dt.Row[0]["ManagementKBN"] +'<br></span></div>\
+                                                    <div class=""><span class="align-self-start">'+ data[0]["ManagementKBN"] + '<br></span></div>\
                                                     </div>\
                                                 </div>\
                                                 <div class="d-inline-flex pb-1">\
@@ -590,7 +592,7 @@ function Bind_Popup_Detail(result) {
                                                         <div class="">\
                                                             <h6 class="align-self-center"><strong>売却希望時期　</strong><br></h6>\
                             </div>\
-                                                            <div class=""><span class="align-self-start">'+ dt.Row[0]["DesiredTime"] +'<br></span></div>\
+                                                            <div class=""><span class="align-self-start">'+ data[0]["DesiredTime"] + '<br></span></div>\
                                                             </div>\
                                                         </div>'
 
@@ -600,7 +602,7 @@ function Bind_Popup_Detail(result) {
                 <div class="">\
                     <h6 class="align-self-center"><strong>家賃</strong><br></h6>\
                             </div>\
-                    <div class=""><span class="align-self-start">'+ dt.Row[0]["DesiredTime"] +'円<br></span></div>\
+                    <div class=""><span class="align-self-start">'+ data[0]["DesiredTime"] + '円<br></span></div>\
                     </div>\
                 </div>\
                 <div class="d-inline-flex pb-1">\
@@ -608,7 +610,7 @@ function Bind_Popup_Detail(result) {
                         <div class="">\
                             <h6 class="align-self-center"><strong>管理賃</strong><br></h6>\
                             </div>\
-                            <div class=""><span class="align-self-start">'+ dt.Row[0]["DesiredTime"] +'円<br></span></div>\
+                            <div class=""><span class="align-self-start">'+ data[0]["DesiredTime"] + '円<br></span></div>\
                             </div>\
                         </div>\
                         <div class="d-inline-flex pb-1">\
@@ -616,7 +618,7 @@ function Bind_Popup_Detail(result) {
                                 <div class="">\
                                     <h6 class="align-self-center"><strong>修繕積立金</strong><br></h6>\
                             </div>\
-                                    <div class=""><span class="align-self-start">'+ dt.Row[0]["DesiredTime"] +'円<br></span></div>\
+                                    <div class=""><span class="align-self-start">'+ data[0]["DesiredTime"] + '円<br></span></div>\
                                     </div>\
                                 </div>\
                                 <div class="d-inline-flex pb-1">\
@@ -624,7 +626,7 @@ function Bind_Popup_Detail(result) {
                                         <div class="">\
                                             <h6 class="align-self-center"><strong>その他費用</strong><br></h6>\
                             </div>\
-                                            <div class=""><span class="align-self-start">'+ dt.Row[0]["DesiredTime"] +'円<br></span></div>\
+                                            <div class=""><span class="align-self-start">'+ data[0]["DesiredTime"] + '円<br></span></div>\
                                             </div>\
                                         </div>\
                                         <div class="d-inline-flex pb-1">\
@@ -632,10 +634,11 @@ function Bind_Popup_Detail(result) {
                                                 <div class="">\
                                                     <h6 class="align-self-center"><strong>固定資産税</strong><br></h6>\
                             </div>\
-                                                    <div class=""><span class="align-self-start">'+ dt.Row[0]["DesiredTime"] +'円<br></span></div>\
+                                                    <div class=""><span class="align-self-start">'+ data[0]["DesiredTime"] + '円<br></span></div>\
                                                     </div>\
                                                 </div>'
     }
+    $('#header1').append(html_Home_Menu);
     $('#Detail_1').append(html_Detail_1);
     $('#Detail_2').append(html_Detail_2);
     $('#Detail_3').append(html_Detail_3);
@@ -643,40 +646,42 @@ function Bind_Popup_Detail(result) {
 
 function Bind_Popup_Seller(result) {
     let data = JSON.parse(result);
-    alert(data);
+
     let html_Seller_1 = "";
     let html_Seller_2 = "";
     for (var i = 0; i < data.length; i++) {
 
         html_Seller_1 = '<div class="align-items-center col-12">\
             <div class="p-md-2 p-1" id = "info">\
-                <div class="text-muted"><span class="text-success">'+ dt.Row[0]["InvalidFLG"] +'</span></div>\
-                <div class="text-muted">'+ dt.Row[0]["InvalidFLG"] +'</div>\
+                <div class="text-muted"><span class="text-success">'+ data[0]["InvalidFLG"] + '</span></div>\
+                <div class="text-muted">'+ data[0]["SellerKana"] + '</div>\
                 <div class="text-muted">\
-                    <h2>'+ dt.Row[0]["SellerKana"] +'</h2>\
+                    <h2>'+ data[0]["SellerName"] + '</h2>\
                 </div>\
                 <div class="p-md-1 text-muted">\
-                    <span class="fa fa-id-card bg-light p-1 rounded-circle"></span>'+ dt.Row[0]["SellerCD"] +'\
+                    <span class="fa fa-id-card bg-light p-1 rounded-circle"></span>'+ data[0]["SellerCD"] + '\
                         </div>\
                     </div>\
                 </div>'
 
         html_Seller_2 = '<div class="d-flex flex-column col-12" id="info">\
             <div class="p-md-1 text-muted cap-fon-form-w500 ">\
-                <span class="fa fa-home bg-light p-1 rounded-circle"></span>'+ dt.Row[0]["Address"] +'\
+                <span class="fa fa-home bg-light p-1 rounded-circle"></span>'+ data[0]["Address"] + '\
                     </div>\
             <div class="p-md-1 pt-sm-1 text-muted">\
-                <span class="fa fa-phone bg-light p-1 rounded-circle"></span> '+ dt.Row[0]["Phone"] +'\
+                <span class="fa fa-phone bg-light p-1 rounded-circle"></span> '+ data[0]["Phone"] + '\
                     </div>\
             <div class="p-md-1 pt-sm-1 text-muted">\
-                <span class="fa fa-mobile bg-light p-1 ps-2 pe-2 rounded-circle"></span> '+ dt.Row[0]["Mobile_Phone"] +'\
+                <span class="fa fa-mobile bg-light p-1 ps-2 pe-2 rounded-circle"></span> '+ data[0]["Mobile_Phone"] + '\
                     </div>\
             <div class="p-md-1 text-muted">\
-                <span class="fa fa-envelope-o bg-light p-1 rounded-circle"></span>'+ dt.Row[0]["MailAddress"] +'\
+                <span class="fa fa-envelope-o bg-light p-1 rounded-circle"></span>'+ data[0]["MailAddress"] + '\
                     </div>\
                 </div>'
 
     }
+
+    $('#header2').append(html_Home_Menu);
     $('#Seller_1').append(html_Seller_1);
     $('#Seller_2').append(html_Seller_2);
 }
