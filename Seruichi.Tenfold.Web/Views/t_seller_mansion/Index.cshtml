@@ -4,6 +4,11 @@
 @section styles{
     @Styles.Render("~/Content/tenfold_css_common")
 }
+<style>
+    .p_tag {
+        float: left;
+    }
+</style>
 <header class="bg-surface-primary border-bottom pt-6">
     <div class="container-fluid">
         <div class="mb-npx">
@@ -40,7 +45,7 @@
                             <th scope="col" class="text-end text-decoration-underline sort-by" style="width:100px" data-type="number">No.</th>
                             <th scope="col" style="width: 100px" class="text-decoration-underline sort-status">ステータス</th>
                             <th scope="col" style="width: 100px" class="text-decoration-underline sort-by">物件CD</th>
-                            <th scope="col" style="width: 300px" class="text-decoration-underline"><span class="left_sort-by">マンション名</span>/<span class="right_sort-by">住所</span></th>
+                            <th scope="col" style="width: 300px;" class="text-decoration-underline"><p id="a_apartment" class="p_tag">マンション名/</p><p id="p_address" class="p_tag">住所</p></th>
                             <th scope="col" style="width: 100px" class="text-decoration-underline sort-by">部屋番号</th>
                             <th scope="col" style="width: 100px" class="text-decoration-underline text-end sort-by" data-type="number">階数(階)</th>
                             <th scope="col" style="width: 100px" class="text-decoration-underline text-end sort-by" data-type="number">面積(㎡)</th>
@@ -48,9 +53,9 @@
                             <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">登録日時</th>
                             <th scope="col" style="width: 180px" class="text-decoration-underline sort-mix-td-and-a">詳細査定日時</th>
                             <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">買取依頼日時</th>
-                            <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">マンション  Top1/金額</th>
-                            <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">エリア Top1/金額</th>
-                            <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">買取依頼会社/金額</th>
+                            <th scope="col" style="min-width: 130px; width: 180px" class="text-decoration-underline"><p id="a_mansion" class="p_tag">マンション  Top1/</p><p id="p_mansionamount" class="p_tag">金額</p></th>
+                            <th scope="col" style="min-width: 110px; width: 180px " class="text-decoration-underline"><p id="a_area" class="p_tag">エリア Top1/</p><p id="p_areaamount" class="p_tag">金額</p></th>
+                            <th scope="col" style="min-width: 110px; width: 180px " class="text-decoration-underline"><p id="a_prcompany" class="p_tag">買取依頼会社/</p><p id="p_prcompanyamount" class="p_tag">金額</p></th>
                             <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">送客日時</th>
                             <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">成約日時</th>
                             <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">辞退日時</th>
