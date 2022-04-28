@@ -17,17 +17,15 @@
         </div>
     </div>
 </header>
-<section class="clean-block clean-form dark h-100 cap-main">
-    <div class="container">
-        <div class="row flex-column flex-sm-row wrapper min-vh-100 pt-5 pb-3">
-            <div class="col-12 col-sm-1 col-md-3">
+ <section class="clean-block clean-form dark h-100 cap-main">
+        <div class="container-fluid" id="wrapper">
+            <div class="pt-5 pb-3">
                 @Html.Partial("_MyPageMenu")
-            </div>
-            <div class="col-12 col-sm-11 col-md-9 py-3 card cap-form">
+            <div class="card cap-form"  id="page-content-wrapper">
                 <form class="mx-auto cap-con-form card-body" id="form1">
                     <h4 class="text-center"><strong>会員登録内容変更</strong></h4>
                     <hr>
-                    <div class="m-auto">
+                    <div class="m-auto  cap-fon-form-w600">
                         <div class="row">
                             <div class="col">
                                 <div>
@@ -201,7 +199,7 @@
             </div>
             <div class="modal-body ">
                 <p class="text-center">下記の内容で送信してもよろしいでしょうか？<br>よろしければ、一番下の「完了ページへ」ボタンをクリックしてください。</p>
-                <div class="mx-auto" style="max-width: 500px;">
+                <div class="mx-auto  cap-fon-form-w600">
                     <div class="block-heading" style="padding-top: 0px;"></div>
                     <div class="form-group mb-3">
                         <label class="form-label">お名前</label>
