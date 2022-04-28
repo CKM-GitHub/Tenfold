@@ -30,9 +30,9 @@
 
 <body>
         @Html.Partial("t_seller_mansion/_t_seller_mansion_sellerPartial")
-    <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+    <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18"  id="wrapper">
             @Html.Partial("t_seller_mansion/_t_seller_mansion_menuPartial")
-         <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18"  id="wrapper">
+         <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
             <hidden>
                 <input type="hidden" id="path" value=@appPath>
             </hidden>

@@ -24,6 +24,6 @@ BEGIN
     AND   (@PrefCD IS NULL OR MAN.PrefCD = @PrefCD)
     AND   MAN.NoDisplayFLG = 0
 
-    ORDER BY MAN.DisplayOrder
+    ORDER BY MAN.DisplayOrder, MAN.MansionName
 
 END

@@ -40,6 +40,31 @@ function addEvents()
 {
     common.bindValidationEvent('#form1', '');
 
+    $('#StartDate, #EndDate').on('change', function () {
+
+        const $this = $(this), $start = $('#StartDate').val(), $end = $('#EndDate').val()
+
+        if (!common.checkValidityInput($this)) {
+            return false;
+        }
+
+        let model = {
+            StartDate: $start,
+            EndDate: $end
+        };
+
+        if (model.StartDate && model.EndDate) {
+            if (model.StartDate < model.EndDate) {
+                $("#StartDate").hideError();
+                $("#EndDate").hideError();
+                $("#EndDate").focus();
+                return;
+            }
+
+        }
+
+    });
+
     const $Chk_Mi = $("#Chk_Mi").val(), $Chk_Kan = $("#Chk_Kan").val(), $Chk_Satei = $("#Chk_Satei").val(),
         $Chk_Kaitori = $("#Chk_Kaitori").val(), $Chk_Kakunin = $("#Chk_Kakunin").val(), $Chk_Kosho = $("#Chk_Kosho").val(),
         $Chk_Seiyaku = $("#Chk_Seiyaku").val(), $Chk_Urinushi = $("#Chk_Urinushi").val(), $Chk_Kainushi = $("#Chk_Kainushi").val(),
