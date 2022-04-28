@@ -73,7 +73,8 @@ function setValidation() {
     //築年月
     $('#ConstYYYYMM')
         .addvalidation_errorElement("#errorConstYYYYMM")
-        .addvalidation_reqired();
+        .addvalidation_reqired()
+        .addvalidation_custom('customValidation_checkConstYYYYMM');
     //総戸数
     $('#Rooms')
         .addvalidation_errorElement("#errorRooms")
@@ -83,7 +84,8 @@ function setValidation() {
     $('#LocationFloor')
         .addvalidation_errorElement("#errorFloors")
         .addvalidation_reqired(true)
-        .addvalidation_singlebyte_number();
+        .addvalidation_singlebyte_number()
+        .addvalidation_custom('customValidation_checkLocationFloor');
     //階建て
     $('#Floors')
         .addvalidation_errorElement("#errorFloors")
@@ -240,13 +242,11 @@ function addEvents() {
 
     //マンション名
     $('#MansionName').on('change', function () {
+        $('#hdnMansionCD').val('');
         const $MansionCD = $('.tt-mansioncd');
         if ($MansionCD.get().length === 1) {
             displayMansionData($MansionCD.text());
         }
-        //else {
-        //    $('#hdnMansionCD').val('');
-        //}
     }).on('typeahead:selected', function (evt, data) {
         displayMansionData(data.Value);
     });
@@ -259,13 +259,13 @@ function addEvents() {
     //路線選択
     $('.js-linecd').on('change', function () {
         const id = $(this).attr('id');
-        const suffix = id.slice(-2);
+        const suffix = id.slice(-2).replace('_', '');
         const inputval = $(this).val();
         if (inputval) {
-            setStationList('add', inputval, suffix);
+            setStationList('add', inputval, '#StationCD_' + suffix);
         }
         else {
-            setStationList('remove', inputval, suffix);
+            setStationList('remove', inputval, '#StationCD_' + suffix);
         }
     });
 
@@ -286,10 +286,16 @@ function addEvents() {
 
     //築年月
     $('#ConstYYYYMM').on('blur', function () {
-        common.callAjax(_url.getBuildingAge, $(this).val(), function (result) {
+        const $this = $(this);
+        common.callAjax(_url.getBuildingAge, $this.val(), function (result) {
             if (result && result.isOK) {
-                if (result.data) 
-                    $('#BuildingAge').text('（築' + result.data + '年）')
+                if (result.data) {
+                    $('#BuildingAge').text('（築' + result.data + '年）').data('building-age', result.data);
+                    if (result.data == 0)
+                        $this.showError(common.getMessage('E208'));
+                    else
+                        $this.hideError();
+                }
                 else
                     $('#BuildingAge').text('（築　年）')
             }
@@ -433,6 +439,16 @@ function displayMansionData(mansionCD) {
                     //Clears the value of an element
                     $('.js-detail :input:not(.form-check-input):not(button):not([type=raido]):not(:hidden):not(:disabled):not([readonly])').val('').hideError();
                     $('.js-detail .form-check-input').val(["0"]).hideError(); //radio button
+                    $('.js-stationContainer').children().remove();
+                    for (let i = 0; i < 3; i++) {
+                        const index = i + 1;
+                        const station = $('.js-station-template').find('.js-station').clone(true);
+                        station.find('.js-paragraph-number').text(getParagraphNumber(index))
+                        station.find('.js-linecd').attr('id', 'LineCD_' + index);
+                        station.find('.js-stationcd').attr('id', 'StationCD_' + index);
+                        station.find('.js-distance').attr('id', 'Distance_' + index);
+                        $('.js-stationContainer').append(station);
+                    }
 
                     let data = dataArray[0];
 
@@ -467,25 +483,33 @@ function displayMansionData(mansionCD) {
                         }
                     }
 
-                    for (let i = 0; i < length; i++) {
-                        data = dataArray[i];
-                        const index = i + 1;
+                    var setLineAndStation = function () {
+                        for (let i = 0; i < length; i++) {
+                            data = dataArray[i];
+                            const index = i + 1;
 
-                        if (!document.getElementById('LineCD_' + index)) {
-                            const station = $('.js-station-template').find('.js-station').clone(true);
-                            station.find('.js-paragraph-number').text(getParagraphNumber(index))
-                            station.find('.js-linecd').attr('id', 'LineCD_' + index);
-                            station.find('.js-stationcd').attr('id', 'StationCD_' + index);
-                            station.find('.js-distance').attr('id', 'Distance_' + index);
-                            $('.js-stationContainer').append(station);
-                        }
+                            if (!document.getElementById('LineCD_' + index)) {
+                                const station = $('.js-station-template').find('.js-station').clone(true);
+                                station.find('.js-paragraph-number').text(getParagraphNumber(index))
+                                station.find('.js-linecd').attr('id', 'LineCD_' + index);
+                                station.find('.js-stationcd').attr('id', 'StationCD_' + index);
+                                station.find('.js-distance').attr('id', 'Distance_' + index);
+                                $('.js-stationContainer').append(station);
+                            }
 
-                        if (data.PrefCD) {
-                            setLineList('add', data.PrefCD, '_' + index, data.LineCD);
-                            if (data.LineCD) setStationList('add', data.LineCD, '_' + index, data.StationCD);
+                            if (data.PrefCD && data.LineCD) {
+                                $('#LineCD_' + index).val(data.LineCD);
+                                setStationList('add', data.LineCD, '#StationCD_' + index, data.StationCD);
+                            }
+                            $('#Distance_' + index).val(data.Distance);
                         }
-                        $('#Distance_' + index).val(data.Distance).hideError();
                     }
+
+                    if (data.PrefCD)
+                        setLineList('add', data.PrefCD, null, null, setLineAndStation);
+                    else
+                        setLineAndStation();
+
                     $hdnMansionCD.val(mansionCD);
                     $('#PrefCD, #CityCD, #TownCD, #MansionName, .js-linecd, .js-stationcd').hideError();
                     common.hideLoading();
@@ -584,15 +608,15 @@ function setTownList(mode, prefCd, cityCd, defaultValue) {
     }
 }
 
-function setLineList(mode, prefCd, suffix, defaultValue) {
-    let selector = ".js-linecd";
-    if (suffix) selector = '#LineCD' + suffix;
+function setLineList(mode, prefCd, selector, defaultValue, callback) {
+    if (!selector) selector = ".js-linecd";
 
     if (mode === 'add') {
         common.callAjax(_url.getLineDropDownList, { PrefCD: prefCd },
             function (result) {
                 if (result && result.isOK) {
                     common.setDropDownListItems(selector, result.data, placeHolder_line, defaultValue);
+                    if (callback) callback();
                 }
             });
     }
@@ -601,9 +625,8 @@ function setLineList(mode, prefCd, suffix, defaultValue) {
     }
 }
 
-function setStationList(mode, lineCd, suffix, defaultValue) {
-    let selector = ".js-stationcd";
-    if (suffix) selector = '#StationCD' + suffix;
+function setStationList(mode, lineCd, selector, defaultValue) {
+    if (!selector) selector = ".js-stationcd";
 
     if (mode === 'add') {
         common.callAjax(_url.getStationDropDownList, { LineCD: lineCd },
@@ -619,9 +642,9 @@ function setStationList(mode, lineCd, suffix, defaultValue) {
 }
 function customValidation_checkStation(e) {
     const $this = $(e)
-    const suffix = $this.attr('id').slice(-2);
+    const suffix = $this.attr('id').slice(-2).replace('_', '');
 
-    if ($('#LineCD' + suffix).val() && !$this.val()) {
+    if ($('#LineCD_' + suffix).val() && !$this.val()) {
         $this.showError(common.getMessage('E102'));
         return false;
     }
@@ -631,11 +654,11 @@ function customValidation_checkStation(e) {
 
 function customValidation_checkDistance(e) {
     const $this = $(e)
-    const suffix = $this.attr('id').slice(-2);
+    const suffix = $this.attr('id').slice(-2).replace('_', '');
     const inputVal = $this.val();
 
-    if ($('#LineCD' + suffix).val()
-        && $('#StationCD' + suffix).val()
+    if ($('#LineCD_' + suffix).val()
+        && $('#StationCD_' + suffix).val()
         && (!inputVal || parseInt(inputVal) === 0)) {
         $this.showError(common.getMessage('E101'));
         return false;
@@ -644,12 +667,41 @@ function customValidation_checkDistance(e) {
     return true;
 }
 
+function customValidation_checkConstYYYYMM(e) {
+    const $this = $(e)
+    const buildingAge = $('#BuildingAge').data('building-age');
+
+    if (buildingAge && buildingAge == 0) {
+        $this.showError(common.getMessage('E208'));
+        return false;
+    }
+
+    return true;
+}
+
+function customValidation_checkLocationFloor(e) {
+    const $this = $(e)
+    const inputVal = $this.val();
+    const floorsVal = $('#Floors').val();
+
+    if (inputVal && floorsVal) {
+        if (parseInt(inputVal) > parseInt(floorsVal))
+        {
+            $this.showError(common.getMessage('E209'));
+            return false;
+        }
+    }
+
+    return true;
+}
+
 function getMansionStationList() {
     let array = [];
 
-    $('.js-stationContainer .js-station').each(function () {
+    $('.js-stationContainer .js-station').each(function (index) {
         const $this = $(this);
         const data = {
+            RowNo: index + 1,
             LineCD: $this.find('.js-linecd').val(),
             StationCD: $this.find('.js-stationcd').val(),
             Distance: $this.find('.js-distance').val()

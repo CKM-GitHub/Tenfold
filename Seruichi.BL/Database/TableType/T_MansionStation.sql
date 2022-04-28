@@ -9,7 +9,8 @@ GO
 
 CREATE TYPE T_MansionStation AS TABLE
 (
-    LineCD              varchar(10)
+    RowNo               int
+    ,LineCD             varchar(10)
     ,StationCD          varchar(10)
     ,Distance           int
 )

@@ -191,24 +191,10 @@ namespace Seruichi.BL
 
             //新しいメールアドレス
             elementId = "formChangeMailAddress_NewMailAddress";
-            if (string.IsNullOrEmpty(model.NewMailAddress))
-            {
-                validator.AddValidationResult(elementId, "E202"); //メールアドレスが入力されていません
-            }
-
-            if (validator.IsValid && model.NewMailAddress.Length > 100)
-            {
-                validator.AddValidationResult(elementId, "E105"); //入力できる桁数を超えています
-            }
-
+            validator.CheckSellerMailAddress(elementId, model.NewMailAddress);
             if (validator.IsValid && !new a_loginBL().CheckDuplicateMailAddresses(model.NewMailAddress))
             {
                 validator.AddValidationResult(elementId, "E203"); //既に登録済みのメールアドレスです
-            }
-
-            if (validator.IsValid)
-            {
-                validator.CheckIsValidEmail(elementId, model.NewMailAddress); //メールアドレスを正しく入力してください
             }
 
             ////パスワード

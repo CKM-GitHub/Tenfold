@@ -28,7 +28,7 @@ namespace Seruichi.BL
             if (validator.IsValid)
             {
                 string hashedPassword = new PasswordHash().GeneratePasswordHash(mailAddress, password);
-                user = GetLoginUser(mailAddress, password);
+                user = GetLoginUser(mailAddress, hashedPassword);
                 if (string.IsNullOrEmpty(user.UserID))
                 {
                     validator.AddValidationResult("Password", "E206"); //メールアドレスとパスワードの組合せが正しくありません
@@ -102,24 +102,10 @@ namespace Seruichi.BL
             ValidatorAllItems validator = new ValidatorAllItems();
             string elementId = "formTemporaryRegistration_MailAddress";
 
-            if (string.IsNullOrEmpty(mailAddress))
-            {
-                validator.AddValidationResult(elementId, "E202"); //メールアドレスが入力されていません
-            }
-
-            if (validator.IsValid && mailAddress.Length > 100)
-            {
-                validator.AddValidationResult(elementId, "E105"); //入力できる桁数を超えています
-            }
-
+            validator.CheckSellerMailAddress(elementId, mailAddress);
             if (validator.IsValid && !CheckDuplicateMailAddresses(mailAddress))
             {
                 validator.AddValidationResult(elementId, "E203"); //既に登録済みのメールアドレスです
-            }
-
-            if (validator.IsValid)
-            {
-                validator.CheckIsValidEmail(elementId, mailAddress); //メールアドレスを正しく入力してください
             }
 
             return validator.GetValidationResult();

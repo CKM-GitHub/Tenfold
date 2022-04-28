@@ -455,6 +455,34 @@ namespace Seruichi.Common
             return true;
         }
 
+        public bool CheckSellerMailAddress(string mailAddress, out string errorcd)
+        {
+            errorcd = "";
+            if (string.IsNullOrEmpty(mailAddress))
+            {
+                errorcd = "E202"; //メールアドレスが入力されていません
+                return false;
+            }
+
+            if (!CheckIsHalfWidth(mailAddress, 100, out errorcd))
+            {
+                return false; //E104 入力できない文字です。
+            }
+
+            if (mailAddress.Length > 100)
+            {
+                errorcd = "E105"; //入力できる桁数を超えています
+                return false;
+            }
+
+            if (!CheckIsValidEmail(mailAddress, out errorcd))
+            {                
+                return false; //E204 メールアドレスを正しく入力してください
+            }
+
+            return true;
+        }
+
         //add by ams
         public bool CheckNullOrEmpty(string modelName, string inputText, out string errorcd)
         {
