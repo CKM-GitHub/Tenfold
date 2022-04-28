@@ -477,7 +477,7 @@ function displayMansionData(mansionCD) {
                         if (key === 'StructuralKBN' || key === 'RightKBN') {
                             $('input:radio[name="' + key + '"]').val([data[key]]).hideError();
                         } else if (key === 'BuildingAge') {
-                            $('#' + key).text('（築' + data[key] + '年）');
+                            $('#' + key).text('（築' + data[key] + '年）').data('building-age', data[key]);;
                         } else {
                             $('#' + key).val(data[key]).hideError();
                         }
