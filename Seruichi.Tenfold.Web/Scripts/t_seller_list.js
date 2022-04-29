@@ -194,7 +194,7 @@ function addEvents() {
                         ("0" + m.getHours()).slice(-2) + "" +
                         ("0" + m.getMinutes()).slice(-2) + "" +
                         ("0" + m.getSeconds()).slice(-2);
-                    downloadLink.download = "売主リスト" + dateString + ".csv";
+                    downloadLink.download = "売主リスト_" + dateString + ".csv";
 
                     document.body.appendChild(downloadLink);
                     downloadLink.click();
