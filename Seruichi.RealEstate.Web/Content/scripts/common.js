@@ -466,5 +466,23 @@ const common = {
             return common.checkValidityInput(this);
         });
     },
+
+    setValidationErrors: function setValidationErrors(errors) {
+        for (key in errors) {
+            const target = document.getElementById(key);
+            $(target).showError(errors[key]);
+        }
+    },
+
+    setFocusFirstError: function setFocusFirstError(form) {
+        if (form) {
+            const $target = $(form).getInvalidItems().get(0);
+            if ($target) {
+                $target.focus();
+                return true;
+            }
+        }
+        return false;
+    },
    
 }
