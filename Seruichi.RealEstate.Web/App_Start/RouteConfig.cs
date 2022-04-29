@@ -16,7 +16,7 @@ namespace Seruichi.RealEstate.Web
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "r_login", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "r_login", action = "Login", id = UrlParameter.Optional }
             );
         }
     }

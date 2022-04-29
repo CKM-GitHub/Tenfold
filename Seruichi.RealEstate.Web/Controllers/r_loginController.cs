@@ -17,7 +17,7 @@ namespace Seruichi.RealEstate.Web.Controllers
     public class r_loginController : BaseController
     {
         // GET: r_login
-        public ActionResult Index()
+        public ActionResult Login()
         {
             Session.Clear();
             SessionAuthenticationHelper.CreateAnonymousUser();

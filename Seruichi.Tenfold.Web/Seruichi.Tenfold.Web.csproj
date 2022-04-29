@@ -244,6 +244,8 @@
     <Content Include="Views\Shared\t_seller_assessment\_t_seller_assessment_sellerPartial.cshtml" />
     <Content Include="Views\Shared\t_seller_assessment\_t_seller_assessmentLayout.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <Content Include="Views\Error\BusinessError.cshtml" />
+    <Content Include="Views\Error\InternalServerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
