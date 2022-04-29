@@ -213,7 +213,7 @@ function addEvents() {
 
 function Get_PopupFor_Detail() {
     let model = {};
-    common.callAjaxWithLoading(_url.Get_PopupFor_Detail, model, this, function (result) {
+    common.callAjax(_url.Get_PopupFor_Detail, model, function (result) {
         if (result && result.isOK) {
 
             Bind_Popup_Detail(result.data);
@@ -230,7 +230,7 @@ function Get_PopupFor_Detail() {
 
 function Get_PopupFor_Seller() {
     let model = {};
-    common.callAjaxWithLoading(_url.Get_PopupFor_Seller, model, this, function (result) {
+    common.callAjax(_url.Get_PopupFor_Seller, model, function (result) {
         if (result && result.isOK) {
 
             Bind_Popup_Seller(result.data);
@@ -384,12 +384,6 @@ function l_logfunction(id) {
         });
 }
 
-function Popup_function(id) {
-
-    var Popupurl = common.appPath + '/t_seller_assessment/PopUpPage?smID=' + id;
-    //window.open(Popupurl, "WindowPopup", 'width=700px,height=700px,top=150,left=250');
-    window.location.href = Popupurl;
-}
 
 function Get_PopupFor_Home(id) {
     var DeepAssDateTime = '';
