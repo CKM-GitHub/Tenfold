@@ -44,7 +44,8 @@ const regexPattern = {
     singlebyte_numberAlpha: "^[0-9a-zA-Z]+$",
     moeney: "^[0-9,]+$",
     numeric: "^[0-9.]+$",
-    dateformat : /^\d{4}-\d{2}-\d{2}$/,
+    dateformat: /^\d{4}-\d{2}-\d{2}$/,
+    doublebyteKana: "^[ァ-ヶー　]+$",
 }
 
 const common = {
@@ -245,7 +246,6 @@ const common = {
         const isDateCompare = $ctrl.attr("data-validation-datecompare");
         const isOneByteCharacter = $ctrl.attr("data-validation-onebyte-character");
         const ischeckboxLenght = $ctrl.attr("data-validation-checkboxlenght");
-        const isMaxlengthCheckforsellerlist = $ctrl.attr("data-validation-MaxLengthforsellerlist");       
 
         let inputValue = "";
         if (type === 'radio') {
@@ -316,21 +316,29 @@ const common = {
             }
         }
         if (inputValue) {
-            //if (isSingleDoubleByte) {
-            //    const maxLength = $ctrl.attr('maxlength');
-            //    if (maxLength) {
-            //        const byteLength = this.getStringByteCount(inputValue);
-            //        if (byteLength > parseInt(maxLength)) {
-            //            $ctrl.showError(this.getMessage('E105'));
-            //            return;
-            //        }
-            //    }
-            //}
+            if (isSingleDoubleByte) {
+                const maxLength = $ctrl.attr('maxlength');
+                if (maxLength) {
+                    const byteLength = this.getStringByteCount(inputValue);
+                    if (byteLength > parseInt(maxLength)) {
+                        $ctrl.showError(this.getMessage('E105'));
+                        return;
+                    }
+                }
+            }
 
             if (isDoubleByte) {
                 const regex = new RegExp(regexPattern.doublebyte);
                 if (!regex.test(inputValue)) {
                     $ctrl.showError(this.getMessage('E107'));
+                    return;
+                }
+            }
+
+            if (isDoubleByteKana) {
+                const regex = new RegExp(regexPattern.doublebyteKana);
+                if (!regex.test(inputValue)) {
+                    $ctrl.showError(this.getMessage('E104'));
                     return;
                 }
             }
