@@ -109,6 +109,17 @@ const common = {
         return '?' + encodeURI(query);
     },
 
+    redirectErrorPage: function redirectErrorPage(status) {
+        let url;
+        if (status == 400) url = "/Error/BadRequest";
+        if (status == 401) url = "/Error/Unauthorized";
+        if (status == 403) url = "/Error/Forbidden";
+        if (status == 404) url = "/Error/NotFound";
+        //if (status == 500) url = "/Error/InternalServerError";
+
+        if (url) location.href = common.appPath + url;
+    },
+
     callAjaxWithLoading: function callAjaxWithLoading(url, model, disableSelector, successCallback, failCallback) {
         common.showLoading(disableSelector);
         $.ajax({
@@ -158,7 +169,19 @@ const common = {
                 failCallback();
             }
         });
-    },  
+    },
+
+    callSubmit: function callSubmit(form, action) {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('name', 'RequestVerificationToken');
+        input.setAttribute('value', $("#_RequestVerificationToken").val());
+        form.appendChild(input);
+
+        form.method = "POST";
+        form.action = action;
+        form.submit();
+    },
 
     showLoading: function showLoading(disableSelector) {
         $loadiong = $('<div id="loadiong"><div class="cv-spinner"><span class="spinner"></span></div></div>');
@@ -180,15 +203,23 @@ const common = {
     },
 
     replaceDoubleToSingle: function replaceDoubleToSingle(str) {
-        return str.replace(/[！-～]/g, function (s) {
+        //return str.replace(/[！-～]/g, function (s) {
+        //    return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+        //});
+        let returnValue = str.replace(/[！-～]/g, function (s) {
             return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
         });
+        return returnValue.replace(/　/g, " ");
     },
 
     replaceSingleToDouble: function replaceSingleToDouble(str) {
-        return str.replace(/[!-~]/g, function (s) {
+        //return str.replace(/[!-~]/g, function (s) {
+        //    return String.fromCharCode(s.charCodeAt(0) + 0xFEE0);
+        //});
+        let returnValue = str.replace(/[!-~]/g, function (s) {
             return String.fromCharCode(s.charCodeAt(0) + 0xFEE0);
         });
+        return returnValue.replace(/ /g, "　");
     },
 
     checkValidityInput: function checkValidityInput(ctrl) {
@@ -285,31 +316,22 @@ const common = {
             }
         }
         if (inputValue) {
-            if (isSingleDoubleByte) {
-                const maxLength = $ctrl.attr('maxlength');
-                if (maxLength) {
-                    const byteLength = this.getStringByteCount(inputValue);
-                    if (byteLength > parseInt(maxLength)) {
-                        $ctrl.showError(this.getMessage('E105'));
-                        return;
-                    }
-                }
-            }
+            //if (isSingleDoubleByte) {
+            //    const maxLength = $ctrl.attr('maxlength');
+            //    if (maxLength) {
+            //        const byteLength = this.getStringByteCount(inputValue);
+            //        if (byteLength > parseInt(maxLength)) {
+            //            $ctrl.showError(this.getMessage('E105'));
+            //            return;
+            //        }
+            //    }
+            //}
 
             if (isDoubleByte) {
                 const regex = new RegExp(regexPattern.doublebyte);
                 if (!regex.test(inputValue)) {
                     $ctrl.showError(this.getMessage('E107'));
                     return;
-                }
-
-                const maxLength = $ctrl.attr('maxlength');
-                if (maxLength) {
-                    const byteLength = this.getStringByteCount(inputValue);
-                    if (byteLength > parseInt(maxLength)) {
-                        $ctrl.showError(this.getMessage('E105'));
-                        return;
-                    }
                 }
             }
 
@@ -359,7 +381,8 @@ const common = {
                         decpart = decpart.substr(0, decdigits);
                     }
                     else {
-                        decpart = ('0'.repeat(decdigits) + decpart).slice(-1 * decdigits);
+                        //decpart = ('0'.repeat(decdigits) + decpart).slice(-1 * decdigits);
+                        decpart = (decpart + '0'.repeat(decdigits)).slice(0, decdigits);
                     }
                     inputValue = intpart + '.' + decpart;
                     $ctrl.val(inputValue);
@@ -386,7 +409,6 @@ const common = {
                 $ctrl.val(Number(inputValue).toLocaleString());
             }
 
-
             if (isOneByteCharacter) {
                 const strByte = this.getStringByteCount(inputValue);
                 if (strByte != inputValue.length) {
@@ -395,19 +417,7 @@ const common = {
                 }
             }
 
-
             if (isMaxlengthCheck) {
-                const maxLength = $ctrl.data('digits');
-                if (maxLength) {
-                    const byteLength = this.getStringByteCount(inputValue);
-                    if (byteLength > parseInt(maxLength)) {
-                        $ctrl.showError(this.getMessage('E105'));
-                        return;
-                    }
-                }
-            }
-
-            if (isMaxlengthCheckforsellerlist) {
                 const maxLength = $ctrl.data('digits');
                 if (maxLength) {
                     const byteLength = inputValue.length;
@@ -427,7 +437,9 @@ const common = {
 
             if (isDateCompare) {
                 if (!common.compareDate($("#StartDate").val(), $("#EndDate").val())) {
-                    $ctrl.showError(this.getMessage('E111'));
+                    $("#StartDate").showError(this.getMessage('E111'));
+                    $("#EndDate").showError(this.getMessage('E111'));
+                    $("#StartDate").focus();
                     return;
                 }
             }
@@ -476,6 +488,24 @@ const common = {
         $(document).on('blur', selector, function (e) {
             return common.checkValidityInput(this);
         });
+    },
+
+    setValidationErrors: function setValidationErrors(errors) {
+        for (key in errors) {
+            const target = document.getElementById(key);
+            $(target).showError(errors[key]);
+        }
+    },
+
+    setFocusFirstError: function setFocusFirstError(form) {
+        if (form) {
+            const $target = $(form).getInvalidItems().get(0);
+            if ($target) {
+                $target.focus();
+                return true;
+            }
+        }
+        return false;
     },
    
 }

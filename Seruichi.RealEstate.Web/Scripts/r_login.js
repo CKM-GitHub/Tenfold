@@ -16,19 +16,19 @@ function setValidation() {
         .addvalidation_errorElement("#errorrealECD")
         .addvalidation_requirednullorempty1()
         .addvalidation_onebyte_character()
-        .addvalidation_MaxLength(10);
+        .addvalidation_maxlengthCheck(10);
 
     $('#reStaffCD')
         .addvalidation_errorElement("#errorreStaffCD")
         .addvalidation_requirednullorempty2()
         .addvalidation_onebyte_character()
-        .addvalidation_MaxLength(10);
+        .addvalidation_maxlengthCheck(10);
    
     $('#rePassword')
         .addvalidation_errorElement("#errorrePassword")
         .addvalidation_requirednullorempty3()
         .addvalidation_onebyte_character()
-        .addvalidation_MaxLength(10);
+        .addvalidation_maxlengthCheck(10);
 
 
     $('#btnLogin')

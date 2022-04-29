@@ -42,6 +42,9 @@ namespace Seruichi.RealEstate.Web
 
             bundles.Add(new ScriptBundle("~/bundles/r_login").Include(
                      "~/Scripts/r_login.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/r_contact").Include(
+                    "~/Scripts/r_contact.js"));
         }
     }
 }

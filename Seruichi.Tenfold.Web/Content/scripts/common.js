@@ -206,15 +206,23 @@ const common = {
     },
 
     replaceDoubleToSingle: function replaceDoubleToSingle(str) {
-        return str.replace(/[！-～]/g, function (s) {
+        //return str.replace(/[！-～]/g, function (s) {
+        //    return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+        //});
+        let returnValue = str.replace(/[！-～]/g, function (s) {
             return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
         });
+        return returnValue.replace(/　/g, " ");
     },
 
     replaceSingleToDouble: function replaceSingleToDouble(str) {
-        return str.replace(/[!-~]/g, function (s) {
+        //return str.replace(/[!-~]/g, function (s) {
+        //    return String.fromCharCode(s.charCodeAt(0) + 0xFEE0);
+        //});
+        let returnValue = str.replace(/[!-~]/g, function (s) {
             return String.fromCharCode(s.charCodeAt(0) + 0xFEE0);
         });
+        return returnValue.replace(/ /g, "　");
     },
 
     checkValidityInput: function checkValidityInput(ctrl) {
@@ -456,6 +464,7 @@ const common = {
         }
         return success;
     },
+
     checkboxlengthCheck: function checkboxlengthCheck(className) {
         if (className.includes(" "))
             className = className.split(" ")[0];
@@ -466,6 +475,7 @@ const common = {
         }
         return success;
     },
+
     getToday: function getToday() {
         let now = new Date();
         let day = ("0" + now.getDate()).slice(-2);
@@ -536,5 +546,23 @@ const common = {
         else {
             return "ERROR";
         }
-    }
+    },
+
+    setValidationErrors: function setValidationErrors(errors) {
+        for (key in errors) {
+            const target = document.getElementById(key);
+            $(target).showError(errors[key]);
+        }
+    },
+
+    setFocusFirstError: function setFocusFirstError(form) {
+        if (form) {
+            const $target = $(form).getInvalidItems().get(0);
+            if ($target) {
+                $target.focus();
+                return true;
+            }
+        }
+        return false;
+    },
 }
