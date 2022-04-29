@@ -378,17 +378,18 @@ function l_logfunction(id) {
     common.callAjax(_url.insert_l_log, model,
         function (result) {
             if (result && result.isOK) {
-                if (model.LogStatus = "t_mansion_detail")
+                if (model.LogStatus == "t_mansion_detail")
                     alert("https://www.seruichi.com/t_mansion_detail?ｍansionCD=" + model.LogId);
-                else if (model.LogStatus = "t_seller_assessment")
-                    alert("https://www.seruichi.com/t_seller_assessment?seller=" + model.LogId);
-                else if (model.LogStatus = "t_seller_assessment_detail")
+                else if (model.LogStatus == "t_seller_assessment")
+                   // alert("https://www.seruichi.com/t_seller_assessment?seller=" + model.LogId);
+                    window.location.href = common.appPath + '/t_seller_assessment/Index?SellerCD=' + model.LogId;
+                else if (model.LogStatus == "t_seller_assessment_detail")
                     alert("https://www.seruichi.com/t_seller_assessment_detail?AssReqID=" + model.LogId);
-                else if (model.LogStatus = "t_seller_assessment_detail_GReal")
+                else if (model.LogStatus == "t_seller_assessment_detail_GReal")
                     alert("https://www.seruichi.com/t_reale_purchase?realestate=" + model.LogId);
-                else if (model.LogStatus = "t_seller_assessment_detail_EReal")
+                else if (model.LogStatus == "t_seller_assessment_detail_EReal")
                     alert("https://www.seruichi.com/t_reale_purchase?realestate=" + model.LogId);
-                else if (model.LogStatus = "t_seller_assessment_detail_IRealECD")
+                else if (model.LogStatus == "t_seller_assessment_detail_IRealECD")
                     alert("https://www.seruichi.com/t_reale_purchase?realestate=" + model.LogId);
             }
             if (result && !result.isOK) {                
