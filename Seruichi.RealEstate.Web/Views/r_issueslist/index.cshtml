@@ -1,9 +1,12 @@
 ﻿@model Models.RealEstate.r_issueslist.r_issueslistModel
 
 @{
-    ViewBag.Title = "index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "案件一覧";
+    Layout = "~/Views/Shared/_r_menuLayout.cshtml";
+}
+@section styles{
+    @Styles.Render("~/Content/realEstate_css_common")
 }
 
-<h2>index</h2>
+@Html.Partial("r_issueslist/r_issueslist_left_sideNavigation_menu")
 

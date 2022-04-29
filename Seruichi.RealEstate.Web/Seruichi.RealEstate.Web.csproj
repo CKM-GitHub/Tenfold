@@ -133,6 +133,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Common\AuthenticationApiController.cs" />
     <Compile Include="Controllers\Common\BaseApiController.cs" />
     <Compile Include="Controllers\Common\BaseController.cs" />
     <Compile Include="Controllers\Common\CommonApiController.cs" />
@@ -145,6 +146,8 @@
     <Compile Include="Filters\CustomHandleErrorAttribute.cs" />
     <Compile Include="Filters\SessionAuthenticationAttribute.cs" />
     <Compile Include="Filters\SessionAuthenticationHelper.cs" />
+    <Compile Include="Filters\_ApiAuthorizeAttribute.cs" />
+    <Compile Include="Filters\_SessionFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -206,6 +209,18 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Views\r_login\Index.cshtml" />
+    <Content Include="Views\r_contact\Index.cshtml" />
+    <Content Include="Views\r_issueslist\Index.cshtml" />
+    <Content Include="Views\r_issueslist\r_issueslist_left_sideNavigation_menu.cshtml" />
+    <Content Include="Views\Error\BadRequest.cshtml" />
+    <Content Include="Views\Error\BusinessError.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
+    <Content Include="Views\Error\InternalServerError.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\Unauthorized.cshtml" />
+    <Content Include="Views\Shared\_r_footer.cshtml" />
+    <Content Include="Views\Shared\_r_menuLayout.cshtml" />
+    <Content Include="Views\r_login\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
