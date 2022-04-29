@@ -1,124 +1,117 @@
-﻿ <div id="sidebar-wrapper">
-      <ul class="navbar-nav mb-md-4 p-3 mt-5 p-md-0">
-        <li>
-          <div class="ls-wider px-xl-3" href="#">
-            <h5>メニュー</h5>
-            </div>
-        </li>
-        <li>
-            <div class="text-center px-xl-3">
-                <div class="mb-3 text-start">
+﻿
+<div id="sidebar-wrapper">
+    <form id="form1">
+        <ul class="navbar-nav mb-md-4 p-3 mt-5 p-md-0">
+            
+            <li>
+                <div class="text-center px-xl-3">
                     <div class="mb-3 text-start">
-                        <label for="disabledSelect" class="form-label">ステータス</label>
-                        @*<span class="cap-errormsg-right" id="CheckBoxError" name="CheckBoxError"></span>*@
-                        <p class="text-danger text-nowrap text-right" id="CheckBoxError" name="CheckBoxError"></p>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Mi" name="Chk_Mi"
-                                   checked><label class="form-check-label" for="Chk_Mi"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white">未</span> 未処理</label>
+                        <div class="mb-3 text-start">
+                            <label for="disabledSelect" class="form-label">ステータス</label>
+                            <span class="cap-errormsg-right" id="CheckBoxError" name="CheckBoxError"></span>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="Chk_Mi" name="Chk_Mi"
+                                       checked><label class="form-check-label" for="Chk_Mi"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white">未</span> 未処理</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="Chk_Kan" name="Chk_Kan"
+                                       checked> <label class="form-check-label" for="Chk_Kan"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-info text-white">簡</span> 簡易査定</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="Chk_Satei" name="Chk_Satei"
+                                       checked> <label class="form-check-label" for="Chk_Satei"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-warning text-white">査</span> 詳細依頼</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="Chk_Kaitori" name="Chk_Kaitori"
+                                       checked> <label class="form-check-label" for="Chk_Kaitori"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white">買</span> 買取依頼</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="Chk_Kakunin" name="Chk_Kakunin"
+                                       checked> <label class="form-check-label" for="Chk_Kakunin"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark">確</span> 確認中</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="Chk_Kosho" name="Chk_Kosho"
+                                       checked> <label class="form-check-label" for="Chk_Kosho"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark">交</span> 交渉中</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="Chk_Seiyaku" name="Chk_Seiyaku"
+                                       checked> <label class="form-check-label" for="Chk_Seiyaku"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-secondary">成</span> 成約</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="Chk_Urinushi" name="Chk_Urinushi"
+                                       checked> <label class="form-check-label" for="Chk_Urinushi"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-light text-danger">辞</span> 売主辞退</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="Chk_Kainushi" name="Chk_Kainushi"
+                                       checked> <label class="form-check-label" for="Chk_Kainushi"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-dark text-white">辞</span> 買主辞退</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="Chk_Sakujo" name="Chk_Sakujo"
+                                       checked> <label class="form-check-label" for="Chk_Sakujo"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-danger text-white">削</span> 削除</label>
+                            </div>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Kan" name="Chk_Kan"
-                                   checked> <label class="form-check-label" for="Chk_Kan"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-info text-white">簡</span> 簡易査定</label>
+                    </div>
+
+                </div>
+            </li>
+            <li>
+                <div class="text-center px-xl-3">
+                    <div class="mb-3 text-start">
+                        <label for="Range" class="form-label">範囲指定</label>
+                        <select id="Range" name="Range" class="form-select mb-2">
+                            <option value="登録日">登録日</option>
+                            <option value="簡易査定日">簡易査定日</option>
+                            <option value="詳細査定日">詳細査定日</option>
+                            <option value="買取依頼日">買取依頼日</option>
+                            <option value="送客日">送客日</option>
+                            <option value="終了日">終了日</option>
+                        </select>
+                        <label for="StartDate" class="form-label">開始日</label>
+                        <span class="cap-errormsg-right" id="errorStartDate"></span>
+                        <input class="form-control mb-2" id="StartDate" name="StartDate" type="date">
+
+                        <label for="EndDate" class="form-label">終了日</label>
+                        <span class="cap-errormsg-right" id="errorEndDate"></span>
+                        <input class="form-control mb-2" id="EndDate" name="EndDate" type="date">
+
+                        <div class="row mb-3">
+                            <div class="col-6"> <button type="button" id="btnToday" name="btnToday" class="btn btn-primary w-100">今日</button></div>
+                            <div class="col-6"><button type="button" id="btnThisWeek" name="btnThisWeek" class="btn btn-primary w-100">今週</button></div>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Satei" name="Chk_Satei"
-                                   checked> <label class="form-check-label" for="Chk_Satei"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-warning text-white">査</span> 詳細依頼</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Kaitori" name="Chk_Kaitori"
-                                   checked> <label class="form-check-label" for="Chk_Kaitori"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white">買</span> 買取依頼</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Kakunin" name="Chk_Kakunin"
-                                   checked> <label class="form-check-label" for="Chk_Kakunin"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark">確</span> 確認中</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Kosho" name="Chk_Kosho"
-                                   checked> <label class="form-check-label" for="Chk_Kosho"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark">交</span> 交渉中</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Seiyaku" name="Chk_Seiyaku"
-                                   checked> <label class="form-check-label" for="Chk_Seiyaku"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-secondary">成</span> 成約</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Urinushi" name="Chk_Urinushi"
-                                   checked> <label class="form-check-label" for="Chk_Urinushi"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-light text-danger">辞</span> 売主辞退</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Kainushi" name="Chk_Kainushi"
-                                   checked> <label class="form-check-label" for="Chk_Kainushi"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-dark text-white">辞</span> 買主辞退</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="Chk_Sakujo" name="Chk_Sakujo"
-                                   checked> <label class="form-check-label" for="Chk_Sakujo"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-danger text-white">削</span> 削除</label>
+                        <div class="row mb-3">
+                            <div class="col-6"><button type="button" id="btnThisMonth" name="btnThisMonth" class="btn btn-primary w-100">今月</button></div>
+                            <div class="col-6"><button type="button" id="btnLastMonth" name="btnLastMonth" class="btn btn-primary w-100">先月</button></div>
                         </div>
                     </div>
                 </div>
+            </li>
 
-            </div>
-        </li>
-        <li>
-            <div class="text-center px-xl-3">
-                <div class="mb-3 text-start">
-                    <label for="Range" class="form-label">範囲指定</label>
-                    <select id="Range" name="Range" class="form-select mb-2">
-                        <option value="登録日">登録日</option>
-                        <option value="簡易査定日">簡易査定日</option>
-                        <option value="詳細査定日">詳細査定日</option>
-                        <option value="買取依頼日">買取依頼日</option>
-                        <option value="送客日">送客日</option>
-                        <option value="終了日">終了日</option>
-                    </select>
-                    <label for="StartDate" class="form-label">開始日</label>
-                    @*<span class="cap-errormsg-right" id="errorStartDate"></span>*@
-                    <p class="text-danger text-nowrap text-right" id="errorStartDate" name="errorStartDate"></p>
-                    <input class="form-control mb-2" id="StartDate" name="StartDate" type="date">
-                    @*<p class="text-danger text-nowrap text-right" id="errorStartDate" name="errorStartDate"></p>*@
-
-
-                    <label for="EndDate" class="form-label">終了日</label>
-                    @*<span class="cap-errormsg-right" id="errorEndDate"></span>*@
-                    <p class="text-danger text-nowrap text-right" id="errorEndDate" name="errorEndDate"></p>
-                    <input class="form-control mb-2" id="EndDate" name="EndDate" type="date">
-                    @*<p class="text-danger text-nowrap text-right" id="errorEndDate" name="errorEndDate"></p>*@
-
-                    <div class="row mb-3">
-                        <div class="col-6"> <button type="button" id="btnToday" name="btnToday" class="btn btn-primary w-100">今日</button></div>
-                        <div class="col-6"><button type="button" id="btnThisWeek" name="btnThisWeek" class="btn btn-primary w-100">今週</button></div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-6"><button type="button" id="btnThisMonth" name="btnThisMonth" class="btn btn-primary w-100">今月</button></div>
-                        <div class="col-6"><button type="button" id="btnLastMonth" name="btnLastMonth" class="btn btn-primary w-100">先月</button></div>
-                    </div>
+            <li>
+                <div class="form-group ps-3 pe-3">
+                    <button type="button" id="btnProcess"
+                            class="btn btn-primary w-100 w-100 mb-3">
+                        表示
+                    </button>
                 </div>
-            </div>
-        </li>
+                <div class="text-center">
+                    <span class="cap-errormsg-bottom" id="errorProcess"></span>
+                </div>
 
-        <li>
-            <div class="form-group ps-3 pe-3">
-                <button type="button" id="btnProcess"
-                        class="btn btn-primary w-100 w-100 mb-3">
-                    表示
-                </button>
-            </div>
-            <div class="text-center">
-                <span class="cap-errormsg-bottom" id="errorProcess"></span>
-            </div>
+                <div class="form-group ps-3 pe-3">
+                    <button type="button" id="btnCSV"
+                            class="btn btn-primary w-100 w-100 mb-3">
+                        CSVダウンロード
+                    </button>
+                </div>
+            </li>
 
-            <div class="form-group ps-3 pe-3">
-                <button type="button" id="btnCSV"
-                        class="btn btn-primary w-100 w-100 mb-3">
-                    CSVダウンロード
-                </button>
-            </div>
-        </li>
+        </ul>
 
-    </ul>
-</form>
-  <div class="mt-auto pb-20"></div>
-    </div>
-    <div class="toggle-button">
-      <a href="#menu-toggle" class="btn" id="menu-toggle">
+    </form>
+    <div class="mt-auto pb-20"></div>
+</div>
+<div class="toggle-button">
+    <a href="#menu-toggle" class="btn" id="menu-toggle">
         <span class="fa fa-angle-right glyphicon-chevron-right" aria-hidden="true"></span>
-      </a>
-    </div>
+    </a>
+</div>
