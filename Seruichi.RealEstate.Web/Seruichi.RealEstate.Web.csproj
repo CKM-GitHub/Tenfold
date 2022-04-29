@@ -138,6 +138,7 @@
     <Compile Include="Controllers\Common\CommonApiController.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
     <Compile Include="Controllers\r_contactController.cs" />
+    <Compile Include="Controllers\r_dashboardController.cs" />
     <Compile Include="Controllers\r_issueslistController.cs" />
     <Compile Include="Controllers\r_loginController.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
@@ -170,6 +171,8 @@
     <Content Include="Content\fonts\ionicons.svg" />
     <Content Include="Content\modernizr\modernizr-2.8.3.js" />
     <Content Include="Content\scripts\common.js" />
+    <Content Include="Content\scripts\sidebar.js" />
+    <Content Include="Content\scripts\table_header_sort.js" />
     <Content Include="Content\scripts\validation_jqueryextend.js" />
     <Content Include="Content\typeahead\bloodhound.js" />
     <Content Include="Content\typeahead\bloodhound.min.js" />
@@ -220,6 +223,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Views\r_dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

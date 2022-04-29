@@ -150,7 +150,7 @@ function addEvents() {
                         ("0" + m.getHours()).slice(-2) + "" +
                         ("0" + m.getMinutes()).slice(-2) + "" +
                         ("0" + m.getSeconds()).slice(-2);
-                    downloadLink.download = "売主リスト" + dateString + ".csv";
+                    downloadLink.download = "売主査定リスト_" + dateString + ".csv";
 
                     document.body.appendChild(downloadLink);
                     downloadLink.click();
@@ -319,7 +319,7 @@ function Bind_tbody(result) {
             <td class= "text-end" > ' + data[i]["NO"] + '</td>\
             <td class="'+ _sort_checkbox + '"><i class="' + _class + '">' + _letter + '</i><span class="font-semibold">' + data[i]["ステータス"] + '</span></td>\
             <td><a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal" data-bs-target="#mansion" href="#" id='+ data[i]["SellerMansionID"] + '&' + data[i]["AssReqID"] + '&' + DeepDatetime + ' onclick="Get_PopupFor_Home(this.id)">' + data[i]["マンション名＆部屋番号"] + '</a></td>\
-            <td><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["RealECD"] + '&t_reale_purchase' + ' onclick="l_logfunction(this.id)">' + data[i]["不動産会社"] + '</a></td>\
+            <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["RealECD"] + '&t_reale_purchase' + ' onclick="l_logfunction(this.id)">' + data[i]["不動産会社"] + '</a></td>\
             <td class="text-nowrap">' + data[i]["登録日時"] + '</td>\
             <td class="text-nowrap">' + data[i]["簡易査定日時"] + '</td>\
             <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["AssReqID"] + '&t_seller_assessment_detail' + ' onclick="l_logfunction(this.id)"> ' + data[i]["詳細査定日時"] + ' </a> </td>\
@@ -673,11 +673,22 @@ function Bind_Popup_Seller(result) {
 
     let html_Seller_1 = "";
     let html_Seller_2 = "";
+
+
+    if (data[0]["InvalidFLG"] =="無効会員")
+    {
+        _classFlag = "text-danger";
+    }
+    else
+    {
+        _classFlag = "text-success";
+    }
+
     for (var i = 0; i < data.length; i++) {
 
         html_Seller_1 = '<div class="align-items-center col-12">\
             <div class="p-md-2 p-1" id = "info">\
-                <div class="text-muted"><span class="text-success">'+ data[0]["InvalidFLG"] + '</span></div>\
+                <div class="text-muted"><span class='+ _classFlag+'>'+ data[0]["InvalidFLG"] + '</span></div>\
                 <div class="text-muted">'+ data[0]["SellerKana"] + '</div>\
                 <div class="text-muted">\
                     <h2>'+ data[0]["SellerName"] + '</h2>\
