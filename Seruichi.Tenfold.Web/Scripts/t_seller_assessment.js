@@ -170,7 +170,8 @@ function addEvents() {
         //$('#ResultDate').empty();
         //$('#tableType1 tbody').empty();
         //$('#tableType2 tbody').empty();
-        location.reload();
+        //location.reload();
+        $('#pills-home-tab').trigger('click');
     });
     $('#btnUpClose').on('click', function () {
         //$('#SNameAndRoomNo').empty();
@@ -178,10 +179,16 @@ function addEvents() {
         //$('#ResultDate').empty();
         //$('#tableType1 tbody').empty();
         //$('#tableType2 tbody').empty();
-        location.reload();
+        // location.reload();
+        $('#pills-home-tab').trigger('click');
     });
 
+    $('#pills-home-tab').on('click', function () {
+    });
 
+    //$('#pills-home-tab').on('click', function () {
+        
+    //});
     $('#pills-profile-tab').on('click', function () {
         $('#header1').empty();
         $('#Detail_1').empty();
@@ -395,7 +402,7 @@ function Get_PopupFor_Home(id) {
         AssReqID: id.split('&')[1]
     };
 
-    common.callAjaxWithLoading(_url.Get_PopupFor_Home, model, this, function (result) {
+    common.callAjax(_url.Get_PopupFor_Home, model, this, function (result) {
         if (result && result.isOK) {
             Bind_Popup_Home(result.data);
         }
@@ -409,7 +416,7 @@ function Get_PopupFor_Home(id) {
         }
     });
 
-    common.callAjaxWithLoading(_url.Get_PopupFor_ResultType_1, model, this, function (result) {
+    common.callAjax(_url.Get_PopupFor_ResultType_1, model, this, function (result) {
         if (result && result.isOK) {
 
             Bind_Popup_ResultType_1(result.data, DeepAssDateTime);
@@ -424,7 +431,7 @@ function Get_PopupFor_Home(id) {
         }
     });
 
-    common.callAjaxWithLoading(_url.Get_PopupFor_ResultType_2, model, this, function (result) {
+    common.callAjax(_url.Get_PopupFor_ResultType_2, model, this, function (result) {
         if (result && result.isOK) {
 
             Bind_Popup_ResultType_2(result.data);
