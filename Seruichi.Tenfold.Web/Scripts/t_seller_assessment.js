@@ -184,6 +184,11 @@ function addEvents() {
     });
 
     $('#pills-home-tab').on('click', function () {
+        $('#SNameAndRoomNo').empty();
+        $('#ekikoutsu').empty();
+        $('#ResultDate').empty();
+        $('#tableType1 tbody').empty();
+        $('#tableType2 tbody').empty();
     });
 
     //$('#pills-home-tab').on('click', function () {
@@ -402,7 +407,7 @@ function Get_PopupFor_Home(id) {
         AssReqID: id.split('&')[1]
     };
 
-    common.callAjax(_url.Get_PopupFor_Home, model, this, function (result) {
+    common.callAjax(_url.Get_PopupFor_Home, model,  function (result) {
         if (result && result.isOK) {
             Bind_Popup_Home(result.data);
         }
@@ -416,7 +421,7 @@ function Get_PopupFor_Home(id) {
         }
     });
 
-    common.callAjax(_url.Get_PopupFor_ResultType_1, model, this, function (result) {
+    common.callAjax(_url.Get_PopupFor_ResultType_1, model,  function (result) {
         if (result && result.isOK) {
 
             Bind_Popup_ResultType_1(result.data, DeepAssDateTime);
@@ -431,7 +436,7 @@ function Get_PopupFor_Home(id) {
         }
     });
 
-    common.callAjax(_url.Get_PopupFor_ResultType_2, model, this, function (result) {
+    common.callAjax(_url.Get_PopupFor_ResultType_2, model,  function (result) {
         if (result && result.isOK) {
 
             Bind_Popup_ResultType_2(result.data);
