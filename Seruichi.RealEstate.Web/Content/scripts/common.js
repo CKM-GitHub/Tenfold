@@ -469,7 +469,41 @@ const common = {
 
         return true;
     },
-    
+
+    getToday: function getToday() {
+        let now = new Date();
+        let day = ("0" + now.getDate()).slice(-2);
+        let month = ("0" + (now.getMonth() + 1)).slice(-2);
+        let today = now.getFullYear() + "-" + (month) + "-" + (day);
+        return today;
+    },
+    getFirstDayofMonth: function getFirstDayofMonth() {
+        let date = new Date();
+        let firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+        return firstDay.getFullYear() + "-" + ("0" + (firstDay.getMonth() + 1)).slice(-2) + "-" + ("0" + firstDay.getDate()).slice(-2);
+    },
+    getFirstDayofPreviousMonth: function getFirstDayofPreviousMonth() {
+        let date = new Date();
+        let fdaypremonth = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+        return fdaypremonth.getFullYear() + "-" + ("0" + (fdaypremonth.getMonth() + 1)).slice(-2) + "-" + ("0" + fdaypremonth.getDate()).slice(-2);
+    },
+    getLastDayofPreviousMonth: function getLastDayofPreviousMonth() {
+        let date = new Date();
+        let ldaypremonth = new Date(date.getFullYear(), date.getMonth(), 0);
+        return ldaypremonth.getFullYear() + "-" + ("0" + (ldaypremonth.getMonth() + 1)).slice(-2) + "-" + ("0" + ldaypremonth.getDate()).slice(-2);
+    },
+    getDayaweekbeforetoday: function getDayaweekbeforetoday() {
+        //var date = new Date();
+        //date.setDate(date.getDate() - 7);
+        //let data = date.toISOString().slice(0, 10);
+        let today = new Date();
+        let first = today.getDate() - today.getDay() + 1;
+
+        let monday = new Date(today.setDate(first));
+        let data = monday.toISOString().slice(0, 10);
+        return data;
+    },
+
     checkValidityOnSave: function checkValidityOnSave(selector) {
         let success = true;
         $(selector + ' :input:not(button):not(:hidden):not(:disabled):not([readonly])').each(function () {
