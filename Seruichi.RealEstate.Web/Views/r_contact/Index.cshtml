@@ -1,0 +1,156 @@
+﻿@{
+    Layout = "~/Views/Shared/_r_menuLayout.cshtml";
+    ViewBag.Title = "お問い合わせ";
+}
+@section styles{
+    @Styles.Render("~/Content/realEstate_css_common")
+}
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
+    <div class="d-flex flex-column min-h-screen" id="page-content-wrapper">
+
+        <main class="py-6 bg-surface-secondary">
+
+            <div class="container-fluid">
+                <div class="card shadow border-0 mb-7">
+
+                    <div class="card-header">
+
+                        <div class="col-md-12 col-12 mb-3 mb-sm-0">
+
+                            <h1 class="h2 mb-0 ls-tight">お問い合わせ</h1>
+                        </div>
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
+                              <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+                        </div>
+                    </div>
+
+
+                    <div class="card-header">
+                        <h5 class="mb-0">フォーム</h5>
+                    </div>
+                    <div>
+                        <div class="row justify-content-center align-items-center position-relative">
+                            <div class="row">
+                                <div class="col-md-4 col-12">
+
+                                </div>
+                                <div class="col-md-4 col-12">
+                                    <div class="position-relative">
+                                        <form class="p-4 rounded" method="post">
+                                            <div>
+                                                <p class="text-muted">以下の項目を入力いただき、<br>送信ボタンをクリックしてください。<br>英数字は半角での記入をお願いいたします。<br></p>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">お名前</label><input class="form-control cap-fon-form-w60mw250" type="text" required="" value="TextTextTextTextTextTextTextText">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">お名前(フリガナ)</label><input class="form-control cap-fon-form-w60mw250" type="text" required="" value="TextTextTextTextTextTextTextText">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">メールアドレス</label><input class="form-control cap-fon-form-w350" type="email" required=""
+                                                                                                value="aaaaaaaaaa@mail.bbbbbb.cccc">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">電話番号</label><input class="form-control cap-fon-form-w200" type="tel" required="" value="99999999999">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">お問い合わせ種類</label>
+                                                <div class="dropdown w-100">
+                                                    <button class="btn btn-light dropdown-toggle"
+                                                            aria-expanded="false" data-bs-toggle="dropdown w-100 text-start"
+                                                            type="button">
+                                                        TextTextTextTextTextTextTextText&nbsp;
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">
+                                                            Third
+                                                            Item
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">査定ID</label><input class="form-control cap-fon-form-w200" type="tel" required="" value="ABC9999999999">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">件名</label><input class="form-control" type="tel"
+                                                                                           required="" value="TextTextTextTextTextTextTextTextText">
+                                            </div>
+                                            <div class="mb-4">
+                                                <label class="form-label">お問い合わせ内容</label><textarea class="form-control"
+                                                                                                    required=""
+                                                                                                    rows="4">TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText</textarea>
+                                            </div>
+                                            <div class="text-center">
+                                                <a class="btn btn-primary w-100 mb-2" type="submit"
+                                                   data-bs-target="#modal-check" data-bs-toggle="modal">送信</a>
+                                                <p><small class="text-black-50 w-100"><a href="#">操作ガイド</a>を確認しましたか？<br></small></p>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">お問い合わせ</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe pt-0 p-0">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post" style="text-align: center;">
+                                        <h1 class="cap-icon-h1"><i class="fa fa-check cap-icon-i"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center"><strong>お問い合わせ</strong>が送信されました。</h4>
+                                <p class="text-center">この度はお問い合わせいただきありがとうございます。<br>ご入力いただきましたメールアドレス宛に、問い合わせ完了メールをお送りさせていただきました。<br>後日、担当よりご連絡を差し上げます。</p>
+                            </section>
+                        </div>
+                        <div class="modal-footer"><button class="btn btn-primary btn-lg" type="button">トップページ</button></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" role="dialog" tabindex="-1" id="modal-check">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">お問い合わせ内容確認</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="bg-white shadow-sm p-4 rounded cap-con-form mx-auto" method="post">
+
+                                <div class="mb-3"><label class="form-label">お名前</label><input readonly class="form-control cap-fon-form-w60mw250" type="text" required="" value="漢字カタカナひらがな"></div>
+                                <div class="mb-3"><label class="form-label">お名前(フリガナ)</label><input readonly class="form-control cap-fon-form-w60mw250" type="text" required="" value="ひらがなひらがなひらがな"></div>
+                                <div class="mb-3"><label class="form-label">メールアドレス</label><input readonly class="form-control cap-fon-form-w350" type="email" required="" value="aaaaaaaaaa@mail.bbbbbb.cccc"></div>
+                                <div class="mb-3"><label class="form-label">電話番号</label><input readonly class="form-control cap-fon-form-w200" type="tel" required="" value="99999999999"></div>
+                                <div class="mb-3">
+                                    <label class="form-label">お問い合わせ種類</label>
+                                    <div class="dropdown w-100">
+                                        <button disabled class="btn btn-light dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown w-100 text-start" type="button">TextTextTextTextTextTextTextText&nbsp;</button>
+                                        <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3"><label class="form-label">査定ID</label><input readonly class="form-control cap-fon-form-w200" type="text" required="" value="ABC9999999999"></div>
+                                <div class="mb-3"><label class="form-label">件名</label><input readonly class="form-control" type="text" required="" value="TextTextTextTextTextTextTextText"></div>
+                                <div class="mb-4"><label class="form-label">お問い合わせ内容</label><textarea readonly class="form-control" required="" rows="4">TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText</textarea></div>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer"><button class="btn btn-primary w-100 mb-2" type="button" data-bs-target="#modal-2" data-bs-toggle="modal">送信</button></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        @Html.Partial("~/Views/Shared/_r_footer.cshtml")
+    </div>
+</div>
