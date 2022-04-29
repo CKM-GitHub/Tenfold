@@ -133,7 +133,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\Common\AuthenticationApiController.cs" />
     <Compile Include="Controllers\Common\BaseApiController.cs" />
     <Compile Include="Controllers\Common\BaseController.cs" />
     <Compile Include="Controllers\Common\CommonApiController.cs" />
@@ -172,6 +171,8 @@
     <Content Include="Content\fonts\ionicons.svg" />
     <Content Include="Content\modernizr\modernizr-2.8.3.js" />
     <Content Include="Content\scripts\common.js" />
+    <Content Include="Content\scripts\sidebar.js" />
+    <Content Include="Content\scripts\table_header_sort.js" />
     <Content Include="Content\scripts\validation_jqueryextend.js" />
     <Content Include="Content\typeahead\bloodhound.js" />
     <Content Include="Content\typeahead\bloodhound.min.js" />
