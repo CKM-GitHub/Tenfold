@@ -165,20 +165,9 @@
             .removeAttr('data-digits')
     };
 
-
-    //add by ct
-    $.fn.addvalidation_MaxLength = function (digits) {
+    $.fn.addvalidation_maxlengthCheck = function (digits) {
         return this
-            .attr('data-validation-MaxLength', 'true')
-            .attr('data-digits', digits)
-            .attr('inputmode', 'text')
-            .attr('autocomplete', 'off');
-    };
-
-    //add by pnz
-    $.fn.addvalidation_MaxLengthforSellerlist = function (digits) {
-        return this
-            .attr('data-validation-MaxLengthforsellerlist', 'true')
+            .attr('add-validation-maxlengthCheck', 'true')
             .attr('data-digits', digits)
             .attr('inputmode', 'text')
             .attr('autocomplete', 'off');

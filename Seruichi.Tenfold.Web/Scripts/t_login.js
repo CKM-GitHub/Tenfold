@@ -13,13 +13,13 @@ function setValidation() {
         .addvalidation_errorElement("#erroremail")
         .addvalidation_reqired()
         .addvalidation_onebyte_character()
-        .addvalidation_MaxLength(10);
+        .addvalidation_maxlengthCheck(10);
    
     $('#password')
         .addvalidation_errorElement("#errorpassword")
         .addvalidation_reqired()
         .addvalidation_onebyte_character()
-        .addvalidation_MaxLength(10);
+        .addvalidation_maxlengthCheck(10);
 
 
     $('#btnLogin')

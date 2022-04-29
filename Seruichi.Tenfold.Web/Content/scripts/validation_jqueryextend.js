@@ -141,16 +141,6 @@
             .removeAttr('data-digits')
     };
 
-
-    //add by ct
-    $.fn.addvalidation_MaxLength = function (digits) {
-        return this
-            .attr('data-validation-MaxLength', 'true')
-            .attr('data-digits', digits)
-            .attr('inputmode', 'text')
-            .attr('autocomplete', 'off');
-    };
-
     //add by pnz
     $.fn.addvalidation_maxlengthCheck = function (digits) {
         return this

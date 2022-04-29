@@ -180,15 +180,23 @@ const common = {
     },
 
     replaceDoubleToSingle: function replaceDoubleToSingle(str) {
-        return str.replace(/[！-～]/g, function (s) {
+        //return str.replace(/[！-～]/g, function (s) {
+        //    return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+        //});
+        let returnValue = str.replace(/[！-～]/g, function (s) {
             return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
         });
+        return returnValue.replace(/　/g, " ");
     },
 
     replaceSingleToDouble: function replaceSingleToDouble(str) {
-        return str.replace(/[!-~]/g, function (s) {
+        //return str.replace(/[!-~]/g, function (s) {
+        //    return String.fromCharCode(s.charCodeAt(0) + 0xFEE0);
+        //});
+        let returnValue = str.replace(/[!-~]/g, function (s) {
             return String.fromCharCode(s.charCodeAt(0) + 0xFEE0);
         });
+        return returnValue.replace(/ /g, "　");
     },
 
     checkValidityInput: function checkValidityInput(ctrl) {
@@ -285,31 +293,22 @@ const common = {
             }
         }
         if (inputValue) {
-            if (isSingleDoubleByte) {
-                const maxLength = $ctrl.attr('maxlength');
-                if (maxLength) {
-                    const byteLength = this.getStringByteCount(inputValue);
-                    if (byteLength > parseInt(maxLength)) {
-                        $ctrl.showError(this.getMessage('E105'));
-                        return;
-                    }
-                }
-            }
+            //if (isSingleDoubleByte) {
+            //    const maxLength = $ctrl.attr('maxlength');
+            //    if (maxLength) {
+            //        const byteLength = this.getStringByteCount(inputValue);
+            //        if (byteLength > parseInt(maxLength)) {
+            //            $ctrl.showError(this.getMessage('E105'));
+            //            return;
+            //        }
+            //    }
+            //}
 
             if (isDoubleByte) {
                 const regex = new RegExp(regexPattern.doublebyte);
                 if (!regex.test(inputValue)) {
                     $ctrl.showError(this.getMessage('E107'));
                     return;
-                }
-
-                const maxLength = $ctrl.attr('maxlength');
-                if (maxLength) {
-                    const byteLength = this.getStringByteCount(inputValue);
-                    if (byteLength > parseInt(maxLength)) {
-                        $ctrl.showError(this.getMessage('E105'));
-                        return;
-                    }
                 }
             }
 
@@ -359,7 +358,8 @@ const common = {
                         decpart = decpart.substr(0, decdigits);
                     }
                     else {
-                        decpart = ('0'.repeat(decdigits) + decpart).slice(-1 * decdigits);
+                        //decpart = ('0'.repeat(decdigits) + decpart).slice(-1 * decdigits);
+                        decpart = (decpart + '0'.repeat(decdigits)).slice(0, decdigits);
                     }
                     inputValue = intpart + '.' + decpart;
                     $ctrl.val(inputValue);
@@ -386,7 +386,6 @@ const common = {
                 $ctrl.val(Number(inputValue).toLocaleString());
             }
 
-
             if (isOneByteCharacter) {
                 const strByte = this.getStringByteCount(inputValue);
                 if (strByte != inputValue.length) {
@@ -395,19 +394,7 @@ const common = {
                 }
             }
 
-
             if (isMaxlengthCheck) {
-                const maxLength = $ctrl.data('digits');
-                if (maxLength) {
-                    const byteLength = this.getStringByteCount(inputValue);
-                    if (byteLength > parseInt(maxLength)) {
-                        $ctrl.showError(this.getMessage('E105'));
-                        return;
-                    }
-                }
-            }
-
-            if (isMaxlengthCheckforsellerlist) {
                 const maxLength = $ctrl.data('digits');
                 if (maxLength) {
                     const byteLength = inputValue.length;
@@ -427,7 +414,9 @@ const common = {
 
             if (isDateCompare) {
                 if (!common.compareDate($("#StartDate").val(), $("#EndDate").val())) {
-                    $ctrl.showError(this.getMessage('E111'));
+                    $("#StartDate").showError(this.getMessage('E111'));
+                    $("#EndDate").showError(this.getMessage('E111'));
+                    $("#StartDate").focus();
                     return;
                 }
             }
