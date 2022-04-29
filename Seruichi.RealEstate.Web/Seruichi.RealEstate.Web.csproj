@@ -139,6 +139,7 @@
     <Compile Include="Controllers\Common\CommonApiController.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
     <Compile Include="Controllers\r_contactController.cs" />
+    <Compile Include="Controllers\r_dashboardController.cs" />
     <Compile Include="Controllers\r_issueslistController.cs" />
     <Compile Include="Controllers\r_loginController.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
@@ -220,6 +221,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Views\r_dashboard\Index.cshtml" />
+    <Content Include="Views\r_dashboard\r_dashboard_left_sideNavigation_menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
