@@ -109,6 +109,17 @@ const common = {
         return '?' + encodeURI(query);
     },
 
+    redirectErrorPage: function redirectErrorPage(status) {
+        let url;
+        if (status == 400) url = "/Error/BadRequest";
+        if (status == 401) url = "/Error/Unauthorized";
+        if (status == 403) url = "/Error/Forbidden";
+        if (status == 404) url = "/Error/NotFound";
+        //if (status == 500) url = "/Error/InternalServerError";
+
+        if (url) location.href = common.appPath + url;
+    },
+
     callAjaxWithLoading: function callAjaxWithLoading(url, model, disableSelector, successCallback, failCallback) {
         common.showLoading(disableSelector);
         $.ajax({
@@ -158,7 +169,19 @@ const common = {
                 failCallback();
             }
         });
-    },  
+    },
+
+    callSubmit: function callSubmit(form, action) {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('name', 'RequestVerificationToken');
+        input.setAttribute('value', $("#_RequestVerificationToken").val());
+        form.appendChild(input);
+
+        form.method = "POST";
+        form.action = action;
+        form.submit();
+    },
 
     showLoading: function showLoading(disableSelector) {
         $loadiong = $('<div id="loadiong"><div class="cv-spinner"><span class="spinner"></span></div></div>');
