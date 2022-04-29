@@ -223,7 +223,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Views\r_dashboard\Index.cshtml" />
-    <Content Include="Views\r_dashboard\r_dashboard_left_sideNavigation_menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
