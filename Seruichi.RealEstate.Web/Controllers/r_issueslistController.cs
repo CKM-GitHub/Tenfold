@@ -9,38 +9,34 @@ using Seruichi.BL.RealEstate.r_issueslist;
 
 namespace Seruichi.RealEstate.Web.Controllers
 {
-    public class r_issueslistController : Controller
+    public class r_issueslistController : BaseController
     {
         // GET: r_issueslist
         public ActionResult Index()
         {
             CommonBL bl = new CommonBL();
-            ViewBag.ContactTypeDropDownListItems = bl.GetDropDownListItemsOfStaff_by_RealECD("");
+            ViewBag.ContactTypeDropDownListItems = bl.GetDropDownListItemsOfStaff_by_RealECD(base.GetOperator("RealECD"));
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult Get_DataList(r_issueslistModel model)
-        //{
-        //    r_issueslistBL bl = new r_issueslistBL();
-        //    List<string> chk_lst = new List<string>();
-        //    chk_lst.Add(model.Chk_Mi.ToString());
-        //    chk_lst.Add(model.Chk_Kan.ToString());
-        //    chk_lst.Add(model.Chk_Satei.ToString());
-        //    chk_lst.Add(model.Chk_Kaitori.ToString());
-        //    chk_lst.Add(model.Chk_Kakunin.ToString());
-        //    chk_lst.Add(model.Chk_Kosho.ToString());
-        //    chk_lst.Add(model.Chk_Seiyaku.ToString());
-        //    chk_lst.Add(model.Chk_Urinushi.ToString());
-        //    chk_lst.Add(model.Chk_Kainushi.ToString());
+        [HttpPost]
+        public ActionResult get_issueslist_Data(r_issueslistModel model)
+        {
+            r_issueslistBL bl = new r_issueslistBL();
+            List<string> chk_lst = new List<string>();
+            chk_lst.Add(model.chk_New.ToString());
+            chk_lst.Add(model.chk_Nego.ToString());
+            chk_lst.Add(model.chk_Contract.ToString());
+            chk_lst.Add(model.chk_SellerDeclined.ToString());
+            chk_lst.Add(model.chk_BuyerDeclined.ToString());
 
-        //    var validationResult = bl.ValidateAll(model, chk_lst);
-        //    if (validationResult.Count > 0)
-        //    {
-        //        return ErrorResult(validationResult);
-        //    }
-        //    var dt = bl.GetM_SellerMansionList(model);
-        //    return OKResult(DataTableToJSON(dt));
-        //}
+            var validationResult = bl.ValidateAll(model, chk_lst);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+            var dt = bl.get_issueslist_Data(model);
+            return OKResult(DataTableToJSON(dt));
+        }
     }
 }
