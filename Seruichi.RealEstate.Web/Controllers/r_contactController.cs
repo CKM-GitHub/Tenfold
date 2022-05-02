@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Seruichi.BL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,8 @@ namespace Seruichi.RealEstate.Web.Controllers
         // GET: r_contact
         public ActionResult Index()
         {
+            CommonBL bl = new CommonBL();
+            ViewBag.ContactTypeDropDownListItems = bl.GetDropDownListItemsOfContactType();
             return View();
         }
     }
