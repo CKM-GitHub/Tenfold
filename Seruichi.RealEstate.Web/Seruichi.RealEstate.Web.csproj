@@ -192,6 +192,7 @@
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
     <Content Include="Scripts\r_contact.js" />
+    <Content Include="Scripts\r_dashboard.js" />
     <Content Include="Scripts\r_issueslist.js" />
     <Content Include="Scripts\r_login.js" />
     <Content Include="Views\Error\BadRequest.cshtml" />
