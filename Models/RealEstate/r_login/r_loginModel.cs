@@ -8,6 +8,9 @@ namespace Models.RealEstate.r_login
 {
     public class r_loginModel
     {
+        public string UserID { get; set; }
+        public string UserName { get; set; }
+        public string VerificationToken { get; set; }
         public string RealECD { get; set; }
         public string REStaffCD { get; set; }
         public string REPassword { get; set; }

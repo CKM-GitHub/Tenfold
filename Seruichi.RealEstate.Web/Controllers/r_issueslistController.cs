@@ -14,6 +14,8 @@ namespace Seruichi.RealEstate.Web.Controllers
         // GET: r_issueslist
         public ActionResult Index()
         {
+            CommonBL bl = new CommonBL();
+            ViewBag.ContactTypeDropDownListItems = bl.GetDropDownListItemsOfStaff_by_RealECD("");
             return View();
         }
 
