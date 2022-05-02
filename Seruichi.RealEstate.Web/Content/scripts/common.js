@@ -235,6 +235,7 @@ const common = {
         const isRequiredNotAllowZero = $ctrl.attr("data-validation-not-allow-zero");
         const isSingleDoubleByte = $ctrl.attr("data-validation-singlebyte-doublebyte");
         const isDoubleByte = $ctrl.attr("data-validation-doublebyte");
+        const isDoubleByteKana = $ctrl.attr("data-validation-doublebyte-kana");
         const isSingleByte = $ctrl.attr("data-validation-singlebyte");
         const isSingleByteNumber = $ctrl.attr("data-validation-singlebyte-number");
         const isSingleByteNumberAlpha = $ctrl.attr("data-validation-singlebyte-numberalpha");
@@ -262,15 +263,16 @@ const common = {
             $ctrl.val(inputValue);
         }
 
-        if (isDoubleByte) {
+        if (isDoubleByte || isDoubleByteKana) {
             inputValue = this.replaceSingleToDouble(inputValue);
+            inputValue = this.replaceSingleToDoubleKana(inputValue);
             $ctrl.val(inputValue);
         }
 
         //validation
         if (!isRequired
             && !isSingleDoubleByte
-            && !isDoubleByte
+            && !isDoubleByte && !isDoubleByteKana
             && !isSingleByte && !isSingleByteNumber && !isSingleByteNumberAlpha
             && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter && !ischeckboxLenght && !isMaxlengthCheckforsellerlist
             && !customValidation && !isrequirednullorempty1 && !isrequirednullorempty2 && !isrequirednullorempty3) return true;
