@@ -1,13 +1,43 @@
 ﻿const _url = {};
 $(function () {
     _url.get_issueslist_Data = common.appPath + '/r_issuelist/get_issueslist_Data';
-
+    setValidation();
     addEvents();
     $('#realECD').focus();
 });
 
+function setValidation() {
+
+    $('#StartDate')
+        .addvalidation_errorElement("#errorStartDate")
+        .addvalidation_datecheck() //E108
+        .addvalidation_datecompare(); //E111
+
+    $('#EndDate')
+        .addvalidation_errorElement("#errorEndDate")
+        .addvalidation_datecheck() //E108
+        .addvalidation_datecompare(); //E111
+
+    $('.form-check-input')
+        .addvalidation_errorElement("#CheckBoxError")
+        .addvalidation_checkboxlenght(); //E112
+}
+
 function addEvents() {
     common.bindValidationEvent('#form1', '');
+
+    let model = {
+        chk_New: $("chk_New").val(),
+        chk_Nego: $("chk_Nego").val(),
+        chk_Contract: $("chk_Contract").val(),
+        chk_SellerDeclined: $("chk_SellerDeclined").val(),
+        chk_BuyerDeclined: $("chk_BuyerDeclined").val(),
+        REStaffCD: $("REStaffCD").val(),
+        Range: $("Range").val(),
+        StartDate: $("StartDate").val(),
+        EndDate: $("EndDate").val()
+    };
+    get_issueslist_Data(model, this);
 
     $('#StartDate, #EndDate').on('change', function () {
         const $this = $(this), $start = $('#StartDate').val(), $end = $('#EndDate').val();

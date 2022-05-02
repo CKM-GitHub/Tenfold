@@ -306,7 +306,7 @@ const common = {
             && !isSingleDoubleByte
             && !isDoubleByte && !isDoubleByteKana
             && !isSingleByte && !isSingleByteNumber && !isSingleByteNumberAlpha
-            && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter && !ischeckboxLenght && !isMaxlengthCheckforsellerlist
+            && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter && !ischeckboxLenght
             && !customValidation && !isrequirednullorempty1 && !isrequirednullorempty2 && !isrequirednullorempty3) return true;
 
         if (isRequired) {
