@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models.RealEstate.r_login
+namespace Models.RealEstate.r_dashboard
 {
-    public class r_loginModel
+    public class r_dashboardModel
     {
-        public string UserID { get; set; }
-        public string UserName { get; set; }
-        public string VerificationToken { get; set; }
         public string RealECD { get; set; }
         public string REStaffCD { get; set; }
         public string REPassword { get; set; }
@@ -19,5 +16,6 @@ namespace Models.RealEstate.r_login
         public byte PermissionSetting { get; set; }
         public byte PermissionPlan { get; set; }
         public byte PermissionInvoice { get; set; }
+        public DateTime ConfDateTime { get; set; }
     }
 }

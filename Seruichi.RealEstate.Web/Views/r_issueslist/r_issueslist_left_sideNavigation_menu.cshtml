@@ -51,8 +51,10 @@
                         <label for="ddlStaff" class="form-label">担当者</label>
                         <select id="ddlStaff" class="form-select mb-2">
                             <option>未指定</option>
-                            <option>Staff name Staff name</option>
-                            <option>Staff name Staff name</option>
+                            @foreach (Models.DropDownListItem item in ViewBag.ContactTypeDropDownListItems)
+                            {
+                                <option class="js-selectable" value="@item.Value" data-subject="@item.HiddenItem">@item.DisplayText</option>
+                            }
                         </select>
                     </div>
                 </div>

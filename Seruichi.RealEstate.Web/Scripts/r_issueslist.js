@@ -1,6 +1,6 @@
 ﻿const _url = {};
 $(function () {
-    //_url.checkRealECD = common.appPath + '/r_login/checkRealECD';
+    _url.get_issueslist_Data = common.appPath + '/r_issuelist/get_issueslist_Data';
 
     addEvents();
     $('#realECD').focus();
@@ -141,44 +141,25 @@ function Bind_tbody(result) {
             }
             else {
                 _letter = data[i]["ステータス"].charAt(0);
-                if (_letter == "未") {
-                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal";
+                if (_letter == "新") {
+                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white";
                     _sort_checkbox = "One";
                 }
-                else if (_letter == "簡") {
-                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-info text-white fst-normal";
+                else if (_letter == "交") {
+                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark";
                     _sort_checkbox = "Two";
                 }
-                else if (_letter == "査") {
-                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal";
+                else if (_letter == "成") {
+                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary";
                     _sort_checkbox = "Three";
                 }
-                else if (_letter == "買" && data[i]["ステータス"] == "買取依頼") {
-                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal";
+                else if (_letter == "辞") {
+                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger";
                     _sort_checkbox = "Four";
                 }
-                else if (_letter == "確") {
-                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark fst-normal";
+                else if (_letter == "辞") {
+                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-dark text-white";
                     _sort_checkbox = "Five";
-                }
-                else if (_letter == "交") {
-                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark fst-normal";
-                    _sort_checkbox = "Six";
-                }
-                else if (_letter == "成") {
-                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary text-dark fst-normal";
-                    _sort_checkbox = "Seven";
-                }
-                else if (_letter == "売" && data[i]["EndStatus"] == 2 && data[i]["ステータス"] == "売主辞退") {
-                    _letter = "辞";
-                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger fst-normal";
-                    _sort_checkbox = "Eight";
-                }
-                else if (_letter == "売" && data[i]["EndStatus"] == 3 && data[i]["ステータス"] == "売主辞退") {
-                    _letter = "辞";
-                    data[i]["ステータス"] = "買主辞退";
-                    _class = "ms-1 ps-1 pe-1 rounded-circle  bg-dark text-white fst-normal";
-                    _sort_checkbox = "Nine";
                 }
 
             }
