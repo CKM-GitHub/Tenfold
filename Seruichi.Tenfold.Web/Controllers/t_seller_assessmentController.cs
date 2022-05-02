@@ -21,6 +21,7 @@ namespace Seruichi.Tenfold.Web.Controllers
             //SellerCD = "S000000017";
             if (!String.IsNullOrWhiteSpace(SellerCD))
             {
+                ViewBag.Url = System.Web.HttpContext.Current.Request.UrlReferrer;
                 strSellerCD = SellerCD;
                 t_seller_assessmentBL bl = new t_seller_assessmentBL();
                 t_seller_assessment_header_Model model = bl.GetM_SellerBy_SellerCD(strSellerCD);

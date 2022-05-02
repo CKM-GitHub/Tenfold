@@ -10,7 +10,7 @@ namespace Seruichi.RealEstate.Web.Controllers
 {
     public class BaseController : Controller
     {
-        protected string GetOperator()
+        protected string GetOperator(string type)
         {
             var user = SessionAuthenticationHelper.GetUserFromSession();
             if (user == null)
@@ -19,7 +19,20 @@ namespace Seruichi.RealEstate.Web.Controllers
             }
             else
             {
-                return user.UserID;
+                string return_value = "";
+                switch (type)
+                {
+                    case "UserID": return_value = user.UserID; break;
+                    case "UserName": return_value = user.UserName; break;
+                    case "VerificationToken": return_value = user.VerificationToken; break;
+                    case "RealECD": return_value = user.RealECD; break;
+                    case "REStaffCD": return_value = user.REStaffCD; break;
+                    case "PermissionChat": return_value = user.PermissionChat.ToString(); break;
+                    case "PermissionSetting": return_value = user.PermissionSetting.ToString(); break;
+                    case "PermissionPlan": return_value = user.PermissionPlan.ToString(); break;
+                    case "PermissionInvoice": return_value = user.PermissionInvoice.ToString(); break;
+                }
+                return return_value;
             }
         }
 

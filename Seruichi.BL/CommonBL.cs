@@ -87,6 +87,14 @@ namespace Seruichi.BL
             return GetDropDownListItems(spName);
         }
 
+        public List<DropDownListItem> GetDropDownListItemsOfStaff_by_RealECD(string realECD)
+        {
+            string spName = "pr_r_issuelist_select_DropDownListOfStaff_by_RealECD";
+            SqlParameter sqlParam = new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = realECD };
+
+            return GetDropDownListItems(spName, sqlParam);
+        }
+
         public bool CheckExistsCounterMaster(CounterKey counterKey, out string errorID)
         {
             errorID = "";

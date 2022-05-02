@@ -1,7 +1,6 @@
 ﻿const _url = {};
 let html_Home_Menu = "";
 
-
 $(function () {
     setValidation();
     _url.getM_SellerMansionList = common.appPath + '/t_seller_assessment/GetM_SellerMansionList';
@@ -184,16 +183,15 @@ function addEvents() {
     });
 
     $('#pills-home-tab').on('click', function () {
-        $('#SNameAndRoomNo').empty();
-        $('#ekikoutsu').empty();
-        $('#ResultDate').empty();
-        $('#tableType1 tbody').empty();
-        $('#tableType2 tbody').empty();
+        //$('#SNameAndRoomNo').empty();
+        //$('#ekikoutsu').empty();
+        //$('#ResultDate').empty();
+        //$('#tableType1 tbody').empty();
+        //$('#tableType2 tbody').empty();
+        //Get_PopupFor_Home(this.id);
+
     });
 
-    //$('#pills-home-tab').on('click', function () {
-        
-    //});
     $('#pills-profile-tab').on('click', function () {
         $('#header1').empty();
         $('#Detail_1').empty();
@@ -369,11 +367,11 @@ function l_logfunction(id) {
     common.callAjax(_url.insert_l_log, model,
         function (result) {
             if (result && result.isOK) {
-                if (model.LogStatus = "t_reale_purchase") {
+                if (model.LogStatus == "t_reale_purchase") {
                     //alert("https://www.seruichi.com/t_reale_purchase?RealECD=" + model.LogId);
 
                 }
-                else if (model.LogStatus = "t_seller_assessment_detail") {
+                else if (model.LogStatus == "t_seller_assessment_detail") {
 
                     //alert("https://www.seruichi.com/t_seller_assessment_detail?AssReqID=" + model.LogId);
 
@@ -386,6 +384,7 @@ function l_logfunction(id) {
 
 
 function Get_PopupFor_Home(id) {
+   
     var DeepAssDateTime = '';
     if (id.split('&')[2] =='')
     {
@@ -450,8 +449,12 @@ function Get_PopupFor_Home(id) {
 
 
 function Bind_Popup_Home(result) {
+    $('#SNameAndRoomNo').empty();
+    $('#ekikoutsu').empty();
     let data = JSON.parse(result);
     let html_HomeList = "";
+    let htmlTemp = "";
+    const isEven = data.length % 2 === 0 ? 'Even' : 'Odd';
    
 
     html_Home_Menu = '<h4 class="text-center fw-bold">' + data[0]["MansionName"] + ' ' + data[0]["RoomNumber"] + '</h4>\
@@ -470,14 +473,25 @@ function Bind_Popup_Home(result) {
                                                             <p class="text-dark">徒歩 '+ data[i]["Distance"] + ' 分</p>\
                                                         </div>\
                                                     </div>\
-                                                   </div>'
+                                                  </div>'
+       
     }
+    htmlTemp = '<div class="invisible card p-1 col-12 col-md-6 shadow-sm"> </div>'
     $('#SNameAndRoomNo').append(html_Home_Menu);
-    $('#ekikoutsu').append(html_HomeList);
+    if (isEven == 'Odd')
+    {
+        $('#ekikoutsu').append(html_HomeList + htmlTemp);
+    }
+    else
+    {
+        $('#ekikoutsu').append(html_HomeList);
+    }
 }
 
 
 function Bind_Popup_ResultType_1(result, DeepAssDateTime) {
+    $('#ResultDate').empty();
+    $('#tableType1 tbody').empty();
     let data = JSON.parse(result);
     let html_Date = "";
     let html_Type1 = "";
@@ -501,6 +515,7 @@ function Bind_Popup_ResultType_1(result, DeepAssDateTime) {
 
 
 function Bind_Popup_ResultType_2(result) {
+    $('#tableType2 tbody').empty();
     let data = JSON.parse(result);
     let html_Type2 = "";
     for (var i = 0; i < data.length; i++) {
@@ -632,7 +647,7 @@ function Bind_Popup_Detail(result) {
                 <div class="">\
                     <h6 class="align-self-center"><strong>家賃</strong><br></h6>\
                             </div>\
-                    <div class=""><span class="align-self-start">'+ data[0]["DesiredTime"] + '円<br></span></div>\
+                    <div class=""><span class="align-self-start">'+ data[0]["RentFee"] + '円<br></span></div>\
                     </div>\
                 </div>\
                 <div class="d-inline-flex pb-1">\
@@ -640,7 +655,7 @@ function Bind_Popup_Detail(result) {
                         <div class="">\
                             <h6 class="align-self-center"><strong>管理賃</strong><br></h6>\
                             </div>\
-                            <div class=""><span class="align-self-start">'+ data[0]["DesiredTime"] + '円<br></span></div>\
+                            <div class=""><span class="align-self-start">'+ data[0]["ManagementFee"] + '円<br></span></div>\
                             </div>\
                         </div>\
                         <div class="d-inline-flex pb-1">\
@@ -648,7 +663,7 @@ function Bind_Popup_Detail(result) {
                                 <div class="">\
                                     <h6 class="align-self-center"><strong>修繕積立金</strong><br></h6>\
                             </div>\
-                                    <div class=""><span class="align-self-start">'+ data[0]["DesiredTime"] + '円<br></span></div>\
+                                    <div class=""><span class="align-self-start">'+ data[0]["RepairFee"] + '円<br></span></div>\
                                     </div>\
                                 </div>\
                                 <div class="d-inline-flex pb-1">\
@@ -656,7 +671,7 @@ function Bind_Popup_Detail(result) {
                                         <div class="">\
                                             <h6 class="align-self-center"><strong>その他費用</strong><br></h6>\
                             </div>\
-                                            <div class=""><span class="align-self-start">'+ data[0]["DesiredTime"] + '円<br></span></div>\
+                                            <div class=""><span class="align-self-start">'+ data[0]["ExtraFee"] + '円<br></span></div>\
                                             </div>\
                                         </div>\
                                         <div class="d-inline-flex pb-1">\
@@ -664,7 +679,7 @@ function Bind_Popup_Detail(result) {
                                                 <div class="">\
                                                     <h6 class="align-self-center"><strong>固定資産税</strong><br></h6>\
                             </div>\
-                                                    <div class=""><span class="align-self-start">'+ data[0]["DesiredTime"] + '円<br></span></div>\
+                                                    <div class=""><span class="align-self-start">'+ data[0]["PropertyTax"] + '円<br></span></div>\
                                                     </div>\
                                                 </div>'
     }

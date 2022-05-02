@@ -2,6 +2,7 @@
 using System;
 using System.Web;
 using Seruichi.Common;
+using Models.RealEstate.r_login;
 
 namespace Seruichi.RealEstate.Web
 {
@@ -18,7 +19,7 @@ namespace Seruichi.RealEstate.Web
 
         public static void CreateAnonymousUser()
         {
-            var userInfo = new LoginUser()
+            var userInfo = new r_loginModel()
             {
                 UserID = "unknown",
                 VerificationToken = NewVerificationToken
@@ -26,26 +27,15 @@ namespace Seruichi.RealEstate.Web
             HttpContext.Current.Session[SESSION_KEY] = userInfo;
         }
 
-        public static void CreateLoginUser(string id)
+        public static void CreateLoginUser(r_loginModel model)
         {
-            var userInfo = new LoginUser()
-            {
-                UserID = id,
-                VerificationToken = NewVerificationToken
-            };
-
-            HttpContext.Current.Session[SESSION_KEY] = userInfo;
+            model.VerificationToken = NewVerificationToken;
+            HttpContext.Current.Session[SESSION_KEY] = model;
         }
 
-        public static void CreateLoginUser(LoginUser user)
+        public static r_loginModel GetUserFromSession()
         {
-            user.VerificationToken = NewVerificationToken;
-            HttpContext.Current.Session[SESSION_KEY] = user;
-        }
-
-        public static LoginUser GetUserFromSession()
-        {
-            return HttpContext.Current.Session[SESSION_KEY] as LoginUser;
+            return HttpContext.Current.Session[SESSION_KEY] as r_loginModel;
         }
 
         public static string GetVerificationToken()
@@ -61,7 +51,7 @@ namespace Seruichi.RealEstate.Web
             }
         }
 
-        public static bool ValidateUser(LoginUser user)
+        public static bool ValidateUser(r_loginModel user)
         {
             if (user == null || user.UserID == "unknown")
             {
