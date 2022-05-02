@@ -58,7 +58,7 @@ namespace Seruichi.BL.Tenfold.t_seller_mansion
             });
             if (!string.IsNullOrEmpty(model.MansionName))
             {
-                var query = e.Where(dr => dr.Field<string>("マンション名").Contains(model.MansionName));
+                var query = e.Where(dr => dr.Field<string>("マンション名").Contains(model.MansionName.Trim()));
                 if (query.Any())
                 {
                     int i = 0;
