@@ -57,22 +57,25 @@ function addEvents() {
             common.setFocusFirstError($form);
             return;
         }
+       
 
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         model.ContactType = $('#ContactTypeCD option:selected').text();
 
-        common.callAjaxWithLoading(_url.registerContact, model, this, function (result) {
-            if (result && result.isOK) {
-                //sucess
-               // $('#modal_2').modal('show');
-            }
-            if (result && result.data) {
-                //error
-                common.setValidationErrors(result.data);
-                common.setFocusFirstError($form);
-            }
-        });
+        Bind_Modal(model);       
+
+        //common.callAjaxWithLoading(_url.registerContact, model, this, function (result) {
+        //    if (result && result.isOK) {
+        //        //sucess
+        //       // $('#modal_2').modal('show');
+        //    }
+        //    if (result && result.data) {
+        //        //error
+        //        common.setValidationErrors(result.data);
+        //        common.setFocusFirstError($form);
+        //    }
+        //});
     });
 }
 
@@ -96,4 +99,30 @@ function customValidation_checkContactAddress(e) {
     }
 
     return true;
+}
+
+function Bind_Modal(model) {
+    $('#modal-name').val(model.ContactName)
+    $('#modal-kana').val(model.ContactKana)
+    $('#modal-contactaddress').val(model.ContactAddress)
+    $('#modal-contactphone').val(model.ContactPhone)
+    $('#modal-contactTypeCD').val($('#ContactTypeCD').val())
+    $('#modal-assId').val(model.ContactAssID)
+    $('#modal-subject').val(model.ContactSubject)
+    $('#modal-contactType').val(model.ContactIssue)
+    $('#modal-check').modal('show');
+
+    $('#btn-modal-check').click(function () {
+        common.callAjaxWithLoading(_url.registerContact, model, this, function (result) {
+            if (result && result.isOK) {
+               // sucess
+                $('#modal_2').modal('show');
+            }
+            if (result && result.data) {
+                //error
+                common.setValidationErrors(result.data);
+                common.setFocusFirstError($form);
+            }
+        });
+    })
 }
