@@ -1,5 +1,7 @@
 ﻿const _url = {};
 $(function () {
+    _url.registerContact = common.appPath + '/r_contact/RegisterContact';
+
     setValidation();
     addEvents();
 });
@@ -7,29 +9,24 @@ function setValidation() {
     $('#ContactName')
         .addvalidation_errorElement("#errorContactName")
         .addvalidation_reqired()
-        .addvalidation_maxlengthCheck(25)
         .addvalidation_doublebyte();
     $('#ContactKana')
         .addvalidation_errorElement("#errorContactKana")
         .addvalidation_reqired()
-        .addvalidation_maxlengthCheck(25)
         .addvalidation_doublebyte_kana();
     $('#ContactAddress')
         .addvalidation_errorElement("#errorContactAddress")
-        .addvalidation_reqired()
-        .addvalidation_maxlengthCheck(100)        
+        .addvalidation_reqired()        
         .addvalidation_custom("customValidation_checkContactAddress");
     $('#ContactPhone')
         .addvalidation_errorElement("#errorContactPhone")
         .addvalidation_reqired()
-        .addvalidation_maxlengthCheck(15)
         .addvalidation_singlebyte_number();
     $('#ContactTypeCD')
         .addvalidation_errorElement("#errorContactTypeCD")
         .addvalidation_reqired();
     $('#ContactAssID')
         .addvalidation_errorElement("#errorContactAssID")
-        .addvalidation_maxlengthCheck(10)
         .addvalidation_singlebyte();
     $('#ContactSubject')
         .addvalidation_errorElement("#errorContactSubject")
@@ -47,6 +44,35 @@ function addEvents() {
     $('#ContactPhone').on('blur', function (e) {
         customValidation_checkPhone(this);
         return common.checkValidityInput(this);
+    });
+
+    $('#ContactTypeCD').on('change', function (e) {
+        $('#ContactSubject').val($('#ContactTypeCD option:selected').data('subject'));
+    });
+
+    $('#btnRegistration').on('click', function () {
+        $form.hideChildErrors();
+
+        if (!common.checkValidityOnSave('#form1')) {
+            common.setFocusFirstError($form);
+            return;
+        }
+
+        const fd = new FormData(document.forms.form1);
+        const model = Object.fromEntries(fd);
+        model.ContactType = $('#ContactTypeCD option:selected').text();
+
+        common.callAjaxWithLoading(_url.registerContact, model, this, function (result) {
+            if (result && result.isOK) {
+                //sucess
+               // $('#modal_2').modal('show');
+            }
+            if (result && result.data) {
+                //error
+                common.setValidationErrors(result.data);
+                common.setFocusFirstError($form);
+            }
+        });
     });
 }
 

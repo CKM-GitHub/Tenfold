@@ -1,15 +1,19 @@
 ﻿using Models;
+using Models.RealEstate.r_contact;
 using Seruichi.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Seruichi.BL
+namespace Seruichi.BL.RealEstate.r_contact
 {
-    public class a_contactBL
+    public class r_contactBL
     {
-        public Dictionary<string, string> ValidateAll(a_contactModel model)
+        public Dictionary<string, string> ValidateAll(r_contactModel model)
         {
             ValidatorAllItems validator = new ValidatorAllItems();
 
@@ -20,6 +24,8 @@ namespace Seruichi.BL
             validator.CheckRequired("ContactKana", model.ContactKana);
             validator.CheckIsDoubleByteKana("ContactKana", model.ContactKana, 50);
             //メールアドレス
+            validator.CheckRequired("ContactAddress", model.ContactAddress);
+            validator.CheckIsHalfWidth("ContactAddress", model.ContactAddress, 100);
             validator.CheckSellerMailAddress("ContactAddress", model.ContactAddress);
             //電話番号
             validator.CheckRequired("ContactPhone", model.ContactPhone);
@@ -37,8 +43,7 @@ namespace Seruichi.BL
 
             return validator.GetValidationResult();
         }
-
-        public bool InsertContactData(a_contactModel model, out string msgid)
+        public bool InsertContactData(r_contactModel model, out string msgid)
         {
             msgid = "";
 
@@ -57,8 +62,9 @@ namespace Seruichi.BL
                 new SqlParameter("@ContactSubject", SqlDbType.VarChar){ Value = model.ContactSubject.ToStringOrNull() },
                 new SqlParameter("@ContactIssue", SqlDbType.VarChar){ Value = model.ContactIssue.ToStringOrNull() },
                 new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.Operator.ToStringOrNull() },
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = "" },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress.ToStringOrNull() },
-                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.SellerName.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.REStaffName.ToStringOrNull() },
             };
 
             try
@@ -73,17 +79,17 @@ namespace Seruichi.BL
             }
         }
 
-        public SendMailInfo GetContactTenfoldMailInfo(a_contactModel model)
+        public SendMailInfo GetContactTenfoldMailInfo(r_contactModel model)
         {
             SendMailInfo mailInfo = new SendMailInfo();
             try
             {
                 CommonBL cmnBL = new CommonBL();
                 cmnBL.GetMailSender(mailInfo);
-                cmnBL.GetMailRecipients(MailKBN.ContactTenfold, mailInfo);
-                cmnBL.GetMailTitleAndText(MailKBN.ContactTenfold, mailInfo);
+                cmnBL.GetMailRecipients(MailKBN.RealEstate_ContactTenfold, mailInfo);
+                cmnBL.GetMailTitleAndText(MailKBN.RealEstate_ContactTenfold, mailInfo);
 
-               mailInfo.Subject = mailInfo.Subject.Replace("@@@@Title", model.ContactSubject);
+                mailInfo.Subject = mailInfo.Subject.Replace("@@@@Title", model.ContactSubject);
 
                 mailInfo.BodyText = mailInfo.Text1
                     .Replace("@@@@Time", model.ContactTime.ToString(DateTimeFormat.yyyyMdHmsJP))
@@ -106,15 +112,15 @@ namespace Seruichi.BL
             return mailInfo;
         }
 
-        public SendMailInfo GetContactPersonMailInfo(a_contactModel model)
+        public SendMailInfo GetContactPersonMailInfo(r_contactModel model)
         {
             SendMailInfo mailInfo = new SendMailInfo();
             try
             {
                 CommonBL cmnBL = new CommonBL();
                 cmnBL.GetMailSender(mailInfo);
-                cmnBL.GetMailRecipients(MailKBN.ContactPerson, mailInfo);
-                cmnBL.GetMailTitleAndText(MailKBN.ContactPerson, mailInfo);
+                cmnBL.GetMailRecipients(MailKBN.RealEstate_ContactPerson, mailInfo);
+                cmnBL.GetMailTitleAndText(MailKBN.RealEstate_ContactPerson, mailInfo);
 
                 mailInfo.Recipients.Add(new SendMailInfo.Recipient()
                 {
