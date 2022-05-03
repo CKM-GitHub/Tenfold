@@ -15,6 +15,11 @@ namespace Seruichi.RealEstate.Web.Controllers
         // GET: r_contact
         public ActionResult Index()
         {
+            if (SessionAuthenticationHelper.GetUserFromSession() == null)
+            {
+                Session.Clear();
+                SessionAuthenticationHelper.CreateAnonymousUser();
+            }
             CommonBL bl = new CommonBL();
             ViewBag.ContactTypeDropDownListItems = bl.GetDropDownListItemsOfContactType();
             return View();
@@ -29,7 +34,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return BadRequestResult();
             }
             model.ContactTime = Utilities.GetSysDateTime();
-            model.Operator = base.GetOperator("RealECD");
+            model.Operator = base.GetOperator("REStaffCD");
             model.IPAddress = base.GetClientIP();
             model.REStaffName = base.GetOperator("REStaffName");
 
@@ -39,10 +44,10 @@ namespace Seruichi.RealEstate.Web.Controllers
             {
                 return ErrorResult(validationResult);
             }
-            //if (!bl.InsertContactData(model, out string errorcd))
-            //{
-            //    return ErrorMessageResult(errorcd);
-            //}
+            if (!bl.InsertContactData(model, out string errorcd))
+            {
+                return ErrorMessageResult(errorcd);
+            }
 
             SendMail.SendSmtp(bl.GetContactTenfoldMailInfo(model));
             SendMail.SendSmtp(bl.GetContactPersonMailInfo(model));
