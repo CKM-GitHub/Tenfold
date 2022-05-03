@@ -15,6 +15,8 @@
         ContactTenfold = 3,
         ContactPerson = 4,
         ChangeMailAddress = 5,
+        RealEstate_ContactTenfold=3,
+        RealEstate_ContactPerson=4,
     }
 
     public enum RegexFormat : int
