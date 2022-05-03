@@ -17,5 +17,7 @@ namespace Models.RealEstate.r_dashboard
         public byte PermissionPlan { get; set; }
         public byte PermissionInvoice { get; set; }
         public DateTime ConfDateTime { get; set; }
+        public string Oldestdate { get; set; }
+       
     }
 }

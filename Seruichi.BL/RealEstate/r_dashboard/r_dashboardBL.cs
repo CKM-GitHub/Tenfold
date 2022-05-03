@@ -70,7 +70,7 @@ namespace Seruichi.BL.RealEstate.r_dashboard
         {
             var sqlParams = new SqlParameter[]
              {
-                new SqlParameter("@ConfDateTime", SqlDbType.VarChar){ Value = model.ConfDateTime }
+                new SqlParameter("@ConfDateTime", SqlDbType.DateTime){ Value = model.ConfDateTime }
 
              };
 
