@@ -152,7 +152,7 @@ function addEvents() {
                     PermissionPlan: data.PermissionPlan,
                     PermissionInvoice: data.PermissionInvoice
                 };
-                window.location.href = common.appPath + '/t_seller_assessment/Index?SellerCD=' ++ model5.RealECD + "&PスタッフID=" + model5.REStaffCD + "&P権限_チャット=" + model5.PermissionChat + "&P権限_設定=" + model5.PermissionSetting + "&P権限_プラン変更=" + model5.PermissionPlan + "&P権限_請求書=" + model5.PermissionInvoice;;
+                window.location.href = common.appPath + '/r_dashboard/Index?P会社ID=' + model5.RealECD + "&PスタッフID=" + model5.REStaffCD + "&P権限_チャット=" + model5.PermissionChat + "&P権限_設定=" + model5.PermissionSetting + "&P権限_プラン変更=" + model5.PermissionPlan + "&P権限_請求書=" + model5.PermissionInvoice;;
                 //var link = './r_dashboard/Index/P会社ID=' + model5.RealECD + "&PスタッフID=" + model5.REStaffCD + "&P権限_チャット=" + model5.PermissionChat + "&P権限_設定=" + model5.PermissionSetting + "&P権限_プラン変更=" + model5.PermissionPlan + "&P権限_請求書=" + model5.PermissionInvoice;
                // alert(link);
 

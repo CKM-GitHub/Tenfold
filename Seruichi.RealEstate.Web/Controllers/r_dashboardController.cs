@@ -18,13 +18,13 @@ namespace Seruichi.RealEstate.Web.Controllers
         static string strPermissionInvoice = string.Empty;
 
         // GET: r_dashboard
-        public ActionResult Index(string RealECD,string REStaffCD,string PermissionChat, string PermissionSetting, string PermissionPlan, string PermissionInvoice)
+        public ActionResult Index(string P会社ID, string PスタッフID, string P権限_チャット, string P権限_設定, string P権限_プラン変更, string P権限_請求書)
         {
-            strRealECD = RealECD;strRealECD = REStaffCD;
-            strPermissionChat = PermissionChat;
-            strPermissionSetting = PermissionSetting;
-            strPermissionPlan = PermissionPlan;
-            strPermissionInvoice = PermissionInvoice;
+            strRealECD = P会社ID; strREStaffCD = PスタッフID;
+            strPermissionChat = P権限_チャット;
+            strPermissionSetting = P権限_設定;
+            strPermissionPlan = P権限_プラン変更;
+            strPermissionInvoice = P権限_請求書;
             return View();
         }
 
@@ -57,22 +57,24 @@ namespace Seruichi.RealEstate.Web.Controllers
             return OKResult(DataTableToJSON(dt));
         }
 
-        //[HttpPost]
-        //public ActionResult GetOldestDate(r_dashboardModel model)
-        //{
-        //    model.RealECD = strRealECD;
-        //    r_dashboardBL bl = new r_dashboardBL();
-        //    var dt = bl.GetOldestDate(model);
-        //    return OKResult(DataTableToJSON(dt));
-        //}
+        [HttpPost]
+        public ActionResult GetOldestDate(r_dashboardModel model)
+        {
+            model.RealECD = strRealECD;
+            r_dashboardBL bl = new r_dashboardBL();
+            var dt = bl.GetOldestDate(model);
+            //model.ConfDateTime = Convert.ToDateTime( dt.Rows[0]["ConfDateTime"].ToString());
+            return OKResult(DataTableToJSON(dt));
+        }
 
-        //[HttpPost]
-        //public ActionResult GetOldestDatecount(r_dashboardModel model)
-        //{
-        //    r_dashboardBL bl = new r_dashboardBL();
-        //    var dt = bl.GetOldestDatecount(model);
-        //    return OKResult(DataTableToJSON(dt));
-        //}
+        [HttpPost]
+        public ActionResult GetOldestDatecount(r_dashboardModel model)
+        {
+            
+            r_dashboardBL bl = new r_dashboardBL();
+            var dt = bl.GetOldestDatecount(model);
+            return OKResult(DataTableToJSON(dt));
+        }
 
         [HttpPost]
         public ActionResult GetNewRequestData(r_dashboardModel model)

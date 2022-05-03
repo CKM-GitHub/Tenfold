@@ -1,21 +1,23 @@
 ﻿const _url = {};
 $(function () {
-    _url.GetREFaceImg = common.appPath + '/t_dashboard/GetCustomerInformationWaitingCount';
-    _url.GetREStaffName = common.appPath + '/t_dashboard/GetChatConfirmationWaitingCount';
-    _url.GetREName = common.appPath + '/t_dashboard/GetNewRequestCasesCount';
-    //_url.GetOldestDate = common.appPath + '/t_dashboard/GetDuringnegotiationsCasesCount';
-    //_url.GetOldestDatecount = common.appPath + '/t_dashboard/GetContractCasesCount';
-    _url.GetNewRequestData = common.appPath + '/t_dashboard/GetDeclineCasesCount';
-    _url.GetNegotiationsData = common.appPath + '/t_dashboard/GetDuringnegotiationsCasesCount';
-    _url.GetNumberOfCompletedData = common.appPath + '/t_dashboard/GetContractCasesCount';
-    _url.GetNumberOfDeclineData = common.appPath + '/t_dashboard/GetDeclineCasesCount';
+ 
+    _url.GetREFaceImg = common.appPath + '/r_dashboard/GetREFaceImg';
+    _url.GetREStaffName = common.appPath + '/r_dashboard/GetREStaffName';
+    _url.GetREName = common.appPath + '/r_dashboard/GetREName';
+    _url.GetOldestDate = common.appPath + '/r_dashboard/GetOldestDate';
+    //_url.GetOldestDatecount = common.appPath + '/r_dashboard/GetOldestDatecount';
+    _url.GetNewRequestData = common.appPath + '/r_dashboard/GetNewRequestData';
+    _url.GetNegotiationsData = common.appPath + '/r_dashboard/GetNegotiationsData';
+    _url.GetNumberOfCompletedData = common.appPath + '/r_dashboard/GetNumberOfCompletedData';
+    _url.GetNumberOfDeclineData = common.appPath + '/r_dashboard/GetNumberOfDeclineData';
 });
 
 $(document).ready(function () {
     common.bindValidationEvent('#form1', "");
     let model = {
         RealECD: null,
-        REStaffCD:null
+        REStaffCD: null,
+        ConfDateTime: null
     };
     common.callAjaxWithLoading(_url.GetREFaceImg, model, this,
         function (result) {
@@ -23,7 +25,6 @@ $(document).ready(function () {
             const length = dataArray.length;
 
             if (length > 0) {
-                debugger;
                 let data = dataArray[0];
                 $('#imgProfile').text(data.REFaceImage);
             }
@@ -48,6 +49,19 @@ $(document).ready(function () {
             if (length > 0) {
                 let data = dataArray[0];
                 $('#companyName').text(data.REName);
+            }
+        }
+    )
+    common.callAjaxWithLoading(_url.GetOldestDate, model, this,
+        function (result) {
+            const dataArray = JSON.parse(result.data);
+            const length = dataArray.length;
+
+            if (length > 0) {
+                let data = dataArray[0];
+                $('#oldestDate').text(data.MinDate);
+                model.ConfDateTime = $('#oldestDate').text;
+                alert(model.ConfDateTime);
             }
         }
     )
