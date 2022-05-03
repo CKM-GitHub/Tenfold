@@ -31,6 +31,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                     case "PermissionSetting": return_value = user.PermissionSetting.ToString(); break;
                     case "PermissionPlan": return_value = user.PermissionPlan.ToString(); break;
                     case "PermissionInvoice": return_value = user.PermissionInvoice.ToString(); break;
+                    case "REStaffName": return_value = user.REStaffName.ToString(); break;
                 }
                 return return_value;
             }

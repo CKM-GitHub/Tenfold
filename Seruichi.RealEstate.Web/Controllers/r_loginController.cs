@@ -147,9 +147,9 @@ namespace Seruichi.RealEstate.Web.Controllers
             {
                 if (model.REPassword == rePassword)
                 {
-                    FormsAuthentication.SetAuthCookie(model.REStaffCD, false);
-                    SessionAuthenticationHelper.CreateLoginUser(model);
                     model.REStaffName = bl.GetREStaffNamebyREStaffCD(model.REStaffCD);
+                    FormsAuthentication.SetAuthCookie(model.REStaffCD, false);
+                    SessionAuthenticationHelper.CreateLoginUser(model);                    
                     bl.Insert_L_Login(model, base.GetClientIP());
                     return OKResult(new { RealECD = model.RealECD, REStaffCD = model.REStaffCD, PermissionChat = model.PermissionChat, PermissionSetting= model.PermissionSetting, PermissionPlan= model.PermissionPlan, PermissionInvoice= model.PermissionInvoice });
                 }

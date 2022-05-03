@@ -29,9 +29,9 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return BadRequestResult();
             }
             model.ContactTime = Utilities.GetSysDateTime();
-            model.Operator = base.GetOperator();
+            model.Operator = base.GetOperator("RealECD");
             model.IPAddress = base.GetClientIP();
-            model.REStaffName = base.GetOperatorName();
+            model.REStaffName = base.GetOperator("REStaffName");
 
             r_contactBL bl = new r_contactBL();
             var validationResult = bl.ValidateAll(model);
