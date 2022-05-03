@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models.RealEstate.r_issueslist
 {
-    public class r_issueslistModel
+    public class r_issueslistModel : RealEstate_L_Log_Model
     {
         public byte chk_New { get; set; }
         public byte chk_Nego { get; set; }
