@@ -38,5 +38,36 @@ namespace Seruichi.RealEstate.Web.Controllers
             var dt = bl.get_issueslist_Data(model);
             return OKResult(DataTableToJSON(dt));
         }
+
+        [HttpPost]
+        public ActionResult Insert_l_log(r_issueslistModel model)
+        {
+            r_issueslistBL bl = new r_issueslistBL();
+            model = Getlogdata(model);
+            bl.Insertr_issueslist_L_Log(model);
+            return OKResult();
+        }
+
+        public r_issueslistModel Getlogdata(r_issueslistModel model)
+        {
+            CommonBL bl = new CommonBL();
+            model.LoginKBN = 2;
+            model.LoginID = base.GetOperator("UserID");
+            model.RealECD = base.GetOperator("RealECD");
+            model.LoginName = bl.GetTenstaffNamebyTenstaffcd(model.LoginID);
+            model.IPAddress = base.GetClientIP();
+            model.PageID = model.PageID;
+            model.ProcessKBN = "link";
+            model.Remarks = model.AssReqID;
+            return model;
+        }
+
+        [HttpPost]
+        public ActionResult Generate_r_issueslist_CSV(r_issueslistModel model)
+        {
+            r_issueslistBL bl = new r_issueslistBL();
+            var dt = bl.get_issueslist_Data(model);
+            return OKResult(DataTableToJSON(dt));
+        }
     }
 }
