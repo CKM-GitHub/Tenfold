@@ -59,9 +59,17 @@ $(document).ready(function () {
 
             if (length > 0) {
                 let data = dataArray[0];
-                $('#oldestDate').text(data.MinDate);
-                model.ConfDateTime = $('#oldestDate').text;
-                alert(model.ConfDateTime);
+                var d = data.MinDate;
+                var lang = 'en',
+                    year = d.toLocaleString(lang, { year: 'numeric' }),
+                    month = d.toLocaleString(lang, { month: 'short' }),
+                    day = d.toLocaleString(lang, { day: 'numeric' }),
+                   
+                var a = year + '年' + month +'月'+ day+ '日';
+               
+                $('#oldestDate').text(a);
+                //model.ConfDateTime = $('#oldestDate').text;
+                //alert(model.ConfDateTime);
             }
         }
     )
