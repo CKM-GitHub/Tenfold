@@ -61,8 +61,8 @@ namespace Seruichi.BL.RealEstate.r_contact
                 new SqlParameter("@ContactAssID", SqlDbType.VarChar){ Value = model.ContactAssID.ToStringOrNull() },
                 new SqlParameter("@ContactSubject", SqlDbType.VarChar){ Value = model.ContactSubject.ToStringOrNull() },
                 new SqlParameter("@ContactIssue", SqlDbType.VarChar){ Value = model.ContactIssue.ToStringOrNull() },
-                new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.Operator.ToStringOrNull() },
-                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = "" },
+                new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.LoginID.ToStringOrNull() },
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull() },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress.ToStringOrNull() },
                 new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.REStaffName.ToStringOrNull() },
             };
@@ -70,7 +70,7 @@ namespace Seruichi.BL.RealEstate.r_contact
             try
             {
                 DBAccess db = new DBAccess();
-                return db.InsertUpdateDeleteData("pr_a_contact_Insert_D_Contact", false, sqlParams);
+                return db.InsertUpdateDeleteData("pr_r_contact_Insert_D_Contact", false, sqlParams);
             }
             catch (ExclusionException)
             {

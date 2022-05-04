@@ -159,5 +159,11 @@ namespace Seruichi.RealEstate.Web.Controllers
                 }
             }
         }
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login", "r_login");
+        }
     }
 }
