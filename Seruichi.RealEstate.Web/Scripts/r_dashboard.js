@@ -28,6 +28,7 @@ $(document).ready(function () {
 
             if (length > 0) {
                 let data = dataArray[0];
+                alert(data.REFaceImage);
                 $('#imgProfile').text(data.REFaceImage);
             }
         }
@@ -58,15 +59,18 @@ $(document).ready(function () {
         function (result) {
             const dataArray = JSON.parse(result.data);
             const length = dataArray.length;
-
+            debugger;
             if (length > 0) {
                 let data = dataArray[0];
                 let d = data.MinDate;
-                let arr1 = d.split('/');
-                let year = arr1[0];
-                let month = arr1[1];
-                let day = arr1[2];
-                date = year + '年' + month +'月'+ day+ '日';
+                if (d == null) {
+                    d = new Date().toISOString().slice(0, 10).replace(/-/g, '/');
+                }
+                    let arr1 = d.split('/');
+                    let year = arr1[0];
+                    let month = arr1[1];
+                    let day = arr1[2];
+                    date = year + '年' + month + '月' + day + '日';
                 //$('#oldestDate').text(date);
                
             }

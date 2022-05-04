@@ -58,16 +58,21 @@ namespace Seruichi.RealEstate.Web.Controllers
             r_dashboardBL bl = new r_dashboardBL();
             var dt = bl.GetOldestDate(model);
             mindate = dt.Rows[0]["MinDate"].ToString();
+            if (string.IsNullOrWhiteSpace(mindate))
+            {
+               mindate = DateTime.Now.ToString();
+            }
             return OKResult(DataTableToJSON(dt));
         }
 
         [HttpPost]
         public ActionResult GetOldestDatecount(r_dashboardModel model)
         {
-            model.ConfDateTime = Convert.ToDateTime(mindate);
+            model.ConfDateTime = Convert.ToDateTime(mindate);  
             r_dashboardBL bl = new r_dashboardBL();
             var dt = bl.GetOldestDatecount(model);
             return OKResult(DataTableToJSON(dt));
+
         }
 
         [HttpPost]
