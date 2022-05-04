@@ -54,6 +54,7 @@
     <Compile Include="RealEstate\r_dashboard\r_dashboardModel.cs" />
     <Compile Include="RealEstate\r_issueslist\r_issueslistModel.cs" />
     <Compile Include="RealEstate\r_login\r_loginModel.cs" />
+    <Compile Include="Seller\a_mypage_whisModel.cs" />
     <Compile Include="Seller\a_mypage_uinfo_passwordModel.cs" />
     <Compile Include="Seller\a_mypage_uinfoModel.cs" />
     <Compile Include="Seller\a_mypage_uinfo_emailModel.cs" />
