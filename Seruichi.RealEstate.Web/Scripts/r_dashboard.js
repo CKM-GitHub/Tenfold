@@ -14,7 +14,7 @@ $(function () {
 
 $(document).ready(function () {
     common.bindValidationEvent('#form1', "");
-    let date=null;
+    
     let model = {
         RealECD: null,
         REStaffCD: null,
@@ -67,13 +67,12 @@ $(document).ready(function () {
                 if (d == null) {
                     d = new Date().toISOString().slice(0, 10).replace(/-/g, '/');
                 }
-                    let arr1 = d.split('/');
-                    let year = arr1[0];
-                    let month = arr1[1];
-                    let day = arr1[2];
-                    date = year + '年' + month + '月' + day + '日';
-                //$('#oldestDate').text(date);
-               
+                let arr1 = d.split('/');
+                let year = arr1[0];
+                let month = arr1[1];
+                let day = arr1[2];
+                $('#oldestDate').text(year + '年' + month + '月' + day + '日');
+
             }
         }
     )
@@ -84,7 +83,7 @@ $(document).ready(function () {
 
             if (length > 0) {
                 let data = dataArray[0];
-                $('#oldestDate').text(date +" "+ data.datecount);
+                $('#date-count').text(data.datecount);
             }
         }
     )
