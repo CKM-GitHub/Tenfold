@@ -25,11 +25,13 @@ $(document).ready(function () {
         function (result) {
             const dataArray = JSON.parse(result.data);
             const length = dataArray.length;
-
             if (length > 0) {
                 let data = dataArray[0];
-                alert(data.REFaceImage);
-                $('#imgProfile').text(data.REFaceImage);
+                //$('#imgProfile').text(data.REFaceImage);
+                $('#imgProfile').attr('src', 'data:image/png;base64,' + data.REFaceImage);
+            }
+            else {
+                $("#imgProfile").attr('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==');
             }
         }
     )
@@ -59,7 +61,6 @@ $(document).ready(function () {
         function (result) {
             const dataArray = JSON.parse(result.data);
             const length = dataArray.length;
-            debugger;
             if (length > 0) {
                 let data = dataArray[0];
                 let d = data.MinDate;
