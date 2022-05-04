@@ -159,6 +159,5 @@
 </div>
 
 @section Scripts{
-    <script src="@Url.Content("~/Content/scripts/sidebar.js")"></script>
-    <script src="@Url.Content("~/Scripts/r_issueslist.js")"></script>
+    @Scripts.Render("~/bundles/r_issueslist")
 }

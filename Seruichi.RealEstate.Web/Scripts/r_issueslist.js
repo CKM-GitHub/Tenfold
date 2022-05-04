@@ -1,7 +1,8 @@
 ﻿const _url = {};
 $(function () {
-    _url.get_issueslist_Data = common.appPath + '/r_issuelist/get_issueslist_Data';
-    _url.insert_l_log = common.appPath + '/r_issuelist/Insert_l_log';
+    debugger;
+    _url.get_issueslist_Data = common.appPath + '/r_issueslist/get_issueslist_Data';
+    _url.insert_l_log = common.appPath + '/r_issueslist/Insert_l_log';
     setValidation();
     addEvents();
     $('#realECD').focus();
