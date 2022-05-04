@@ -7,6 +7,18 @@
 @section styles{
     @Styles.Render("~/Content/realEstate_css_common")
 }
+<style>
+    #tblissueslist thead tr th:nth-child(3),
+    #tblissueslist thead tr th:nth-child(4),
+    #tblissueslist thead tr th:nth-child(7),
+    #tblissueslist thead tr th:nth-child(12),
+    #tblissueslist tbody tr td:nth-child(3),
+    #tblissueslist tbody tr td:nth-child(4),
+    #tblissueslist tbody tr td:nth-child(7),
+    #tblissueslist tbody tr td:nth-child(12) {
+        display: none;
+    }
+</style>
 
 <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18" id="wrapper">
     @Html.Partial("r_issueslist_left_sideNavigation_menu")
@@ -30,20 +42,25 @@
                     </div>
 
                     <div class="card-header d-md-inline-flex">
-                        <h5 class="mb-0">案件一覧</h5> <span class="ps-md-5 text-muted text-sm">検索結果：999999件</span>
+                        <h5 class="mb-0">案件一覧</h5> <span class="ps-md-5 text-muted text-sm" id="total_record_up"></span>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-hover table-nowrap">
+                        <table class="table table-hover table-nowrap" id="tblissueslist">
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col" class="text-end text-decoration-underline" style="width: 100px">No.</th>
-                                    <th scope="col" style="width: 80px" class="text-decoration-underline">ステータス</th>
-                                    <th scope="col" style="width: 250px" class="text-decoration-underline">物件（部屋番号）</th>
-                                    <th scope="col" style="width: 150px" class="text-decoration-underline">お客様名</th>
+                                    <th scope="col" style="width: 100px" class="text-decoration-underline">ステータス名</th>
+                                    <th>査定依頼ID</th>
+                                    <th>売主保持物件ID</th>
+                                    <th scope="col" style="width: 250px" class="text-decoration-underline">物件名</th>
+                                    <th scope="col" style="width: 200px" class="text-decoration-underline">部屋番号</th>
+                                    <th>依頼売主CD</th>
+                                    <th scope="col" style="width: 130px" class="text-decoration-underline">お客様名</th>
                                     <th scope="col" style="width: 130px" class="text-decoration-underline">買取依頼日時</th>
-                                    <th scope="col" style="width: 130px" class="text-decoration-underline">終了日時</th>
-                                    <th scope="col" style="width: 100px" class="text-decoration-underline text-end">査定価格(円)</th>
-                                    <th scope="col" style="width: 300px" class="text-decoration-underline">担当者</th>
+                                    <th scope="col" style="width: 100px" class="text-decoration-underline text-end">終了日時</th>
+                                    <th scope="col" style="width: 100px" class="text-decoration-underline">査定価格</th>
+                                    <th>不動産担当者CD</th>
+                                    <th scope="col" style="width: 150px" class="text-decoration-underline">担当者名</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,7 +68,7 @@
                         </table>
                     </div>
                     <div class="card-footer border-0 py-5">
-                        <span class="text-muted text-sm">検索結果：999999件</span>
+                        <span class="text-muted text-sm" id="total_record"></span>
                     </div>
                 </div>
             </div>
@@ -142,6 +159,5 @@
 </div>
 
 @section Scripts{
-    <script src="@Url.Content("~/Content/scripts/sidebar.js")"></script>
-    <script src="@Url.Content("~/Scripts/r_issueslist.js")"></script>
+    @Scripts.Render("~/bundles/r_issueslist")
 }

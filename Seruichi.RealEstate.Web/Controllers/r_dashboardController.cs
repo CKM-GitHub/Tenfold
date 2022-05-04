@@ -11,30 +11,21 @@ namespace Seruichi.RealEstate.Web.Controllers
 {
     public class r_dashboardController : BaseController
     {
-        static string strRealECD = string.Empty;
-        static string strREStaffCD = string.Empty;
-        static string strPermissionChat = string.Empty;
-        static string strPermissionSetting = string.Empty;
-        static string strPermissionPlan = string.Empty;
-        static string strPermissionInvoice = string.Empty;
         static string mindate = string.Empty;
+        static string date = string.Empty;
 
         // GET: r_dashboard
-        public ActionResult Index(string P会社ID, string PスタッフID, string P権限_チャット, string P権限_設定, string P権限_プラン変更, string P権限_請求書)
+        public ActionResult Index()
         {
-            strRealECD = P会社ID; strREStaffCD = PスタッフID;
-            strPermissionChat = P権限_チャット;
-            strPermissionSetting = P権限_設定;
-            strPermissionPlan = P権限_プラン変更;
-            strPermissionInvoice = P権限_請求書;
             return View();
         }
 
         [HttpPost]
         public ActionResult GetREFaceImg(r_dashboardModel model)
         {
-            model.RealECD = strRealECD;
-            model.REStaffCD = strREStaffCD;
+ 
+            model.RealECD = base.GetOperator("RealECD");
+            model.REStaffCD = base.GetOperator("REStaffCD");
             r_dashboardBL bl = new r_dashboardBL();
             var dt = bl.GetREFaceImg(model);
             return OKResult(DataTableToJSON(dt));
@@ -43,8 +34,8 @@ namespace Seruichi.RealEstate.Web.Controllers
         [HttpPost]
         public ActionResult GetREStaffName(r_dashboardModel model)
         {
-            model.RealECD = strRealECD;
-            model.REStaffCD = strREStaffCD;
+            model.RealECD = base.GetOperator("RealECD");
+            model.REStaffCD = base.GetOperator("REStaffCD");
             r_dashboardBL bl = new r_dashboardBL();
             var dt = bl.GetREStaffName(model);
             return OKResult(DataTableToJSON(dt));
@@ -53,7 +44,8 @@ namespace Seruichi.RealEstate.Web.Controllers
         [HttpPost]
         public ActionResult GetREName(r_dashboardModel model)
         {
-            model.RealECD = strRealECD;
+            //model.RealECD = strRealECD;
+            model.RealECD = base.GetOperator("RealECD");
             r_dashboardBL bl = new r_dashboardBL();
             var dt = bl.GetREName(model);
             return OKResult(DataTableToJSON(dt));
@@ -62,26 +54,41 @@ namespace Seruichi.RealEstate.Web.Controllers
         [HttpPost]
         public ActionResult GetOldestDate(r_dashboardModel model)
         {
-            model.RealECD = strRealECD;
+            //model.RealECD = strRealECD;
+            model.RealECD = base.GetOperator("RealECD");
             r_dashboardBL bl = new r_dashboardBL();
             var dt = bl.GetOldestDate(model);
             mindate = dt.Rows[0]["MinDate"].ToString();
+            if (string.IsNullOrWhiteSpace(mindate))
+            {
+               mindate = DateTime.Now.ToString();
+            }
             return OKResult(DataTableToJSON(dt));
         }
 
         [HttpPost]
         public ActionResult GetOldestDatecount(r_dashboardModel model)
         {
-            model.ConfDateTime = Convert.ToDateTime(mindate);
+            if (string.IsNullOrWhiteSpace(mindate))
+            {
+                date  = DateTime.Now.ToString();
+            }
+            else
+            {
+                date = mindate;
+            }
+            model.ConfDateTime= Convert.ToDateTime(date);  
             r_dashboardBL bl = new r_dashboardBL();
             var dt = bl.GetOldestDatecount(model);
             return OKResult(DataTableToJSON(dt));
+
         }
 
         [HttpPost]
         public ActionResult GetNewRequestData(r_dashboardModel model)
         {
-            model.RealECD = strRealECD;
+            //model.RealECD = strRealECD;
+            model.RealECD = base.GetOperator("RealECD");
             r_dashboardBL bl = new r_dashboardBL();
             var dt = bl.GetNewRequestData(model);
             return OKResult(DataTableToJSON(dt));
@@ -90,7 +97,8 @@ namespace Seruichi.RealEstate.Web.Controllers
         [HttpPost]
         public ActionResult GetNegotiationsData(r_dashboardModel model)
         {
-            model.RealECD = strRealECD;
+            //model.RealECD = strRealECD;
+            model.RealECD = base.GetOperator("RealECD");
             r_dashboardBL bl = new r_dashboardBL();
             var dt = bl.GetNegotiationsData(model);
             return OKResult(DataTableToJSON(dt));
@@ -99,7 +107,8 @@ namespace Seruichi.RealEstate.Web.Controllers
         [HttpPost]
         public ActionResult GetNumberOfCompletedData(r_dashboardModel model)
         {
-            model.RealECD = strRealECD;
+            //model.RealECD = strRealECD;
+            model.RealECD = base.GetOperator("RealECD");
             r_dashboardBL bl = new r_dashboardBL();
             var dt = bl.GetNumberOfCompletedData(model);
             return OKResult(DataTableToJSON(dt));
@@ -108,7 +117,8 @@ namespace Seruichi.RealEstate.Web.Controllers
         [HttpPost]
         public ActionResult GetNumberOfDeclineData(r_dashboardModel model)
         {
-            model.RealECD = strRealECD;
+            //model.RealECD = strRealECD;
+            model.RealECD = base.GetOperator("RealECD");
             r_dashboardBL bl = new r_dashboardBL();
             var dt = bl.GetNumberOfDeclineData(model);
             return OKResult(DataTableToJSON(dt));

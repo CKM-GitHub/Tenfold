@@ -57,25 +57,34 @@ function addEvents() {
             common.setFocusFirstError($form);
             return;
         }
-       
+        const fd = new FormData(document.forms.form1);
+        const model = Object.fromEntries(fd);
+        model.ContactType = $('#ContactTypeCD option:selected').text();
+
+        Bind_Modal(model);  
+    });
+    $('#btn-modal-check').click(function () {
 
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         model.ContactType = $('#ContactTypeCD option:selected').text();
 
-        Bind_Modal(model);       
-
-        //common.callAjaxWithLoading(_url.registerContact, model, this, function (result) {
-        //    if (result && result.isOK) {
-        //        //sucess
-        //       // $('#modal_2').modal('show');
-        //    }
-        //    if (result && result.data) {
-        //        //error
-        //        common.setValidationErrors(result.data);
-        //        common.setFocusFirstError($form);
-        //    }
-        //});
+        $('#modal-check').modal('hide');
+        common.callAjaxWithLoading(_url.registerContact, model, this, function (result) {
+            
+            if (result && result.isOK) {
+                // sucess
+                $('#modal-2').modal('show');
+            }
+            if (result && result.data) {
+                //error
+                common.setValidationErrors(result.data);
+                common.setFocusFirstError($form);
+            }
+        });
+    });
+    $('#btn-modal-2').on('click', function () {
+        window.location.href = common.appPath + '/r_dashboard/Index';
     });
 }
 
@@ -110,19 +119,5 @@ function Bind_Modal(model) {
     $('#modal-assId').val(model.ContactAssID)
     $('#modal-subject').val(model.ContactSubject)
     $('#modal-contactType').val(model.ContactIssue)
-    $('#modal-check').modal('show');
-
-    $('#btn-modal-check').click(function () {
-        common.callAjaxWithLoading(_url.registerContact, model, this, function (result) {
-            if (result && result.isOK) {
-               // sucess
-                $('#modal_2').modal('show');
-            }
-            if (result && result.data) {
-                //error
-                common.setValidationErrors(result.data);
-                common.setFocusFirstError($form);
-            }
-        });
-    })
+    $('#modal-check').modal('show');   
 }

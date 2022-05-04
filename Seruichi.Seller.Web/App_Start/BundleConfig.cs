@@ -97,20 +97,9 @@ namespace Seruichi.Seller.Web
             bundles.Add(new ScriptBundle("~/bundles/a_contact").Include(
                       "~/Scripts/a_contact.js"));
 
-
-
-            //a_mypage_plus ----------
-            bundles.Add(new StyleBundle("~/Content/css/a_mypage_plus").Include(
-                        "~/Content/css/font-awesome.min.css",
-                        "~/Content/css/Soft-UI-Aside-Navbar.css",
-                        "~/Content/css/style.css",
-                        "~/Content/css/Clients-UI.css",
-                        "~/Content/css/Ludens-Users---25-After-Register.css",
-                        "~/Content/css/Sidebar.css"));
-
-            bundles.Add(new ScriptBundle("~/bundles/a_mypage_plus").Include(
-                     "~/Scripts/a_mypage_plus.js"));
-
+            //a_mypage_ahis ---------- 
+            bundles.Add(new ScriptBundle("~/bundles/a_mypage_ahis").Include(
+                   "~/Scripts/a_mypage_ahis.js"));
         }
     }
 }
