@@ -96,6 +96,10 @@ namespace Seruichi.Seller.Web
             //a_contact ----------
             bundles.Add(new ScriptBundle("~/bundles/a_contact").Include(
                       "~/Scripts/a_contact.js"));
+
+            //a_mypage_ahis ---------- 
+            bundles.Add(new ScriptBundle("~/bundles/a_mypage_ahis").Include(
+                   "~/Scripts/a_mypage_ahis.js"));
         }
     }
 }
