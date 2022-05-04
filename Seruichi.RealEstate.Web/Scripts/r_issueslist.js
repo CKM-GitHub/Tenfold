@@ -1,13 +1,13 @@
 ﻿const _url = {};
 $(function () {
     _url.get_issueslist_Data = common.appPath + '/r_issuelist/get_issueslist_Data';
+    _url.insert_l_log = common.appPath + '/r_issuelist/Insert_l_log';
     setValidation();
     addEvents();
     $('#realECD').focus();
 });
 
 function setValidation() {
-
     $('#StartDate')
         .addvalidation_errorElement("#errorStartDate")
         .addvalidation_datecheck() //E108
@@ -164,30 +164,30 @@ function Bind_tbody(result) {
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
 
-            if (isEmptyOrSpaces(data[i]["ステータス"])) {
+            if (isEmptyOrSpaces(data[i]["ステータス名"])) {
                 _letter = "";
                 _class = "ms-1 ps-1 pe-1 rounded-circle";
                 _sort_checkbox = "";
             }
             else {
-                _letter = data[i]["ステータス"].charAt(0);
-                if (_letter == "新") {
+                _letter = data[i]["ステータス名"].charAt(0);
+                if (_letter == "新規依頼") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white";
                     _sort_checkbox = "One";
                 }
-                else if (_letter == "交") {
+                else if (_letter == "交渉中") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark";
                     _sort_checkbox = "Two";
                 }
-                else if (_letter == "成") {
+                else if (_letter == "成約") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary";
                     _sort_checkbox = "Three";
                 }
-                else if (_letter == "辞") {
+                else if (_letter == "売主辞退") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger";
                     _sort_checkbox = "Four";
                 }
-                else if (_letter == "辞") {
+                else if (_letter == "買主辞退") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-dark text-white";
                     _sort_checkbox = "Five";
                 }
@@ -195,35 +195,64 @@ function Bind_tbody(result) {
             }
             html += '<tr>\
             <td class= "text-end"> ' + data[i]["NO"] + '</td>\
-            <td class="'+ _sort_checkbox + '"><i class="' + _class + '">' + _letter + '</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
-            <td> ' + data[i]["物件CD"] + ' </td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["MansionCD"] + '&t_mansion_detail' + '  href="#" onclick="l_logfunction(this.id)">' + data[i]["マンション名"] + '</a><p><small class="text-wrap w-100">' + data[i]["住所"] + '</small></p></td>\
-            <td> '+ data[i]["部屋"] + '</td>\
-            <td class="text-end">'+ data[i]["階数"] + '</td>\
-            <td class="text-end">'+ data[i]["面積"].toFixed(2) + '</td>\
-            <td> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["SellerCD"] + '&t_seller_assessment' + ' onclick="l_logfunction(this.id)">' + data[i]["売主名"] + '</a></td>\
-            <td class="text-nowrap"> '+ data[i]["登録日時"] + '</td>\
-            <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["AssReqID"] + '&t_seller_assessment_detail' + ' onclick="l_logfunction(this.id)"> ' + data[i]["詳細査定日時"] + ' </a> </td>\
-            <td class="text-nowrap"> '+ data[i]["買取依頼日時"] + ' </td>\
-            <td class="text-nowrap">\
-            <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["GRealECD"] + '&t_seller_assessment_detail_GReal' + ' onclick="l_logfunction(this.id)" >' + data[i]["マンションTop1"] + ' </a><p class="text-end">' + data[i]["マンション金額"] + '</p> </td>\
-             <td class="text-nowrap">\
-             <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["ERealECD"] + '&t_seller_assessment_detail_EReal' + ' onclick="l_logfunction(this.id)"> ' + data[i]["エリアTop1"] + ' </a> <p class="text-end">' + data[i]["エリア金額"] + '</p></td>\
-             <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["IRealECD"] + '&t_seller_assessment_detail_IRealECD' + ' onclick="l_logfunction(this.id)"> ' + data[i]["買取依頼会社"] + ' </a><p class="text-end">' + data[i]["買取依頼金額"] + '</p> </td>\
-             <td class="text-nowrap"> '+ data[i]["送客日時"] + ' </td>\
-             <td class="text-nowrap"> '+ data[i]["成約日時"] + ' </td>\
-             <td class="text-nowrap"> '+ data[i]["辞退日時"] + '</td>\
+            <td class="'+ _sort_checkbox + '"><i class="' + _class + '">' + _letter + '</i><span class="font-semibold"> ' + data[i]["ステータス名"] + '</span></td>\
+            <td>'+ data[i]["査定依頼ID"] + '</td>\
+            <td>'+ data[i]["売主保持物件ID"] + '</td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["査定依頼ID"] + '&r_issueslist' + '  href="#" onclick="l_logfunction(this.id)">' + data[i]["物件名"] + '</a></td>\
+            <td class="text-nowrap">' + data[i]["部屋番号"] + '</td>\
+            <td>'+ data[i]["依頼売主CD"] + '</td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["査定依頼ID"] + '&r_issueslist' + '  href="#" onclick="l_logfunction(this.id)">' + data[i]["お客様名"] + '</a></td>\
+            <td class="text-nowrap">'+ data[i]["買取依頼日時"] + '</td>\
+            <td class="text-nowrap"> '+ data[i]["終了日時"] + '</td>\
+            <td class="text-end text-nowrap"> '+ data[i]["査定価格"] + '</td>\
+            <td>'+ data[i]["不動産担当者CD"] + '</td>\
+            <td class="text-nowrap"> '+ data[i]["担当者名"] + '</td>\
             </tr>'
         }
 
-        $('#total_record').text("検索結果：" + data.length + "件")
-        $('#total_record_up').text("検索結果：" + data.length + "件")
+        $('#total_record').text("検索結果：" + data.length + "件");
+        $('#total_record_up').text("検索結果：" + data.length + "件");
     }
     else {
-        $('#total_record').text("検索結果： 0件")
-        $('#total_record_up').text("検索結果： 0件")
+        $('#total_record').text("検索結果： 0件 表示可能データがありません");
+        $('#total_record_up').text("検索結果： 0件");
     }
-    $('#mansiontable tbody').append(html);
+    $('#tblissueslist tbody').append(html);
 
-    sortTable.getSortingTable("mansiontable");
+    sortTable.getSortingTable("tblissueslist");
+}
+
+function l_logfunction(id) {
+    let model = {
+        LoginKBN: null,
+        LoginID: null,
+        RealECD: null,
+        LoginName: null,
+        IPAddress: null,
+        PageID: null,
+        ProcessKBN: null,
+        Remarks: null,
+        AssReqID: id.split('&')[0],
+        PageID: id.split('&')[1]
+    };
+    common.callAjax(_url.insert_l_log, model,
+        function (result) {
+            if (result && result.isOK) {
+                if (model.LogStatus == "t_mansion_detail")
+                    alert("https://www.seruichi.com/t_mansion_detail?ｍansionCD=" + model.LogId);
+                else if (model.LogStatus == "t_seller_assessment")
+                    // alert("https://www.seruichi.com/t_seller_assessment?seller=" + model.LogId);
+                    window.location.href = common.appPath + '/t_seller_assessment/Index?SellerCD=' + model.LogId;
+                else if (model.LogStatus == "t_seller_assessment_detail")
+                    alert("https://www.seruichi.com/t_seller_assessment_detail?AssReqID=" + model.LogId);
+                else if (model.LogStatus == "t_seller_assessment_detail_GReal")
+                    alert("https://www.seruichi.com/t_reale_purchase?realestate=" + model.LogId);
+                else if (model.LogStatus == "t_seller_assessment_detail_EReal")
+                    alert("https://www.seruichi.com/t_reale_purchase?realestate=" + model.LogId);
+                else if (model.LogStatus == "t_seller_assessment_detail_IRealECD")
+                    alert("https://www.seruichi.com/t_reale_purchase?realestate=" + model.LogId);
+            }
+            if (result && !result.isOK) {
+            }
+        });
 }
