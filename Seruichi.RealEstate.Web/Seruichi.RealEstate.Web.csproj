@@ -225,6 +225,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Views\r_dashboard\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
