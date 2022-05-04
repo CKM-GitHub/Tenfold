@@ -12,6 +12,7 @@ namespace Seruichi.RealEstate.Web.Controllers
     public class r_dashboardController : BaseController
     {
         static string mindate = string.Empty;
+        static string date = string.Empty;
 
         // GET: r_dashboard
         public ActionResult Index()
@@ -68,7 +69,15 @@ namespace Seruichi.RealEstate.Web.Controllers
         [HttpPost]
         public ActionResult GetOldestDatecount(r_dashboardModel model)
         {
-            model.ConfDateTime = Convert.ToDateTime(mindate);  
+            if (string.IsNullOrWhiteSpace(mindate))
+            {
+                date  = DateTime.Now.ToString();
+            }
+            else
+            {
+                date = mindate;
+            }
+            model.ConfDateTime= Convert.ToDateTime(date);  
             r_dashboardBL bl = new r_dashboardBL();
             var dt = bl.GetOldestDatecount(model);
             return OKResult(DataTableToJSON(dt));
