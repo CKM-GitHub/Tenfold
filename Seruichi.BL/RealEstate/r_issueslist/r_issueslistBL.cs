@@ -5,6 +5,7 @@ using Seruichi.Common;
 using Models.RealEstate.r_issueslist;
 using System.Collections.Generic;
 using Models;
+using System.Linq;
 
 namespace Seruichi.BL.RealEstate.r_issueslist
 {
@@ -45,7 +46,45 @@ namespace Seruichi.BL.RealEstate.r_issueslist
 
             DBAccess db = new DBAccess();
             var dt = db.SelectDatatable("pr_r_issueslist_getDisplayData", sqlParams);
+            var e = dt.AsEnumerable();
+            if (!string.IsNullOrEmpty(model.REStaffCD))
+            {
+                var query = e.Where(dr => dr.Field<string>("マンション名").Contains(model.REStaffCD));
+                if (query.Any())
+                {
+                    int i = 0;
+                    foreach (var row in query)
+                    {
+                        i++;
+                        row["NO"] = i;
+                    }
+                    return query.CopyToDataTable();
+                }
+                else
+                {
+                    DataTable newTable = dt.Clone();
+                    return newTable;
+                }
+            }
             return dt;
+        }
+
+        public void Insertr_issueslist_L_Log(r_issueslistModel model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@LoginKBN", SqlDbType.TinyInt){ Value = model.LoginKBN.ToByte(0)},
+                new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.LoginID.ToStringOrNull() },
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.LoginName.ToStringOrNull() },
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress },
+                new SqlParameter("@PageID", SqlDbType.VarChar){ Value = model.PageID },
+                new SqlParameter("@Processing", SqlDbType.VarChar){ Value = model.ProcessKBN },
+                new SqlParameter("@Remarks", SqlDbType.VarChar){ Value = model.Remarks },
+             };
+
+            DBAccess db = new DBAccess();
+            db.InsertUpdateDeleteData("pr_RealEstate_Insert_L_Log", false, sqlParams);
         }
     }
 }

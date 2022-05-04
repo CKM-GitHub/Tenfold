@@ -57,15 +57,24 @@ function addEvents() {
             common.setFocusFirstError($form);
             return;
         }
+        const fd = new FormData(document.forms.form1);
+        const model = Object.fromEntries(fd);
+        model.ContactType = $('#ContactTypeCD option:selected').text();
+
+        Bind_Modal(model);  
+    });
+    $('#btn-modal-check').click(function () {
 
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         model.ContactType = $('#ContactTypeCD option:selected').text();
 
+        $('#modal-check').modal('hide');
         common.callAjaxWithLoading(_url.registerContact, model, this, function (result) {
+            
             if (result && result.isOK) {
-                //sucess
-               // $('#modal_2').modal('show');
+                // sucess
+                $('#modal-2').modal('show');
             }
             if (result && result.data) {
                 //error
@@ -73,6 +82,9 @@ function addEvents() {
                 common.setFocusFirstError($form);
             }
         });
+    });
+    $('#btn-modal-2').on('click', function () {
+        window.location.href = common.appPath + '/r_dashboard/Index';
     });
 }
 
@@ -96,4 +108,16 @@ function customValidation_checkContactAddress(e) {
     }
 
     return true;
+}
+
+function Bind_Modal(model) {
+    $('#modal-name').val(model.ContactName)
+    $('#modal-kana').val(model.ContactKana)
+    $('#modal-contactaddress').val(model.ContactAddress)
+    $('#modal-contactphone').val(model.ContactPhone)
+    $('#modal-contactTypeCD').val($('#ContactTypeCD').val())
+    $('#modal-assId').val(model.ContactAssID)
+    $('#modal-subject').val(model.ContactSubject)
+    $('#modal-contactType').val(model.ContactIssue)
+    $('#modal-check').modal('show');   
 }
