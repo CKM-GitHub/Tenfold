@@ -34,7 +34,8 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return BadRequestResult();
             }
             model.ContactTime = Utilities.GetSysDateTime();
-            model.Operator = base.GetOperator("REStaffCD");
+            model.LoginID = base.GetOperator("REStaffCD");
+            model.RealECD= base.GetOperator("RealECD");
             model.IPAddress = base.GetClientIP();
             model.REStaffName = base.GetOperator("REStaffName");
 

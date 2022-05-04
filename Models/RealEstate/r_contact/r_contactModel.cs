@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models.RealEstate.r_contact
 {
-    public class r_contactModel:BaseModel
+    public class r_contactModel:RealEstate_L_Log_Model
     {
         public int ContactSEQ { get; set; }
         public DateTime ContactTime { get; set; }
