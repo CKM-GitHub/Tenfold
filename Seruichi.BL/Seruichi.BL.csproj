@@ -54,6 +54,7 @@
     <Compile Include="Seller\a_mypage_ahisBL.cs" />
     <Compile Include="Seller\a_mypage_uinfoBL.cs" />
     <Compile Include="Seller\a_mailregisterBL.cs" />
+    <Compile Include="Seller\a_mypage_whisBL.cs" />
     <Compile Include="Seller\a_registerBL.cs" />
     <Compile Include="Seller\a_loginBL.cs" />
     <Compile Include="Seller\a_indexBL.cs" />

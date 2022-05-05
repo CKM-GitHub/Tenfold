@@ -154,6 +154,7 @@
     <Compile Include="Controllers\a_mypage_plusController.cs" />
     <Compile Include="Controllers\a_mypage_uinfoController.cs" />
     <Compile Include="Controllers\a_mailregisterController.cs" />
+    <Compile Include="Controllers\a_mypage_whisController.cs" />
     <Compile Include="Controllers\a_registerController.cs" />
     <Compile Include="Controllers\a_loginController.cs" />
     <Compile Include="Controllers\Common\CommonApiController.cs" />

@@ -113,6 +113,10 @@ namespace Seruichi.Seller.Web
 
             bundles.Add(new ScriptBundle("~/bundles/a_mypage_plus").Include(
                      "~/Scripts/a_mypage_plus.js"));
+
+            //a_mypage_whis --
+            bundles.Add(new ScriptBundle("~/bundles/a_mypage_whis").Include(
+                    "~/Scripts/a_mypage_whis.js"));
         }
     }
 }

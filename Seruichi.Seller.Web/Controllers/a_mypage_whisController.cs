@@ -19,10 +19,10 @@ namespace Seruichi.Seller.Web.Controllers
             }
 
             a_mypage_whisBL bl = new a_mypage_whisBL();
-            var dt = bl.GetSellerData(user.UserID);
+            a_mypage_whisModel model = bl.GetSellerData(user.UserID);
 
             // CommonBL cmmbl = new CommonBL();
-           return View(dt);
+           return View(model);
         }
 
        

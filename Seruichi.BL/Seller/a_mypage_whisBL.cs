@@ -10,7 +10,7 @@ namespace Seruichi.BL
 {
     public class a_mypage_whisBL
     {
-        public DataTable GetSellerData(string sellerCD)
+        public a_mypage_whisModel GetSellerData(string sellerCD)
         {
             var sqlParams = new SqlParameter[]
             {
@@ -24,15 +24,15 @@ namespace Seruichi.BL
             AESCryption crypt = new AESCryption();
             string decryptionKey = StaticCache.GetDataCryptionKey();
             var dr = dt.Rows[0];
-            //var model = new a_mypage_whisModel()
-            //{
-            //    SellerCD = sellerCD,
+            var model = new a_mypage_whisModel()
+            {
+                SellerCD = sellerCD,
 
-            //    PossibleID = dr["PossibleID"].ToStringOrEmpty(),
-               
-            //};
+                PossibleID = dr["PossibleID"].ToStringOrEmpty(),
 
-            return dt;
+            };
+
+            return model;
         }
       }
 }
