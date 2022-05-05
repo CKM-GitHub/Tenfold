@@ -15,9 +15,7 @@ function setValidation() {
 function addEvents() {
     common.bindValidationEvent('#form1', '');
     const $this = $(this), $typeNum = $('#typeNumber').val()
-    let model = {
-        Change_Count: $typeNum
-    };
+    let model = { Change_Count: $typeNum };
     Get_Calculate_extra_charge(model, this);
 
     $('#typeNumber').on('change', function () {
@@ -77,9 +75,9 @@ function addEvents() {
             }
 
         });
-    }
+    });
 
-        }
+   }
 function Get_Calculate_extra_charge(model, $form) {
 
     common.callAjaxWithLoading(_url.Get_Calculate_extra_charge, model, this, function (result) {
