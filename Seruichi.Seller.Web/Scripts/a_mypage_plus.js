@@ -34,7 +34,7 @@ function addEvents() {
             Change_Count: $typeNum
         };
 
-        if (model.Extra_Charge > 0) {
+        if (model.Change_Count > 0) {
             $("#typeNumber").hideError();
             $("#typeNumber").focus();
             Get_Calculate_extra_charge(model, this);
@@ -56,7 +56,6 @@ function addEvents() {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
-       // $('#extraCharge').empty();
         const $this = $(this), $typeNum = $('#typeNumber').val(), $extraCharge = $('#ChargeFee').val(), $afterValue = $('#afterValue').val()
         let model = {
             Change_Count: $typeNum,
@@ -64,7 +63,7 @@ function addEvents() {
             Possible_Time: $afterValue
         };
 
-        common.callAjaxWithLoading(_url.Get_Calculate_extra_charge, model, this, function (result) {
+        common.callAjax(_url.Get_Calculate_extra_charge, model, function (result) {
             if (result && result.isOK) {
                 const $this = $(this), $typeNum = $('#typeNumber').val(), $extraCharge = document.getElementById('ChargeFee').innerHTML, $afterValue = document.getElementById('afterValue').innerHTML;
                
@@ -116,7 +115,7 @@ function addEvents() {
   }
 function Get_Calculate_extra_charge(model, $form) {
 
-    common.callAjaxWithLoading(_url.Get_Calculate_extra_charge, model, this, function (result) {
+    common.callAjax(_url.Get_Calculate_extra_charge, model, function (result) {
         if (result && result.isOK) {
 
             Bind_Charges(result.data);
