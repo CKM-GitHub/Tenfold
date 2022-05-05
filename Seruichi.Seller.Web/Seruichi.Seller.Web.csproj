@@ -150,6 +150,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\a_contactController.cs" />
+    <Compile Include="Controllers\a_mypage_ahisController.cs" />
+    <Compile Include="Controllers\a_mypage_plusController.cs" />
     <Compile Include="Controllers\a_mypage_uinfoController.cs" />
     <Compile Include="Controllers\a_mailregisterController.cs" />
     <Compile Include="Controllers\a_registerController.cs" />
@@ -219,6 +221,8 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Scripts\a_contact.js" />
+    <Content Include="Scripts\a_mypage_ahis.js" />
+    <Content Include="Scripts\a_mypage_plus.js" />
     <Content Include="Scripts\a_mypage_whis.js" />
     <Content Include="Scripts\a_mypage_uinfo.js" />
     <Content Include="Scripts\a_mailregister.js" />
@@ -272,6 +276,9 @@
     <Content Include="Views\a_contact\Index.cshtml" />
     <Content Include="Views\a_mailregister\Index.cshtml" />
     <Content Include="Views\a_mypage_whis\Index.cshtml" />
+    <Content Include="Views\a_mypage_ahis\Index.cshtml" />
+    <Content Include="Views\a_mypage_plus\Index.cshtml" />
+    <Content Include="Views\Shared\_loginLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
