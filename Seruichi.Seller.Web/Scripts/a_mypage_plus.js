@@ -37,16 +37,15 @@ function addEvents() {
         if (model.Extra_Charge > 0) {
             $("#typeNumber").hideError();
             $("#typeNumber").focus();
-           Get_Calculate_extra_charge(model, this);
-           return ;
-            
+            Get_Calculate_extra_charge(model, this);
+            return;
+
         }
-        else
-        {
-          // alert(-1);
+        else {
+            // alert(-1);
             $("#typeNumber").showError(common.getMessage('E105'));
             $("#typeNumber").focus();
-            return ;
+            return;
         }
     });
 
@@ -77,10 +76,10 @@ function addEvents() {
                 }
             }
 
-    });
-}
+        });
+    }
 
-
+        }
 function Get_Calculate_extra_charge(model, $form) {
 
     common.callAjaxWithLoading(_url.Get_Calculate_extra_charge, model, this, function (result) {
