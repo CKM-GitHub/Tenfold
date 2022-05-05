@@ -1,7 +1,7 @@
 ﻿@model Models.RealEstate.r_issueslist.r_issueslistModel
 
 @{
-    ViewBag.Title = "r_issueslist";
+    ViewBag.Title = "案件一覧";
     Layout = "~/Views/Shared/_r_menuLayout.cshtml";
 }
 @section styles{
@@ -10,12 +10,29 @@
 <style>
     #tblissueslist thead tr th:nth-child(3),
     #tblissueslist thead tr th:nth-child(4),
-    #tblissueslist thead tr th:nth-child(7),
-    #tblissueslist thead tr th:nth-child(12),
+    #tblissueslist thead tr th:nth-child(6),
+    #tblissueslist thead tr th:nth-child(8),
+    #tblissueslist thead tr th:nth-child(9),
+    #tblissueslist thead tr th:nth-child(10),
+    #tblissueslist thead tr th:nth-child(11),
+    #tblissueslist thead tr th:nth-child(15),
     #tblissueslist tbody tr td:nth-child(3),
     #tblissueslist tbody tr td:nth-child(4),
-    #tblissueslist tbody tr td:nth-child(7),
-    #tblissueslist tbody tr td:nth-child(12) {
+    #tblissueslist tbody tr td:nth-child(6),
+    #tblissueslist tbody tr td:nth-child(8),
+    #tblissueslist tbody tr td:nth-child(9),
+    #tblissueslist tbody tr td:nth-child(10),
+    #tblissueslist tbody tr td:nth-child(11),
+    #tblissueslist tbody tr td:nth-child(15) {
+        display: none;
+    }
+
+    #tblsellerdetails thead tr th:nth-child(3),
+    #tblsellerdetails thead tr th:nth-child(4),
+    #tblsellerdetails thead tr th:nth-child(9),
+    #tblsellerdetails tbody tr td:nth-child(3),
+    #tblsellerdetails tbody tr td:nth-child(4),
+    #tblsellerdetails tbody tr td:nth-child(9) {
         display: none;
     }
 </style>
@@ -48,17 +65,20 @@
                         <table class="table table-hover table-nowrap" id="tblissueslist">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" class="text-end text-decoration-underline" style="width: 100px">No.</th>
+                                    <th scope="col" class="text-end text-decoration-underline text-center" style="width: 70px">No.</th>
                                     <th scope="col" style="width: 100px" class="text-decoration-underline">ステータス名</th>
                                     <th>査定依頼ID</th>
                                     <th>売主保持物件ID</th>
-                                    <th scope="col" style="width: 250px" class="text-decoration-underline">物件名</th>
-                                    <th scope="col" style="width: 200px" class="text-decoration-underline">部屋番号</th>
+                                    <th scope="col" style="width: 250px" class="text-decoration-underline">物件名 (部屋番号)</th>
                                     <th>依頼売主CD</th>
-                                    <th scope="col" style="width: 130px" class="text-decoration-underline">お客様名</th>
-                                    <th scope="col" style="width: 130px" class="text-decoration-underline">買取依頼日時</th>
-                                    <th scope="col" style="width: 100px" class="text-decoration-underline text-end">終了日時</th>
-                                    <th scope="col" style="width: 100px" class="text-decoration-underline">査定価格</th>
+                                    <th scope="col" style="width: 150px" class="text-decoration-underline">お客様名</th>
+                                    <th>Address</th>
+                                    <th>Land Line No.</th>
+                                    <th>Mobile No.</th>
+                                    <th>Mail</th>
+                                    <th scope="col" style="width: 130px" class="text-decoration-underline text-center">買取依頼日時</th>
+                                    <th scope="col" style="width: 130px" class="text-decoration-underline text-center">終了日時</th>
+                                    <th scope="col" style="width: 100px" class="text-decoration-underline text-end">査定価格</th>
                                     <th>不動産担当者CD</th>
                                     <th scope="col" style="width: 150px" class="text-decoration-underline">担当者名</th>
                                 </tr>
@@ -74,12 +94,12 @@
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+            <div class="modal fade" id="SellerDetails" tabindex="-1" role="dialog" aria-labelledby="SellerDetails" aria-hidden="true">
+                <div class="modal-dialog modal-xl cap-modal-xl modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">売主詳細</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <h5 class="modal-title" id="h_sellerdetails">売主詳細</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" id="btnUpClose">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -92,27 +112,24 @@
                                             <div class="justify-content-around align-items-center row">
                                                 <div class="align-items-center col-sm-6 col-lg-3">
                                                     <div class="p-md-2 p-1" id="info">
-                                                        <div class="text-muted">Seller name Seller name1</div>
+                                                        <div id="kana_name" class="text-muted"></div>
                                                         <div class="text-muted">
-                                                            <h2>Seller name Seller name2</h2>
+                                                            <h2 id="name"></h2>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex flex-column col-sm-6 col-lg-9" id="info">
                                                     <div class="p-md-1 text-muted">
-                                                        <span class="fa fa-home bg-light p-1 rounded-circle"></span>
-                                                        AddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddress
+                                                        <span class="fa fa-home bg-light p-1 rounded-circle"></span> <span id="address"></span>
                                                     </div>
                                                     <div class="p-md-1 pt-sm-1 text-muted">
-                                                        <span class="fa fa-phone bg-light p-1 rounded-circle"></span> 02-6865-5551
+                                                        <span class="fa fa-phone bg-light p-1 rounded-circle"></span> <span id="landline_no"></span>
                                                     </div>
-
                                                     <div class="p-md-1 pt-sm-1 text-muted">
-                                                        <span class="fa fa-mobile bg-light p-1 ps-2 pe-2 rounded-circle"></span> 080-6865-5551
+                                                        <span class="fa fa-mobile bg-light p-1 ps-2 pe-2 rounded-circle"></span> <span id="mobile_no"></span>
                                                     </div>
                                                     <div class="p-md-1 text-muted">
-                                                        <span class="fa fa-envelope-o bg-light p-1 rounded-circle"></span>
-                                                        AAAA999999@9999.aaaamail.com
+                                                        <span class="fa fa-envelope-o bg-light p-1 rounded-circle"></span> <span id="mail"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -120,18 +137,21 @@
                                     </div>
                                     <div class="card shadow border-0 ">
                                         <div class="card-header d-md-inline-flex">
-                                            <h5 class="mb-0">案件一覧</h5> <span class="ps-md-5 text-muted text-sm">検索結果：999999件</span>
+                                            <h5 class="mb-0">案件一覧</h5> <span class="ps-md-5 text-muted text-sm" id="mtotal_record_up"></span>
                                         </div>
                                         <div class="table-responsive">
-                                            <table class="table table-hover table-nowrap">
+                                            <table class="table table-hover table-nowrap" id="tblsellerdetails">
                                                 <thead class="thead-light">
                                                     <tr>
-                                                        <th scope="col" class="text-end text-decoration-underline" style="width: 100px">No.</th>
-                                                        <th scope="col" style="width: 80px" class="text-decoration-underline">ステータス</th>
+                                                        <th scope="col" class=" text-center text-decoration-underline" style="width: 80px">No.</th>
+                                                        <th scope="col" style="width: 100px" class="text-decoration-underline">ステータス</th>
+                                                        <th>査定依頼ID</th>
+                                                        <th>売主保持物件ID</th>
                                                         <th scope="col" style="width: 250px" class="text-decoration-underline">物件（部屋番号）</th>
-                                                        <th scope="col" style="width: 130px" class="text-decoration-underline">買取依頼日時</th>
-                                                        <th scope="col" style="width: 130px" class="text-decoration-underline">終了日時</th>
+                                                        <th scope="col" style="width: 130px" class="text-decoration-underline text-center">買取依頼日時</th>
+                                                        <th scope="col" style="width: 130px" class="text-decoration-underline text-center">終了日時</th>
                                                         <th scope="col" style="width: 100px" class="text-decoration-underline text-end">査定価格(円)</th>
+                                                        <th>不動産担当者CD</th>
                                                         <th scope="col" style="width: 180px" class="text-decoration-underline">担当者</th>
                                                     </tr>
                                                 </thead>
@@ -140,7 +160,7 @@
                                             </table>
                                         </div>
                                         <div class="card-footer border-0 py-5">
-                                            <span class="text-muted text-sm">検索結果：999999件</span>
+                                            <span class="text-muted text-sm" id="mtotal_record"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -148,7 +168,7 @@
                             <!-- Card stats -->
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">閉じる</button>
                         </div>
                     </div>
                 </div>
