@@ -16,7 +16,8 @@ function setValidation() {
         .addvalidation_doublebyte_kana();
     $('#ContactAddress')
         .addvalidation_errorElement("#errorContactAddress")
-        .addvalidation_reqired()        
+        .addvalidation_reqired()
+        .addvalidation_singlebyte()
         .addvalidation_custom("customValidation_checkContactAddress");
     $('#ContactPhone')
         .addvalidation_errorElement("#errorContactPhone")
@@ -42,7 +43,7 @@ function addEvents() {
     common.bindValidationEvent('#form1', ':not(#ContactPhone)');
 
     $('#ContactPhone').on('blur', function (e) {
-        customValidation_checkPhone(this);
+       // customValidation_checkPhone(this);
         return common.checkValidityInput(this);
     });
 
@@ -86,17 +87,6 @@ function addEvents() {
     $('#btn-modal-2').on('click', function () {
         window.location.href = common.appPath + '/r_dashboard/Index';
     });
-}
-
-function customValidation_checkPhone(e) {
-    const $this = $(e)
-
-    let inputValue = $this.val();
-    inputValue = inputValue.replace(/-/g, "")
-    inputValue = inputValue.replace(/－/g, "")
-    $this.val(inputValue);
-
-    return true;
 }
 
 function customValidation_checkContactAddress(e) {

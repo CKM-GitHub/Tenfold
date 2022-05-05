@@ -51,7 +51,7 @@
     <Compile Include="RealEstate\r_issueslist\r_issueslistBL.cs" />
     <Compile Include="RealEstate\r_login\r_loginBL.cs" />
     <Compile Include="Seller\a_contactBL.cs" />
-    <Compile Include="Seller\a_mypage_whisBL.cs" />
+    <Compile Include="Seller\a_mypage_ahisBL.cs" />
     <Compile Include="Seller\a_mypage_uinfoBL.cs" />
     <Compile Include="Seller\a_mailregisterBL.cs" />
     <Compile Include="Seller\a_registerBL.cs" />
@@ -83,6 +83,7 @@
     <Content Include="Database\StoredProcedure\pr_a_index_Select_Prefectures_by_ZipCode.sql" />
     <Content Include="Database\StoredProcedure\pr_a_index_Select_Towns_by_ZipCode.sql" />
     <Content Include="Database\StoredProcedure\pr_a_login_Insert_D_Certification.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_mypage_ahis_Select_D_AssReqProgress.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Select_M_Address_by_ZipCode.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mailregister_Select_M_Seller_by_SellerCD.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Select_M_Seller_Password_by_SellerCD.sql" />
@@ -121,6 +122,7 @@
     <Content Include="Database\StoredProcedure\pr_M_Message_Select_by_ID.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfPref.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfStation.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_contact_Insert_D_Contact.sql" />
     <Content Include="Database\StoredProcedure\pr_r_login_Insert_L_Login.sql" />
     <Content Include="Database\StoredProcedure\pr_r_login_Select_M_RealEstate_by_RealECD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_login_Select_M_REStaff_by_RealECD_and_REStaffCD.sql" />
