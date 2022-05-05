@@ -538,6 +538,27 @@ const common = {
         return true;
     },
 
+    compareDate: function compareTwoDate(d1, d2) {
+        const date1 = new Date(d1);
+        const date2 = new Date(d2);
+        let success = true;
+        if (date1 > date2) {
+            success = false;
+        }
+        return success;
+    },
+
+    checkboxlengthCheck: function checkboxlengthCheck(className) {
+        if (className.includes(" "))
+            className = className.split(" ")[0];
+        let success = true;
+        let checked = $("." + className + ":checked").length;
+        if (!checked) {
+            success = false;
+        }
+        return success;
+    },
+
     getToday: function getToday() {
         let now = new Date();
         let day = ("0" + now.getDate()).slice(-2);
@@ -590,6 +611,25 @@ const common = {
         $(document).on('blur', selector, function (e) {
             return common.checkValidityInput(this);
         });
+    },
+
+    getJSONtoCSV: function JSON2CSV(objArray) {
+        if (!(objArray == "[]")) {
+            var array = typeof JSONString != 'object' ? JSON.parse(objArray) : JSONString;
+            var fields = Object.keys(array[0])
+            var replacer = function (key, value) { return value === null ? null : value }
+            var csv = array.map(function (row) {
+                return fields.map(function (fieldName) {
+                    return JSON.stringify(row[fieldName], replacer)
+                }).join(',')
+            })
+            csv.unshift(fields.join(',')) // add header column
+            csv = csv.join('\r\n');
+            return csv;
+        }
+        else {
+            return "ERROR";
+        }
     },
 
     setValidationErrors: function setValidationErrors(errors) {

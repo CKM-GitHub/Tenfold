@@ -68,6 +68,7 @@ namespace Seruichi.RealEstate.Web.Controllers
         public ActionResult generate_r_issueslist_CSV(r_issueslistModel model)
         {
             r_issueslistBL bl = new r_issueslistBL();
+            model.RealECD = base.GetOperator("RealECD");
             var dt = bl.get_issueslist_Data(model);
             return OKResult(DataTableToJSON(dt));
         }
