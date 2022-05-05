@@ -16,7 +16,8 @@ function setValidation() {
         .addvalidation_doublebyte_kana();
     $('#ContactAddress')
         .addvalidation_errorElement("#errorContactAddress")
-        .addvalidation_reqired()        
+        .addvalidation_reqired()
+        .addvalidation_singlebyte()
         .addvalidation_custom("customValidation_checkContactAddress");
     $('#ContactPhone')
         .addvalidation_errorElement("#errorContactPhone")
