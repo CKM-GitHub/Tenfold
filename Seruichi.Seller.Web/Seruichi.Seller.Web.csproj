@@ -150,6 +150,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\a_contactController.cs" />
+    <Compile Include="Controllers\a_mypage_whisController.cs" />
     <Compile Include="Controllers\a_mypage_uinfoController.cs" />
     <Compile Include="Controllers\a_mailregisterController.cs" />
     <Compile Include="Controllers\a_registerController.cs" />
