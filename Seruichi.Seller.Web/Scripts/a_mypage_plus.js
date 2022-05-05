@@ -2,6 +2,8 @@
 $(function () {
     // setValidation();
     _url.Get_Calculate_extra_charge = common.appPath + '/a_mypage_plus/Get_Calculate_extra_charge';
+    _url.Insert_D_SellerPossible_OK = common.appPath + '/a_mypage_plus/Insert_D_SellerPossible_OK';
+    _url.Insert_D_SellerPossible_NG = common.appPath + '/a_mypage_plus/Insert_D_SellerPossible_NG';
     addEvents();
 });
 
@@ -54,30 +56,64 @@ function addEvents() {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
-        $('#extraCharge').empty();
-        const $this = $(this), $typeNum = $('#typeNumber').val()
+       // $('#extraCharge').empty();
+        const $this = $(this), $typeNum = $('#typeNumber').val(), $extraCharge = $('#ChargeFee').val(), $afterValue = $('#afterValue').val()
         let model = {
-            Change_Count: $typeNum
+            Change_Count: $typeNum,
+            ChangeFee: $extraCharge,
+            Possible_Time: $afterValue
         };
 
         common.callAjaxWithLoading(_url.Get_Calculate_extra_charge, model, this, function (result) {
             if (result && result.isOK) {
+                const $this = $(this), $typeNum = $('#typeNumber').val(), $extraCharge = document.getElementById('ChargeFee').innerHTML, $afterValue = document.getElementById('afterValue').innerHTML;
+               
+                let model = {
+                    Change_Count: $typeNum,
+                    ChangeFee: $extraCharge,
+                    Possible_Time: $afterValue
+                };
 
-                Bind_Charges(result.data);
-            }
-            if (result && !result.isOK) {
-                const errors = result.data;
-                for (key in errors) {
-                    const target = document.getElementById(key);
-                    $(target).showError(errors[key]);
-                    $form.getInvalidItems().get(0).focus();
-                }
-            }
+                common.callAjax(_url.Insert_D_SellerPossible_OK, model, function (result) {
+                    if (result && result.isOK) {
 
+                       
+                    }
+                    if (result && !result.isOK) {
+                        const errors = result.data;
+                        for (key in errors) {
+                            const target = document.getElementById(key);
+                            $(target).showError(errors[key]);
+                        }
+                    }
+                });
+                
+            }
+            if (result && !result.isOK)
+            {
+                const $this = $(this), $typeNum = $('#typeNumber').val(), $extraCharge = document.getElementById('ChargeFee').innerHTML, $afterValue = document.getElementById('afterValue').innerHTML;
+
+                let model = {
+                    Change_Count: $typeNum,
+                    ChangeFee: $extraCharge,
+                    Possible_Time: $afterValue
+                };
+                common.callAjax(_url.Insert_D_SellerPossible_NG, model, function (result) {
+                    if (result && result.isOK) {
+
+                    }
+                    if (result && !result.isOK) {
+                        const errors = result.data;
+                        for (key in errors) {
+                            const target = document.getElementById(key);
+                            $(target).showError(errors[key]);
+                        }
+                    }
+                });
+            }
         });
     });
-
-   }
+  }
 function Get_Calculate_extra_charge(model, $form) {
 
     common.callAjaxWithLoading(_url.Get_Calculate_extra_charge, model, this, function (result) {
@@ -103,7 +139,7 @@ function Bind_Charges(result) {
     let html = "";
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
-            html = '<h3 class="d-xl-flex">' + data[0]["Change_Count"]+'</h3>\
+            html = '<h3 class="d-xl-flex" Maxlength="7" id="ChargeFee">' + data[0]["Change_Count"]+'</h3>\
                 <p class="d-xl-flex align-items-xl-end" style = "height: 33px;"> 円</p>'
         }
         $('#extraCharge').append(html);
