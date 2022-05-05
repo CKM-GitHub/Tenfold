@@ -15,7 +15,7 @@ namespace Seruichi.BL.RealEstate.r_issueslist
         {
             ValidatorAllItems validator = new ValidatorAllItems();
 
-            validator.CheckMaxLenght("REStaffCD", model.REStaffCD, 50);//E105
+            validator.CheckMaxLenght("txtFreeWord", model.FreeWord, 50);//E105
 
             validator.CheckDate("StartDate", model.StartDate);//E108
             validator.CheckDate("EndDate", model.EndDate);//E108
@@ -41,7 +41,8 @@ namespace Seruichi.BL.RealEstate.r_issueslist
                 new SqlParameter("@REStaffCD", SqlDbType.VarChar){ Value = model.REStaffCD.ToString() },
                 new SqlParameter("@Range", SqlDbType.VarChar){ Value = model.Range.ToStringOrNull() },
                 new SqlParameter("@StartDate", SqlDbType.VarChar){ Value = model.StartDate.ToStringOrNull() },
-                new SqlParameter("@EndDate", SqlDbType.VarChar){ Value = model.EndDate.ToStringOrNull() }
+                new SqlParameter("@EndDate", SqlDbType.VarChar){ Value = model.EndDate.ToStringOrNull() },
+                new SqlParameter("@FreeWord", SqlDbType.VarChar){ Value = model.FreeWord.ToStringOrNull() }
             };
 
             DBAccess db = new DBAccess();

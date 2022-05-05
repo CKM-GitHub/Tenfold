@@ -17,6 +17,7 @@ namespace Models.RealEstate.r_issueslist
         public string Range { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
+        public string FreeWord { get; set; }
         public string AssReqID { get; set; }
         public string SellerID { get; set; }
     }

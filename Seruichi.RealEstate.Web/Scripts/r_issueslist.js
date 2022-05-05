@@ -60,7 +60,8 @@ function addEvents() {
         REStaffCD: $("#ddlStaff").val(),
         Range: $("#ddlRange").val(),
         StartDate: $("#StartDate").val(),
-        EndDate: $("#EndDate").val()
+        EndDate: $("#EndDate").val(),
+        FreeWord: $("#txtFreeWord").text()
     };
     get_issueslist_Data(model, this);
 
@@ -130,7 +131,7 @@ function addEvents() {
                         ("0" + m.getHours()).slice(-2) + "" +
                         ("0" + m.getMinutes()).slice(-2) + "" +
                         ("0" + m.getSeconds()).slice(-2);
-                    downloadLink.download = "売主マンションリスト" + dateString + ".csv";
+                    downloadLink.download = "案件一覧_" + dateString + ".csv";
 
                     document.body.appendChild(downloadLink);
                     downloadLink.click();
