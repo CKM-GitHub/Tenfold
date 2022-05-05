@@ -35,6 +35,8 @@ namespace Seruichi.RealEstate.Web.Controllers
             {
                 return ErrorResult(validationResult);
             }
+
+            model.RealECD = base.GetOperator("RealECD");
             var dt = bl.get_issueslist_Data(model);
             return OKResult(DataTableToJSON(dt));
         }
@@ -63,10 +65,18 @@ namespace Seruichi.RealEstate.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Generate_r_issueslist_CSV(r_issueslistModel model)
+        public ActionResult generate_r_issueslist_CSV(r_issueslistModel model)
         {
             r_issueslistBL bl = new r_issueslistBL();
             var dt = bl.get_issueslist_Data(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult get_SellerDetails_Data(r_issueslistModel model)
+        {
+            r_issueslistBL bl = new r_issueslistBL();
+            var dt = bl.get_SellerDetails_Data(model);
             return OKResult(DataTableToJSON(dt));
         }
     }

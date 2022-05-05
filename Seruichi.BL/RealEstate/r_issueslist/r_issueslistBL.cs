@@ -16,7 +16,6 @@ namespace Seruichi.BL.RealEstate.r_issueslist
             ValidatorAllItems validator = new ValidatorAllItems();
 
             validator.CheckMaxLenght("REStaffCD", model.REStaffCD, 50);//E105
-            validator.CheckIsDoubleByte("REStaffCD", model.REStaffCD, 50);//E107
 
             validator.CheckDate("StartDate", model.StartDate);//E108
             validator.CheckDate("EndDate", model.EndDate);//E108
@@ -38,6 +37,7 @@ namespace Seruichi.BL.RealEstate.r_issueslist
                 new SqlParameter("@chk_Contract", SqlDbType.TinyInt){ Value = model.chk_Contract.ToByte(0) },
                 new SqlParameter("@chk_SellerDeclined", SqlDbType.TinyInt){ Value = model.chk_SellerDeclined.ToByte(0) },
                 new SqlParameter("@chk_BuyerDeclined", SqlDbType.TinyInt){ Value = model.chk_BuyerDeclined.ToByte(0) },
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToString() },
                 new SqlParameter("@REStaffCD", SqlDbType.VarChar){ Value = model.REStaffCD.ToString() },
                 new SqlParameter("@Range", SqlDbType.VarChar){ Value = model.Range.ToStringOrNull() },
                 new SqlParameter("@StartDate", SqlDbType.VarChar){ Value = model.StartDate.ToStringOrNull() },
@@ -46,26 +46,6 @@ namespace Seruichi.BL.RealEstate.r_issueslist
 
             DBAccess db = new DBAccess();
             var dt = db.SelectDatatable("pr_r_issueslist_getDisplayData", sqlParams);
-            var e = dt.AsEnumerable();
-            if (!string.IsNullOrEmpty(model.REStaffCD))
-            {
-                var query = e.Where(dr => dr.Field<string>("マンション名").Contains(model.REStaffCD));
-                if (query.Any())
-                {
-                    int i = 0;
-                    foreach (var row in query)
-                    {
-                        i++;
-                        row["NO"] = i;
-                    }
-                    return query.CopyToDataTable();
-                }
-                else
-                {
-                    DataTable newTable = dt.Clone();
-                    return newTable;
-                }
-            }
             return dt;
         }
 
@@ -85,6 +65,18 @@ namespace Seruichi.BL.RealEstate.r_issueslist
 
             DBAccess db = new DBAccess();
             db.InsertUpdateDeleteData("pr_RealEstate_Insert_L_Log", false, sqlParams);
+        }
+
+        public DataTable get_SellerDetails_Data(r_issueslistModel model)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@SellerID", SqlDbType.VarChar){ Value = model.SellerID.ToStringOrNull() }
+            };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_issueslist_get_SellerDetails_Data", sqlParams);
+            return dt;
         }
     }
 }

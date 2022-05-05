@@ -1,0 +1,110 @@
+﻿
+@model Models.a_mypage_plusModel
+
+@{
+    ViewBag.Title = "簡易査定 - セルイチ";
+}
+@section styles{
+    @Styles.Render("~/Content/css/a_mypage_plus")
+}
+
+
+<header class="text-center text-white masthead cap-header">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto position-relative">
+                <h1 class="mb-2">マイページ</h1>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="clean-block clean-form dark h-100 cap-main">
+    <div class="container-fluid" id="wrapper">
+        <div class="pt-5 pb-3">
+            @Html.Partial("_MyPageMenu")
+            <div class="card cap-form" id="page-content-wrapper">
+                <form action="index.html" method="post" enctype="multipart/form-data" role="form">
+                    <h4 style="text-align: center;padding-top: 50px;"><strong>利用可能査定枠</strong></h4>
+                    <hr>
+                    <div class="m-auto cap-fon-form-w600">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="card">
+                                    <div class="card-body" style="height: 200px;">
+                                        <h6 class="card-title">現在</h6>
+                                        <p>残り</p>
+                                        <h3 class="card-title" style="text-align: center;">0</h3>
+                                        <p style="text-align: right;">件</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="card">
+                                    <div class="card-body d-flex justify-content-center align-items-center align-content-center"
+                                         style="height: 120px;">
+                                        <div>
+                                            <h6 class="card-title">追加</h6>
+                                            <div class="input-group d-inline-flex">
+                                                <input type="number" id="typeNumber" class="form-control" value="1" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body d-flex justify-content-center align-items-center align-content-center"
+                                         style="height: 55px;">
+                                        <i class="fa fa-long-arrow-right"
+                                           style="height: 60px;text-align: center;font-size: 55px;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="card">
+                                    <div class="card-body" style="height: 200px;">
+                                        <h6 class="card-title">増枠後<br></h6>
+                                        <p>残り</p>
+                                        <h3 class="card-title" style="text-align: center;">10</h3>
+                                        <p style="text-align: right;">件</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="text-center">
+                                            <h6>増枠利用料金</h6>
+                                            <div class="d-inline-flex">
+                                                <h3 class="d-xl-flex">10,000</h3>
+                                                <p class="d-xl-flex align-items-xl-end" style="height: 33px;">円</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="text-center">
+                                            <div class="d-inline-flex">
+                                                <button class="btn btn-primary btn-lg"
+                                                        type="button">
+                                                    お支払いへ
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/a_mypage_plus")
+}
