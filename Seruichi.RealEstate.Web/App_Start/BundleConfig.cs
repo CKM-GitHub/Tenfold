@@ -51,7 +51,8 @@ namespace Seruichi.RealEstate.Web
 
             bundles.Add(new ScriptBundle("~/bundles/r_issueslist").Include(
                     "~/Scripts/r_issueslist.js",
-                    "~/Content/scripts/sidebar.js"));
+                    "~/Content/scripts/sidebar.js",
+                    "~/Content/scripts/table_header_sort.js"));
         }
     }
 }

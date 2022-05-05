@@ -154,6 +154,7 @@
     <Compile Include="Controllers\a_mypage_plusController.cs" />
     <Compile Include="Controllers\a_mypage_uinfoController.cs" />
     <Compile Include="Controllers\a_mailregisterController.cs" />
+    <Compile Include="Controllers\a_mypage_whisController.cs" />
     <Compile Include="Controllers\a_registerController.cs" />
     <Compile Include="Controllers\a_loginController.cs" />
     <Compile Include="Controllers\Common\CommonApiController.cs" />
@@ -174,6 +175,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\css\a_mypage_ahis.css" />
     <Content Include="Content\css\Bootstrap-Chat-1.css" />
     <Content Include="Content\css\Bootstrap-Chat.css" />
     <Content Include="Content\css\Contact-FormModal-Contact-Form-with-Google-Map.css" />

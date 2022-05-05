@@ -46,6 +46,7 @@ const regexPattern = {
     numeric: "^[0-9.]+$",
     dateformat: /^\d{4}-\d{2}-\d{2}$/,
     doublebyteKana: "^[ァ-ヶー　]+$",
+    singlebyte_number_minus:"^[0-9-]+$",
 }
 
 const kanaMap = {
@@ -222,7 +223,23 @@ const common = {
 
     getStringByteCount: function getStringByteCount(str) {
         var blob = new Blob([str], { type: 'text/plain' });
+        
         return blob.size;
+    },
+
+    getFullWithOneCharactertwoByteCount: function mbStrWidth(input) {
+        let len = 0;
+        for (let i = 0; i < input.length; i++) {
+            let code = input.charCodeAt(i);
+            if ((code >= 0x0020 && code <= 0x1FFF) || (code >= 0xFF61 && code <= 0xFF9F)) {
+                len += 1;
+            } else if ((code >= 0x2000 && code <= 0xFF60) || (code >= 0xFFA0)) {
+                len += 2;
+            } else {
+                len += 0;
+            }
+        }
+        return len;
     },
 
     replaceDoubleToSingle: function replaceDoubleToSingle(str) {
@@ -353,7 +370,7 @@ const common = {
             if (isSingleDoubleByte) {
                 const maxLength = $ctrl.attr('maxlength');
                 if (maxLength) {
-                    const byteLength = this.getStringByteCount(inputValue);
+                    const byteLength = this.getFullWithOneCharactertwoByteCount(inputValue);
                     if (byteLength > parseInt(maxLength)) {
                         $ctrl.showError(this.getMessage('E105'));
                         return;
@@ -386,10 +403,19 @@ const common = {
             }
 
             if (isSingleByteNumber) {
-                const regex = new RegExp(regexPattern.singlebyte_number);
-                if (!regex.test(inputValue)) {
-                    $ctrl.showError(this.getMessage('E104'));
-                    return;
+                if ($ctrl.prop("id") == "ContactPhone") {
+                    const regex_number_minus = new RegExp(regexPattern.singlebyte_number_minus);
+                    if (!regex_number_minus.test(inputValue)) {
+                        $ctrl.showError(this.getMessage('E104'));
+                        return;
+                    }
+                }
+                else {
+                    const regex = new RegExp(regexPattern.singlebyte_number);
+                    if (!regex.test(inputValue)) {
+                        $ctrl.showError(this.getMessage('E104'));
+                        return;
+                    }
                 }
             }
 
@@ -512,6 +538,27 @@ const common = {
         return true;
     },
 
+    compareDate: function compareTwoDate(d1, d2) {
+        const date1 = new Date(d1);
+        const date2 = new Date(d2);
+        let success = true;
+        if (date1 > date2) {
+            success = false;
+        }
+        return success;
+    },
+
+    checkboxlengthCheck: function checkboxlengthCheck(className) {
+        if (className.includes(" "))
+            className = className.split(" ")[0];
+        let success = true;
+        let checked = $("." + className + ":checked").length;
+        if (!checked) {
+            success = false;
+        }
+        return success;
+    },
+
     getToday: function getToday() {
         let now = new Date();
         let day = ("0" + now.getDate()).slice(-2);
@@ -564,6 +611,25 @@ const common = {
         $(document).on('blur', selector, function (e) {
             return common.checkValidityInput(this);
         });
+    },
+
+    getJSONtoCSV: function JSON2CSV(objArray) {
+        if (!(objArray == "[]")) {
+            var array = typeof JSONString != 'object' ? JSON.parse(objArray) : JSONString;
+            var fields = Object.keys(array[0])
+            var replacer = function (key, value) { return value === null ? null : value }
+            var csv = array.map(function (row) {
+                return fields.map(function (fieldName) {
+                    return JSON.stringify(row[fieldName], replacer)
+                }).join(',')
+            })
+            csv.unshift(fields.join(',')) // add header column
+            csv = csv.join('\r\n');
+            return csv;
+        }
+        else {
+            return "ERROR";
+        }
     },
 
     setValidationErrors: function setValidationErrors(errors) {

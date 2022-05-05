@@ -12,31 +12,31 @@
                         <div class="mb-3 text-start">
                             <label for="disabledSelect" class="form-label">ステータス</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="chk_New" checked>
+                                <input class="form-check-input" type="checkbox" value="1" id="chk_New" name="chk_New" checked>
                                 <label class="form-check-label" for="chk_New">
                                     <span class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white">新</span> 新規依頼
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="chk_Nego" checked>
+                                <input class="form-check-input" type="checkbox" value="1" id="chk_Nego" name="chk_Nego" checked>
                                 <label class="form-check-label" for="chk_Nego">
                                     <span class="ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark">交</span> 交渉中
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="chk_Contract" checked>
+                                <input class="form-check-input" type="checkbox" value="1" id="chk_Contract" name="chk_Contract" checked>
                                 <label class="form-check-label" for="chk_Contract">
                                     <span class="ms-1 ps-1 pe-1 rounded-circle bg-secondary">成</span> 成約
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="chk_SellerDeclined" checked>
+                                <input class="form-check-input" type="checkbox" value="1" id="chk_SellerDeclined" name="chk_SellerDeclined" checked>
                                 <label class="form-check-label" for="chk_SellerDeclined">
                                     <span class="ms-1 ps-1 pe-1 rounded-circle bg-light text-danger">辞</span> 売主辞退
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="1" id="chk_BuyerDeclined" checked>
+                                <input class="form-check-input" type="checkbox" value="1" id="chk_BuyerDeclined" name="chk_BuyerDeclined" checked>
                                 <label class="form-check-label" for="chk_BuyerDeclined">
                                     <span class="ms-1 ps-1 pe-1 rounded-circle bg-dark text-white">辞</span> 買主辞退
                                 </label>
@@ -49,8 +49,8 @@
                 <div class="text-center px-xl-3">
                     <div class="mb-3 text-start">
                         <label for="ddlStaff" class="form-label">担当者</label>
-                        <select id="ddlStaff" class="form-select mb-2">
-                            <option>未指定</option>
+                        <select id="ddlStaff" name="REStaffCD" class="form-select mb-2">
+                            <option class="js-selectable" value="0">未指定</option>
                             @foreach (Models.DropDownListItem item in ViewBag.ContactTypeDropDownListItems)
                             {
                                 <option class="js-selectable" value="@item.Value" data-subject="@item.HiddenItem">@item.DisplayText</option>
@@ -63,10 +63,10 @@
                 <div class="text-center px-xl-3">
                     <div class="mb-3 text-start">
                         <label for="ddlRange" class="form-label">範囲指定</label>
-                        <select id="ddlRange" class="form-select mb-2">
-                            <option>未指定</option>
+                        <select id="ddlRange" name="Range" class="form-select mb-2">
+                            <option>未選択</option>
                             <option>買取依頼日</option>
-                            <option>終了日時</option>
+                            <option>終了日付</option>
                         </select>
                         <label for="StartDate" class="form-label">開始日</label>
                         <span class="cap-errormsg-right" id="errorStartDate"></span>
@@ -89,7 +89,8 @@
                 <div class="text-center px-xl-3">
                     <div class="mb-3 text-start">
                         <label for="txtFreeWord" class="form-label">フリーワード</label>
-                        <input type="search" id="txtFreeWord" class="form-control mb-2" placeholder="フリーワードで検索" maxlength="50" />
+                        <span class="cap-errormsg-bottom" id="errorFreeWord"></span>
+                        <input type="search" id="txtFreeWord" name="txtFreeWord" class="form-control mb-2" placeholder="フリーワードで検索" maxlength="50" />
                     </div>
                 </div>
             </li>
