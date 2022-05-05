@@ -98,8 +98,22 @@ namespace Seruichi.Seller.Web
                       "~/Scripts/a_contact.js"));
 
             //a_mypage_ahis ---------- 
-            bundles.Add(new ScriptBundle("~/bundles/a_mypage_ahis").Include(
-                   "~/Scripts/a_mypage_ahis.js"));
+            bundles.Add(new ScriptBundle("~/bundles/a_mypage_ahis").Include( 
+             "~/Scripts/a_mypage_ahis.js")); 
+            bundles.Add(new StyleBundle("~/Content/css/a_mypage_ahis").Include(
+            "~/Content/css/a_mypage_ahis.css", 
+            "~/Content/css/Contact-Form-Clean.css",
+            "~/Content/css/Contact-FormModal-Contact-Form-with-Google-Map.css",
+            "~/Content/css/Highlight-Blue.css",
+            "~/Content/css/Highlight-Clean.css",
+            "~/Content/css/Login-Form-Clean.css",
+            "~/Content/css/Ludens-Users---2-Register.css",
+            "~/Content/css/Ludens-Users---25-After-Register.css",
+            "~/Content/css/Newsletter-Subscription-Form.css",
+            "~/Content/css/Profile-Edit-Form-1.css",
+            "~/Content/css/Profile-Edit-Form.css",
+            "~/Content/css/Registration-Form-with-Photo.css",
+            "~/Content/css/Clients-UI.css"));
         }
     }
 }
