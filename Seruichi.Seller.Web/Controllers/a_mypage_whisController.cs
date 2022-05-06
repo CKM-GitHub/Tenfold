@@ -18,20 +18,19 @@ namespace Seruichi.Seller.Web.Controllers
                 return RedirectToAction("Index", "a_login");
             }
 
-            a_mypage_whisBL bl = new a_mypage_whisBL();
-            a_mypage_whisModel model = bl.GetSellerData(user.UserID);
-
-            // CommonBL cmmbl = new CommonBL();
-           return View(model);
+            
+            return View();
         }
-
-       
-
-        // POST: GotoNextPage
         [HttpPost]
-        public ActionResult GotoNextPage()
+        public ActionResult GetD_SellerPossibleData(a_mypage_whisModel model)
         {
-            return RedirectToAction("Index", "a_mypage_whis");
+            LoginUser user = SessionAuthenticationHelper.GetUserFromSession();
+            a_mypage_whisBL bl = new a_mypage_whisBL();
+
+            var dt = bl.GetD_SellerPossibleData(user.UserID);
+
+            return OKResult(DataTableToJSON(dt));
         }
+
     }
 }
