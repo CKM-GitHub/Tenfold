@@ -27,7 +27,7 @@
         };
 
         const sortColumn = function (index) {
-
+            var col_index = headers[index].getAttribute('ordercol-index').split('_');
             // Get the current direction
             const direction = directions[index] || 'asc';
 
@@ -37,19 +37,57 @@
             const newRows = Array.from(rows);
            
             newRows.sort(function (rowA, rowB) {
-                const cellA = rowA.querySelectorAll('td')[index].innerHTML;
-                const cellB = rowB.querySelectorAll('td')[index].innerHTML;               
-                
-                const a = transform(index, cellA);
-                const b = transform(index, cellB);
-                
-                switch (true) {
-                    case a > b:
-                        return 1 * multiplier;
-                    case a < b:
-                        return -1 * multiplier;
-                    case a === b:
-                        return 0;
+                var count = col_index.length;
+                let cellA, cellB, cellC, cellD, cellE, cellF;
+                let a, b, c, d, e, f;
+                var index1 = col_index[0];
+                cellA = rowA.querySelectorAll('td')[index1].innerHTML;
+                cellB = rowB.querySelectorAll('td')[index1].innerHTML;
+                a = transform(index1, cellA);
+                b = transform(index1, cellB);
+
+                switch (count) {
+                    case 1: if (a > b) return 1 * multiplier;
+                    else if (a < b) return - 1 * multiplier;
+                    else if (a === b) return 0;
+
+                    case 2: var index2 = col_index[1];
+                        cellC = rowA.querySelectorAll('td')[index2].innerHTML;
+                        cellD = rowB.querySelectorAll('td')[index2].innerHTML;
+                        c = transform(index2, cellC);
+                        d = transform(index2, cellD);
+
+                        if (a > b) return 1 * multiplier;
+                        else if (a < b) return - 1 * multiplier;
+                        else {
+                            if (c > d) return 1;
+                            else if (c < d) return -1;
+                            else return 0;
+                        }
+
+                    case 3: var index2 = col_index[1];
+                        cellC = rowA.querySelectorAll('td')[index2].innerHTML;
+                        cellD = rowB.querySelectorAll('td')[index2].innerHTML;
+                        c = transform(index2, cellC);
+                        d = transform(index2, cellD);
+
+                        var index3 = col_index[2];
+                        cellE = rowA.querySelectorAll('td')[index3].innerHTML;
+                        cellF = rowB.querySelectorAll('td')[index3].innerHTML;
+                        e = transform(index3, cellE);
+                        f = transform(index3, cellF);
+
+                        if (a > b) return 1 * multiplier;
+                        else if (a < b) return - 1 * multiplier;
+                        else {
+                            if (c > d) return 1;
+                            else if (c < d) return -1;
+                            else {
+                                if (e > f) return 1;
+                                else if (e < f) return -1;
+                                else return 0;
+                            }
+                        }
                 }
             });
 
