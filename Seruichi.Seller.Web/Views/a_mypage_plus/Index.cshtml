@@ -46,8 +46,7 @@
                                         <div>
                                             <h6 class="card-title">追加</h6>
                                             <div class="input-group d-inline-flex" id="checkZero">
-                                                <input type="number" id="typeNumber" class="form-control" value="1"/>
-                                                <span class="cap-errormsg-right" id="CheckNumber" name="CheckNumber"></span>
+                                                <input type="number" id="typeNumber" class="form-control" value="0" min="0" onkeydown="return false;" />
                                             </div>
                                         </div>
                                     </div>
@@ -65,7 +64,7 @@
                                     <div class="card-body" style="height: 200px;">
                                         <h6 class="card-title">増枠後<br></h6>
                                         <p>残り</p>
-                                        <h3 class="card-title" style="text-align: center;" id="afterValue">@ViewBag.PossibleTime</h3>
+                                        <h3 class="card-title" style="text-align: center;" id="afterValue">@*after here*@</h3>
                                         <p style="text-align: right;">件</p>
                                     </div>
                                 </div>

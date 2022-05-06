@@ -1,18 +1,10 @@
 ﻿const _url = {};
 $(function () {
-    // setValidation();
     _url.Get_Calculate_extra_charge = common.appPath + '/a_mypage_plus/Get_Calculate_extra_charge';
     _url.Insert_D_SellerPossible_OK = common.appPath + '/a_mypage_plus/Insert_D_SellerPossible_OK';
     _url.Insert_D_SellerPossible_NG = common.appPath + '/a_mypage_plus/Insert_D_SellerPossible_NG';
     addEvents();
 });
-
-function setValidation() {
-    $('#typeNumber')
-        .addvalidation_errorElement("#CheckNumber")
-        .addvalidation_less_than_zero(); 
-   // $("#typeNumber").focus();
-}
 
 function addEvents() {
     common.bindValidationEvent('#form1', '');
@@ -34,19 +26,14 @@ function addEvents() {
             Change_Count: $typeNum
         };
 
-        if (model.Change_Count > 0) {
+        if (model.Change_Count >= 0) {
             $("#typeNumber").hideError();
             $("#typeNumber").focus();
             Get_Calculate_extra_charge(model, this);
             return;
 
         }
-        else {
-            // alert(-1);
-            $("#typeNumber").showError(common.getMessage('E105'));
-            $("#typeNumber").focus();
-            return;
-        }
+        else {}
     });
 
     $('#btnPayment').on('click', function () {
@@ -72,7 +59,6 @@ function addEvents() {
                     ChangeFee: $extraCharge,
                     Possible_Time: $afterValue
                 };
-
                 common.callAjax(_url.Insert_D_SellerPossible_OK, model, function (result) {
                     if (result && result.isOK) {
 
@@ -86,7 +72,6 @@ function addEvents() {
                         }
                     }
                 });
-                
             }
             if (result && !result.isOK)
             {
@@ -134,13 +119,20 @@ function Get_Calculate_extra_charge(model, $form) {
 
 function Bind_Charges(result) {
     $('#extraCharge').empty();
+    $('#afterValue').empty();
+    $currentValue = document.getElementById('currentValue').innerHTML;
+    $typeNum = $('#typeNumber').val();
+    $afterValue = parseInt($currentValue, 10) + parseInt($typeNum, 10);
     let data = JSON.parse(result);
     let html = "";
+    let html_after = "";
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
             html = '<h3 class="d-xl-flex" Maxlength="7" id="ChargeFee">' + data[0]["Change_Count"]+'</h3>\
                 <p class="d-xl-flex align-items-xl-end" style = "height: 33px;"> 円</p>'
         }
+        html_after = $afterValue;
         $('#extraCharge').append(html);
+        $('#afterValue').append(html_after);
     }
 }
