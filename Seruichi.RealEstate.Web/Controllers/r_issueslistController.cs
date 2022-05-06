@@ -69,7 +69,7 @@ namespace Seruichi.RealEstate.Web.Controllers
         {
             r_issueslistBL bl = new r_issueslistBL();
             model.RealECD = base.GetOperator("RealECD");
-            var dt = bl.get_issueslist_Data(model);
+            var dt = bl.generate_r_issueslist_CSV(model);
             return OKResult(DataTableToJSON(dt));
         }
 
