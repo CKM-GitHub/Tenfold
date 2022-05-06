@@ -47,9 +47,8 @@
                 b = transform(index1, cellB);
 
                 switch (count) {
-                    case 1: if (a > b) return 1 * multiplier;
-                    else if (a < b) return - 1 * multiplier;
-                    else if (a === b) return 0;
+                    case 1: if (multiplier == 1) return a.localeCompare(b, "ja-JP");
+                        else return b.localeCompare(a, "ja-JP");
 
                     case 2: var index2 = col_index[1];
                         cellC = rowA.querySelectorAll('td')[index2].innerHTML;
@@ -57,12 +56,13 @@
                         c = transform(index2, cellC);
                         d = transform(index2, cellD);
 
-                        if (a > b) return 1 * multiplier;
-                        else if (a < b) return - 1 * multiplier;
-                        else {
-                            if (c > d) return 1;
-                            else if (c < d) return -1;
-                            else return 0;
+                        if (a !== b) {
+                            if (multiplier == 1) return a.localeCompare(b, "ja-JP");
+                            else return b.localeCompare(a, "ja-JP");
+                        }
+                        else if (c !== d) {
+                            if (multiplier == 1) return c.localeCompare(d, "ja-JP");
+                            else return d.localeCompare(c, "ja-JP");
                         }
 
                     case 3: var index2 = col_index[1];
@@ -77,16 +77,17 @@
                         e = transform(index3, cellE);
                         f = transform(index3, cellF);
 
-                        if (a > b) return 1 * multiplier;
-                        else if (a < b) return - 1 * multiplier;
-                        else {
-                            if (c > d) return 1;
-                            else if (c < d) return -1;
-                            else {
-                                if (e > f) return 1;
-                                else if (e < f) return -1;
-                                else return 0;
-                            }
+                        if (a !== b) {
+                            if (multiplier == 1) return a.localeCompare(b, "ja-JP");
+                            else return b.localeCompare(a, "ja-JP");
+                        }
+                        else if (c !== d) {
+                            if (multiplier == 1) return c.localeCompare(d, "ja-JP");
+                            else return d.localeCompare(c, "ja-JP");
+                        }
+                        else if (e !== f) {
+                            if (multiplier == 1) return e.localeCompare(f, "ja-JP");
+                            else return f.localeCompare(e, "ja-JP");
                         }
                 }
             });
