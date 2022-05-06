@@ -64,6 +64,10 @@ namespace Seruichi.BL.Tenfold.t_seller_list
             {
                 item["売主名"] = crypt.DecryptFromBase64(item.Field<string>("売主名"), decryptionKey);
             });
+            Parallel.ForEach(e, item =>
+            {
+                item["SellerKana"] = crypt.DecryptFromBase64(item.Field<string>("SellerKana"), decryptionKey);
+            });
             if (!string.IsNullOrEmpty(model.SellerName))
             {
                 var query = e.Where(dr => dr.Field<string>("売主名").Contains(model.SellerName) || dr.Field<string>("売主CD").Contains(model.SellerName));
@@ -75,7 +79,8 @@ namespace Seruichi.BL.Tenfold.t_seller_list
                         i++;
                         row["NO"] = i;
                     }
-                    return query.CopyToDataTable();
+                    return query.OrderBy(row => row["SellerKana"])
+                           .ThenBy(row => row["売主CD"]).CopyToDataTable();
                 }
                 else
                 {
@@ -83,6 +88,7 @@ namespace Seruichi.BL.Tenfold.t_seller_list
                     return newTable;
                 }
             }
+            dt.DefaultView.Sort = "SellerKana,売主CD";
             return dt;
         }
         public DataTable Generate_CSV(t_seller_listModel model)
