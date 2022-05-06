@@ -27,9 +27,13 @@
         };
 
         const sortColumn = function (index) {
-            var col_index = headers[index].getAttribute('ordercol-index').split('_');
+            var col_index;
+            if (headers[index].getAttribute('ordercol-index').length > 0)
+                col_index = headers[index].getAttribute('ordercol-index').split('_');
+            else
+                col_index = index;
             // Get the current direction
-            const direction = directions[index] || 'asc';
+            const direction = directions[col_index[0]] || 'asc';
 
             // A factor based on the direction
             const multiplier = direction === 'asc' ? 1 : -1;
@@ -98,7 +102,7 @@
             });
 
             // Reverse the direction
-            directions[index] = direction === 'asc' ? 'desc' : 'asc';
+            directions[col_index[0]] = direction === 'asc' ? 'desc' : 'asc';
 
             // Append new row
             newRows.forEach(function (newRow) {
