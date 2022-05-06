@@ -58,7 +58,7 @@ function Bind_tbody(result) {
             class="text-decoration-underline"> ' + data[i]["Status"] + ' </a>\
             <p class="p-0 m-0"><small class="text-nowrap w-100"> ' + data[i]["Address"] + ' </small></p>\
             </td>\
-            <td class="text-start"> ' + data[i]["REName"] + ' </td>\
+            <td class="text-start text-nowrap"> ' + data[i]["REName"] + ' </td>\
             <td class="text-nowrap text-end" style="width:200px"> ' + data[i]["AssessAmount"] + ' </td>\
             <td class="text-nowrap" style="width:200px"> ' + data[i]["DeepAssDateTime"] + ' </td>\
             </tr>'
