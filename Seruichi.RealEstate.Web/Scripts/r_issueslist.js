@@ -229,8 +229,8 @@ function Bind_tbody(result) {
         $('#total_record_up').text("検索結果：" + data.length + "件");
     }
     else {
-        $('#total_record').text("検索結果： 0件 表示可能データがありません");
-        $('#total_record_up').text("検索結果： 0件");
+        $('#total_record').text("検索結果： 0件");
+        $('#total_record_up').text("検索結果： 0件 表示可能データがありません");
     }
     $('#tblissueslist tbody').append(html);
 
