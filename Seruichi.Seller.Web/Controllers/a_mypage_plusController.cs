@@ -12,7 +12,6 @@ namespace Seruichi.Seller.Web.Controllers
 {
     public class a_mypage_plusController : BaseController
     {
-        static string Change_Count = string.Empty;
         // GET: a_mypage_plus
         [AllowAnonymous]
         public ActionResult Index()
@@ -30,13 +29,10 @@ namespace Seruichi.Seller.Web.Controllers
         [HttpPost]
         public ActionResult Get_Calculate_extra_charge(a_mypage_plusModel model)
         {
-            Change_Count = model.Change_Count;
             a_mypage_plusBL bl = new a_mypage_plusBL();
             var dt = bl.Get_Calculate_extra_charge(model);
             return OKResult(DataTableToJSON(dt));
         }
-
-
         [HttpPost]
         public ActionResult Insert_D_SellerPossible_OK(a_mypage_plusModel model)
         {
