@@ -2,15 +2,17 @@
 
 $(function () {
     _url.getSellerList = common.appPath + '/a_mypage_whis/GetD_SellerPossibleData';
+    addEvents();
     
+});
+
+
+function addEvents() {
     let model = {
         SellerCD: null
     };
     getSellerList(model, this);
-});
-
-
-
+}
 function getSellerList(model, $form) {
     common.callAjaxWithLoading(_url.getSellerList, model, this, function (result) {
         if (result && result.isOK) {
