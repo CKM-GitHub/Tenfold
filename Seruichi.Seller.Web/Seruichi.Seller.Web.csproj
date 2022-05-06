@@ -277,10 +277,10 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\a_contact\Index.cshtml" />
     <Content Include="Views\a_mailregister\Index.cshtml" />
-    <Content Include="Views\a_mypage_whis\Index.cshtml" />
     <Content Include="Views\a_mypage_ahis\Index.cshtml" />
     <Content Include="Views\a_mypage_plus\Index.cshtml" />
     <Content Include="Views\Shared\_loginLayout.cshtml" />
+    <Content Include="Views\a_mypage_whis\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

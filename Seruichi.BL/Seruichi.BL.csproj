@@ -52,6 +52,7 @@
     <Compile Include="RealEstate\r_login\r_loginBL.cs" />
     <Compile Include="Seller\a_contactBL.cs" />
     <Compile Include="Seller\a_mypage_ahisBL.cs" />
+    <Compile Include="Seller\a_mypage_plusBL.cs" />
     <Compile Include="Seller\a_mypage_uinfoBL.cs" />
     <Compile Include="Seller\a_mailregisterBL.cs" />
     <Compile Include="Seller\a_mypage_whisBL.cs" />

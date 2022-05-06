@@ -51,16 +51,20 @@ function addEvents() {
         }
     });
 
+    const $chk_New = $("#chk_New").val(), $chk_Nego = $("#chk_Nego").val(), $chk_Contract = $("#chk_Contract").val(), $chk_SellerDeclined = $("#chk_SellerDeclined").val(), $chk_BuyerDeclined = $("#chk_BuyerDeclined").val(),
+        $ddlStaff = $("#ddlStaff").val(), $ddlRange = $("#ddlRange").val(), $StartDate = $("#StartDate").val(), $EndDate = $("#EndDate").val(), $txtFreeWord = $("#txtFreeWord").val()
+
     let model = {
-        chk_New: $("#chk_New").val(),
-        chk_Nego: $("#chk_Nego").val(),
-        chk_Contract: $("#chk_Contract").val(),
-        chk_SellerDeclined: $("#chk_SellerDeclined").val(),
-        chk_BuyerDeclined: $("#chk_BuyerDeclined").val(),
-        REStaffCD: $("#ddlStaff").val(),
-        Range: $("#ddlRange").val(),
-        StartDate: $("#StartDate").val(),
-        EndDate: $("#EndDate").val()
+        chk_New: $chk_New,
+        chk_Nego: $chk_Nego,
+        chk_Contract: $chk_Contract,
+        chk_SellerDeclined: $chk_SellerDeclined,
+        chk_BuyerDeclined: $chk_BuyerDeclined,
+        REStaffCD: $ddlStaff,
+        Range: $ddlRange,
+        StartDate: $StartDate,
+        EndDate: $EndDate,
+        FreeWord: $txtFreeWord
     };
     get_issueslist_Data(model, this);
 
@@ -130,7 +134,7 @@ function addEvents() {
                         ("0" + m.getHours()).slice(-2) + "" +
                         ("0" + m.getMinutes()).slice(-2) + "" +
                         ("0" + m.getSeconds()).slice(-2);
-                    downloadLink.download = "売主マンションリスト" + dateString + ".csv";
+                    downloadLink.download = "案件一覧_" + dateString + ".csv";
 
                     document.body.appendChild(downloadLink);
                     downloadLink.click();
@@ -248,19 +252,8 @@ function l_logfunction(id) {
     common.callAjax(_url.insert_l_log, model,
         function (result) {
             if (result && result.isOK) {
-                if (model.LogStatus == "t_mansion_detail")
-                    alert("https://www.seruichi.com/t_mansion_detail?ｍansionCD=" + model.LogId);
-                else if (model.LogStatus == "t_seller_assessment")
-                    // alert("https://www.seruichi.com/t_seller_assessment?seller=" + model.LogId);
-                    window.location.href = common.appPath + '/t_seller_assessment/Index?SellerCD=' + model.LogId;
-                else if (model.LogStatus == "t_seller_assessment_detail")
-                    alert("https://www.seruichi.com/t_seller_assessment_detail?AssReqID=" + model.LogId);
-                else if (model.LogStatus == "t_seller_assessment_detail_GReal")
-                    alert("https://www.seruichi.com/t_reale_purchase?realestate=" + model.LogId);
-                else if (model.LogStatus == "t_seller_assessment_detail_EReal")
-                    alert("https://www.seruichi.com/t_reale_purchase?realestate=" + model.LogId);
-                else if (model.LogStatus == "t_seller_assessment_detail_IRealECD")
-                    alert("https://www.seruichi.com/t_reale_purchase?realestate=" + model.LogId);
+                if (model.PageID == "r_issueslist")
+                    alert("https://www.seruichi.com/r_chat?AssReqID=" + model.AssReqID);
             }
             if (result && !result.isOK) {
             }
