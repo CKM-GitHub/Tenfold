@@ -1,109 +1,61 @@
-﻿@{
-    ViewBag.Title = "利用履歴 - セルイチ";
-}
-@section styles{
-    @Styles.Render("~/Content/css/a_mypage_uinfo")
-}
+﻿@model Models.a_mypage_whisModel
+    @{
+        ViewBag.Title = "利用履歴 - セルイチ";
+    }
+    @section styles{
+        @Styles.Render("~/Content/css/a_mypage_uinfo")
+    }
 
-<header class="text-center text-white masthead cap-header">
+    <header class="text-center text-white masthead cap-header">
 
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-9 mx-auto position-relative">
-                <h1 class="mb-2">マイページ</h1>
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto position-relative">
+                    <h1 class="mb-2">マイページ</h1>
+                </div>
             </div>
         </div>
-    </div>
-</header>
-
-<section class="clean-block clean-form dark h-100 cap-main">
-    <div class="container-fluid" id="wrapper">
-        <div class="pt-5 pb-3">
-            @Html.Partial("_MyPageMenu")
-            <div class="card cap-form" id="page-content-wrapper">
-                <form class="mx-auto cap-con-form card-body" id="form1">
-                    <h4 class="text-center"><strong>利用履歴</strong></h4>
-                    <hr>
-                    <div class="m-auto">
-                        <div class="row justify-content-center" style="display:grid">
-                            <div class="col-12">
-                                <div class="card shadow">
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-hover sortMe" id="GetAssHistory">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="text-center" style="width: 50px;">No</th>
-                                                        <th class="text-center" style="width: 100px;">利用ID</th>
-                                                        <th class="text-center" style="width: 100px;">購入日時</th>
-                                                        <th class="text-end" style="width: 80px;">購入数</th>
-                                                        <th class="text-end" style="width: 100px;">購入金額</th>
-                                                        <th class="text-center" style="width: 100px;">結果</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
+    </header>
+    <section class="clean-block clean-form dark h-100 cap-main">
+        <div class="container-fluid" id="wrapper">
+            <div class="pt-5 pb-3">
+                @Html.Partial("_MyPageMenu")
+                <div class="card cap-form">
+                    <form action="index.html" method="post" enctype="multipart/form-data" role="form">
+                        <h4 style="text-align: center;padding-top: 50px;"><strong>利用履歴</strong></h4>
+                        <hr>
+                        <div class="m-auto cap-fon-form-w600">
+                            <div class="row justify-content-center">
+                                <div class="col-12">
+                                    <div class="card shadow">
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover" id="getSellerCD">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center" style="width: 50px;">No</th>
+                                                            <th class="text-center" style="width: 100px;">利用ID</th>
+                                                            <th class="text-center" style="width: 100px;">購入日時</th>
+                                                            <th class="text-end" style="width: 80px;">購入数</th>
+                                                            <th class="text-end" style="width: 100px;">購入金額</th>
+                                                            <th class="text-center" style="width: 100px;">結果</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <nav>
-                                            <ul class="pagination pagination-sm mb-0 justify-content-center">
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#"
-                                                       aria-label="Previous"><span aria-hidden="true">«</span></a>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#"
-                                                       aria-label="Next"><span aria-hidden="true">»</span></a>
-                                                </li>
-                                            </ul>
-                                        </nav>
+                                       
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" data-bs-backdrop="static" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">MansionName</h5>
-                    <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <div class="pt-5 pb-5 row">
-                        <div class="col-6">
-                            <button type="button" class="btn btn-success cap-btn-slg text-nowrap w-100 ps-1 pe-1 ps-sm-3" data-bs-toggle="modal"
-                                    data-bs-target="#menu-seiyaku">
-                                <i class="fa fa-history pe-1"
-                                   aria-hidden="true"></i>査定結果
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button type="button" class="btn btn-primary cap-btn-slg text-nowrap w-100 ps-1 pe-1 ps-sm-3" data-bs-toggle="modal"
-                                    data-bs-target="#menu-jitai">
-                                <i class="fa fa-comments-o pe-1"
-                                   aria-hidden="true"></i>チャット
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-@section Scripts{
-    @Scripts.Render("~/bundles/a_mypage_whis")
-}
+    </section>
+    @section Scripts{
+        @Scripts.Render("~/bundles/a_mypage_whis")
+    }
