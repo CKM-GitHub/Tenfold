@@ -12,9 +12,11 @@ function addEvents() {
         SellerCD: null
     };
     getSellerList(model, this);
+    common.addPager('#getSellerCD', 10);
+    $('#mypage_whis').addClass('active');
 }
 function getSellerList(model, $form) {
-    common.callAjaxWithLoading(_url.getSellerList, model, this, function (result) {
+    common.callAjaxWithLoadingSync(_url.getSellerList, model, this, function (result) {
         if (result && result.isOK) {
 
             Bind_tbody(result.data);
