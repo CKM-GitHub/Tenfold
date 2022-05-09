@@ -27,11 +27,11 @@
         };
 
         const sortColumn = function (index) {
-            var col_index;
-            if (headers[index].getAttribute('ordercol-index').length > 0)
+            var col_index = [];
+            if (headers[index].hasAttribute('ordercol-index'))
                 col_index = headers[index].getAttribute('ordercol-index').split('_');
             else
-                col_index = index;
+                col_index[0] = index;
             // Get the current direction
             const direction = directions[col_index[0]] || 'asc';
 
@@ -45,8 +45,14 @@
                 let cellA, cellB, cellC, cellD, cellE, cellF;
                 let a, b, c, d, e, f;
                 var index1 = col_index[0];
-                cellA = rowA.querySelectorAll('td')[index1].innerHTML;
-                cellB = rowB.querySelectorAll('td')[index1].innerHTML;
+                if (rowA.querySelectorAll('td')[index1].querySelectorAll('a').length > 0) {
+                    cellA = rowA.querySelectorAll('td')[index1].querySelectorAll('a')[0].innerHTML;
+                    cellB = rowB.querySelectorAll('td')[index1].querySelectorAll('a')[0].innerHTML;
+                }
+                else {
+                    cellA = rowA.querySelectorAll('td')[index1].innerHTML;
+                    cellB = rowB.querySelectorAll('td')[index1].innerHTML;
+                }
                 a = transform(index1, cellA);
                 b = transform(index1, cellB);
 
@@ -55,8 +61,14 @@
                         else return b.localeCompare(a, "ja-JP");
 
                     case 2: var index2 = col_index[1];
-                        cellC = rowA.querySelectorAll('td')[index2].innerHTML;
-                        cellD = rowB.querySelectorAll('td')[index2].innerHTML;
+                        if (rowA.querySelectorAll('td')[index2].querySelectorAll('a').length > 0) {
+                            cellC = rowA.querySelectorAll('td')[index2].querySelectorAll('a')[0].innerHTML;
+                            cellD = rowB.querySelectorAll('td')[index2].querySelectorAll('a')[0].innerHTML;
+                        }
+                        else {
+                            cellC = rowA.querySelectorAll('td')[index2].innerHTML;
+                            cellD = rowB.querySelectorAll('td')[index2].innerHTML;
+                        }
                         c = transform(index2, cellC);
                         d = transform(index2, cellD);
 
@@ -70,14 +82,26 @@
                         }
 
                     case 3: var index2 = col_index[1];
-                        cellC = rowA.querySelectorAll('td')[index2].innerHTML;
-                        cellD = rowB.querySelectorAll('td')[index2].innerHTML;
+                        if (rowA.querySelectorAll('td')[index2].querySelectorAll('a').length > 0) {
+                            cellC = rowA.querySelectorAll('td')[index2].querySelectorAll('a')[0].innerHTML;
+                            cellD = rowB.querySelectorAll('td')[index2].querySelectorAll('a')[0].innerHTML;
+                        }
+                        else {
+                            cellC = rowA.querySelectorAll('td')[index2].innerHTML;
+                            cellD = rowB.querySelectorAll('td')[index2].innerHTML;
+                        }
                         c = transform(index2, cellC);
                         d = transform(index2, cellD);
 
                         var index3 = col_index[2];
-                        cellE = rowA.querySelectorAll('td')[index3].innerHTML;
-                        cellF = rowB.querySelectorAll('td')[index3].innerHTML;
+                        if (rowA.querySelectorAll('td')[index3].querySelectorAll('a').length > 0) {
+                            cellE = rowA.querySelectorAll('td')[index3].querySelectorAll('a')[0].innerHTML;
+                            cellF = rowB.querySelectorAll('td')[index3].querySelectorAll('a')[0].innerHTML;
+                        }
+                        else {
+                            cellE = rowA.querySelectorAll('td')[index3].innerHTML;
+                            cellF = rowB.querySelectorAll('td')[index3].innerHTML;
+                        }
                         e = transform(index3, cellE);
                         f = transform(index3, cellF);
 

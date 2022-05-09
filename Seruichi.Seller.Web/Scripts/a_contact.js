@@ -1,11 +1,13 @@
 ﻿const _url = {};
 
 $(function () {
+    _url.checkAll = common.appPath + '/a_contact/CheckAll';
     _url.registerContact = common.appPath + '/a_contact/RegisterContact';
     _url.gotoNextPage = common.appPath + '/a_contact/GotoNextPage';
 
     setValidation();
     addEvents();
+    $('#ContactName').focus();
 });
 
 function setValidation() {
@@ -41,6 +43,7 @@ function setValidation() {
 
 function addEvents()
 {
+    let updateData;
     const $form = $('#form1');
 
     common.bindValidationEvent('#form1', ':not(#ContactPhone)');
@@ -54,7 +57,7 @@ function addEvents()
         $('#ContactSubject').val($('#ContactTypeCD option:selected').data('subject'));
     });
 
-    $('#btnRegistration').on('click', function () {
+    $('#btnShowConfirmation').on('click', function () {
         $form.hideChildErrors();
 
         if (!common.checkValidityOnSave('#form1')) {
@@ -66,13 +69,34 @@ function addEvents()
         const model = Object.fromEntries(fd);
         model.ContactType = $('#ContactTypeCD option:selected').text();
 
-        common.callAjaxWithLoading(_url.registerContact, model, this, function (result) {
+        common.callAjaxWithLoading(_url.checkAll, model, this, function (result) {
             if (result && result.isOK) {
                 //sucess
+                updateData = model;
+                for (key in updateData) {
+                    const target = document.getElementById('confirm_' + key);
+                    if (target) $(target).val(updateData[key]);
+                }
+                $('#modal_1').modal('show');
+            }
+            if (result && result.data) {
+                //error
+                common.setValidationErrors(result.data);
+                common.setFocusFirstError($form);
+            }
+        });
+    });
+
+    $('#btnRegistration').on('click', function () {
+        common.callAjaxWithLoading(_url.registerContact, updateData, this, function (result) {
+            if (result && result.isOK) {
+                //sucess
+                $('#modal_1').modal('hide');
                 $('#modal_2').modal('show');
             }
             if (result && result.data) {
                 //error
+                $('#modal_1').modal('hide');
                 common.setValidationErrors(result.data);
                 common.setFocusFirstError($form);
             }

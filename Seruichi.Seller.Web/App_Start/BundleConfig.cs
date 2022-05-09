@@ -117,12 +117,14 @@ namespace Seruichi.Seller.Web
 
             //a_mypage_whis --
             bundles.Add(new StyleBundle("~/Content/css/a_mypage_whis").Include(
+                  "~/Content/css/a_mypage_ahis.css",
                       "~/Content/css/font-awesome.min.css",
                       "~/Content/css/Soft-UI-Aside-Navbar.css",
                       "~/Content/css/style.css",
                       "~/Content/css/Clients-UI.css",
                       "~/Content/css/Ludens-Users---25-After-Register.css",
-                      "~/Content/css/Sidebar.css"));
+                      "~/Content/css/Sidebar.css"
+                      ));
             bundles.Add(new ScriptBundle("~/bundles/a_mypage_whis").Include(
                     "~/Scripts/a_mypage_whis.js"));
 

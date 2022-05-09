@@ -30,6 +30,25 @@ namespace Seruichi.Seller.Web.Controllers
             return RedirectToAction("Index", "a_index");
         }
 
+        // Ajax: CheckAll
+        [HttpPost]
+        public ActionResult CheckAll(a_contactModel model)
+        {
+            if (model == null)
+            {
+                return BadRequestResult();
+            }
+
+            a_contactBL bl = new a_contactBL();
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+
+            return OKResult();
+        }
+
         // Ajax: RegisterContact
         [HttpPost]
         public ActionResult RegisterContact(a_contactModel model)

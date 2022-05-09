@@ -4,6 +4,8 @@ $(function () {
     _url.Insert_D_SellerPossible_OK = common.appPath + '/a_mypage_plus/Insert_D_SellerPossible_OK';
     _url.Insert_D_SellerPossible_NG = common.appPath + '/a_mypage_plus/Insert_D_SellerPossible_NG';
     addEvents();
+
+    $('#mypage_plus').addClass('active');
 });
 
 function addEvents() {
