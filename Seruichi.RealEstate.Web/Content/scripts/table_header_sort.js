@@ -27,11 +27,11 @@
         };
 
         const sortColumn = function (index) {
-            var col_index;
-            if (headers[index].getAttribute('ordercol-index').length > 0)
+            var col_index = [];
+            if (headers[index].hasAttribute('ordercol-index'))
                 col_index = headers[index].getAttribute('ordercol-index').split('_');
             else
-                col_index = index;
+                col_index[0] = index;
             // Get the current direction
             const direction = directions[col_index[0]] || 'asc';
 
