@@ -11,6 +11,7 @@ $(function () {
     GetAssHistoryData(model, this)
     common.addPager('#GetAssHistory', 10); 
     $('#mypage_ahis').addClass('active');
+    e.PreventDefault();
 }); 
 function GetAssHistoryData(model, $form) {
     return common.callAjaxWithLoadingSync(_url.GetAssHistory, model, this, function (result) {
@@ -34,16 +35,17 @@ function Bind_tbody(result) {
     //alert(data.length);
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
+            var param = "'"+data[i]["AssReqID"] + "','" + data[i]["MansionName"]+"'";
             html +=  
             '<tr>\
             <td class= "text-truncate text-center" > ' + data[i]["No"] + '</td>\
             <td class="text-truncate text-center" style="width:200px"> ' + data[i]["ID"] + ' </td >\
             <td class="text-truncate text-center" style="width:200px"> ' + data[i]["Status"] + ' </td>\
             <td class="text-start" style="width:500px">\
-            <a onclick="setId('+ data[i]["AssReqID"] +')" href="#" data-bs-toggle="modal"\
+            <a onclick="setIdMansion('+ param+')" href="#" data-bs-toggle="modal"\
             data-bs-target="#exampleModal"\
-            class="text-decoration-underline"> ' + data[i]["Status"] + ' </a>\
-            <p class="p-0 m-0"><small class="text-nowrap w-100"> ' + data[i]["Address"] + ' </small></p>\
+            class="text-decoration-underline"> ' + data[i]["MansionName"] + ' </a>\
+            <p class="p-0 m-0"><small class="text-nowrap w-100"  > ' + data[i]["Address"] + ' </small></p>\
             </td>\
             <td class="text-start text-nowrap"> ' + data[i]["REName"] + ' </td>\
             <td class="text-nowrap text-end" style="width:200px"> ' + data[i]["AssessAmount"] + ' </td>\
@@ -52,16 +54,23 @@ function Bind_tbody(result) {
         }
     }
     $('#GetAssHistory tbody').append(html);   
-} 
+}
+function a123() {
+    
+}
+function setIdMansion(id,mansion) {
+  
+    $('#exampleModalLabel').text(mansion);
+    $('#assessreqid').text(id);
+}
+
 $('#btn_assess').on('click', function () {
     l_logfunction('a_assess_d'); 
 });
 $('#btn_chat').on('click', function () {
     l_logfunction('a_chat');  
 });
-function setId(id) { 
-    $('#assessreqid').text(id)
-}
+
 function l_logfunction(link) {
     let model = {
         LogDateTime: null,
