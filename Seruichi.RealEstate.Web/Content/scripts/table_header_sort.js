@@ -27,9 +27,13 @@
         };
 
         const sortColumn = function (index) {
-
+            var col_index;
+            if (headers[index].getAttribute('ordercol-index').length > 0)
+                col_index = headers[index].getAttribute('ordercol-index').split('_');
+            else
+                col_index = index;
             // Get the current direction
-            const direction = directions[index] || 'asc';
+            const direction = directions[col_index[0]] || 'asc';
 
             // A factor based on the direction
             const multiplier = direction === 'asc' ? 1 : -1;
@@ -37,19 +41,58 @@
             const newRows = Array.from(rows);
            
             newRows.sort(function (rowA, rowB) {
-                const cellA = rowA.querySelectorAll('td')[index].innerHTML;
-                const cellB = rowB.querySelectorAll('td')[index].innerHTML;               
-                
-                const a = transform(index, cellA);
-                const b = transform(index, cellB);
-                
-                switch (true) {
-                    case a > b:
-                        return 1 * multiplier;
-                    case a < b:
-                        return -1 * multiplier;
-                    case a === b:
-                        return 0;
+                var count = col_index.length;
+                let cellA, cellB, cellC, cellD, cellE, cellF;
+                let a, b, c, d, e, f;
+                var index1 = col_index[0];
+                cellA = rowA.querySelectorAll('td')[index1].innerHTML;
+                cellB = rowB.querySelectorAll('td')[index1].innerHTML;
+                a = transform(index1, cellA);
+                b = transform(index1, cellB);
+
+                switch (count) {
+                    case 1: if (multiplier == 1) return a.localeCompare(b, "ja-JP");
+                        else return b.localeCompare(a, "ja-JP");
+
+                    case 2: var index2 = col_index[1];
+                        cellC = rowA.querySelectorAll('td')[index2].innerHTML;
+                        cellD = rowB.querySelectorAll('td')[index2].innerHTML;
+                        c = transform(index2, cellC);
+                        d = transform(index2, cellD);
+
+                        if (a !== b) {
+                            if (multiplier == 1) return a.localeCompare(b, "ja-JP");
+                            else return b.localeCompare(a, "ja-JP");
+                        }
+                        else if (c !== d) {
+                            if (multiplier == 1) return c.localeCompare(d, "ja-JP");
+                            else return d.localeCompare(c, "ja-JP");
+                        }
+
+                    case 3: var index2 = col_index[1];
+                        cellC = rowA.querySelectorAll('td')[index2].innerHTML;
+                        cellD = rowB.querySelectorAll('td')[index2].innerHTML;
+                        c = transform(index2, cellC);
+                        d = transform(index2, cellD);
+
+                        var index3 = col_index[2];
+                        cellE = rowA.querySelectorAll('td')[index3].innerHTML;
+                        cellF = rowB.querySelectorAll('td')[index3].innerHTML;
+                        e = transform(index3, cellE);
+                        f = transform(index3, cellF);
+
+                        if (a !== b) {
+                            if (multiplier == 1) return a.localeCompare(b, "ja-JP");
+                            else return b.localeCompare(a, "ja-JP");
+                        }
+                        else if (c !== d) {
+                            if (multiplier == 1) return c.localeCompare(d, "ja-JP");
+                            else return d.localeCompare(c, "ja-JP");
+                        }
+                        else if (e !== f) {
+                            if (multiplier == 1) return e.localeCompare(f, "ja-JP");
+                            else return f.localeCompare(e, "ja-JP");
+                        }
                 }
             });
 
@@ -59,7 +102,7 @@
             });
 
             // Reverse the direction
-            directions[index] = direction === 'asc' ? 'desc' : 'asc';
+            directions[col_index[0]] = direction === 'asc' ? 'desc' : 'asc';
 
             // Append new row
             newRows.forEach(function (newRow) {

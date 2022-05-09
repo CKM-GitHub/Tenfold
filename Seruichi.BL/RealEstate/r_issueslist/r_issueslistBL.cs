@@ -68,6 +68,28 @@ namespace Seruichi.BL.RealEstate.r_issueslist
             db.InsertUpdateDeleteData("pr_RealEstate_Insert_L_Log", false, sqlParams);
         }
 
+        public DataTable generate_r_issueslist_CSV(r_issueslistModel model)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@chk_New", SqlDbType.TinyInt){ Value = model.chk_New.ToByte(0) },
+                new SqlParameter("@chk_Nego", SqlDbType.TinyInt){ Value = model.chk_Nego.ToByte(0) },
+                new SqlParameter("@chk_Contract", SqlDbType.TinyInt){ Value = model.chk_Contract.ToByte(0) },
+                new SqlParameter("@chk_SellerDeclined", SqlDbType.TinyInt){ Value = model.chk_SellerDeclined.ToByte(0) },
+                new SqlParameter("@chk_BuyerDeclined", SqlDbType.TinyInt){ Value = model.chk_BuyerDeclined.ToByte(0) },
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToString() },
+                new SqlParameter("@REStaffCD", SqlDbType.VarChar){ Value = model.REStaffCD.ToString() },
+                new SqlParameter("@Range", SqlDbType.VarChar){ Value = model.Range.ToStringOrNull() },
+                new SqlParameter("@StartDate", SqlDbType.VarChar){ Value = model.StartDate.ToStringOrNull() },
+                new SqlParameter("@EndDate", SqlDbType.VarChar){ Value = model.EndDate.ToStringOrNull() },
+                new SqlParameter("@FreeWord", SqlDbType.VarChar){ Value = model.FreeWord.ToStringOrNull() }
+            };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_issueslist_getCSVData", sqlParams);
+            return dt;
+        }
+
         public DataTable get_SellerDetails_Data(r_issueslistModel model)
         {
             var sqlParams = new SqlParameter[]

@@ -210,6 +210,7 @@ function Bind_tbody(result) {
             <td>'+ data[i]["査定依頼ID"] + '</td>\
             <td>'+ data[i]["売主保持物件ID"] + '</td>\
             <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["査定依頼ID"] + '&r_issueslist' + '  href="#" onclick="l_logfunction(this.id)">' + data[i]["物件名"] + ' ' + data[i]["部屋番号"] + '</a></td>\
+            <td>'+ data[i]["依頼売主CD"] + '</td>\
             <td>'+ data[i]["売主_カナ"] + '</td>\
             <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" data-bs-toggle="modal" data-bs-target="#SellerDetails" id='+ data[i]["依頼売主CD"] + ' href="#" onclick="Bind_SellerDetails_Popup(this)">' + data[i]["お客様名"] + '</a></td>\
             <td>'+ data[i]["売主_住所１"] + data[i]["売主_住所２"] + data[i]["売主_住所３"] + data[i]["売主_住所４"] + data[i]["売主_住所５"] + '</td>\
@@ -228,8 +229,8 @@ function Bind_tbody(result) {
         $('#total_record_up').text("検索結果：" + data.length + "件");
     }
     else {
-        $('#total_record').text("検索結果： 0件 表示可能データがありません");
-        $('#total_record_up').text("検索結果： 0件");
+        $('#total_record').text("検索結果： 0件");
+        $('#total_record_up').text("検索結果： 0件 表示可能データがありません");
     }
     $('#tblissueslist tbody').append(html);
 
@@ -263,12 +264,12 @@ function l_logfunction(id) {
 function Bind_SellerDetails_Popup(ctrl) {
     var r_index = ctrl.parentNode.parentNode.rowIndex - 1;
     var tr = $('#tblissueslist tbody tr')[r_index];
-    var kana_name = tr.querySelectorAll('td')[5].innerHTML;
-    var name = tr.querySelectorAll('td')[6].querySelectorAll('a')[0].innerHTML;
-    var address = tr.querySelectorAll('td')[7].innerHTML;
-    var landline_no = tr.querySelectorAll('td')[8].innerHTML;
-    var mobile_no = tr.querySelectorAll('td')[9].innerHTML;
-    var mail = tr.querySelectorAll('td')[10].innerHTML;
+    var kana_name = tr.querySelectorAll('td')[6].innerHTML;
+    var name = tr.querySelectorAll('td')[7].querySelectorAll('a')[0].innerHTML;
+    var address = tr.querySelectorAll('td')[8].innerHTML;
+    var landline_no = tr.querySelectorAll('td')[9].innerHTML;
+    var mobile_no = tr.querySelectorAll('td')[10].innerHTML;
+    var mail = tr.querySelectorAll('td')[11].innerHTML;
     $('#kana_name').text(kana_name);
     $('#name').text(name);
     $('#address').text(address);

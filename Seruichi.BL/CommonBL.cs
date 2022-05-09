@@ -162,7 +162,8 @@ namespace Seruichi.BL
             if (diffMonth == 0)
                 return 1;
             else
-                return diffMonth % 12 > 0 ? diffMonth / 12 + 1 : diffMonth / 12;
+                //return diffMonth % 12 > 0 ? diffMonth / 12 + 1 : diffMonth / 12;
+                return diffMonth / 12 + 1;
         }
 
         public string GetTenstaffNamebyTenstaffcd(string staffcd)

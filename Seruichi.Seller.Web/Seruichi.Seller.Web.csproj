@@ -204,6 +204,7 @@
     <Content Include="Content\fonts\ionicons.min.css" />
     <Content Include="Content\fonts\ionicons.svg" />
     <Content Include="Content\scripts\sha256.js" />
+    <Content Include="Content\scripts\sidebar.js" />
     <Content Include="Content\typeahead\typeahead.custom.css" />
     <Content Include="Content\css\validation.css" />
     <Content Include="Content\css\loading.css" />

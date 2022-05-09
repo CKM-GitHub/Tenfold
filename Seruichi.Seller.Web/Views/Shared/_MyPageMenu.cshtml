@@ -1,52 +1,51 @@
-﻿
- <div id="sidebar-wrapper">
-<div id="sidebar-main" class="sidebar sidebar-default sidebar-separate">
-    <div class="sidebar-category sidebar-default">
-                            <div class="category-title">
-                                <a><span>メニュー</span>
+﻿<div id="sidebar-wrapper">
+    <div id="sidebar-main" class="sidebar sidebar-default sidebar-separate">
+        <div class="sidebar-category sidebar-default">
+            <div class="category-title">
+                <a>
+                    <span>メニュー</span>
+                </a>
+            </div>
+            <div class="category-content collapse show" id="cap-collapse-sidemenu">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index", "a_mypage_ahis")" class="nav-link">
 
-                                </a>
-                            </div>
-                            <div class="category-content collapse show" id="cap-collapse-sidemenu">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("Index", "a_mypage_ahis")" class="nav-link">
-
-                                            <i class="fa fa-search me-2 text-info" aria-hidden="true"></i>査定履歴
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("Index", "a_mypage_uinfo")" class="nav-link" id="mypage_uinfo">
-                                            <i class="fa fa-pencil-square-o me-2 text-info" aria-hidden="true"></i>会員登録内容変更
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("Index", "a_mypage_plus")" class="nav-link" id="mypage_plus">
-                                            <i class="fa fa-sort-numeric-desc me-2 text-info" aria-hidden="true"></i>利用可能査定枠
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("Index", "a_mypage_whis")" class="nav-link" id="mypage_whis">
-                                            <i class="fa fa-history me-2 text-info" aria-hidden="true"></i>利用履歴
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="fa fa-exclamation-triangle me-2 text-info" aria-hidden="true"></i>退会
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="@Url.Action("Logout", "a_login")" class="nav-link">
-                                            <i class="fa fa-sign-out me-2 text-info" aria-hidden="true"></i>ログアウト
-                                        </a>
-                                    </li>
-                                </ul>
+                            <i class="fa fa-search me-2 text-info" aria-hidden="true"></i>査定履歴
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index", "a_mypage_uinfo")" class="nav-link" id="mypage_uinfo">
+                            <i class="fa fa-pencil-square-o me-2 text-info" aria-hidden="true"></i>会員登録内容変更
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index", "a_mypage_plus")" class="nav-link" id="mypage_plus">
+                            <i class="fa fa-sort-numeric-desc me-2 text-info" aria-hidden="true"></i>利用可能査定枠
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index", "a_mypage_whis")" class="nav-link" id="mypage_whis">
+                            <i class="fa fa-history me-2 text-info" aria-hidden="true"></i>利用履歴
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-exclamation-triangle me-2 text-info" aria-hidden="true"></i>退会
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Logout", "a_login")" class="nav-link">
+                            <i class="fa fa-sign-out me-2 text-info" aria-hidden="true"></i>ログアウト
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
-</div>
 <div class="toggle-button">
-                    <a href="#menu-toggle" class="btn" id="menu-toggle">
-                        <span class="fa fa-angle-right glyphicon-chevron-right" aria-hidden="true"></span>
-                    </a>
-                </div>
+    <a href="#menu-toggle" class="btn" id="menu-toggle">
+        <span class="fa fa-angle-right glyphicon-chevron-right" aria-hidden="true"></span>
+    </a>
+</div>
