@@ -130,8 +130,8 @@ function Bind_Charges(result) {
     let html_after = "";
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
-            html = '<h3 class="d-xl-flex" Maxlength="7" id="ChargeFee">' + data[0]["Change_Count"]+'</h3>\
-                <p class="d-xl-flex align-items-xl-end" style = "height: 33px;"> 円</p>'
+            html = '<h3 class="d-xl-flex" Maxlength="7" id="ChargeFee">' + data[0]["Change_Count"]+' </h3>\
+                <p class="d-xl-flex align-items-xl-end" style = "height: 33px;">円</p>'
         }
         html_after = $afterValue;
         $('#extraCharge').append(html);
