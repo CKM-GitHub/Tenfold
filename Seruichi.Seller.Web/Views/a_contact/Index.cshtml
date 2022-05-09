@@ -47,7 +47,7 @@
                         <div class="d-flex">
                             <label class="form-label">電話番号</label>
                             <span class="cap-errormsg-right" id="errorContactPhone"></span>
-                            </div>
+                        </div>
                         <input class="form-control cap-fon-form-w200" type="tel" maxlength="15" name="ContactPhone" id="ContactPhone">
                     </div>
                     <div class="mb-3">
@@ -85,7 +85,7 @@
                         <textarea class="form-control" rows="4" name="ContactIssue" maxlength="1000" id="ContactIssue"></textarea>
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-primary w-100 mb-2" type="button" id="btnRegistration">送信</button>
+                        <button class="btn btn-primary w-100 mb-2" type="button" id="btnShowConfirmation">送信内容確認</button>
                         <p><small class="text-black-50 w-100"><a href="#">操作ガイド</a>を確認しましたか？<br></small></p>
                     </div>
                 </form>
@@ -114,6 +114,56 @@
             <div class="modal-footer">
                 <form id="form2"></form>
                 <button class="btn btn-primary btn-lg" type="button" id="btnCompleted">トップページ</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" id="modal_1">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">お問い合わせ内容確認</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="bg-white shadow-sm p-4 rounded cap-con-form mx-auto">
+                    <div class="mb-3">
+                        <label class="form-label">お名前</label>
+                        <input readonly class="form-control cap-fon-form-w60mw250" type="text" name="ContactName" id="confirm_ContactName">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">お名前(フリガナ)</label>
+                        <input readonly class="form-control cap-fon-form-w60mw250" type="text" name="ContactKana" id="confirm_ContactKana">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">メールアドレス</label>
+                        <input readonly class="form-control" type="email" name="ContactAddress" id="confirm_ContactAddress">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">電話番号</label>
+                        <input readonly class="form-control cap-fon-form-w200" type="tel" name="ContactPhone" id="confirm_ContactPhone">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">お問い合わせ種類</label>
+                        <input readonly class="form-control w-100" type="text" name="ContactType" id="confirm_ContactType">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">査定ID</label>
+                        <input readonly class="form-control cap-fon-form-w200" type="text" name="ContactAssID" id="confirm_ContactAssID">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">件名</label>
+                        <input readonly class="form-control" type="text" name="ContactSubject" id="confirm_ContactSubject">
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">お問い合わせ内容</label>
+                        <textarea readonly class="form-control" rows="4" name="ContactIssue" id="confirm_ContactIssue"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button class="btn btn-secondary mb-2" type="button" data-bs-dismiss="modal" aria-label="Close">戻る</button>
+                <button class="btn btn-primary mb-2" type="button" id="btnRegistration">送信</button>
             </div>
         </div>
     </div>
