@@ -13,8 +13,10 @@ BEGIN
 	SET NOCOUNT ON;
 	
 							select 
-							ROW_NUMBER( ) OVER(order by A.InsertDateTime desc) as No,
-							A.AssReqID as ID,
+								A.SellerCD,
+								A.SellerName,
+							Cast(ROW_NUMBER( ) OVER(order by A.InsertDateTime desc) as varchar(3)) as No,
+							Cast(A.AssReqID as varchar(10)) as ID,
 
 						    (
 							Case When A.EasyAssDateTime is not null and A.DeepAssDateTime is null and D.DeleteDateTime is null then  N'簡易査定'  
@@ -28,11 +30,12 @@ BEGIN
 							 N'買主辞退'   
 							end
 							) as [Status], 
-							cast (D.MansionName as varchar(30) ) as MansionName,
-							(D.PrefName + D.CityName + D.TownName + D.Address) as Address,
-							Cast(C.REName as varchar(30)) as REName,
-							(case when cast (Isnull(A.AssessAmount,0) as int ) = 0 then null else A.AssessAmount end) as AssessAmount,
-							A.DeepAssDateTime as DeepAssDateTime, 
+							Cast (D.MansionName as varchar(30) ) as MansionName,
+							Cast((D.PrefName + D.CityName + D.TownName + D.Address) as varchar(160)) as Address,
+							Cast(Isnull(C.REName,'') as varchar(30)) as REName,
+							ISNULL(FORMAT(CONVERT(MONEY, A.AssessAmount), '###,###'),'0') +' '+N'円'as AssessAmount,
+							ISNULL(FORMAT(A.DeepAssDateTime, 'yyyy/MM/dd HH:mm:ss'),'') DeepAssDateTime,
+							--Isnull(A.DeepAssDateTime,'') as DeepAssDateTime, 
 							A.AssReqID as AssReqID, 
 							A.SellerMansionID as SellerMansionID 
 							from D_AssReqProgress A

@@ -149,6 +149,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\css\a_mypage_ahis_1.css" />
     <Compile Include="Controllers\a_contactController.cs" />
     <Compile Include="Controllers\a_mypage_ahisController.cs" />
     <Compile Include="Controllers\a_mypage_plusController.cs" />

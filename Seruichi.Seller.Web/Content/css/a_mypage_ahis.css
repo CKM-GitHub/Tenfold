@@ -1,5 +1,60 @@
-﻿@media (min-width: 500px) and (min-width: 500px)  {
-    bg-light {
-        visibility: hidden;
-    }
+﻿table tbody tr {
+    /*display: none;*/
+    /*visibility:hidden;*/
 }
+.paginationli:hover {
+    cursor: pointer;
+}
+
+.pagination {
+    display: flex !important;
+    padding-left: 0;
+    list-style: none;
+}
+
+.page-link {
+    position: relative;
+    display: block;
+    color: #0d6efd;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.sidebar .category-content .nav li > a {
+    font-size: 14px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5) ;
+    transition: background 0.15s linear, color 0.15s linear;
+}
+.pagination {
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.pagination {
+    display: flex !important;
+    padding-left: 0;
+    list-style: none;
+}
+
+    .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+        z-index: 3;
+        color: #fff;
+        cursor: pointer;
+        background-color: #337ab7;
+        border-color: #337ab7;
+    }
+
+    .pagination > li > a, .pagination > li > span {
+        position: relative;
+        float: left;
+        padding: 6px 12px;
+        margin-left: -1px;
+        line-height: 1.42857143;
+        color: #337ab7;
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        cursor:pointer;
+    }

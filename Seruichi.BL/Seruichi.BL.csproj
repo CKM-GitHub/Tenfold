@@ -85,6 +85,7 @@
     <Content Include="Database\StoredProcedure\pr_a_index_Select_Prefectures_by_ZipCode.sql" />
     <Content Include="Database\StoredProcedure\pr_a_index_Select_Towns_by_ZipCode.sql" />
     <Content Include="Database\StoredProcedure\pr_a_login_Insert_D_Certification.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_mypage_ahis_Insert_L_Log.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_ahis_Select_D_AssReqProgress.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Select_M_Address_by_ZipCode.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mailregister_Select_M_Seller_by_SellerCD.sql" />

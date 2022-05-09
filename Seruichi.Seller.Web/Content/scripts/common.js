@@ -170,7 +170,32 @@ const common = {
             }
         });
     },
-
+    callAjaxWithLoadingSync: function callAjaxWithLoadingSync(url, model, disableSelector, successCallback, failCallback) {
+        common.showLoading(disableSelector);
+        $.ajax({
+            url: url,
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            dataType: "json",
+            data: JSON.stringify(model),
+            headers: {
+                RequestVerificationToken: $("#_RequestVerificationToken").val(),
+            },
+            async: false,
+            timeout: 30000,
+        }).done(function (data) {
+            common.hideLoading(disableSelector);
+            if (successCallback) {
+                successCallback(data);
+            }
+        }).fail(function (XMLHttpRequest, status, e) {
+            common.hideLoading(disableSelector);
+            common.redirectErrorPage(XMLHttpRequest.status);
+            if (failCallback) {
+                failCallback();
+            }
+        });
+    },
     callAjax: function callAjax(url, model, successCallback, failCallback) {
         $.ajax({
             url: url,
@@ -517,6 +542,22 @@ const common = {
         return true;
     },
 
+    limitPager: function limitPager(count) {
+        if ($('.pagination li').length > 7) {
+            if ($('.pagination li.active').attr('data-page') <= 3) {
+                $('.pagination li:gt(' + count + ')').hide();
+                $('.pagination li:lt(' + count + ')').show();
+                $('.pagination [data-page="next"]').show();
+            } if ($('.pagination li.active').attr('data-page') > 3) {
+                $('.pagination li:gt(0)').hide();
+                $('.pagination [data-page="next"]').show();
+                for (let i = (parseInt($('.pagination li.active').attr('data-page')) - 2); i <= (parseInt($('.pagination li.active').attr('data-page')) + 2); i++) {
+                    $('.pagination [data-page="' + i + '"]').show();
+                }
+            }
+        }
+    },
+
     checkValidityOnSave: function checkValidityOnSave(selector) {
         let success = true;
         $(selector + ' :input:not(button):not(:hidden):not(:disabled):not([readonly])').each(function () {
@@ -555,5 +596,72 @@ const common = {
             }
         }
         return false;
+    },
+     
+    addPager: function addPager(tb,count) {
+        
+            $('.pagination [data-page="1"]').addClass('active');
+            var totalRows = 0;
+            totalRows = $(tb + " tbody tr").length;
+        var maxRows = parseInt(count);
+            if (totalRows > maxRows) {
+                var pagenum = Math.ceil(totalRows / maxRows);
+                for (var i = 1; i <= pagenum;) {
+                    $('.pagination #prev')
+                        .before(
+                            '<li data-page="' +
+                            i +
+                            '">\
+								  <span>' +
+                            i++ +
+                            '<span class="sr-only">(current)</span></span>\
+								</li>'
+                        )
+                        .show();
+                }
+            }
+            var lastPage = 1;
+            $('.pagination li').on('click', function (evt) {
+
+                evt.stopImmediatePropagation();
+                evt.preventDefault();
+                var pageNum = $(this).attr('data-page');
+
+                var maxRows = parseInt(count);
+
+                if (pageNum == 'prev') {
+                    if (lastPage == 1) {
+                        return;
+                    }
+                    pageNum = --lastPage;
+                }
+                if (pageNum == 'next') {
+                    if (lastPage == $('.pagination li').length - 2) {
+                        return;
+                    }
+                    pageNum = ++lastPage;
+                }
+
+                lastPage = pageNum;
+                var trIndex = 0;
+                $('.pagination li').removeClass('active');
+                $('.pagination [data-page="' + lastPage + '"]').addClass('active');
+
+                common.limitPager(count);
+                $(tb + ' tr:gt(0)').each(function () {
+                    trIndex++;
+                    if (
+                        trIndex > maxRows * pageNum ||
+                        trIndex <= maxRows * pageNum - maxRows
+                    ) {
+                        $(this).hide();
+                    } else {
+                        $(this).show();
+                    }
+                });
+            });
+        common.limitPager(count);
+        $(tb + " tr:gt(" + count + ")").hide()
+      
     },
 }

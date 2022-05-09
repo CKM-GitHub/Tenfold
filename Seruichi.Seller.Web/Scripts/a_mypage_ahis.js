@@ -1,4 +1,5 @@
-﻿const _url = {};
+﻿
+const _url = {};
 
 $(function () {
     _url.GetAssHistory = common.appPath + '/a_mypage_ahis/GetD_AssReqProgressList';
@@ -6,10 +7,12 @@ $(function () {
     let model = {
         SellerCD: null
     };
-    GetAssHistoryData(model, this);
+    
+    GetAssHistoryData(model, this)
+    common.addPager('#GetAssHistory',10); 
 }); 
 function GetAssHistoryData(model, $form) {
-    common.callAjaxWithLoading(_url.GetAssHistory, model, this, function (result) {
+    return common.callAjaxWithLoadingSync(_url.GetAssHistory, model, this, function (result) {
         if (result && result.isOK) {
             Bind_tbody(result.data);
         }
@@ -22,32 +25,15 @@ function GetAssHistoryData(model, $form) {
             }
         }
     });
+   
 }
 function Bind_tbody(result) {
     let data = JSON.parse(result);
-    let html = ""; 
+    let html = "";
     //alert(data.length);
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
-            html += 
-                //'<tr>\
-                //    <td class="text-truncate text-center">21</td>\
-                //    <td class="text-truncate text-center">00000030</td>\
-                //    <td class="text-truncate text-center">交渉中</td>\
-                //    <td class="text-start">\
-                //        <a onclick="setId(1)" href="#" data-bs-toggle="modal"\
-                //            data-bs-target="#exampleModal"\
-                //            class="text-decoration-underline">\
-                //            MansionName\
-                //            RoomName\
-                //     </a><p class="p-0 m-0"><small class="text-wrap w-100">MansionAddressMansionAddressMansionAddressMansionAddressMansionAddressMansionAddress,Tokyo</small></p>\
-                //    </td>\
-                //    <td class="text-start">\
-                //        <p>RealEstateCompany</p>\
-                //    </td>\
-                //    <td class="text-nowrap">999,999,999円</td>\
-                //    <td class="text-nowrap">2022/03/01 11:30:30</td>\
-                //</tr>'
+            html +=  
             '<tr>\
             <td class= "text-truncate text-center" > ' + data[i]["No"] + '</td>\
             <td class="text-truncate text-center" style="width:200px"> ' + data[i]["ID"] + ' </td >\
@@ -64,21 +50,15 @@ function Bind_tbody(result) {
             </tr>'
         }
     }
-    $('#GetAssHistory tbody').append(html); 
-   
-}
-  
- 
+    $('#GetAssHistory tbody').append(html);   
+} 
 $('#btn_assess').on('click', function () {
-    l_logfunction('a_assess_d');
-    //window.location.href = window.location.protocol + "//" + window.location.host + "/a_assess_d?AssReqID=" + $('#assessreqid').text(); 
+    l_logfunction('a_assess_d'); 
 });
 $('#btn_chat').on('click', function () {
-    l_logfunction('a_chat'); 
-    //window.location.href = window.location.protocol + "//" + window.location.host + "/a_chat?AssReqID=" + $('#assessreqid').text();  
+    l_logfunction('a_chat');  
 });
-function setId(id) {
-    //var myURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
+function setId(id) { 
     $('#assessreqid').text(id)
 }
 function l_logfunction(link) {
@@ -101,4 +81,4 @@ function l_logfunction(link) {
                 window.location.href = window.location.protocol + "//" + window.location.host + "/" + link + "?AssReqID=" + $('#assessreqid').text();  
             } 
         });
-}
+}  
