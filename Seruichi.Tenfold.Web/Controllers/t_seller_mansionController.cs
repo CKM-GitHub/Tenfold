@@ -97,6 +97,29 @@ namespace Seruichi.Tenfold.Web.Controllers
             var dt = bl.Generate_M_SellerMansionCSV(model);
             return OKResult(DataTableToJSON(dt));
         }
-        
+
+        [HttpPost]
+        public ActionResult Get_Pills_Home(t_seller_mansion_popup_Model model)
+        {
+            t_seller_mansionBL bl = new t_seller_mansionBL();
+            var dt = bl.Get_Pills_Home(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+        [HttpPost]
+        public ActionResult Get_Pills_Profile(t_seller_mansion_popup_Model model)
+        {
+            t_seller_mansionBL bl = new t_seller_mansionBL();
+            var dt = bl.Get_Pills_Profile(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+        [HttpPost]
+        public ActionResult Get_Pills_Contact(t_seller_mansion_popup_Model model)
+        {
+            t_seller_mansionBL bl = new t_seller_mansionBL();
+            var dt = bl.Get_Pills_Contact(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+
     }
 }

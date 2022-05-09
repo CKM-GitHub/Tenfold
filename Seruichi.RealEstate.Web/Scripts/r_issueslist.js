@@ -205,7 +205,7 @@ function Bind_tbody(result) {
 
             }
             html += '<tr>\
-            <td class= "text-center"> ' + data[i]["NO"] + '</td>\
+            <td class= "text-end"> ' + data[i]["NO"] + '</td>\
             <td class="'+ _sort_checkbox + '"><span class="' + _class + '">' + _letter + '</span><span class="font-semibold"> ' + data[i]["ステータス名"] + '</span></td>\
             <td>'+ data[i]["査定依頼ID"] + '</td>\
             <td>'+ data[i]["売主保持物件ID"] + '</td>\
@@ -217,8 +217,8 @@ function Bind_tbody(result) {
             <td>'+ data[i]["売主_固定電話番号"] + '</td>\
             <td>'+ data[i]["売主_携帯電話番号"] + '</td>\
             <td>'+ data[i]["売主_メールアドレス"] + '</td>\
-            <td class="text-nowrap text-center">'+ data[i]["買取依頼日時"] + '</td>\
-            <td class="text-nowrap text-center"> '+ data[i]["終了日時"] + '</td>\
+            <td class="text-nowrap">'+ data[i]["買取依頼日時"] + '</td>\
+            <td class="text-nowrap"> '+ data[i]["終了日時"] + '</td>\
             <td class="text-end text-nowrap"> '+ data[i]["査定価格"] + '</td>\
             <td>'+ data[i]["不動産担当者CD"] + '</td>\
             <td class="text-nowrap"> '+ data[i]["担当者名"] + '</td>\
@@ -332,13 +332,13 @@ function Bind_Model_tbody(result) {
 
             }
             html += '<tr>\
-            <td class= "text-center"> ' + data[i]["NO"] + '</td>\
+            <td class= "text-end"> ' + data[i]["NO"] + '</td>\
             <td class="'+ _sort_checkbox + '"><span class="' + _class + '">' + _letter + '</span><span class="font-semibold"> ' + data[i]["ステータス名"] + '</span></td>\
             <td>'+ data[i]["査定依頼ID"] + '</td>\
             <td>'+ data[i]["売主保持物件ID"] + '</td>\
             <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["査定依頼ID"] + '&r_issueslist' + '  href="#" onclick="l_logfunction(this.id)">' + data[i]["物件名"] + ' ' + data[i]["部屋番号"] + '</a></td>\
-            <td class="text-nowrap text-center">'+ data[i]["買取依頼日時"] + '</td>\
-            <td class="text-nowrap text-center"> '+ data[i]["終了日時"] + '</td>\
+            <td class="text-nowrap">'+ data[i]["買取依頼日時"] + '</td>\
+            <td class="text-nowrap"> '+ data[i]["終了日時"] + '</td>\
             <td class="text-end text-nowrap"> '+ data[i]["査定価格"] + '</td>\
             <td>'+ data[i]["不動産担当者CD"] + '</td>\
             <td class="text-nowrap"> '+ data[i]["担当者名"] + '</td>\

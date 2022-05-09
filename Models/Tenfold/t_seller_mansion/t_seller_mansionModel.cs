@@ -39,5 +39,11 @@ namespace Models.Tenfold.t_seller_mansion
          public string LogId { get; set; }
         public string LogStatus { get; set; }
     }
-   
+
+    public class t_seller_mansion_popup_Model
+    {
+        public string SellerCD { get; set; }
+        public string SellerMansionID { get; set; }
+    }
+
 }

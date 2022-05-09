@@ -7,11 +7,15 @@ let _area = 'asc';
 let _areaamount = 'asc';
 let _prcompany = 'asc';
 let _prcompanyamount = 'asc';
+let _header_mantion_info = "";
 $(function () {
      setValidation();
     _url.getM_SellerMansionList = common.appPath + '/t_seller_mansion/GetM_SellerMansionList';
     _url.generate_M_SellerMansionCSV = common.appPath + '/t_seller_mansion/Generate_M_SellerMansionCSV';
     _url.insert_l_log = common.appPath + '/t_seller_mansion/Insert_l_log';
+    _url.Get_Pills_Home = common.appPath + '/t_seller_mansion/Get_Pills_Home';
+    _url.Get_Pills_Profile = common.appPath + '/t_seller_mansion/Get_Pills_Profile';
+    _url.Get_Pills_Contact = common.appPath + '/t_seller_mansion/Get_Pills_Contact';
     addEvents();
     tbl_columns_addevents();
 });
@@ -167,6 +171,10 @@ function addEvents()
                 }
             }
         )
+    });
+
+    $('.btn-close-modal-t-seller-mansion').on('click', function () {
+       $('#pills-home-tab').trigger('click');
     });
 }
 
@@ -330,7 +338,7 @@ function Bind_tbody(result) {
             <td class= "text-end"> ' + data[i]["NO"] + '</td>\
             <td class="'+ _sort_checkbox + '"><i class="' + _class + '">' + _letter + '</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
             <td> ' + data[i]["物件CD"] + ' </td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["MansionCD"] + '&t_mansion_detail' + '  href="#" onclick="l_logfunction(this.id)">' + data[i]["マンション名"] + '</a><p><small class="text-wrap w-100">' + data[i]["住所"]+'</small></p></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" data-bs-toggle="modal" data-bs-target="#mansion" id='+ data[i]["SellerCD"] + '&' + data[i]["物件CD"] + '  href="#" onclick="modal_popup(this.id)">' + data[i]["マンション名"] + '</a><p><small class="text-wrap w-100">' + data[i]["住所"]+'</small></p></td>\
             <td> '+ data[i]["部屋"] + '</td>\
             <td class="text-end">'+ data[i]["階数"] + '</td>\
             <td class="text-end">'+ data[i]["面積"].toFixed(2) + '</td>\
@@ -395,6 +403,310 @@ function l_logfunction(id) {
             if (result && !result.isOK) {                
             }
         });
+}
+
+function modal_popup(id) {
+    var seller_CD = id.split('&')[0];
+    var sellerMansion_ID = id.split('&')[1];
+
+    let model = {
+        SellerCD: seller_CD,
+        SellerMansionID: sellerMansion_ID
+    };
+
+    common.callAjax(_url.Get_Pills_Home, model, function (result) {
+        if (result && result.isOK) {
+            Bind_popup_home(result.data);
+        }
+        if (result && !result.isOK) {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                $form.getInvalidItems().get(0).focus();
+            }
+        }
+    });
+
+    common.callAjax(_url.Get_Pills_Profile, model, function (result) {
+        if (result && result.isOK) {
+            Bind_popup_profile(result.data);
+        }
+        if (result && !result.isOK) {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                $form.getInvalidItems().get(0).focus();
+            }
+        }
+    });
+
+    common.callAjax(_url.Get_Pills_Contact, model, function (result) {
+        if (result && result.isOK) {
+            Bind_popup_contact(result.data);
+        }
+        if (result && !result.isOK) {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                $form.getInvalidItems().get(0).focus();
+            }
+        }
+    });
+}
+
+function Bind_popup_home(result) {
+    $('#_header_mantion_info_home').empty('');
+    $('#ekikoutsu').empty();
+    let data = JSON.parse(result);
+
+    let html_HomeList = "";
+    let htmlTemp = "";
+    const isEven = data.length % 2 === 0 ? 'Even' : 'Odd';
+
+    _header_mantion_info = '<h4 class="text-center fw-bold">' + data[0]["MansionName"] + ' ' + data[0]["RoomNumber"] + '</h4>\
+        <p class="font-monospace small text-start pt-3">'+ data[0]["Address"] + '</p >'
+   
+    for (var i = 0; i < data.length; i++) {
+        html_HomeList += '<div class="card p-1 col-12 col-md-6 shadow-sm">\
+                                                    <div class="card-body p-2 row">\
+                                                        <div class="col-12">\
+                                                            <h5>'+ data[i]["LineName"] + '</h5>\
+                                                        </div>\
+                                                        <div class="col-12">\
+                                                            <p class="text-dark">'+ data[i]["StationName"] + '</p>\
+                                                        </div>\
+                                                        <div class="col-12 text-end">\
+                                                            <p class="text-dark">徒歩 '+ data[i]["Distance"] + ' 分</p>\
+                                                        </div>\
+                                                    </div>\
+                                                  </div>'
+
+    }
+    htmlTemp = '<div class="invisible card p-1 col-12 col-md-6 shadow-sm"> </div>'
+
+    $('#_header_mantion_info_home').append(_header_mantion_info);
+
+    if (isEven == 'Odd') {
+        $('#ekikoutsu').append(html_HomeList + htmlTemp);
+    }
+    else {
+        $('#ekikoutsu').append(html_HomeList);
+    }
+}
+
+function Bind_popup_profile(result) {
+    $('#_header_mantion_info_profile').empty('');
+    $('#profile-first-column').empty('');
+    $('#profile-second-column').empty('');
+    $('#profile-third-column').empty('');
+
+    let profile_first_column = "";
+    let profile_second_column = "";
+    let profile_third_column = "";
+
+    let data = JSON.parse(result);
+
+    for (var i = 0; i < data.length; i++) {
+
+        profile_first_column = '<div class="d-inline-flex pb-1">\
+            <div class="row">\
+                <div class="">\
+                    <h6 class="align-self-center"><strong>建物構造</strong><br></h6>\
+                            </div>\
+                <div class=""><span class="align-self-start">'+ data[0]["StructuralKBN"] + '<br></span></div>\
+                    </div>\
+                </div>\
+                <div class="d-inline-flex pb-1">\
+                    <div class="row">\
+                        <div class="">\
+                            <h6 class="align-self-center"><strong>築年月</strong><br></h6>\
+                            </div>\
+                            <div class=""><span class="align-self-start">'+ data[0]["ConstYYYYMM"] + '<br></span></div>\
+                            </div>\
+                        </div>\
+                        <div class="d-inline-flex pb-1">\
+                            <div class="row">\
+                                <div class="">\
+                                    <h6 class="align-self-center"><strong>部屋番号</strong><br></h6>\
+                            </div>\
+                                    <div class=""><span class="align-self-start">'+ data[0]["RoomNumber"] + '<br></span></div>\
+                                    </div>\
+                                </div>\
+                                <div class="d-inline-flex pb-1">\
+                                    <div class="row">\
+                                        <div class="">\
+                                            <h6 class="align-self-center"><strong>専有面積</strong><br></h6>\
+                            </div>\
+                                            <div class=""><span class="align-self-start">'+ data[0]["RoomArea"].toFixed(2) + ' ㎡<br></span></div>\
+                                            </div>\
+                                        </div>\
+                                        <div class="d-inline-flex pb-1">\
+                                            <div class="row">\
+                                                <div class="">\
+                                                    <h6 class="align-self-center"><strong>バルコニー面積　</strong><br></h6>\
+                            </div>\
+                                                    <div class=""><span class="align-self-start">'+ data[0]["BalconyArea"].toFixed(2) + ' ㎡<br></span></div>\
+                                                    </div>\
+                                                </div>\
+                                                <div class="d-inline-flex pb-1">\
+                                                    <div class="row">\
+                                                        <div class="">\
+                                                            <h6 class="align-self-center"><strong>主採光</strong><br></h6>\
+                            </div>\
+                                                            <div class=""><span class="align-self-start">'+ data[0]["Direction"] + '<br></span></div>\
+                                                            </div>\
+                                                        </div>'
+
+
+        profile_second_column = '<div class="d-inline-flex pb-1">\
+            <div class="row">\
+                <div class="">\
+                    <h6 class="align-self-center"><strong>部屋数</strong><br></h6>\
+                            </div>\
+                    <div class=""><span class="align-self-start">'+ data[0]["FloorType"] + '部屋<br></span></div>\
+                    </div>\
+                </div>\
+                <div class="d-inline-flex pb-1">\
+                    <div class="row">\
+                        <div class="">\
+                            <h6 class="align-self-center"><strong>バス・トイレ　</strong><br></h6>\
+                            </div>\
+                            <div class=""><span class="align-self-start">'+ data[0]["BathKBN"] + '<br></span></div>\
+                            </div>\
+                        </div>\
+                        <div class="d-inline-flex pb-1">\
+                            <div class="row">\
+                                <div class="">\
+                                    <h6 class="align-self-center"><strong>土地権利　</strong><br></h6>\
+                            </div>\
+                             <div class=""><span class="align-self-start">'+ data[0]["RightKBN"] + '<br></span></div>\
+                                    </div>\
+                                </div>\
+                                <div class="d-inline-flex pb-1">\
+                                    <div class="row">\
+                                        <div class="">\
+                                            <h6 class="align-self-center"><strong>現況</strong><br></h6>\
+                            </div>\
+                                            <div class=""><span class="align-self-start">'+ data[0]["CurrentKBN"] + '<br></span></div>\
+                                            </div>\
+                                        </div>\
+                                        <div class="d-inline-flex pb-1">\
+                                            <div class="row">\
+                                                <div class="">\
+                                                    <h6 class="align-self-center"><strong>管理方式</strong><br></h6>\
+                            </div>\
+                                                    <div class=""><span class="align-self-start">'+ data[0]["ManagementKBN"] + '<br></span></div>\
+                                                    </div>\
+                                                </div>\
+                                                <div class="d-inline-flex pb-1">\
+                                                    <div class="row">\
+                                                        <div class="">\
+                                                            <h6 class="align-self-center"><strong>売却希望時期　</strong><br></h6>\
+                            </div>\
+                                                            <div class=""><span class="align-self-start">'+ data[0]["DesiredTime"] + '<br></span></div>\
+                                                            </div>\
+                                                        </div>'
+
+
+        profile_third_column = '<div class="d-inline-flex pb-1">\
+            <div class="row">\
+                <div class="">\
+                    <h6 class="align-self-center"><strong>家賃</strong><br></h6>\
+                            </div>\
+                    <div class=""><span class="align-self-start">'+ data[0]["RentFee"] + '円<br></span></div>\
+                    </div>\
+                </div>\
+                <div class="d-inline-flex pb-1">\
+                    <div class="row">\
+                        <div class="">\
+                            <h6 class="align-self-center"><strong>管理賃</strong><br></h6>\
+                            </div>\
+                            <div class=""><span class="align-self-start">'+ data[0]["ManagementFee"] + '円<br></span></div>\
+                            </div>\
+                        </div>\
+                        <div class="d-inline-flex pb-1">\
+                            <div class="row">\
+                                <div class="">\
+                                    <h6 class="align-self-center"><strong>修繕積立金</strong><br></h6>\
+                            </div>\
+                                    <div class=""><span class="align-self-start">'+ data[0]["RepairFee"] + '円<br></span></div>\
+                                    </div>\
+                                </div>\
+                                <div class="d-inline-flex pb-1">\
+                                    <div class="row">\
+                                        <div class="">\
+                                            <h6 class="align-self-center"><strong>その他費用</strong><br></h6>\
+                            </div>\
+                                            <div class=""><span class="align-self-start">'+ data[0]["ExtraFee"] + '円<br></span></div>\
+                                            </div>\
+                                        </div>\
+                                        <div class="d-inline-flex pb-1">\
+                                            <div class="row">\
+                                                <div class="">\
+                                                    <h6 class="align-self-center"><strong>固定資産税</strong><br></h6>\
+                            </div>\
+                                                    <div class=""><span class="align-self-start">'+ data[0]["PropertyTax"] + '円<br></span></div>\
+                                                    </div>\
+                                                </div>'
+    }
+    $('#_header_mantion_info_profile').append(_header_mantion_info);
+    $('#profile-first-column').append(profile_first_column);
+    $('#profile-second-column').append(profile_second_column);
+    $('#profile-third-column').append(profile_third_column);
+}
+
+function Bind_popup_contact(result) {
+    $('#_header_mantion_info_contact').empty('');
+    $('#contact-first').empty('');
+    $('#contact-second').empty('');
+
+    let contact_first = "";
+    let contact_second = "";
+
+    let data = JSON.parse(result);
+
+    if (data[0]["InvalidFLG"] == "無効会員") {
+        _classFlag = "text-danger";
+    }
+    else {
+        _classFlag = "text-success";
+    }
+    
+    contact_first = '<div class="align-items-center col-12">\
+            <div class="p-md-2 p-1" id = "info">\
+                <div class="text-muted"><span class='+ _classFlag + '>' + data[0]["InvalidFLG"] + '</span></div>\
+                <div class="text-muted">'+ data[0]["SellerKana"] + '</div>\
+                <div class="text-muted">\
+                    <h2>'+ data[0]["SellerName"] + '</h2>\
+                </div>\
+                <div class="p-md-1 text-muted">\
+                    <span class="fa fa-id-card bg-light p-1 rounded-circle"></span>'+ data[0]["SellerCD"] + '\
+                        </div>\
+                    </div>\
+                </div>'
+
+    contact_second = '<div class="d-flex flex-column col-12" id="info">\
+            <div class="p-md-1 text-muted cap-fon-form-w500 ">\
+                <span class="fa fa-home bg-light p-1 rounded-circle"></span>'+ data[0]["Address"] + '\
+                    </div>\
+            <div class="p-md-1 pt-sm-1 text-muted">\
+                <span class="fa fa-phone bg-light p-1 rounded-circle"></span> '+ data[0]["Phone"] + '\
+                    </div>\
+            <div class="p-md-1 pt-sm-1 text-muted">\
+                <span class="fa fa-mobile bg-light p-1 ps-2 pe-2 rounded-circle"></span> '+ data[0]["Mobile_Phone"] + '\
+                    </div>\
+            <div class="p-md-1 text-muted">\
+                <span class="fa fa-envelope-o bg-light p-1 rounded-circle"></span>'+ data[0]["MailAddress"] + '\
+                    </div>\
+                </div>'
+
+    $('#_header_mantion_info_contact').append(_header_mantion_info);
+    $('#contact-first').append(contact_first);
+    $('#contact-second').append(contact_second);
+    
 }
 
 function sort_table_columns(index, col_type, multiplier) {
