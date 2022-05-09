@@ -43,6 +43,7 @@ namespace Seruichi.Seller.Web
             bundles.Add(new ScriptBundle("~/Content/scripts/application").Include(
                       "~/Content/typeahead/typeahead.bundle.min.js",
                       "~/Content/scripts/validation_jqueryextend.js",
+                      "~/Content/scripts/sidebar.js",
                       "~/Content/scripts/common.js"));
 
             //a_index ----------
