@@ -3,7 +3,6 @@
 $(function () {
     _url.getSellerList = common.appPath + '/a_mypage_whis/GetD_SellerPossibleData';
     addEvents();
-    
 });
 
 
@@ -42,8 +41,7 @@ function Bind_tbody(result) {
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
             html +=
-               
-                '<tr>\
+           '<tr>\
             <td class= "text-truncate text-center" > ' + data[i]["No"] + '</td>\
             <td class="text-truncate text-center" > ' + data[i]["PossibleID"] + ' </td >\
             <td class="text-truncate text-center" > ' + data[i]["ChangeDateTime"] + ' </td>\
@@ -54,8 +52,6 @@ function Bind_tbody(result) {
         }
     }
     $('#getSellerCD tbody').append(html);
-
-    sortTable.getSortingTable("getSellerCD");
 }
 
 
