@@ -45,8 +45,31 @@ const regexPattern = {
     singlebyte_numberAlpha: "^[0-9a-zA-Z]+$",
     moeney: "^[0-9,]+$",
     numeric: "^[0-9.]+$",
-    dateformat : /^\d{4}-\d{2}-\d{2}$/,
+    dateformat: /^\d{4}-\d{2}-\d{2}$/,
+    doublebyteKana: "^[ァ-ヶー　]+$",
 }
+
+const kanaMap = {
+    'ｶﾞ': 'ガ', 'ｷﾞ': 'ギ', 'ｸﾞ': 'グ', 'ｹﾞ': 'ゲ', 'ｺﾞ': 'ゴ',
+    'ｻﾞ': 'ザ', 'ｼﾞ': 'ジ', 'ｽﾞ': 'ズ', 'ｾﾞ': 'ゼ', 'ｿﾞ': 'ゾ',
+    'ﾀﾞ': 'ダ', 'ﾁﾞ': 'ヂ', 'ﾂﾞ': 'ヅ', 'ﾃﾞ': 'デ', 'ﾄﾞ': 'ド',
+    'ﾊﾞ': 'バ', 'ﾋﾞ': 'ビ', 'ﾌﾞ': 'ブ', 'ﾍﾞ': 'ベ', 'ﾎﾞ': 'ボ',
+    'ﾊﾟ': 'パ', 'ﾋﾟ': 'ピ', 'ﾌﾟ': 'プ', 'ﾍﾟ': 'ペ', 'ﾎﾟ': 'ポ',
+    'ｳﾞ': 'ヴ', 'ﾜﾞ': 'ヷ', 'ｦﾞ': 'ヺ',
+    'ｱ': 'ア', 'ｲ': 'イ', 'ｳ': 'ウ', 'ｴ': 'エ', 'ｵ': 'オ',
+    'ｶ': 'カ', 'ｷ': 'キ', 'ｸ': 'ク', 'ｹ': 'ケ', 'ｺ': 'コ',
+    'ｻ': 'サ', 'ｼ': 'シ', 'ｽ': 'ス', 'ｾ': 'セ', 'ｿ': 'ソ',
+    'ﾀ': 'タ', 'ﾁ': 'チ', 'ﾂ': 'ツ', 'ﾃ': 'テ', 'ﾄ': 'ト',
+    'ﾅ': 'ナ', 'ﾆ': 'ニ', 'ﾇ': 'ヌ', 'ﾈ': 'ネ', 'ﾉ': 'ノ',
+    'ﾊ': 'ハ', 'ﾋ': 'ヒ', 'ﾌ': 'フ', 'ﾍ': 'ヘ', 'ﾎ': 'ホ',
+    'ﾏ': 'マ', 'ﾐ': 'ミ', 'ﾑ': 'ム', 'ﾒ': 'メ', 'ﾓ': 'モ',
+    'ﾔ': 'ヤ', 'ﾕ': 'ユ', 'ﾖ': 'ヨ',
+    'ﾗ': 'ラ', 'ﾘ': 'リ', 'ﾙ': 'ル', 'ﾚ': 'レ', 'ﾛ': 'ロ',
+    'ﾜ': 'ワ', 'ｦ': 'ヲ', 'ﾝ': 'ン',
+    'ｧ': 'ァ', 'ｨ': 'ィ', 'ｩ': 'ゥ', 'ｪ': 'ェ', 'ｫ': 'ォ',
+    'ｯ': 'ッ', 'ｬ': 'ャ', 'ｭ': 'ュ', 'ｮ': 'ョ',
+    '｡': '。', '､': '、', 'ｰ': 'ー', '｢': '「', '｣': '」', '･': '・'
+};
 
 const common = {
 
@@ -110,6 +133,17 @@ const common = {
         return '?' + encodeURI(query);
     },
 
+    redirectErrorPage: function redirectErrorPage(status) {
+        let url;
+        if (status == 400) url = "/Error/BadRequest";
+        if (status == 401) url = "/Error/Unauthorized";
+        if (status == 403) url = "/Error/Forbidden";
+        if (status == 404) url = "/Error/NotFound";
+        //if (status == 500) url = "/Error/InternalServerError";
+
+        if (url) location.href = common.appPath + url;
+    },
+
     callAjaxWithLoading: function callAjaxWithLoading(url, model, disableSelector, successCallback, failCallback) {
         common.showLoading(disableSelector);
         $.ajax({
@@ -130,19 +164,44 @@ const common = {
             }
         }).fail(function (XMLHttpRequest, status, e) {
             common.hideLoading(disableSelector);
-            //alert(XMLHttpRequest.status);
+            common.redirectErrorPage(XMLHttpRequest.status);
             if (failCallback) {
                 failCallback();
             }
         });
     },
-
-    callAjax: function callAjax(url, model, successCallback, failCallback) {
+    callAjaxWithLoadingSync: function callAjaxWithLoadingSync(url, model, disableSelector, successCallback, failCallback) {
+        common.showLoading(disableSelector);
         $.ajax({
             url: url,
             type: "POST",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
+            data: JSON.stringify(model),
+            headers: {
+                RequestVerificationToken: $("#_RequestVerificationToken").val(),
+            },
+            async: false,
+            timeout: 30000,
+        }).done(function (data) {
+            common.hideLoading(disableSelector);
+            if (successCallback) {
+                successCallback(data);
+            }
+        }).fail(function (XMLHttpRequest, status, e) {
+            common.hideLoading(disableSelector);
+            common.redirectErrorPage(XMLHttpRequest.status);
+            if (failCallback) {
+                failCallback();
+            }
+        });
+    },
+    callAjax: function callAjax(url, model, successCallback, failCallback) {
+        $.ajax({
+            url: url,
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            //dataType: "json",
             data: JSON.stringify(model),
             headers: {
                 RequestVerificationToken: $("#_RequestVerificationToken").val(),
@@ -154,11 +213,22 @@ const common = {
                 successCallback(data);
             }
         }).fail(function (XMLHttpRequest, status, e) {
-            //alert(XMLHttpRequest.status);
+            common.redirectErrorPage(XMLHttpRequest.status);
             if (failCallback) {
                 failCallback();
             }
         });
+    },
+    callSubmit: function callSubmit(form, action) {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('name', 'RequestVerificationToken');
+        input.setAttribute('value', $("#_RequestVerificationToken").val());
+        form.appendChild(input);
+
+        form.method = "POST";
+        form.action = action;
+        form.submit();
     },
 
     removeDropDownListItems: function removeDropDownListItems(selector, placeHolder) {
@@ -234,6 +304,7 @@ const common = {
         const isRequiredNotAllowZero = $ctrl.attr("data-validation-not-allow-zero");
         const isSingleDoubleByte = $ctrl.attr("data-validation-singlebyte-doublebyte");
         const isDoubleByte = $ctrl.attr("data-validation-doublebyte");
+        const isDoubleByteKana = $ctrl.attr("data-validation-doublebyte-kana");
         const isSingleByte = $ctrl.attr("data-validation-singlebyte");
         const isSingleByteNumber = $ctrl.attr("data-validation-singlebyte-number");
         const isSingleByteNumberAlpha = $ctrl.attr("data-validation-singlebyte-numberalpha");
@@ -262,15 +333,16 @@ const common = {
             $ctrl.val(inputValue);
         }
 
-        if (isDoubleByte) {
+        if (isDoubleByte || isDoubleByteKana) {
             inputValue = this.replaceSingleToDouble(inputValue);
+            inputValue = this.replaceSingleToDoubleKana(inputValue);
             $ctrl.val(inputValue);
         }
 
         //validation
         if (!isRequired
             && !isSingleDoubleByte
-            && !isDoubleByte
+            && !isDoubleByte && !isDoubleByteKana
             && !isSingleByte && !isSingleByteNumber && !isSingleByteNumberAlpha
             && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter && !ischeckboxLenght 
             && !customValidation) return true;
@@ -314,6 +386,14 @@ const common = {
                 const regex = new RegExp(regexPattern.doublebyte);
                 if (!regex.test(inputValue)) {
                     $ctrl.showError(this.getMessage('E107'));
+                    return;
+                }
+            }
+
+            if (isDoubleByteKana) {
+                const regex = new RegExp(regexPattern.doublebyteKana);
+                if (!regex.test(inputValue)) {
+                    $ctrl.showError(this.getMessage('E104'));
                     return;
                 }
             }
@@ -364,7 +444,8 @@ const common = {
                         decpart = decpart.substr(0, decdigits);
                     }
                     else {
-                        decpart = ('0'.repeat(decdigits) + decpart).slice(-1 * decdigits);
+                        //decpart = ('0'.repeat(decdigits) + decpart).slice(-1 * decdigits);
+                        decpart = (decpart + '0'.repeat(decdigits)).slice(0, decdigits);
                     }
                     inputValue = intpart + '.' + decpart;
                     $ctrl.val(inputValue);

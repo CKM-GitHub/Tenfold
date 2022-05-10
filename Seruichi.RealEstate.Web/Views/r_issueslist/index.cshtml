@@ -30,15 +30,6 @@
     #tblissueslist tbody tr td:nth-child(17) {
         display: none;
     }
-
-    #tblsellerdetails thead tr th:nth-child(3),
-    #tblsellerdetails thead tr th:nth-child(4),
-    #tblsellerdetails thead tr th:nth-child(9),
-    #tblsellerdetails tbody tr td:nth-child(3),
-    #tblsellerdetails tbody tr td:nth-child(4),
-    #tblsellerdetails tbody tr td:nth-child(9) {
-        display: none;
-    }
 </style>
 
 <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18" id="wrapper">
@@ -63,7 +54,7 @@
                     </div>
 
                     <div class="card-header d-md-inline-flex">
-                        <h5 class="mb-0">案件一覧</h5> <span class="ps-md-5 text-muted text-sm" id="total_record_up"></span>
+                        <h5 class="mb-0">案件一覧</h5> <span class="ps-md-5 text-muted text-sm" id="total_record_up"></span> <span style="color: red;" class="ps-md-5 text-sm" id="no_record"></span>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover table-nowrap" id="tblissueslist">
@@ -143,22 +134,23 @@
                                     </div>
                                     <div class="card shadow border-0 ">
                                         <div class="card-header d-md-inline-flex">
-                                            <h5 class="mb-0">案件一覧</h5> <span class="ps-md-5 text-muted text-sm" id="mtotal_record_up"></span>
+                                            <h5 class="mb-0">案件一覧</h5> <span class="ps-md-5 text-muted text-sm" id="mtotal_record_up"></span> <span class="ps-md-5 text-sm" style="color: red;" id="mno_record"></span>
                                         </div>
                                         <div class="table-responsive">
                                             <table class="table table-hover table-nowrap" id="tblsellerdetails">
                                                 <thead class="thead-light">
                                                     <tr>
-                                                        <th scope="col" class="text-end text-decoration-underline" style="width: 80px">No.</th>
-                                                        <th scope="col" style="width: 100px" class="text-decoration-underline">ステータス</th>
-                                                        <th>査定依頼ID</th>
-                                                        <th>売主保持物件ID</th>
-                                                        <th scope="col" style="width: 250px" class="text-decoration-underline">物件（部屋番号）</th>
-                                                        <th scope="col" style="width: 130px" class="text-decoration-underline">買取依頼日時</th>
-                                                        <th scope="col" style="width: 130px" class="text-decoration-underline">終了日時</th>
-                                                        <th scope="col" style="width: 100px" class="text-decoration-underline text-end">査定価格(円)</th>
-                                                        <th>不動産担当者CD</th>
-                                                        <th scope="col" style="width: 180px" class="text-decoration-underline">担当者</th>
+                                                        <th scope="col" class="text-end text-decoration-underline sort-by" ordercol-index="3" style="width: 80px">No.</th>
+                                                        <th scope="col" style="width: 100px" class="text-decoration-underline sort-by" ordercol-index="2_3">ステータス</th>
+                                                        <th class="d-none">ステータスCD</th>
+                                                        <th class="d-none">査定依頼ID</th>
+                                                        <th class="d-none">売主保持物件ID</th>
+                                                        <th scope="col" style="width: 250px" class="text-decoration-underline sort-by" ordercol-index="5">物件（部屋番号）</th>
+                                                        <th scope="col" style="width: 130px" class="text-decoration-underline sort-by" ordercol-index="6_3">買取依頼日時</th>
+                                                        <th scope="col" style="width: 130px" class="text-decoration-underline sort-by" ordercol-index="7_3">終了日時</th>
+                                                        <th scope="col" style="width: 100px" class="text-decoration-underline sort-by text-end" ordercol-index="8_3">査定価格(円)</th>
+                                                        <th class="d-none">不動産担当者CD</th>
+                                                        <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="10_9_3">担当者</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>

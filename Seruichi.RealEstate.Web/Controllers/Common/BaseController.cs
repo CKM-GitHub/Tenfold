@@ -22,8 +22,8 @@ namespace Seruichi.RealEstate.Web.Controllers
                 string return_value = "";
                 switch (type)
                 {
-                    case "UserID": return_value = user.UserID; break;
-                    case "UserName": return_value = user.UserName; break;
+                    case "UserID": return_value = user.REStaffCD; break;
+                    case "UserName": return_value = user.REStaffName; break;
                     case "VerificationToken": return_value = user.VerificationToken; break;
                     case "RealECD": return_value = user.RealECD; break;
                     case "REStaffCD": return_value = user.REStaffCD; break;

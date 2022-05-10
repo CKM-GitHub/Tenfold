@@ -28,20 +28,21 @@
 </head>
 
 <body>
-        @Html.Partial("t_dashboard/_t_dashboard_sellerPartial")
-    <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18" >
+    <input type="hidden" id="_RequestVerificationToken" value="@SessionAuthenticationHelper.GetVerificationToken()" />
+    @Html.Partial("t_dashboard/_t_dashboard_sellerPartial")
+    <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
         <div class="d-flex flex-column min-h-screen" id="page-content-wrapper">
             <hidden>
                 <input type="hidden" id="path" value=@appPath>
             </hidden>
             @RenderBody()
-             <footer class="text-center text-lg-start mx-auto">
-        <!-- Copyright -->
-        <div class="text-center p-3">
-          © セルイチ 2022. All Rights Reserved.
-        </div>
-        <!-- Copyright -->
-      </footer>
+            <footer class="text-center text-lg-start mx-auto">
+                <!-- Copyright -->
+                <div class="text-center p-3">
+                    © セルイチ 2022. All Rights Reserved.
+                </div>
+                <!-- Copyright -->
+            </footer>
         </div>
     </div>
     <script src="~/Content/bootstrap/bootstrap.min.js"></script>
