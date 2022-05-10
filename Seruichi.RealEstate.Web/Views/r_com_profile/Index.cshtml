@@ -1,0 +1,496 @@
+﻿@model Models.RealEstate.r_com_profile.r_com_profileModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_r_menuLayout.cshtml";
+}
+
+@section styles{
+    @Styles.Render("~/Content/realEstate_css_common")
+}
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
+    <div class="d-flex flex-column min-h-screen" id="page-content-wrapper">
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <div class="col-md-12 col-12 mb-3 mb-sm-0">
+                            <h1 class="h2 mb-0 ls-tight">会社情報</h1>
+                            <span class="text-muted small">設定</span>
+                        </div>
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
+                  <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+                        </div>
+                    </div>
+                    <ul class="nav nav-tabs mt-0 overflow-x border-0 ps-5">
+                        <li class="nav-item"> <a href="#" class="nav-link active">会社情報</a> </li>
+                        <li class="nav-item"> <a href="#" class="nav-link font-regular ">テンプレートメッセージ</a> </li>
+                        <li class="nav-item "> <a href="#" class="nav-link font-regular">自動メッセージ</a> </li>
+                        <li class="nav-item"> <a href="#" class="nav-link font-regular">テンプレート一覧</a> </li>
+                    </ul>
+                </div>
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <h5 class="mb-0">情報編集</h5>
+                    </div>
+                    <div class="p-5 container">
+                        <div class="row d-flex justify-content-center align-items-center h-100">
+                            <div class="col-12">
+                                <div class="row g-0">
+                                    <div class="col-lg-4">
+                                        <div class="p-5">
+                                            <div class="mb-4 pb-2">
+                                                <h5 class="pb-2">会社情報</h5>
+                                                <div class="form-outline">
+                                                    <label class="form-label" for="form3Examplev4">社名</label>
+                                                    <input type="text" id="form3Examplev4" class="form-control form-control-lg" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="mb-4 pb-2">
+                                                <div class="form-outline">
+                                                    <label class="form-label" for="form3Examplev4">社名(フリガナ)</label>
+                                                    <input type="text" id="form3Examplev4" class="form-control form-control-lg" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="mb-4 pb-2">
+                                                <div class="form-outline">
+                                                    <label class="form-label" for="form3Examplev4">代表者名</label>
+                                                    <input type="text" id="form3Examplev4" class="form-control form-control-lg" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="mb-4 pb-2">
+                                                <div class="form-outline cap-fon-form-w150">
+                                                    <label class="form-label" for="form3Examplev4">サービス参加日</label>
+                                                    <input type="date" id="form3Examplev4" class="form-control form-control-lg text-center" value="2000-01-01" readonly />
+                                                </div>
+                                            </div>
+                                            <hr class="navbar-divider mb-4 my-5 opacity-20">
+                                            <div class="mb-4 pb-2">
+                                                <div class="form-group">
+                                                    <label class="form-label">郵便番号</label>
+                                                    <div class="row">
+                                                        <div class="col-12 col-md-12 row">
+                                                            <div class="col-1 align-self-center">
+                                                                <span class="text-dark">〒</span>
+                                                            </div>
+                                                            <div class="col-4 col-md-3 pe-0 ms-0 me-0 align-self-centeralign-self-center">
+                                                                <input class="form-control text-center w-100" type="text" readonly value="123" maxlength="3">
+                                                            </div>
+                                                            <div class="col-1 ps-0 pe-0 ms-0 me-0 text-center align-self-center">
+                                                                <span class="align-self-center text-dark">―</span>
+                                                            </div>
+                                                            <div class="col-4 ps-0 pe-0 ms-0 me-0 align-self-center">
+                                                                <input class="form-control text-center w-100" type="text" value="4567" maxlength="4" readonly />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-4 pb-2">
+                                                <div class="form-outline form-white">
+                                                    <label class="form-label" for="form3Examplea2">都道府県</label>
+                                                    <div class="dropdown w-100">
+                                                        <input type="text" id="form3Examplea3" class="form-control form-control-lg" value="京都府" readonly />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-4 pb-2">
+                                                <div class="form-outline form-white">
+                                                    <label class="form-label" for="form3Examplea3">市町村区</label>
+                                                    <input type="text" id="form3Examplea3" class="form-control form-control-lg" value="京都市東山区" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="mb-4 pb-2">
+                                                <div class="form-outline form-white">
+                                                    <label class="form-label" for="form3Examplea3">住所</label>
+                                                    <input type="text" id="form3Examplea3" class="form-control form-control-lg" value="三条通南二筋目白川筋西入ル二丁目北木之元町3-5-5" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="mb-4 pb-2">
+                                                <div class="form-outline form-white">
+                                                    <label class="form-label" for="form3Examplea6">建物名</label>
+                                                    <input type="text" id="form3Examplea6" class="form-control form-control-lg" value="あああああああああマンション" readonly />
+                                                </div>
+                                            </div>
+                                            <hr class="navbar-divider mb-4 my-5 opacity-20">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 bg-indigo text-white">
+                                        <div class="p-5">
+                                            <div class="mb-4 pb-2">
+                                                <h5 class="pb-2">メイン担当者</h5>
+                                                <div class="form-outline">
+                                                    <label class="form-label" for="form3Examplev4">お名前</label>
+                                                    <input type="text" id="form3Examplev4" class="form-control form-control-lg" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="mb-4 pb-2">
+                                                <div class="form-outline">
+                                                    <label class="form-label" for="form3Examplev4">お名前(フリガナ)</label>
+                                                    <input type="text" id="form3Examplev4" class="form-control form-control-lg" readonly />
+                                                </div>
+                                            </div>
+                                            <hr class="navbar-divider mb-4 my-5 opacity-20">
+                                            <div class="mb-4 pb-2">
+                                                <h5 class="pb-2">連絡方法</h5>
+                                                <div class="form-outline form-white">
+                                                    <label class="form-label" for="form3Examplea6">電話番号</label>
+                                                    <input type="text" id="form3Examplea6" class="form-control form-control-lg" value="0678545689" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="mb-4">
+                                                <div class="form-outline form-white">
+                                                    <label class="form-label" for="form3Examplea9">FAX番号</label>
+                                                    <input type="text" id="form3Examplea9" class="form-control form-control-lg" value="0611112223" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="mb-4">
+                                                <div class="form-outline form-white">
+                                                    <label class="form-label" for="form3Examplea9">メールアドレス</label>
+                                                    <input type="text" id="form3Examplea9" class="form-control form-control-lg" value="aaaaabbbb@ggggg.cccc" readonly />
+                                                </div>
+                                            </div>
+                                            <hr class="navbar-divider mb-4 my-5 opacity-20">
+                                            <div class="mb-4">
+                                                <h5 class="pb-2">営業日</h5>
+                                                <div class="form-outline form-white">
+                                                    <label class="form-label" for="form3Examplea9">営業時間</label>
+                                                    <input type="text" id="form3Examplea9" class="form-control form-control-lg" value="9:00~18:00" />
+                                                </div>
+                                            </div>
+                                            <div class="mb-4">
+                                                <div class="form-outline form-white">
+                                                    <label class="form-label" for="form3Examplea9">定休日</label>
+                                                    <input type="text" id="form3Examplea9" class="form-control form-control-lg" value="土、日" />
+                                                </div>
+                                            </div>
+                                            <hr class="navbar-divider mb-4 my-5 opacity-20">
+                                            <div class="mb-4row">
+                                                <h5 class="pb-2">口座情報</h5>
+                                                <div class="col-12 col-md-5 form-outline form-white pb-3 ">
+                                                    <div class="dropdown w-100">
+                                                        <input type="text" id="form3Examplea3" class="form-control form-control-lg" value="BankName" readonly />
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 pb-3 ">
+                                                    <label class="form-label" for="form3Examplea9">支店名</label>
+                                                    <input type="text" id="form3Examplev4" class="form-control form-control-lg texc" autocomplete="off" value="天満支店(000)" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="mb-4 row">
+                                                <div class="col-12 form-outline form-white pb-3">
+                                                    <label class="form-label" for="form3Examplea9">口座種類</label>
+                                                    <input type="text" id="form3Examplev4" class="form-control form-control-lg texc" autocomplete="off" value="普通" readonly />
+                                                </div>
+                                                <div class="col-12 pb-3">
+                                                    <label class="form-label" for="form3Examplea9">口座番号</label>
+                                                    <input type="text" id="form3Examplev4" class="form-control form-control-lg" autocomplete="off" value="1000221" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="mb-4">
+                                                <div class="form-outline form-white pb-3 ">
+                                                    <label class="form-label" for="form3Examplea9">名義人</label>
+                                                    <input type="text" id="form3Examplea9" class="form-control form-control-lg" value="キャピタル不動産" readonly />
+                                                </div>
+                                            </div>
+                                            <hr class="navbar-divider mb-4 my-5 opacity-20">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="p-5">
+                                            <div class="mb-4 pb-2 row">
+                                                <h5 class="pb-2">宅建免許番号</h5>
+                                                <div class="col-12 form-outline form-white pb-3">
+                                                    <label class="form-label" for="form3Examplea2">免許発行主体</label>
+                                                    <input type="text" id="form3Examplea9" class="form-control form-control-lg text-center cap-fon-form-w250" value="国土交通大臣免許" readonly />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label class="form-label" for="form3Examplea2">更新回数</label>
+                                                    <input type="text" id="form3Examplev4" class="form-control form-control-lg text-center" autocomplete="off" value="99" readonly />
+                                                </div>
+                                                <div class="col-8">
+                                                    <label class="form-label" for="form3Examplea2">免許番号</label>
+                                                    <div class="d-inline-flex ">
+                                                        <span class="align-self-center pe-1">第</span>
+                                                        <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg text-center" autocomplete="off" value="999999" />
+                                                        <span class="align-self-center ps-1">号</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="adminblock">
+                                                <hr class="navbar-divider mb-4 my-5 opacity-20">
+                                                <div class="p-5">
+                                                    <div class="mb-4 pb-2">
+                                                        <h5 class="pb-2">ログイン情報(admin)</h5>
+                                                        <div class="form-outline">
+                                                            <label class="form-label" for="form3Examplev4">パスワード</label>
+                                                            <div class="passkey-box">
+                                                                <input type="password" name="passkey" id="passkey" class="passkey form-control" placeholder="パスワード" required="required" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 pb-2">
+                                                        <div class="form-outline">
+                                                            <label class="form-label" for="form3Examplev4">パスワード再確認</label>
+                                                            <input type="password" name="passkey1" id="passkey" class="passkey form-control" placeholder="パスワード" required="required">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="text-right mt-3 float-end">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">確認</button>&nbsp;
+                            <button type="button" class="btn btn-default">取消</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="exampleModal" tabindex="-1"
+                     role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">変更内容確認</h5>
+                                <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Card stats -->
+                                <div class="row d-flex justify-content-center align-items-center h-100">
+                                    <div class="col-12">
+                                        <div class="row g-0">
+                                            <div class="col-lg-6">
+                                                <div class="p-5">
+                                                    <div class="mb-4 pb-2">
+                                                        <h5 class="pb-2">会社情報</h5>
+                                                        <div class="form-outline">
+                                                            <label class="form-label" for="form3Examplev4">社名</label>
+                                                            <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 pb-2">
+                                                        <div class="form-outline">
+                                                            <label class="form-label" for="form3Examplev4">社名(フリガナ)</label>
+                                                            <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 pb-2">
+                                                        <div class="form-outline">
+                                                            <label class="form-label" for="form3Examplev4">代表者名</label>
+                                                            <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 pb-2">
+                                                        <div class="form-outline cap-fon-form-w150">
+                                                            <label class="form-label" for="form3Examplev4">サービス参加日</label>
+                                                            <input readonly type="date" id="form3Examplev4" class="form-control form-control-lg text-center" value="2000-01-01" readonly />
+                                                        </div>
+                                                    </div>
+                                                    <hr class="navbar-divider mb-4 my-5 opacity-20">
+                                                    <div class="mb-4 pb-2">
+                                                        <h5 class="pb-2">住所</h5>
+                                                        <div class="row cap-fon-form-w350 form-outline form-white">
+                                                            <label class="form-label" for="form3Examplea4">郵便番号</label>
+                                                            <div class="col-12 col-md-8 d-inline-flex mb-4 mb-md-0 pb-md-0 pb-2">
+                                                                <span class="align-self-center pe-2 text-dark">〒</span>
+                                                                <input readonly class="form-control text-center w-50" type="text" value="123">
+                                                                <span class="align-self-center pe-2 ps-2 text-dark">-</span>
+                                                                <input readonlyclass="form-control w-50 text-center" type="text" value="4567">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 pb-2">
+                                                        <div class="form-outline form-white">
+                                                            <label class="form-label" for="form3Examplea2">都道府県</label>
+                                                            <div class="dropdown w-100">
+                                                                <input readonly type="text" id="form3Examplea3" class="form-control form-control-lg" value="京都府" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-4 pb-2">
+                                                        <div class="form-outline form-white">
+                                                            <label class="form-label" for="form3Examplea3">市町村区</label>
+                                                            <input readonly type="text" id="form3Examplea3" class="form-control form-control-lg" value="京都市東山区" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-4 pb-2">
+                                                        <div class="form-outline form-white">
+                                                            <label class="form-label" for="form3Examplea3">町域名</label>
+                                                            <input readonly type="text" id="form3Examplea3" class="form-control form-control-lg" value="三条通南二筋目白川筋西入ル二丁目北木之元町" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 pb-2">
+                                                        <div class="form-outline form-white">
+                                                            <label class="form-label" for="form3Examplea6">町名・番地など</label>
+                                                            <input readonly type="text" id="form3Examplea6" class="form-control form-control-lg" value="3-5-5" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 pb-2">
+                                                        <div class="form-outline form-white">
+                                                            <label class="form-label" for="form3Examplea6">建物名</label>
+                                                            <input readonly type="text" id="form3Examplea6" class="form-control form-control-lg" value="あああああああああマンション" />
+                                                        </div>
+                                                    </div>
+                                                    <hr class="navbar-divider mb-4 my-5 opacity-20">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 bg-indigo text-white">
+                                                <div class="p-5">
+                                                    <div class="mb-4 pb-2">
+                                                        <h5 class="pb-2">メイン担当者</h5>
+                                                        <div class="form-outline">
+                                                            <label class="form-label" for="form3Examplev4">お名前</label>
+                                                            <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 pb-2">
+                                                        <div class="form-outline">
+                                                            <label class="form-label" for="form3Examplev4">お名前(フリガナ)</label>
+                                                            <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg" />
+                                                        </div>
+                                                    </div>
+                                                    <hr class="navbar-divider mb-4 my-5 opacity-20">
+                                                    <div class="mb-4 pb-2">
+                                                        <h5 class="pb-2">連絡方法</h5>
+                                                        <div class="form-outline form-white">
+                                                            <label class="form-label" for="form3Examplea6">電話番号</label>
+                                                            <input readonly type="text" id="form3Examplea6" class="form-control form-control-lg" value="0678545689" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4">
+                                                        <div class="form-outline form-white">
+                                                            <label class="form-label" for="form3Examplea9">携帯番号</label>
+                                                            <input readonly type="text" id="form3Examplea9" class="form-control form-control-lg" value="09012345678" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4">
+                                                        <div class="form-outline form-white">
+                                                            <label class="form-label" for="form3Examplea9">FAX番号</label>
+                                                            <input readonly type="text" id="form3Examplea9" class="form-control form-control-lg"
+                                                                   value="0611112223" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4">
+                                                        <div class="form-outline form-white">
+                                                            <label class="form-label" for="form3Examplea9">メールアドレス</label>
+                                                            <input readonly type="text" id="form3Examplea9" class="form-control form-control-lg" value="aaaaabbbb@ggggg.cccc" />
+                                                        </div>
+                                                    </div>
+                                                    <hr class="navbar-divider mb-4 my-5 opacity-20">
+                                                    <div class="mb-4">
+                                                        <h5 class="pb-2">営業日</h5>
+                                                        <div class="form-outline form-white">
+                                                            <label class="form-label" for="form3Examplea9">営業時間</label>
+                                                            <input readonly type="text" id="form3Examplea9" class="form-control form-control-lg" value="9:00~18:00" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4">
+                                                        <div class="form-outline form-white">
+                                                            <label class="form-label" for="form3Examplea9">定休日</label>
+                                                            <input readonly type="text" id="form3Examplea9" class="form-control form-control-lg" value="土、日" />
+                                                        </div>
+                                                    </div>
+                                                    <hr class="navbar-divider mb-4 my-5 opacity-20">
+                                                    <div class="mb-4 pb-2 row">
+                                                        <h5 class="pb-2">口座情報</h5>
+                                                        <div class="col-5 form-outline form-white">
+                                                            <div class="dropdown w-100">
+                                                                <input readonly type="text" id="form3Examplea9" class="form-control form-control-lg" value="三菱UFJ銀行" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-7">
+                                                            <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg texc" autocomplete="off" value="天満支店(000)" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 pb-2 row">
+                                                        <div class="col-3 form-outline form-white">
+                                                            <div class="dropdown w-100">
+                                                                <input readonly type="text" id="form3Examplea9" class="form-control form-control-lg" value="当座" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-9">
+                                                            <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg" autocomplete="off" value="1000221" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4">
+                                                        <div class="form-outline form-white">
+                                                            <label class="form-label" for="form3Examplea9">名義人</label>
+                                                            <input readonly type="text" id="form3Examplea9" class="form-control form-control-lg" value="キャピタル不動産" />
+                                                        </div>
+                                                    </div>
+                                                    <hr class="navbar-divider mb-4 my-5 opacity-20">
+                                                    <div class="mb-4 pb-2 row">
+                                                        <h5 class="pb-2">免許</h5>
+                                                        <label class="form-label" for="form3Examplea2">宅建免許番号</label>
+                                                        <div class="col-4 form-outline form-white col-md-5">
+                                                            <div class="dropdown w-100">
+                                                                <input readonly type="text" id="form3Examplea3" class="form-control form-control-lg text-center" value="国土交通大臣免許" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-3 col-md-3">
+                                                            <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg text-center" autocomplete="off" value="99" />
+                                                        </div>
+                                                        <div class="col-5 col-md-4">
+                                                            <div class="d-inline-flex ">
+                                                                <span class="align-self-center pe-1 text-dark">第</span>
+                                                                <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg text-center" autocomplete="off" value="999999" />
+                                                                <span class="align-self-center ps-1 text-dark">号</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card stats -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">戻る</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-3">変更保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1" id="modal-3">
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">変更保存完了</h4>
+                                <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <section class="newsletter-subscribe">
+                                    <div class="container">
+                                        <div class="intro"></div>
+                                        <form class="d-flex justify-content-center flex-wrap mx-auto" method="post" style="text-align: center;">
+                                            <h1 class="cap-icon-h1"><i class="fa fa-check cap-icon-i"></i></h1>
+                                        </form>
+                                    </div>
+                                    <h4 class="text-center align-self-center pt-2">変更を保存しました。</h4>
+                                </section>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">閉じる</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        @Html.Partial("~/Views/Shared/_r_footer.cshtml")
+    </div>
+</div>

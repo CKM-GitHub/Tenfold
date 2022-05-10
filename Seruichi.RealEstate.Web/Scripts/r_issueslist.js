@@ -184,32 +184,33 @@ function Bind_tbody(result) {
                 _letter = data[i]["ステータス名"].charAt(0);
                 if (_letter == "新") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white";
-                    _sort_checkbox = "One";
+                    _sort_checkbox = "1";
                 }
                 else if (_letter == "交") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark";
-                    _sort_checkbox = "Two";
+                    _sort_checkbox = "2";
                 }
                 else if (_letter == "成") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary";
-                    _sort_checkbox = "Three";
+                    _sort_checkbox = "3";
                 }
                 else if (_letter == "売") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger";
-                    _sort_checkbox = "Four";
+                    _sort_checkbox = "4";
                 }
                 else if (_letter == "買") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-dark text-white";
-                    _sort_checkbox = "Five";
+                    _sort_checkbox = "5";
                 }
 
             }
             html += '<tr>\
-            <td class= "text-center"> ' + data[i]["NO"] + '</td>\
+            <td class= "text-end"> ' + data[i]["NO"] + '</td>\
             <td class="'+ _sort_checkbox + '"><span class="' + _class + '">' + _letter + '</span><span class="font-semibold"> ' + data[i]["ステータス名"] + '</span></td>\
+            <td>'+ _sort_checkbox + '</td>\
             <td>'+ data[i]["査定依頼ID"] + '</td>\
             <td>'+ data[i]["売主保持物件ID"] + '</td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["査定依頼ID"] + '&r_issueslist' + '  href="#" onclick="l_logfunction(this.id)">' + data[i]["物件名"] + ' ' + data[i]["部屋番号"] + '</a></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["査定依頼ID"] + '&r_issueslist' + '  href="#" onclick="l_logfunction(this.id)"><span>' + data[i]["物件名"] + '</span><span>' + data[i]["部屋番号"] + '</span></a></td>\
             <td>'+ data[i]["依頼売主CD"] + '</td>\
             <td>'+ data[i]["売主_カナ"] + '</td>\
             <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" data-bs-toggle="modal" data-bs-target="#SellerDetails" id='+ data[i]["依頼売主CD"] + ' href="#" onclick="Bind_SellerDetails_Popup(this)">' + data[i]["お客様名"] + '</a></td>\
@@ -217,8 +218,8 @@ function Bind_tbody(result) {
             <td>'+ data[i]["売主_固定電話番号"] + '</td>\
             <td>'+ data[i]["売主_携帯電話番号"] + '</td>\
             <td>'+ data[i]["売主_メールアドレス"] + '</td>\
-            <td class="text-nowrap text-center">'+ data[i]["買取依頼日時"] + '</td>\
-            <td class="text-nowrap text-center"> '+ data[i]["終了日時"] + '</td>\
+            <td class="text-nowrap">'+ data[i]["買取依頼日時"] + '</td>\
+            <td class="text-nowrap"> '+ data[i]["終了日時"] + '</td>\
             <td class="text-end text-nowrap"> '+ data[i]["査定価格"] + '</td>\
             <td>'+ data[i]["不動産担当者CD"] + '</td>\
             <td class="text-nowrap"> '+ data[i]["担当者名"] + '</td>\
@@ -264,12 +265,12 @@ function l_logfunction(id) {
 function Bind_SellerDetails_Popup(ctrl) {
     var r_index = ctrl.parentNode.parentNode.rowIndex - 1;
     var tr = $('#tblissueslist tbody tr')[r_index];
-    var kana_name = tr.querySelectorAll('td')[6].innerHTML;
-    var name = tr.querySelectorAll('td')[7].querySelectorAll('a')[0].innerHTML;
-    var address = tr.querySelectorAll('td')[8].innerHTML;
-    var landline_no = tr.querySelectorAll('td')[9].innerHTML;
-    var mobile_no = tr.querySelectorAll('td')[10].innerHTML;
-    var mail = tr.querySelectorAll('td')[11].innerHTML;
+    var kana_name = tr.querySelectorAll('td')[7].innerHTML;
+    var name = tr.querySelectorAll('td')[8].querySelectorAll('a')[0].innerHTML;
+    var address = tr.querySelectorAll('td')[9].innerHTML;
+    var landline_no = tr.querySelectorAll('td')[10].innerHTML;
+    var mobile_no = tr.querySelectorAll('td')[11].innerHTML;
+    var mail = tr.querySelectorAll('td')[12].innerHTML;
     $('#kana_name').text(kana_name);
     $('#name').text(name);
     $('#address').text(address);
@@ -282,6 +283,7 @@ function Bind_SellerDetails_Popup(ctrl) {
     }
     common.callAjaxWithLoading(_url.get_SellerDetails_Data, model, this, function (result) {
         if (result && result.isOK) {
+            $('#tblsellerdetails tbody').empty();
             Bind_Model_tbody(result.data);
         }
         if (result && !result.isOK) {
@@ -332,13 +334,13 @@ function Bind_Model_tbody(result) {
 
             }
             html += '<tr>\
-            <td class= "text-center"> ' + data[i]["NO"] + '</td>\
+            <td class= "text-end"> ' + data[i]["NO"] + '</td>\
             <td class="'+ _sort_checkbox + '"><span class="' + _class + '">' + _letter + '</span><span class="font-semibold"> ' + data[i]["ステータス名"] + '</span></td>\
             <td>'+ data[i]["査定依頼ID"] + '</td>\
             <td>'+ data[i]["売主保持物件ID"] + '</td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["査定依頼ID"] + '&r_issueslist' + '  href="#" onclick="l_logfunction(this.id)">' + data[i]["物件名"] + ' ' + data[i]["部屋番号"] + '</a></td>\
-            <td class="text-nowrap text-center">'+ data[i]["買取依頼日時"] + '</td>\
-            <td class="text-nowrap text-center"> '+ data[i]["終了日時"] + '</td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["査定依頼ID"] + '&r_issueslist' + '  href="#" onclick="l_logfunction(this.id)"><span>' + data[i]["物件名"] + '</span><span>' + data[i]["部屋番号"] + '</span></a></td>\
+            <td class="text-nowrap">'+ data[i]["買取依頼日時"] + '</td>\
+            <td class="text-nowrap"> '+ data[i]["終了日時"] + '</td>\
             <td class="text-end text-nowrap"> '+ data[i]["査定価格"] + '</td>\
             <td>'+ data[i]["不動産担当者CD"] + '</td>\
             <td class="text-nowrap"> '+ data[i]["担当者名"] + '</td>\

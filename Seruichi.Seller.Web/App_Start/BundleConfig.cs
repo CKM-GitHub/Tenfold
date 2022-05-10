@@ -116,8 +116,11 @@ namespace Seruichi.Seller.Web
                      "~/Scripts/a_mypage_plus.js"));
 
             //a_mypage_whis --
+
+            bundles.Add(new ScriptBundle("~/bundles/a_mypage_whis").Include(
+                    "~/Scripts/a_mypage_whis.js"));
             bundles.Add(new StyleBundle("~/Content/css/a_mypage_whis").Include(
-                  "~/Content/css/a_mypage_ahis.css",
+                        "~/Content/css/a_mypage_ahis.css",
                       "~/Content/css/font-awesome.min.css",
                       "~/Content/css/Soft-UI-Aside-Navbar.css",
                       "~/Content/css/style.css",
@@ -125,8 +128,7 @@ namespace Seruichi.Seller.Web
                       "~/Content/css/Ludens-Users---25-After-Register.css",
                       "~/Content/css/Sidebar.css"
                       ));
-            bundles.Add(new ScriptBundle("~/bundles/a_mypage_whis").Include(
-                    "~/Scripts/a_mypage_whis.js"));
+            
 
             //a_mypage_ahis ---------- 
             bundles.Add(new ScriptBundle("~/bundles/a_mypage_ahis").Include(

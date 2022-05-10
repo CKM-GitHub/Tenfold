@@ -597,7 +597,7 @@ function Bind_Popup_Detail(result) {
                 <div class="">\
                     <h6 class="align-self-center"><strong>部屋数</strong><br></h6>\
                             </div>\
-                    <div class=""><span class="align-self-start">'+ data[0]["FloorType"] + '部屋数<br></span></div>\
+                    <div class=""><span class="align-self-start">'+ data[0]["FloorType"] + '部屋<br></span></div>\
                     </div>\
                 </div>\
                 <div class="d-inline-flex pb-1">\

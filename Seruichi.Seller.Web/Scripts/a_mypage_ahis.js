@@ -11,7 +11,7 @@ $(function () {
     GetAssHistoryData(model, this)
     common.addPager('#GetAssHistory', 10); 
     $('#mypage_ahis').addClass('active');
-    e.PreventDefault();
+ 
 }); 
 function GetAssHistoryData(model, $form) {
     return common.callAjaxWithLoadingSync(_url.GetAssHistory, model, this, function (result) {

@@ -6,9 +6,10 @@
     }
     string messageJson = Newtonsoft.Json.JsonConvert.SerializeObject(Seruichi.Common.StaticCache.GetClientMessages());
 }
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
@@ -19,11 +20,13 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>セルイチ管理機能</title>
-
+   
     @Styles.Render("~/Content/css/application")
     @RenderSection("styles", required: false)
 </head>
+
 <body>
+
 
     <nav class="navbar navbar-expand-lg navbar-light bg-white px-0 py-3 border-bottom  fixed-top">
         <div class="container-fluid">
@@ -32,39 +35,58 @@
                 <h1>セルイチ</h1>
             </a>
             <!-- Navbar toggle -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- Collapse -->
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <!-- Nav -->
                 <div class="navbar-nav mx-lg-auto">
-                    <a class="nav-item nav-link text-underline-hover" id="r_dashboard" href="@Url.Action("Index", "r_dashboard")">ダッシュボード</a>
-                    <a class="nav-item nav-link text-underline-hover" id="r_issueslist" href="@Url.Action("Index", "r_issueslist")">案件一覧</a>
-                    <a class="nav-item nav-link text-underline-hover" href="#">査定条件</a>
-                    <a class="nav-item nav-link text-underline-hover" href="#">管理</a>
-                    <a class="nav-item nav-link text-underline-hover" id="r_com_profile" href="@Url.Action("Index", "r_com_profile")">設定</a>
-                </div>
-                <!-- Right navigation -->
-                <div class="navbar-nav ms-lg-4">
-                    <a class="nav-item nav-link" href="@Url.Action("Logout", "r_login")">ログアウト</a>
-                </div>
-                <!-- Action
+                    <a class="nav-item nav-link text-underline-hover" href="#" aria-current="page">ダッシュボード</a>
+                    <a class="nav-item nav-link text-underline-hover" href="#">査定依頼</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-underline-hover font-bold active text-underline" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            管理
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item shadow-hover text-underline-hover" href="#">不動産会社</a>
+                            <a class="dropdown-item shadow-hover text-underline-hover" href="#">売主</a>
+                            <a class="dropdown-item shadow-hover text-underline-hover" href="#">物件(部屋)</a>
+                            <a class="dropdown-item shadow-hover text-underline-hover font-bold text-underline" href="#">マンション</a>
+                            <a class="dropdown-item shadow-hover text-underline-hover" href="#">集計</a>
+                        </div>
+                    </li>
+                    <!-- Right navigation -->
+                    <div class="navbar-nav ms-lg-4">
+                        <a class="nav-item nav-link" href="#">ログアウト</a>
+                    </div>
+                    <!-- Action
                     <div class="d-flex align-items-lg-center mt-3 mt-lg-0">
                         <a href="#" class="btn btn-sm btn-primary w-full w-lg-auto">
 
                         </a>
                     </div>-->
+                </div>
+
             </div>
 
         </div>
     </nav>
-    @RenderBody()
 
+    @*@Html.Partial("~/Views/Shared/t_manion_list/_t_mansion_listLayout.cshtml")*@
+    @RenderBody()
+    <footer class="text-center text-lg-start mx-auto">
+        <!-- Copyright -->
+        <div class="text-center p-3">
+            © セルイチ 2022. All Rights Reserved.
+        </div>
+        <!-- Copyright -->
+    </footer>
     <script src="~/Content/bootstrap/bootstrap.min.js"></script>
+    <script src="~/Content/scripts/tree.js"></script>
+    <script src="~/Content/scripts/sidebar.js"></script>
     @Scripts.Render("~/Content/scripts/application")
-<script>
+    <script>
         $(function () {
             common.appPath = '@appPath';
             data = JSON.parse('@Html.Raw(messageJson)');
@@ -72,9 +94,8 @@
             {
                 messageConst[key] = data[key];
             }
-            $('#' + '@ViewBag.Title').addClass('text-underline active font-bold ');
         });
-</script>
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
