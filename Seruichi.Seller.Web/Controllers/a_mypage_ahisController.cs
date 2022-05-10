@@ -64,11 +64,12 @@ namespace Seruichi.Seller.Web.Controllers
             var result = dt.AsEnumerable().Where(myRow => myRow.Field<string>("SellerCD") == model.SellerCD).CopyToDataTable() ;
 
             CommonBL bl = new CommonBL();
-
+            a_mypage_uinfoBL bl1 = new a_mypage_uinfoBL();
+            a_mypage_uinfoModel model1 = bl1.GetSellerData(user.UserID);
             model.LoginKBN = 1;
             model.LoginID = base.GetOperator();
             model.RealECD = null;
-            model.LoginName = result.Rows[0]["SellerName"].ToStringOrNull(); ;
+            model.LoginName = model1.SellerName;///result.Rows[0]["SellerName"].ToStringOrNull(); ;
             model.IPAddress = base.GetClientIP();
             model.PageID = PageID;
             model.ProcessKBN = "link";
