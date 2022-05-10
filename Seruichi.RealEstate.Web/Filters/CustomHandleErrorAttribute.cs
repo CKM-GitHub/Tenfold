@@ -53,7 +53,7 @@ namespace Seruichi.RealEstate.Web
 
             filterContext.ExceptionHandled = true;
             filterContext.HttpContext.Response.Clear();
-            filterContext.HttpContext.Response.StatusCode = statusCode == 0 ? (int)HttpStatusCode.InternalServerError: statusCode;
+            filterContext.HttpContext.Response.StatusCode = statusCode == 0 ? (int)HttpStatusCode.InternalServerError : statusCode;
             filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
             filterContext.Result = new JsonResult
             {

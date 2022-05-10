@@ -24,7 +24,7 @@
     @RenderSection("styles", required: false)
 </head>
 <body>
-
+    <input type="hidden" id="_RequestVerificationToken" value="@SessionAuthenticationHelper.GetVerificationToken()" />
     <nav class="navbar navbar-expand-lg navbar-light bg-white px-0 py-3 border-bottom  fixed-top">
         <div class="container-fluid">
             <!-- Logo -->
@@ -64,7 +64,7 @@
 
     <script src="~/Content/bootstrap/bootstrap.min.js"></script>
     @Scripts.Render("~/Content/scripts/application")
-<script>
+    <script>
         $(function () {
             common.appPath = '@appPath';
             data = JSON.parse('@Html.Raw(messageJson)');
@@ -74,7 +74,7 @@
             }
             $('#' + '@ViewBag.Title').addClass('text-underline active font-bold ');
         });
-</script>
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

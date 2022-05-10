@@ -26,7 +26,8 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
         public ActionResult Logout()
         {
-            Session.Clear();
+            // Session.Clear();
+            SessionAuthenticationHelper.Logout();
             return RedirectToAction("Login", "t_login");
         }
         [HttpPost]
@@ -45,7 +46,7 @@ namespace Seruichi.Tenfold.Web.Controllers
             DataTable dt = bl.GetM_TenfoldStaff(model);
             if (dt.Rows.Count > 0)
             {
-                FormsAuthentication.SetAuthCookie(model.TenStaffCD, false);
+               // FormsAuthentication.SetAuthCookie(model.TenStaffCD, false);
                 SessionAuthenticationHelper.CreateLoginUser(model.TenStaffCD);
                 return OKResult();
             }

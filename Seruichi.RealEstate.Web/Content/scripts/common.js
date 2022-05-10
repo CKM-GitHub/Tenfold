@@ -164,19 +164,44 @@ const common = {
             }
         }).fail(function (XMLHttpRequest, status, e) {
             common.hideLoading(disableSelector);
-            //alert(XMLHttpRequest.status);
+            common.redirectErrorPage(XMLHttpRequest.status);
             if (failCallback) {
                 failCallback();
             }
         });
     },
-
-    callAjax: function callAjax(url, model, successCallback, failCallback) {
+    callAjaxWithLoadingSync: function callAjaxWithLoadingSync(url, model, disableSelector, successCallback, failCallback) {
+        common.showLoading(disableSelector);
         $.ajax({
             url: url,
             type: "POST",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
+            data: JSON.stringify(model),
+            headers: {
+                RequestVerificationToken: $("#_RequestVerificationToken").val(),
+            },
+            async: false,
+            timeout: 30000,
+        }).done(function (data) {
+            common.hideLoading(disableSelector);
+            if (successCallback) {
+                successCallback(data);
+            }
+        }).fail(function (XMLHttpRequest, status, e) {
+            common.hideLoading(disableSelector);
+            common.redirectErrorPage(XMLHttpRequest.status);
+            if (failCallback) {
+                failCallback();
+            }
+        });
+    },
+    callAjax: function callAjax(url, model, successCallback, failCallback) {
+        $.ajax({
+            url: url,
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            //dataType: "json",
             data: JSON.stringify(model),
             headers: {
                 RequestVerificationToken: $("#_RequestVerificationToken").val(),
@@ -188,13 +213,12 @@ const common = {
                 successCallback(data);
             }
         }).fail(function (XMLHttpRequest, status, e) {
-            //alert(XMLHttpRequest.status);
+            common.redirectErrorPage(XMLHttpRequest.status);
             if (failCallback) {
                 failCallback();
             }
         });
     },
-
     callSubmit: function callSubmit(form, action) {
         const input = document.createElement('input');
         input.setAttribute('type', 'hidden');
