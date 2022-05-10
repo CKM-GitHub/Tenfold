@@ -226,12 +226,14 @@ function Bind_tbody(result) {
             </tr>'
         }
 
-        $('#total_record').text("検索結果：" + data.length + "件");
-        $('#total_record_up').text("検索結果：" + data.length + "件");
+        $('#total_record').text("検索結果： " + data.length + "件");
+        $('#total_record_up').text("検索結果： " + data.length + "件");
+        $('#no_record').text("");
     }
     else {
         $('#total_record').text("検索結果： 0件");
-        $('#total_record_up').text("検索結果： 0件 表示可能データがありません");
+        $('#total_record_up').text("検索結果： 0件 ");
+        $('#no_record').text("表示可能データがありません");
     }
     $('#tblissueslist tbody').append(html);
 
@@ -313,46 +315,49 @@ function Bind_Model_tbody(result) {
                 _letter = data[i]["ステータス名"].charAt(0);
                 if (_letter == "新") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white";
-                    _sort_checkbox = "One";
+                    _sort_checkbox = "1";
                 }
                 else if (_letter == "交") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark";
-                    _sort_checkbox = "Two";
+                    _sort_checkbox = "2";
                 }
                 else if (_letter == "成") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary";
-                    _sort_checkbox = "Three";
+                    _sort_checkbox = "3";
                 }
                 else if (_letter == "売") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger";
-                    _sort_checkbox = "Four";
+                    _sort_checkbox = "4";
                 }
                 else if (_letter == "買") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-dark text-white";
-                    _sort_checkbox = "Five";
+                    _sort_checkbox = "5";
                 }
 
             }
             html += '<tr>\
             <td class= "text-end"> ' + data[i]["NO"] + '</td>\
             <td class="'+ _sort_checkbox + '"><span class="' + _class + '">' + _letter + '</span><span class="font-semibold"> ' + data[i]["ステータス名"] + '</span></td>\
-            <td>'+ data[i]["査定依頼ID"] + '</td>\
-            <td>'+ data[i]["売主保持物件ID"] + '</td>\
+            <td class="d-none">'+ _sort_checkbox + '</td>\
+            <td class="d-none">'+ data[i]["査定依頼ID"] + '</td>\
+            <td class="d-none">'+ data[i]["売主保持物件ID"] + '</td>\
             <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["査定依頼ID"] + '&r_issueslist' + '  href="#" onclick="l_logfunction(this.id)"><span>' + data[i]["物件名"] + '</span><span>' + data[i]["部屋番号"] + '</span></a></td>\
             <td class="text-nowrap">'+ data[i]["買取依頼日時"] + '</td>\
             <td class="text-nowrap"> '+ data[i]["終了日時"] + '</td>\
             <td class="text-end text-nowrap"> '+ data[i]["査定価格"] + '</td>\
-            <td>'+ data[i]["不動産担当者CD"] + '</td>\
+            <td class="d-none">'+ data[i]["不動産担当者CD"] + '</td>\
             <td class="text-nowrap"> '+ data[i]["担当者名"] + '</td>\
             </tr>'
         }
 
-        $('#mtotal_record').text("検索結果：" + data.length + "件");
-        $('#mtotal_record_up').text("検索結果：" + data.length + "件");
+        $('#mtotal_record').text("検索結果： " + data.length + "件");
+        $('#mtotal_record_up').text("検索結果： " + data.length + "件");
+        $('#mno_record').text("");
     }
     else {
-        $('#mtotal_record').text("検索結果： 0件 表示可能データがありません");
-        $('#mtotal_record_up').text("検索結果： 0件");
+        $('#mtotal_record').text("検索結果： 0件");
+        $('#mtotal_record_up').text("検索結果： 0件 ");
+        $('#mno_record').text("表示可能データがありません");
     }
     $('#tblsellerdetails tbody').append(html);
 
