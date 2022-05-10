@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Seruichi.Seller.Web.Controllers
 {
+    [IgnoreVerificationToken]
     [AllowAnonymous]
     public class a_loginController : BaseController
     {
@@ -14,12 +15,8 @@ namespace Seruichi.Seller.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            //if (HttpContext.User.Identity.IsAuthenticated)
-            //{
-            //    GotoTopPage();
-            //}
             Session.Clear();
-            SessionAuthenticationHelper.CreateAnonymousUser();
+            //SessionAuthenticationHelper.CreateAnonymousUser();
             return View();
         }
 
@@ -27,10 +24,6 @@ namespace Seruichi.Seller.Web.Controllers
         [HttpGet]
         public ActionResult Logout()
         {
-            //if (HttpContext.User.Identity.IsAuthenticated)
-            //{
-            //    FormsAuthentication.SignOut();
-            //}
             SessionAuthenticationHelper.Logout();
             return RedirectToAction("Index", "a_login");
         }
@@ -46,7 +39,7 @@ namespace Seruichi.Seller.Web.Controllers
                 ViewBag.ValidationResult = base.ConvertToJson(validationResult);
                 return View("Index");
             }
-            //FormsAuthentication.SetAuthCookie(user.UserID, false);
+
             SessionAuthenticationHelper.CreateLoginUser(user);
 
             bl.InsertLoginLog(user, base.GetClientIP());

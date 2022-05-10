@@ -8,15 +8,31 @@ namespace Seruichi.Seller.Web.Controllers
 {
     public class a_mypage_uinfoController : BaseController
     {
-        // GET: a_mypage_uinfo
+        // GET: CheckRedirect
         [AllowAnonymous]
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult CheckRedirect()
         {
             LoginUser user = SessionAuthenticationHelper.GetUserFromSession();
             if (!SessionAuthenticationHelper.ValidateUser(user))
             {
                 return RedirectToAction("Index", "a_login");
             }
+
+            //TempData["a_mypage_uinfo"] = "CheckRedirect";
+            return RedirectToAction("Index", "a_mypage_uinfo");
+        }
+
+        // GET: a_mypage_uinfo
+        [HttpGet]
+        public ActionResult Index()
+        {
+            //if (string.IsNullOrEmpty(TempData["a_mypage_uinfo"].ToStringOrEmpty()))
+            //{
+            //    return RedirectToAction("BadRequest", "Error");
+            //}
+
+            LoginUser user = SessionAuthenticationHelper.GetUserFromSession();
 
             a_mypage_uinfoBL bl = new a_mypage_uinfoBL();
             a_mypage_uinfoModel model = bl.GetSellerData(user.UserID);

@@ -147,8 +147,6 @@
     <Compile Include="Filters\CustomHandleErrorAttribute.cs" />
     <Compile Include="Filters\SessionAuthenticationAttribute.cs" />
     <Compile Include="Filters\SessionAuthenticationHelper.cs" />
-    <Compile Include="Filters\_ApiAuthorizeAttribute.cs" />
-    <Compile Include="Filters\_SessionFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

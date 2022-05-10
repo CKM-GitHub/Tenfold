@@ -163,9 +163,11 @@
     <Compile Include="Controllers\Common\BaseController.cs" />
     <Compile Include="Controllers\Common\BaseApiController.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
+    <Compile Include="Filters\ApiValidateVerificationTokenAttribute.cs" />
     <Compile Include="Filters\BrowsingHistoryAttribute.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
     <Compile Include="Filters\CustomHandleErrorAttribute.cs" />
+    <Compile Include="Filters\IgnoreVerificationToken.cs" />
     <Compile Include="Filters\SessionAuthenticationHelper.cs" />
     <Compile Include="Filters\SessionAuthenticationAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -281,8 +283,8 @@
     <Content Include="Views\a_mailregister\Index.cshtml" />
     <Content Include="Views\a_mypage_ahis\Index.cshtml" />
     <Content Include="Views\a_mypage_plus\Index.cshtml" />
-    <Content Include="Views\Shared\_loginLayout.cshtml" />
     <Content Include="Views\a_mypage_whis\Index.cshtml" />
+    <Content Include="Views\Shared\_VerificationToken.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
