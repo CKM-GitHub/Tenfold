@@ -666,16 +666,18 @@ function Bind_popup_contact(result) {
     let contact_first = "";
     let contact_second = "";
 
+
     let data = JSON.parse(result);
 
-    if (data[0]["InvalidFLG"] == "無効会員") {
-        _classFlag = "text-danger";
-    }
-    else {
-        _classFlag = "text-success";
-    }
-    
-    contact_first = '<div class="align-items-center col-12">\
+    if (data.length > 0) {
+        if (data[0]["InvalidFLG"] == "無効会員") {
+            _classFlag = "text-danger";
+        }
+        else {
+            _classFlag = "text-success";
+        }
+
+        contact_first = '<div class="align-items-center col-12">\
             <div class="p-md-2 p-1" id = "info">\
                 <div class="text-muted"><span class='+ _classFlag + '>' + data[0]["InvalidFLG"] + '</span></div>\
                 <div class="text-muted">'+ data[0]["SellerKana"] + '</div>\
@@ -688,7 +690,7 @@ function Bind_popup_contact(result) {
                     </div>\
                 </div>'
 
-    contact_second = '<div class="d-flex flex-column col-12" id="info">\
+        contact_second = '<div class="d-flex flex-column col-12" id="info">\
             <div class="p-md-1 text-muted cap-fon-form-w500 ">\
                 <span class="fa fa-home bg-light p-1 rounded-circle"></span>'+ data[0]["Address"] + '\
                     </div>\
@@ -703,10 +705,10 @@ function Bind_popup_contact(result) {
                     </div>\
                 </div>'
 
-    $('#_header_mantion_info_contact').append(_header_mantion_info);
-    $('#contact-first').append(contact_first);
-    $('#contact-second').append(contact_second);
-    
+        $('#_header_mantion_info_contact').append(_header_mantion_info);
+        $('#contact-first').append(contact_first);
+        $('#contact-second').append(contact_second);
+    }
 }
 
 function sort_table_columns(index, col_type, multiplier) {

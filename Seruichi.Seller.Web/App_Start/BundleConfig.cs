@@ -132,7 +132,10 @@ namespace Seruichi.Seller.Web
 
             //a_mypage_ahis ---------- 
             bundles.Add(new ScriptBundle("~/bundles/a_mypage_ahis").Include(
-             "~/Scripts/a_mypage_ahis.js"));
+             "~/Scripts/a_mypage_ahis.js",
+             "~/Content/scripts/table_header_sort.js" 
+             ));
+
             bundles.Add(new StyleBundle("~/Content/css/a_mypage_ahis").Include(
                         "~/Content/css/a_mypage_ahis.css",
                         //"~/Content/css/a_mypage_ahis_1.css",

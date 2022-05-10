@@ -38,7 +38,7 @@ function Bind_tbody(result) {
             var param = "'"+data[i]["AssReqID"] + "','" + data[i]["MansionName"]+"'";
             html +=  
             '<tr>\
-            <td class= "text-truncate text-center" > ' + data[i]["No"] + '</td>\
+            <td class= "text-truncate text-center"  > ' + data[i]["No"] + '</td>\
             <td class="text-truncate text-center" style="width:200px"> ' + data[i]["ID"] + ' </td >\
             <td class="text-truncate text-center" style="width:200px"> ' + data[i]["Status"] + ' </td>\
             <td class="text-start" style="width:500px">\
@@ -50,10 +50,12 @@ function Bind_tbody(result) {
             <td class="text-start text-nowrap"> ' + data[i]["REName"] + ' </td>\
             <td class="text-nowrap text-end" style="width:200px"> ' + data[i]["AssessAmount"] + ' </td>\
             <td class="text-nowrap" style="width:200px"> ' + data[i]["DeepAssDateTime"] + ' </td>\
+            <td style="display:none">'+ data[i]["IDT"]+'</td>\
             </tr>'
         }
     }
     $('#GetAssHistory tbody').append(html);   
+    sortTable.getSortingTable("GetAssHistory");
 }
 function a123() {
     
