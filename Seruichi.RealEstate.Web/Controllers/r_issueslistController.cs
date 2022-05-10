@@ -77,6 +77,7 @@ namespace Seruichi.RealEstate.Web.Controllers
         public ActionResult get_SellerDetails_Data(r_issueslistModel model)
         {
             r_issueslistBL bl = new r_issueslistBL();
+            model.RealECD = base.GetOperator("RealECD");
             var dt = bl.get_SellerDetails_Data(model);
             return OKResult(DataTableToJSON(dt));
         }

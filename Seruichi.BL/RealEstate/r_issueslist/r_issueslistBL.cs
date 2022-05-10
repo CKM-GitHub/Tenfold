@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using Seruichi.Common;
 using Models.RealEstate.r_issueslist;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Models;
 using System.Linq;
 
@@ -47,6 +48,38 @@ namespace Seruichi.BL.RealEstate.r_issueslist
 
             DBAccess db = new DBAccess();
             var dt = db.SelectDatatable("pr_r_issueslist_getDisplayData", sqlParams);
+
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+            var e = dt.AsEnumerable();
+            Parallel.ForEach(e, item =>
+            {
+                item["売主_カナ"] = crypt.DecryptFromBase64(item.Field<string>("売主_カナ"), decryptionKey);
+            });
+            Parallel.ForEach(e, item =>
+            {
+                item["お客様名"] = crypt.DecryptFromBase64(item.Field<string>("お客様名"), decryptionKey);
+            });
+            Parallel.ForEach(e, item =>
+            {
+                item["売主_住所３"] = crypt.DecryptFromBase64(item.Field<string>("売主_住所３"), decryptionKey);
+            });
+            Parallel.ForEach(e, item =>
+            {
+                item["売主_住所４"] = crypt.DecryptFromBase64(item.Field<string>("売主_住所４"), decryptionKey);
+            });
+            Parallel.ForEach(e, item =>
+            {
+                item["売主_住所５"] = crypt.DecryptFromBase64(item.Field<string>("売主_住所５"), decryptionKey);
+            });
+            Parallel.ForEach(e, item =>
+            {
+                item["売主_固定電話番号"] = crypt.DecryptFromBase64(item.Field<string>("売主_固定電話番号"), decryptionKey);
+            });
+            Parallel.ForEach(e, item =>
+            {
+                item["売主_携帯電話番号"] = crypt.DecryptFromBase64(item.Field<string>("売主_携帯電話番号"), decryptionKey);
+            });
             return dt;
         }
 
@@ -87,6 +120,38 @@ namespace Seruichi.BL.RealEstate.r_issueslist
 
             DBAccess db = new DBAccess();
             var dt = db.SelectDatatable("pr_r_issueslist_getCSVData", sqlParams);
+
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+            var e = dt.AsEnumerable();
+            Parallel.ForEach(e, item =>
+            {
+                item["売主_カナ"] = crypt.DecryptFromBase64(item.Field<string>("売主_カナ"), decryptionKey);
+            });
+            Parallel.ForEach(e, item =>
+            {
+                item["お客様名"] = crypt.DecryptFromBase64(item.Field<string>("お客様名"), decryptionKey);
+            });
+            Parallel.ForEach(e, item =>
+            {
+                item["売主_住所３"] = crypt.DecryptFromBase64(item.Field<string>("売主_住所３"), decryptionKey);
+            });
+            Parallel.ForEach(e, item =>
+            {
+                item["売主_住所４"] = crypt.DecryptFromBase64(item.Field<string>("売主_住所４"), decryptionKey);
+            });
+            Parallel.ForEach(e, item =>
+            {
+                item["売主_住所５"] = crypt.DecryptFromBase64(item.Field<string>("売主_住所５"), decryptionKey);
+            });
+            Parallel.ForEach(e, item =>
+            {
+                item["売主_固定電話番号"] = crypt.DecryptFromBase64(item.Field<string>("売主_固定電話番号"), decryptionKey);
+            });
+            Parallel.ForEach(e, item =>
+            {
+                item["売主_携帯電話番号"] = crypt.DecryptFromBase64(item.Field<string>("売主_携帯電話番号"), decryptionKey);
+            });
             return dt;
         }
 
@@ -94,6 +159,7 @@ namespace Seruichi.BL.RealEstate.r_issueslist
         {
             var sqlParams = new SqlParameter[]
             {
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToString() },
                 new SqlParameter("@SellerID", SqlDbType.VarChar){ Value = model.SellerID.ToStringOrNull() }
             };
 
