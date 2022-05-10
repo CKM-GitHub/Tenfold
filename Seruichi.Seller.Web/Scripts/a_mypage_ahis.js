@@ -10,8 +10,11 @@ $(function () {
     
     GetAssHistoryData(model, this)
     common.addPager('#GetAssHistory', 10); 
-    $('#mypage_ahis').addClass('active');
- 
+    $('#mypage_ahis').addClass('active');  
+    if ($('#pager').children('li').eq(1))
+        $('#pager').children('li').eq(1).addClass('active');
+
+    //class="active"
 }); 
 function GetAssHistoryData(model, $form) {
     return common.callAjaxWithLoadingSync(_url.GetAssHistory, model, this, function (result) {
@@ -50,7 +53,8 @@ function Bind_tbody(result) {
             <td class="text-start text-nowrap"> ' + data[i]["REName"] + ' </td>\
             <td class="text-nowrap text-end" style="width:200px"> ' + data[i]["AssessAmount"] + ' </td>\
             <td class="text-nowrap" style="width:200px"> ' + data[i]["DeepAssDateTime"] + ' </td>\
-            <td style="display:none">'+ data[i]["IDT"]+'</td>\
+            <td  style="display:none">'+ data[i]["IDT"] +'</td>\
+            <td  style="display:none">'+ data[i]["StatusIndex"] + '</td>\
             </tr>'
         }
     }

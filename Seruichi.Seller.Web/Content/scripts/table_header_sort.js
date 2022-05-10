@@ -5,10 +5,7 @@
         const table = document.getElementById(selector);
         const headers = table.querySelectorAll('th');
         const tableBody = table.querySelector('tbody');
-        const rows = tableBody.querySelectorAll('tr');
-
-        const left_right_headers = table.querySelectorAll('th left_sort-by');
-
+        const rows = tableBody.querySelectorAll('tr'); 
         // Track sort directions
         const directions = Array.from(headers).map(function (header) {
             return '';
@@ -28,6 +25,7 @@
         };
 
         const sortColumn = function (index) {
+           // debugger;
             var col_index = [];
             if (headers[index].hasAttribute('ordercol-index'))
                 col_index = headers[index].getAttribute('ordercol-index').split('_');
@@ -140,6 +138,8 @@
             header.addEventListener('click', function () {
                 if ($(this).hasClass('sort-by')) {
                     sortColumn(index);
+                    if($('#pager').children('li').eq(1)) 
+                    $('#pager').children('li').eq(1).click();
                 }
             });
         });
