@@ -59,5 +59,19 @@ namespace Seruichi.RealEstate.Web
             }
             return true;
         }
+
+        public static bool Logout()
+        {
+            HttpContext.Current.Session.Clear();
+            return true;
+        }
+
+        public static bool ChangeToAnonymousUser()
+        {
+            var user = GetUserFromSession();
+            user.UserID = "unknown";
+            user.UserName = "";
+            return true;
+        }
     }
 }
