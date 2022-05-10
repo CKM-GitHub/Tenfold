@@ -58,7 +58,7 @@
 
                 switch (count) {
                     case 1: if (multiplier == 1) return a.localeCompare(b, "ja-JP");
-                    else return b.localeCompare(a, "ja-JP");
+                        else return b.localeCompare(a, "ja-JP");
 
                     case 2: var index2 = col_index[1];
                         if (rowA.querySelectorAll('td')[index2].querySelectorAll('a').length > 0) {
@@ -126,7 +126,7 @@
             });
 
             // Reverse the direction
-            directions[index] = direction === 'asc' ? 'desc' : 'asc';
+            directions[col_index[0]] = direction === 'asc' ? 'desc' : 'asc';
 
             // Append new row
             newRows.forEach(function (newRow) {

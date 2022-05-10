@@ -284,6 +284,7 @@ function Bind_tbody(result) {
             <td> ' + data[i]["買取依頼日時"] + ' </td>\
             <td class="text-end"> '+ data[i]["登録数"] + ' </td>\
             <td class="text-end"> '+ data[i]["成約数"] + ' </td>\
+            <td class="text-end d-none"> '+ data[i]["SellerKana"] + ' </td>\
             </tr>'
     }
     
