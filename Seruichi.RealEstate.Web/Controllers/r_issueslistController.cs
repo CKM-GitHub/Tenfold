@@ -56,7 +56,7 @@ namespace Seruichi.RealEstate.Web.Controllers
             model.LoginKBN = 2;
             model.LoginID = base.GetOperator("UserID");
             model.RealECD = base.GetOperator("RealECD");
-            model.LoginName = bl.GetTenstaffNamebyTenstaffcd(model.LoginID);
+            model.LoginName = base.GetOperator("UserName");
             model.IPAddress = base.GetClientIP();
             model.PageID = model.PageID;
             model.ProcessKBN = "link";
