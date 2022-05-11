@@ -244,6 +244,7 @@
     <Content Include="Views\Error\InternalServerError.cshtml" />
     <Content Include="Views\t_mansion_list\Index.cshtml" />
     <Content Include="Views\Shared\t_mansion_list\_t_mansion_listMainLayout.cshtml" />
+    <Content Include="Views\Shared\_ErrorLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
