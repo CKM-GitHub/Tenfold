@@ -73,16 +73,16 @@ function addEvents() {
         };
 
         if (model.StartUnit && model.EndUnit) {
-            if (model.StartUnit < model.EndUnit) {
-                $("#StartUnit").hideError();
-                $("#EndUnit").hideError();
-                $("#EndUnit").focus();
-                return;
-            }
-            else {
+            if (model.StartUnit > model.EndUnit) {
                 $("#StartUnit").showError(common.getMessage('E113'));
                 //$("#EndUnit").showError(this.getMessage('E113'));
                 $("#StartUnit").focus();
+                return;
+            }
+            else {
+                $("#StartUnit").hideError();
+                $("#EndUnit").hideError();
+                $("#EndUnit").focus();
                 return;
             }
 
