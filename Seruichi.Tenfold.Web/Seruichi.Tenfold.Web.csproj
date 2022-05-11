@@ -196,6 +196,7 @@
     <Content Include="Content\fonts\ionicons.woff" />
     <Content Include="Scripts\t_dashboard.js" />
     <Content Include="Scripts\t_login.js" />
+    <Content Include="Scripts\t_mansion_list.js" />
     <Content Include="Scripts\t_seller_assessment.js" />
     <Content Include="Scripts\t_seller_list.js" />
     <Content Include="Scripts\t_seller_mansion.js" />

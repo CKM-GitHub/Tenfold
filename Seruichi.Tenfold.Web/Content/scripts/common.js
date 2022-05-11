@@ -316,6 +316,7 @@ const common = {
         const isDateCompare = $ctrl.attr("data-validation-datecompare");
         const isOneByteCharacter = $ctrl.attr("data-validation-onebyte-character");
         const ischeckboxLenght = $ctrl.attr("data-validation-checkboxlenght");
+        const isNumCompare = $ctrl.attr("data_validation_numcompare");
         
 
         let inputValue = "";
@@ -508,6 +509,19 @@ const common = {
                 }
                 //else {                //    $("#StartDate").hideError(this.getMessage('E111'));                //    $("#EndDate").hideError(this.getMessage('E111'));                //    //$("#EndDate").focus();                //    return;                //}
             }
+
+            if (isNumCompare) {
+                if ($("#StartNum").val() != "" && $("#EndNum").val() != "") {
+                    if (!common.compareNum($("#StartNum").val(), $("#EndNum").val())) {
+                        $("#StartNum").showError(this.getMessage('E113'));
+                        //$("#EndNum").showError(this.getMessage('E113'));
+                        $("#StartNum").focus();
+                        return;
+                    }
+                }
+               
+            }
+
             if (ischeckboxLenght) {                
                 if (!common.checkboxlengthCheck($ctrl.attr('class'))) {
                     $ctrl.showError(this.getMessage('E112'));
@@ -541,6 +555,16 @@ const common = {
         const date2 = new Date(d2);
         let success = true;
         if (date1 > date2) {
+            success = false;
+        }
+        return success;
+    },
+
+    compareNum: function compareTwoNum(n1, n2) {
+        const num1 = n1;
+        const num2 = n2;
+        let success = true;
+        if (num1 > num2) {
             success = false;
         }
         return success;
