@@ -23,50 +23,8 @@
 
 </head>
 <body>
-    <input type="hidden" id="_RequestVerificationToken" value="@SessionAuthenticationHelper.GetVerificationToken()" />
-    <nav class="navbar navbar-expand-lg navbar-light bg-white px-0 py-3 border-bottom fixed-top">
-        <div class="container-fluid">
-            <!-- Logo -->
-            <a class="navbar-brand" href="#">
-                <h1>セルイチ</h1>
-            </a>
-            <!-- Navbar toggle -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!-- Collapse -->
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <!-- Nav -->
-                <div class="navbar-nav mx-lg-auto">
-                    <a class="nav-item nav-link text-underline-hover" href="@Url.Action("Index", "t_dashboard")">ダッシュボード</a>
-                    <a class="nav-item nav-link text-underline-hover" href="#">査定依頼</a>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-underline-hover" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            管理
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item shadow-hover text-underline-hover" href="#">不動産会社</a>
-                            <a class="dropdown-item shadow-hover text-underline-hover" href="@Url.Action("Index", "t_seller_list")">売主</a>
-                            <a class="dropdown-item shadow-hover text-underline-hover" href="@Url.Action("Index", "t_seller_mansion")">物件(部屋)</a>
-                            <a class="dropdown-item shadow-hover text-underline-hover" href="#">マンション</a>
-                            <a class="dropdown-item shadow-hover text-underline-hover" href="#">集計</a>
-                        </div>
-                    </li>
-                    <a class="nav-item nav-link text-underline-hover" href="#">プラン設定</a>
-                </div>
-                <!-- Right navigation -->
-                <div class="navbar-nav ms-lg-4">
-                    <a class="nav-item nav-link" href="@Url.Action("Logout", "t_login")">ログアウト</a>
-                </div>
-                <!-- Action
-            <div class="d-flex align-items-lg-center mt-3 mt-lg-0">
-                <a href="#" class="btn btn-sm btn-primary w-full w-lg-auto">
-
-                </a>
-            </div>-->
-            </div>
-        </div>
-    </nav>
+    
+    @Html.Partial("_t_header")
 
     @RenderBody()
 
