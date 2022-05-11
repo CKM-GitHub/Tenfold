@@ -1,0 +1,74 @@
+﻿@{
+    string appPath = System.Web.Hosting.HostingEnvironment.ApplicationVirtualPath;
+    if (appPath == "/")
+    {
+        appPath = "";
+    }
+}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js"
+            integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <title>セルイチ管理機能</title>
+    @Styles.Render("~/Content/css/error")
+    @RenderSection("styles", required: false)
+
+</head>
+<body>
+    <input type="hidden" id="_RequestVerificationToken" value="@SessionAuthenticationHelper.GetVerificationToken()" />
+    <nav class="navbar navbar-expand-lg navbar-light bg-white px-0 py-3 border-bottom fixed-top">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#">
+                <h1>セルイチ</h1>
+            </a>
+            <!-- Navbar toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <!-- Nav -->
+                <div class="navbar-nav mx-lg-auto">
+                    <a class="nav-item nav-link text-underline-hover" href="@Url.Action("Index", "r_dashboard")">ダッシュボード</a>
+                    <a class="nav-item nav-link text-underline-hover" href="@Url.Action("Index", "r_issueslist")">案件一覧</a>
+                    <a class="nav-item nav-link text-underline-hover" href="#">査定条件</a>
+                    <a class="nav-item nav-link text-underline-hover" href="#">管理</a>
+                    <a class="nav-item nav-link text-underline-hover" href="@Url.Action("Index", "r_com_profile")">設定</a>
+                </div>
+                <!-- Right navigation -->
+                <div class="navbar-nav ms-lg-4">
+                    <a class="nav-item nav-link" href="@Url.Action("Logout", "r_login")">ログアウト</a>
+                </div>
+                <!-- Action
+                <div class="d-flex align-items-lg-center mt-3 mt-lg-0">
+                    <a href="#" class="btn btn-sm btn-primary w-full w-lg-auto">
+
+                    </a>
+                </div>-->
+            </div>
+        </div>
+    </nav>
+
+    @RenderBody()
+
+
+    @Scripts.Render("~/Content/scripts/application")
+    <script src="~/Content/bootstrap/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            common.appPath = '@appPath';
+        });
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

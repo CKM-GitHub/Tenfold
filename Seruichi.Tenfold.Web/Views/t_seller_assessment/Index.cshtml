@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Views/Shared/t_seller_assessment/_t_seller_assessmentLayout.cshtml";
+    Layout = "~/Views/Shared/_t_menuLayout.cshtml";
 }
 @section styles{
     @Styles.Render("~/Content/tenfold_css_common")
@@ -7,386 +7,320 @@
 
 @{
     var lst = ViewBag.SellerModel;
-
 }
-<main class="py-6 bg-surface-secondary">
-    <div class="container-fluid">
-        <!-- Card stats -->
-        <div class="row g-6 mb-6">
-            <div class="col-12">
-                <div class="card shadow border-0">
-                    <div class="card-body ">
-                        <div class="justify-content-around align-items-center row">
-                            <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
 
-                                <div class="border-end"><a type="button" href="@ViewBag.Url" class="btn btn-secondary me-2">戻る</a></div><h1 class="ps-2 h2 mb-0 ls-tight">売主</h1>
-                                <span class="ps-2 text-muted small align-self-end">管理</span>
-                            </div>
-                            <hr class="navbar-divider my-5 opacity-20">
-                            <div class="align-items-center col-sm-6 col-lg-2  p-0 m-0 border-end">
-                                <div class="p-md-2 p-1" id="info">
-                                    @if (lst.InvalidFLG == "無効会員")
-                                    {
-                                        <div class="text-muted"><span class="text-danger">@lst.InvalidFLG</span></div>
-                                    }
-                                    else
-                                    {
-                                        <div class="text-muted"><span class="text-success">@lst.InvalidFLG</span></div>
-                                    }
-                                    <div class="text-muted">@lst.SellerKana</div>
-                                    <div class="text-muted">
-                                        <h2>@lst.SellerName</h2>
-                                    </div>
-                                    <div class="p-md-1 text-muted">
-                                        <span class="fa fa-id-card bg-light p-1 rounded-circle"></span>
-                                        @lst.SellerCD
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column col-sm-6 col-lg-4  p-0 m-0" id="info">
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18" id="wrapper">
+    @Html.Partial("_t_seller_assessment_menuPartial")
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
 
-                                <div class="p-md-1 text-muted cap-fon-form-w500 ">
-                                    <span class="fa fa-home bg-light p-1 rounded-circle"></span>
-                                    @lst.Address
-                                </div>
-                                <div class="p-md-1 pt-sm-1 text-muted">
-                                    <span class="fa fa-phone bg-light p-1 rounded-circle"></span>
-                                    @lst.Phone
-                                </div>
-                                <div class="p-md-1 pt-sm-1 text-muted">
-                                    <span class="fa fa-mobile bg-light p-1 ps-2 pe-2 rounded-circle"></span>
-                                    @lst.Mobile_Phone
-                                </div>
-                                <div class="p-md-1 text-muted">
-                                    <span class="fa fa-envelope-o bg-light p-1 rounded-circle"></span>
-                                    @lst.MailAddress
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column col-sm-6 col-lg-2 p-0 m-0" id="info">
-                                <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                    <div class="col"><span class="fa fa-money bg-light p-1 rounded-circle"></span><span class="text-nowrap">今月課金</span></div>
-                                    <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.BillingAmt 円</span></div>
-                                </div>
-                                <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                    <div class="col">
-                                        <span class="fa fa-calculator bg-light p-1 rounded-circle"></span><span class="text-nowrap">査定数</span>
-                                    </div>
-                                    <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.Assessment_constant 件</span></div>
-                                </div>
-                                <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                    <div class="col">
-                                        <span class="fa fa-thumbs-o-up bg-light p-1 rounded-circle"></span><span class="text-nowrap">成約数</span>
-                                    </div>
-                                    <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.Num_contracts 件</span></div>
-                                </div>
-                                <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                    <div class="col">
-                                        <span class="fa fa-thumbs-o-down bg-light p-1 rounded-circle"></span><span class="text-nowrap">売主辞退数</span>
-                                    </div>
-                                    <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.Num_seller_declines 件</span></div>
-                                </div>
-                                <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                    <div class="col">
-                                        <span class="fa fa-thumbs-o-down bg-light p-1 rounded-circle"></span><span class="text-nowrap">買主辞退数</span>
-                                    </div>
-                                    <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.Num_buyer_declines 件</span></div>
-                                </div>
-                            </div>
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                <!-- Card stats -->
+                <div class="row g-6 mb-6">
+                    <div class="col-12">
+                        <div class="card shadow border-0">
+                            <div class="card-body ">
+                                <div class="justify-content-around align-items-center row">
+                                    <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
 
-
-
-                            <div class="d-flex flex-column col-sm-6 col-lg-2 p-0 m-0" id="info">
-                                <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                    <div class="col">
-                                        <span class="fa fa-calendar bg-light p-1 rounded-circle"></span>会員登録日</span>
+                                        <div class="border-end"><a type="button" href="@ViewBag.Url" class="btn btn-secondary me-2">戻る</a></div><h1 class="ps-2 h2 mb-0 ls-tight">売主</h1>
+                                        <span class="ps-2 text-muted small align-self-end">管理</span>
                                     </div>
-                                    <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.InsertDateTime</span></div>
-                                </div>
-                                @*<div class="p-md-1 text-muted w-100 row text-nowrap">
-                                        <div class="col">
-                                            <span class="fa fa-calendar  bg-light p-1 rounded-circle"></span>SMS認証日</span>
+                                    <hr class="navbar-divider my-5 opacity-20">
+                                    <div class="align-items-center col-sm-6 col-lg-2  p-0 m-0 border-end">
+                                        <div class="p-md-2 p-1" id="info">
+                                            @if (lst.InvalidFLG == "無効会員")
+                                            {
+                                                <div class="text-muted"><span class="text-danger">@lst.InvalidFLG</span></div>
+                                            }
+                                            else
+                                            {
+                                                <div class="text-muted"><span class="text-success">@lst.InvalidFLG</span></div>
+                                            }
+                                            <div class="text-muted">@lst.SellerKana</div>
+                                            <div class="text-muted">
+                                                <h2>@lst.SellerName</h2>
+                                            </div>
+                                            <div class="p-md-1 text-muted">
+                                                <span class="fa fa-id-card bg-light p-1 rounded-circle"></span>
+                                                @lst.SellerCD
+                                            </div>
                                         </div>
-                                        <div class="col text-end"><span class="dark text-dark text-nowrap">2020/12/15</span></div>
-                                    </div>*@
-                                <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                    <div class="col">
-                                        <span class="fa fa-calendar  bg-light p-1 rounded-circle"></span>詳細査定日</span>
                                     </div>
-                                    <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.DeepAssDateTime</span></div>
-                                </div>
-                                <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                    <div class="col">
-                                        <span class="fa fa-calendar  bg-light p-1 rounded-circle"></span>買取依頼日</span>
+                                    <div class="d-flex flex-column col-sm-6 col-lg-4  p-0 m-0" id="info">
+
+                                        <div class="p-md-1 text-muted cap-fon-form-w500 ">
+                                            <span class="fa fa-home bg-light p-1 rounded-circle"></span>
+                                            @lst.Address
+                                        </div>
+                                        <div class="p-md-1 pt-sm-1 text-muted">
+                                            <span class="fa fa-phone bg-light p-1 rounded-circle"></span>
+                                            @lst.Phone
+                                        </div>
+                                        <div class="p-md-1 pt-sm-1 text-muted">
+                                            <span class="fa fa-mobile bg-light p-1 ps-2 pe-2 rounded-circle"></span>
+                                            @lst.Mobile_Phone
+                                        </div>
+                                        <div class="p-md-1 text-muted">
+                                            <span class="fa fa-envelope-o bg-light p-1 rounded-circle"></span>
+                                            @lst.MailAddress
+                                        </div>
                                     </div>
-                                    <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.PurchReqDateTime</span></div>
-                                </div>
-                                <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                    <div class="col">
-                                        <span class="fa fa-calendar  bg-light p-1 rounded-circle"></span>最終ログイン日</span>
+                                    <div class="d-flex flex-column col-sm-6 col-lg-2 p-0 m-0" id="info">
+                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                                            <div class="col"><span class="fa fa-money bg-light p-1 rounded-circle"></span><span class="text-nowrap">今月課金</span></div>
+                                            <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.BillingAmt 円</span></div>
+                                        </div>
+                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                                            <div class="col">
+                                                <span class="fa fa-calculator bg-light p-1 rounded-circle"></span><span class="text-nowrap">査定数</span>
+                                            </div>
+                                            <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.Assessment_constant 件</span></div>
+                                        </div>
+                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                                            <div class="col">
+                                                <span class="fa fa-thumbs-o-up bg-light p-1 rounded-circle"></span><span class="text-nowrap">成約数</span>
+                                            </div>
+                                            <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.Num_contracts 件</span></div>
+                                        </div>
+                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                                            <div class="col">
+                                                <span class="fa fa-thumbs-o-down bg-light p-1 rounded-circle"></span><span class="text-nowrap">売主辞退数</span>
+                                            </div>
+                                            <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.Num_seller_declines 件</span></div>
+                                        </div>
+                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                                            <div class="col">
+                                                <span class="fa fa-thumbs-o-down bg-light p-1 rounded-circle"></span><span class="text-nowrap">買主辞退数</span>
+                                            </div>
+                                            <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.Num_buyer_declines 件</span></div>
+                                        </div>
                                     </div>
-                                    <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.LoginDateTime</span></div>
-                                </div>
 
 
 
+                                    <div class="d-flex flex-column col-sm-6 col-lg-2 p-0 m-0" id="info">
+                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                                            <div class="col">
+                                                <span class="fa fa-calendar bg-light p-1 rounded-circle"></span>会員登録日</span>
+                                            </div>
+                                            <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.InsertDateTime</span></div>
+                                        </div>
+                                        @*<div class="p-md-1 text-muted w-100 row text-nowrap">
+                                            <div class="col">
+                                                <span class="fa fa-calendar  bg-light p-1 rounded-circle"></span>SMS認証日</span>
+                                            </div>
+                                            <div class="col text-end"><span class="dark text-dark text-nowrap">2020/12/15</span></div>
+                                        </div>*@
+                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                                            <div class="col">
+                                                <span class="fa fa-calendar  bg-light p-1 rounded-circle"></span>詳細査定日</span>
+                                            </div>
+                                            <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.DeepAssDateTime</span></div>
+                                        </div>
+                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                                            <div class="col">
+                                                <span class="fa fa-calendar  bg-light p-1 rounded-circle"></span>買取依頼日</span>
+                                            </div>
+                                            <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.PurchReqDateTime</span></div>
+                                        </div>
+                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                                            <div class="col">
+                                                <span class="fa fa-calendar  bg-light p-1 rounded-circle"></span>最終ログイン日</span>
+                                            </div>
+                                            <div class="col text-end"><span class="dark text-dark text-nowrap">@lst.LoginDateTime</span></div>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- Card stats -->
-        <div class="card shadow border-0 mb-7">
-            <div class="card-header pt-2 pb-2 ps-4 pe-4">
-                <ul class="nav nav-tabs overflow-x border-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">査定管理</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">情報管理</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">課⾦履歴</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">アカウントフラグ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">メモ</a>
-                    </li>
-                </ul>
-            </div>
+                <!-- Card stats -->
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header pt-2 pb-2 ps-4 pe-4">
+                        <ul class="nav nav-tabs overflow-x border-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">査定管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">情報管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">課⾦履歴</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">アカウントフラグ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">メモ</a>
+                            </li>
+                        </ul>
+                    </div>
 
-            <div class="card-header d-md-inline-flex">
-                <h5 class="mb-0">査定管理</h5> <span class="ps-md-5 text-muted text-sm" id="total_record_up"></span>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-hover table-nowrap sortMe" id="mansiontable">
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col" class="text-end text-decoration-underline sort-by" style="width: 50px" data-type="number">No.</th>
-                            <th scope="col" style="width: 150px" class="text-decoration-underline sort-status-t-seller-assessment">ステータス</th>
-                            <th scope="col" style="width: auto" class="text-decoration-underline sort-by">物件（マンション、部屋番号）</th>
-                            <th scope="col" style="width: 200px" class="text-decoration-underline sort-mix-td-and-a">不動産会社</th>
-                            <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">登録日時</th>
-                            <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">簡易査定日時</th>
-                            <th scope="col" style="width: 180px" class="text-decoration-underline sort-mix-td-and-a">詳細査定日時</th>
-                            <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">買取依頼日時</th>
-                            <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">送客日時</th>
-                            <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">終了日時</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-            <div class="card-footer border-0 py-5">
-                <span class="text-muted text-sm" id="total_record"></span>
-            </div>
-        </div>
-    </div>
+                    <div class="card-header d-md-inline-flex">
+                        <h5 class="mb-0">査定管理</h5> <span class="ps-md-5 text-muted text-sm" id="total_record_up"></span>
+                    </div>
 
+                    <div class="table-responsive">
+                        <table class="table table-hover table-nowrap sortMe" id="mansiontable">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col" class="text-end text-decoration-underline sort-by" style="width: 50px" data-type="number">No.</th>
+                                    <th scope="col" style="width: 150px" class="text-decoration-underline sort-status-t-seller-assessment">ステータス</th>
+                                    <th scope="col" style="width: auto" class="text-decoration-underline sort-by">物件（マンション、部屋番号）</th>
+                                    <th scope="col" style="width: 200px" class="text-decoration-underline sort-mix-td-and-a">不動産会社</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">登録日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">簡易査定日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-mix-td-and-a">詳細査定日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">買取依頼日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">送客日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">終了日時</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
 
+                    <div class="card-footer border-0 py-5">
+                        <span class="text-muted text-sm" id="total_record"></span>
+                    </div>
 
-    <!-- ポップアップ -->
-    <div class="modal fade" id="mansion" tabindex="-1" aria-labelledby="mansion" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl cap-modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="mansionLabel">査定結果 </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btnUpClose"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12 col-md-5">
+            </div>
 
-                            <div class="col-12">
-                                <div class="users-container">
 
-                                    <div class="users p-3">
-                                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                                                        data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                                                        aria-selected="true">
-                                                    物件情報
-                                                </button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
-                                                        data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
-                                                        aria-selected="false">
-                                                    詳細情報
-                                                </button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
-                                                        data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
-                                                        aria-selected="false">
-                                                    売主情報
-                                                </button>
-                                            </li>
-                                        </ul>
-                                        <!--Home-->
-                                        <div class="tab-content" id="pills-tabContent">
-                                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                                                 aria-labelledby="pills-home-tab">
-                                                <section class="highlight-clean">
-                                                    <div>
-                                                        <div class="intro">
-                                                            <hr class="navbar-divider my-5 opacity-20">
-                                                            <div class="card shadow border-0">
-                                                                <div class="card-body " id="SNameAndRoomNo">
-                                                                    <!--SellerName and RoomNumber here-->
 
-                                                                </div>
-                                                            </div>
-                                                            <hr class="navbar-divider my-5 opacity-20">
-                                                            <div class="card shadow border-0">
-                                                                <div class="card-body ">
-                                                                    <div class=" pb-0 pm-0">
-                                                                        <h6>交通アクセス</h6>
-                                                                        <div class="row justify-content-center" id="ekikoutsu"
-                                                                             style="width:100%;overflow-x: hidden;overflow-y: auto;max-height: 300px;">
+            <!-- ポップアップ -->
+            <div class="modal fade" id="mansion" tabindex="-1" aria-labelledby="mansion" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl cap-modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="mansionLabel">査定結果 </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btnUpClose"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12 col-md-5">
 
-                                                                            <!--data list here-->
+                                    <div class="col-12">
+                                        <div class="users-container">
 
+                                            <div class="users p-3">
+                                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                                                                data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                                                                aria-selected="true">
+                                                            物件情報
+                                                        </button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                                                data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                                                                aria-selected="false">
+                                                            詳細情報
+                                                        </button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                                                                data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                                                                aria-selected="false">
+                                                            売主情報
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                                <!--Home-->
+                                                <div class="tab-content" id="pills-tabContent">
+                                                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                                                         aria-labelledby="pills-home-tab">
+                                                        <section class="highlight-clean">
+                                                            <div>
+                                                                <div class="intro">
+                                                                    <hr class="navbar-divider my-5 opacity-20">
+                                                                    <div class="card shadow border-0">
+                                                                        <div class="card-body " id="SNameAndRoomNo">
+                                                                            <!--SellerName and RoomNumber here-->
 
                                                                         </div>
+                                                                    </div>
+                                                                    <hr class="navbar-divider my-5 opacity-20">
+                                                                    <div class="card shadow border-0">
+                                                                        <div class="card-body ">
+                                                                            <div class=" pb-0 pm-0">
+                                                                                <h6>交通アクセス</h6>
+                                                                                <div class="row justify-content-center" id="ekikoutsu"
+                                                                                     style="width:100%;overflow-x: hidden;overflow-y: auto;max-height: 300px;">
+
+                                                                                    <!--data list here-->
+
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </section>
+
+                                                        @*@Html.Partial("t_seller_assessment/_t_seller_assessment_P_home")*@
+                                                    </div>
+
+                                                    <!--Detail-->
+                                                    <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                                                         aria-labelledby="pills-profile-tab">
+                                                        <hr class="navbar-divider my-5 opacity-20">
+                                                        <div class="card shadow border-0">
+                                                            <div class="card-body " id="header1">
+                                                                <!--header here-->
+
+                                                            </div>
+                                                        </div>
+                                                        <hr class="navbar-divider my-5 opacity-20">
+                                                        <div class="card shadow border-0">
+                                                            <div class="card-body ">
+                                                                <div class="row">
+                                                                    <div class="col-4" id="Detail_1">
+                                                                        <!--data list here-->
+                                                                    </div>
+                                                                    <div class="col-4" id="Detail_2">
+                                                                        <!--data list here-->
+                                                                    </div>
+                                                                    <div class="col-4" id="Detail_3">
+                                                                        <!--data list here-->
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </section>
 
-                                                @*@Html.Partial("t_seller_assessment/_t_seller_assessment_P_home")*@
-                                            </div>
+                                                    @*@Html.Partial("t_seller_assessment/_t_seller_assessment_P_profile")*@
+                                                    @*@Html.Partial("t_seller_assessment/_t_seller_assessment_P_contact")*@
+                                                    <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+                                                         aria-labelledby="pills-contact-tab">
 
-                                            <!--Detail-->
-                                            <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                                                 aria-labelledby="pills-profile-tab">
-                                                <hr class="navbar-divider my-5 opacity-20">
-                                                <div class="card shadow border-0">
-                                                    <div class="card-body " id="header1">
-                                                        <!--header here-->
-
-                                                    </div>
-                                                </div>
-                                                <hr class="navbar-divider my-5 opacity-20">
-                                                <div class="card shadow border-0">
-                                                    <div class="card-body ">
-                                                        <div class="row">
-                                                            <div class="col-4" id="Detail_1">
-                                                                <!--data list here-->
-                                                            </div>
-                                                            <div class="col-4" id="Detail_2">
-                                                                <!--data list here-->
-                                                            </div>
-                                                            <div class="col-4" id="Detail_3">
-                                                                <!--data list here-->
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            @*@Html.Partial("t_seller_assessment/_t_seller_assessment_P_profile")*@
-                                            @*@Html.Partial("t_seller_assessment/_t_seller_assessment_P_contact")*@
-                                            <div class="tab-pane fade" id="pills-contact" role="tabpanel"
-                                                 aria-labelledby="pills-contact-tab">
-
-                                                <hr class="navbar-divider my-5 opacity-20">
-                                                <div class="card shadow border-0">
-                                                    <div class="card-body" id="header2">
-                                                        <!--header here-->
-
-                                                    </div>
-                                                </div>
-                                                <hr class="navbar-divider my-3 opacity-20">
-                                                <div class="card shadow border-0">
-                                                    <div class="card-body ">
-                                                        <div class="justify-content-around align-items-center row" id="Seller_1">
-                                                            <!--data list here-->
-
-                                                        </div>
                                                         <hr class="navbar-divider my-5 opacity-20">
-                                                        <div class="justify-content-around align-items-center row" id="Seller_2">
-                                                            <!--data list here-->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Result Type-->
-                        <div class="col-12 col-md-7">
-                            <div class="card shadow border-0">
-                                <div class="card-body " id="ResultDate">
-                                    <!--Asessment Date Time here-->
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 col-12">
-                                    <div class="w-100 p-1 pt-3">
-                                        <div class="w-100">
-                                            <div class="row">
-                                                <div class="col-xl-12">
-                                                    <div class="card">
-                                                        <div class="card-header pb-0">
-                                                            <div class="card-actions float-right">
+                                                        <div class="card shadow border-0">
+                                                            <div class="card-body" id="header2">
+                                                                <!--header here-->
 
                                                             </div>
-                                                            <h5 class="card-title mb-0">マンション査定結果トップ５</h5>
                                                         </div>
-                                                        <div class="card-body" style="width:100%;overflow-x: auto;max-height: 480px;">
-                                                            <table class="table table-striped" style="width:100%;overflow-x: auto;" id="tableType1">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th></th>
-                                                                        <th>不動産会社</th>
-                                                                        <th class="text-end">買取価格</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <!--here type 1-->
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                        <hr class="navbar-divider my-3 opacity-20">
+                                                        <div class="card shadow border-0">
+                                                            <div class="card-body ">
+                                                                <div class="justify-content-around align-items-center row" id="Seller_1">
+                                                                    <!--data list here-->
 
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="w-100 p-1 pt-3">
-                                        <div class="w-100">
-                                            <div class="row">
-                                                <div class="col-xl-12">
-                                                    <div class="card">
-                                                        <div class="card-header pb-0">
-                                                            <div class="card-actions float-right">
-
+                                                                </div>
+                                                                <hr class="navbar-divider my-5 opacity-20">
+                                                                <div class="justify-content-around align-items-center row" id="Seller_2">
+                                                                    <!--data list here-->
+                                                                </div>
                                                             </div>
-                                                            <h5 class="card-title mb-0">エリア査定結果トップ５</h5>
-                                                        </div>
-                                                        <div class="card-body" style="width:100%;overflow-x: auto;max-height: 480px;">
-                                                            <table class="table table-striped" style="width:100%;overflow-x: auto;" id="tableType2">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th></th>
-                                                                        <th>不動産会社</th>
-                                                                        <th class="text-end">買取価格</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <!--here type 2-->
-                                                                </tbody>
-                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -394,25 +328,102 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!--Result Type-->
+                                <div class="col-12 col-md-7">
+                                    <div class="card shadow border-0">
+                                        <div class="card-body " id="ResultDate">
+                                            <!--Asessment Date Time here-->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-12">
+                                            <div class="w-100 p-1 pt-3">
+                                                <div class="w-100">
+                                                    <div class="row">
+                                                        <div class="col-xl-12">
+                                                            <div class="card">
+                                                                <div class="card-header pb-0">
+                                                                    <div class="card-actions float-right">
+
+                                                                    </div>
+                                                                    <h5 class="card-title mb-0">マンション査定結果トップ５</h5>
+                                                                </div>
+                                                                <div class="card-body" style="width:100%;overflow-x: auto;max-height: 480px;">
+                                                                    <table class="table table-striped" style="width:100%;overflow-x: auto;" id="tableType1">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th></th>
+                                                                                <th>不動産会社</th>
+                                                                                <th class="text-end">買取価格</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <!--here type 1-->
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="w-100 p-1 pt-3">
+                                                <div class="w-100">
+                                                    <div class="row">
+                                                        <div class="col-xl-12">
+                                                            <div class="card">
+                                                                <div class="card-header pb-0">
+                                                                    <div class="card-actions float-right">
+
+                                                                    </div>
+                                                                    <h5 class="card-title mb-0">エリア査定結果トップ５</h5>
+                                                                </div>
+                                                                <div class="card-body" style="width:100%;overflow-x: auto;max-height: 480px;">
+                                                                    <table class="table table-striped" style="width:100%;overflow-x: auto;" id="tableType2">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th></th>
+                                                                                <th>不動産会社</th>
+                                                                                <th class="text-end">買取価格</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <!--here type 2-->
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*@Html.Partial("t_seller_assessment/_t_seller_assessment_P_result")*@
                             </div>
+
                         </div>
-                        @*@Html.Partial("t_seller_assessment/_t_seller_assessment_P_result")*@
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#mansion" id="btnDownClose">
+                                戻る
+                            </button>
+                        </div>
+
                     </div>
-
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#mansion" id="btnDownClose">
-                        戻る
-                    </button>
-                </div>
-
             </div>
-        </div>
+        </main>
+        @Html.Partial("_t_footer")
     </div>
-</main>
 </div>
+
 
 @section Scripts{
     @Scripts.Render("~/bundles/t_seller_assessment")
 }
+<script src="~/Content/scripts/table_header_sort.js"></script>

@@ -1,157 +1,166 @@
 ﻿@{
-    Layout = "~/Views/Shared/t_dashboard/_t_dashboardLayout.cshtml";
+    Layout = "~/Views/Shared/_t_menuLayout.cshtml";
     ViewBag.Title = "ダッシュボード";
 }
 @section styles{
     @Styles.Render("~/Content/tenfold_css_common")
 }
- <main class="py-6 bg-surface-secondary">
-        <div class="container-fluid">
-            
-            <div class="card shadow border-0 mb-7">
-              
-                <div class="card-header">
-                  
-                    <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
-                      
-                      <h1 class="h2 mb-0 ls-tight">ダッシュボード</h1>
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
+    <div class="d-flex flex-column min-h-screen" id="page-content-wrapper">
+        
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+
+                <div class="card shadow border-0 mb-7">
+
+                    <div class="card-header">
+
+                        <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
+
+                            <h1 class="h2 mb-0 ls-tight">ダッシュボード</h1>
+                        </div>
+                        <hr class="navbar-divider my-5 opacity-20">
+                        <h5 class="mb-0">
+                            管理者要確認
+                        </h5>
                     </div>
-                    <hr class="navbar-divider my-5 opacity-20">
-                    <h5 class="mb-0">管理者要確認
-                    </h5>
+
+
                 </div>
+                <!-- Card stats -->
+                <div class="row g-6 mb-6">
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card shadow border-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">送客案内</span>
+                                        <span class="h3 font-bold mb-0" name="Customer_Information_Waiting_Count" id="Customer_Information_Waiting_Count"></span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
+                                            <i class="fa fa-address-book" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card shadow border-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">チャット確認</span>
+                                        <span class="h3 font-bold mb-0" name="Chat_Confirmation_Waiting_Count" id="Chat_Confirmation_Waiting_Count"></span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
 
 
+                </div>
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            サイト全体
+
+                        </h5>
+                    </div>
+
+
+                </div>
+                <!-- Card stats -->
+                <div class="row g-6 mb-6">
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card shadow border-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">新規依頼</span>
+                                        <span class="h3 font-bold mb-0" name="New_Request_Cases_Count" id="New_Request_Cases_Count"></span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card shadow border-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">交渉中</span>
+                                        <span class="h3 font-bold mb-0" name="During_negotiations_Cases_Count" id="During_negotiations_Cases_Count"></span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
+                                            <i class="fa fa-comments" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card shadow border-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">成約</span>
+                                        <span class="h3 font-bold mb-0" name="Contract_Cases_Count" id="Contract_Cases_Count"></span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-info text-white text-lg rounded-circle">
+                                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card shadow border-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">辞退</span>
+                                        <span class="h3 font-bold mb-0" name="Decline_Cases_Count" id="Decline_Cases_Count"></span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-warning text-white text-lg rounded-circle">
+                                            <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- Card stats -->
-            <div class="row g-6 mb-6">
-                <div class="col-xl-3 col-sm-6 col-12">
-                    <div class="card shadow border-0">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <span class="h6 font-semibold text-muted text-sm d-block mb-2">送客案内</span>
-                                    <span class="h3 font-bold mb-0" name="Customer_Information_Waiting_Count" id="Customer_Information_Waiting_Count"></span>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
-                                        <i class="fa fa-address-book" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
+        </main>
 
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-12">
-                    <div class="card shadow border-0">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <span class="h6 font-semibold text-muted text-sm d-block mb-2">チャット確認</span>
-                                    <span class="h3 font-bold mb-0" name="Chat_Confirmation_Waiting_Count" id="Chat_Confirmation_Waiting_Count"></span>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
+        @Html.Partial("_t_footer")
+    </div>
+</div>
 
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-            <div class="card shadow border-0 mb-7">
-                <div class="card-header">
-                    <h5 class="mb-0">
-                        サイト全体
-
-                    </h5>
-                </div>
-
-
-            </div>
-            <!-- Card stats -->
-            <div class="row g-6 mb-6">
-                <div class="col-xl-3 col-sm-6 col-12">
-                    <div class="card shadow border-0">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <span class="h6 font-semibold text-muted text-sm d-block mb-2">新規依頼</span>
-                                    <span class="h3 font-bold mb-0" name="New_Request_Cases_Count" id="New_Request_Cases_Count"></span>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-12">
-                    <div class="card shadow border-0">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <span class="h6 font-semibold text-muted text-sm d-block mb-2">交渉中</span>
-                                    <span class="h3 font-bold mb-0" name="During_negotiations_Cases_Count" id="During_negotiations_Cases_Count"></span>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
-                                        <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-12">
-                    <div class="card shadow border-0">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <span class="h6 font-semibold text-muted text-sm d-block mb-2">成約</span>
-                                    <span class="h3 font-bold mb-0" name="Contract_Cases_Count" id="Contract_Cases_Count"></span>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="icon icon-shape bg-info text-white text-lg rounded-circle">
-                                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 col-12">
-                    <div class="card shadow border-0">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <span class="h6 font-semibold text-muted text-sm d-block mb-2">辞退</span>
-                                    <span class="h3 font-bold mb-0" name="Decline_Cases_Count" id="Decline_Cases_Count"></span>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="icon icon-shape bg-warning text-white text-lg rounded-circle">
-                                        <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-</form>
 @section Scripts{
     @Scripts.Render("~/bundles/t_dashboard")
 }

@@ -9,8 +9,15 @@ namespace Seruichi.Tenfold.Web
         public static void RegisterBundles(BundleCollection bundles)
         {
             BundleTable.EnableOptimizations = false;
+
+            bundles.Add(new StyleBundle("~/Content/css/error").Include(
+                        "~/Content/bootstrap/bootstrap.min.css",
+                     "~/Content/fonts/font-awesome.min.css",
+                     "~/Content/css/style.css",
+                     "~/Content/css/index.css"));
+
             //The bundle hierarchy and the physical folder hierarchy must match
-            bundles.Add(new StyleBundle("~/Content/css/application").Include(                      
+            bundles.Add(new StyleBundle("~/Content/css/application").Include(
                       "~/Content/typeahead/typeahead.custom.css",
                       "~/Content/css/loading.css",
                       "~/Content/css/validation.css",
