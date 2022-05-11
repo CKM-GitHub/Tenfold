@@ -187,13 +187,15 @@ namespace Seruichi.BL
 
             DBAccess db = new DBAccess();
             var dt = db.SelectDatatable("pr_common_t_seller_select_SellerName_by_SellerCD", sqlParm);
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
             if (dt.Rows.Count > 0)
             {
-                SellerName = dt.Rows[0]["SellerName"].ToString();
+                string StrSellerName = dt.Rows[0]["SellerName"].ToString();
+                SellerName = !string.IsNullOrEmpty(StrSellerName) ? crypt.DecryptFromBase64(StrSellerName, decryptionKey) : StrSellerName;
             }
             return SellerName;
         }
-
         public string GetMansionNamebyMansioncd(string mansionCD)
         {
             string mansionName = string.Empty;
