@@ -1,7 +1,6 @@
 ﻿const _url = {};
 
 $(function () {
-    debugger;
     setValidation();
     addEvents();
 });
@@ -62,7 +61,6 @@ function addEvents() {
     });
 
     $('#StartUnit, #EndUnit').on('change', function () {
-        debugger;
         const $this = $(this), $start1 = $('#StartUnit').val(), $end1 = $('#EndUnit').val()
 
         if (!common.checkValidityInput($this)) {
