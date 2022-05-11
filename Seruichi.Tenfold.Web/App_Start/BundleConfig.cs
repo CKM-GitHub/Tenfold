@@ -17,7 +17,7 @@ namespace Seruichi.Tenfold.Web
                      "~/Content/css/index.css"));
 
             //The bundle hierarchy and the physical folder hierarchy must match
-            bundles.Add(new StyleBundle("~/Content/css/application").Include(                      
+            bundles.Add(new StyleBundle("~/Content/css/application").Include(
                       "~/Content/typeahead/typeahead.custom.css",
                       "~/Content/css/loading.css",
                       "~/Content/css/validation.css",

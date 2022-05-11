@@ -7,8 +7,8 @@
     string messageJson = Newtonsoft.Json.JsonConvert.SerializeObject(Seruichi.Common.StaticCache.GetClientMessages());
 }
 <!DOCTYPE html>
-<html>
 
+<html>
 <head>
     <meta charset="utf-8">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
@@ -19,37 +19,18 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>セルイチ管理機能</title>
-    @*<link rel="stylesheet" href="~/Content/t_dashboard/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="~/Content/fonts/font-awesome.min.css">
-        <link rel="stylesheet" href="~/Content/t_dashboard/css/style.css">
-        <link rel="stylesheet" href="~/Content/t_dashboard/css/index.css">
-        <link href="~/Content/css/validation.css" rel="stylesheet" />*@
+
     @Styles.Render("~/Content/css/application")
     @RenderSection("styles", required: false)
 </head>
-
 <body>
-    <input type="hidden" id="_RequestVerificationToken" value="@SessionAuthenticationHelper.GetVerificationToken()" />
-    @Html.Partial("t_seller_mansion/_t_seller_mansion_sellerPartial")
-    <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18" id="wrapper">
-        @Html.Partial("t_seller_mansion/_t_seller_mansion_menuPartial")
-        <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
-            <hidden>
-                <input type="hidden" id="path" value=@appPath>
-            </hidden>
-            @RenderBody()
-            <footer class="text-center text-lg-start mx-auto">
-                <!-- Copyright -->
-                <div class="text-center p-3">
-                    © セルイチ 2022. All Rights Reserved.
-                </div>
-                <!-- Copyright -->
-            </footer>
-        </div>
-    </div>
+    <hidden>
+        <input type="hidden" id="path" value=@appPath>
+    </hidden>
+    @Html.Partial("_t_header")
+    @RenderBody()
+
     <script src="~/Content/bootstrap/bootstrap.min.js"></script>
-    <script src="~/Content/scripts/table_header_sort.js"></script>
-    <script src="~/Content/scripts/sidebar.js"></script>
     @Scripts.Render("~/Content/scripts/application")
     <script>
         $(function () {
@@ -63,5 +44,4 @@
     </script>
     @RenderSection("scripts", required: false)
 </body>
-
 </html>

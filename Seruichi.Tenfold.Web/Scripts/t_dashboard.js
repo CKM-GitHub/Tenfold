@@ -6,6 +6,7 @@ $(function () {
     _url.getDuringnegotiationsCasesCount = common.appPath + '/t_dashboard/GetDuringnegotiationsCasesCount';
     _url.getContractCasesCount = common.appPath + '/t_dashboard/GetContractCasesCount';
     _url.getDeclineCasesCount = common.appPath + '/t_dashboard/GetDeclineCasesCount';
+    $('#t_dashboard').addClass('font-bold active text-underline');
 });
 
 $(document).ready(function () {

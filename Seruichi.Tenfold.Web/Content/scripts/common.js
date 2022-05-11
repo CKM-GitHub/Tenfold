@@ -295,6 +295,16 @@ const common = {
         return returnValue.replace(/ /g, "　");
     },
 
+    replaceSingleToDoubleKana: function replaceSingleToDoubleKana(str) {
+        var reg = new RegExp('(' + Object.keys(kanaMap).join('|') + ')', 'g');
+        return str
+            .replace(reg, function (match) {
+                return kanaMap[match];
+            })
+            .replace(/ﾞ/g, '゛')
+            .replace(/ﾟ/g, '゜');
+    },
+
     checkValidityInput: function checkValidityInput(ctrl) {
         const $ctrl = $(ctrl);
         const type = $ctrl.attr('type');

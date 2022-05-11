@@ -8,6 +8,8 @@ $(function () {
     _url.generate_CSV = common.appPath + '/t_seller_list/Generate_CSV';
     _url.InsertL_Log = common.appPath + '/t_seller_list/InsertM_Seller_L_Log';
     addEvents();
+    $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
+    $('#t_seller_list').addClass('font-bold text-underline');
 });
 
 function setValidation() {
