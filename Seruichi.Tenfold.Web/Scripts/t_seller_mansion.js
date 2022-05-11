@@ -11,7 +11,7 @@ $(function () {
     addEvents();
     
     $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
-    $('#t_seller_mansion').addClass('font-bold active text-underline');
+    $('#t_seller_mansion').addClass('font-bold text-underline');
 });
 function setValidation() {
     $('#MansionName')
