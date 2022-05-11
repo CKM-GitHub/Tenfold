@@ -150,6 +150,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\css\a_mypage_ahis_1.css" />
+    <Compile Include="Controllers\a_assess_dController.cs" />
     <Compile Include="Controllers\a_contactController.cs" />
     <Compile Include="Controllers\a_mypage_ahisController.cs" />
     <Compile Include="Controllers\a_mypage_plusController.cs" />
@@ -284,6 +285,7 @@
     <Content Include="Views\a_mypage_plus\Index.cshtml" />
     <Content Include="Views\Shared\_loginLayout.cshtml" />
     <Content Include="Views\a_mypage_whis\Index.cshtml" />
+    <Content Include="Views\a_assess_d\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
