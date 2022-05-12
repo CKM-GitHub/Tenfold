@@ -275,7 +275,7 @@ function Bind_tbody(result) {
 
         }
         html += '<tr>\
-            <td class= "text-end" > ' + data[i]["NO"] + '</td>\
+            <td class= "text-end" > ' + (i + 1) + '</td>\
             <td class="'+ _sort_checkbox + '"><i class="' + _class + '">' + _letter + '</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td >\
             <td class="text-center"> ' + data[i]["無効会員"] + ' </td>\
             <td> ' + data[i]["売主CD"] + ' </td>\
