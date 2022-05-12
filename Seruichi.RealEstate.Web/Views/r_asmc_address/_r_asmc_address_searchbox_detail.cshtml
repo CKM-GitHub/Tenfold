@@ -1,0 +1,61 @@
+﻿@model Models.RealEstate.r_asmc_address.r_asmc_addressDetailModel
+
+@{
+    int counter = 0;
+}
+
+@foreach (var item01 in Model.Cities)
+{
+    if (counter > 0)
+    {
+        <hr class="navbar-divider my-5 opacity-20">
+    }
+
+    counter++;
+    string css_target = "js-search-detail-chk-" + item01.CityCD;
+    string css_chkbox = "js-search-detail-chk js-search-detail-chk-" + item01.CityCD;
+    string css_label = "checkbox-inline p-3 cap-fon-div-w250 text-nowrap " 
+                    + (item01.ValidFLG == 0? "text-danger" : item01.ValidFLG == 1? "text-primary" : "text-dark");
+
+    <div class="row y-5 kenbetsu">
+        <div class="col-12 col-md-2 text-md-center">
+            <h5 class="pb-3 text-nowrap">@item01.CityName</h5>
+            @if (item01.TownsCount > 1)
+            {
+                <div class="w-100 pb-1">
+                    <button type="button" class="btn btn-primary btn-sm js-btn-select" data-target-class="@css_target">
+                        全て<span class="cap-text-wrap">選択</span>
+                    </button>
+                </div>
+                <div class="w-100 pb-3">
+                    <button type="button" class="btn btn-secondary btn-sm js-btn-deselect" data-target-class="@css_target">
+                        全て<span class="cap-text-wrap">解除</span>
+                    </button>
+                </div>
+            }
+        </div>
+        <div class="col-12 col-md-10">
+            @foreach (var item02 in item01.Towns)
+            {
+                var towntext = item02.TownName;
+                if (Model.Settings1 == 1 && Model.Settings2 == 1)
+                {
+                    towntext = string.Format("{0}({1}件/{2}社)", item02.TownName, item02.MansionCount, item02.RealEstateCount);
+                }
+                else if (Model.Settings1 == 1 && Model.Settings2 == 0)
+                {
+                    towntext = string.Format("{0}({1}件)", item02.TownName, item02.MansionCount);
+                }
+                else if (Model.Settings1 == 0 && Model.Settings2 == 1)
+                {
+                    towntext = string.Format("{0}({1}社)", item02.TownName, item02.RealEstateCount);
+                }
+
+                <label class="@css_label">
+                    <input type="checkbox" value="@item02.TownCD" class="@css_chkbox">
+                    <span class="ps-1">@towntext</span>
+                </label>
+            }
+        </div>
+    </div>
+}

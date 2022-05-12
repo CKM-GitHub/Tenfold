@@ -1,0 +1,107 @@
+/* areamap */
+.areamap .areamap-map {
+	width: 500px;
+	margin: 0 auto;
+}
+
+.areamap .areamap-field {
+	background: url(/Content/images/map/japan_map_outline.png) left top no-repeat;
+}
+
+.areamap .ui-icon--loupe8 {
+	margin-right: 5px;
+}
+
+.areamap .ui-icon--building2,
+.areamap .ui-icon--house2 {
+	margin-right: 5px;
+}
+
+
+/* areamap_monthly_background */
+.areamap_monthly_background {
+	position: relative;
+	height: 426px;
+}
+
+/* areabox */
+.areabox {
+	position: absolute;
+	text-align: center;
+}
+
+.areabox:hover {
+	opacity: .9;
+}
+
+.areabox .areabox-link {
+	display: block;
+}
+
+.areabox .areabox-title {
+	font-weight: bold;
+	color: #263C2A;
+	line-height: 1;
+}
+
+.areabox .areabox-list {
+	color: #999999;
+	font-size: 0.9em;
+}
+
+.areabox .areabox-list li {
+	display: inline;
+}
+
+
+.areabox.areabox--kanto {
+	right: 0;
+	top: 180px;
+	padding-top: 11px;
+}
+
+.areabox.areabox--kanto .areabox-link {
+	width: 130px;
+	height: 150px;
+	padding-top: 1.3em;
+	font-size: 1.3em;
+}
+
+.areabox.areabox--tokai {
+	left: 200px;
+	top: 200px;
+	padding-top: 10px;
+}
+
+.areabox.areabox--tokai .areabox-link {
+	width: 130px;
+	height: 110px;
+	padding-top: 1.3em;
+	font-size: 1.3em;
+}
+
+.areabox.areabox--kansai {
+	top: 190px;
+	left: 150px;
+	padding-top: 10px;
+}
+
+.areabox.areabox--kansai .areabox-link {
+	width: 130px;
+	height: 110px;
+	padding-top: 1.3em;
+	font-size: 1.3em;
+}
+
+.areabox.areabox--kyushu {
+	top: 230px;
+	left: 0;
+	padding-bottom: 10px;
+}
+
+.areabox.areabox--kyushu .areabox-link {
+	width: 130px;
+	height: 110px;
+	padding-top: 1.3em;
+	font-size: 1.3em;
+}

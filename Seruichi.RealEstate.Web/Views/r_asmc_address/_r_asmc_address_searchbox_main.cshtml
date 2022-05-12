@@ -1,0 +1,81 @@
+﻿@model Models.RealEstate.r_asmc_address.r_asmc_addressModel
+
+@foreach (var item01 in Model.Prefectures)
+{
+    string switch_id = "flexSwitch" + item01.PrefCD;
+    string toggle_id = "js-search-box-" + item01.PrefCD;
+    string toggle_jid = "#" + toggle_id;
+    int counter = 0;
+
+    <div class="card mb-5">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-12">
+                    <h5 class="mb-0 text-nowrap d-inline-flex">
+                        @item01.PrefName
+                        <span class="form-check form-switch ms-5">
+                            <input class="form-check-input" type="checkbox" role="switch" id="@switch_id"
+                                   data-toggle="toggle" data-bs-toggle="collapse" data-bs-target="@toggle_jid"
+                                   aria-expanded="false" aria-controls="@toggle_id">
+                            <label class="form-check-label" for="@switch_id">行政区画表示</label>
+                        </span>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <div class="card-body mb-5 mb-md-0 collapse" id="@toggle_id">
+            @foreach (var item02 in item01.CityGroups)
+            {
+                if (counter > 0)
+                {
+                    <hr class="navbar-divider my-5 opacity-20">
+                }
+
+                counter++;
+                string css_target = "js-search-chk-" + item02.CityGroupCD;
+                string css_chkbox = "js-search-chk js-search-chk-" + item02.CityGroupCD;
+
+                <div class="row y-5 kenbetsu">
+                    <div class="col-12 col-md-1 text-md-center align-self-center d-flex d-md-block">
+                        <h5 class="pb-1 text-nowrap align-self-center">@item02.CityGroupName</h5>
+                        @if (item02.CitiesCount > 1)
+                        {
+                            <div class="w-100 d-flex d-md-block justify-content-end">
+                                <div class="pb-md-1 p-2">
+                                    <button type="button" class="btn btn-primary btn-sm js-btn-select" data-target-class="@css_target">
+                                        全て<span class="cap-text-wrap text-nowrap ">選択</span>
+                                    </button>
+                                </div>
+                                <div class="pb-md-3 p-2 float-end float-md-none">
+                                    <button type="button" class="btn btn-secondary btn-sm js-btn-deselect" data-target-class="@css_target">
+                                        全て<span class="cap-text-wrap text-nowrap ">解除</span>
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-12 col-md-11">
+                        @foreach (var item03 in item02.Cities)
+                        {
+                            var text1 = string.Format("({0}件/{1}社)", item03.MansionCount, item03.RealEstateCount);
+                            var text2 = string.Format("({0}件)", item03.MansionCount);
+                            var text3 = string.Format("({0}社)", item03.RealEstateCount);
+                            string css_label = "checkbox-inline p-3 cap-fon-div-w250 text-nowrap "
+                                            + (item03.ValidFLG == 0 ? "text-danger" : item03.ValidFLG == 1 ? "text-primary" : "text-dark");
+
+                            <label class="@css_label">
+                                <input type="checkbox" value="@item03.CityCD" class="@css_chkbox">
+                                <span class="ps-1">
+                                    @item03.CityName
+                                    <span class="js-text1">@text1</span>
+                                    <span class="js-text2 d-none">@text2</span>
+                                    <span class="js-text3 d-none">@text3</span>
+                                </span>
+                            </label>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

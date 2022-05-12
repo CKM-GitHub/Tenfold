@@ -137,9 +137,11 @@
     <Compile Include="Controllers\Common\BaseController.cs" />
     <Compile Include="Controllers\Common\CommonApiController.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
+    <Compile Include="Controllers\r_asmc_address.cs" />
     <Compile Include="Controllers\r_com_profileController.cs" />
     <Compile Include="Controllers\r_contactController.cs" />
     <Compile Include="Controllers\r_dashboardController.cs" />
+    <Compile Include="Controllers\r_asmc.cs" />
     <Compile Include="Controllers\r_issueslistController.cs" />
     <Compile Include="Controllers\r_loginController.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
@@ -159,6 +161,7 @@
     <Content Include="Content\css\Contact-Form-Clean.css" />
     <Content Include="Content\css\errorpage.css" />
     <Content Include="Content\css\index.css" />
+    <Content Include="Content\css\japanmap.css" />
     <Content Include="Content\css\loading.css" />
     <Content Include="Content\css\Login-Form-Clean.css" />
     <Content Include="Content\css\Soft-UI-Aside-Navbar.css" />
@@ -168,6 +171,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\ionicons.min.css" />
     <Content Include="Content\fonts\ionicons.svg" />
+    <Content Include="Content\images\map\japan_map_outline.png" />
     <Content Include="Content\modernizr\modernizr-2.8.3.js" />
     <Content Include="Content\scripts\common.js" />
     <Content Include="Content\scripts\sidebar.js" />
@@ -190,9 +194,11 @@
     <Content Include="Content\fonts\ionicons.eot" />
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
+    <Content Include="Scripts\r_asmc_address.js" />
     <Content Include="Scripts\r_com_profile.js" />
     <Content Include="Scripts\r_contact.js" />
     <Content Include="Scripts\r_dashboard.js" />
+    <Content Include="Scripts\r_asmc.js" />
     <Content Include="Scripts\r_issueslist.js" />
     <Content Include="Scripts\r_login.js" />
     <Content Include="Views\Error\BadRequest.cshtml" />
@@ -227,6 +233,12 @@
     <Content Include="Views\r_dashboard\Index.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\r_com_profile\Index.cshtml" />
+    <Content Include="Views\r_asmc\Index.cshtml" />
+    <Content Include="Views\r_asmc_address\Index.cshtml" />
+    <Content Include="Views\r_asmc_address\_r_asmc_address_left_sideNavigation_menu.cshtml" />
+    <Content Include="Views\r_asmc_address\_r_asmc_address_searchbox_main.cshtml" />
+    <Content Include="Views\r_asmc_address\_r_asmc_address_searchbox_detail.cshtml" />
+    <Content Include="Views\r_asmc_address\_r_asmc_address_tab_menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

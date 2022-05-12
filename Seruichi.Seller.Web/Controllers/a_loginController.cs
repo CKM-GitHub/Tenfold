@@ -16,7 +16,6 @@ namespace Seruichi.Seller.Web.Controllers
         public ActionResult Index()
         {
             Session.Clear();
-            //SessionAuthenticationHelper.CreateAnonymousUser();
             return View();
         }
 

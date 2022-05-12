@@ -40,6 +40,11 @@ namespace Seruichi.RealEstate.Web
                       "~/Content/css/index.css"
                       ));
 
+            //css japan map
+            bundles.Add(new StyleBundle("~/Content/realEstate_css_japanmap").Include(
+                      "~/Content/css/japanmap.css"
+                      ));
+
             bundles.Add(new ScriptBundle("~/bundles/r_login").Include(
                      "~/Scripts/r_login.js"));
 
@@ -56,6 +61,14 @@ namespace Seruichi.RealEstate.Web
 
             bundles.Add(new ScriptBundle("~/bundles/r_com_profile").Include(
                     "~/Scripts/r_com_profile.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/r_asmc").Include(
+                    "~/Scripts/r_asmc.js",
+                    "~/Content/scripts/sidebar.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/r_asmc_address").Include(
+                    "~/Scripts/r_asmc_address.js",
+                    "~/Content/scripts/sidebar.js"));
         }
     }
 }
