@@ -141,6 +141,7 @@
     <Compile Include="Controllers\t_dashboardController.cs" />
     <Compile Include="Controllers\t_loginController.cs" />
     <Compile Include="Controllers\t_mansion_listController.cs" />
+    <Compile Include="Controllers\t_mansion_newController.cs" />
     <Compile Include="Controllers\t_seller_assessmentController.cs" />
     <Compile Include="Controllers\t_seller_listController.cs" />
     <Compile Include="Controllers\t_seller_mansionController.cs" />
@@ -242,6 +243,7 @@
     <Content Include="Views\t_seller_mansion\_t_seller_mansion_menuPartial.cshtml" />
     <Content Include="Views\t_seller_assessment\_t_seller_assessment_menuPartial.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Views\t_mansion_new\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
