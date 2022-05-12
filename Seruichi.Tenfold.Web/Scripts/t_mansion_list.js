@@ -2,6 +2,7 @@
 
 $(function () {
     setValidation();
+    _url.GetM_MansionList = common.appPath + '/t_mansion_list/GetM_MansionList';
     addEvents();
 });
 
@@ -89,4 +90,31 @@ function addEvents() {
         }
 
     });
+
+    $('#btnDisplay').on('click', function () {
+        $form = $('#form1').hideChildErrors();
+        if (!common.checkValidityOnSave('#form1')) {
+            $form.getInvalidItems().get(0).focus();
+            return false;
+        }
+
+        $('#mansiontable tbody').empty();
+
+        const $Apartment = $("#txtApartment").val(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').text(),
+            $StartUnit = $("#StartUnit").val(), $EndUnit = $("#EndUnit").val()
+
+        if ($StartAge )
+          
+        let model = {
+            Apartment: $Apartment,
+            SellerName: $StartAge,
+            RangeSelect: $EndAge,
+            StartDate: $StartUnit,
+            EndDate: $EndUnit,
+        };
+        GetM_MansionList(model, $form);
+
+    });
+
+
 }
