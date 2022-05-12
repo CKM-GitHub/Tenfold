@@ -332,3 +332,18 @@ label:focus,
 	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
 	background-color: #4286f4b7;
   }
+
+  .cap-form td,th,tr{
+	  font-size:0.95em!important;
+	  vertical-align: middle!important;
+   }
+
+
+.cap-asmc-set-table{
+	min-width:280px!important;
+}
+
+.cap-asmc-set-table input{
+	width: 40%!important;
+}
+

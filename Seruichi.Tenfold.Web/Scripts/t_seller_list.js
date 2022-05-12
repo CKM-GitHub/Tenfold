@@ -8,6 +8,8 @@ $(function () {
     _url.generate_CSV = common.appPath + '/t_seller_list/Generate_CSV';
     _url.InsertL_Log = common.appPath + '/t_seller_list/InsertM_Seller_L_Log';
     addEvents();
+    $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
+    $('#t_seller_list').addClass('font-bold text-underline');
 });
 
 function setValidation() {
@@ -278,13 +280,14 @@ function Bind_tbody(result) {
             <td class="text-center"> ' + data[i]["無効会員"] + ' </td>\
             <td> ' + data[i]["売主CD"] + ' </td>\
             <td> <a class="text-heading font-semibold text-decoration-underline" id='+ data[i]["売主CD"] + ' href="#" onclick="l_logfunction(this.id)">' + data[i]["売主名"] + '</a></td>\
-            <td> ' + data[i]["居住地"] + '<span style="display:none;">' + data[i]["PrefCD"] + ' </span> </td>\
+            <td> ' + data[i]["居住地"] + ' </td>\
             <td> ' + data[i]["登録日時"] + ' </td>\
             <td> ' + data[i]["査定依頼日時"] + ' </td >\
             <td> ' + data[i]["買取依頼日時"] + ' </td>\
             <td class="text-end"> '+ data[i]["登録数"] + ' </td>\
             <td class="text-end"> '+ data[i]["成約数"] + ' </td>\
             <td class="text-end d-none"> '+ data[i]["SellerKana"] + ' </td>\
+            <td class="text-end d-none"> '+ data[i]["PrefCD"] + ' </td>\
             </tr>'
     }
     

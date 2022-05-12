@@ -10,6 +10,12 @@ namespace Seruichi.RealEstate.Web
         {
             BundleTable.EnableOptimizations = false;
 
+            bundles.Add(new StyleBundle("~/Content/css/error").Include(
+                        "~/Content/bootstrap/bootstrap.min.css",
+                     "~/Content/fonts/font-awesome.min.css",
+                     "~/Content/css/style.css",
+                     "~/Content/css/index.css"));
+
             //The bundle hierarchy and the physical folder hierarchy must match
             bundles.Add(new StyleBundle("~/Content/css/application").Include(
                       "~/Content/typeahead/typeahead.custom.css",

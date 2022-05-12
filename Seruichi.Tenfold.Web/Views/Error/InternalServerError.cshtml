@@ -2,28 +2,58 @@
     Layout = "~/Views/Shared/_ErrorLayout.cshtml";
 }
 
-<header class="text-center text-white masthead cap-header">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-9 mx-auto position-relative">
-                <h1 class="mb-2"><strong>500&nbsp;</strong>Internal Server Error<br></h1>
-            </div>
-        </div>
-    </div>
-</header>
-<section class="cap-main">
-    <div class="container w-100 h-100">
-        <div class="col">
-            <div class="row">
-                <div class="col text-center"><i class="fa fa-server w-100 cap-error-icon pt-5 pb-3"></i></div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <h3 class="cap-error-title text-center">サーバー内部エラーです。<br></h3>
-                    <p class="lead shadow-none text-center cap-error-p"><strong>申し訳ございませんが、</strong>しばらくしてから<strong>もう一度</strong>お試しください。</p>
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
+    <div class="d-flex flex-column min-h-screen" id="page-content-wrapper">
+
+        <main class="py-6 bg-surface-secondary">
+
+            <div class="container-fluid">
+                <div class="card shadow border-0 mb-7">
+
+                    <div class="card-header">
+
+                        <div class="col-md-12 col-12 mb-3 mb-sm-0">
+
+                            <h1 class="h2 mb-0 ls-tight">エラー 500 Internal Server Error</h1>
+                        </div>
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
+                              <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+                        </div>
+                    </div>
+
                 </div>
+
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card mb-5">
+                            <div class="card-body text-center mb-5 mb-md-0">
+                                <div class="w-100 h-100">
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col text-center"><i class="fa fa-server w-100 cap-error-icon pt-5 pb-3"></i></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <h3 class="cap-error-title text-center">サーバー内部エラーです。<br></h3>
+                                                <p class="lead shadow-none text-center cap-error-p"><strong>申し訳ございませんが、</strong>しばらくしてから<strong>もう一度</strong>お試しください。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
             </div>
-        </div>
+        </main>
+        @Html.Partial("_t_footer")
     </div>
-</section>
+</div>

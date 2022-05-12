@@ -73,7 +73,7 @@ namespace Seruichi.Tenfold.Web
             {
                 filterContext.HttpContext.Response.Clear();
                 filterContext.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                filterContext.Result = new RedirectResult("~/a_login/Index");
+                filterContext.Result = new RedirectResult("~/t_login/Login");
             }
         }
     }

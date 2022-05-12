@@ -141,7 +141,6 @@
     <Compile Include="Controllers\t_dashboardController.cs" />
     <Compile Include="Controllers\t_loginController.cs" />
     <Compile Include="Controllers\t_mansion_listController.cs" />
-    <Compile Include="Controllers\t_mansion_newController.cs" />
     <Compile Include="Controllers\t_seller_assessmentController.cs" />
     <Compile Include="Controllers\t_seller_listController.cs" />
     <Compile Include="Controllers\t_seller_mansionController.cs" />
@@ -197,6 +196,7 @@
     <Content Include="Content\fonts\ionicons.woff" />
     <Content Include="Scripts\t_dashboard.js" />
     <Content Include="Scripts\t_login.js" />
+    <Content Include="Scripts\t_mansion_list.js" />
     <Content Include="Scripts\t_seller_assessment.js" />
     <Content Include="Scripts\t_seller_list.js" />
     <Content Include="Scripts\t_seller_mansion.js" />
@@ -215,11 +215,6 @@
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\Unauthorized.cshtml" />
-    <Content Include="Views\Shared\t_dashboard\_t_dashboardLayout.cshtml" />
-    <Content Include="Views\Shared\t_dashboard\_t_dashboard_sellerPartial.cshtml" />
-    <Content Include="Views\Shared\t_seller_list\_t_seller_listLayout.cshtml" />
-    <Content Include="Views\Shared\t_seller_list\_t_seller_list_menuPartial.cshtml" />
-    <Content Include="Views\Shared\t_seller_list\_t_seller_list_sellerPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\t_dashboard\Index.cshtml" />
     <Content Include="Views\t_login\Login.cshtml" />
@@ -232,20 +227,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Views\Shared\t_seller_mansion\_t_seller_mansionLayout.cshtml" />
-    <Content Include="Views\Shared\t_seller_mansion\_t_seller_mansion_menuPartial.cshtml" />
-    <Content Include="Views\Shared\t_seller_mansion\_t_seller_mansion_sellerPartial.cshtml" />
     <Content Include="Views\t_seller_mansion\Index.cshtml" />
     <Content Include="Views\t_seller_assessment\Index.cshtml" />
-    <Content Include="Views\Shared\t_seller_assessment\_t_seller_assessment_menuPartial.cshtml" />
-    <Content Include="Views\Shared\t_seller_assessment\_t_seller_assessment_sellerPartial.cshtml" />
-    <Content Include="Views\Shared\t_seller_assessment\_t_seller_assessmentLayout.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <Content Include="Views\Error\BusinessError.cshtml" />
     <Content Include="Views\Error\InternalServerError.cshtml" />
     <Content Include="Views\t_mansion_list\Index.cshtml" />
     <Content Include="Views\Shared\t_mansion_list\_t_mansion_listMainLayout.cshtml" />
-    <Content Include="Views\t_mansion_new\Index.cshtml" />
+    <Content Include="Views\Shared\_ErrorLayout.cshtml" />
+    <Content Include="Views\Shared\_t_menuLayout.cshtml" />
+    <Content Include="Views\Shared\_t_footer.cshtml" />
+    <Content Include="Views\Shared\_t_header.cshtml" />
+    <Content Include="Views\t_seller_list\_t_seller_list_menuPartial.cshtml" />
+    <Content Include="Views\t_seller_mansion\_t_seller_mansion_menuPartial.cshtml" />
+    <Content Include="Views\t_seller_assessment\_t_seller_assessment_menuPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
