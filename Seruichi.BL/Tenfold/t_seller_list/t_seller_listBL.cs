@@ -6,6 +6,7 @@ using System.Data;
 using Models.Tenfold.t_seller_list;
 using System.Threading.Tasks;
 using System.Linq;
+using System;
 
 namespace Seruichi.BL.Tenfold.t_seller_list
 {
@@ -88,8 +89,11 @@ namespace Seruichi.BL.Tenfold.t_seller_list
                     return newTable;
                 }
             }
-            dt.DefaultView.Sort = "SellerKana,売主CD";
-            return dt;
+            //dt.DefaultView.Sort = "SellerKana,売主CD";
+            DataView dv = dt.DefaultView;
+            dv.Sort = "SellerKana,売主CD";
+            DataTable dtSort = dv.ToTable();
+            return dtSort;
         }
         public DataTable Generate_CSV(t_seller_listModel model)
         {
@@ -180,7 +184,7 @@ namespace Seruichi.BL.Tenfold.t_seller_list
              {
                 new SqlParameter("@LogDateTime", SqlDbType.VarChar){ Value = model.LogDateTime },
                 new SqlParameter("@LoginKBN", SqlDbType.TinyInt){ Value = model.LoginKBN.ToByte(0) },
-                new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.SellerCD.ToStringOrNull() },
+                new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.LoginID.ToStringOrNull() },
                 new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull() },
                 new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.LoginName.ToStringOrNull() },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress },

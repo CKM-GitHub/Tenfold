@@ -182,6 +182,15 @@
         return this.removeAttr('data-validation-datecompare')
     };
 
+    $.fn.addvalidation_numcompare = function () {
+        return this
+            .attr('data_validation_numcompare', 'true')
+    };
+    $.fn.removeValidation_numcompare = function () {
+        return this.removeAttr('data_validation_numcompare')
+    };
+
+
     $.fn.addvalidation_checkboxlenght = function () {
         return this
             .attr('data-validation-checkboxlenght', 'true')

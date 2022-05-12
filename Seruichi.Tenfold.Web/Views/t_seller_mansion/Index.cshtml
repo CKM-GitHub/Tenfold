@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Views/Shared/t_seller_mansion/_t_seller_mansionLayout.cshtml";
+    Layout = "~/Views/Shared/_t_menuLayout.cshtml";
 }
 @section styles{
     @Styles.Render("~/Content/tenfold_css_common")
@@ -10,124 +10,130 @@
     }
 </style>
 
-<main class="py-6 bg-surface-secondary">
-    <div class="container-fluid">
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18" id="wrapper">
+    @Html.Partial("_t_seller_mansion_menuPartial")
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
 
-        <div class="card shadow border-0 mb-7">
+                <div class="card shadow border-0 mb-7">
 
-            <div class="card-header">
+                      <div class="card-header">
 
-                <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
+                            <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
 
-                    <h1 class="h2 mb-0 ls-tight">物件(部屋)</h1>
-                    <span class="ps-2 text-muted small align-self-end">管理</span>
-                </div>
-                <hr class="navbar-divider my-5 opacity-20"><div class="d-inline-flex">
-                    <h5 class="mb-0">物件(部屋)査定一覧</h5> <span class="ps-md-5 text-muted text-sm" id="total_record_up"></span>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-hover table-nowrap sortMe" id="mansiontable">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col" class="text-end text-decoration-underline sort-by" style="width:100px" data-type="number">No.</th>
-                                <th scope="col" style="width: 100px" class="text-decoration-underline sort-status">ステータス</th>
-                                <th scope="col" style="width: 100px" class="text-decoration-underline sort-by">物件CD</th>
-                                <th scope="col" style="width: 300px;" class="text-decoration-underline"><p id="a_apartment" class="p_tag">マンション名/</p><p id="p_address" class="p_tag">住所</p></th>
-                                <th scope="col" style="width: 100px" class="text-decoration-underline sort-by">部屋番号</th>
-                                <th scope="col" style="width: 100px" class="text-decoration-underline text-end sort-by" data-type="number">階数(階)</th>
-                                <th scope="col" style="width: 100px" class="text-decoration-underline text-end sort-by" data-type="number">面積(㎡)</th>
-                                <th scope="col" style="width: 300px" class="text-decoration-underline sort-by" ordercol-index="3">売主名</th>
-                                <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">登録日時</th>
-                                <th scope="col" style="width: 180px" class="text-decoration-underline sort-mix-td-and-a">詳細査定日時</th>
-                                <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">買取依頼日時</th>
-                                <th scope="col" style="min-width: 130px; width: 180px" class="text-decoration-underline"><p id="a_mansion" class="p_tag">マンション  Top1/</p><p id="p_mansionamount" class="p_tag">金額</p></th>
-                                <th scope="col" style="min-width: 110px; width: 180px " class="text-decoration-underline"><p id="a_area" class="p_tag">エリア Top1/</p><p id="p_areaamount" class="p_tag">金額</p></th>
-                                <th scope="col" style="min-width: 110px; width: 180px " class="text-decoration-underline"><p id="a_prcompany" class="p_tag">買取依頼会社/</p><p id="p_prcompanyamount" class="p_tag">金額</p></th>
-                                <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">送客日時</th>
-                                <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">成約日時</th>
-                                <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">辞退日時</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="card-footer border-0 py-5">
-                    <span class="text-muted text-sm" id="total_record">検索結果：999999件</span>
+                                <h1 class="h2 mb-0 ls-tight">物件(部屋)</h1>
+                                <span class="ps-2 text-muted small align-self-end">管理</span>
+                            </div>
+                            <hr class="navbar-divider my-5 opacity-20"><div class="d-inline-flex">
+                                <h5 class="mb-0">物件(部屋)査定一覧</h5> <span class="ps-md-5 text-muted text-sm" id="total_record_up"></span>
+                            </div>
+                        </div>
+                      <div class="table-responsive">
+                            <table class="table table-hover table-nowrap sortMe" id="mansiontable">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" class="text-end text-decoration-underline " style="width:100px" >No.</th>
+                                        <th scope="col" style="width: 100px" class="text-decoration-underline sort-status">ステータス</th>
+                                        <th scope="col" style="width: 100px" class="text-decoration-underline sort-by" ordercol-index="2">物件CD</th>
+                                        <th scope="col" style="width: 300px;" class="text-decoration-underline sort-by"><p id="a_apartment" class="p_tag">マンション名/</p><p id="p_address" class="p_tag">住所</p></th>
+                                        <th scope="col" style="width: 100px" class="text-decoration-underline sort-by" ordercol-index="4_2">部屋番号</th>
+                                        <th scope="col" style="width: 100px" class="text-decoration-underline text-end sort-by" data-type="number" ordercol-index="5_2">階数(階)</th>
+                                        <th scope="col" style="width: 100px" class="text-decoration-underline text-end sort-by" data-type="number" ordercol-index="6_2">面積(㎡)</th>
+                                        <th scope="col" style="width: 300px" class="text-decoration-underline sort-by" ordercol-index="7_2">売主名</th>
+                                        <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="8_2">登録日時</th>
+                                        <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="9_2">詳細査定日時</th>
+                                        <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="10_2">買取依頼日時</th>
+                                        <th scope="col" style="min-width: 130px; width: 180px" class="text-decoration-underline"><p id="a_mansion" class="p_tag">マンション  Top1/</p><p id="p_mansionamount" class="p_tag">金額</p></th>
+                                        <th scope="col" style="min-width: 110px; width: 180px " class="text-decoration-underline"><p id="a_area" class="p_tag">エリア Top1/</p><p id="p_areaamount" class="p_tag">金額</p></th>
+                                        <th scope="col" style="min-width: 110px; width: 180px " class="text-decoration-underline"><p id="a_prcompany" class="p_tag">買取依頼会社/</p><p id="p_prcompanyamount" class="p_tag">金額</p></th>
+                                        <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="14_2">送客日時</th>
+                                        <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="15_2">成約日時</th>
+                                        <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="16_2">辞退日時</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                      <div class="card-footer border-0 py-5">
+                            <span class="text-muted text-sm" id="total_record">検索結果：999999件</span>
+                      </div>
+                    
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- ポップアップ -->
-    <div class="modal fade" data-bs-backdrop="static" id="mansion" tabindex="-1" aria-labelledby="mansion" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered ">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="mansionLabel">
-                        物件(部屋)情報
-                    </h5>
-                    <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12 col-md-12">
+            <!-- ポップアップ -->
+            <div class="modal fade" data-bs-backdrop="static" id="mansion" tabindex="-1" aria-labelledby="mansion" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="mansionLabel">
+                                物件(部屋)情報
+                            </h5>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12 col-md-12">
 
-                            <div class="col-12">
-                                <div class="users-container">
+                                    <div class="col-12">
+                                        <div class="users-container">
 
-                                    <div class="users p-3">
-                                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                                                        data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                                                        aria-selected="true">
-                                                    物件(部屋)情報
-                                                </button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
-                                                        data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
-                                                        aria-selected="false">
-                                                    詳細情報
-                                                </button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
-                                                        data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
-                                                        aria-selected="false">
-                                                    売主情報
-                                                </button>
-                                            </li>
-                                        </ul>
-                                        <div class="tab-content" id="pills-tabContent">
-                                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                                                 aria-labelledby="pills-home-tab">
-                                                <section class="highlight-clean">
-                                                    <div>
-                                                        <div class="intro">
-                                                            <hr class="navbar-divider my-5 opacity-20">
-                                                            <div class="card shadow border-0">
-                                                                <div class="card-body " id="_header_mantion_info_home">                                                                   
-                                                                </div>
-                                                            </div>
-                                                            <hr class="navbar-divider my-5 opacity-20">
-                                                            <div class="card shadow border-0">
-                                                                <div class="card-body ">
-                                                                    <div class=" pb-0 pm-0">
-                                                                        <h6>交通アクセス</h6>
-                                                                        <div class="row justify-content-center" id="ekikoutsu"
-                                                                             style="width:100%;overflow-x: hidden;overflow-y: auto;max-height: 300px;">
-                                                                            <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                                                                <div class="card-body p-2 row">
-                                                                                    <div class="col-12">
-                                                                                        <h5> 路線名路線名路線名</h5>
-                                                                                    </div>
-                                                                                    <div class="col-12">
-                                                                                        <p class="text-dark">駅名駅名駅名駅名駅名</p>
-                                                                                    </div>
-                                                                                    <div class="col-12 text-end">
-                                                                                        <p class="text-dark">徒歩 99 分</p>
+                                            <div class="users p-3">
+                                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                                                                data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                                                                aria-selected="true">
+                                                            物件(部屋)情報
+                                                        </button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                                                data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                                                                aria-selected="false">
+                                                            詳細情報
+                                                        </button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                                                                data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                                                                aria-selected="false">
+                                                            売主情報
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content" id="pills-tabContent">
+                                                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                                                         aria-labelledby="pills-home-tab">
+                                                        <section class="highlight-clean">
+                                                            <div>
+                                                                <div class="intro">
+                                                                    <hr class="navbar-divider my-5 opacity-20">
+                                                                    <div class="card shadow border-0">
+                                                                        <div class="card-body " id="_header_mantion_info_home">
+                                                                        </div>
+                                                                    </div>
+                                                                    <hr class="navbar-divider my-5 opacity-20">
+                                                                    <div class="card shadow border-0">
+                                                                        <div class="card-body ">
+                                                                            <div class=" pb-0 pm-0">
+                                                                                <h6>交通アクセス</h6>
+                                                                                <div class="row justify-content-center" id="ekikoutsu"
+                                                                                     style="width:100%;overflow-x: hidden;overflow-y: auto;max-height: 300px;">
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> 路線名路線名路線名</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">駅名駅名駅名駅名駅名</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -135,57 +141,57 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </section>
                                                     </div>
-                                                </section>
-                                            </div>
 
-                                            <div class="tab-pane fade" data-bs-backdrop="static" id="pills-profile" role="tabpanel"
-                                                 aria-labelledby="pills-profile-tab">
-                                                <hr class="navbar-divider my-5 opacity-20">
-                                                <div class="card shadow border-0">
-                                                    <div class="card-body " id="_header_mantion_info_profile">
-                                                    </div>
-                                                </div>
-                                                <hr class="navbar-divider my-5 opacity-20">
-                                                <div class="card shadow border-0">
-                                                    <div class="card-body ">
-                                                        <div class="row">
-                                                            <div class="col-4" id="profile-first-column">
-                                                                <!--data list here-->
+                                                    <div class="tab-pane fade" data-bs-backdrop="static" id="pills-profile" role="tabpanel"
+                                                         aria-labelledby="pills-profile-tab">
+                                                        <hr class="navbar-divider my-5 opacity-20">
+                                                        <div class="card shadow border-0">
+                                                            <div class="card-body " id="_header_mantion_info_profile">
                                                             </div>
-
-                                                            <div class="col-4" id="profile-second-column">
-                                                                <!--data list here-->
-                                                            </div>
-
-                                                            <div class="col-4" id="profile-third-column">
-                                                                <!--data list here-->
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="tab-pane fade" data-bs-backdrop="static" id="pills-contact" role="tabpanel"
-                                                 aria-labelledby="pills-contact-tab">
-
-                                                <hr class="navbar-divider my-5 opacity-20">
-                                                <div class="card shadow border-0">
-                                                    <div class="card-body "id="_header_mantion_info_contact">
-                                                       
-                                                    </div>
-                                                </div>
-                                                <hr class="navbar-divider my-3 opacity-20">
-                                                <div class="card shadow border-0">
-                                                    <div class="card-body ">
-                                                        <div class="justify-content-around align-items-center row" id="contact-first">
-                                                            <!--data list here-->
-
                                                         </div>
                                                         <hr class="navbar-divider my-5 opacity-20">
-                                                        <div class="justify-content-around align-items-center row" id="contact-second">
-                                                            <!--data list here-->
+                                                        <div class="card shadow border-0">
+                                                            <div class="card-body ">
+                                                                <div class="row">
+                                                                    <div class="col-4" id="profile-first-column">
+                                                                        <!--data list here-->
+                                                                    </div>
+
+                                                                    <div class="col-4" id="profile-second-column">
+                                                                        <!--data list here-->
+                                                                    </div>
+
+                                                                    <div class="col-4" id="profile-third-column">
+                                                                        <!--data list here-->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="tab-pane fade" data-bs-backdrop="static" id="pills-contact" role="tabpanel"
+                                                         aria-labelledby="pills-contact-tab">
+
+                                                        <hr class="navbar-divider my-5 opacity-20">
+                                                        <div class="card shadow border-0">
+                                                            <div class="card-body " id="_header_mantion_info_contact">
+
+                                                            </div>
+                                                        </div>
+                                                        <hr class="navbar-divider my-3 opacity-20">
+                                                        <div class="card shadow border-0">
+                                                            <div class="card-body ">
+                                                                <div class="justify-content-around align-items-center row" id="contact-first">
+                                                                    <!--data list here-->
+
+                                                                </div>
+                                                                <hr class="navbar-divider my-5 opacity-20">
+                                                                <div class="justify-content-around align-items-center row" id="contact-second">
+                                                                    <!--data list here-->
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -195,20 +201,25 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary btn-close-modal-t-seller-mansion" data-bs-toggle="modal"
+                                    data-bs-target="#mansion">
+                                戻る
+                            </button>
+                        </div>
+
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn-close-modal-t-seller-mansion" data-bs-toggle="modal"
-                            data-bs-target="#mansion">
-                        戻る
-                    </button>
-                </div>
-
             </div>
-        </div>
+        </main>
+        
+        @Html.Partial("_t_footer")
     </div>
-</main>
+</div>
+
+
 
 @section Scripts{
     @Scripts.Render("~/bundles/t_seller_mansion")
 }
+<script src="~/Content/scripts/table_header_sort.js"></script>

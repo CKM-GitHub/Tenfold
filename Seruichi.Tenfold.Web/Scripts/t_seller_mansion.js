@@ -1,12 +1,4 @@
 ﻿const _url = {};
-let _apartment = 'asc';
-let _address = 'asc';
-let _mansion = 'asc';
-let _mansionamount = 'asc';
-let _area = 'asc';
-let _areaamount = 'asc';
-let _prcompany = 'asc';
-let _prcompanyamount = 'asc';
 let _header_mantion_info = "";
 $(function () {
      setValidation();
@@ -17,7 +9,9 @@ $(function () {
     _url.Get_Pills_Profile = common.appPath + '/t_seller_mansion/Get_Pills_Profile';
     _url.Get_Pills_Contact = common.appPath + '/t_seller_mansion/Get_Pills_Contact';
     addEvents();
-    tbl_columns_addevents();
+    
+    $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
+    $('#t_seller_mansion').addClass('font-bold text-underline');
 });
 function setValidation() {
     $('#MansionName')
@@ -178,87 +172,7 @@ function addEvents()
     });
 }
 
-function tbl_columns_addevents() {
-    $('#a_apartment').on('click', function () {
-        const multiplier = _apartment === 'asc' ? 1 : -1;
-        sort_table_columns(3, 'a', multiplier);
-        // Reverse the direction
-        if (_apartment == 'asc')
-            _apartment = 'desc';
-        else
-            _apartment = 'asc';
-    });
 
-    $('#p_address').on('click', function () {
-        const multiplier = _address === 'asc' ? 1 : -1;
-        sort_table_columns(3, 'p', multiplier);
-        // Reverse the direction
-        if (_address == 'asc')
-            _address = 'desc';
-        else
-            _address = 'asc';
-    });
-
-    $('#a_mansion').on('click', function () {
-        const multiplier = _mansion === 'asc' ? 1 : -1;
-        sort_table_columns(11, 'a', multiplier);
-        // Reverse the direction
-        if (_mansion == 'asc')
-            _mansion = 'desc';
-        else
-            _mansion = 'asc';
-    });
-
-    $('#p_mansionamount').on('click', function () {
-        const multiplier = _mansionamount === 'asc' ? 1 : -1;
-        sort_table_columns(11, 'p', multiplier);
-        // Reverse the direction
-        if (_mansionamount == 'asc')
-            _mansionamount = 'desc';
-        else
-            _mansionamount = 'asc';
-    });
-
-    $('#a_area').on('click', function () {
-        const multiplier = _area === 'asc' ? 1 : -1;
-        sort_table_columns(12, 'a', multiplier);
-        // Reverse the direction
-        if (_area == 'asc')
-            _area = 'desc';
-        else
-            _area = 'asc';
-    });
-
-    $('#p_areaamount').on('click', function () {
-        const multiplier = _areaamount === 'asc' ? 1 : -1;
-        sort_table_columns(12, 'p', multiplier);
-        // Reverse the direction
-        if (_areaamount == 'asc')
-            _areaamount = 'desc';
-        else
-            _areaamount = 'asc';
-    });
-
-    $('#a_prcompany').on('click', function () {
-        const multiplier = _prcompany === 'asc' ? 1 : -1;
-        sort_table_columns(13, 'a', multiplier);
-        // Reverse the direction
-        if (_prcompany == 'asc')
-            _prcompany = 'desc';
-        else
-            _prcompany = 'asc';
-    });
-
-    $('#p_prcompanyamount').on('click', function () {
-        const multiplier = _prcompanyamount === 'asc' ? 1 : -1;
-        sort_table_columns(13, 'p', multiplier);
-        // Reverse the direction
-        if (_prcompanyamount == 'asc')
-            _prcompanyamount = 'desc';
-        else
-            _prcompanyamount = 'asc';
-    });
-}
 
 function getM_SellerMansionList(model, $form) {
 
@@ -709,74 +623,4 @@ function Bind_popup_contact(result) {
         $('#contact-first').append(contact_first);
         $('#contact-second').append(contact_second);
     }
-}
-
-function sort_table_columns(index, col_type, multiplier) {
-    const table = document.getElementById('mansiontable');
-    const headers = table.querySelectorAll('th');
-    const tableBody = table.querySelector('tbody');
-    const rows = tableBody.querySelectorAll('tr');
-
-    // Transform the content of given cell in given column
-    const transform = function (index, content) {
-        // Get the data type of column           
-        const type = headers[index].getAttribute('data-type');
-        switch (type) {
-            case 'number':
-                return parseFloat(content);
-            case 'string':
-            default:
-                return content;
-        }
-    };
-
-    const newRows = Array.from(rows);
-
-    if (col_type == 'a') {
-        // A factor based on the direction
-        newRows.sort(function (rowA, rowB) {
-            const cellA = rowA.querySelectorAll('td')[index].querySelectorAll('a')[0].innerHTML;
-            const cellB = rowB.querySelectorAll('td')[index].querySelectorAll('a')[0].innerHTML;
-
-            const a = transform(index, cellA);
-            const b = transform(index, cellB);
-
-            switch (true) {
-                case a > b:
-                    return 1 * multiplier;
-                case a < b:
-                    return -1 * multiplier;
-                case a === b:
-                    return 0;
-            }
-        });
-    }
-    else if (col_type == 'p') {
-        // A factor based on the direction
-        newRows.sort(function (rowA, rowB) {
-            const cellA = rowA.querySelectorAll('td')[index].querySelectorAll('p')[0].innerHTML;
-            const cellB = rowB.querySelectorAll('td')[index].querySelectorAll('p')[0].innerHTML;
-
-            const a = transform(index, cellA);
-            const b = transform(index, cellB);
-
-            switch (true) {
-                case a > b:
-                    return 1 * multiplier;
-                case a < b:
-                    return -1 * multiplier;
-                case a === b:
-                    return 0;
-            }
-        });
-    }
-
-    // Remove old rows
-    [].forEach.call(rows, function (row) {
-        tableBody.removeChild(row);
-    });
-    // Append new row
-    newRows.forEach(function (newRow) {
-        tableBody.appendChild(newRow);
-    });
 }

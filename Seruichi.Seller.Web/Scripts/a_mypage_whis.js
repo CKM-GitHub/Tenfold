@@ -13,8 +13,16 @@ function addEvents() {
     getSellerList(model, this);
     common.addPager('#getSellerCD', 10);
     $('#mypage_whis').addClass('active');
-    if ($('#pager').children('li').eq(1))
+
+    //if ($('#pager').children('li').eq(1))
+    //    $('#pager').children('li').eq(1).addClass('active');
+
+    if ($("tbody tr").length >= 10) {
         $('#pager').children('li').eq(1).addClass('active');
+
+    }
+   
+  
 }
 function getSellerList(model, $form) {
     common.callAjaxWithLoadingSync(_url.getSellerList, model, this, function (result) {

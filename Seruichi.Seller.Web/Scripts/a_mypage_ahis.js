@@ -11,8 +11,13 @@ $(function () {
     GetAssHistoryData(model, this)
     common.addPager('#GetAssHistory', 10); 
     $('#mypage_ahis').addClass('active');  
-    if ($('#pager').children('li').eq(1))
+    //if ($('#pager').children('li').eq(1))
+    //    $('#pager').children('li').eq(1).addClass('active');
+
+    if ($("tbody tr").length >= 10) {
         $('#pager').children('li').eq(1).addClass('active');
+
+    }
 
     //class="active"
 }); 

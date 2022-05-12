@@ -19,7 +19,7 @@
             const type = headers[index].getAttribute('data-type');
             switch (type) {
                 case 'number':
-                    return parseFloat(content);
+                    return parseFloat(content.replace(/,/gi, ''));
                 case 'string':
                 default:
                     return content;
@@ -27,7 +27,7 @@
         };
 
         const sortColumn = function (index) {
-            var col_index = [];
+            var col_index = [], multiplier;
             if (headers[index].hasAttribute('ordercol-index'))
                 col_index = headers[index].getAttribute('ordercol-index').split('_');
             else
@@ -36,13 +36,19 @@
             const direction = directions[col_index[0]] || 'asc';
 
             // A factor based on the direction
-            const multiplier = direction === 'asc' ? 1 : -1;
+            if (index == 0) {
+                multiplier = 1;
+                if (headers[index].hasAttribute('ordercol-direction'))
+                    multiplier = headers[index].getAttribute('ordercol-direction') === 'asc' ? 1 : -1;
+            }
+            else
+                multiplier = direction === 'asc' ? 1 : -1;
 
             const newRows = Array.from(rows);
-           
+
             newRows.sort(function (rowA, rowB) {
                 var count = col_index.length;
-                let cellA, cellB, cellC, cellD, cellE, cellF;
+                let cellA, cellB, cellC, cellD, cellE, cellF, col_type1 = '', col_type2 = '', col_type3 = '';
                 let a, b, c, d, e, f;
                 var index1 = col_index[0];
                 if (rowA.querySelectorAll('td')[index1].querySelectorAll('a').length > 0) {
@@ -53,12 +59,20 @@
                     cellA = rowA.querySelectorAll('td')[index1].innerHTML;
                     cellB = rowB.querySelectorAll('td')[index1].innerHTML;
                 }
+                col_type1 = headers[index1].hasAttribute('data-type') ? headers[index1].getAttribute('data-type') : '';
                 a = transform(index1, cellA);
                 b = transform(index1, cellB);
 
                 switch (count) {
-                    case 1: if (multiplier == 1) return a.localeCompare(b, "ja-JP");
-                        else return b.localeCompare(a, "ja-JP");
+                    case 1:
+                        if (col_type1 == 'number') {
+                            if (multiplier == 1) return a - b;
+                            else return b - a;
+                        }
+                        else {
+                            if (multiplier == 1) return a.localeCompare(b, "ja-JP");
+                            else return b.localeCompare(a, "ja-JP");
+                        }
 
                     case 2: var index2 = col_index[1];
                         if (rowA.querySelectorAll('td')[index2].querySelectorAll('a').length > 0) {
@@ -69,16 +83,29 @@
                             cellC = rowA.querySelectorAll('td')[index2].innerHTML;
                             cellD = rowB.querySelectorAll('td')[index2].innerHTML;
                         }
+                        col_type2 = headers[index2].hasAttribute('data-type') ? headers[index2].getAttribute('data-type') : '';
                         c = transform(index2, cellC);
                         d = transform(index2, cellD);
 
                         if (a !== b) {
-                            if (multiplier == 1) return a.localeCompare(b, "ja-JP");
-                            else return b.localeCompare(a, "ja-JP");
+                            if (col_type1 == 'number') {
+                                if (multiplier == 1) return a - b;
+                                else return b - a;
+                            }
+                            else {
+                                if (multiplier == 1) return a.localeCompare(b, "ja-JP");
+                                else return b.localeCompare(a, "ja-JP");
+                            }
                         }
                         else if (c !== d) {
-                            if (multiplier == 1) return c.localeCompare(d, "ja-JP");
-                            else return d.localeCompare(c, "ja-JP");
+                            if (col_type2 == 'number') {
+                                if (multiplier == 1) return c - d;
+                                else return d - c;
+                            }
+                            else {
+                                if (multiplier == 1) return c.localeCompare(d, "ja-JP");
+                                else return d.localeCompare(c, "ja-JP");
+                            }
                         }
 
                     case 3: var index2 = col_index[1];
@@ -90,6 +117,7 @@
                             cellC = rowA.querySelectorAll('td')[index2].innerHTML;
                             cellD = rowB.querySelectorAll('td')[index2].innerHTML;
                         }
+                        col_type2 = headers[index2].hasAttribute('data-type') ? headers[index2].getAttribute('data-type') : '';
                         c = transform(index2, cellC);
                         d = transform(index2, cellD);
 
@@ -102,20 +130,39 @@
                             cellE = rowA.querySelectorAll('td')[index3].innerHTML;
                             cellF = rowB.querySelectorAll('td')[index3].innerHTML;
                         }
+                        col_type3 = headers[index3].hasAttribute('data-type') ? headers[index3].getAttribute('data-type') : '';
                         e = transform(index3, cellE);
                         f = transform(index3, cellF);
 
                         if (a !== b) {
-                            if (multiplier == 1) return a.localeCompare(b, "ja-JP");
-                            else return b.localeCompare(a, "ja-JP");
+                            if (col_type1 == 'number') {
+                                if (multiplier == 1) return a - b;
+                                else return b - a;
+                            }
+                            else {
+                                if (multiplier == 1) return a.localeCompare(b, "ja-JP");
+                                else return b.localeCompare(a, "ja-JP");
+                            }
                         }
                         else if (c !== d) {
-                            if (multiplier == 1) return c.localeCompare(d, "ja-JP");
-                            else return d.localeCompare(c, "ja-JP");
+                            if (col_type2 == 'number') {
+                                if (multiplier == 1) return c - d;
+                                else return d - c;
+                            }
+                            else {
+                                if (multiplier == 1) return c.localeCompare(d, "ja-JP");
+                                else return d.localeCompare(c, "ja-JP");
+                            }
                         }
                         else if (e !== f) {
-                            if (multiplier == 1) return e.localeCompare(f, "ja-JP");
-                            else return f.localeCompare(e, "ja-JP");
+                            if (col_type3 == 'number') {
+                                if (multiplier == 1) return e - f;
+                                else return f - e;
+                            }
+                            else {
+                                if (multiplier == 1) return e.localeCompare(f, "ja-JP");
+                                else return f.localeCompare(e, "ja-JP");
+                            }
                         }
                 }
             });
@@ -129,7 +176,10 @@
             directions[col_index[0]] = direction === 'asc' ? 'desc' : 'asc';
 
             // Append new row
+            var count = 0;
             newRows.forEach(function (newRow) {
+                count = count + 1;
+                newRow.querySelectorAll('td')[0].innerHTML = count;
                 tableBody.appendChild(newRow);
             });
         };

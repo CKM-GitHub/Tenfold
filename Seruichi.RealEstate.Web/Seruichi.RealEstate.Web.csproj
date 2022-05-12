@@ -233,6 +233,7 @@
     <Content Include="Views\r_dashboard\Index.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\r_com_profile\Index.cshtml" />
+    <Content Include="Views\Shared\_ErrorLayout.cshtml" />
     <Content Include="Views\r_asmc\Index.cshtml" />
     <Content Include="Views\r_asmc_address\Index.cshtml" />
     <Content Include="Views\r_asmc_address\_r_asmc_address_left_sideNavigation_menu.cshtml" />
