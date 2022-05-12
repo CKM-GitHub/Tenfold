@@ -195,10 +195,12 @@ function Bind_tbody(result) {
                     _sort_checkbox = "3";
                 }
                 else if (_letter == "売") {
+                    _letter = "辞";
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger";
                     _sort_checkbox = "4";
                 }
                 else if (_letter == "買") {
+                    _letter = "辞";
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-dark text-white";
                     _sort_checkbox = "5";
                 }
@@ -326,10 +328,12 @@ function Bind_Model_tbody(result) {
                     _sort_checkbox = "3";
                 }
                 else if (_letter == "売") {
+                    _letter = "辞";
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger";
                     _sort_checkbox = "4";
                 }
                 else if (_letter == "買") {
+                    _letter = "辞";
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-dark text-white";
                     _sort_checkbox = "5";
                 }
