@@ -604,6 +604,7 @@ const common = {
             var totalRows = 0;
             totalRows = $(tb + " tbody tr").length;
         var maxRows = parseInt(count);
+        if (totalRows > 10) {
             if (totalRows > maxRows) {
                 var pagenum = Math.ceil(totalRows / maxRows);
                 for (var i = 1; i <= pagenum;) {
@@ -660,8 +661,11 @@ const common = {
                     }
                 });
             });
-        common.limitPager(count);
-        $(tb + " tr:gt(" + count + ")").hide()
+            common.limitPager(count);
+            $(tb + " tr:gt(" + count + ")").hide()}
+           
+        
+           
       
     },
 }
