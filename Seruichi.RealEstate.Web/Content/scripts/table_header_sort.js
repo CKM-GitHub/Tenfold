@@ -27,7 +27,7 @@
         };
 
         const sortColumn = function (index) {
-            var col_index = [];
+            var col_index = [], multiplier;
             if (headers[index].hasAttribute('ordercol-index'))
                 col_index = headers[index].getAttribute('ordercol-index').split('_');
             else
@@ -36,10 +36,16 @@
             const direction = directions[col_index[0]] || 'asc';
 
             // A factor based on the direction
-            const multiplier = direction === 'asc' ? 1 : -1;
+            if (index == 0) {
+                multiplier = 1;
+                if (headers[index].hasAttribute('ordercol-direction'))
+                    multiplier = headers[index].getAttribute('ordercol-direction') === 'asc' ? 1 : -1;
+            }
+            else
+                multiplier = direction === 'asc' ? 1 : -1;
 
             const newRows = Array.from(rows);
-           
+
             newRows.sort(function (rowA, rowB) {
                 var count = col_index.length;
                 let cellA, cellB, cellC, cellD, cellE, cellF, col_type1 = '', col_type2 = '', col_type3 = '';
@@ -53,7 +59,7 @@
                     cellA = rowA.querySelectorAll('td')[index1].innerHTML;
                     cellB = rowB.querySelectorAll('td')[index1].innerHTML;
                 }
-                col_type1 = headers[index1].hasAttribute('data-type')? headers[index1].getAttribute('data-type') : '';
+                col_type1 = headers[index1].hasAttribute('data-type') ? headers[index1].getAttribute('data-type') : '';
                 a = transform(index1, cellA);
                 b = transform(index1, cellB);
 
