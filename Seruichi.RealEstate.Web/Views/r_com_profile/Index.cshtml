@@ -20,8 +20,6 @@
                             <span class="text-muted small">設定</span>
                         </div>
                         <div class="col-sm-6 col-12 text-sm-end">
-                            <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
-                  <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
                         </div>
                     </div>
                     <ul class="nav nav-tabs mt-0 overflow-x border-0 ps-5">
@@ -44,26 +42,26 @@
                                             <div class="mb-4 pb-2">
                                                 <h5 class="pb-2">会社情報</h5>
                                                 <div class="form-outline">
-                                                    <label class="form-label" for="form3Examplev4">社名</label>
-                                                    <input type="text" id="form3Examplev4" class="form-control form-control-lg" readonly />
+                                                    <label class="form-label" for="txtREName">社名</label>
+                                                    <input type="text" id="txtREName" name="txtREName" class="form-control form-control-lg" readonly />
                                                 </div>
                                             </div>
                                             <div class="mb-4 pb-2">
                                                 <div class="form-outline">
-                                                    <label class="form-label" for="form3Examplev4">社名(フリガナ)</label>
-                                                    <input type="text" id="form3Examplev4" class="form-control form-control-lg" readonly />
+                                                    <label class="form-label" for="txtREKana">社名(フリガナ)</label>
+                                                    <input type="text" id="txtREKana" name="txtREKana" class="form-control form-control-lg" readonly />
                                                 </div>
                                             </div>
                                             <div class="mb-4 pb-2">
                                                 <div class="form-outline">
-                                                    <label class="form-label" for="form3Examplev4">代表者名</label>
-                                                    <input type="text" id="form3Examplev4" class="form-control form-control-lg" readonly />
+                                                    <label class="form-label" for="txtPresident">代表者名</label>
+                                                    <input type="text" id="txtPresident" name="txtPresident" class="form-control form-control-lg" readonly />
                                                 </div>
                                             </div>
                                             <div class="mb-4 pb-2">
                                                 <div class="form-outline cap-fon-form-w150">
-                                                    <label class="form-label" for="form3Examplev4">サービス参加日</label>
-                                                    <input type="date" id="form3Examplev4" class="form-control form-control-lg text-center" value="2000-01-01" readonly />
+                                                    <label class="form-label" for="txtJoinedDate">サービス参加日</label>
+                                                    <input type="date" id="txtJoinedDate" name="txtJoinedDate" class="form-control form-control-lg text-center" readonly />
                                                 </div>
                                             </div>
                                             <hr class="navbar-divider mb-4 my-5 opacity-20">
@@ -76,13 +74,13 @@
                                                                 <span class="text-dark">〒</span>
                                                             </div>
                                                             <div class="col-4 col-md-3 pe-0 ms-0 me-0 align-self-centeralign-self-center">
-                                                                <input class="form-control text-center w-100" type="text" readonly value="123" maxlength="3">
+                                                                <input class="form-control text-center w-100" type="text" id="txtZipCode1" name="txtZipCode1" maxlength="3" readonly>
                                                             </div>
                                                             <div class="col-1 ps-0 pe-0 ms-0 me-0 text-center align-self-center">
                                                                 <span class="align-self-center text-dark">―</span>
                                                             </div>
                                                             <div class="col-4 ps-0 pe-0 ms-0 me-0 align-self-center">
-                                                                <input class="form-control text-center w-100" type="text" value="4567" maxlength="4" readonly />
+                                                                <input class="form-control text-center w-100" type="text" id="txtZipCode2" name="txtZipCode2" maxlength="4" readonly />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -90,28 +88,28 @@
                                             </div>
                                             <div class="mb-4 pb-2">
                                                 <div class="form-outline form-white">
-                                                    <label class="form-label" for="form3Examplea2">都道府県</label>
+                                                    <label class="form-label" for="txtPrefName">都道府県</label>
                                                     <div class="dropdown w-100">
-                                                        <input type="text" id="form3Examplea3" class="form-control form-control-lg" value="京都府" readonly />
+                                                        <input type="text" id="txtPrefName" name="txtPrefName" class="form-control form-control-lg" readonly />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="mb-4 pb-2">
                                                 <div class="form-outline form-white">
-                                                    <label class="form-label" for="form3Examplea3">市町村区</label>
-                                                    <input type="text" id="form3Examplea3" class="form-control form-control-lg" value="京都市東山区" readonly />
+                                                    <label class="form-label" for="txtCity_Town">市町村区</label>
+                                                    <input type="text" id="txtCity_Town" name="txtCity_Town" class="form-control form-control-lg" readonly />
                                                 </div>
                                             </div>
                                             <div class="mb-4 pb-2">
                                                 <div class="form-outline form-white">
-                                                    <label class="form-label" for="form3Examplea3">住所</label>
-                                                    <input type="text" id="form3Examplea3" class="form-control form-control-lg" value="三条通南二筋目白川筋西入ル二丁目北木之元町3-5-5" readonly />
+                                                    <label class="form-label" for="txtAddress1">住所</label>
+                                                    <input type="text" id="txtAddress1" name="txtAddress1" class="form-control form-control-lg" readonly />
                                                 </div>
                                             </div>
                                             <div class="mb-4 pb-2">
                                                 <div class="form-outline form-white">
-                                                    <label class="form-label" for="form3Examplea6">建物名</label>
-                                                    <input type="text" id="form3Examplea6" class="form-control form-control-lg" value="あああああああああマンション" readonly />
+                                                    <label class="form-label" for="txtAddress2">建物名</label>
+                                                    <input type="text" id="txtAddress2" name="txtAddress2" class="form-control form-control-lg" readonly />
                                                 </div>
                                             </div>
                                             <hr class="navbar-divider mb-4 my-5 opacity-20">
@@ -122,48 +120,50 @@
                                             <div class="mb-4 pb-2">
                                                 <h5 class="pb-2">メイン担当者</h5>
                                                 <div class="form-outline">
-                                                    <label class="form-label" for="form3Examplev4">お名前</label>
-                                                    <input type="text" id="form3Examplev4" class="form-control form-control-lg" readonly />
+                                                    <label class="form-label" for="txtPICName">お名前</label>
+                                                    <input type="text" id="txtPICName" name="txtPICName" class="form-control form-control-lg" readonly />
                                                 </div>
                                             </div>
                                             <div class="mb-4 pb-2">
                                                 <div class="form-outline">
-                                                    <label class="form-label" for="form3Examplev4">お名前(フリガナ)</label>
-                                                    <input type="text" id="form3Examplev4" class="form-control form-control-lg" readonly />
+                                                    <label class="form-label" for="txtPICKana">お名前(フリガナ)</label>
+                                                    <input type="text" id="txtPICKana" name="txtPICKana" class="form-control form-control-lg" readonly />
                                                 </div>
                                             </div>
                                             <hr class="navbar-divider mb-4 my-5 opacity-20">
                                             <div class="mb-4 pb-2">
                                                 <h5 class="pb-2">連絡方法</h5>
                                                 <div class="form-outline form-white">
-                                                    <label class="form-label" for="form3Examplea6">電話番号</label>
-                                                    <input type="text" id="form3Examplea6" class="form-control form-control-lg" value="0678545689" readonly />
+                                                    <label class="form-label" for="txtHousePhone">電話番号</label>
+                                                    <input type="text" id="txtHousePhone" name="txtHousePhone" class="form-control form-control-lg" readonly />
                                                 </div>
                                             </div>
                                             <div class="mb-4">
                                                 <div class="form-outline form-white">
-                                                    <label class="form-label" for="form3Examplea9">FAX番号</label>
-                                                    <input type="text" id="form3Examplea9" class="form-control form-control-lg" value="0611112223" readonly />
+                                                    <label class="form-label" for="txtFax">FAX番号</label>
+                                                    <input type="text" id="txtFax" name="txtFax" class="form-control form-control-lg" readonly />
                                                 </div>
                                             </div>
                                             <div class="mb-4">
                                                 <div class="form-outline form-white">
-                                                    <label class="form-label" for="form3Examplea9">メールアドレス</label>
-                                                    <input type="text" id="form3Examplea9" class="form-control form-control-lg" value="aaaaabbbb@ggggg.cccc" readonly />
+                                                    <label class="form-label" for="txtMailAddress">メールアドレス</label>
+                                                    <input type="text" id="txtMailAddress" name="txtMailAddress" class="form-control form-control-lg" readonly />
                                                 </div>
                                             </div>
                                             <hr class="navbar-divider mb-4 my-5 opacity-20">
                                             <div class="mb-4">
                                                 <h5 class="pb-2">営業日</h5>
                                                 <div class="form-outline form-white">
-                                                    <label class="form-label" for="form3Examplea9">営業時間</label>
-                                                    <input type="text" id="form3Examplea9" class="form-control form-control-lg" value="9:00~18:00" />
+                                                    <label class="form-label" for="txtBusinessHours">営業時間</label>
+                                                    <span class="cap-errormsg-bottom" id="errorBusinessHours"></span>
+                                                    <input type="text" id="txtBusinessHours" name="txtBusinessHours" class="form-control form-control-lg" />
                                                 </div>
                                             </div>
                                             <div class="mb-4">
                                                 <div class="form-outline form-white">
-                                                    <label class="form-label" for="form3Examplea9">定休日</label>
-                                                    <input type="text" id="form3Examplea9" class="form-control form-control-lg" value="土、日" />
+                                                    <label class="form-label" for="txtCompanyHoliday">定休日</label>
+                                                    <span class="cap-errormsg-bottom" id="errorCompanyHoliday"></span>
+                                                    <input type="text" id="txtCompanyHoliday" name="txtCompanyHoliday" class="form-control form-control-lg" />
                                                 </div>
                                             </div>
                                             <hr class="navbar-divider mb-4 my-5 opacity-20">
@@ -171,28 +171,28 @@
                                                 <h5 class="pb-2">口座情報</h5>
                                                 <div class="col-12 col-md-5 form-outline form-white pb-3 ">
                                                     <div class="dropdown w-100">
-                                                        <input type="text" id="form3Examplea3" class="form-control form-control-lg" value="BankName" readonly />
+                                                        <input type="text" id="txtBankName" name="txtBankName" class="form-control form-control-lg" readonly />
                                                     </div>
                                                 </div>
                                                 <div class="col-12 pb-3 ">
-                                                    <label class="form-label" for="form3Examplea9">支店名</label>
-                                                    <input type="text" id="form3Examplev4" class="form-control form-control-lg texc" autocomplete="off" value="天満支店(000)" readonly />
+                                                    <label class="form-label" for="txtBranchName">支店名</label>
+                                                    <input type="text" id="txtBranchName" name="txtBranchName" class="form-control form-control-lg texc" autocomplete="off" readonly />
                                                 </div>
                                             </div>
                                             <div class="mb-4 row">
                                                 <div class="col-12 form-outline form-white pb-3">
-                                                    <label class="form-label" for="form3Examplea9">口座種類</label>
-                                                    <input type="text" id="form3Examplev4" class="form-control form-control-lg texc" autocomplete="off" value="普通" readonly />
+                                                    <label class="form-label" for="txtSourceAccountType">口座種類</label>
+                                                    <input type="text" id="txtSourceAccountType" name="txtSourceAccountType" class="form-control form-control-lg texc" autocomplete="off" readonly />
                                                 </div>
                                                 <div class="col-12 pb-3">
-                                                    <label class="form-label" for="form3Examplea9">口座番号</label>
-                                                    <input type="text" id="form3Examplev4" class="form-control form-control-lg" autocomplete="off" value="1000221" readonly />
+                                                    <label class="form-label" for="txtSourceAccount">口座番号</label>
+                                                    <input type="text" id="txtSourceAccount" name="txtSourceAccount" class="form-control form-control-lg" autocomplete="off" readonly />
                                                 </div>
                                             </div>
                                             <div class="mb-4">
                                                 <div class="form-outline form-white pb-3 ">
-                                                    <label class="form-label" for="form3Examplea9">名義人</label>
-                                                    <input type="text" id="form3Examplea9" class="form-control form-control-lg" value="キャピタル不動産" readonly />
+                                                    <label class="form-label" for="txtSourceAccountName">名義人</label>
+                                                    <input type="text" id="txtSourceAccountName" name="txtSourceAccountName" class="form-control form-control-lg" readonly />
                                                 </div>
                                             </div>
                                             <hr class="navbar-divider mb-4 my-5 opacity-20">
@@ -203,18 +203,18 @@
                                             <div class="mb-4 pb-2 row">
                                                 <h5 class="pb-2">宅建免許番号</h5>
                                                 <div class="col-12 form-outline form-white pb-3">
-                                                    <label class="form-label" for="form3Examplea2">免許発行主体</label>
-                                                    <input type="text" id="form3Examplea9" class="form-control form-control-lg text-center cap-fon-form-w250" value="国土交通大臣免許" readonly />
+                                                    <label class="form-label" for="txtLicenceNo1">免許発行主体</label>
+                                                    <input type="text" id="txtLicenceNo1" name="txtLicenceNo1" class="form-control form-control-lg text-center cap-fon-form-w250" readonly />
                                                 </div>
                                                 <div class="col-4">
-                                                    <label class="form-label" for="form3Examplea2">更新回数</label>
-                                                    <input type="text" id="form3Examplev4" class="form-control form-control-lg text-center" autocomplete="off" value="99" readonly />
+                                                    <label class="form-label" for="txtLicenceNo2">更新回数</label>
+                                                    <input type="text" id="txtLicenceNo2" name="txtLicenceNo2" class="form-control form-control-lg text-center" autocomplete="off" readonly />
                                                 </div>
                                                 <div class="col-8">
-                                                    <label class="form-label" for="form3Examplea2">免許番号</label>
+                                                    <label class="form-label" for="txtLicenceNo3">免許番号</label>
                                                     <div class="d-inline-flex ">
                                                         <span class="align-self-center pe-1">第</span>
-                                                        <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg text-center" autocomplete="off" value="999999" />
+                                                        <input type="text" id="txtLicenceNo3" name="txtLicenceNo3" class="form-control form-control-lg text-center" autocomplete="off" readonly />
                                                         <span class="align-self-center ps-1">号</span>
                                                     </div>
                                                 </div>
@@ -225,19 +225,20 @@
                                                     <div class="mb-4 pb-2">
                                                         <h5 class="pb-2">ログイン情報(admin)</h5>
                                                         <div class="form-outline">
-                                                            <label class="form-label" for="form3Examplev4">パスワード</label>
+                                                            <label class="form-label" for="txtPassword">パスワード</label>
+                                                            <span class="cap-errormsg-bottom" id="errorPassword"></span>
                                                             <div class="passkey-box">
-                                                                <input type="password" name="passkey" id="passkey" class="passkey form-control" placeholder="パスワード" required="required" />
+                                                                <input type="password" id="txtPassword" name="txtPassword" class="passkey form-control" placeholder="パスワード" required="required" />
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline">
-                                                            <label class="form-label" for="form3Examplev4">パスワード再確認</label>
-                                                            <input type="password" name="passkey1" id="passkey" class="passkey form-control" placeholder="パスワード" required="required">
+                                                            <label class="form-label" for="txtConfirmPassword">パスワード再確認</label>
+                                                            <span class="cap-errormsg-bottom" id="errorConfirmPassword"></span>
+                                                            <input type="password" id="txtConfirmPassword" name="txtConfirmPassword" class="passkey form-control" placeholder="パスワード" required="required">
                                                         </div>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -248,18 +249,18 @@
                     </div>
                     <div class="card-footer">
                         <div class="text-right mt-3 float-end">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">確認</button>&nbsp;
-                            <button type="button" class="btn btn-default">取消</button>
+                            <button type="button" class="btn btn-primary" id="btnConfirm" data-bs-toggle="modal" data-bs-target="#ConfirmModal">確認</button>&nbsp;
+                            <button type="button" class="btn btn-default" id="btnCancel">取消</button>
                         </div>
                     </div>
                 </div>
                 <!-- Modal -->
-                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="exampleModal" tabindex="-1"
-                     role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="ConfirmModal" tabindex="-1"
+                     role="dialog" aria-labelledby="ConfirmModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">変更内容確認</h5>
+                                <h5 class="modal-title" id="ConfirmModalLabel">変更内容確認</h5>
                                 <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -274,26 +275,26 @@
                                                     <div class="mb-4 pb-2">
                                                         <h5 class="pb-2">会社情報</h5>
                                                         <div class="form-outline">
-                                                            <label class="form-label" for="form3Examplev4">社名</label>
-                                                            <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg" />
+                                                            <label class="form-label" for="m_txtREName">社名</label>
+                                                            <input readonly type="text" id="m_txtREName" class="form-control form-control-lg" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline">
-                                                            <label class="form-label" for="form3Examplev4">社名(フリガナ)</label>
-                                                            <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg" />
+                                                            <label class="form-label" for="m_txtREKana">社名(フリガナ)</label>
+                                                            <input readonly type="text" id="m_txtREKana" class="form-control form-control-lg" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline">
-                                                            <label class="form-label" for="form3Examplev4">代表者名</label>
-                                                            <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg" />
+                                                            <label class="form-label" for="m_txtPresident">代表者名</label>
+                                                            <input readonly type="text" id="m_txtPresident" class="form-control form-control-lg" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline cap-fon-form-w150">
-                                                            <label class="form-label" for="form3Examplev4">サービス参加日</label>
-                                                            <input readonly type="date" id="form3Examplev4" class="form-control form-control-lg text-center" value="2000-01-01" readonly />
+                                                            <label class="form-label" for="m_txtJoinedDate">サービス参加日</label>
+                                                            <input readonly type="date" id="m_txtJoinedDate" class="form-control form-control-lg text-center" value="2000-01-01" readonly />
                                                         </div>
                                                     </div>
                                                     <hr class="navbar-divider mb-4 my-5 opacity-20">
@@ -303,44 +304,42 @@
                                                             <label class="form-label" for="form3Examplea4">郵便番号</label>
                                                             <div class="col-12 col-md-8 d-inline-flex mb-4 mb-md-0 pb-md-0 pb-2">
                                                                 <span class="align-self-center pe-2 text-dark">〒</span>
-                                                                <input readonly class="form-control text-center w-50" type="text" value="123">
+                                                                <input readonly class="form-control text-center w-50" type="text" id="m_txtZipCode1" >
                                                                 <span class="align-self-center pe-2 ps-2 text-dark">-</span>
-                                                                <input readonlyclass="form-control w-50 text-center" type="text" value="4567">
+                                                                <input readonly class="form-control w-50 text-center" type="text" id="m_txtZipCode2" >
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline form-white">
-                                                            <label class="form-label" for="form3Examplea2">都道府県</label>
+                                                            <label class="form-label" for="m_txtPrefName">都道府県</label>
                                                             <div class="dropdown w-100">
-                                                                <input readonly type="text" id="form3Examplea3" class="form-control form-control-lg" value="京都府" />
+                                                                <input readonly type="text" id="m_txtPrefName" class="form-control form-control-lg" />
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline form-white">
-                                                            <label class="form-label" for="form3Examplea3">市町村区</label>
-                                                            <input readonly type="text" id="form3Examplea3" class="form-control form-control-lg" value="京都市東山区" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="mb-4 pb-2">
-                                                        <div class="form-outline form-white">
-                                                            <label class="form-label" for="form3Examplea3">町域名</label>
-                                                            <input readonly type="text" id="form3Examplea3" class="form-control form-control-lg" value="三条通南二筋目白川筋西入ル二丁目北木之元町" />
+                                                            <label class="form-label" for="m_txtCity_Town">市町村区</label>
+                                                            <input readonly type="text" id="m_txtCity_Town" class="form-control form-control-lg" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline form-white">
-                                                            <label class="form-label" for="form3Examplea6">町名・番地など</label>
-                                                            <input readonly type="text" id="form3Examplea6" class="form-control form-control-lg" value="3-5-5" />
+                                                            <label class="form-label" for="m_txtTownAddress">町域名</label>
+                                                            <input readonly type="text" id="m_txtTownAddress" class="form-control form-control-lg" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline form-white">
-                                                            <label class="form-label" for="form3Examplea6">建物名</label>
-                                                            <input readonly type="text" id="form3Examplea6" class="form-control form-control-lg" value="あああああああああマンション" />
+                                                            <label class="form-label" for="m_txtStreetAddress">町名・番地など</label>
+                                                            <input readonly type="text" id="m_txtStreetAddress" class="form-control form-control-lg" value="3-5-5" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 pb-2">
+                                                        <div class="form-outline form-white">
+                                                            <label class="form-label" for="m_txtAddress2">建物名</label>
+                                                            <input readonly type="text" id="m_txtAddress2" class="form-control form-control-lg" value="あああああああああマンション" />
                                                         </div>
                                                     </div>
                                                     <hr class="navbar-divider mb-4 my-5 opacity-20">
@@ -351,55 +350,54 @@
                                                     <div class="mb-4 pb-2">
                                                         <h5 class="pb-2">メイン担当者</h5>
                                                         <div class="form-outline">
-                                                            <label class="form-label" for="form3Examplev4">お名前</label>
-                                                            <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg" />
+                                                            <label class="form-label" for="m_txtPICName">お名前</label>
+                                                            <input readonly type="text" id="m_txtPICName" class="form-control form-control-lg" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline">
-                                                            <label class="form-label" for="form3Examplev4">お名前(フリガナ)</label>
-                                                            <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg" />
+                                                            <label class="form-label" for="m_txtPICKana">お名前(フリガナ)</label>
+                                                            <input readonly type="text" id="m_txtPICKana" class="form-control form-control-lg" />
                                                         </div>
                                                     </div>
                                                     <hr class="navbar-divider mb-4 my-5 opacity-20">
                                                     <div class="mb-4 pb-2">
                                                         <h5 class="pb-2">連絡方法</h5>
                                                         <div class="form-outline form-white">
-                                                            <label class="form-label" for="form3Examplea6">電話番号</label>
-                                                            <input readonly type="text" id="form3Examplea6" class="form-control form-control-lg" value="0678545689" />
+                                                            <label class="form-label" for="m_txtHousePhone">電話番号</label>
+                                                            <input readonly type="text" id="m_txtHousePhone" class="form-control form-control-lg" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-4">
                                                         <div class="form-outline form-white">
-                                                            <label class="form-label" for="form3Examplea9">携帯番号</label>
-                                                            <input readonly type="text" id="form3Examplea9" class="form-control form-control-lg" value="09012345678" />
+                                                            <label class="form-label" for="m_txtCellPhone">携帯番号</label>
+                                                            <input readonly type="text" id="m_txtCellPhone" class="form-control form-control-lg" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-4">
                                                         <div class="form-outline form-white">
-                                                            <label class="form-label" for="form3Examplea9">FAX番号</label>
-                                                            <input readonly type="text" id="form3Examplea9" class="form-control form-control-lg"
-                                                                   value="0611112223" />
+                                                            <label class="form-label" for="m_txtFax">FAX番号</label>
+                                                            <input readonly type="text" id="m_txtFax" class="form-control form-control-lg" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-4">
                                                         <div class="form-outline form-white">
-                                                            <label class="form-label" for="form3Examplea9">メールアドレス</label>
-                                                            <input readonly type="text" id="form3Examplea9" class="form-control form-control-lg" value="aaaaabbbb@ggggg.cccc" />
+                                                            <label class="form-label" for="m_txtMailAddress">メールアドレス</label>
+                                                            <input readonly type="text" id="m_txtMailAddress" class="form-control form-control-lg" />
                                                         </div>
                                                     </div>
                                                     <hr class="navbar-divider mb-4 my-5 opacity-20">
                                                     <div class="mb-4">
                                                         <h5 class="pb-2">営業日</h5>
                                                         <div class="form-outline form-white">
-                                                            <label class="form-label" for="form3Examplea9">営業時間</label>
-                                                            <input readonly type="text" id="form3Examplea9" class="form-control form-control-lg" value="9:00~18:00" />
+                                                            <label class="form-label" for="m_txtBusinessHours">営業時間</label>
+                                                            <input readonly type="text" id="m_txtBusinessHours" class="form-control form-control-lg" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-4">
                                                         <div class="form-outline form-white">
-                                                            <label class="form-label" for="form3Examplea9">定休日</label>
-                                                            <input readonly type="text" id="form3Examplea9" class="form-control form-control-lg" value="土、日" />
+                                                            <label class="form-label" for="m_txtCompanyHoliday">定休日</label>
+                                                            <input readonly type="text" id="m_txtCompanyHoliday" class="form-control form-control-lg" value="土、日" />
                                                         </div>
                                                     </div>
                                                     <hr class="navbar-divider mb-4 my-5 opacity-20">
@@ -407,27 +405,27 @@
                                                         <h5 class="pb-2">口座情報</h5>
                                                         <div class="col-5 form-outline form-white">
                                                             <div class="dropdown w-100">
-                                                                <input readonly type="text" id="form3Examplea9" class="form-control form-control-lg" value="三菱UFJ銀行" />
+                                                                <input readonly type="text" id="m_txtBankName" class="form-control form-control-lg" />
                                                             </div>
                                                         </div>
                                                         <div class="col-7">
-                                                            <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg texc" autocomplete="off" value="天満支店(000)" />
+                                                            <input readonly type="text" id="m_txtBranchName" class="form-control form-control-lg texc" autocomplete="off" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-4 pb-2 row">
                                                         <div class="col-3 form-outline form-white">
                                                             <div class="dropdown w-100">
-                                                                <input readonly type="text" id="form3Examplea9" class="form-control form-control-lg" value="当座" />
+                                                                <input readonly type="text" id="m_txtSourceAccountType" class="form-control form-control-lg" />
                                                             </div>
                                                         </div>
                                                         <div class="col-9">
-                                                            <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg" autocomplete="off" value="1000221" />
+                                                            <input readonly type="text" id="m_txtSourceAccount" class="form-control form-control-lg" autocomplete="off" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-4">
                                                         <div class="form-outline form-white">
-                                                            <label class="form-label" for="form3Examplea9">名義人</label>
-                                                            <input readonly type="text" id="form3Examplea9" class="form-control form-control-lg" value="キャピタル不動産" />
+                                                            <label class="form-label" for="m_txtSourceAccountName">名義人</label>
+                                                            <input readonly type="text" id="m_txtSourceAccountName" class="form-control form-control-lg" />
                                                         </div>
                                                     </div>
                                                     <hr class="navbar-divider mb-4 my-5 opacity-20">
@@ -436,16 +434,16 @@
                                                         <label class="form-label" for="form3Examplea2">宅建免許番号</label>
                                                         <div class="col-4 form-outline form-white col-md-5">
                                                             <div class="dropdown w-100">
-                                                                <input readonly type="text" id="form3Examplea3" class="form-control form-control-lg text-center" value="国土交通大臣免許" />
+                                                                <input readonly type="text" id="m_txtLicenceNo1" class="form-control form-control-lg text-center" />
                                                             </div>
                                                         </div>
                                                         <div class="col-3 col-md-3">
-                                                            <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg text-center" autocomplete="off" value="99" />
+                                                            <input readonly type="text" id="m_txtLicenceNo2" class="form-control form-control-lg text-center" autocomplete="off" />
                                                         </div>
                                                         <div class="col-5 col-md-4">
                                                             <div class="d-inline-flex ">
                                                                 <span class="align-self-center pe-1 text-dark">第</span>
-                                                                <input readonly type="text" id="form3Examplev4" class="form-control form-control-lg text-center" autocomplete="off" value="999999" />
+                                                                <input readonly type="text" id="m_txtLicenceNo3" class="form-control form-control-lg text-center" autocomplete="off" />
                                                                 <span class="align-self-center ps-1 text-dark">号</span>
                                                             </div>
                                                         </div>
@@ -459,12 +457,12 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">戻る</button>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-3">変更保存</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SaveCompleteModal">変更保存</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1" id="modal-3">
+                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1" id="SaveCompleteModal">
                     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
