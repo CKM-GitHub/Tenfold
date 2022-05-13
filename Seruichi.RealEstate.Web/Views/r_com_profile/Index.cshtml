@@ -29,7 +29,7 @@
                         <li class="nav-item"> <a href="#" class="nav-link font-regular">テンプレート一覧</a> </li>
                     </ul>
                 </div>
-                <div class="card shadow border-0 mb-7">
+                <div id="maindiv" class="card shadow border-0 mb-7">
                     <div class="card-header">
                         <h5 class="mb-0">情報編集</h5>
                     </div>
@@ -249,7 +249,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="text-right mt-3 float-end">
-                            <button type="button" class="btn btn-primary" id="btnConfirm" data-bs-toggle="modal" data-bs-target="#ConfirmModal">確認</button>&nbsp;
+                            <button type="button" class="btn btn-primary" id="btnConfirm" data-bs-toggle="modal">確認</button>&nbsp;
                             <button type="button" class="btn btn-default" id="btnCancel">取消</button>
                         </div>
                     </div>
@@ -333,13 +333,13 @@
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline form-white">
                                                             <label class="form-label" for="m_txtStreetAddress">町名・番地など</label>
-                                                            <input readonly type="text" id="m_txtStreetAddress" class="form-control form-control-lg" value="3-5-5" />
+                                                            <input readonly type="text" id="m_txtStreetAddress" class="form-control form-control-lg" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline form-white">
                                                             <label class="form-label" for="m_txtAddress2">建物名</label>
-                                                            <input readonly type="text" id="m_txtAddress2" class="form-control form-control-lg" value="あああああああああマンション" />
+                                                            <input readonly type="text" id="m_txtAddress2" class="form-control form-control-lg" />
                                                         </div>
                                                     </div>
                                                     <hr class="navbar-divider mb-4 my-5 opacity-20">
@@ -368,12 +368,12 @@
                                                             <input readonly type="text" id="m_txtHousePhone" class="form-control form-control-lg" />
                                                         </div>
                                                     </div>
-                                                    <div class="mb-4">
+                                                    @*<div class="mb-4">
                                                         <div class="form-outline form-white">
                                                             <label class="form-label" for="m_txtCellPhone">携帯番号</label>
                                                             <input readonly type="text" id="m_txtCellPhone" class="form-control form-control-lg" />
                                                         </div>
-                                                    </div>
+                                                    </div>*@
                                                     <div class="mb-4">
                                                         <div class="form-outline form-white">
                                                             <label class="form-label" for="m_txtFax">FAX番号</label>
@@ -397,7 +397,7 @@
                                                     <div class="mb-4">
                                                         <div class="form-outline form-white">
                                                             <label class="form-label" for="m_txtCompanyHoliday">定休日</label>
-                                                            <input readonly type="text" id="m_txtCompanyHoliday" class="form-control form-control-lg" value="土、日" />
+                                                            <input readonly type="text" id="m_txtCompanyHoliday" class="form-control form-control-lg" />
                                                         </div>
                                                     </div>
                                                     <hr class="navbar-divider mb-4 my-5 opacity-20">
@@ -456,8 +456,8 @@
                                 <!-- Card stats -->
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">戻る</button>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SaveCompleteModal">変更保存</button>
+                                <button type="button" id="btnM_Close" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">戻る</button>
+                                <button type="button" id="btnProcess" class="btn btn-primary" data-bs-toggle="modal">変更保存</button>
                             </div>
                         </div>
                     </div>
@@ -492,3 +492,27 @@
         @Html.Partial("~/Views/Shared/_r_footer.cshtml")
     </div>
 </div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/r_com_profile")
+<script type="text/javascript">
+    const _url = {};
+    $(document).ready(function () {
+        var model = {
+            LoginID: '@Model.LoginID',
+            RealECD: '@Model.RealECD',
+            PermissionChat: '@Model.PermissionChat',
+            PermissionSetting: '@Model.PermissionSetting',
+            PermissionPlan: '@Model.PermissionPlan',
+            PermissionInvoice: '@Model.PermissionInvoice'
+        }
+        var LoginID = '@Model.LoginID';
+        var PermissionSetting = '@Model.PermissionSetting';
+        _url.get_r_com_profileData = common.appPath + '/r_com_profile/get_r_com_profileData';
+        _url.update_r_com_profileData = common.appPath + '/r_com_profile/update_r_com_profileData';
+        _url.insert_l_log = common.appPath + '/r_com_profile/Insert_l_log';
+        setValidation();
+        addEvents(model);
+    })
+</script>
+}

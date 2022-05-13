@@ -175,8 +175,16 @@
 
     $.fn.addvalidation_maxlengthCheck = function (digits) {
         return this
-            .attr('add-validation-maxlengthCheck', 'true')
+            .attr('data-validation-maxlengthCheck', 'true')
             .attr('data-digits', digits)
+            .attr('inputmode', 'text')
+            .attr('autocomplete', 'off');
+    };
+
+    $.fn.addvalidation_minlengthCheck = function (digits) {
+        return this
+            .attr('data-validation-minlengthCheck', 'true')
+            .attr('data-mindigits', digits)
             .attr('inputmode', 'text')
             .attr('autocomplete', 'off');
     };
@@ -202,6 +210,14 @@
     };
     $.fn.removeValidation_datecompare = function () {
         return this.removeAttr('data-validation-datecompare')
+    };
+
+    $.fn.addvalidation_passwordcompare = function () {
+        return this
+            .attr('data-validation-passwordcompare', 'true')
+    };
+    $.fn.removeValidation_passwordcompare = function () {
+        return this.removeAttr('data-validation-passwordcompare')
     };
 
     $.fn.addvalidation_checkboxlenght = function () {
