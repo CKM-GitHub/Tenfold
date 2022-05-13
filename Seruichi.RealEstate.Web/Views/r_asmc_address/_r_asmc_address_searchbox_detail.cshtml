@@ -14,8 +14,6 @@
     counter++;
     string css_target = "js-search-detail-chk-" + item01.CityCD;
     string css_chkbox = "js-search-detail-chk js-search-detail-chk-" + item01.CityCD;
-    string css_label = "checkbox-inline p-3 cap-fon-div-w250 text-nowrap " 
-                    + (item01.ValidFLG == 0? "text-danger" : item01.ValidFLG == 1? "text-primary" : "text-dark");
 
     <div class="row y-5 kenbetsu">
         <div class="col-12 col-md-2 text-md-center">
@@ -37,7 +35,7 @@
         <div class="col-12 col-md-10">
             @foreach (var item02 in item01.Towns)
             {
-                var towntext = item02.TownName;
+                string towntext = item02.TownName;
                 if (Model.Settings1 == 1 && Model.Settings2 == 1)
                 {
                     towntext = string.Format("{0}({1}件/{2}社)", item02.TownName, item02.MansionCount, item02.RealEstateCount);
@@ -50,6 +48,9 @@
                 {
                     towntext = string.Format("{0}({1}社)", item02.TownName, item02.RealEstateCount);
                 }
+
+                string css_label = "checkbox-inline p-3 cap-fon-div-w250 text-nowrap "
+                                + (item02.ValidFLG == 0 ? "text-danger" : item02.ValidFLG == 1 ? "text-primary" : "text-dark");
 
                 <label class="@css_label">
                     <input type="checkbox" value="@item02.TownCD" class="@css_chkbox">
