@@ -5,7 +5,7 @@
 }
 
 .areamap .areamap-field {
-	background: url(/Content/images/map/japan_map_outline.png) left top no-repeat;
+    background: url(../images/map/japan_map_outline.png) left top no-repeat;
 }
 
 .areamap .ui-icon--loupe8 {

@@ -47,7 +47,7 @@ namespace Seruichi.RealEstate.Web
                       ));
 
             //css japan map
-            bundles.Add(new StyleBundle("~/Content/realEstate_css_japanmap").Include(
+            bundles.Add(new StyleBundle("~/Content/css/realEstate_css_japanmap").Include(
                       "~/Content/css/japanmap.css"
                       ));
 
