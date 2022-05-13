@@ -42,7 +42,7 @@
                 <div class="navbar-nav mx-lg-auto">
                     <a class="nav-item nav-link text-underline-hover" id="r_dashboard" href="@Url.Action("Index", "r_dashboard")">ダッシュボード</a>
                     <a class="nav-item nav-link text-underline-hover" id="r_issueslist" href="@Url.Action("Index", "r_issueslist")">案件一覧</a>
-                    <a class="nav-item nav-link text-underline-hover" href="#">査定条件</a>
+                    <a class="nav-item nav-link text-underline-hover active text-underline" href="#">査定条件</a>
                     <a class="nav-item nav-link text-underline-hover" href="#">管理</a>
                     <a class="nav-item nav-link text-underline-hover" id="r_com_profile" href="@Url.Action("Index", "r_com_profile")">設定</a>
                 </div>
@@ -51,11 +51,17 @@
                     <a class="nav-item nav-link" href="@Url.Action("Logout", "r_login")">ログアウト</a>
                 </div>
                 <!-- Action
-                    <div class="d-flex align-items-lg-center mt-3 mt-lg-0">
-                        <a href="#" class="btn btn-sm btn-primary w-full w-lg-auto">
+        <div class="d-flex align-items-lg-center mt-3 mt-lg-0">
+            <a href="#" class="btn btn-sm btn-primary w-full w-lg-auto">
 
-                        </a>
-                    </div>-->
+            </a>
+        </div>-->
+                <div class="navbar-nav d-flex">
+                    <div class="nav-item">
+                        <hr class="navbar-divider my-3 opacity-20 d-md-none">
+                        <p class="nav-item nav-link">LoginStaffName</p>
+                    </div>
+                </div>
             </div>
 
         </div>

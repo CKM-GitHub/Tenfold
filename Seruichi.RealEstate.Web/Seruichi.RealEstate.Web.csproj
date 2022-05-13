@@ -137,6 +137,7 @@
     <Compile Include="Controllers\Common\BaseController.cs" />
     <Compile Include="Controllers\Common\CommonApiController.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
+    <Compile Include="Controllers\r_asmc_ms_reged_listController.cs" />
     <Compile Include="Controllers\r_com_profileController.cs" />
     <Compile Include="Controllers\r_contactController.cs" />
     <Compile Include="Controllers\r_dashboardController.cs" />
@@ -165,6 +166,7 @@
     <Content Include="Content\css\Login-Form-Clean.css" />
     <Content Include="Content\css\Soft-UI-Aside-Navbar.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\tree.css" />
     <Content Include="Content\css\validation.css" />
     <Content Include="Content\fonts\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
@@ -172,8 +174,10 @@
     <Content Include="Content\fonts\ionicons.svg" />
     <Content Include="Content\modernizr\modernizr-2.8.3.js" />
     <Content Include="Content\scripts\common.js" />
+    <Content Include="Content\scripts\rating.js" />
     <Content Include="Content\scripts\sidebar.js" />
     <Content Include="Content\scripts\table_header_sort.js" />
+    <Content Include="Content\scripts\tree.js" />
     <Content Include="Content\scripts\validation_jqueryextend.js" />
     <Content Include="Content\typeahead\bloodhound.js" />
     <Content Include="Content\typeahead\bloodhound.min.js" />
@@ -192,6 +196,7 @@
     <Content Include="Content\fonts\ionicons.eot" />
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
+    <Content Include="Scripts\r_asmc_ms_reged_list.js" />
     <Content Include="Scripts\r_com_profile.js" />
     <Content Include="Scripts\r_contact.js" />
     <Content Include="Scripts\r_dashboard.js" />
@@ -230,6 +235,8 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\r_com_profile\Index.cshtml" />
     <Content Include="Views\Shared\_ErrorLayout.cshtml" />
+    <Content Include="Views\r_asmc_ms_reged_list\Index.cshtml" />
+    <Content Include="Views\r_asmc_ms_reged_list\_r_asmc_ms_reged_list_left_sideNavigation_menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
