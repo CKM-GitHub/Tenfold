@@ -35,6 +35,10 @@ namespace Models.Tenfold.t_mansion_list
         public string CityGPName { get; set; }
         public string CityCD { get; set; }
         public string CityName { get; set; }
+    }
+
+    public class t_mansion_list_l_log_Model
+    {
         public string LogDateTime { get; set; }
         public byte LoginKBN { get; set; }
         public string LoginID { get; set; }
@@ -46,4 +50,5 @@ namespace Models.Tenfold.t_mansion_list
         public string Remarks { get; set; }
         public string MansionCD { get; set; }
     }
+
 }
