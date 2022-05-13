@@ -75,6 +75,20 @@ namespace Seruichi.RealEstate.Web
             bundles.Add(new ScriptBundle("~/bundles/r_asmc_address").Include(
                     "~/Scripts/r_asmc_address.js",
                     "~/Content/scripts/sidebar.js"));
+
+          
+
+            bundles.Add(new StyleBundle("~/Content/r_asmc_ms_reged_list").Include(
+                      "~/Content/css/style.css",
+                      "~/Content/css/index.css",
+                       "~/Content/css/tree.css"
+                      ));
+            bundles.Add(new ScriptBundle("~/bundles/r_asmc_ms_reged_list").Include(
+                    "~/Scripts/r_asmc_address.js",
+                     "~/Content/scripts/tree.js",
+                     "~/Content/scripts/rating.js",
+                     "~/Content/scripts/sidebar.js",
+                     "~/Content/scripts/table_header_sort.js"));
         }
     }
 }
