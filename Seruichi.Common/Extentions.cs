@@ -389,6 +389,7 @@ namespace Seruichi.Common
                 return new String(s.TakeWhile((c, i) => e.GetByteCount(s.Substring(0, i + 1)) <= length).ToArray());
             }
         }
+
         public static string GetByteString(this string s, int startIndex, int length)
         {
             if (string.IsNullOrEmpty(s))
@@ -405,6 +406,13 @@ namespace Seruichi.Common
 
                 return new string(cutChars);
             }
+        }
+
+        public static TEnum ToEnum<TEnum>(this string s) where TEnum : struct
+        {
+            TEnum ret;
+            Enum.TryParse(s, out ret);
+            return ret;
         }
     }
 }

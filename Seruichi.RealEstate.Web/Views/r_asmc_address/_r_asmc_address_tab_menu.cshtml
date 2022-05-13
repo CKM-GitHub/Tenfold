@@ -1,0 +1,33 @@
+﻿<div class="card shadow border-0 mb-7">
+    <div class="card-header">
+        <div class="col-md-12 col-12 mb-3 mb-sm-0">
+            <h1 class="h2 mb-0 ls-tight"> 都道府県選択</h1>
+            <span class="text-muted small">査定条件＞設定＞住所・路線から設定＞住所から設定</span>
+        </div>
+        <div class="col-sm-6 col-12 text-sm-end">
+            <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
+                  <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+        </div>
+    </div>
+    <ul class="nav nav-tabs mt-0 overflow-x border-0 ps-5">
+        @foreach (var item in ViewBag.Regions)
+        {
+            if (item.RegionCD == ViewBag.CurrentRegionCD)
+            {
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "r_asmc_address", new { rc = item.RegionCD })" class="nav-link active">
+                        @item.RegionName
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "r_asmc_address", new { rc = item.RegionCD })" class="nav-link font-regular">
+                        @item.RegionName
+                    </a>
+                </li>
+            }
+        }
+    </ul>
+</div>

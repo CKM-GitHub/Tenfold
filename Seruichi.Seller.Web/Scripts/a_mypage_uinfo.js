@@ -71,9 +71,6 @@ function setValidation() {
     $('#formChangeMailAddress_NewMailAddress')
         .addvalidation_errorElement("#formChangeMailAddress_errorNewMailAddress")
         .addvalidation_reqired();
-    //$('#formChangeMailAddress_Password')
-    //    .addvalidation_errorElement("#formChangeMailAddress_errorPassword")
-    //    .addvalidation_reqired();
 
     //パスワード変更
     $('#formChangePassword_Password')
