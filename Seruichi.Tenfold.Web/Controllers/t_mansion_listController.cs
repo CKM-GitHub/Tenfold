@@ -73,5 +73,53 @@ namespace Seruichi.Tenfold.Web.Controllers
             var dt = bl.GetM_MansionList(model);
             return OKResult(DataTableToJSON(dt));
         }
+
+        [HttpPost]
+        public ActionResult Generate_CSV1(t_mansion_listModel model)
+        {
+            t_mansion_listBL bl = new t_mansion_listBL();
+            var dt = bl.Generate_CSV1(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+        [HttpPost]
+        public ActionResult Generate_CSV2(t_mansion_listModel model)
+        {
+            t_mansion_listBL bl = new t_mansion_listBL();
+            var dt = bl.Generate_CSV2(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult Generate_CSV3(t_mansion_listModel model)
+        {
+            t_mansion_listBL bl = new t_mansion_listBL();
+            var dt = bl.Generate_CSV3(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult InsertM_Seller_L_Log(t_mansion_list_l_log_Model model)
+        {
+
+            t_mansion_listBL bl = new t_mansion_listBL();
+            model = Getlogdata(model);
+            bl.InsertM_Mansion_List_L_Log(model);
+            return OKResult();
+
+        }
+
+        public t_mansion_list_l_log_Model Getlogdata(t_mansion_list_l_log_Model model)
+        {
+            CommonBL bl = new CommonBL();
+            model.LoginKBN = 3;
+            model.LoginID = base.GetOperator();
+            model.RealECD = null;
+            model.LoginName = bl.GetTenstaffNamebyTenstaffcd(model.LoginID);
+            model.IPAddress = base.GetClientIP();
+            model.PageID = "t_mansion_list";
+            model.ProcessKBN = "link";
+            model.Remarks = model.MansionCD + " " + bl.GetSellerNamebySellerCD(model.MansionCD);
+            return model;
+        }
     }
 }
