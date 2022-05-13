@@ -29,6 +29,7 @@ function setValidation() {
         .addvalidation_errorElement("#errorUnit")
         .addvalidation_onebyte_character()
         .addvalidation_maxlengthCheck(3);
+    
 
 }
 
