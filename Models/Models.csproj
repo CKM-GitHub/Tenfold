@@ -50,7 +50,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ValidationModel.cs" />
     <Compile Include="RealEstate\RealEstate_L_Log_Model.cs" />
-    <Compile Include="RealEstate\r_asmc_ms_reged_list\r_asmc_ms_reged_listModel.cs" />
+    <Compile Include="RealEstate\r_asmc_address\r_asmc_addressModel.cs" />
     <Compile Include="RealEstate\r_com_profile\r_com_profileModel.cs" />
     <Compile Include="RealEstate\r_contact\r_contactModel.cs" />
     <Compile Include="RealEstate\r_dashboard\r_dashboardModel.cs" />
@@ -68,6 +68,7 @@
     <Compile Include="Seller\a_indexModel.cs" />
     <Compile Include="Tenfold\Login\t_loginModel.cs" />
     <Compile Include="Tenfold\t_dashboard\t_dashboardModel.cs" />
+    <Compile Include="Tenfold\t_mansion_list\t_mansion_listModel.cs" />
     <Compile Include="Tenfold\t_seller_assessment\t_seller_assessmentModel.cs" />
     <Compile Include="Tenfold\t_seller_list\t_seller_listModel.cs" />
     <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionModel.cs" />

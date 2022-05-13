@@ -27,7 +27,7 @@ namespace Seruichi.Tenfold.Web.Controllers
         public ActionResult GetM_SellerList(t_seller_listModel model)
         {
             t_seller_listBL bl = new t_seller_listBL();
-
+            
             List<string> chk_lst = new List<string>();
             chk_lst.Add(model.ValidCheck.ToString());
             chk_lst.Add(model.InValidCheck.ToString());

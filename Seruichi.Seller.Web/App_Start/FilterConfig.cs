@@ -7,7 +7,6 @@ namespace Seruichi.Seller.Web
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            //filters.Add(new AuthorizeAttribute());
             filters.Add(new SessionAuthenticationAttribute());
             filters.Add(new BrowsingHistoryAttribute());
             filters.Add(new CustomHandleErrorAttribute());
@@ -15,7 +14,7 @@ namespace Seruichi.Seller.Web
 
         public static void RegisterWebApiFilters(System.Web.Http.Filters.HttpFilterCollection filters)
         {
-            //filters.Add(new System.Web.Http.AuthorizeAttribute());
+            filters.Add(new ApiValidateVerificationTokenAttribute());
             filters.Add(new ApiExceptionAttribute());
         }
     }
