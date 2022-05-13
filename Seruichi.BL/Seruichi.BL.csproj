@@ -49,6 +49,7 @@
     <Compile Include="RealEstate\r_com_profile\r_com_profileBL.cs" />
     <Compile Include="RealEstate\r_contact\r_contactBL.cs" />
     <Compile Include="RealEstate\r_dashboard\r_dashboardBL.cs" />
+    <Compile Include="RealEstate\r_asmc_address\r_asmc_addressBL.cs" />
     <Compile Include="RealEstate\r_issueslist\r_issueslistBL.cs" />
     <Compile Include="RealEstate\r_login\r_loginBL.cs" />
     <Compile Include="Seller\a_contactBL.cs" />
@@ -128,7 +129,19 @@
     <Content Include="Database\StoredProcedure\pr_M_Message_Select_by_ID.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfPref.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfStation.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_address_Select_Cities_by_RegionCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_address_Select_M_Region.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_address_Select_Towns_by_Cities.sql" />
     <Content Include="Database\StoredProcedure\pr_r_contact_Insert_D_Contact.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectForOldestDate.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectForOldestDatecount.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectForREName.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectForREStaffName.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectNumForNegotiations.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectNumForNewRequest.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectNumForNumberOfCompleted.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectNumForNumberOfDecline.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectREFaceImage.sql" />
     <Content Include="Database\StoredProcedure\pr_r_login_Insert_L_Login.sql" />
     <Content Include="Database\StoredProcedure\pr_r_login_Select_M_RealEstate_by_RealECD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_login_Select_M_REStaff_by_RealECD_and_REStaffCD.sql" />

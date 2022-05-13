@@ -1,5 +1,4 @@
-﻿<input type="hidden" id="_RequestVerificationToken" value="@SessionAuthenticationHelper.GetVerificationToken()" />
-<nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
+﻿<nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
     <div class="container">
         <a class="navbar-brand" href="@Url.Action("Index", "a_index")">セルイチ</a>
         <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"></button>
@@ -9,7 +8,7 @@
                     <a class="nav-link active" href="@Url.Action("Index", "a_index")"><i class="fa fa-building-o pe-2"></i>査定</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Index", "a_mypage_uinfo")"><i class="fa fa-user pe-2"></i>マイページ</a>
+                    <a class="nav-link" href="@Url.Action("CheckRedirect", "a_mypage_uinfo")"><i class="fa fa-user pe-2"></i>マイページ</a>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="@Url.Action("Logout", "a_login")"><i class="fa fa-sign-out pe-2"></i>ログアウト</a></li>
             </ul>

@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "査定条件[住所]";
+    Layout = "~/Views/Shared/_r_menuLayout.cshtml";
+}
+@section styles{
+    @Styles.Render("~/Content/realEstate_css_common")
+}
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18" id="wrapper">
+    @Html.Partial("_r_asmc_address_left_sideNavigation_menu")
+
+    <div class="toggle-button">
+        <a href="#menu-toggle" class="btn" id="menu-toggle">
+            <span class="fa fa-angle-right glyphicon-chevron-right" aria-hidden="true"></span>
+        </a>
+    </div>
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                @Html.Action("Render_tab_menu", new { rc = ViewBag.CurrentRegionCD })
+                <div class="row">
+                    <div class="col-12" id="searchbox_main">
+                        @Html.Action("Render_searchbox_main", new { rc = ViewBag.CurrentRegionCD })
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" id="searchbox_detail" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">町名選択</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="searchbox_detail_result">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
+                            <button type="button" class="btn btn-primary" id="btnRegistrationDetail">新規登録</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <form id="form1" method="post" novalidate>
+        <input type="hidden" name="selectedList_Cities" id="hdnSelectedList_Cities" />
+        <input type="hidden" name="selectedList_Towns" id="hdnSelectedList_Towns" />
+    </form>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/r_asmc_address")
+}

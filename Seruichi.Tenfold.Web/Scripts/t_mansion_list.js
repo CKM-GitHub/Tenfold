@@ -100,15 +100,13 @@ function addEvents() {
 
         $('#mansiontable tbody').empty();
 
-        const $Apartment = $("#txtApartment").val(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').text(),
+        const $Apartment = $("#txtApartment").val(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
             $StartUnit = $("#StartUnit").val(), $EndUnit = $("#EndUnit").val()
 
-        if ($StartAge )
-          
         let model = {
             Apartment: $Apartment,
-            SellerName: $StartAge,
-            RangeSelect: $EndAge,
+            StartAge: Get_FT_Age($EndAge, 'F'),
+            EndAge: Get_FT_Age($StartAge, 'T'),
             StartDate: $StartUnit,
             EndDate: $EndUnit,
         };
@@ -117,4 +115,28 @@ function addEvents() {
     });
 
 
+}
+
+function Get_FT_Age(age, type) {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    var start_yyyymm = '', end_yyyymm = '';
+
+    //Forｍ.築年数（To） => 築年月(From)
+    if (type == 'F') {
+        if (age !== '') {
+            start_yyyymm = (yyyy - age) + '/' + String(parseInt(mm) + 1).padStart(2, '0');
+        }
+        return start_yyyymm;
+    }
+    //Forｍ.築年数（From） => 築年月(To)
+    else if (type == 'T') {
+        if (age !== '') {
+            end_yyyymm = (yyyy - (age - 1)) + '/' + mm;
+        }
+        return end_yyyymm;
+    }
 }
