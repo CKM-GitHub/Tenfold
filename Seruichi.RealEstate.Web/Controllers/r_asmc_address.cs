@@ -1,5 +1,6 @@
 ﻿using Models.RealEstate.r_asmc_address;
 using Seruichi.BL.RealEstate.r_asmc_address;
+using Seruichi.Common;
 using System.Web.Mvc;
 
 namespace Seruichi.RealEstate.Web.Controllers
@@ -62,5 +63,22 @@ namespace Seruichi.RealEstate.Web.Controllers
             model.Settings2 = settings2;
             return PartialView("_r_asmc_address_searchbox_detail", model);
         }
+
+        [HttpPost]
+        public ActionResult GotoNextPage()
+        {
+            string selectedListCsv_cities = Request.Form["selectedList_Cities"].ToStringOrEmpty();
+            string selectedListCsv_towns = Request.Form["selectedList_Towns"].ToStringOrEmpty();
+
+            if (string.IsNullOrEmpty(selectedListCsv_cities) && string.IsNullOrEmpty(selectedListCsv_towns))
+            {
+                return RedirectToAction("BadRequest", "Error");
+            }
+
+            TempData["selectedList_Cities"] = selectedListCsv_cities;
+            TempData["selectedList_Towns"] = selectedListCsv_towns;
+            return RedirectToAction("Index", "r_asmc_set_area");
+        }
+
     }
 }

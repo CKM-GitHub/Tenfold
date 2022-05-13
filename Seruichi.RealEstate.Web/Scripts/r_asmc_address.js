@@ -1,6 +1,7 @@
 ﻿const _url = {};
 $(function () {
     _url.render_searchbox_detail = common.appPath + '/r_asmc_address/Render_searchbox_detail';
+    _url.gotoNextPage = common.appPath + '/r_asmc_address/GotoNextPage';
     addEvents();
 });
 
@@ -71,4 +72,33 @@ function addEvents() {
         });
     });
 
+    $('#btnRegistration').on('click', function () {
+        let citycdCsv = '';
+        $('.js-search-chk:checked').each(function () {
+            citycdCsv += $(this).val() + ",";
+        });
+
+        if (!citycdCsv) {
+            alert(common.getMessage('E302'));
+            return;
+        }
+
+        $('#hdnSelectedList_Cities').val(citycdCsv.slice(0, -1));
+        common.callSubmit(document.forms.form1, _url.gotoNextPage);
+    });
+
+    $('#btnRegistrationDetail').on('click', function () {
+        let towncdCsv = '';
+        $('.js-search-detail-chk:checked').each(function () {
+            towncdCsv += $(this).val() + ",";
+        });
+
+        if (!towncdCsv) {
+            alert(common.getMessage('E302'));
+            return;
+        }
+
+        $('#hdnSelectedList_Towns').val(towncdCsv.slice(0, -1));
+        common.callSubmit(document.forms.form1, _url.gotoNextPage);
+    });
 }
