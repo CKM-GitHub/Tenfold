@@ -24,7 +24,6 @@
                     </div>
                 </div>
 
-
             </div>
             <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" id="searchbox_detail" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -37,13 +36,18 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
-                            <button type="button" class="btn btn-primary">新規登録</button>
+                            <button type="button" class="btn btn-primary" id="btnRegistrationDetail">新規登録</button>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+
+    <form id="form1" method="post" novalidate>
+        <input type="hidden" name="selectedList_Cities" id="hdnSelectedList_Cities" />
+        <input type="hidden" name="selectedList_Towns" id="hdnSelectedList_Towns" />
+    </form>
 </div>
 
 @section Scripts{
