@@ -138,6 +138,7 @@
     <Compile Include="Controllers\Common\CommonApiController.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
     <Compile Include="Controllers\r_asmc_address.cs" />
+    <Compile Include="Controllers\r_asmc_ms_reged_listController.cs" />
     <Compile Include="Controllers\r_com_profileController.cs" />
     <Compile Include="Controllers\r_contactController.cs" />
     <Compile Include="Controllers\r_dashboardController.cs" />
@@ -240,6 +241,8 @@
     <Content Include="Views\r_asmc_address\_r_asmc_address_searchbox_main.cshtml" />
     <Content Include="Views\r_asmc_address\_r_asmc_address_searchbox_detail.cshtml" />
     <Content Include="Views\r_asmc_address\_r_asmc_address_tab_menu.cshtml" />
+    <Content Include="Views\r_asmc_ms_reged_list\Index.cshtml" />
+    <Content Include="Views\r_asmc_ms_reged_list\_r_asmc_ms_reged_list_left_sideNavigation_menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
