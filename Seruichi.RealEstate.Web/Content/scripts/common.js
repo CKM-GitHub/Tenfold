@@ -316,7 +316,7 @@ const common = {
         const isMoney = $ctrl.attr("data-validation-money");
         const customValidation = $ctrl.attr("data-validation-custom");
         const isDate = $ctrl.attr("data-validation-datecheck");
-        const isMaxlengthCheck = $ctrl.attr("data-validation-MaxLength");
+        const isMaxlengthCheck = $ctrl.attr("add-validation-maxlengthCheck");
         const isDateCompare = $ctrl.attr("data-validation-datecompare");
         const isOneByteCharacter = $ctrl.attr("data-validation-onebyte-character");
         const ischeckboxLenght = $ctrl.attr("data-validation-checkboxlenght");
@@ -534,7 +534,17 @@ const common = {
                     $("#StartDate").focus();
                     return;
                 }
+
+                if ($("#StartYear").val() != "" && $("#EndYear").val() != "") {
+                    if (!common.compareYear($("#StartYear").val(), $("#EndYear").val())) {
+                        $("#StartYear").showError(this.getMessage('E111'));
+                        //$("#EndNum").showError(this.getMessage('E113'));
+                        $("#StartYear").focus();
+                        return;
+                    }
+                }
             }
+
             if (ischeckboxLenght) {                
                 if (!common.checkboxlengthCheck($ctrl.attr('class'))) {
                     $ctrl.showError(this.getMessage('E112'));
@@ -567,6 +577,17 @@ const common = {
         const date2 = new Date(d2);
         let success = true;
         if (date1 > date2) {
+            success = false;
+        }
+        return success;
+    },
+
+
+    compareYear: function compareTwoDate(d1, d2) {
+        const Year1 = d1;
+        const Year2 = d2;
+        let success = true;
+        if (Year1 > Year2) {
             success = false;
         }
         return success;

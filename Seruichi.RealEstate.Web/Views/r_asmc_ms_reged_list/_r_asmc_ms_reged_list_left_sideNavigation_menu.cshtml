@@ -6,8 +6,9 @@
                 <div class="text-center px-xl-3 pt-3">
 
                     <div class="mb-3 text-start">
-                        <label for="disabledSelect" class="form-label">マンション</label> <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="マンション名
-                  ">
+                        <label for="disabledSelect" class="form-label">マンション</label>
+                        <span class="cap-errormsg-right" id="errorMansionName" name="errorMansionName"></span>
+                        <input type="text" class="form-control mb-2" id="MansionName" placeholder="マンション名">
                     </div>
                 </div>
             </li>
@@ -102,10 +103,11 @@
                         築年数
                     </label>
                     <div class="form-group input-group mb-3">
-
-                        <input type="text" class="form-control">
+                        <span class="cap-errormsg-right" id="errorStartYear" name="errorStartYear"></span>
+                        <input type="text" class="form-control" id="StartYear">
                         <span class="input-group-inline text-center align-self-center p-2">年 ~</span>
-                        <input type="text" class="form-control">
+                        <span class="cap-errormsg-right" id="errorEndYear" name="errorEndYear"></span>
+                        <input type="text" class="form-control" id="EndYear">
                         <span class="input-group-inline text-center align-self-center p-2">年</span>
                     </div>
                 </div>
@@ -163,7 +165,7 @@
             </li>
             <li>
                 <div class="form-group ps-3 pe-3">
-                    <button type="button" class="btn btn-primary w-100 w-100 mb-3">表示</button>
+                    <button type="button" class="btn btn-primary w-100 w-100 mb-3" id="btnDisplay">表示</button>
                 </div>
 
             </li>
