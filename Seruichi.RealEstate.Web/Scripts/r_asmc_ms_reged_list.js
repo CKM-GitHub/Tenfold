@@ -1,7 +1,7 @@
 ﻿const _url = {};
 $(function () {
     setValidation();
-    _url.Get_DataList = common.appPath + '/r_asmc_ms_reged_list/Get_DataList';
+    //_url.Get_DataList = common.appPath + '/r_asmc_ms_reged_list/Get_DataList';
     addEvents();
 });
 function setValidation() {
@@ -21,6 +21,10 @@ function setValidation() {
         .addvalidation_maxlengthCheck(2)//E105
         .addvalidation_singlebyte_number() //E104
         .addvalidation_datecompare(); //E113
+
+    $('.form-check-input')
+        .addvalidation_errorElement("#CheckBoxError")
+        .addvalidation_checkboxlenght(); //E112
 }
 function addEvents() {
     common.bindValidationEvent('#form1', '');
@@ -48,6 +52,13 @@ function addEvents() {
         }
     });
 
+    $('.form-check-input').on('change', function () {
+        this.value = this.checked ? 1 : 0;
+        if ($("input[type=checkbox]:checked").length > 0) {
+            $('.form-check-input').hideError();
+        }
+    }).change();
+
     $('#btnDisplay').on('click', function () {
         $form = $('#form1').hideChildErrors();
 
@@ -57,7 +68,7 @@ function addEvents() {
         }
         $('#r_table_List tbody').empty();
 
-        const $Apartment = $("#MansionName").val(), $StartYear = $("#StartYear").val(), $EndYear = $('#EndYear').val(),
+        const $MansionName = $("#MansionName").val(), $StartYear = $("#StartYear").val(), $EndYear = $('#EndYear').val(),
             $StartUnit = $("#StartUnit").val(), $EndUnit = $("#EndUnit").val()
 
         let model = {
