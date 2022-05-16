@@ -60,12 +60,6 @@ function setValidation() {
 
 function addEvents() {
 
-    //共通チェック処理
-    //common.bindValidationEvent('#formLogin');
-    //common.bindValidationEvent('#formTemporaryRegistration');
-    //common.bindValidationEvent('#formVerifyMailAddress');
-    //common.bindValidationEvent('#formResetPassword');
-
     $('#formVerifyMailAddress_Birthday, #formResetPassword_Birthday').on('change', function () {
         common.birthdayCheck(this);
     });

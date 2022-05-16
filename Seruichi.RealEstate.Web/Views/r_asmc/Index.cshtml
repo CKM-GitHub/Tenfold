@@ -1,0 +1,271 @@
+﻿@{
+    ViewBag.Title = "査定条件";
+    Layout = "~/Views/Shared/_r_menuLayout.cshtml";
+}
+@section styles{
+    @Styles.Render("~/Content/realEstate_css_common")
+    @Styles.Render("~/Content/css/realEstate_css_japanmap")
+}
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
+    <div class="d-flex flex-column min-h-screen" id="page-content-wrapper">
+        <main class="py-6 bg-surface-secondary">
+
+            <div class="container-fluid">
+                <!-- 205 査定条件（5000）トップ -->
+                <div class="card shadow border-0 mb-7">
+
+                    <div class="card-header">
+
+                        <div class="col-md-12 col-12 mb-3 mb-sm-0">
+
+                            <h1 class="h2 mb-0 ls-tight">査定条件</h1>
+                        </div>
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
+                            <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <h5 class="mb-0">設定</h5>
+                    </div>
+                    <div class="card-body  pt-5 pm-5 container text-center">
+
+                        <button type="button" class="btn btn-outline-primary btn-lg m-5 p-5" data-bs-toggle="modal"
+                                data-bs-target="#chihousenntaku">
+                            <i class="fa fa-map" aria-hidden="true"></i><span class="p-3">住所・路線から設定</span>
+                        </button>
+                        <button type="button" class="btn btn-outline-success btn-lg m-5 p-5" data-bs-toggle="modal"
+                                data-bs-target="#mansion">
+                            <i class="fa fa-building-o"
+                               aria-hidden="true"></i><span class="p-3">マンション指定から設定</span>
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+                <!-- 205 査定条件（5100） 地方選択 -->
+                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="chihousenntaku" tabindex="-1" aria-labelledby="chihousenntaku" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="chihousenntakuLabel">地方選択 </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <div class="areamap">
+                                        <div class="areamap-map">
+                                            <div class="areamap-map-inner p-2">
+                                                <section class="ui-section--map">
+                                                    <div class="ui-section-body">
+                                                        <div class="areamap-field">
+                                                            <div id="js-areamap_monthly_background"
+                                                                 class="areamap_monthly_background js-areamap_monthly_background--04">
+
+                                                                <div class="areabox areabox--kanto">
+                                                                    <a href="#" data-chihou-name="Kanto"
+                                                                       class="bg-white border rounded rounded-lg areabox-link border border-primary js-chihou">
+                                                                        <div class="areabox-title">関東</div>
+                                                                        <div class="areabox-list pt-2">
+                                                                            東京|神奈川<br>千葉|埼玉
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="areabox areabox--tokai">
+                                                                    <a href="#" data-chihou-name="Tokai"
+                                                                       class="bg-white border rounded rounded-lg areabox-link border border-primary js-chihou">
+                                                                        <div class="areabox-title">東海</div>
+                                                                        <div class="areabox-list pt-2">
+                                                                            愛知
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+
+                                                                <div class="areabox areabox--kansai">
+                                                                    <a href="#" data-chihou-name="Kansai"
+                                                                       class="bg-white border rounded rounded-lg areabox-link border border-primary js-chihou">
+                                                                        <div class="areabox-title">関西</div>
+                                                                        <div class="areabox-list pt-2">
+                                                                            大阪|兵庫|京都
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="areabox areabox--kyushu">
+                                                                    <a href="#" data-chihou-name="Kyushu"
+                                                                       class="bg-white border rounded rounded-lg areabox-link border border-primary js-chihou">
+                                                                        <div class="areabox-title">九州</div>
+                                                                        <div class="areabox-list pt-2">
+                                                                            福岡
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div> <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">戻る</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 205 査定条件（5101）登録方法 -->
+                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="tourokuhouhou" tabindex="-1" aria-labelledby="tourokuhouhou" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="tourokuhouhouLabel">登録方法</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <div class="p-5">
+                                    <button type="button" class="btn btn-outline-primary btn-lg m-5 p-5" id="btnSearch5101_1">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i><span class="p-3">住所から設定</span>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-success btn-lg m-5 p-5" id="btnSearch5101_2">
+                                        <i class="fa fa-train"
+                                           aria-hidden="true"></i><span class="p-3">路線から設定</span>
+                                    </button>
+                                    <form id="form5101">
+                                        <input type="hidden" name="Region" id="form5101_region" />
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#chihousenntaku">
+                                    戻る
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 208 査定条件（5200 マンション・マンション名） -->
+                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="mansion" tabindex="-1" aria-labelledby="tourokuhouhou" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="tourokuhouhouLabel">登録方法</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <div class="p-5">
+                                    <div class="input-group rounded cap-fon-form-w350 mx-auto">
+                                        <input type="search" class="form-control" placeholder="マンション検索" aria-label="Search" aria-describedby="search-addon" />
+
+                                        <button type="button" class="btn btn-primary">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="p-5">
+                                    <button type="button" class="btn btn-outline-primary btn-lg m-5 p-5" data-bs-toggle="modal"
+                                            data-bs-target="#mansionmap">
+                                        <i class="fa fa-map" aria-hidden="true"></i><span class="p-3">地図から設定</span>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-success btn-lg m-5 p-5"><i class="fa fa-list-ol" aria-hidden="true"></i><span class="p-3">登録済一覧表示</span></button>
+                                </div>
+                            </div>  <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">戻る</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 205 査定条件 (5201 マンション・地図) -->
+                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="mansionmap" tabindex="-1" aria-labelledby="mansionmap" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="mansionmapLabel">地方選択 </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <div class="areamap">
+                                        <div class="areamap-map">
+                                            <div class="areamap-map-inner p-2">
+                                                <section class="ui-section--map">
+                                                    <div class="ui-section-body">
+                                                        <div class="areamap-field">
+                                                            <div id="js-areamap_monthly_background"
+                                                                 class="areamap_monthly_background js-areamap_monthly_background--04">
+
+
+                                                                <div class="areabox areabox--kanto">
+                                                                    <a href="/kanto/"
+                                                                       class="bg-white border rounded rounded-lg areabox-link border border-primary">
+                                                                        <div class="areabox-title">関東</div>
+                                                                        <div class="areabox-list pt-2">
+                                                                            東京|神奈川<br>千葉|埼玉
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="areabox areabox--tokai">
+                                                                    <a href="/tokai/"
+                                                                       class="bg-white border rounded rounded-lg areabox-link border border-primary">
+                                                                        <div class="areabox-title">東海</div>
+                                                                        <div class="areabox-list pt-2">
+                                                                            愛知
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+
+                                                                <div class="areabox areabox--kansai">
+                                                                    <a href="#"
+                                                                       class="bg-white border rounded rounded-lg areabox-link border border-primary">
+                                                                        <div class="areabox-title">関西</div>
+                                                                        <div class="areabox-list pt-2">
+                                                                            大阪|兵庫|京都
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="areabox areabox--kyushu">
+                                                                    <a href="/kyushu/"
+                                                                       class="bg-white border rounded rounded-lg areabox-link border border-primary">
+                                                                        <div class="areabox-title">九州</div>
+                                                                        <div class="areabox-list pt-2">
+                                                                            福岡
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>  <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#mansion">
+                                    戻る
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/r_asmc")
+}

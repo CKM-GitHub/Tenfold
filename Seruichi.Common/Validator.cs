@@ -229,6 +229,20 @@ namespace Seruichi.Common
             return true;
         }
 
+        public bool CheckCompareNum(string fromNum, string toNum, out string errorcd)
+        {
+            errorcd = "";
+
+            if (string.IsNullOrEmpty(fromNum) || string.IsNullOrEmpty(toNum)) return true;
+
+            if (fromNum.ToInt32() > toNum.ToInt32())
+            {
+                errorcd = "E113"; //入力された値が正しくありません ★エラーメッセージ未定
+                return false;
+            }
+            return true;
+        }
+
         public bool CheckByteCount(string inputText, int maxLength, out string errorcd, out string cutString)
         {
             errorcd = "";

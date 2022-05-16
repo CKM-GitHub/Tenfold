@@ -63,6 +63,12 @@ namespace Seruichi.Common
                 AddValidationResult(elementId, errorcd);
         }
 
+        public void CheckCompareNum(string elementId, string fromNum, string toNum)
+        {
+            if (!validator.CheckCompareNum(fromNum, toNum, out string errorcd))
+                AddValidationResult(elementId, errorcd);
+        }
+
         public void CheckByteCount(string elementId, string inputText, int maxLength)
         {
             if (!validator.CheckByteCount(inputText, maxLength, out string errorcd, out string outVal))

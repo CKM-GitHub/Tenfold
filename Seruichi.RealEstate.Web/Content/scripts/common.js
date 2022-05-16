@@ -316,10 +316,12 @@ const common = {
         const isMoney = $ctrl.attr("data-validation-money");
         const customValidation = $ctrl.attr("data-validation-custom");
         const isDate = $ctrl.attr("data-validation-datecheck");
-        const isMaxlengthCheck = $ctrl.attr("data-validation-MaxLength");
+        const isMaxlengthCheck = $ctrl.attr("data-validation-maxlengthCheck");
         const isDateCompare = $ctrl.attr("data-validation-datecompare");
         const isOneByteCharacter = $ctrl.attr("data-validation-onebyte-character");
         const ischeckboxLenght = $ctrl.attr("data-validation-checkboxlenght");
+        const ispasswordcompare = $ctrl.attr("data-validation-passwordcompare");
+        const isMinlengthCheck = $ctrl.attr("data-validation-minlengthcheck");
 
         let inputValue = "";
         if (type === 'radio') {
@@ -520,6 +522,18 @@ const common = {
                 }
             }
 
+            if (isMinlengthCheck) {
+                const minLength = $ctrl.data('mindigits');
+                if (minLength) {
+                    const byteLength = inputValue.length;
+                    if (byteLength < parseInt(minLength)) {
+                        $ctrl.showError(this.getMessage('E105'));
+                        return;
+                    }
+                }
+            }
+
+
             if (isDate) {
                 if (!inputValue.match(regexPattern.dateformat)) {
                     $ctrl.showError(this.getMessage('E108'));
@@ -534,10 +548,29 @@ const common = {
                     $("#StartDate").focus();
                     return;
                 }
+
+                if ($("#StartYear").val() != "" && $("#EndYear").val() != "") {
+                    if (!common.compareYear($("#StartYear").val(), $("#EndYear").val())) {
+                        $("#StartYear").showError(this.getMessage('E111'));
+                        //$("#EndNum").showError(this.getMessage('E113'));
+                        $("#StartYear").focus();
+                        return;
+                    }
+                }
             }
+
             if (ischeckboxLenght) {                
                 if (!common.checkboxlengthCheck($ctrl.attr('class'))) {
                     $ctrl.showError(this.getMessage('E112'));
+                    return;
+                }
+            }
+
+            if (ispasswordcompare) {
+                if (!common.comparePassword($("#txtPassword").val(), $("#txtConfirmPassword").val())) {
+                    $("#txtPassword").showError(this.getMessage('E109'));
+                    $("#txtConfirmPassword").showError(this.getMessage('E109'));
+                    $("#txtPassword").focus();
                     return;
                 }
             }
@@ -567,6 +600,24 @@ const common = {
         const date2 = new Date(d2);
         let success = true;
         if (date1 > date2) {
+            success = false;
+        }
+        return success;
+    },
+
+    comparePassword: function compareTwoPassword(pw, c_pw) {
+        let success = true;
+        if (pw !== c_pw) {
+            success = false;
+        }
+        return success;
+    },
+
+    compareYear: function compareTwoDate(d1, d2) {
+        const Year1 = d1;
+        const Year2 = d2;
+        let success = true;
+        if (Year1 > Year2) {
             success = false;
         }
         return success;

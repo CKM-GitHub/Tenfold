@@ -336,6 +336,7 @@ function Bind_tbody(result) {
             <td class="text-nowrap"> '+ data[i]["買取依頼日時"] + ' </td>\
             <td class="text-nowrap"> '+ data[i]["送客日時"] + ' </td>\
             <td class="text-nowrap"> '+ data[i]["終了日時"] + '</td>\
+            <td class="d-none"> '+ data[i]["SellerMansionID"] + '</td>\
             </tr>'
     }
     if (data.length > 0) {

@@ -1,7 +1,6 @@
 ﻿using Models;
-using System;
-using System.Web;
 using Seruichi.Common;
+using System.Web;
 
 namespace Seruichi.Seller.Web
 {
@@ -48,7 +47,7 @@ namespace Seruichi.Seller.Web
             return HttpContext.Current.Session[SESSION_KEY] as LoginUser;
         }
 
-        public static string GetVerificationToken()
+        public static string GetAndStoreVerificationToken()
         {
             var user = GetUserFromSession();
             if (user == null)
@@ -57,6 +56,7 @@ namespace Seruichi.Seller.Web
             }
             else
             {
+                //user.VerificationToken = NewVerificationToken;
                 return user.VerificationToken;
             }
         }
@@ -72,7 +72,7 @@ namespace Seruichi.Seller.Web
 
         public static bool Logout()
         {
-            HttpContext.Current.Session.Clear();
+            HttpContext.Current.Session.Abandon();
             return true;
         }
 

@@ -23,7 +23,8 @@ namespace Seruichi.Tenfold.Web
                       "~/Content/css/validation.css",
                        "~/Content/bootstrap/bootstrap.min.css",
                       "~/Content/fonts/font-awesome.min.css",
-                      "~/Content/css/jquery.dataTables.min.css"
+                      "~/Content/css/jquery.dataTables.min.css",
+                      "~/Content/css/tree.css"
                       ));
 
             bundles.Add(new ScriptBundle("~/Content/scripts/application").Include(
