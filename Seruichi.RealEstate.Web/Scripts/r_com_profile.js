@@ -59,6 +59,14 @@ function addEvents(model) {
     $('#btnProcess').on('click', function () {
         Modified_M_RealEstate_Data();
     });
+
+    $('#btnxC_alert').on('click', function () {
+        window.location.reload();
+    });
+
+    $('#btnC_alert').on('click', function () {
+        window.location.reload();
+    });
 }
 
 function Get_ModalData(RealECD) {
