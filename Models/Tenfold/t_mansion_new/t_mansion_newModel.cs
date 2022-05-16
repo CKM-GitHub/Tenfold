@@ -21,6 +21,9 @@ namespace Models.Tenfold.t_mansion_new
         public string TownCD { get; set; }
         public string TownName { get; set; }
         public string Address { get; set; }
+
         public List<MansionStation> MansionStationList { get; set; } = new List<MansionStation>();
+
+        public string MansionStationListJson { get; set; }
     }
 }
