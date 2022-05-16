@@ -141,8 +141,8 @@
     <Compile Include="Controllers\t_dashboardController.cs" />
     <Compile Include="Controllers\t_loginController.cs" />
     <Compile Include="Controllers\t_mansion_listController.cs" />
-    <Compile Include="Controllers\t_mansion_newController.cs" />
     <Compile Include="Controllers\t_seller_assessmentController.cs" />
+    <Compile Include="Controllers\t_mansion_newController.cs" />
     <Compile Include="Controllers\t_seller_listController.cs" />
     <Compile Include="Controllers\t_seller_mansionController.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
