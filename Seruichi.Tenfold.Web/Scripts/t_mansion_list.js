@@ -107,6 +107,23 @@ function addEvents() {
         const $Apartment = $("#txtApartment").val(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
             $StartUnit = $("#StartUnit").val(), $EndUnit = $("#EndUnit").val()
 
+        var cityGPCD_check = '';
+        var gp_length = 0;
+        $('.node-parent:checkbox:checked').each(function () {
+            cityGPCD_check += $(this).val() + ',';
+            gp_length += 1;
+        });
+        alert(cityGPCD_check);
+
+        var cityCD_check = '';
+        var city_lenght = 0;
+        $('.node-item:checkbox:checked').each(function () {
+            cityCD_check += $(this).val() + ',';
+            city_lenght += 1;
+        });
+        alert(cityCD_check);
+        alert(gp_length + ',' + city_lenght);
+
         let model = {
             Apartment: $Apartment,
             StartAge: Get_FT_Age($EndAge, 'F'),
@@ -225,11 +242,10 @@ function addEvents() {
         )
 
     });
-
 }
 
 function Get_FT_Age(age, type) {
-    debugger;
+    
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
