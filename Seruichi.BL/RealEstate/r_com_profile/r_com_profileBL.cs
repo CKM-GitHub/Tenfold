@@ -27,7 +27,7 @@ namespace Seruichi.BL.RealEstate.r_com_profile
         {
             var sqlParams = new SqlParameter[]
             {
-                new SqlParameter("@BusinessHours", SqlDbType.TinyInt){ Value = model.BusinessHours.ToByte(0)},
+                new SqlParameter("@BusinessHours", SqlDbType.VarChar){ Value = model.BusinessHours.ToStringOrNull()},
                 new SqlParameter("@CompanyHoliday", SqlDbType.VarChar){ Value = model.CompanyHoliday.ToStringOrNull() },
                 new SqlParameter("@Password", SqlDbType.VarChar){ Value = model.Password.ToStringOrNull() },
                 new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.LoginID.ToStringOrNull() },
