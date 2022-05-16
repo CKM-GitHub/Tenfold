@@ -65,6 +65,10 @@ namespace Seruichi.Tenfold.Web
             bundles.Add(new ScriptBundle("~/bundles/t_mansion_list").Include(
                      "~/Scripts/t_mansion_list.js"));
 
+          
+
+            bundles.Add(new ScriptBundle("~/bundles/t_mansion_new").Include(
+                     "~/Scripts/t_mansion_new.js"));
 
         }
     }
