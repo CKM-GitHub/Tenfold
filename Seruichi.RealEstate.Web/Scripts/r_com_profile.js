@@ -122,8 +122,7 @@ function Bind_DetailData(data) {
         $('#m_txtZipCode2').val(data[0]['ZipCode2']);
         $('#m_txtPrefName').val(data[0]['PrefName']);
         $('#m_txtCity_Town').val(data[0]['CityName'] + data[0]['TownName']);
-        $('#m_txtTownAddress').val(data[0]['Address1']);
-        $('#m_txtStreetAddress').val(data[0]['Address1']);
+        $('#m_txtAddress1').val(data[0]['Address1']);
         $('#m_txtAddress2').val(data[0]['Address2']);
 
         $('#m_txtPICName').val(data[0]['PICName']);

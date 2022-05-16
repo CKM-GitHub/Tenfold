@@ -1,15 +1,15 @@
-﻿using Models;
-using Seruichi.BL;
-using Seruichi.BL.Tenfold.t_mansion_new;
-using Seruichi.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+using System.Web;
 using System.Web.Mvc;
-using HttpPostAttribute = System.Web.Http.HttpPostAttribute;
+using Seruichi.BL;
+using Seruichi.Common;
+using Models;
+using Seruichi.BL.Tenfold.t_mansion_new;
+using Models.Tenfold.t_mansion_new;
 
 namespace Seruichi.Tenfold.Web.Controllers
 {
@@ -21,15 +21,10 @@ namespace Seruichi.Tenfold.Web.Controllers
             ViewBag.PrefDropDownListItems = bl.GetDropDownListItemsOfPrefecture();
             return View();
         }
-        [HttpPost]
-        public ActionResult GotoNextPage()
-        {
-            return RedirectToAction("Index", "a_index");
-        }
-
+       
         // Ajax: CheckZipCode
         [HttpPost]
-        public ActionResult CheckZipCode(a_indexModel model)
+        public ActionResult CheckZipCode(t_mansion_newModel model)
         {
             if (model == null)
             {
@@ -75,7 +70,7 @@ namespace Seruichi.Tenfold.Web.Controllers
             return OKResult(DataTableToJSON(dt));
         }
 
-       
+
         // Ajax: CheckAll
         [HttpPost]
         public ActionResult CheckAll(a_indexModel model)
@@ -97,5 +92,4 @@ namespace Seruichi.Tenfold.Web.Controllers
             return OKResult();
         }
     }
-   
 }
