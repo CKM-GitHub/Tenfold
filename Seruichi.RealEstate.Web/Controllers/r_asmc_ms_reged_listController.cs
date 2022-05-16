@@ -54,27 +54,43 @@ namespace Seruichi.RealEstate.Web.Controllers
                             CityName = dr["CityName"].ToString()
                         }).ToList();
 
-            //For Rating
-            List<RatingModel> RatingList = new List<RatingModel>();
-            DataTable dtRating = bl.Get_Rating(user.RealECD);
-            if(dtRating.Rows.Count>0)
-            {
-                RatingList = (from DataRow dr in dtRating.Rows
-                              select new RatingModel()
-                              {
-                                  Rating = dr["Rating"].ToString()
-                              }).ToList();
-                ViewBag.Rating = RatingList;
-            }
-            else
-            {
-                ViewBag.Rating = "0";
-            }
 
             ViewBag.PrefCD = prefList;
             ViewBag.CityGPCD = prefcitygpcdList;
             ViewBag.CityCD = cityList;
             return View();
         }
-    }
+
+        [HttpPost]
+        public ActionResult Get_Rating(RatingModel model)
+        {
+            //For Rating
+            r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
+            r_asmc_ms_reged_listBL bl = new r_asmc_ms_reged_listBL();
+            //List<RatingModel> RatingList = new List<RatingModel>();
+            DataTable dtRating = bl.Get_Rating(user.RealECD);
+            //if(dtRating.Rows.Count>0)
+            //{
+            //    RatingList = (from DataRow dr in dtRating.Rows
+            //                    select new RatingModel()
+            //{
+            //Rating = dr["Rating"].ToString()
+            //                    }).ToList();
+            //ViewBag.Rating = RatingList;
+            //}
+            //else
+            //{
+            //    ViewBag.Rating = "0";
+            //}
+            return OKResult(DataTableToJSON(dtRating));
+        }
+
+
+        [HttpPost]
+        public ActionResult Get_DataList(r_asmc_ms_reged_listModel model)
+        {
+            DataTable dt = new DataTable();
+            return OKResult(DataTableToJSON(dt));
+        }
+        }
 }

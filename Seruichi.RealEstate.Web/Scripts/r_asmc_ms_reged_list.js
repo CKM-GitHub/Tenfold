@@ -1,7 +1,8 @@
 ﻿const _url = {};
 $(function () {
     setValidation();
-    //_url.Get_DataList = common.appPath + '/r_asmc_ms_reged_list/Get_DataList';
+    _url.Get_DataList = common.appPath + '/r_asmc_ms_reged_list/Get_DataList';
+    _url.Get_Rating = common.appPath + '/r_asmc_ms_reged_list/Get_Rating';
     addEvents();
 });
 function setValidation() {
@@ -52,6 +53,13 @@ function addEvents() {
         }
     });
 
+    $('#RadioRating').on('change', function () {
+
+        var checked = $(this).is(':checked');
+        Get_Rating_List(checked);
+    });
+   
+
     $('.form-check-input').on('change', function () {
         this.value = this.checked ? 1 : 0;
         if ($("input[type=checkbox]:checked").length > 0) {
@@ -93,6 +101,22 @@ function addEvents() {
         };
         Get_DataList(model, $form);
 
+    });
+}
+function Get_Rating_List(checked) {
+    let model = {};
+    common.callAjax(_url.Get_Rating, model, function (result) {
+        if (result && result.isOK) {
+
+            Bind_Rating(result.data);
+        }
+        if (result && !result.isOK) {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+            }
+        }
     });
 }
 
@@ -169,4 +193,23 @@ function Bind_tbody(result) {
     $('#r_table_List tbody').append(html);
 
     sortTable.getSortingTable("r_table_List");
+}
+
+
+
+function Bind_Rating(result) {
+    $('#RadioRating').empty();
+    let data = JSON.parse(result);
+    let html_Rating = "";
+    if (data.length > 0) {
+        for (var i = 0; i < data.length; i++) {
+            html += '<div class="ms-6">\
+                <input class="form-check-input" type = "radio" name = "Radios" id = "Radio" value = rating.Rating >\
+                    <span class="text-danger">'
+        }
+    }
+    else {
+       
+    }
+    $('#RadioRating').append(html_Rating);
 }
