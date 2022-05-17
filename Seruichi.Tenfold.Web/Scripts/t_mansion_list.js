@@ -107,12 +107,31 @@ function addEvents() {
         const $Apartment = $("#txtApartment").val(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
             $StartUnit = $("#StartUnit").val(), $EndUnit = $("#EndUnit").val()
 
+        var cityGPCD_check = '';
+        var gp_length = 0;
+        $('.node-parent:checkbox:checked').each(function () {
+            cityGPCD_check += $(this).val() + ',';
+            gp_length += 1;
+        });
+        //alert(cityGPCD_check);
+
+        var cityCD_check = '';
+        var city_lenght = 0;
+        $('.node-item:checkbox:checked').each(function () {
+            cityCD_check += $(this).val() + ',';
+            city_lenght += 1;
+        });
+        //alert(cityCD_check);
+        //alert(gp_length + ',' + city_lenght);
+
         let model = {
             Apartment: $Apartment,
             StartAge: Get_FT_Age($EndAge, 'F'),
             EndAge: Get_FT_Age($StartAge, 'T'),
             StartDate: $StartUnit,
             EndDate: $EndUnit,
+            CityCD: cityCD_check,
+            CityGPCD: cityGPCD_check
         };
         GetM_MansionList(model, $form);
 
@@ -226,10 +245,23 @@ function addEvents() {
 
     });
 
+    $(document).on('click', '.tree li  input[type="checkbox"]', function () {
+        $(this).closest('li').find('ul input[type="checkbox"]').prop('checked', $(this).is(':checked'));
+    }).on('click', '.node-item', function () {
+        var parentNode = $(this).parents('.tree ul');
+        if ($(this).is(':checked')) {
+            parentNode.find('li .node-parent').prop('checked', true);
+        } else {
+            var elements = parentNode.find('ul input[type="checkbox"]:checked');
+            if (elements.length == 0) {
+                parentNode.find('li .node-parent').prop('checked', false);
+            }
+        }
+    });
 }
 
 function Get_FT_Age(age, type) {
-    debugger;
+    
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!

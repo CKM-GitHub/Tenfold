@@ -38,16 +38,16 @@
                         @foreach (var item in ViewBag.PrefCD)
                         {
                         <li>
-                            <a> @item.PrefCD +','+@item.PrefName </a>
+                            <a>@item.PrefName </a>
                             @foreach (var cityGPCD in ViewBag.CityGPCD)
                             {
                                 if (cityGPCD.PrefCD == item.PrefCD)
                                 {
                                     <ul>
                                         <li class="text-nowrap">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                            <input class="form-check-input node-parent" type="checkbox" value="@cityGPCD.CityGPCD"  checked>
                                             <label class="form-check-label" for="flexCheckChecked">
-                                                @cityGPCD.PrefCD +","+@cityGPCD.CityGPCD +","+@cityGPCD.CityGPName
+                                                @cityGPCD.CityGPName
                                             </label>
 
                                             @foreach (var cityCD in ViewBag.CityCD)
@@ -56,9 +56,9 @@
                                                 {
                                                     <ul>
                                                         <li>
-                                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                                            <input class="form-check-input node-item" type="checkbox" value="@cityCD.CityCD"  checked>
                                                             <label class="form-check-label" for="flexCheckChecked">
-                                                                @cityCD.PrefCD +","+@cityCD.CityGPCD +","+@cityCD.CityGPName+","+@cityCD.CityCD +","+@cityCD.CityName
+                                                                @cityCD.CityName
                                                             </label>
                                                         </li>
                                                     </ul>

@@ -65,7 +65,7 @@ namespace Seruichi.Tenfold.Web.Controllers
             {
                 return BadRequestResult();
             }
-            a_indexBL bl = new a_indexBL();
+            t_mansion_newBL bl = new t_mansion_newBL();
             var dt = bl.GetMansionListByMansionWord(prefCD, searchWord);
             return OKResult(DataTableToJSON(dt));
         }
@@ -73,7 +73,7 @@ namespace Seruichi.Tenfold.Web.Controllers
 
         // Ajax: CheckAll
         [HttpPost]
-        public ActionResult CheckAll(a_indexModel model)
+        public ActionResult CheckAll(t_mansion_newModel model)
         {
             if (model == null)
             {
@@ -82,7 +82,7 @@ namespace Seruichi.Tenfold.Web.Controllers
 
             model.MansionStationList = ConvertJsonToObject<List<a_indexModel.MansionStation>>(model.MansionStationListJson);
 
-            a_indexBL bl = new a_indexBL();
+            t_mansion_newBL bl = new t_mansion_newBL();
             var validationResult = bl.ValidateAll(model);
             if (validationResult.Count > 0)
             {

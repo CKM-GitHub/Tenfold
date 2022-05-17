@@ -13,7 +13,9 @@ namespace Models.Tenfold.t_mansion_list
         public string EndAge { get; set; }
         public string StartUnit { get; set; }
         public string EndUnit { get; set; }
-         
+        public string CityCD { get; set; }
+        public string CityGPCD { get; set; }
+
     }
     public class M_Pref
     {
