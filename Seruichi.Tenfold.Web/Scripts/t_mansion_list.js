@@ -6,7 +6,7 @@ $(function () {
     _url.generate_CSV1 = common.appPath + '/t_mansion_list/Generate_CSV1';
     _url.generate_CSV2 = common.appPath + '/t_mansion_list/Generate_CSV2';
     _url.generate_CSV3 = common.appPath + '/t_mansion_list/Generate_CSV3';
-    _url.InsertL_Log = common.appPath + '/t_mansion_list/InsertM_Mansion_List_L_Log';
+    _url.InsertL_Log = common.appPath + '/t_mansion_list/InsertM_Mansion_L_Log';
     addEvents();
 });
 
@@ -110,10 +110,40 @@ function addEvents() {
         var cityGPCD_check = '';
         var gp_length = 0;
         $('.node-parent:checkbox:checked').each(function () {
+            cityGPCD_check +=  $(this).val() + ',' ;
+            gp_length += 1;
+        });
+       
+        var cityCD_check = '';
+        var city_lenght = 0;
+        $('.node-item:checkbox:checked').each(function () {
+            cityCD_check += $(this).val() + ',';
+            city_lenght += 1;
+        });
+        
+        let model = {
+            Apartment: $Apartment,
+            StartAge: Get_FT_Age($EndAge, 'F'),
+            EndAge: Get_FT_Age($StartAge, 'T'),
+            StartDate: $StartUnit,
+            EndDate: $EndUnit,
+            CityCD: cityCD_check.slice(0,-1),
+            CityGPCD: cityGPCD_check.slice(0, -1)
+        };
+        GetM_MansionList(model, $form);
+
+    });
+
+    $('#btnCSVDownload').on('click', function () {
+        const $Apartment = $("#txtApartment").val(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
+            $StartUnit = $("#StartUnit").val(), $EndUnit = $("#EndUnit").val()
+
+        var cityGPCD_check = '';
+        var gp_length = 0;
+        $('.node-parent:checkbox:checked').each(function () {
             cityGPCD_check += $(this).val() + ',';
             gp_length += 1;
         });
-        //alert(cityGPCD_check);
 
         var cityCD_check = '';
         var city_lenght = 0;
@@ -121,8 +151,6 @@ function addEvents() {
             cityCD_check += $(this).val() + ',';
             city_lenght += 1;
         });
-        //alert(cityCD_check);
-        //alert(gp_length + ',' + city_lenght);
 
         let model = {
             Apartment: $Apartment,
@@ -130,24 +158,8 @@ function addEvents() {
             EndAge: Get_FT_Age($StartAge, 'T'),
             StartDate: $StartUnit,
             EndDate: $EndUnit,
-            CityCD: cityCD_check,
-            CityGPCD: cityGPCD_check
-        };
-        GetM_MansionList(model, $form);
-
-    });
-
-    $('#btnCSV').on('click', function () {
-        const $Apartment = $("#txtApartment").val(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
-            $StartUnit = $("#StartUnit").val(), $EndUnit = $("#EndUnit").val()
-
-
-        let model = {
-            Apartment: $Apartment,
-            StartAge: Get_FT_Age($EndAge, 'F'),
-            EndAge: Get_FT_Age($StartAge, 'T'),
-            StartDate: $StartUnit,
-            EndDate: $EndUnit,
+            CityCD: cityCD_check.slice(0, -1),
+            CityGPCD: cityGPCD_check.slice(0, -1)
         };
         common.callAjax(_url.generate_CSV1, model,
             function (result) {
@@ -175,13 +187,12 @@ function addEvents() {
                     document.body.removeChild(downloadLink);
                 }
                 else {
-                    //alert("There is no data!");
                     alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
                 }
             }
         )
         common.callAjax(_url.generate_CSV2, model,
-            function (result) {
+            function (result) {     
                 //sucess
                 var table_data = result.data;
 
@@ -206,14 +217,13 @@ function addEvents() {
                     document.body.removeChild(downloadLink);
                 }
                 else {
-                    //alert("There is no data!");
                     alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
                 }
             }
         )
         common.callAjax(_url.generate_CSV3, model,
             function (result) {
-                //sucess
+                //sucess 
                 var table_data = result.data;
 
                 var csv = common.getJSONtoCSV(table_data);
@@ -237,12 +247,16 @@ function addEvents() {
                     document.body.removeChild(downloadLink);
                 }
                 else {
-                    //alert("There is no data!");
                     alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
                 }
             }
         )
 
+    });
+
+    $('#btnSignUp').on('click', function () {
+        $form = $('#form1').hideChildErrors();
+        window.location.href = common.appPath + '/t_mansion_new/Index';
     });
 
     $(document).on('click', '.tree li  input[type="checkbox"]', function () {
@@ -307,7 +321,8 @@ function Bind_tbody(result) {
     let data = JSON.parse(result);
     let html = "";
     if (data.length > 0) {
-        html += '<tr>\
+        for (var i = 0; i < data.length; i++) {
+            html += '<tr>\
             <td class= "text-end" > ' + (i + 1) + '</td>\
             <td>' + data[i]["マンションCD"] + '</td >\
             <td> <a href="#"  onclick="l_logfunction(this.id)" class="text-heading font-semibold text-decoration-underline" id='+ data[i]["マンションCD"] + '>' + data[i]["マンション名"] + '</a></td>\
@@ -316,7 +331,7 @@ function Bind_tbody(result) {
             <td>' + data[i]["築年数"] + '</td>\
             <td>' + data[i]["総戸数"] + '</td>\
             </tr>'
-
+        }
         $('#total_record').text("検索結果：" + data.length + "件")
         $('#total_record_up').text("検索結果：" + data.length + "件")
     }
@@ -326,10 +341,10 @@ function Bind_tbody(result) {
     }
     $('#mansiontable tbody').append(html);
 
-    sortTable.getSortingTable("mansiontable");
 }
 
 function l_logfunction(id) {
+    debugger;
     let model = {
         LogDateTime: null,
         LoginKBN: null,
@@ -345,7 +360,8 @@ function l_logfunction(id) {
     common.callAjax(_url.InsertL_Log, model,
         function (result) {
             if (result && result.isOK) {
-                window.location.href = common.appPath + '/t_mansion/Index?MansionCD=' + model.MansionCD;              
+                alert("go to t_mansion")
+                //window.location.href = common.appPath + '/t_mansion/Index?MansionCD=' + model.MansionCD;              
             }
             if (result && !result.isOK) {
 

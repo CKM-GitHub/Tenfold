@@ -29,10 +29,12 @@ namespace Seruichi.BL.RealEstate.r_issueslist
             return validator.GetValidationResult();
         }
 
-        public DataTable get_issueslist_Data(r_issueslistModel model)
+        public async Task<DataTable> get_issueslist_Data(r_issueslistModel model)
         {
-            var sqlParams = new SqlParameter[]
+            return await Task.Run(() =>
             {
+                var sqlParams = new SqlParameter[]
+                {
                 new SqlParameter("@chk_New", SqlDbType.TinyInt){ Value = model.chk_New.ToByte(0) },
                 new SqlParameter("@chk_Nego", SqlDbType.TinyInt){ Value = model.chk_Nego.ToByte(0) },
                 new SqlParameter("@chk_Contract", SqlDbType.TinyInt){ Value = model.chk_Contract.ToByte(0) },
@@ -44,43 +46,44 @@ namespace Seruichi.BL.RealEstate.r_issueslist
                 new SqlParameter("@StartDate", SqlDbType.VarChar){ Value = model.StartDate.ToStringOrNull() },
                 new SqlParameter("@EndDate", SqlDbType.VarChar){ Value = model.EndDate.ToStringOrNull() },
                 new SqlParameter("@FreeWord", SqlDbType.VarChar){ Value = model.FreeWord.ToStringOrNull() }
-            };
+               };
 
-            DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_r_issueslist_getDisplayData", sqlParams);
+                DBAccess db = new DBAccess();
+                var dt = db.SelectDatatable("pr_r_issueslist_getDisplayData", sqlParams);
 
-            AESCryption crypt = new AESCryption();
-            string decryptionKey = StaticCache.GetDataCryptionKey();
-            var e = dt.AsEnumerable();
-            Parallel.ForEach(e, item =>
-            {
-                item["売主_カナ"] = crypt.DecryptFromBase64(item.Field<string>("売主_カナ"), decryptionKey);
+                AESCryption crypt = new AESCryption();
+                string decryptionKey = StaticCache.GetDataCryptionKey();
+                var e = dt.AsEnumerable();
+                Parallel.ForEach(e, item =>
+                {
+                    item["売主_カナ"] = crypt.DecryptFromBase64(item.Field<string>("売主_カナ"), decryptionKey);
+                });
+                Parallel.ForEach(e, item =>
+                {
+                    item["お客様名"] = crypt.DecryptFromBase64(item.Field<string>("お客様名"), decryptionKey);
+                });
+                Parallel.ForEach(e, item =>
+                {
+                    item["売主_住所３"] = crypt.DecryptFromBase64(item.Field<string>("売主_住所３"), decryptionKey);
+                });
+                Parallel.ForEach(e, item =>
+                {
+                    item["売主_住所４"] = crypt.DecryptFromBase64(item.Field<string>("売主_住所４"), decryptionKey);
+                });
+                Parallel.ForEach(e, item =>
+                {
+                    item["売主_住所５"] = crypt.DecryptFromBase64(item.Field<string>("売主_住所５"), decryptionKey);
+                });
+                Parallel.ForEach(e, item =>
+                {
+                    item["売主_固定電話番号"] = crypt.DecryptFromBase64(item.Field<string>("売主_固定電話番号"), decryptionKey);
+                });
+                Parallel.ForEach(e, item =>
+                {
+                    item["売主_携帯電話番号"] = crypt.DecryptFromBase64(item.Field<string>("売主_携帯電話番号"), decryptionKey);
+                });
+                return dt;
             });
-            Parallel.ForEach(e, item =>
-            {
-                item["お客様名"] = crypt.DecryptFromBase64(item.Field<string>("お客様名"), decryptionKey);
-            });
-            Parallel.ForEach(e, item =>
-            {
-                item["売主_住所３"] = crypt.DecryptFromBase64(item.Field<string>("売主_住所３"), decryptionKey);
-            });
-            Parallel.ForEach(e, item =>
-            {
-                item["売主_住所４"] = crypt.DecryptFromBase64(item.Field<string>("売主_住所４"), decryptionKey);
-            });
-            Parallel.ForEach(e, item =>
-            {
-                item["売主_住所５"] = crypt.DecryptFromBase64(item.Field<string>("売主_住所５"), decryptionKey);
-            });
-            Parallel.ForEach(e, item =>
-            {
-                item["売主_固定電話番号"] = crypt.DecryptFromBase64(item.Field<string>("売主_固定電話番号"), decryptionKey);
-            });
-            Parallel.ForEach(e, item =>
-            {
-                item["売主_携帯電話番号"] = crypt.DecryptFromBase64(item.Field<string>("売主_携帯電話番号"), decryptionKey);
-            });
-            return dt;
         }
 
         public void Insertr_issueslist_L_Log(r_issueslistModel model)

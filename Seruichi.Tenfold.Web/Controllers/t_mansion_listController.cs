@@ -9,6 +9,7 @@ using Seruichi.BL;
 using Seruichi.BL.Tenfold.t_mansion_list;
 using Models.Tenfold.t_mansion_list;
 using Seruichi.BL.Tenfold.t_mansion_list;
+using System.Threading.Tasks;
 
 namespace Seruichi.Tenfold.Web.Controllers
 {
@@ -98,7 +99,7 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult InsertM_Seller_L_Log(t_mansion_list_l_log_Model model)
+        public ActionResult InsertM_Mansion_L_Log(t_mansion_list_l_log_Model model)
         {
 
             t_mansion_listBL bl = new t_mansion_listBL();

@@ -44,31 +44,36 @@ namespace Seruichi.BL.Tenfold.t_mansion_list
        
         public DataTable Generate_CSV1(t_mansion_listModel model)
         {
-            var sqlParams = new SqlParameter[]
+             var sqlParams = new SqlParameter[]
              {
-                new SqlParameter("@StartAge", SqlDbType.Int){ Value = model.StartAge },
-                new SqlParameter("@EndAge", SqlDbType.Int){ Value = model.EndAge },
-                new SqlParameter("@StartUnit", SqlDbType.Int){ Value = model.StartUnit},
-                new SqlParameter("@EndUnit", SqlDbType.Int){ Value = model.EndUnit },
-                new SqlParameter("@Apartment", SqlDbType.VarChar){ Value =  model.Apartment.ToStringOrNull() }
+             new SqlParameter("@StartAge", SqlDbType.Int) { Value = model.StartAge },
+             new SqlParameter("@EndAge", SqlDbType.Int) { Value = model.EndAge },
+             new SqlParameter("@StartUnit", SqlDbType.Int) { Value = model.StartUnit },
+             new SqlParameter("@EndUnit", SqlDbType.Int) { Value = model.EndUnit },
+             new SqlParameter("@Apartment", SqlDbType.VarChar) { Value = model.Apartment.ToStringOrNull() },
+             new SqlParameter("@CityCD", SqlDbType.VarChar){ Value =  model.CityCD.ToStringOrNull() },
+             new SqlParameter("@CityGPCD", SqlDbType.VarChar){ Value =  model.CityGPCD.ToStringOrNull() }
              };
 
-            DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_t_mansion_list_csv1_generate", sqlParams);
+              DBAccess db = new DBAccess();
+              var dt = db.SelectDatatable("pr_t_mansion_list_csv1_generate", sqlParams);
 
-            return dt;
+              return dt;
+           
         }
 
         public DataTable Generate_CSV2(t_mansion_listModel model)
         {
             var sqlParams = new SqlParameter[]
-             {
+            {
                 new SqlParameter("@StartAge", SqlDbType.Int){ Value = model.StartAge },
                 new SqlParameter("@EndAge", SqlDbType.Int){ Value = model.EndAge },
                 new SqlParameter("@StartUnit", SqlDbType.Int){ Value = model.StartUnit},
                 new SqlParameter("@EndUnit", SqlDbType.Int){ Value = model.EndUnit },
-                new SqlParameter("@Apartment", SqlDbType.VarChar){ Value =  model.Apartment.ToStringOrNull() }
-             };
+                new SqlParameter("@Apartment", SqlDbType.VarChar){ Value =  model.Apartment.ToStringOrNull() },
+                new SqlParameter("@CityCD", SqlDbType.VarChar){ Value =  model.CityCD.ToStringOrNull() },
+                new SqlParameter("@CityGPCD", SqlDbType.VarChar){ Value =  model.CityGPCD.ToStringOrNull() }
+            };
 
             DBAccess db = new DBAccess();
             var dt = db.SelectDatatable("pr_t_mansion_list_csv2_generate", sqlParams);
@@ -84,7 +89,9 @@ namespace Seruichi.BL.Tenfold.t_mansion_list
                 new SqlParameter("@EndAge", SqlDbType.Int){ Value = model.EndAge },
                 new SqlParameter("@StartUnit", SqlDbType.Int){ Value = model.StartUnit},
                 new SqlParameter("@EndUnit", SqlDbType.Int){ Value = model.EndUnit },
-                new SqlParameter("@Apartment", SqlDbType.VarChar){ Value =  model.Apartment.ToStringOrNull() }
+                new SqlParameter("@Apartment", SqlDbType.VarChar){ Value =  model.Apartment.ToStringOrNull() },
+                new SqlParameter("@CityCD", SqlDbType.VarChar){ Value =  model.CityCD.ToStringOrNull() },
+                new SqlParameter("@CityGPCD", SqlDbType.VarChar){ Value =  model.CityGPCD.ToStringOrNull() }
              };
 
             DBAccess db = new DBAccess();

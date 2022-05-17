@@ -1,5 +1,8 @@
 ﻿const _url = {};
-
+const placeHolder_city = '市区町村';
+const placeHolder_town = '町域名';
+const placeHolder_line = '路線選択'
+const placeHolder_station = '駅選択'
 
 $(function () {
     _url.getBuildingAge = common.appPath + commonApiUrl.getBuildingAge;
@@ -8,18 +11,18 @@ $(function () {
     _url.getTownDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfTown;
     _url.getLineDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfLine;
     _url.getStationDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfStation;
+    _url.getMansinoData = common.appPath + '/a_index/GetMansionData';
     _url.checkZipCode = common.appPath + '/t_mansion_new/CheckZipCode';
     _url.getMansionListByMansionWord = common.appPath + '/t_mansion_new/GetMansionListByMansionWord';
     _url.checkAll = common.appPath + '/t_mansion_new/CheckAll';
     setValidation();
     addEvents();
-    setTypeahead('#MansionName');
 });
 
 function setValidation() {
     //マンション名
-    $('#MansionName')
-        .addvalidation_errorElement("#errorMansionName")
+    $('#Name')
+        .addvalidation_errorElement("#errorName")
         .addvalidation_reqired()
         .addvalidation_doublebyte();
 
@@ -30,7 +33,7 @@ function setValidation() {
     $('#ZipCode2')
         .addvalidation_errorElement("#errorZipCode")
         .addvalidation_singlebyte_number();
-    //都道府県
+    ////都道府県
     $('#PrefCD')
         .addvalidation_errorElement("#errorPrefCD")
         .addvalidation_reqired();
@@ -47,36 +50,36 @@ function setValidation() {
         .addvalidation_errorElement("#errorAddress")
         .addvalidation_reqired()
         .addvalidation_doublebyte();
-    $('input[name="StructuralKBN"]:radio')
-        .addvalidation_errorElement("#errorStructuralKBN")
-        .addvalidation_reqired();
-    //築年月
-    $('#ConstYYYYMM')
-        .addvalidation_errorElement("#errorConstYYYYMM")
-        .addvalidation_reqired()
-        .addvalidation_custom('customValidation_checkConstYYYYMM');
+    //$('input[name="StructuralKBN"]:radio')
+    //    .addvalidation_errorElement("#errorStructuralKBN")
+    //    .addvalidation_reqired();
+    ////築年月
+    //$('#ConstYYYYMM')
+    //    .addvalidation_errorElement("#errorConstYYYYMM")
+    //    .addvalidation_reqired()
+    //    .addvalidation_custom('customValidation_checkConstYYYYMM');
 
-    $('#Rooms')
-        .addvalidation_errorElement("#errorRooms")
-        .addvalidation_reqired(true)
-        .addvalidation_singlebyte_number();
+    //$('#Rooms')
+    //    .addvalidation_errorElement("#errorRooms")
+    //    .addvalidation_reqired(true)
+    //    .addvalidation_singlebyte_number();
 
-    //土地・権利
-    $('input[name="RightKBN"]:radio')
-        .addvalidation_errorElement("#errorRightKBN")
-        .addvalidation_reqired();
+    ////土地・権利
+    //$('input[name="RightKBN"]:radio')
+    //    .addvalidation_errorElement("#errorRightKBN")
+    //    .addvalidation_reqired();
 
-    //交通アクセス
-    $('#LineCD_1')
-        .addvalidation_errorElement("#errorMansionStationInfo")
-        .addvalidation_reqired();
-    $('.js-stationcd')
-        .addvalidation_errorElement("#errorMansionStationInfo")
-        .addvalidation_custom('customValidation_checkStation');
-    $('.js-distance')
-        .addvalidation_errorElement("#errorMansionStationInfo")
-        .addvalidation_singlebyte_number()
-        .addvalidation_custom('customValidation_checkDistance');
+    ////交通アクセス
+    //$('#LineCD_1')
+    //    .addvalidation_errorElement("#errorMansionStationInfo")
+    //    .addvalidation_reqired();
+    //$('.js-stationcd')
+    //    .addvalidation_errorElement("#errorMansionStationInfo")
+    //    .addvalidation_custom('customValidation_checkStation');
+    //$('.js-distance')
+    //    .addvalidation_errorElement("#errorMansionStationInfo")
+    //    .addvalidation_singlebyte_number()
+    //    .addvalidation_custom('customValidation_checkDistance');
 
 }
 
@@ -118,7 +121,7 @@ function addEvents() {
                         setTownList('remove');
                         setLineList('add', data.PrefCD);
                         setStationList('remove');
-                        setTypeahead('#MansionName');
+                        //setTypeahead('#Name');
                     }
                     if (data.CityCD) {
                         setTownList('add', data.PrefCD, data.CityCD, data.TownCD);
@@ -144,7 +147,7 @@ function addEvents() {
             setLineList('add', inputval);
             setStationList('remove');
             $('.js-distance').val('').hideError();
-            setTypeahead('#MansionName');
+            //setTypeahead('#Name');
         }
         else {
             setCityList('remove');
@@ -152,25 +155,16 @@ function addEvents() {
             setLineList('remove');
             setStationList('remove');
             $('.js-distance').val('').hideError();
-            setTypeahead('#MansionName');
+            //setTypeahead('#Name');
         }
     });
 
-    //マンション名
-    //$('#MansionName').on('change', function () {
-    //    $('#hdnMansionCD').val('');
-    //    const $MansionCD = $('.tt-mansioncd');
-    //    if ($MansionCD.get().length === 1) {
-    //        displayMansionData($MansionCD.text());
-    //    }
-    //}).on('typeahead:selected', function (evt, data) {
-    //    displayMansionData(data.Value);
-    //});
+    
 
-    ////市区町村
-    //$('#CityCD').on('change', function () {
-    //    setTownList('add', $('#PrefCD').val(), $(this).val());
-    //});
+    //市区町村
+    $('#CityCD').on('change', function () {
+        setTownList('add', $('#PrefCD').val(), $(this).val());
+    });
 
     ////路線選択
     //$('.js-linecd').on('change', function () {
@@ -200,44 +194,105 @@ function addEvents() {
     //    }
     //});
 
-    ////築年月
-    //$('#ConstYYYYMM').on('blur', function () {
-    //    const $this = $(this);
-    //    common.callAjax(_url.getBuildingAge, $this.val(), function (result) {
-    //        if (result && result.isOK) {
-    //            if (result.data) {
-    //                $('#BuildingAge').text('（築' + result.data + '年）').data('building-age', result.data);
-    //                if (result.data == 0)
-    //                    $this.showError(common.getMessage('E208'));
-    //                else
-    //                    $this.hideError();
-    //            }
-    //            else
-    //                $('#BuildingAge').text('（築　年）')
-    //        }
-    //    })
-    //});
+    //築年月
+    $('#ConstYYYYMM').on('blur', function () {
+        const $this = $(this);
+        common.callAjax(_url.getBuildingAge, $this.val(), function (result) {
+            if (result && result.isOK) {
+                if (result.data) {
+                    $('#BuildingAge').text('（築' + result.data + '年）').data('building-age', result.data);
+                    if (result.data == 0)
+                        $this.showError(common.getMessage('E208'));
+                    else
+                        $this.hideError();
+                }
+                else
+                    $('#BuildingAge').text('（築　年）')
+            }
+        })
+    });
 
    
 }
 
-function setTypeahead(selector) {
-
-    $(selector).typeahead('destroy').typeahead(
-        {
-            hint: false,
-            highlight: true,
-            minLength: 2
-        },
-        {
-            name: 'data',
-            display: 'DisplayText',
-            source: bloodhoundSuggestions,
-            templates: {
-                suggestion: function (data) {
-                    return '<div>' + data.DisplayText + '<span class="tt-mansioncd" style="display:none;">' + data.Value + '</span></div>';
+function setCityList(mode, prefCd, defaultValue) {
+    if (mode === 'add') {
+        common.callAjax(_url.getCityDropDownList, { PrefCD: prefCd },
+            function (result) {
+                if (result && result.isOK) {
+                    common.setDropDownListItems('#CityCD', result.data, placeHolder_city, defaultValue);
                 }
-            },
-            limit: 3000,
-        });
+            });
+    }
+    if (mode === 'remove') {
+        common.removeDropDownListItems('#CityCD', placeHolder_city);
+    }
 }
+
+function setTownList(mode, prefCd, cityCd, defaultValue) {
+    if (mode === 'add') {
+        common.callAjax(_url.getTownDropDownList, { PrefCD: prefCd, CityCD: cityCd },
+            function (result) {
+                if (result && result.isOK) {
+                    common.setDropDownListItems('#TownCD', result.data, placeHolder_town, defaultValue);
+                }
+            });
+    }
+    if (mode === 'remove') {
+        common.removeDropDownListItems('#TownCD', placeHolder_town);
+    }
+}
+
+function setLineList(mode, prefCd, selector, defaultValue, callback) {
+    if (!selector) selector = ".js-linecd";
+
+    if (mode === 'add') {
+        common.callAjax(_url.getLineDropDownList, { PrefCD: prefCd },
+            function (result) {
+                if (result && result.isOK) {
+                    common.setDropDownListItems(selector, result.data, placeHolder_line, defaultValue);
+                    if (callback) callback();
+                }
+            });
+    }
+    if (mode === 'remove') {
+        common.removeDropDownListItems(selector, placeHolder_line);
+    }
+}
+
+function setStationList(mode, lineCd, selector, defaultValue) {
+    if (!selector) selector = ".js-stationcd";
+
+    if (mode === 'add') {
+        common.callAjax(_url.getStationDropDownList, { LineCD: lineCd },
+            function (result) {
+                if (result && result.isOK) {
+                    common.setDropDownListItems(selector, result.data, placeHolder_station, defaultValue);
+                }
+            });
+    }
+    if (mode === 'remove') {
+        common.removeDropDownListItems(selector, placeHolder_station);
+    }
+}
+
+
+function getMansionStationList() {
+    let array = [];
+
+    $('.js-stationContainer .js-station').each(function (index) {
+        const $this = $(this);
+        const data = {
+            RowNo: index + 1,
+            LineCD: $this.find('.js-linecd').val(),
+            StationCD: $this.find('.js-stationcd').val(),
+            Distance: $this.find('.js-distance').val()
+        }
+        if (data.LineCD) {
+            array[array.length] = data;
+        }
+    });
+
+    return array;
+}
+
