@@ -1,9 +1,11 @@
 ﻿const _url = {};
+let Radio_Checkbox = 0;
 $(function () {
     setValidation();
     _url.Get_DataList = common.appPath + '/r_asmc_ms_reged_list/Get_DataList';
     _url.Get_Rating = common.appPath + '/r_asmc_ms_reged_list/Get_Rating';
     addEvents();
+    
 });
 function setValidation() {
     $('#MansionName')
@@ -23,13 +25,13 @@ function setValidation() {
         .addvalidation_singlebyte_number() //E104
         .addvalidation_datecompare(); //E113
 
-    $('.form-check-input')
-        .addvalidation_errorElement("#CheckBoxError")
-        .addvalidation_checkboxlenght(); //E112
+    $('#btnDisplay')
+        .addvalidation_errorElement("#errorbtnDisplay"); //E303
+
 }
 function addEvents() {
     common.bindValidationEvent('#form1', '');
-
+    //Bind_Rating("[]");
     $('#StartYear, #EndYear').on('change', function () {
 
         const $this = $(this), $start = $('#StartYear').val(), $end = $('#EndYear').val()
@@ -53,19 +55,17 @@ function addEvents() {
         }
     });
 
-    $('#RadioRating').on('change', function () {
-
-        var checked = $(this).is(':checked');
-        Get_Rating_List(checked);
-    });
-   
-
-    $('.form-check-input').on('change', function () {
-        this.value = this.checked ? 1 : 0;
-        if ($("input[type=checkbox]:checked").length > 0) {
-            $('.form-check-input').hideError();
+    $('#RadioCheck').on('change', function () {
+        $form = $('#form1').hideChildErrors();
+        if (!common.checkValidityOnSave('#form1')) {
+            $form.getInvalidItems().get(0).focus();
+            return false;
         }
-    }).change();
+        this.value = this.checked ? 1 : 0;
+        Radio_Checkbox = this.value;
+       // alert(this.value);
+        //Get_Rating_List(this.value);
+    });
 
     $('#btnDisplay').on('click', function () {
         $form = $('#form1').hideChildErrors();
@@ -76,48 +76,53 @@ function addEvents() {
         }
         $('#r_table_List tbody').empty();
 
-        const $MansionName = $("#MansionName").val(), $StartYear = $("#StartYear").val(), $EndYear = $('#EndYear').val(),
-
-        var cityGPCD_check = '';
-        var gp_length = 0;
-        $('.node-parent:checkbox:checked').each(function () {
-            cityGPCD_check += $(this).val() + ',';
-            gp_length += 1;
-        });
-
+        const $MansionName = $("#MansionName").val(), $StartYear = $("#StartYear").val(), $EndYear = $('#EndYear').val()
         var cityCD_check = '';
         var city_lenght = 0;
         $('.node-item:checkbox:checked').each(function () {
             cityCD_check += $(this).val() + ',';
             city_lenght += 1;
         });
-       
+
+        var Rdo_Rating = '';
+        if (Radio_Checkbox == 1)
+        {
+          $('.form-check-input:radio:checked').each(function () {
+            Rdo_Rating = $(this).val();
+            });
+        }
+
         let model = {
             MansionName: $MansionName,
-            StartYear: Get_FT_Age($StartYear, 'F'),
-            EndYear: Get_FT_Age($EndYear, 'T'),
+            StartYear: Get_FT_Age($EndYear, 'F'),
+            EndYear: Get_FT_Age($StartYear, 'T'),
             CityCD: cityCD_check,
-            CityGPCD: cityGPCD_check
+            Radio_Rating: Rdo_Rating
         };
         Get_DataList(model, $form);
 
     });
 }
 function Get_Rating_List(checked) {
-    let model = {};
-    common.callAjax(_url.Get_Rating, model, function (result) {
-        if (result && result.isOK) {
-
-            Bind_Rating(result.data);
-        }
-        if (result && !result.isOK) {
-            const errors = result.data;
-            for (key in errors) {
-                const target = document.getElementById(key);
-                $(target).showError(errors[key]);
+    if (checked == 1) {
+        let model = {};
+        common.callAjax(_url.Get_Rating, model, function (result) {
+            if (result && result.isOK) {
+                Bind_Rating(result.data);
             }
-        }
-    });
+            if (result && !result.isOK) {
+                const errors = result.data;
+                for (key in errors) {
+                    const target = document.getElementById(key);
+                    $(target).showError(errors[key]);
+                }
+            }
+        });
+    }
+    else
+    {
+        Bind_Rating("[]");
+    }
 }
 
 
@@ -148,16 +153,22 @@ function Get_FT_Age(age, type) {
 
 function Get_DataList(model, $form) {
     common.callAjaxWithLoading(_url.Get_DataList, model, this, function (result) {
+        
         if (result && result.isOK) {
 
             Bind_tbody(result.data);
         }
         if (result && !result.isOK) {
-            const errors = result.data;
-            for (key in errors) {
-                const target = document.getElementById(key);
-                $(target).showError(errors[key]);
-                $form.getInvalidItems().get(0).focus();
+            if (result.message.MessageText1 != "") {
+                $('#btnDisplay').showError(result.message.MessageText1);
+            }
+            else {
+                const errors = result.data;
+                for (key in errors) {
+                    const target = document.getElementById(key);
+                    $(target).showError(errors[key]);
+                    $form.getInvalidItems().get(0).focus();
+                }
             }
         }
     });
@@ -171,7 +182,7 @@ function Bind_tbody(result) {
         for (var i = 0; i < data.length; i++) {
             html += '<tr>\
             <td class= "text-end" > ' + (i + 1) + '</td>\
-            <td> <a class="text-heading font-semibold text-decoration-underline" href="#">'+ data[i]["マンション名"] + '</a> </td>\
+            <td> <a class="text-heading font-semibold text-decoration-underline" href="#"  onclick="l_logfunction(this.id)" id='+ data[i]["マンションCD"] +'>'+ data[i]["マンション名"] + '</a> </td>\
             <td> <a class="text-heading font-semibold">'+ data[i]["住所"] + '</a> </td>\
             <td> '+ data[i]["登録日"] + '</td>\
             <td>\
@@ -195,21 +206,77 @@ function Bind_tbody(result) {
     sortTable.getSortingTable("r_table_List");
 }
 
-
-
 function Bind_Rating(result) {
-    $('#RadioRating').empty();
+    alert(result);
+    $('#DivRadio').empty();
     let data = JSON.parse(result);
     let html_Rating = "";
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
-            html += '<div class="ms-6">\
-                <input class="form-check-input" type = "radio" name = "Radios" id = "Radio" value = rating.Rating >\
-                    <span class="text-danger">'
+
+            if (data[i]["Rating"] == "4") {
+
+                _Rating = '<span class="fa fa-star" data-rating="1"></span>\
+                       <span class="fa fa-star" data-rating="2" ></span >\
+                       <span class="fa fa-star" data-rating="3"></span>\
+                       <span class="fa fa-star" data-rating="4"></span>\
+                       <span class="fa fa-star-o" data-rating="5"></span>';
+
+            }
+            if (data[i]["Rating"] == "3") {
+                _Rating = '<span class="fa fa-star" data-rating="1"></span>\
+                      <span class="fa fa-star" data-rating="2"></span>\
+                      <span class="fa fa-star" data-rating="3"></span>\
+                      <span class="fa fa-star-o" data-rating="4"></span>\
+                      <span class="fa fa-star-o" data-rating="5"></span>'
+            }
+            if (data[i]["Rating"] == "2") {
+                _Rating = '<span class="fa fa-star" data-rating="1"></span>\
+                       <span class="fa fa-star" data-rating="2"></span>\
+                       <span class="fa fa-star-o" data-rating="3"></span>\
+                       <span class="fa fa-star-o" data-rating="4"></span>\
+                       <span class="fa fa-star-o" data-rating="5"></span>'
+            }
+            if (data[i]["Rating"] == "1") {
+                _Rating = '<span class="fa fa-star" data-rating="1"></span>\
+                       <span class="fa fa-star-o" data-rating="2"></span>\
+                       <span class="fa fa-star-o" data-rating="3"></span>\
+                       <span class="fa fa-star-o" data-rating="4"></span>\
+                       <span class="fa fa-star-o" data-rating="5"></span>'
+
+            }
+
+            if (data[i]["Rating"] == "0") {
+                _Rating = '<span class="fa fa-star-o" data-rating="1"></span>\
+                       <span class="fa fa-star-o" data-rating="2"></span>\
+                       <span class="fa fa-star-o" data-rating="3"></span>\
+                       <span class="fa fa-star-o" data-rating="4"></span>\
+                       <span class="fa fa-star-o" data-rating="5"></span>'
+
+            }
+     
+
+            html_Rating += '<div class="ms-6">\
+                <input class="form-check-input" type = "radio" name = "Radios" id = "RadioCheck" value = '+ data[i]["Rating"] + ' >\
+                <span class="text-danger">'+_Rating+
+               '</span> <span><small>以上</small></span>\
+                </div>'
         }
+        
     }
     else {
-       
-    }
-    $('#RadioRating').append(html_Rating);
+
+        html_Rating= '<div class="ms-6">\
+                     <input class="form-check-input" type="radio" name="Radios" id="RadioRating" value="0">\
+                     <span class="text-danger">\
+                     <span class="fa fa-star-o" data-rating="1"></span>\
+                     <span class="fa fa-star-o" data-rating="2"></span>\
+                     <span class="fa fa-star-o" data-rating="3"></span>\
+                     <span class="fa fa-star-o" data-rating="4"></span>\
+                     <span class="fa fa-star-o" data-rating="5"></span>\
+                     </span><span><small>以上</small></span>\
+                     </div>'
+ 
+           }
+$('#DivRadio').append(html_Rating);
 }
