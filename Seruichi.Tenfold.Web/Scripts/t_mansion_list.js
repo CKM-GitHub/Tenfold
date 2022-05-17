@@ -138,7 +138,7 @@ function addEvents() {
         const $Apartment = $("#txtApartment").val(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
             $StartUnit = $("#StartUnit").val(), $EndUnit = $("#EndUnit").val()
 
-        debugger;
+        
         let model = {
             Apartment: $Apartment,
             StartAge: Get_FT_Age($EndAge, 'F'),
