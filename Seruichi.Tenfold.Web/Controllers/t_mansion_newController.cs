@@ -70,6 +70,19 @@ namespace Seruichi.Tenfold.Web.Controllers
             return OKResult(DataTableToJSON(dt));
         }
 
+        // Ajax: GetMansionData
+        [HttpPost]
+        public ActionResult GetMansionData(string mansionCD)
+        {
+            if (string.IsNullOrEmpty(mansionCD))
+            {
+                return BadRequestResult();
+            }
+            a_indexBL bl = new a_indexBL();
+            var dt = bl.GetMansionData(mansionCD);
+            return OKResult(DataTableToJSON(dt));
+        }
+
 
         // Ajax: CheckAll
         [HttpPost]

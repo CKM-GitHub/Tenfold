@@ -49,19 +49,14 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
                 }
             }
             //建物構造
-           // validator.CheckSelectionRequired("StructuralKBN", model.StructuralKBN);
+            validator.CheckSelectionRequired("StructuralKBN", model.StructuralKBN);
             //築年月
-          //  validator.CheckRequired("ConstYYYYMM", model.ConstYYYYMM);
-           // validator.CheckYMDate("ConstYYYYMM", model.ConstYYYYMM);
+            validator.CheckRequired("ConstYYYYMM", model.ConstYYYYMM);
+            validator.CheckYMDate("ConstYYYYMM", model.ConstYYYYMM);
             //総戸数
-         //   validator.CheckRequiredNumber("Rooms", model.Rooms, true);
-       //     validator.CheckIsNumeric("Rooms", model.Rooms, 3, 0);
-            //階
-            //validator.CheckRequiredNumber("LocationFloor", model.LocationFloor, true);
-            //validator.CheckIsNumeric("LocationFloor", model.LocationFloor, 2, 0);
-            ////階建て
-            //validator.CheckRequiredNumber("Floors", model.Floors, true);
-            //validator.CheckIsNumeric("Floors", model.Floors, 2, 0);
+            validator.CheckRequiredNumber("Rooms", model.Rooms, true);
+            validator.CheckIsNumeric("Rooms", model.Rooms, 3, 0);
+
             ////部屋番号
             //validator.CheckRequired("RoomNumber", model.RoomNumber);
             //validator.CheckIsHalfWidth("RoomNumber", model.RoomNumber, 5, RegexFormat.NumAlphaLowUp);
@@ -88,7 +83,7 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
             ////バス・トイレ
             //validator.CheckSelectionRequired("BathKBN", model.BathKBN);
             ////土地・権利
-            //validator.CheckSelectionRequired("RightKBN", model.RightKBN);
+            validator.CheckSelectionRequired("RightKBN", model.RightKBN);
             ////現況
             //validator.CheckSelectionRequired("CurrentKBN", model.CurrentKBN);
             ////管理方式
@@ -109,27 +104,24 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
             //validator.CheckRequiredNumber("PropertyTax", model.PropertyTax, false);
             //validator.CheckIsNumeric("PropertyTax", model.PropertyTax, 9, 0);
 
-            //if (validator.IsValid)
-            //{
-            //    foreach (var item in model.MansionStationList)
-            //    {
-            //        if (!string.IsNullOrEmpty(item.StationCD))
-            //        {
-            //            if (model.MansionStationList.Any(r => r.LineCD == item.LineCD && r.StationCD == item.StationCD && r.RowNo < item.RowNo))
-            //            {
-            //                validator.AddValidationResult("StationCD_" + item.RowNo.ToStringOrEmpty(), "E210");
-            //            }
-            //        }
-            //    }
-            //    if (Utilities.GetSysDateTime().ToString("yyyyMM").ToInt32(0) < model.ConstYYYYMM.ToInt32(0))
-            //    {
-            //        validator.AddValidationResult("ConstYYYYMM", "E208");
-            //    }
-            //    if (model.Floors.ToInt32(0) < model.LocationFloor.ToInt32(0))
-            //    {
-            //        validator.AddValidationResult("LocationFloor", "E209");
-            //    }
-            //}
+            if (validator.IsValid)
+            {
+                foreach (var item in model.MansionStationList)
+                {
+                    if (!string.IsNullOrEmpty(item.StationCD))
+                    {
+                        if (model.MansionStationList.Any(r => r.LineCD == item.LineCD && r.StationCD == item.StationCD && r.RowNo < item.RowNo))
+                        {
+                            validator.AddValidationResult("StationCD_" + item.RowNo.ToStringOrEmpty(), "E210");
+                        }
+                    }
+                }
+                if (Utilities.GetSysDateTime().ToString("yyyyMM").ToInt32(0) < model.ConstYYYYMM.ToInt32(0))
+                {
+                    validator.AddValidationResult("ConstYYYYMM", "E208");
+                }
+               
+            }
 
             string errorcd = "";
 
