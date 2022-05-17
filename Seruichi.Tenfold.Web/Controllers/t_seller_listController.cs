@@ -9,7 +9,7 @@ using Models.Tenfold.t_seller_list;
 using Seruichi.BL.Tenfold.t_seller_list;
 using Seruichi.BL;
 using Seruichi.Common;
-
+using System.Threading.Tasks;
 
 namespace Seruichi.Tenfold.Web.Controllers
 {
@@ -46,10 +46,10 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Generate_CSV(t_seller_listModel model)
+        public async Task<ActionResult> Generate_CSV(t_seller_listModel model)
         {
             t_seller_listBL bl = new t_seller_listBL();
-            var dt = bl.Generate_CSV(model);
+            var dt = await bl.Generate_CSV(model);
             return OKResult(DataTableToJSON(dt));
         }
 

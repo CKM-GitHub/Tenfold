@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Models.RealEstate.r_issueslist;
@@ -20,7 +21,7 @@ namespace Seruichi.RealEstate.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult get_issueslist_Data(r_issueslistModel model)
+        public async Task<ActionResult> get_issueslist_Data(r_issueslistModel model)
         {
             r_issueslistBL bl = new r_issueslistBL();
             List<string> chk_lst = new List<string>();
@@ -37,7 +38,7 @@ namespace Seruichi.RealEstate.Web.Controllers
             }
 
             model.RealECD = base.GetOperator("RealECD");
-            var dt = bl.get_issueslist_Data(model);
+            var dt = await bl.get_issueslist_Data(model);
             return OKResult(DataTableToJSON(dt));
         }
 

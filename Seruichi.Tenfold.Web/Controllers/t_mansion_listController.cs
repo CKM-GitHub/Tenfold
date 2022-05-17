@@ -75,7 +75,7 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Generate_CSV1(t_mansion_listModel model)
+        public  ActionResult Generate_CSV1(t_mansion_listModel model)
         {
             t_mansion_listBL bl = new t_mansion_listBL();
             var dt = bl.Generate_CSV1(model);

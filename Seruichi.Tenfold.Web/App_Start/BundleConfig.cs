@@ -64,12 +64,13 @@ namespace Seruichi.Tenfold.Web
                      "~/Scripts/t_seller_assessment.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/t_mansion_list").Include(
-                     "~/Scripts/t_mansion_list.js"));
-
-          
+                     "~/Scripts/t_mansion_list.js"));          
 
             bundles.Add(new ScriptBundle("~/bundles/t_mansion_new").Include(
                      "~/Scripts/t_mansion_new.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/t_admin").Include(
+                     "~/Scripts/t_admin.js"));
 
         }
     }
