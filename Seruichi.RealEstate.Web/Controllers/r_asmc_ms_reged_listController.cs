@@ -93,5 +93,28 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return OKResult(DataTableToJSON(dt));
             }
         }
+
+        [HttpPost]
+        public ActionResult Insert_l_log(r_asmc_ms_reged_listModel model)
+        {
+            r_asmc_ms_reged_listBL bl = new r_asmc_ms_reged_listBL();
+            model = Getlogdata(model);
+            bl.Insert_r_asmc_ms_reged_list_L_Log(model);
+            return OKResult();
+        }
+
+        public r_asmc_ms_reged_listModel Getlogdata(r_asmc_ms_reged_listModel model)
+        {
+            CommonBL bl = new CommonBL();
+            model.LoginKBN = 2;
+            model.LoginID = base.GetOperator("UserID");
+            model.RealECD = base.GetOperator("RealECD");
+            model.LoginName = base.GetOperator("UserName");
+            model.IPAddress = base.GetClientIP();
+            model.PageID = "r_asmc_ms_reged_list";
+            model.ProcessKBN = "link";
+            model.Remarks = model.MansionCD;
+            return model;
+        }
     }
 }

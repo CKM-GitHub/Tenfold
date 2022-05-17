@@ -3,7 +3,8 @@ let Radio_Checkbox = 0;
 $(function () {
     setValidation();
     _url.Get_DataList = common.appPath + '/r_asmc_ms_reged_list/Get_DataList';
-    _url.Get_Rating = common.appPath + '/r_asmc_ms_reged_list/Get_Rating';
+    //_url.Get_Rating = common.appPath + '/r_asmc_ms_reged_list/Get_Rating';
+    _url.InsertL_Log = common.appPath + '/r_asmc_ms_reged_list/Insert_l_log';   
     addEvents();
     
 });
@@ -182,13 +183,13 @@ function Bind_tbody(result) {
         for (var i = 0; i < data.length; i++) {
             html += '<tr>\
             <td class= "text-end" > ' + (i + 1) + '</td>\
-            <td> <a class="text-heading font-semibold text-decoration-underline" href="#"  onclick="l_logfunction(this.id)" id='+ data[i]["マンションCD"] +'>'+ data[i]["マンション名"] + '</a> </td>\
+            <td> <a class="text-heading font-semibold text-decoration-underline" href="#"  onclick="l_logfunction(this.id)" id='+ data[i]["MansionCD"] +'>'+ data[i]["マンション名"] + '</a> </td>\
             <td> <a class="text-heading font-semibold">'+ data[i]["住所"] + '</a> </td>\
             <td> '+ data[i]["登録日"] + '</td>\
             <td>\
             <div class="d-flex flex-row mt-2">\
-            <div class="text-danger mb-1 me-2">\
-           <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>\
+            <div class="text-danger mb-1 me-2">'
+                + data[i]["優先度マーク"] +  '\
            </div>\
            </div>\
            </td>\
@@ -204,6 +205,33 @@ function Bind_tbody(result) {
     $('#r_table_List tbody').append(html);
 
     sortTable.getSortingTable("r_table_List");
+}
+
+
+function l_logfunction(id) {
+    
+    let model = {
+        LogDateTime: null,
+        LoginKBN: null,
+        LoginID: null,
+        RealECD: null,
+        LoginName: null,
+        IPAddress: null,
+        Page: null,
+        Processing: null,
+        Remarks: null,
+        MansionCD: id
+    };
+    common.callAjax(_url.InsertL_Log, model,
+        function (result) {
+            if (result && result.isOK) {
+                window.location.href = common.appPath + '/r_asmc_set_ms/Index?MansionCD=' + model.MansionCD;
+                
+            }
+            if (result && !result.isOK) {
+
+            }
+        });
 }
 
 function Bind_Rating(result) {
