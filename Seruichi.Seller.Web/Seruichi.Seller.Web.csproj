@@ -149,6 +149,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\css\a_assess_d.css" />
     <Content Include="Content\css\a_mypage_ahis_1.css" />
     <Compile Include="Controllers\a_assess_dController.cs" />
     <Compile Include="Controllers\a_contactController.cs" />
@@ -228,6 +229,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Scripts\a_assess_d.js" />
     <Content Include="Scripts\a_contact.js" />
     <Content Include="Scripts\a_mypage_ahis.js" />
     <Content Include="Scripts\a_mypage_plus.js" />
