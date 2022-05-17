@@ -252,7 +252,7 @@ function Bind_tbody(result) {
             <td class= "text-end"> ' + data[i]["NO"] + '</td>\
             <td class="'+ _sort_checkbox + '"><i class="' + _class + '">' + _letter + '</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
             <td> ' + data[i]["物件CD"] + ' </td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" data-bs-toggle="modal" data-bs-target="#mansion" id='+ data[i]["SellerCD"] + '&' + data[i]["物件CD"] + '  href="#" onclick="modal_popup(this.id)">' + data[i]["マンション名"] + '</a><p><small class="text-wrap w-100">' + data[i]["住所"]+'</small></p></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" data-bs-toggle="modal" data-bs-target="#mansion" id='+ data[i]["SellerCD"] + '&' + data[i]["物件CD"] + '  href="#" onclick="modal_popup(this.id)">' + data[i]["マンション名"] + '</a><p class="text-wrap w-100">' + data[i]["住所"] + '</p><p class="d-none">' + data[i]["PrefCD"] + '</p></td>\
             <td> '+ data[i]["部屋"] + '</td>\
             <td class="text-end">'+ data[i]["階数"] + '</td>\
             <td class="text-end">'+ data[i]["面積"].toFixed(2) + '</td>\
