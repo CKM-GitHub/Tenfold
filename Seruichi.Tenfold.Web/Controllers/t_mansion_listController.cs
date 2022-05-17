@@ -9,6 +9,7 @@ using Seruichi.BL;
 using Seruichi.BL.Tenfold.t_mansion_list;
 using Models.Tenfold.t_mansion_list;
 using Seruichi.BL.Tenfold.t_mansion_list;
+using System.Threading.Tasks;
 
 namespace Seruichi.Tenfold.Web.Controllers
 {
@@ -75,10 +76,10 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
 
         [HttpPost]
-        public  ActionResult Generate_CSV1(t_mansion_listModel model)
+        public async Task<ActionResult> Generate_CSV1(t_mansion_listModel model)
         {
             t_mansion_listBL bl = new t_mansion_listBL();
-            var dt = bl.Generate_CSV1(model);
+            var dt = await bl.Generate_CSV1(model);
             return OKResult(DataTableToJSON(dt));
         }
         [HttpPost]

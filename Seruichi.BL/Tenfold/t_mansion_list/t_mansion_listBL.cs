@@ -42,21 +42,24 @@ namespace Seruichi.BL.Tenfold.t_mansion_list
             return dt;
         }
        
-        public DataTable Generate_CSV1(t_mansion_listModel model)
+        public async Task<DataTable> Generate_CSV1(t_mansion_listModel model)
         {
-            var sqlParams = new SqlParameter[]
+            return await Task.Run(() =>
+            {
+                var sqlParams = new SqlParameter[]
              {
-                new SqlParameter("@StartAge", SqlDbType.Int){ Value = model.StartAge },
-                new SqlParameter("@EndAge", SqlDbType.Int){ Value = model.EndAge },
-                new SqlParameter("@StartUnit", SqlDbType.Int){ Value = model.StartUnit},
-                new SqlParameter("@EndUnit", SqlDbType.Int){ Value = model.EndUnit },
-                new SqlParameter("@Apartment", SqlDbType.VarChar){ Value =  model.Apartment.ToStringOrNull() }
+             new SqlParameter("@StartAge", SqlDbType.Int) { Value = model.StartAge },
+             new SqlParameter("@EndAge", SqlDbType.Int) { Value = model.EndAge },
+             new SqlParameter("@StartUnit", SqlDbType.Int) { Value = model.StartUnit },
+             new SqlParameter("@EndUnit", SqlDbType.Int) { Value = model.EndUnit },
+             new SqlParameter("@Apartment", SqlDbType.VarChar) { Value = model.Apartment.ToStringOrNull() }
              };
 
-            DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_t_mansion_list_csv1_generate", sqlParams);
+                DBAccess db = new DBAccess();
+                var dt = db.SelectDatatable("pr_t_mansion_list_csv1_generate", sqlParams);
 
-            return dt;
+                return dt;
+            });
         }
 
         public DataTable Generate_CSV2(t_mansion_listModel model)
