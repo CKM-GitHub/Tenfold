@@ -113,7 +113,7 @@ function addEvents() {
             cityGPCD_check += $(this).val() + ',';
             gp_length += 1;
         });
-        alert(cityGPCD_check);
+        //alert(cityGPCD_check);
 
         var cityCD_check = '';
         var city_lenght = 0;
@@ -121,8 +121,8 @@ function addEvents() {
             cityCD_check += $(this).val() + ',';
             city_lenght += 1;
         });
-        alert(cityCD_check);
-        alert(gp_length + ',' + city_lenght);
+        //alert(cityCD_check);
+        //alert(gp_length + ',' + city_lenght);
 
         let model = {
             Apartment: $Apartment,
@@ -130,6 +130,8 @@ function addEvents() {
             EndAge: Get_FT_Age($StartAge, 'T'),
             StartDate: $StartUnit,
             EndDate: $EndUnit,
+            CityCD: cityCD_check,
+            CityGPCD: cityGPCD_check
         };
         GetM_MansionList(model, $form);
 
