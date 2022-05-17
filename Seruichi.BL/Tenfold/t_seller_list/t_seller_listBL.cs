@@ -61,17 +61,22 @@ namespace Seruichi.BL.Tenfold.t_seller_list
             AESCryption crypt = new AESCryption();
             string decryptionKey = StaticCache.GetDataCryptionKey();
             var e = dt.AsEnumerable();
-            Parallel.ForEach(e, item =>
+            for(int i = 0; i < dt.Rows.Count; i++)
             {
-                item["売主名"] = crypt.DecryptFromBase64(item.Field<string>("売主名"), decryptionKey);
-            });
-            Parallel.ForEach(e, item =>
-            {
-                item["SellerKana"] = crypt.DecryptFromBase64(item.Field<string>("SellerKana"), decryptionKey);
-            });
+                dt.Rows[i]["売主名"] = crypt.DecryptFromBase64(dt.Rows[i]["売主名"].ToString(), decryptionKey);
+                dt.Rows[i]["SellerKana"] = crypt.DecryptFromBase64(dt.Rows[i]["SellerKana"].ToString(), decryptionKey);
+            }
+            //Parallel.ForEach(e, item =>
+            //{
+            //    item["売主名"] = crypt.DecryptFromBase64(item.Field<string>("売主名"), decryptionKey);
+            //});
+            //Parallel.ForEach(e, item =>
+            //{
+            //    item["SellerKana"] = crypt.DecryptFromBase64(item.Field<string>("SellerKana"), decryptionKey);
+            //});
             if (!string.IsNullOrEmpty(model.SellerName))
             {
-                var query = e.Where(dr => dr.Field<string>("売主名").Contains(model.SellerName) || dr.Field<string>("売主CD").Contains(model.SellerName));
+                var query = dt.AsEnumerable().Where(dr => dr.Field<string>("売主名").Contains(model.SellerName) || dr.Field<string>("売主CD").Contains(model.SellerName));
                 if (query.Any())
                 {
                     int i = 0;
