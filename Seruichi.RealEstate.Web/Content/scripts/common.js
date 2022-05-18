@@ -615,8 +615,8 @@ const common = {
     },
 
     compareYear: function compareTwoDate(d1, d2) {
-        const Year1 = d1;
-        const Year2 = d2;
+        const Year1 = Number(d1);
+        const Year2 = Number(d2);
         let success = true;
         if (Year1 > Year2) {
             success = false;

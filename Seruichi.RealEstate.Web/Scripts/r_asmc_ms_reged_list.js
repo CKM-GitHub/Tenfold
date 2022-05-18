@@ -15,13 +15,13 @@ function setValidation() {
         .addvalidation_doublebyte(); 
 
     $('#StartYear')
-        .addvalidation_errorElement("#errorStartYear")
+        .addvalidation_errorElement("#errorYear")
         .addvalidation_maxlengthCheck(2)//E105
         .addvalidation_singlebyte_number()//E104
         .addvalidation_datecompare(); //E113
 
     $('#EndYear')
-        .addvalidation_errorElement("#errorEndYear")
+        .addvalidation_errorElement("#errorYear")
         .addvalidation_maxlengthCheck(2)//E105
         .addvalidation_singlebyte_number() //E104
         .addvalidation_datecompare(); //E113
@@ -47,7 +47,7 @@ function addEvents() {
         };
 
         if (model.StartDate && model.EndDate) {
-            if (model.StartDate < model.EndDate) {
+            if (Number(model.StartDate) <= Number(model.EndDate)) {
                 $("#StartYear").hideError();
                 $("#EndYear").hideError();
                 $("#EndYear").focus();
@@ -77,7 +77,7 @@ function addEvents() {
         }
         $('#r_table_List tbody').empty();
 
-        const $MansionName = $("#MansionName").val(), $StartYear = $("#StartYear").val(), $EndYear = $('#EndYear').val()
+        const $MansionName = $("#MansionName").val().trim(), $StartYear = $("#StartYear").val(), $EndYear = $('#EndYear').val()
         var cityCD_check = '';
         var city_lenght = 0;
         $('.node-item:checkbox:checked').each(function () {
@@ -104,6 +104,7 @@ function addEvents() {
         if (model.MansionName == "" && model.StartYear == "" && model.EndYear == "" && model.CityCD == "" && model.Radio_Rating == "")
         {
             $('#btnDisplay').showError(common.getMessage('E303'));
+            $('#MansionName').focus();
         }
         else
         {
