@@ -11,6 +11,6 @@ namespace Models.Tenfold.t_admin
         public string TenStaffCD { get; set; }
         public string TenStaffPW { get; set; }
         public string TenStaffName { get; set; }
-        public bool InvalidFLG { get; set; }
+        public string InvalidFLG { get; set; }
     }
 }
