@@ -27,6 +27,7 @@
         };
 
         const sortColumn = function (index) {
+            const rows = tableBody.querySelectorAll('tr');
             var col_index = [], multiplier;
             if (headers[index].hasAttribute('ordercol-index'))
                 col_index = headers[index].getAttribute('ordercol-index').split('_');
@@ -179,7 +180,7 @@
         };
 
         const sortMultiColumn = function (ctrl, index) {
-            debugger;
+            const rows = tableBody.querySelectorAll('tr');
             var col_index = [], multiplier, col_ordertype;
             if ($(ctrl).attr('ordercol-index')) {
                 col_ordertype = $(ctrl).attr('col_ordertype');
@@ -199,7 +200,6 @@
             const newRows = Array.from(rows);
 
             newRows.sort(function (rowA, rowB) {
-                debugger;
                 var count = col_index.length;
                 let cellA, cellB, cellC, cellD, cellE, cellF, col_type1 = '', col_type2 = '', col_type3 = '', PrefCD_A = '', PrefCD_B = '';
                 let a, b, c, d, e, f;

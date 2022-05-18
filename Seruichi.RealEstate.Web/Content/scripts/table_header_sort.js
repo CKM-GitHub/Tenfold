@@ -27,6 +27,7 @@
         };
 
         const sortColumn = function (index) {
+            const rows = tableBody.querySelectorAll('tr');
             var col_index = [], multiplier;
             if (headers[index].hasAttribute('ordercol-index'))
                 col_index = headers[index].getAttribute('ordercol-index').split('_');

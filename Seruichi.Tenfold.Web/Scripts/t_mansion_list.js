@@ -35,6 +35,9 @@ function setValidation() {
         .addvalidation_onebyte_character()
         .addvalidation_maxlengthCheck(2);
 
+    $('#btnDisplay')
+        .addvalidation_errorElement("#errorbtnDisplay"); //E303
+
 }
 
 function addEvents() {
@@ -54,7 +57,7 @@ function addEvents() {
         };
 
         if (model.StartAge && model.EndAge) {
-            if (model.StartAge < model.EndAge) {
+            if (Number(model.StartAge) < Number(model.EndAge)) {
                 $("#StartNum").hideError();
                 $("#EndNum").hideError();
                 $("#EndNum").focus();
@@ -76,9 +79,8 @@ function addEvents() {
             StartUnit: $start1,
             EndUnit: $end1
         };
-
         if (model.StartUnit && model.EndUnit) {
-            if (model.StartUnit > model.EndUnit) {
+            if (Number(model.StartUnit) > Number(model.EndUnit)) {
                 $("#StartUnit").showError(common.getMessage('E113'));
                 //$("#EndUnit").showError(this.getMessage('E113'));
                 $("#StartUnit").focus();
@@ -101,10 +103,9 @@ function addEvents() {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
-
         $('#mansiontable tbody').empty();
 
-        const $Apartment = $("#txtApartment").val(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
+        const $Apartment = $("#txtApartment").val().trim(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
             $StartUnit = $("#StartUnit").val(), $EndUnit = $("#EndUnit").val()
 
         var cityGPCD_check = '';
@@ -125,30 +126,51 @@ function addEvents() {
             Apartment: $Apartment,
             StartAge: Get_FT_Age($EndAge, 'F'),
             EndAge: Get_FT_Age($StartAge, 'T'),
-            StartDate: $StartUnit,
-            EndDate: $EndUnit,
+            StartUnit: $StartUnit,
+            EndUnit: $EndUnit,
             CityCD: cityCD_check.slice(0,-1),
             CityGPCD: cityGPCD_check.slice(0, -1)
         };
-        GetM_MansionList(model, $form);
-
+        
+        if (model.Apartment == "" && model.StartAge == "" && model.EndAge == "" && model.StartUnit == "" && model.EndUnit == "" && model.CityCD == "" && model.CityGPCD == "") {
+            $('#btnDisplay').showError(common.getMessage('E303'));
+            $("#txtApartment").focus();
+        }
+        else {
+            GetM_MansionList(model, $form);
+        }
+            
     });
 
     $('#btnCSVDownload').on('click', function () {
-        const $Apartment = $("#txtApartment").val(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
+        const $Apartment = $("#txtApartment").val().trim(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
             $StartUnit = $("#StartUnit").val(), $EndUnit = $("#EndUnit").val()
 
-        
+        var cityGPCD_check = '';
+        var gp_length = 0;
+        $('.node-parent:checkbox:checked').each(function () {
+            cityGPCD_check += $(this).val() + ',';
+            gp_length += 1;
+        });
+
+        var cityCD_check = '';
+        var city_lenght = 0;
+        $('.node-item:checkbox:checked').each(function () {
+            cityCD_check += $(this).val() + ',';
+            city_lenght += 1;
+        });
+
         let model = {
             Apartment: $Apartment,
             StartAge: Get_FT_Age($EndAge, 'F'),
             EndAge: Get_FT_Age($StartAge, 'T'),
-            StartDate: $StartUnit,
-            EndDate: $EndUnit,
+            StartUnit: $StartUnit,
+            EndUnit: $EndUnit,
+            CityCD: cityCD_check.slice(0, -1),
+            CityGPCD: cityGPCD_check.slice(0, -1)
         };
         common.callAjax(_url.generate_CSV1, model,
             function (result) {
-                debugger;
                 //sucess
                 var table_data = result.data;
 
@@ -173,75 +195,70 @@ function addEvents() {
                     document.body.removeChild(downloadLink);
                 }
                 else {
-                    //alert("There is no data!");
                     alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
                 }
             }
         )
-        //common.callAjax(_url.generate_CSV2, model,
-        //    function (result) {
-        //        debugger;
-        //        //sucess
-        //        var table_data = result.data;
+        common.callAjax(_url.generate_CSV2, model,
+            function (result) {     
+                //sucess
+                var table_data = result.data;
 
-        //        var csv = common.getJSONtoCSV(table_data);
-        //        if (!(csv == "ERROR")) {
-        //            var downloadLink = document.createElement("a");
-        //            var blob = new Blob(["\ufeff", csv]);
-        //            var url = URL.createObjectURL(blob);
-        //            downloadLink.href = url;
-        //            let m = new Date();
-        //            var dateString =
-        //                m.getUTCFullYear() + "" +
-        //                ("0" + (m.getUTCMonth() + 1)).slice(-2) + "" +
-        //                ("0" + m.getUTCDate()).slice(-2) + "_" +
-        //                ("0" + m.getHours()).slice(-2) + "" +
-        //                ("0" + m.getMinutes()).slice(-2) + "" +
-        //                ("0" + m.getSeconds()).slice(-2);
-        //            downloadLink.download = "マンション最寄り駅一覧_" + dateString + ".csv";
+                var csv = common.getJSONtoCSV(table_data);
+                if (!(csv == "ERROR")) {
+                    var downloadLink = document.createElement("a");
+                    var blob = new Blob(["\ufeff", csv]);
+                    var url = URL.createObjectURL(blob);
+                    downloadLink.href = url;
+                    let m = new Date();
+                    var dateString =
+                        m.getUTCFullYear() + "" +
+                        ("0" + (m.getUTCMonth() + 1)).slice(-2) + "" +
+                        ("0" + m.getUTCDate()).slice(-2) + "_" +
+                        ("0" + m.getHours()).slice(-2) + "" +
+                        ("0" + m.getMinutes()).slice(-2) + "" +
+                        ("0" + m.getSeconds()).slice(-2);
+                    downloadLink.download = "マンション最寄り駅一覧_" + dateString + ".csv";
 
-        //            document.body.appendChild(downloadLink);
-        //            downloadLink.click();
-        //            document.body.removeChild(downloadLink);
-        //        }
-        //        else {
-        //            //alert("There is no data!");
-        //            alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
-        //        }
-        //    }
-        //)
-        //common.callAjax(_url.generate_CSV3, model,
-        //    function (result) {
-        //        debugger;
-        //        //sucess 
-        //        var table_data = result.data;
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                }
+                else {
+                    alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
+                }
+            }
+        )
+        common.callAjax(_url.generate_CSV3, model,
+            function (result) {
+                //sucess 
+                var table_data = result.data;
 
-        //        var csv = common.getJSONtoCSV(table_data);
-        //        if (!(csv == "ERROR")) {
-        //            var downloadLink = document.createElement("a");
-        //            var blob = new Blob(["\ufeff", csv]);
-        //            var url = URL.createObjectURL(blob);
-        //            downloadLink.href = url;
-        //            let m = new Date();
-        //            var dateString =
-        //                m.getUTCFullYear() + "" +
-        //                ("0" + (m.getUTCMonth() + 1)).slice(-2) + "" +
-        //                ("0" + m.getUTCDate()).slice(-2) + "_" +
-        //                ("0" + m.getHours()).slice(-2) + "" +
-        //                ("0" + m.getMinutes()).slice(-2) + "" +
-        //                ("0" + m.getSeconds()).slice(-2);
-        //            downloadLink.download = "マンション検索用語一覧_" + dateString + ".csv";
+                var csv = common.getJSONtoCSV(table_data);
+                if (!(csv == "ERROR")) {
+                    var downloadLink = document.createElement("a");
+                    var blob = new Blob(["\ufeff", csv]);
+                    var url = URL.createObjectURL(blob);
+                    downloadLink.href = url;
+                    let m = new Date();
+                    var dateString =
+                        m.getUTCFullYear() + "" +
+                        ("0" + (m.getUTCMonth() + 1)).slice(-2) + "" +
+                        ("0" + m.getUTCDate()).slice(-2) + "_" +
+                        ("0" + m.getHours()).slice(-2) + "" +
+                        ("0" + m.getMinutes()).slice(-2) + "" +
+                        ("0" + m.getSeconds()).slice(-2);
+                    downloadLink.download = "マンション検索用語一覧_" + dateString + ".csv";
 
-        //            document.body.appendChild(downloadLink);
-        //            downloadLink.click();
-        //            document.body.removeChild(downloadLink);
-        //        }
-        //        else {
-        //            //alert("There is no data!");
-        //            alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
-        //        }
-        //    }
-        //)
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                }
+                else {
+                    alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
+                }
+            }
+        )
 
     });
 
