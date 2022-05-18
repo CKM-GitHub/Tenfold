@@ -7,8 +7,17 @@ using static Models.a_indexModel;
 
 namespace Models.Tenfold.t_mansion_new
 {
-   public class t_mansion_newModel
+   public class t_mansion_newModel:BaseModel
     {
+
+
+        public class MansionStation
+        {
+            public int RowNo { get; set; }
+            public string LineCD { get; set; }
+            public string StationCD { get; set; }
+            public string Distance { get; set; }
+        }
         public string MansionCD { get; set; }
         public string MansionName { get; set; }
         public string PrefCD { get; set; }
@@ -27,8 +36,13 @@ namespace Models.Tenfold.t_mansion_new
 
         public byte RightKBN { get; set; }
         public byte CurrentKBN { get; set; }
-        public List<MansionStation> MansionStationList { get; set; } = new List<MansionStation>();
 
+        public string Remark { get; set; }
+        public decimal Longitude { get; set; }
+        public decimal Latitude { get; set; }
+        public string SellerCD { get; set; }
+        public string SellerName { get; set; }
+        public List<MansionStation> MansionStationList { get; set; } = new List<MansionStation>();
         public string MansionStationListJson { get; set; }
     }
 }

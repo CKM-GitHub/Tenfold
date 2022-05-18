@@ -57,52 +57,10 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
             validator.CheckRequiredNumber("Rooms", model.Rooms, true);
             validator.CheckIsNumeric("Rooms", model.Rooms, 3, 0);
 
-            ////部屋番号
-            //validator.CheckRequired("RoomNumber", model.RoomNumber);
-            //validator.CheckIsHalfWidth("RoomNumber", model.RoomNumber, 5, RegexFormat.NumAlphaLowUp);
-            ////専有面積
-            //validator.CheckRequiredNumber("RoomArea", model.RoomArea, true);
-            //validator.CheckIsNumeric("RoomArea", model.RoomArea, 3, 2);
-            ////バルコニー区分
-            //validator.CheckSelectionRequired("BalconyKBN", model.BalconyKBN);
-            ////バルコニー面積
-            //if (model.BalconyKBN == 1)
-            //{
-            //    validator.CheckRequiredNumber("BalconyArea", model.BalconyArea, true);
-            //    validator.CheckIsNumeric("BalconyArea", model.BalconyArea, 3, 2);
-            //}
-            //else if (model.BalconyKBN == 2)
-            //{
-            //    model.BalconyArea = "";
-            //}
-            ////主採光
-            //validator.CheckSelectionRequired("Direction", model.Direction);
-            ////間取り
-            //validator.CheckRequiredNumber("FloorType", model.FloorType, true);
-            //validator.CheckIsNumeric("FloorType", model.FloorType, 2, 0);
-            ////バス・トイレ
-            //validator.CheckSelectionRequired("BathKBN", model.BathKBN);
-            ////土地・権利
+           
+           
             validator.CheckSelectionRequired("RightKBN", model.RightKBN);
-            ////現況
-            //validator.CheckSelectionRequired("CurrentKBN", model.CurrentKBN);
-            ////管理方式
-            //validator.CheckSelectionRequired("ManagementKBN", model.ManagementKBN);
-            ////月額家賃
-            //validator.CheckRequiredNumber("RentFee", model.RentFee, false);
-            //validator.CheckIsNumeric("RentFee", model.RentFee, 9, 0);
-            ////管理費
-            //validator.CheckRequiredNumber("ManagementFee", model.ManagementFee, false);
-            //validator.CheckIsNumeric("ManagementFee", model.ManagementFee, 9, 0);
-            ////修繕積立金
-            //validator.CheckRequiredNumber("RepairFee", model.RepairFee, false);
-            //validator.CheckIsNumeric("RepairFee", model.RepairFee, 9, 0);
-            ////その他費用
-            //validator.CheckRequiredNumber("ExtraFee", model.ExtraFee, false);
-            //validator.CheckIsNumeric("ExtraFee", model.ExtraFee, 9, 0);
-            ////固定資産税
-            //validator.CheckRequiredNumber("PropertyTax", model.PropertyTax, false);
-            //validator.CheckIsNumeric("PropertyTax", model.PropertyTax, 9, 0);
+           
 
             if (validator.IsValid)
             {
@@ -232,6 +190,49 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
             var dt = db.SelectDatatable("pr_a_index_Select_MansionList_by_MansionWord", sqlParams);
             return dt;
         }
+        public bool InsertSellerMansionData(t_mansion_newModel model, out string msgid)
+        {
+            msgid = "";
 
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@SellerMansionID", SqlDbType.VarChar){ Value = null },
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD.ToStringOrNull() },
+                new SqlParameter("@MansionName", SqlDbType.VarChar){ Value = model.MansionName.ToStringOrNull() },
+                new SqlParameter("@MansionCD", SqlDbType.VarChar){ Value = model.MansionCD.ToStringOrNull() },
+                new SqlParameter("@ZipCode1", SqlDbType.VarChar){ Value = model.ZipCode1.ToStringOrNull() },
+                new SqlParameter("@ZipCode2", SqlDbType.VarChar){ Value = model.ZipCode2.ToStringOrNull() },
+                new SqlParameter("@PrefCD", SqlDbType.VarChar){ Value = model.PrefCD.ToStringOrNull() },
+                new SqlParameter("@PrefName", SqlDbType.VarChar){ Value = model.PrefName.ToStringOrNull() },
+                new SqlParameter("@CityCD", SqlDbType.VarChar){ Value = model.CityCD.ToStringOrNull() },
+                new SqlParameter("@CityName", SqlDbType.VarChar){ Value = model.CityName.ToStringOrNull() },
+                new SqlParameter("@TownCD", SqlDbType.VarChar){ Value = model.TownCD.ToStringOrNull() },
+                new SqlParameter("@TownName", SqlDbType.VarChar){ Value = model.TownName.ToStringOrNull() },
+                new SqlParameter("@Address", SqlDbType.VarChar){ Value = model.Address.ToStringOrNull() },
+                new SqlParameter("@StructuralKBN", SqlDbType.TinyInt){ Value = model.StructuralKBN.ToByte(0) },
+                new SqlParameter("@ConstYYYYMM", SqlDbType.Int){ Value = model.ConstYYYYMM.Replace("/", "").ToInt32(0) },
+                new SqlParameter("@Rooms", SqlDbType.Int){ Value = model.Rooms.ToInt32(0) },
+                new SqlParameter("@RightKBN", SqlDbType.TinyInt){ Value = model.RightKBN.ToByte(0) },
+                new SqlParameter("@CurrentKBN", SqlDbType.TinyInt){ Value = model.CurrentKBN.ToByte(0) },
+                new SqlParameter("@Remark", SqlDbType.VarChar){ Value = model.Remark.ToStringOrNull() },
+                new SqlParameter("@Longitude", SqlDbType.Decimal){ Value = model.Longitude.ToDecimal(0) },
+                new SqlParameter("@Latitude", SqlDbType.Decimal){ Value = model.Latitude.ToDecimal(0) },
+                new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.Operator.ToStringOrNull() },
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.SellerName.ToStringOrNull() },
+                new SqlParameter("@MansionStationTable", SqlDbType.Structured) { TypeName = "dbo.T_MansionStation", Value = model.MansionStationList.ToDataTable() },
+            };
+
+            try
+            {
+                DBAccess db = new DBAccess();
+                return db.InsertUpdateDeleteData("", false, sqlParams);
+            }
+            catch (ExclusionException)
+            {
+                //msgid = "S004"; //他端末エラー
+                return false;
+            }
+        }
     }
 }
