@@ -103,6 +103,8 @@ function addEvents() {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
+        $('#total_record').text("検索結果： 0件");
+        $('#total_record_up').text("検索結果： 0件");
         $('#mansiontable tbody').empty();
 
         const $Apartment = $("#txtApartment").val().trim(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
@@ -137,6 +139,7 @@ function addEvents() {
             $("#txtApartment").focus();
         }
         else {
+            $('#btnDisplay').hideError();
             GetM_MansionList(model, $form);
         }
             
@@ -336,8 +339,8 @@ function Bind_tbody(result) {
             <td> <a href="#"  onclick="l_logfunction(this.id)" class="text-heading font-semibold text-decoration-underline" id='+ data[i]["マンションCD"] + '>' + data[i]["マンション名"] + '</a></td>\
             <td>' + data[i]["住所"] + ' </td>\
             <td>' + data[i]["築年月"] + '</td>\
-            <td>' + data[i]["築年数"] + '</td>\
-            <td>' + data[i]["総戸数"] + '</td>\
+            <td class="text-end">' + data[i]["築年数"] + '</td>\
+            <td class="text-end">' + data[i]["総戸数"] + '</td>\
             </tr>'
         }
         $('#total_record').text("検索結果：" + data.length + "件")
@@ -352,7 +355,6 @@ function Bind_tbody(result) {
 }
 
 function l_logfunction(id) {
-    debugger;
     let model = {
         LogDateTime: null,
         LoginKBN: null,
