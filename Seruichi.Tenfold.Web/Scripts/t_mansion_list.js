@@ -35,6 +35,9 @@ function setValidation() {
         .addvalidation_onebyte_character()
         .addvalidation_maxlengthCheck(2);
 
+    $('#btnDisplay')
+        .addvalidation_errorElement("#errorbtnDisplay"); //E303
+
 }
 
 function addEvents() {
@@ -101,7 +104,6 @@ function addEvents() {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
-
         $('#mansiontable tbody').empty();
 
         const $Apartment = $("#txtApartment").val(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
@@ -125,13 +127,20 @@ function addEvents() {
             Apartment: $Apartment,
             StartAge: Get_FT_Age($EndAge, 'F'),
             EndAge: Get_FT_Age($StartAge, 'T'),
-            StartDate: $StartUnit,
-            EndDate: $EndUnit,
+            StartUnit: $StartUnit,
+            EndUnit: $EndUnit,
             CityCD: cityCD_check.slice(0,-1),
             CityGPCD: cityGPCD_check.slice(0, -1)
         };
-        GetM_MansionList(model, $form);
-
+        
+        if (model.Apartment == "" && model.StartAge == "" && model.EndAge == "" && model.StartUnit == "" && model.EndUnit == "" && model.CityCD == "" && model.CityGPCD == "") {
+            $('#btnDisplay').showError(common.getMessage('E303'));
+            $("#txtApartment").focus();
+        }
+        else {
+            GetM_MansionList(model, $form);
+        }
+            
     });
 
     $('#btnCSVDownload').on('click', function () {
@@ -156,8 +165,8 @@ function addEvents() {
             Apartment: $Apartment,
             StartAge: Get_FT_Age($EndAge, 'F'),
             EndAge: Get_FT_Age($StartAge, 'T'),
-            StartDate: $StartUnit,
-            EndDate: $EndUnit,
+            StartUnit: $StartUnit,
+            EndUnit: $EndUnit,
             CityCD: cityCD_check.slice(0, -1),
             CityGPCD: cityGPCD_check.slice(0, -1)
         };

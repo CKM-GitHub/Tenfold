@@ -61,25 +61,26 @@ namespace Seruichi.Tenfold.Web.Controllers
         [HttpPost]
         public ActionResult GetM_MansionList(t_mansion_listModel model)
         {
-            t_mansion_listBL bl = new t_mansion_listBL();
+           t_mansion_listBL bl = new t_mansion_listBL();
 
-            List<string> chk_lst = new List<string>();
-            
-            var validationResult = bl.ValidateAll(model);
-            if (validationResult.Count > 0)
-            {
-                return ErrorResult(validationResult);
-            }
+           List<string> chk_lst = new List<string>();
 
-            var dt = bl.GetM_MansionList(model);
-            return OKResult(DataTableToJSON(dt));
+           var validationResult = bl.ValidateAll(model);
+           if (validationResult.Count > 0)
+           {
+               return ErrorResult(validationResult);
+           }
+
+           var dt = bl.GetM_MansionList(model);
+           return OKResult(DataTableToJSON(dt));
+             
         }
 
         [HttpPost]
-        public ActionResult Generate_CSV1(t_mansion_listModel model)
+        public async Task<ActionResult> Generate_CSV1(t_mansion_listModel model)
         {
             t_mansion_listBL bl = new t_mansion_listBL();
-            var dt = bl.Generate_CSV1(model);
+            var dt = await bl.Generate_CSV1(model);
             return OKResult(DataTableToJSON(dt));
         }
         [HttpPost]
