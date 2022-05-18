@@ -11,6 +11,10 @@ namespace Models.RealEstate.r_asmc_ms_reged_list
         public string MansionName { get; set; }
         public string StartYear { get; set; }
         public string EndYear { get; set; }
+        public string CityCD { get; set; }
+        public string Radio_Rating { get; set; }
+        public string MansionCD { get; set; }
+
     }
     public class M_Pref
     {

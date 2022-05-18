@@ -67,21 +67,7 @@ namespace Seruichi.RealEstate.Web.Controllers
             //For Rating
             r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
             r_asmc_ms_reged_listBL bl = new r_asmc_ms_reged_listBL();
-            //List<RatingModel> RatingList = new List<RatingModel>();
             DataTable dtRating = bl.Get_Rating(user.RealECD);
-            //if(dtRating.Rows.Count>0)
-            //{
-            //    RatingList = (from DataRow dr in dtRating.Rows
-            //                    select new RatingModel()
-            //{
-            //Rating = dr["Rating"].ToString()
-            //                    }).ToList();
-            //ViewBag.Rating = RatingList;
-            //}
-            //else
-            //{
-            //    ViewBag.Rating = "0";
-            //}
             return OKResult(DataTableToJSON(dtRating));
         }
 
@@ -89,8 +75,46 @@ namespace Seruichi.RealEstate.Web.Controllers
         [HttpPost]
         public ActionResult Get_DataList(r_asmc_ms_reged_listModel model)
         {
-            DataTable dt = new DataTable();
-            return OKResult(DataTableToJSON(dt));
+            if (String.IsNullOrWhiteSpace(model.MansionName) && String.IsNullOrWhiteSpace(model.CityCD) && String.IsNullOrWhiteSpace(model.StartYear) && String.IsNullOrWhiteSpace(model.EndYear) && String.IsNullOrWhiteSpace(model.Radio_Rating))
+            {
+                return ErrorMessageResult("E303");
+            }
+            else
+            {
+                DataTable dt = new DataTable();
+                r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
+                r_asmc_ms_reged_listBL bl = new r_asmc_ms_reged_listBL();
+                var validationResult = bl.ValidateAll(model);
+                if (validationResult.Count > 0)
+                {
+                    return ErrorResult(validationResult);
+                }
+                dt = bl.Get_DataList(model, user.RealECD);
+                return OKResult(DataTableToJSON(dt));
+            }
         }
+
+        [HttpPost]
+        public ActionResult Insert_l_log(r_asmc_ms_reged_listModel model)
+        {
+            r_asmc_ms_reged_listBL bl = new r_asmc_ms_reged_listBL();
+            model = Getlogdata(model);
+            bl.Insert_r_asmc_ms_reged_list_L_Log(model);
+            return OKResult();
         }
+
+        public r_asmc_ms_reged_listModel Getlogdata(r_asmc_ms_reged_listModel model)
+        {
+            CommonBL bl = new CommonBL();
+            model.LoginKBN = 2;
+            model.LoginID = base.GetOperator("UserID");
+            model.RealECD = base.GetOperator("RealECD");
+            model.LoginName = base.GetOperator("UserName");
+            model.IPAddress = base.GetClientIP();
+            model.PageID = "r_asmc_ms_reged_list";
+            model.ProcessKBN = "link";
+            model.Remarks = model.MansionCD;
+            return model;
+        }
+    }
 }
