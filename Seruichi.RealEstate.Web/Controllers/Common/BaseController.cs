@@ -37,16 +37,16 @@ namespace Seruichi.RealEstate.Web.Controllers
             }
         }
 
-        protected string GetOperatorName()
+        public static string GetLoginStaffName()
         {
             var user = SessionAuthenticationHelper.GetUserFromSession();
             if (user == null)
             {
-                return "";
+                return "unknown";
             }
             else
             {
-                return user.UserName;
+                return user.REStaffName;
             }
         }
 

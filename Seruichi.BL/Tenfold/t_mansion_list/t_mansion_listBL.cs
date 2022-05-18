@@ -119,15 +119,21 @@ namespace Seruichi.BL.Tenfold.t_mansion_list
         {
             ValidatorAllItems validator = new ValidatorAllItems();
 
-            validator.CheckIsHalfWidth("StartNum", model.StartAge, 15, RegexFormat.Number); //E104,E105 
-            validator.CheckIsHalfWidth("EndNum", model.EndAge, 15, RegexFormat.Number); //E104,E105 
+            validator.CheckIsHalfWidth("StartNum", model.StartAge,7, RegexFormat.Number); //E104,E105 
+            validator.CheckIsHalfWidth("EndNum", model.EndAge, 7, RegexFormat.Number); //E104,E105 
 
-            validator.CheckIsHalfWidth("StartUnit", model.StartAge, 2, RegexFormat.Number); //E104,E105 
-            validator.CheckIsHalfWidth("EndUnit", model.EndAge, 2, RegexFormat.Number); //E104,E105 
+            validator.CheckIsHalfWidth("StartUnit", model.StartUnit, 2, RegexFormat.Number); //E104,E105 
+            validator.CheckIsHalfWidth("EndUnit", model.EndUnit, 2, RegexFormat.Number); //E104,E105 
 
-            validator.CheckCompareNum("EndNum", model.StartAge, model.EndAge);//E113
-            validator.CheckCompareNum("EndUnit", model.StartUnit, model.EndUnit);//E113
-
+            if(!string.IsNullOrWhiteSpace(model.StartAge) && !string.IsNullOrWhiteSpace(model.EndAge))
+            {
+                validator.CheckCompareNum("EndNum", model.StartAge, model.EndAge);//E113
+            }
+            if (!string.IsNullOrWhiteSpace(model.StartUnit) && !string.IsNullOrWhiteSpace(model.EndUnit))
+            {
+                validator.CheckCompareNum("EndUnit", model.StartUnit, model.EndUnit);//E113
+            }
+               
             return validator.GetValidationResult();
         }
 

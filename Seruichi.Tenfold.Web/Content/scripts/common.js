@@ -571,8 +571,8 @@ const common = {
     },
 
     compareNum: function compareTwoNum(n1, n2) {
-        const num1 = n1;
-        const num2 = n2;
+        const num1 = Number(n1);
+        const num2 = Number(n2);
         let success = true;
         if (num1 > num2) {
             success = false;
