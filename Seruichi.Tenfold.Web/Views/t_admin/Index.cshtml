@@ -37,68 +37,145 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-12 col-md-6 col-lg-4 pb-3">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5>&nbsp;</h5>
-                                                </div>
-                                                <div class="row gutters">
+                                        @foreach (var item in ViewBag.M_TenfoldStaff_list)
+                                        {
+                                            <div class="col-12 col-md-6 col-lg-4 pb-3">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>&nbsp;</h5>
+                                                    </div>
+                                                    <div class="row gutters">
 
-                                                    <div class="col-md-12 col-sm-12 col-12">
-                                                        <div class="h-100">
-                                                            <div class="card-body">
-                                                                <div class="row gutters">
-                                                                    <div class="col-12 pb-2">
-                                                                        <div class="form-group">
-                                                                            <label for="eMail">スタッフID</label>
-                                                                            <input type="text" class="form-control" value="IDIDID9999" readonly>
+                                                        <div class="col-md-12 col-sm-12 col-12">
+                                                            <div class="h-100">
+                                                                <div class="card-body">
+                                                                    <div class="row gutters">
+                                                                        <div class="col-12 pb-2">
+                                                                            <div class="form-group">
+                                                                                <label for="eMail">スタッフID</label>
+                                                                                <input type="text" class="form-control" value="@item.TenStaffCD" readonly>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-12 pb-2">
+                                                                            <div class="form-group">
+                                                                                <label for="website">パスワード</label>
+                                                                                <input type="text" class="form-control" value="@item.TenStaffPW">
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-12 pb-2">
+                                                                            <div class="form-group">
+                                                                                <label>スタッフ名</label>
+                                                                                <input type="text" class="form-control" value="@item.TenStaffName">
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-12 pb-2">
-                                                                        <div class="form-group">
-                                                                            <label for="website">パスワード</label>
-                                                                            <input type="text" class="form-control" value="Password">
+                                                                    <div class="row gutters">
+                                                                        <div class="col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="Street">アカウントフラグ</label>
+                                                                                <div class="row align-items-center">
+                                                                                    <div class="col">
+                                                                                        <label class="form-check-label">無効化</label>
+                                                                                    </div>
+                                                                                    <div class="col-auto">
+                                                                                        <div class="form-check form-switch">
+                                                                                            <input class="form-check-input" type="checkbox" role="switch" @item.InvalidFLG />
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
 
-                                                                    <div class="col-12 pb-2">
-                                                                        <div class="form-group">
-                                                                            <label>スタッフ名</label>
-                                                                            <input type="text" class="form-control" value="NameNameName">
+                                                                    </div>
+                                                                    <div class="row gutters">
+                                                                        <div class="col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="Street">アカウント削除</label>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" value="" id="accdel">
+                                                                                    <label class="form-check-label" for="accdel">
+                                                                                        削除
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
+
                                                                     </div>
                                                                 </div>
-                                                                <div class="row gutters">
-                                                                    <div class="col-12">
-                                                                        <div class="form-group">
-                                                                            <label for="Street">アカウントフラグ</label>
-                                                                            <div class="row align-items-center">
-                                                                                <div class="col">
-                                                                                    <label class="form-check-label">無効化</label>
-                                                                                </div>
-                                                                                <div class="col-auto">
-                                                                                    <div class="form-check form-switch">
-                                                                                        <input class="form-check-input" type="checkbox" role="switch" checked />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+
+
+                                            <div class="col-12 col-md-6 col-lg-4 pb-3">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>新規登録</h5>
+                                                    </div>
+                                                    <div class="row gutters">
+
+                                                        <div class="col-md-12 col-sm-12 col-12">
+                                                            <div class="h-100">
+                                                                <div class="card-body">
+                                                                    <div class="row gutters">
+                                                                        <div class="col-12 pb-2">
+                                                                            <div class="d-flex">
+                                                                                <label for="eMail">スタッフID</label>
+                                                                                <span class="cap-errormsg-right" id="errorTenStaffCD"></span>
+                                                                            </div>
+                                                                            <input type="text" name="TenStaffCD" id="TenStaffCD" class="form-control" value="" maxlength="10">
+                                                                        </div>
+                                                                        <div class="col-12 pb-2">
+                                                                            <div class="d-flex">
+                                                                                <label for="website">パスワード</label>
+                                                                                <span class="cap-errormsg-right" id="errorTenStaffPW"></span>
+                                                                            </div>
+                                                                            <input type="text" name="TenStaffPW" id="TenStaffPW" class="form-control" value="" maxlength="10">
+                                                                        </div>
+
+                                                                        <div class="col-12 pb-2">
+                                                                            <div class="d-flex">
+                                                                                <label>スタッフ名</label>
+                                                                                <span class="cap-errormsg-right" id="errorTenStaffName"></span>
+                                                                            </div>
+                                                                            <input type="text" name="TenStaffName" id="TenStaffName" class="form-control" value="" maxlength="15">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row gutters">
+                                                                        <div class="col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="Street">アカウントフラグ</label>
+                                                                                <div class="row align-items-center">
+                                                                                    <div class="col">
+                                                                                        <label class="form-check-label text-muted">無効化</label>
+                                                                                    </div>
+                                                                                    <div class="col-auto">
+                                                                                        <div class="form-check form-switch">
+                                                                                            <input class="form-check-input" type="checkbox" role="switch" id="InvalidFLG" name="InvalidFLG" />
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-
-                                                                </div>
-                                                                <div class="row gutters">
-                                                                    <div class="col-12">
-                                                                        <div class="form-group">
-                                                                            <label for="Street">アカウント削除</label>
-                                                                            <div class="form-check">
-                                                                                <input class="form-check-input" type="checkbox" value="" id="accdel">
-                                                                                <label class="form-check-label" for="accdel">
-                                                                                    削除
-                                                                                </label>
+                                                                    <div class="row gutters">
+                                                                        <div class="col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="Street">アカウント削除</label>
+                                                                                <div class="form-check">
+                                                                                    <input class="form-check-input" type="checkbox" value=""  disabled>
+                                                                                    <label class="form-check-label" for="accdel">
+                                                                                        削除
+                                                                                    </label>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
 
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -106,80 +183,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
-                                        <div class="col-12 col-md-6 col-lg-4 pb-3">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5>新規登録</h5>
-                                                </div>
-                                                <div class="row gutters">
-
-                                                    <div class="col-md-12 col-sm-12 col-12">
-                                                        <div class="h-100">
-                                                            <div class="card-body">
-                                                                <div class="row gutters">
-                                                                    <div class="col-12 pb-2">
-                                                                        <div class="d-flex">
-                                                                            <label for="eMail">スタッフID</label>
-                                                                            <span class="cap-errormsg-right" id="errorTenStaffCD"></span>                                                                            
-                                                                        </div>
-                                                                        <input type="text" name="TenStaffCD" id="TenStaffCD" class="form-control" value="">
-                                                                    </div>
-                                                                    <div class="col-12 pb-2">
-                                                                        <div class="d-flex">
-                                                                            <label for="website">パスワード</label>
-                                                                            <span class="cap-errormsg-right" id="errorTenStaffPW"></span>
-                                                                        </div>
-                                                                        <input type="text" name="TenStaffPW" id="TenStaffPW" class="form-control" value="" maxlength="10">
-                                                                    </div>
-
-                                                                    <div class="col-12 pb-2">
-                                                                        <div class="d-flex">
-                                                                            <label>スタッフ名</label>
-                                                                            <span class="cap-errormsg-right" id="errorTenStaffName"></span>
-                                                                        </div>
-                                                                        <input type="text" name="TenStaffName" id="TenStaffName" class="form-control" value="">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row gutters">
-                                                                    <div class="col-12">
-                                                                        <div class="form-group">
-                                                                            <label for="Street">アカウントフラグ</label>
-                                                                            <div class="row align-items-center">
-                                                                                <div class="col">
-                                                                                    <label class="form-check-label text-muted">無効化</label>
-                                                                                </div>
-                                                                                <div class="col-auto">
-                                                                                    <div class="form-check form-switch">
-                                                                                        <input class="form-check-input" type="checkbox" role="switch" id="InvalidFLG" name="InvalidFLG" />
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row gutters">
-                                                                    <div class="col-12">
-                                                                        <div class="form-group">
-                                                                            <label for="Street">アカウント削除</label>
-                                                                            <div class="form-check">
-                                                                                <input class="form-check-input" type="checkbox" value="" id="accdel" disabled>
-                                                                                <label class="form-check-label" for="accdel">
-                                                                                    削除
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
 
 
@@ -196,7 +199,7 @@
                                     <div class="form-outline  pb-2">
                                         <label class="form-label" for="form3Examplev4">パスワード</label>
                                         <div class="passkey-box">
-                                            <input type="password" name="passkey" id="passkey" class="passkey form-control"
+                                            <input type="password"  class="passkey form-control"
                                                    placeholder="パスワード" required="required" />
                                         </div>
                                     </div>
@@ -204,7 +207,7 @@
                                     <div class="mb-4 pb-2">
                                         <div class="form-outline">
                                             <label class="form-label" for="form3Examplev4">パスワード再確認</label>
-                                            <input type="password" name="passkey1" id="passkey" class="passkey form-control"
+                                            <input type="password" class="passkey form-control"
                                                    placeholder="パスワード" required="required">
 
                                         </div>
@@ -214,7 +217,7 @@
                             <div class="card shadow border-0 mb-7">
                                 <div class="card-body">
                                     <div class="text-right mt-3 float-end">
-                                        <button type="button" class="btn btn-primary">変更保存</button>
+                                        <button type="button" class="btn btn-primary" id="btn_save_update">変更保存</button>
                                         <button type="button" class="btn btn-default">取消</button>
                                     </div>
                                 </div>
