@@ -119,8 +119,8 @@ namespace Seruichi.BL.Tenfold.t_mansion_list
         {
             ValidatorAllItems validator = new ValidatorAllItems();
 
-            validator.CheckIsHalfWidth("StartNum", model.StartAge, 15, RegexFormat.Number); //E104,E105 
-            validator.CheckIsHalfWidth("EndNum", model.EndAge, 15, RegexFormat.Number); //E104,E105 
+            validator.CheckIsHalfWidth("StartNum", model.StartAge, 2, RegexFormat.Number); //E104,E105 
+            validator.CheckIsHalfWidth("EndNum", model.EndAge, 2, RegexFormat.Number); //E104,E105 
 
             validator.CheckIsHalfWidth("StartUnit", model.StartAge, 2, RegexFormat.Number); //E104,E105 
             validator.CheckIsHalfWidth("EndUnit", model.EndAge, 2, RegexFormat.Number); //E104,E105 

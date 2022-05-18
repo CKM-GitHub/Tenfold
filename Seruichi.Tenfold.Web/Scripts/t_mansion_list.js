@@ -57,7 +57,7 @@ function addEvents() {
         };
 
         if (model.StartAge && model.EndAge) {
-            if (model.StartAge < model.EndAge) {
+            if (Number(model.StartAge) < Number(model.EndAge)) {
                 $("#StartNum").hideError();
                 $("#EndNum").hideError();
                 $("#EndNum").focus();
@@ -79,9 +79,9 @@ function addEvents() {
             StartUnit: $start1,
             EndUnit: $end1
         };
-
+        debugger;
         if (model.StartUnit && model.EndUnit) {
-            if (model.StartUnit > model.EndUnit) {
+            if (Number(model.StartUnit) > Number(model.EndUnit)) {
                 $("#StartUnit").showError(common.getMessage('E113'));
                 //$("#EndUnit").showError(this.getMessage('E113'));
                 $("#StartUnit").focus();
@@ -106,7 +106,7 @@ function addEvents() {
         }
         $('#mansiontable tbody').empty();
 
-        const $Apartment = $("#txtApartment").val(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
+        const $Apartment = $("#txtApartment").val().trim(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
             $StartUnit = $("#StartUnit").val(), $EndUnit = $("#EndUnit").val()
 
         var cityGPCD_check = '';
@@ -144,7 +144,7 @@ function addEvents() {
     });
 
     $('#btnCSVDownload').on('click', function () {
-        const $Apartment = $("#txtApartment").val(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
+        const $Apartment = $("#txtApartment").val().trim(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
             $StartUnit = $("#StartUnit").val(), $EndUnit = $("#EndUnit").val()
 
         var cityGPCD_check = '';
