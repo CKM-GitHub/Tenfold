@@ -6,7 +6,7 @@ $(function () {
     //_url.Get_Rating = common.appPath + '/r_asmc_ms_reged_list/Get_Rating';
     _url.InsertL_Log = common.appPath + '/r_asmc_ms_reged_list/Insert_l_log';   
     addEvents();
-    
+    $('#MansionName').focus();
 });
 function setValidation() {
     $('#MansionName')
@@ -100,8 +100,29 @@ function addEvents() {
             CityCD: cityCD_check,
             Radio_Rating: Rdo_Rating
         };
-        Get_DataList(model, $form);
 
+        if (model.MansionName == "" && model.StartYear == "" && model.EndYear == "" && model.CityCD == "" && model.Radio_Rating == "")
+        {
+            $('#btnDisplay').showError(common.getMessage('E303'));
+        }
+        else
+        {
+            Get_DataList(model, $form);
+        }
+    });
+
+    $(document).on('click', '.tree li  input[type="checkbox"]', function () {
+        $(this).closest('li').find('ul input[type="checkbox"]').prop('checked', $(this).is(':checked'));
+    }).on('click', '.node-item', function () {
+        var parentNode = $(this).parents('.tree ul');
+        if ($(this).is(':checked')) {
+            parentNode.find('li .node-parent').prop('checked', true);
+        } else {
+            var elements = parentNode.find('ul input[type="checkbox"]:checked');
+            if (elements.length == 0) {
+                parentNode.find('li .node-parent').prop('checked', false);
+            }
+        }
     });
 }
 function Get_Rating_List(checked) {
@@ -183,7 +204,7 @@ function Bind_tbody(result) {
         for (var i = 0; i < data.length; i++) {
             html += '<tr>\
             <td class= "text-end" > ' + (i + 1) + '</td>\
-            <td> <a class="text-heading font-semibold text-decoration-underline" href="#"  onclick="l_logfunction(this.id)" id='+ data[i]["MansionCD"] +'>'+ data[i]["マンション名"] + '</a> </td>\
+            <td> <a class="text-heading font-semibold text-decoration-underline" href="#"  onclick="l_logfunction(this.id)" id='+ data[i]["マンションCD"] + '&' + data[i]["マンション名"]+'>'+ data[i]["マンション名"] + '</a> </td>\
             <td> <a class="text-heading font-semibold">'+ data[i]["住所"] + '</a> </td>\
             <td> '+ data[i]["登録日"] + '</td>\
             <td>\
@@ -197,10 +218,12 @@ function Bind_tbody(result) {
         }
         $('#total_record').text("検索結果：" + data.length + "件")
         $('#total_record_up').text("検索結果：" + data.length + "件")
+        $('#no_record').text("");
     }
     else {
         $('#total_record').text("検索結果： 0件")
         $('#total_record_up').text("検索結果： 0件")
+        $('#no_record').text("表示可能データがありません");
     }
     $('#r_table_List tbody').append(html);
 
@@ -217,14 +240,16 @@ function l_logfunction(id) {
         RealECD: null,
         LoginName: null,
         IPAddress: null,
-        Page: null,
+        PageID: null,
         Processing: null,
         Remarks: null,
-        MansionCD: id
+        MansionCD: id.split('&')[0],
+        MansionName: id.split('&')[1],
     };
     common.callAjax(_url.InsertL_Log, model,
         function (result) {
             if (result && result.isOK) {
+                if (model.PageID == "r_issueslist")
                 window.location.href = common.appPath + '/r_asmc_set_ms/Index?MansionCD=' + model.MansionCD;
                 
             }

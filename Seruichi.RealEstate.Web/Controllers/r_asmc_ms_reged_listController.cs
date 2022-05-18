@@ -62,17 +62,6 @@ namespace Seruichi.RealEstate.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Get_Rating(RatingModel model)
-        {
-            //For Rating
-            r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
-            r_asmc_ms_reged_listBL bl = new r_asmc_ms_reged_listBL();
-            DataTable dtRating = bl.Get_Rating(user.RealECD);
-            return OKResult(DataTableToJSON(dtRating));
-        }
-
-
-        [HttpPost]
         public ActionResult Get_DataList(r_asmc_ms_reged_listModel model)
         {
             if (String.IsNullOrWhiteSpace(model.MansionName) && String.IsNullOrWhiteSpace(model.CityCD) && String.IsNullOrWhiteSpace(model.StartYear) && String.IsNullOrWhiteSpace(model.EndYear) && String.IsNullOrWhiteSpace(model.Radio_Rating))
@@ -113,7 +102,7 @@ namespace Seruichi.RealEstate.Web.Controllers
             model.IPAddress = base.GetClientIP();
             model.PageID = "r_asmc_ms_reged_list";
             model.ProcessKBN = "link";
-            model.Remarks = model.MansionCD;
+            model.Remarks = "r_asmc_set_ms" +" "+model.MansionCD+" "+ model.MansionName;
             return model;
         }
     }
