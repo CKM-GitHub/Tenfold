@@ -41,7 +41,7 @@
                                             <ul>
                                                 <li class="text-nowrap">
                                                     <span class="cap-errormsg-right" id="CheckBoxError"></span>
-                                                    <input class="form-check-input node-parent" type="checkbox" value="@cityGPCD.CityGPCD" checked>
+                                                    <input class="form-check-input node-parent" type="checkbox" value="@cityGPCD.CityGPCD">
                                                     <label class="form-check-label" for="flexCheckChecked">
                                                         @cityGPCD.CityGPName
                                                     </label>
@@ -52,7 +52,7 @@
                                                         {
                                                             <ul>
                                                                 <li>
-                                                                    <input class="form-check-input node-item" type="checkbox" value="@cityCD.CityCD" checked>
+                                                                    <input class="form-check-input node-item" type="checkbox" value="@cityCD.CityCD">
                                                                     <label class="form-check-label" for="flexCheckChecked">
                                                                         @cityCD.CityName
                                                                     </label>
@@ -80,10 +80,10 @@
                         </label>
                         <span class="cap-errormsg-right" id="errorYear"></span>
                         <div class="form-group input-group mb-3">
-                            <span class="cap-errormsg-right" id="errorStartYear" name="errorStartYear"></span>
+                            @*<span class="cap-errormsg-right" id="errorStartYear" name="errorStartYear"></span>*@
                             <input type="text" class="form-control" id="StartYear">
                             <span class="input-group-inline text-center align-self-center p-2">年 ~</span>
-                            <span class="cap-errormsg-right" id="errorEndYear" name="errorEndYear"></span>
+                            @*<span class="cap-errormsg-right" id="errorEndYear" name="errorEndYear"></span>*@
                             <input type="text" class="form-control" id="EndYear">
                             <span class="input-group-inline text-center align-self-center p-2">年</span>
                         </div>
@@ -93,89 +93,61 @@
                 <li>
                     <div class="form-group ps-3 pe-3">
                         <div class="form-check pb-3">
-                            <input class="form-check-input" type="checkbox" value="" id="RadioCheck">
-                            <label class="form-check-label" for="flexCheckChecked">
+                            <input class="form-check-input" type="checkbox" value="0" id="RadioCheck" name="RadioCheck">
+                            <label class="form-check-label" for="RadioCheck">
                                 優先度
                             </label>
-                            @if (ViewBag.Rating == null)
-                            {
-                                <div class="ms-6">
-                                    <input class="form-check-input" type="radio" name="Radios" id="RadioRating" value="0">
-                                    <span class="text-danger">
-                                        <span class="fa fa-star-o" data-rating="1"></span>
-                                        <span class="fa fa-star-o" data-rating="2"></span>
-                                        <span class="fa fa-star-o" data-rating="3"></span>
-                                        <span class="fa fa-star-o" data-rating="4"></span>
-                                        <span class="fa fa-star-o" data-rating="5"></span>
-                                    </span><span><small>以上</small></span>
-                                </div>
-                            }
-                           else
-                            {
-                                foreach (var rating in ViewBag.Rating)
-                                {
-                                    <div class="ms-6">
-                                        <input class="form-check-input" type="radio" name="Radios" id="RadioRating" value=rating.Rating>
-                                        <span class="text-danger">
-
-                                            @if (rating.Rating == "4")
-                                            {
-                                                <span class="fa fa-star" data-rating="1"></span>
-                                                <span class="fa fa-star" data-rating="2"></span>
-                                                <span class="fa fa-star" data-rating="3"></span>
-                                                <span class="fa fa-star" data-rating="4"></span>
-                                                <span class="fa fa-star-o" data-rating="5"></span>
-                                            }
-
-                                            @if (rating.Rating == "3")
-                                            {
-                                                <span class="fa fa-star" data-rating="1"></span>
-                                                <span class="fa fa-star" data-rating="2"></span>
-                                                <span class="fa fa-star" data-rating="3"></span>
-                                                <span class="fa fa-star-o" data-rating="4"></span>
-                                                <span class="fa fa-star-o" data-rating="5"></span>
-                                            }
-
-                                            @if (rating.Rating == "2")
-                                            {
-                                                <span class="fa fa-star" data-rating="1"></span>
-                                                <span class="fa fa-star" data-rating="2"></span>
-                                                <span class="fa fa-star-o" data-rating="3"></span>
-                                                <span class="fa fa-star-o" data-rating="4"></span>
-                                                <span class="fa fa-star-o" data-rating="5"></span>
-                                            }
-
-                                            @if (rating.Rating == "1")
-                                            {
-                                                <span class="fa fa-star" data-rating="1"></span>
-                                                <span class="fa fa-star-o" data-rating="2"></span>
-                                                <span class="fa fa-star-o" data-rating="3"></span>
-                                                <span class="fa fa-star-o" data-rating="4"></span>
-                                                <span class="fa fa-star-o" data-rating="5"></span>
-                                            }
-
-                                            @if (rating.Rating == "0")
-                                            {
-                                                <span class="fa fa-star-o" data-rating="1"></span>
-                                                <span class="fa fa-star-o" data-rating="2"></span>
-                                                <span class="fa fa-star-o" data-rating="3"></span>
-                                                <span class="fa fa-star-o" data-rating="4"></span>
-                                                <span class="fa fa-star-o" data-rating="5"></span>
-                                            }
-
-                                        </span><span><small>以上</small></span>
-                                    </div>
-                                }
-                            }
-                        </div>
+                            <div class="ms-6">
+                                <input class="form-check-input" type="radio" name="Radios" id="RadioRating" value="4">
+                                <span class="text-danger">
+                                    <span class="fa fa-star" data-rating="1"></span>
+                                    <span class="fa fa-star" data-rating="2"></span>
+                                    <span class="fa fa-star" data-rating="3"></span>
+                                    <span class="fa fa-star" data-rating="4"></span>
+                                    <span class="fa fa-star-o" data-rating="5"></span>
+                                </span><span><small>以上</small></span>
                             </div>
 
+                            <div class="ms-6">
+                                <input class="form-check-input" type="radio" name="Radios" id="RadioRating" value="3">
+                                <span class="text-danger">
+                                    <span class="fa fa-star" data-rating="1"></span>
+                                    <span class="fa fa-star" data-rating="2"></span>
+                                    <span class="fa fa-star" data-rating="3"></span>
+                                    <span class="fa fa-star-o" data-rating="4"></span>
+                                    <span class="fa fa-star-o" data-rating="5"></span>
+                                </span><span><small>以上</small></span>
+                            </div>
+
+                            <div class="ms-6">
+                                <input class="form-check-input" type="radio" name="Radios" id="RadioRating" value="2">
+                                <span class="text-danger">
+                                    <span class="fa fa-star" data-rating="1"></span>
+                                    <span class="fa fa-star" data-rating="2"></span>
+                                    <span class="fa fa-star-o" data-rating="3"></span>
+                                    <span class="fa fa-star-o" data-rating="4"></span>
+                                    <span class="fa fa-star-o" data-rating="5"></span>
+                                </span><span><small>以上</small></span>
+                            </div>
+
+                            <div class="ms-6">
+                                <input class="form-check-input" type="radio" name="Radios" id="RadioRating" value="1">
+                                <span class="text-danger">
+                                    <span class="fa fa-star" data-rating="1"></span>
+                                    <span class="fa fa-star-o" data-rating="2"></span>
+                                    <span class="fa fa-star-o" data-rating="3"></span>
+                                    <span class="fa fa-star-o" data-rating="4"></span>
+                                    <span class="fa fa-star-o" data-rating="5"></span>
+                                </span><span><small>以上</small></span>
+                        </div>
+                   </div>
+                  </div>
                 </li>
                 <li>
+                    <span class="cap-errormsg-right" id="errorbtnDisplay"></span>
                     <div class="form-group ps-3 pe-3">
                         <button type="button" class="btn btn-primary w-100 w-100 mb-3" id="btnDisplay">表示</button>
                     </div>
-
                 </li>
             </ul>
          <div class="mt-auto pb-20"></div>
@@ -209,7 +181,7 @@
                     </div>
 
                     <div class="card-header d-md-inline-flex">
-                        <h5 class="mb-0">登録済マンション一覧</h5> <span class="ps-md-5 text-muted text-sm" id="total_record_up"></span>
+                        <h5 class="mb-0">登録済マンション一覧</h5> <span class="ps-md-5 text-muted text-sm" id="total_record_up"></span><span style="color: red;" class="ps-md-5 text-sm" id="no_record"></span>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover table-nowrap" id="r_table_List">
@@ -226,248 +198,7 @@
 
 
                             </tbody>
-                            @*<tbody>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#"> 物件名物件名物件名物件名物件名</a>
-                                    </td>
-                                    <td> <a class="text-heading font-semibold">住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所 </a> </td>
-                                    <td> 2020/12/15 20:33:00 </td>
-                                    <td>
-                                        <div class="d-flex flex-row mt-2">
-                                            <div class="text-danger mb-1 me-2">
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#"> 物件名物件名物件名物件名物件名</a>
-                                    </td>
-                                    <td> <a class="text-heading font-semibold"> 住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所 </a> </td>
-                                    <td> 2020/12/15 20:33:00 </td>
-                                    <td>
-                                        <div class="d-flex flex-row mt-2">
-                                            <div class="text-danger mb-1 me-2">
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#"> 物件名物件名物件名物件名物件名</a>
-                                    </td>
-                                    <td> <a class="text-heading font-semibold"> 住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所 </a> </td>
-                                    <td> 2020/12/15 20:33:00 </td>
-                                    <td>
-                                        <div class="d-flex flex-row mt-2">
-                                            <div class="text-danger mb-1 me-2">
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#"> 物件名物件名物件名物件名物件名</a>
-                                    </td>
-                                    <td> <a class="text-heading font-semibold"> 住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所 </a> </td>
-                                    <td> 2020/12/15 20:33:00 </td>
-                                    <td>
-                                        <div class="d-flex flex-row mt-2">
-                                            <div class="text-danger mb-1 me-2">
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#"> 物件名物件名物件名物件名物件名</a>
-                                    </td>
-                                    <td> <a class="text-heading font-semibold"> 住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所 </a> </td>
-                                    <td> 2020/12/15 20:33:00 </td>
-                                    <td>
-                                        <div class="d-flex flex-row mt-2">
-                                            <div class="text-danger mb-1 me-2">
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#"> 物件名物件名物件名物件名物件名</a>
-                                    </td>
-                                    <td> <a class="text-heading font-semibold"> 住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所 </a> </td>
-                                    <td> 2020/12/15 20:33:00 </td>
-                                    <td>
-                                        <div class="d-flex flex-row mt-2">
-                                            <div class="text-danger mb-1 me-2">
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#"> 物件名物件名物件名物件名物件名</a>
-                                    </td>
-                                    <td> <a class="text-heading font-semibold"> 住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所 </a> </td>
-                                    <td> 2020/12/15 20:33:00 </td>
-                                    <td>
-                                        <div class="d-flex flex-row mt-2">
-                                            <div class="text-danger mb-1 me-2">
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#"> 物件名物件名物件名物件名物件名</a>
-                                    </td>
-                                    <td> <a class="text-heading font-semibold"> 住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所 </a> </td>
-                                    <td> 2020/12/15 20:33:00 </td>
-                                    <td>
-                                        <div class="d-flex flex-row mt-2">
-                                            <div class="text-danger mb-1 me-2">
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#"> 物件名物件名物件名物件名物件名</a>
-                                    </td>
-                                    <td> <a class="text-heading font-semibold"> 住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所 </a> </td>
-                                    <td> 2020/12/15 20:33:00 </td>
-                                    <td>
-                                        <div class="d-flex flex-row mt-2">
-                                            <div class="text-danger mb-1 me-2">
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#"> 物件名物件名物件名物件名物件名</a>
-                                    </td>
-                                    <td> <a class="text-heading font-semibold"> 住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所 </a> </td>
-                                    <td> 2020/12/15 20:33:00 </td>
-                                    <td>
-                                        <div class="d-flex flex-row mt-2">
-                                            <div class="text-danger mb-1 me-2">
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#"> 物件名物件名物件名物件名物件名</a>
-                                    </td>
-                                    <td> <a class="text-heading font-semibold"> 住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所 </a> </td>
-                                    <td> 2020/12/15 20:33:00 </td>
-                                    <td>
-                                        <div class="d-flex flex-row mt-2">
-                                            <div class="text-danger mb-1 me-2">
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#"> 物件名物件名物件名物件名物件名</a>
-                                    </td>
-                                    <td> <a class="text-heading font-semibold"> 住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所 </a> </td>
-                                    <td> 2020/12/15 20:33:00 </td>
-                                    <td>
-                                        <div class="d-flex flex-row mt-2">
-                                            <div class="text-danger mb-1 me-2">
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#"> 物件名物件名物件名物件名物件名</a>
-                                    </td>
-                                    <td> <a class="text-heading font-semibold"> 住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所 </a> </td>
-                                    <td> 2020/12/15 20:33:00 </td>
-                                    <td>
-                                        <div class="d-flex flex-row mt-2">
-                                            <div class="text-danger mb-1 me-2">
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#"> 物件名物件名物件名物件名物件名</a>
-                                    </td>
-                                    <td> <a class="text-heading font-semibold"> 住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所 </a> </td>
-                                    <td> 2020/12/15 20:33:00 </td>
-                                    <td>
-                                        <div class="d-flex flex-row mt-2">
-                                            <div class="text-danger mb-1 me-2">
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#"> 物件名物件名物件名物件名物件名</a>
-                                    </td>
-                                    <td> <a class="text-heading font-semibold"> 住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所 </a> </td>
-                                    <td> 2020/12/15 20:33:00 </td>
-                                    <td>
-                                        <div class="d-flex flex-row mt-2">
-                                            <div class="text-danger mb-1 me-2">
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#"> 物件名物件名物件名物件名物件名</a>
-                                    </td>
-                                    <td> <a class="text-heading font-semibold"> 住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所 </a> </td>
-                                    <td> 2020/12/15 20:33:00 </td>
-                                    <td>
-                                        <div class="d-flex flex-row mt-2">
-                                            <div class="text-danger mb-1 me-2">
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>*@
+                           
                         </table>
                     </div>
                     <div class="card-footer border-0 py-5">

@@ -20,7 +20,7 @@ function setValidation() {
         .addvalidation_datecheck() //E108
         .addvalidation_datecompare(); //E111
 
-    $('#txtFreeWord')
+    $('#FreeWord')
         .addvalidation_errorElement("#errorFreeWord")
         .addvalidation_maxlengthCheck(50);
 
@@ -52,7 +52,7 @@ function addEvents() {
     });
 
     const $chk_New = $("#chk_New").val(), $chk_Nego = $("#chk_Nego").val(), $chk_Contract = $("#chk_Contract").val(), $chk_SellerDeclined = $("#chk_SellerDeclined").val(), $chk_BuyerDeclined = $("#chk_BuyerDeclined").val(),
-        $ddlStaff = $("#ddlStaff").val(), $ddlRange = $("#ddlRange").val(), $StartDate = $("#StartDate").val(), $EndDate = $("#EndDate").val(), $txtFreeWord = $("#txtFreeWord").val()
+        $ddlStaff = $("#ddlStaff").val(), $ddlRange = $("#ddlRange").val(), $StartDate = $("#StartDate").val(), $EndDate = $("#EndDate").val(), $FreeWord = $("#FreeWord").val()
 
     let model = {
         chk_New: $chk_New,
@@ -64,7 +64,7 @@ function addEvents() {
         Range: $ddlRange,
         StartDate: $StartDate,
         EndDate: $EndDate,
-        FreeWord: $txtFreeWord
+        FreeWord: $FreeWord
     };
     get_issueslist_Data(model, this);
 
@@ -106,6 +106,7 @@ function addEvents() {
             return false;
         }
         $('#tblissueslist tbody').empty();
+        debugger;
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         get_issueslist_Data(model, $form);

@@ -5,6 +5,7 @@
         appPath = "";
     }
     string messageJson = Newtonsoft.Json.JsonConvert.SerializeObject(Seruichi.Common.StaticCache.GetClientMessages());
+    string staffName = Seruichi.RealEstate.Web.Controllers.BaseController.GetLoginStaffName();
 }
 <!DOCTYPE html>
 
@@ -52,10 +53,14 @@
                 </div>
                 <!-- Action
                     <div class="d-flex align-items-lg-center mt-3 mt-lg-0">
-                        <a href="#" class="btn btn-sm btn-primary w-full w-lg-auto">
-
-                        </a>
+                        <a href="#" class="btn btn-sm btn-primary w-full w-lg-auto"></a>
                     </div>-->
+                <div class="navbar-nav d-flex">
+                    <div class="nav-item">
+                        <hr class="navbar-divider my-3 opacity-20 d-md-none">
+                        <p id="loginStaffName" class="nav-item nav-link"></p>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -64,7 +69,7 @@
 
     <script src="~/Content/bootstrap/bootstrap.min.js"></script>
     @Scripts.Render("~/Content/scripts/application")
-    <script>
+<script>
         $(function () {
             common.appPath = '@appPath';
             data = JSON.parse('@Html.Raw(messageJson)');
@@ -73,8 +78,9 @@
                 messageConst[key] = data[key];
             }
             $('#' + '@ViewBag.Title').addClass('text-underline active font-bold ');
+            $('#loginStaffName').html('@staffName');
         });
-    </script>
+</script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
