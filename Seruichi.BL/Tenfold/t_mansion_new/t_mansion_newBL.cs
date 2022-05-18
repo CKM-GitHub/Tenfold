@@ -60,8 +60,17 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
            
            
             validator.CheckSelectionRequired("RightKBN", model.RightKBN);
-           
 
+            validator.CheckSelectionRequired("Noti", model.TownCD);
+            validator.CheckSelectionRequired("katakana", model.TownCD);
+            validator.CheckSelectionRequired("katakana1", model.TownCD);
+            validator.CheckSelectionRequired("hirakana", model.TownCD);
+            validator.CheckSelectionRequired("Other1", model.TownCD);
+            validator.CheckSelectionRequired("Other2", model.TownCD);
+            validator.CheckSelectionRequired("Other3", model.TownCD);
+            validator.CheckSelectionRequired("Other4", model.TownCD);
+            validator.CheckSelectionRequired("Other5", model.TownCD);
+            validator.CheckSelectionRequired("Other6", model.TownCD);
             if (validator.IsValid)
             {
                 foreach (var item in model.MansionStationList)
