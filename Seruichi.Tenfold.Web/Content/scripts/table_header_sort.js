@@ -27,6 +27,7 @@
         };
 
         const sortColumn = function (index) {
+            const rows = tableBody.querySelectorAll('tr');
             var col_index = [], multiplier;
             if (headers[index].hasAttribute('ordercol-index'))
                 col_index = headers[index].getAttribute('ordercol-index').split('_');
@@ -179,6 +180,7 @@
         };
 
         const sortMultiColumn = function (ctrl, index) {
+            const rows = tableBody.querySelectorAll('tr');
             var col_index = [], multiplier, col_ordertype;
             if ($(ctrl).attr('ordercol-index')) {
                 col_ordertype = $(ctrl).attr('col_ordertype');
