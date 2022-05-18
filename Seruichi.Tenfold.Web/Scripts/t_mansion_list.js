@@ -79,7 +79,6 @@ function addEvents() {
             StartUnit: $start1,
             EndUnit: $end1
         };
-        debugger;
         if (model.StartUnit && model.EndUnit) {
             if (Number(model.StartUnit) > Number(model.EndUnit)) {
                 $("#StartUnit").showError(common.getMessage('E113'));
