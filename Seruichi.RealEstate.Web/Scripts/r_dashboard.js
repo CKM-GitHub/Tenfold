@@ -25,7 +25,6 @@ $(document).ready(function () {
         function (result) {
             const dataArray = JSON.parse(result.data);
             const length = dataArray.length;
-            debugger;
             if (length > 0) {
                 let data = dataArray[0];
                 if (data.REFaceImage == null) {

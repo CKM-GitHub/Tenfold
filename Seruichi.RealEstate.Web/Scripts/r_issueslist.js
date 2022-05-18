@@ -68,6 +68,9 @@ function addEvents() {
     };
     get_issueslist_Data(model, this);
 
+    sortTable.getSortingTable("tblissueslist");
+    sortTable.getSortingTable("tblsellerdetails");
+
     $('.form-check-input').on('change', function () {
         this.value = this.checked ? 1 : 0;
         if ($("input[type=checkbox]:checked").length > 0) {
@@ -106,7 +109,6 @@ function addEvents() {
             return false;
         }
         $('#tblissueslist tbody').empty();
-        debugger;
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         get_issueslist_Data(model, $form);
@@ -239,8 +241,6 @@ function Bind_tbody(result) {
         $('#no_record').text("表示可能データがありません");
     }
     $('#tblissueslist tbody').append(html);
-
-    sortTable.getSortingTable("tblissueslist");
 }
 
 function l_logfunction(id) {
@@ -365,6 +365,4 @@ function Bind_Model_tbody(result) {
         $('#mno_record').text("表示可能データがありません");
     }
     $('#tblsellerdetails tbody').append(html);
-
-    sortTable.getSortingTable("tblsellerdetails");
 }

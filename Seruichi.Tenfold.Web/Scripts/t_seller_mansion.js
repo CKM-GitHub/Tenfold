@@ -84,7 +84,9 @@ function addEvents()
         StartDate: $StartDate,
         EndDate: $EndDate,
     };
-    getM_SellerMansionList(model,this);
+    getM_SellerMansionList(model, this);
+
+    sortTable.getSortingTable("mansiontable");
    
     $('.form-check-input').on('change', function () {
         this.value = this.checked ? 1 : 0;
@@ -279,8 +281,6 @@ function Bind_tbody(result) {
         $('#total_record_up').text("検索結果： 0件")
     }
     $('#mansiontable tbody').append(html);
-
-    sortTable.getSortingTable("mansiontable");
     
 }
 function l_logfunction(id) {   
