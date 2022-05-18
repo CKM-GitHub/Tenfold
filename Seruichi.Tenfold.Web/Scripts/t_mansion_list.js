@@ -104,7 +104,6 @@ function addEvents() {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
-        debugger;
         $('#mansiontable tbody').empty();
 
         const $Apartment = $("#txtApartment").val(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
