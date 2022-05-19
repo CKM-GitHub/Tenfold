@@ -27,157 +27,158 @@
                         <hr class="navbar-divider my-5 opacity-20"><div class="d-inline-flex">
                             <h5 class="mb-0">売主一覧</h5><span class="ps-md-5 text-muted text-sm" id="total_record_up"></span><span style="color: red;" class="ps-md-5 text-sm" id="no_record"></span>
                         </div>
-                        </div>
+                    </div>
                     <div class="table-responsive">
-                            <table class="table table-hover table-nowrap sortMe" id="mansiontable">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col" style="width: 50px" class="text-end sort-by" ordercol-index="12_4"><a class="text-decoration-underline" href="#">No.</a></th>
-                                        <th scope="col" style="width: 10px" class="sort-by" ordercol-index="2_12_4"><a class="text-decoration-underline" href="#">ステータス</a></th>
-                                        <th class="d-none"><a class="text-decoration-underline" href="#">Status</a></th>
-                                        <th scope="col" style="width: 60px" class="sort-by" ordercol-index="3_12_4"><a class="text-decoration-underline text-center" href="#">無効会員</a></th>
-                                        <th scope="col" style="width: 120px" class="sort-by" ordercol-index="4_12_4"><a class="text-decoration-underline" href="#">売主CD</a></th>
-                                        <th scope="col" style="width: 250px" class="sort-by" ordercol-index="5_12_4"><a class="text-decoration-underline" href="#">売主名</a></th>
-                                        <th scope="col" style="width: 100px" class="sort-by" ordercol-index="13_12_4"><a class="text-decoration-underline" href="#">居住地</a></th>
-                                        <th scope="col" style="width: 180px" class="sort-by" ordercol-index="7_12_4"><a class="text-decoration-underline" href="#">登録日時</a></th>
-                                        <th scope="col" style="width: 180px" class="sort-by" ordercol-index="8_12_4"><a class="text-decoration-underline" href="#">詳細査定日時</a></th>
-                                        <th scope="col" style="width: 180px" class="sort-by" ordercol-index="9_12_4"><a class="text-decoration-underline" href="#">買取依頼日時</a></th>
-                                        <th scope="col" style="width: 50px" class="text-end sort-by" data-type="number" ordercol-index="10_12_4"><a class="text-decoration-underline" href="#">登録数</a></th>
-                                        <th scope="col" style="width: 100px" class="text-end sort-by" data-type="number" ordercol-index="11_12_4"><a class="text-decoration-underline" href="#">成約数</a></th>
-                                        <th class="d-none"><a class="text-decoration-underline" href="#">SellerKana</a></th>
-                                        <th class="d-none"><a class="text-decoration-underline" href="#">PrefCD</a></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @*<tr>
-                                        <td class="text-end"> 999 </td>
-                                        <td>  <i class="ms-1 ps-1 pe-1 rounded-circle bg-info text-white fst-normal">交</i><span class="font-semibold"> 交渉中</span> </td>
-                                        <td class="text-center">  </td>
-                                        <td> U999999999 </td>
-                                        <td> <a class="text-heading font-semibold text-decoration-underline" href="#">売主名売主名売主名売主名売主名</a> </td>
-                                        <td> ⼤阪府 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td class="text-end"> 99999999 </td>
-                                        <td class="text-end"> 99999999 </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-end"> 999 </td>
-                                        <td>  <i class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal">見</i><span class="font-semibold"> ⾒込</span> </td>
-                                        <td class="text-center">  </td>
-                                        <td> U999999999 </td>
-                                        <td> <a class="text-heading font-semibold text-decoration-underline" href="#">売主名売主名売主名売主名売主名</a> </td>
-                                        <td> ⼤阪府 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td class="text-end"> 99999999 </td>
-                                        <td class="text-end"> 99999999 </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-end"> 999 </td>
-                                        <td> <i class="ms-1 ps-1 pe-1 rounded-circle bg-secondary fst-normal">終</i><span class="font-semibold"> 終了</span></td>
-                                        <td class="text-center">  </td>
-                                        <td> U999999999 </td>
-                                        <td> <a class="text-heading font-semibold text-decoration-underline" href="#">売主名売主名売主名売主名売主名</a> </td>
-                                        <td> ⼤阪府 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td class="text-end"> 99999999 </td>
-                                        <td class="text-end"> 99999999 </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-end"> 999 </td>
-                                        <td>   <i class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal">見</i><span class="font-semibold"> ⾒込</span> </td>
-                                        <td class="text-center"> <i class="fa fa-check" aria-hidden="true"></i> </td>
-                                        <td> U999999999 </td>
-                                        <td> <a class="text-heading font-semibold text-decoration-underline" href="#">売主名売主名売主名売主名売主名</a> </td>
-                                        <td> ⼤阪府 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td class="text-end"> 99999999 </td>
-                                        <td class="text-end"> 99999999 </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-end"> 999 </td>
-                                        <td>  <i class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal">見</i><span class="font-semibold"> ⾒込</span></td>
-                                        <td class="text-center"> <i class="fa fa-check" aria-hidden="true"></i> </td>
-                                        <td> U999999999 </td>
-                                        <td> <a class="text-heading font-semibold text-decoration-underline" href="#">売主名売主名売主名売主名売主名</a> </td>
-                                        <td> ⼤阪府 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td class="text-end"> 99999999 </td>
-                                        <td class="text-end"> 99999999 </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-end"> 999 </td>
-                                        <td>  <i class="ms-1 ps-1 pe-1 rounded-circle bg-secondary fst-normal">終</i><span class="font-semibold"> 終了</span> </td>
-                                        <td class="text-center"> <i class="fa fa-check" aria-hidden="true"></i> </td>
-                                        <td> U999999999 </td>
-                                        <td> <a class="text-heading font-semibold text-decoration-underline" href="#">売主名売主名売主名売主名売主名</a> </td>
-                                        <td> ⼤阪府 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td class="text-end"> 99999999 </td>
-                                        <td class="text-end"> 99999999 </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-end"> 999 </td>
-                                        <td>  <i class="ms-1 ps-1 pe-1 rounded-circle bg-info text-white fst-normal">交</i><span class="font-semibold"> 交渉中</span></td>
-                                        <td class="text-center">  </td>
-                                        <td> U999999999 </td>
-                                        <td> <a class="text-heading font-semibold text-decoration-underline" href="#">売主名売主名売主名売主名売主名</a> </td>
-                                        <td> ⼤阪府 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td class="text-end"> 99999999 </td>
-                                        <td class="text-end"> 99999999 </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-end"> 999 </td>
-                                        <td>  <i class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal">見</i><span class="font-semibold"> ⾒込</span></td>
-                                        <td class="text-center"> <i class="fa fa-check" aria-hidden="true"></i> </td>
-                                        <td> U999999999 </td>
-                                        <td> <a class="text-heading font-semibold text-decoration-underline" href="#">売主名売主名売主名売主名売主名</a> </td>
-                                        <td> ⼤阪府 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td class="text-end"> 99999999 </td>
-                                        <td class="text-end"> 99999999 </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-end"> 999 </td>
-                                        <td> <i class="ms-1 ps-1 pe-1 rounded-circle bg-secondary fst-normal">終</i><span class="font-semibold"> 終了</span> </td>
-                                        <td class="text-center">  </td>
-                                        <td> U999999999 </td>
-                                        <td> <a class="text-heading font-semibold text-decoration-underline" href="#">売主名売主名売主名売主名売主名</a> </td>
-                                        <td> ⼤阪府 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td> 2020/12/15 20:33:00 </td>
-                                        <td class="text-end"> 99999999 </td>
-                                        <td class="text-end"> 99999999 </td>
-                                    </tr>*@
+                        <table class="table table-hover table-nowrap sortMe" id="mansiontable">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col" style="width: 50px" class="text-end sort-by" ordercol-index="12_4"><a class="text-decoration-underline" href="#">No.</a></th>
+                                    <th scope="col" style="width: 10px" class="sort-by" ordercol-index="2_12_4"><a class="text-decoration-underline" href="#">ステータス</a></th>
+                                    <th class="d-none"><a class="text-decoration-underline" href="#">Status</a></th>
+                                    <th scope="col" style="width: 60px" class="sort-by" ordercol-index="3_12_4"><a class="text-decoration-underline text-center" href="#">無効会員</a></th>
+                                    <th scope="col" style="width: 120px" class="sort-by" ordercol-index="4_12_4"><a class="text-decoration-underline" href="#">売主CD</a></th>
+                                    <th scope="col" style="width: 250px" class="sort-by" ordercol-index="5_12_4"><a class="text-decoration-underline" href="#">売主名</a></th>
+                                    <th scope="col" style="width: 100px" class="sort-by" ordercol-index="13_12_4"><a class="text-decoration-underline" href="#">居住地</a></th>
+                                    <th scope="col" style="width: 180px" class="sort-by" ordercol-index="7_12_4"><a class="text-decoration-underline" href="#">登録日時</a></th>
+                                    <th scope="col" style="width: 180px" class="sort-by" ordercol-index="8_12_4"><a class="text-decoration-underline" href="#">詳細査定日時</a></th>
+                                    <th scope="col" style="width: 180px" class="sort-by" ordercol-index="9_12_4"><a class="text-decoration-underline" href="#">買取依頼日時</a></th>
+                                    <th scope="col" style="width: 50px" class="text-end sort-by" data-type="number" ordercol-index="10_12_4"><a class="text-decoration-underline" href="#">登録数</a></th>
+                                    <th scope="col" style="width: 100px" class="text-end sort-by" data-type="number" ordercol-index="11_12_4"><a class="text-decoration-underline" href="#">成約数</a></th>
+                                    <th class="d-none"><a class="text-decoration-underline" href="#">SellerKana</a></th>
+                                    <th class="d-none"><a class="text-decoration-underline" href="#">PrefCD</a></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @*<tr>
+                                    <td class="text-end"> 999 </td>
+                                    <td>  <i class="ms-1 ps-1 pe-1 rounded-circle bg-info text-white fst-normal">交</i><span class="font-semibold"> 交渉中</span> </td>
+                                    <td class="text-center">  </td>
+                                    <td> U999999999 </td>
+                                    <td> <a class="text-heading font-semibold text-decoration-underline" href="#">売主名売主名売主名売主名売主名</a> </td>
+                                    <td> ⼤阪府 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td class="text-end"> 99999999 </td>
+                                    <td class="text-end"> 99999999 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999 </td>
+                                    <td>  <i class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal">見</i><span class="font-semibold"> ⾒込</span> </td>
+                                    <td class="text-center">  </td>
+                                    <td> U999999999 </td>
+                                    <td> <a class="text-heading font-semibold text-decoration-underline" href="#">売主名売主名売主名売主名売主名</a> </td>
+                                    <td> ⼤阪府 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td class="text-end"> 99999999 </td>
+                                    <td class="text-end"> 99999999 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999 </td>
+                                    <td> <i class="ms-1 ps-1 pe-1 rounded-circle bg-secondary fst-normal">終</i><span class="font-semibold"> 終了</span></td>
+                                    <td class="text-center">  </td>
+                                    <td> U999999999 </td>
+                                    <td> <a class="text-heading font-semibold text-decoration-underline" href="#">売主名売主名売主名売主名売主名</a> </td>
+                                    <td> ⼤阪府 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td class="text-end"> 99999999 </td>
+                                    <td class="text-end"> 99999999 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999 </td>
+                                    <td>   <i class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal">見</i><span class="font-semibold"> ⾒込</span> </td>
+                                    <td class="text-center"> <i class="fa fa-check" aria-hidden="true"></i> </td>
+                                    <td> U999999999 </td>
+                                    <td> <a class="text-heading font-semibold text-decoration-underline" href="#">売主名売主名売主名売主名売主名</a> </td>
+                                    <td> ⼤阪府 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td class="text-end"> 99999999 </td>
+                                    <td class="text-end"> 99999999 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999 </td>
+                                    <td>  <i class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal">見</i><span class="font-semibold"> ⾒込</span></td>
+                                    <td class="text-center"> <i class="fa fa-check" aria-hidden="true"></i> </td>
+                                    <td> U999999999 </td>
+                                    <td> <a class="text-heading font-semibold text-decoration-underline" href="#">売主名売主名売主名売主名売主名</a> </td>
+                                    <td> ⼤阪府 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td class="text-end"> 99999999 </td>
+                                    <td class="text-end"> 99999999 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999 </td>
+                                    <td>  <i class="ms-1 ps-1 pe-1 rounded-circle bg-secondary fst-normal">終</i><span class="font-semibold"> 終了</span> </td>
+                                    <td class="text-center"> <i class="fa fa-check" aria-hidden="true"></i> </td>
+                                    <td> U999999999 </td>
+                                    <td> <a class="text-heading font-semibold text-decoration-underline" href="#">売主名売主名売主名売主名売主名</a> </td>
+                                    <td> ⼤阪府 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td class="text-end"> 99999999 </td>
+                                    <td class="text-end"> 99999999 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999 </td>
+                                    <td>  <i class="ms-1 ps-1 pe-1 rounded-circle bg-info text-white fst-normal">交</i><span class="font-semibold"> 交渉中</span></td>
+                                    <td class="text-center">  </td>
+                                    <td> U999999999 </td>
+                                    <td> <a class="text-heading font-semibold text-decoration-underline" href="#">売主名売主名売主名売主名売主名</a> </td>
+                                    <td> ⼤阪府 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td class="text-end"> 99999999 </td>
+                                    <td class="text-end"> 99999999 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999 </td>
+                                    <td>  <i class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal">見</i><span class="font-semibold"> ⾒込</span></td>
+                                    <td class="text-center"> <i class="fa fa-check" aria-hidden="true"></i> </td>
+                                    <td> U999999999 </td>
+                                    <td> <a class="text-heading font-semibold text-decoration-underline" href="#">売主名売主名売主名売主名売主名</a> </td>
+                                    <td> ⼤阪府 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td class="text-end"> 99999999 </td>
+                                    <td class="text-end"> 99999999 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999 </td>
+                                    <td> <i class="ms-1 ps-1 pe-1 rounded-circle bg-secondary fst-normal">終</i><span class="font-semibold"> 終了</span> </td>
+                                    <td class="text-center">  </td>
+                                    <td> U999999999 </td>
+                                    <td> <a class="text-heading font-semibold text-decoration-underline" href="#">売主名売主名売主名売主名売主名</a> </td>
+                                    <td> ⼤阪府 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td> 2020/12/15 20:33:00 </td>
+                                    <td class="text-end"> 99999999 </td>
+                                    <td class="text-end"> 99999999 </td>
+                                </tr>*@
 
-                                </tbody>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="card-footer border-0 py-5">
-                            <span class="text-muted text-sm" id="total_record">見つかった0件の結果を表示されています。</span>
-                        </div>
+                        <span class="text-muted text-sm" id="total_record">見つかった0件の結果を表示されています。</span>
                     </div>
                 </div>
+            </div>
         </main>
 
         @Html.Partial("_t_footer")
+        @Html.Partial("_ErrorPopup")
     </div>
 </div>
 

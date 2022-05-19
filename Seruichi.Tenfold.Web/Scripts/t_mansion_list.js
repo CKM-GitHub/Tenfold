@@ -213,7 +213,7 @@ function addEvents() {
                         document.body.removeChild(downloadLink);
                     }
                     else {
-                        alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
+                        $('#site-error-modal').modal('show');
                     }
                 }
             )
@@ -243,7 +243,7 @@ function addEvents() {
                         document.body.removeChild(downloadLink);
                     }
                     else {
-                        alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
+                        $('#site-error-modal').modal('show');
                     }
                 }
             )
@@ -273,7 +273,7 @@ function addEvents() {
                         document.body.removeChild(downloadLink);
                     }
                     else {
-                        alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
+                        $('#site-error-modal').modal('show');
                     }
                 }
             )
