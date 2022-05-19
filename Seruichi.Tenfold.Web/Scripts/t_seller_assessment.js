@@ -115,20 +115,27 @@ function addEvents() {
     });
 
     $('#btnProcess').on('click', function () {
+        $('#total_record').text("")
+        $('#total_record_up').text("")
+        $('#no_record').text("");
+        $('#mansiontable tbody').empty();
         $form = $('#form1').hideChildErrors();
 
         if (!common.checkValidityOnSave('#form1')) {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
-        $('#mansiontable tbody').empty();
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         getM_SellerMansionList(model, $form);
+        sortTable.getSortingTable("mansiontable");
     });
     $('#btnCSV').on('click', function () {
-        $form = $('#form1').hideChildErrors();
+        $('#total_record').text("")
+        $('#total_record_up').text("")
+        $('#no_record').text("");
         $('#mansiontable tbody').empty();
+        $form = $('#form1').hideChildErrors();
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         getM_SellerMansionList(model, $form)
@@ -351,8 +358,6 @@ function Bind_tbody(result) {
         $('#no_record').text("表示可能データがありません");
     }
     $('#mansiontable tbody').append(html);
-
-    sortTable.getSortingTable("mansiontable");
 }
 function l_logfunction(id) {
     let model = {

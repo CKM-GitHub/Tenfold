@@ -122,20 +122,28 @@ function addEvents()
     });
 
     $('#btnProcess').on('click', function () {
+        $('#total_record').text("")
+        $('#total_record_up').text("")
+        $('#no_record').text("");
+        $('#mansiontable tbody').empty();
         $form = $('#form1').hideChildErrors();
 
         if (!common.checkValidityOnSave('#form1')) {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
-        $('#mansiontable tbody').empty();
+
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         getM_SellerMansionList(model, $form);
     });
     $('#btnCSV').on('click', function () {
-        $form = $('#form1').hideChildErrors();
+        $('#total_record').text("")
+        $('#total_record_up').text("")
+        $('#no_record').text("");
         $('#mansiontable tbody').empty();
+        $form = $('#form1').hideChildErrors();
+      
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         getM_SellerMansionList(model, $form)
