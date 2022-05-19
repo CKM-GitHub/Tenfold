@@ -42,6 +42,16 @@ namespace Models.Tenfold.t_mansion_new
         public decimal Latitude { get; set; }
         public string SellerCD { get; set; }
         public string SellerName { get; set; }
+        public string Noti { get; set; }
+        public string Katakana { get; set; }
+        public string Katakana1 { get; set; }
+        public string Hirakana { get; set; }
+        public string Other1 { get; set; }
+        public string Other2 { get; set; }
+        public string Other3 { get; set; }
+        public string Other4 { get; set; }
+        public string Other5 { get; set; }
+        public string Other6 { get; set; }
         public List<MansionStation> MansionStationList { get; set; } = new List<MansionStation>();
         public string MansionStationListJson { get; set; }
     }
