@@ -5,6 +5,7 @@
         appPath = "";
     }
     string messageJson = Newtonsoft.Json.JsonConvert.SerializeObject(Seruichi.Common.StaticCache.GetClientMessages());
+    string staffName = Seruichi.Tenfold.Web.Controllers.BaseController.GetLoginStaffName();
 }
 
 <!DOCTYPE html>
@@ -43,6 +44,8 @@
             {
                 messageConst[key] = data[key];
             }
+            $('#' + '@ViewBag.Title').addClass('text-underline active font-bold ');
+            $('#loginStaffName').html('@staffName');
         });
     </script>
     @RenderSection("scripts", required: false)

@@ -5,6 +5,7 @@ using System.Data;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Seruichi.BL;
 
 namespace Seruichi.Tenfold.Web.Controllers
 {
@@ -33,6 +34,21 @@ namespace Seruichi.Tenfold.Web.Controllers
             else
             {
                 return user.UserName;
+            }
+        }
+
+        public static string GetLoginStaffName()
+        {
+            var user = SessionAuthenticationHelper.GetUserFromSession();
+            if (user == null)
+            {
+                return "unknown";
+            }
+            else
+            {
+                CommonBL bl = new CommonBL();
+                var StaffName = bl.GetTenstaffNamebyTenstaffcd(user.UserID);
+                return StaffName;
             }
         }
 
