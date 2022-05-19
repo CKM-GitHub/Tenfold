@@ -18,6 +18,7 @@ const messageConst = {
     E110: '入力すべき文字数を満たしていません',
     E111: '日付の大小が不正です',
     E112: '１つ以上選択してください',
+    E113: '値の大小が不正です',
 
     E201: '査定サービスの対象外地域です',
     E202: 'メールアドレスが入力されていません',
@@ -27,6 +28,7 @@ const messageConst = {
     E206: 'メールアドレスとパスワードの組合せが正しくありません',
     E207: 'この情報での登録はありません',
 
+    E303: '検索条件は必ずひとつ以上指定してください',
     E310: '会社IDが入力されていません',
     E311: '会社IDが未登録です',
     E312: 'スタッフIDが入力されていません',
@@ -551,8 +553,7 @@ const common = {
 
                 if ($("#StartYear").val() != "" && $("#EndYear").val() != "") {
                     if (!common.compareYear($("#StartYear").val(), $("#EndYear").val())) {
-                        $("#StartYear").showError(this.getMessage('E111'));
-                        //$("#EndNum").showError(this.getMessage('E113'));
+                        $("#StartYear").showError(this.getMessage('E113'));
                         $("#StartYear").focus();
                         return;
                     }
@@ -614,8 +615,8 @@ const common = {
     },
 
     compareYear: function compareTwoDate(d1, d2) {
-        const Year1 = d1;
-        const Year2 = d2;
+        const Year1 = Number(d1);
+        const Year2 = Number(d2);
         let success = true;
         if (Year1 > Year2) {
             success = false;

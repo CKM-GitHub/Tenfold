@@ -127,9 +127,11 @@ function addEvents() {
         getM_SellerMansionList(model, $form);
     });
     $('#btnCSV').on('click', function () {
+        $form = $('#form1').hideChildErrors();
+        $('#mansiontable tbody').empty();
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
-
+        getM_SellerMansionList(model, $form)
         common.callAjax(_url.generate_M_SellerMansionCSV, model,
             function (result) {
                 //sucess
@@ -156,7 +158,7 @@ function addEvents() {
                     document.body.removeChild(downloadLink);
                 }
                 else {
-                    alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
+                    $('#site-error-modal').modal('show');
                 }
             }
         )
@@ -346,6 +348,7 @@ function Bind_tbody(result) {
     else {
         $('#total_record').text("検索結果： 0件")
         $('#total_record_up').text("検索結果： 0件")
+        $('#no_record').text("表示可能データがありません");
     }
     $('#mansiontable tbody').append(html);
 

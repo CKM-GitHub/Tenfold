@@ -21,7 +21,14 @@ namespace Seruichi.Tenfold.Web.Controllers
             ViewBag.PrefDropDownListItems = bl.GetDropDownListItemsOfPrefecture();
             return View();
         }
-       
+        // POST: 
+        [HttpPost]
+        public ActionResult GotoNextPage()
+        {
+            return RedirectToAction("Index", "t_mansion_new");
+        }
+
+
         // Ajax: CheckZipCode
         [HttpPost]
         public ActionResult CheckZipCode(t_mansion_newModel model)
@@ -70,6 +77,19 @@ namespace Seruichi.Tenfold.Web.Controllers
             return OKResult(DataTableToJSON(dt));
         }
 
+        // Ajax: GetMansionData
+        [HttpPost]
+        public ActionResult GetMansionData(string mansionCD)
+        {
+            if (string.IsNullOrEmpty(mansionCD))
+            {
+                return BadRequestResult();
+            }
+            a_indexBL bl = new a_indexBL();
+            var dt = bl.GetMansionData(mansionCD);
+            return OKResult(DataTableToJSON(dt));
+        }
+
 
         // Ajax: CheckAll
         [HttpPost]
@@ -80,13 +100,78 @@ namespace Seruichi.Tenfold.Web.Controllers
                 return BadRequestResult();
             }
 
-            model.MansionStationList = ConvertJsonToObject<List<a_indexModel.MansionStation>>(model.MansionStationListJson);
+            model.MansionStationList = ConvertJsonToObject<List<t_mansion_newModel.MansionStation>>(model.MansionStationListJson);
 
             t_mansion_newBL bl = new t_mansion_newBL();
             var validationResult = bl.ValidateAll(model);
             if (validationResult.Count > 0)
             {
                 return ErrorResult(validationResult);
+            }
+
+            return OKResult();
+        }
+
+
+        // Ajax: InsertSellerMansionData
+        [HttpPost]
+        public ActionResult InsertSellerMansionData(a_indexModel model)
+        {
+            if (model == null)
+            {
+                return BadRequestResult();
+            }
+
+            CommonBL blCmm = new CommonBL();
+            var longitude_latitude = blCmm.GetLongitudeAndLatitude(model.PrefName, model.CityName, model.TownName, model.Address);
+            model.Longitude = longitude_latitude[0];
+            model.Latitude = longitude_latitude[1];
+            model.SellerCD = base.GetOperator();
+            model.SellerName = base.GetOperatorName();
+            model.Operator = base.GetOperator();
+            model.IPAddress = base.GetClientIP();
+            model.MansionStationList = ConvertJsonToObject<List<a_indexModel.MansionStation>>(model.MansionStationListJson);
+
+            a_indexBL bl = new a_indexBL();
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+            if (!bl.InsertSellerMansionData(model, out string errorcd))
+            {
+                return ErrorMessageResult(errorcd);
+            }
+
+            return OKResult();
+        } // Ajax: InsertSellerMansionData
+        [HttpPost]
+        public ActionResult InsertSellerMansionData(t_mansion_newModel model)
+        {
+            if (model == null)
+            {
+                return BadRequestResult();
+            }
+
+            CommonBL blCmm = new CommonBL();
+            var longitude_latitude = blCmm.GetLongitudeAndLatitude(model.PrefName, model.CityName, model.TownName, model.Address);
+            model.Longitude = longitude_latitude[0];
+            model.Latitude = longitude_latitude[1];
+            model.SellerCD = base.GetOperator();
+            model.SellerName = base.GetOperatorName();
+            model.Operator = base.GetOperator();
+            model.IPAddress = base.GetClientIP();
+            model.MansionStationList = ConvertJsonToObject<List<t_mansion_newModel.MansionStation>>(model.MansionStationListJson);
+
+            t_mansion_newBL bl = new t_mansion_newBL();
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+            if (!bl.InsertSellerMansionData(model, out string errorcd))
+            {
+                return ErrorMessageResult(errorcd);
             }
 
             return OKResult();

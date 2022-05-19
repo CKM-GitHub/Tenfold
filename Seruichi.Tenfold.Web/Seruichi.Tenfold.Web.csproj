@@ -138,6 +138,7 @@
     <Compile Include="Controllers\Common\BaseController.cs" />
     <Compile Include="Controllers\Common\CommonApiController.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
+    <Compile Include="Controllers\t_adminController.cs" />
     <Compile Include="Controllers\t_dashboardController.cs" />
     <Compile Include="Controllers\t_loginController.cs" />
     <Compile Include="Controllers\t_mansion_listController.cs" />
@@ -203,6 +204,7 @@
     <Content Include="Content\fonts\ionicons.eot" />
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
+    <Content Include="Scripts\t_admin.js" />
     <Content Include="Scripts\t_dashboard.js" />
     <Content Include="Scripts\t_login.js" />
     <Content Include="Scripts\t_mansion_list.js" />
@@ -253,6 +255,8 @@
     <Content Include="Views\t_seller_assessment\_t_seller_assessment_menuPartial.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\t_mansion_new\Index.cshtml" />
+    <Content Include="Views\t_admin\Index.cshtml" />
+    <Content Include="Views\Shared\_ErrorPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

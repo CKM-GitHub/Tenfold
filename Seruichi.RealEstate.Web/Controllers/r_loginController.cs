@@ -13,6 +13,7 @@ using Seruichi.Common;
 
 namespace Seruichi.RealEstate.Web.Controllers
 {
+    [IgnoreVerificationToken]
     [AllowAnonymous]
     public class r_loginController : BaseController
     {
@@ -147,7 +148,7 @@ namespace Seruichi.RealEstate.Web.Controllers
             {
                 if (model.REPassword == rePassword)
                 {
-                    model.REStaffName = bl.GetREStaffNamebyREStaffCD(model.REStaffCD);
+                    //model.REStaffName = bl.GetREStaffNamebyREStaffCD(model.REStaffCD);        //comment by TZA
                     //FormsAuthentication.SetAuthCookie(model.REStaffCD, false);
 
                     SessionAuthenticationHelper.CreateLoginUser(model);                    
