@@ -73,13 +73,185 @@ function setValidation() {
 
     ////交通アクセス
     $('#LineCD_1')
-        .addvalidation_errorElement("#errorMansionStationInfo")
+        .addvalidation_errorElement("#errorLineCD1")
         .addvalidation_reqired();
+    $('#StationCD_1')
+        .addvalidation_errorElement("#errorStationCD1")
+        .addvalidation_reqired();
+    $('#Distance_1')
+        .addvalidation_errorElement("#errorDistanceCD1")
+        .addvalidation_reqired();
+    //$('#StationCD_2')
+    //    .addvalidation_errorElement("#errorStationCD2")
+    //    .addvalidation_reqired();
+    //$('#LineCD_2')
+    //    .addvalidation_errorElement("#errorLineCD2")
+    //    .addvalidation_reqired();
+    //$('#StationCD_3')
+    //    .addvalidation_errorElement("#errorStationCD3")
+    //    .addvalidation_reqired();
+    //$('#LineCD_3')
+    //    .addvalidation_errorElement("#errorLineCD3")
+    //    .addvalidation_reqired();
+    //$('#StationCD_4')
+    //    .addvalidation_errorElement("#errorStationCD4")
+    //    .addvalidation_reqired();
+    //$('#LineCD_4')
+    //    .addvalidation_errorElement("#errorLineCD4")
+    //    .addvalidation_reqired();
+    //$('#StationCD_5')
+    //    .addvalidation_errorElement("#errorStationCD5")
+    //    .addvalidation_reqired();
+    //$('#LineCD_5')
+    //    .addvalidation_errorElement("#errorLineCD5")
+    //    .addvalidation_reqired();
+    //$('#StationCD_6')
+    //    .addvalidation_errorElement("#errorStationCD6")
+    //    .addvalidation_reqired();
+    //$('#LineCD_6')
+    //    .addvalidation_errorElement("#errorLineCD6")
+    //    .addvalidation_reqired();
+    //$('#StationCD_7')
+    //    .addvalidation_errorElement("#errorStationCD7")
+    //    .addvalidation_reqired();
+    //$('#LineCD_7')
+    //    .addvalidation_errorElement("#errorLineCD7")
+    //    .addvalidation_reqired();
+    //$('#StationCD_8')
+    //    .addvalidation_errorElement("#errorStationCD8")
+    //    .addvalidation_reqired();
+    //$('#LineCD_8')
+    //    .addvalidation_errorElement("#errorLineCD8")
+    //    .addvalidation_reqired();
+    //$('#StationCD_9')
+    //    .addvalidation_errorElement("#errorStationCD9")
+    //    .addvalidation_reqired();
+    //$('#LineCD_9')
+    //    .addvalidation_errorElement("#errorLineCD9")
+    //    .addvalidation_reqired();
+    //$('#StationCD_10')
+    //    .addvalidation_errorElement("#errorStationCD10")
+    //    .addvalidation_reqired();
+    //$('#LineCD_10')
+    //    .addvalidation_errorElement("#errorLineCD10")
+    //    .addvalidation_reqired();
+    //$('#StationCD_11')
+    //    .addvalidation_errorElement("#errorStationCD11")
+    //    .addvalidation_reqired();
+    //$('#LineCD_11')
+    //    .addvalidation_errorElement("#errorLineCD11")
+    //    .addvalidation_reqired();
+    //$('#StationCD_12')
+    //    .addvalidation_errorElement("#errorStationCD12")
+    //    .addvalidation_reqired();
+    //$('#Distance_2')
+    //    .addvalidation_errorElement("#errorDistanceCD2")
+    //    .addvalidation_reqired();
+    //$('#StationCD_13')
+    //    .addvalidation_errorElement("#errorStationCD13")
+    //    .addvalidation_reqired();
+    //$('#LineCD_13')
+    //    .addvalidation_errorElement("#errorLineCD13")
+    //    .addvalidation_reqired();
+    //$('#StationCD_14')
+    //    .addvalidation_errorElement("#errorStationCD14")
+    //    .addvalidation_reqired();
+    //$('#LineCD_14')
+    //    .addvalidation_errorElement("#errorLineCD14")
+    //    .addvalidation_reqired();
+    //$('#StationCD_15')
+    //    .addvalidation_errorElement("#errorStationCD15")
+    //    .addvalidation_reqired();
+    //$('#LineCD_15')
+    //    .addvalidation_errorElement("#errorLineCD15")
+    //    .addvalidation_reqired();
+    //$('#StationCD_16')
+    //    .addvalidation_errorElement("#errorStationCD16")
+    //    .addvalidation_reqired();
+    //$('#LineCD_16')
+    //    .addvalidation_errorElement("#errorLineCD16")
+    //    .addvalidation_reqired();
+    //$('#StationCD_17')
+    //    .addvalidation_errorElement("#errorStationCD17")
+    //    .addvalidation_reqired();
+    //$('#LineCD_17')
+    //    .addvalidation_errorElement("#errorLineCD17")
+    //    .addvalidation_reqired();
+    //$('#StationCD_18')
+    //    .addvalidation_errorElement("#errorStationCD18")
+    //    .addvalidation_reqired();
+    //$('#LineCD_18')
+    //    .addvalidation_errorElement("#errorLineCD18")
+    //    .addvalidation_reqired();
+    //$('#StationCD_19')
+    //    .addvalidation_errorElement("#errorStationCD19")
+    //    .addvalidation_reqired();
+    //$('#LineCD_19')
+    //    .addvalidation_errorElement("#errorLineCD19")
+    //    .addvalidation_reqired();
+    //$('#StationCD_20')
+    //    .addvalidation_errorElement("#errorStationCD20")
+    //    .addvalidation_reqired();
+    //$('#LineCD_20')
+    //    .addvalidation_errorElement("#errorLineCD20")
+    //    .addvalidation_reqired();
+    //$('#Distance_3')
+    //    .addvalidation_errorElement("#errorDistanceCD3")
+    //    .addvalidation_reqired();
+    //$('#Distance_4')
+    //    .addvalidation_errorElement("#errorDistanceCD4")
+    //    .addvalidation_reqired();
+    //$('#Distance_5')
+    //    .addvalidation_errorElement("#errorDistanceCD5")
+    //    .addvalidation_reqired();
+    //$('#Distance_6')
+    //    .addvalidation_errorElement("#errorDistanceCD6")
+    //    .addvalidation_reqired();
+    //$('#Distance_7')
+    //    .addvalidation_errorElement("#errorDistanceCD7")
+    //    .addvalidation_reqired();
+    //$('#Distance_8')
+    //    .addvalidation_errorElement("#errorDistanceCD8")
+    //    .addvalidation_reqired();
+    //$('#Distance_9')
+    //    .addvalidation_errorElement("#errorDistanceCD9")
+    //    .addvalidation_reqired();
+    //$('#Distance_10')
+    //    .addvalidation_errorElement("#errorDistanceCD10")
+    //    .addvalidation_reqired();
+    //$('#Distance_11')
+    //    .addvalidation_errorElement("#errorDistanceCD11")
+    //    .addvalidation_reqired();
+    //$('#Distance_12')
+    //    .addvalidation_errorElement("#errorDistanceCD12")
+    //    .addvalidation_reqired();
+    //$('#Distance_13')
+    //    .addvalidation_errorElement("#errorDistanceCD13")
+    //    .addvalidation_reqired();
+    //$('#Distance_14')
+    //    .addvalidation_errorElement("#errorDistanceCD14")
+    //    .addvalidation_reqired();
+    //$('#Distance_15')
+    //    .addvalidation_errorElement("#errorDistanceCD15")
+    //    .addvalidation_reqired();
+    //$('#Distance_16')
+    //    .addvalidation_errorElement("#errorDistanceCD16")
+    //    .addvalidation_reqired();
+    //$('#Distance_17')
+    //    .addvalidation_errorElement("#errorDistanceCD17")
+    //    .addvalidation_reqired();
+    //$('#Distance_18')
+    //    .addvalidation_errorElement("#errorDistanceCD18")
+    //    .addvalidation_reqired();
+    //$('#Distance_19')
+    //    .addvalidation_errorElement("#errorDistanceCD19")
+    //    .addvalidation_reqired();
+    //$('#Distance_20')
+    //    .addvalidation_errorElement("#errorDistanceCD20")
+    //    .addvalidation_reqired();
     $('.js-stationcd')
-        .addvalidation_errorElement("#errorMansionStationInfo")
         .addvalidation_custom('customValidation_checkStation');
     $('.js-distance')
-        .addvalidation_errorElement("#errorMansionStationInfo")
         .addvalidation_singlebyte_number()
         .addvalidation_custom('customValidation_checkDistance');
     //謄本表記
@@ -103,36 +275,7 @@ function setValidation() {
         .addvalidation_errorElement("#errorHirakana")
         .addvalidation_reqired()
         .addvalidation_doublebyte();
-    //その他1
-    $('#Other1')
-        .addvalidation_errorElement("#errorOther1")
-        .addvalidation_reqired()
-        .addvalidation_doublebyte();
-    //その他2
-    $('#Other2')
-        .addvalidation_errorElement("#errorOther2")
-        .addvalidation_reqired()
-        .addvalidation_doublebyte();
-    //その他3
-    $('#Other3')
-        .addvalidation_errorElement("#errorOther3")
-        .addvalidation_reqired()
-        .addvalidation_doublebyte();
-    //その他4
-    $('#Other4')
-        .addvalidation_errorElement("#errorOther4")
-        .addvalidation_reqired()
-        .addvalidation_doublebyte();
-    //その他5
-    $('#Other5')
-        .addvalidation_errorElement("#errorOther5")
-        .addvalidation_reqired()
-        .addvalidation_doublebyte();
-    //その他6
-    $('#Other6')
-        .addvalidation_errorElement("#errorOther6")
-        .addvalidation_reqired()
-        .addvalidation_doublebyte();
+   
 
     $('#btnShowConfirmation')
         .addvalidation_errorElement("#errorProcess");
@@ -257,7 +400,6 @@ function addEvents() {
     });
 
     $('#btnShowConfirmation').on('click', function () {
-        debugger;
         $form = $('#form1').hideChildErrors();
         if (!common.checkValidityOnSave('#form1')) {
             common.setFocusFirstError($form);
@@ -274,14 +416,13 @@ function addEvents() {
         model.MansionStationListJson = JSON.stringify(getMansionStationList());
         common.callAjaxWithLoading(_url.checkAll, model, this, function (result) {
             if (result && result.isOK) {
-                debugger;
                 updateData = model;
                 setScreenComfirm(updateData);
                 $('#modal_1').modal('show');
             }
             if (result && result.data) {
                 //error
-                debugger;
+                
                 common.setValidationErrors(result.data);
                 common.setFocusFirstError($form);
             }
@@ -289,7 +430,6 @@ function addEvents() {
     });
 
     $('#btnRegistration').on('click', function () {
-        debugger;
         alert("Hello! I am an alert box!!");
         common.callAjaxWithLoading(_url.insertSellerMansionData, updateData, this, function (result) {
             if (result && result.isOK) {
@@ -343,8 +483,7 @@ function setScreenComfirm(data) {
     $('#confirm_Memo').text($('#Memo').text());
 
     const stationContainer = $('.js-confirm-stationContainer');
-    // stationContainer.children().remove();
-    debugger;
+    // stationContainer.children().remove();   
     let index = 0;
     $('.js-stationContainer .js-station').each(function () {
         const $this = $(this);
@@ -484,8 +623,6 @@ function getMansionStationList() {
     return array;
 }
 
-
-
 function getParagraphNumber(number) {
     if (number === 1) return '路線1'
     if (number === 2) return '路線2'
@@ -509,99 +646,4 @@ function getParagraphNumber(number) {
     if (number === 20) return '路線20'
 }
 
-//function displayMansionData(mansionCD) {
-//    $hdnMansionCD = $('#hdnMansionCD');
 
-//    common.showLoading();
-//    common.callAjax(_url.getMansinoData, { mansionCD },
-//        function (result) {
-//            if (result && result.isOK) {
-//                const dataArray = JSON.parse(result.data);
-//                const length = dataArray.length;
-
-//                if (length > 0) {
-//                    //Clears the value of an element
-//                    $('.js-detail :input:not(.form-check-input):not(button):not([type=raido]):not(:hidden):not(:disabled):not([readonly])').val('').hideError();
-//                    $('.js-detail .form-check-input').val(["0"]).hideError(); //radio button
-//                    $('.js-stationContainer').children().remove();
-//                    for (let i = 0; i < 3; i++) {
-//                        const index = i + 1;
-//                        const station = $('.js-station-template').find('.js-station').clone(true);
-//                        station.find('.js-paragraph-number').text(getParagraphNumber(index))
-//                        station.find('.js-linecd').attr('id', 'LineCD_' + index);
-//                        station.find('.js-stationcd').attr('id', 'StationCD_' + index);
-//                        station.find('.js-distance').attr('id', 'Distance_' + index);
-//                        $('.js-stationContainer').append(station);
-//                    }
-
-//                    let data = dataArray[0];
-
-//                    $('#PrefCD').val(data.PrefCD);
-//                    if (data.PrefCD) {
-//                        setCityList('add', data.PrefCD, data.CityCD);
-//                        setTypeahead('#MansionName');
-//                    }
-//                    else {
-//                        setCityList('remove');
-//                        setTownList('remove');
-//                        setLineList('remove');
-//                        setStationList('remove');
-//                        setTypeahead('#MansionName');
-//                    }
-
-//                    if (data.CityCD) {
-//                        setTownList('add', data.PrefCD, data.CityCD, data.TownCD);
-//                    }
-//                    else {
-//                        setTownList('remove');
-//                    }
-
-//                    for (var key in data) {
-//                        if (key === 'PrefCD' || key === 'CityCD' || key === 'TownCD') continue;
-//                        if (key === 'StructuralKBN' || key === 'RightKBN') {
-//                            $('input:radio[name="' + key + '"]').val([data[key]]).hideError();
-//                        } else if (key === 'BuildingAge') {
-//                            $('#' + key).text('（築' + data[key] + '年）').data('building-age', data[key]);;
-//                        } else {
-//                            $('#' + key).val(data[key]).hideError();
-//                        }
-//                    }
-
-//                    var setLineAndStation = function () {
-//                        for (let i = 0; i < length; i++) {
-//                            data = dataArray[i];
-//                            const index = i + 1;
-
-//                            if (!document.getElementById('LineCD_' + index)) {
-//                                const station = $('.js-station-template').find('.js-station').clone(true);
-//                                station.find('.js-paragraph-number').text(getParagraphNumber(index))
-//                                station.find('.js-linecd').attr('id', 'LineCD_' + index);
-//                                station.find('.js-stationcd').attr('id', 'StationCD_' + index);
-//                                station.find('.js-distance').attr('id', 'Distance_' + index);
-//                                $('.js-stationContainer').append(station);
-//                            }
-
-//                            if (data.PrefCD && data.LineCD) {
-//                                $('#LineCD_' + index).val(data.LineCD);
-//                                setStationList('add', data.LineCD, '#StationCD_' + index, data.StationCD);
-//                            }
-//                            $('#Distance_' + index).val(data.Distance);
-//                        }
-//                    }
-
-//                    if (data.PrefCD)
-//                        setLineList('add', data.PrefCD, null, null, setLineAndStation);
-//                    else
-//                        setLineAndStation();
-
-//                    $hdnMansionCD.val(mansionCD);
-//                    $('#PrefCD, #CityCD, #TownCD, #MansionName, .js-linecd, .js-stationcd').hideError();
-//                    common.hideLoading();
-//                }
-//            }
-//        },
-//        function () {
-//            common.hideLoading(null, 0);
-//        }
-//    );
-//}

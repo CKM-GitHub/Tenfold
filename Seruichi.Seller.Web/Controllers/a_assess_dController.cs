@@ -23,6 +23,17 @@ namespace Seruichi.Seller.Web.Controllers
             return View();
         }
         [HttpPost]
+        public ActionResult InsertAssess_d(a_assess_dModel model)
+        {
+            LoginUser user = SessionAuthenticationHelper.GetUserFromSession();
+            model.SellerCD = user.UserID;
+            model.IPAddress = GetClientIP();
+            a_assess_dBL bl = new a_assess_dBL();
+            bl.InsertA_Assess(model);
+            InsertGetD_AssReqProgress_L_Log(new a_mypage_ahisModel_l_log_Model() { Link=model.RealECD});
+            return OKResult();
+        } 
+        [HttpPost]
         public ActionResult GetD_Mansion_Info(a_assess_dModel model)
         {
             LoginUser user = SessionAuthenticationHelper.GetUserFromSession();
@@ -62,5 +73,29 @@ namespace Seruichi.Seller.Web.Controllers
             var dt = bl.GetD_AreaRank_Info(model);
             return OKResult(DataTableToJSON(dt));
         }
+        //[HttpPost]
+        public void InsertGetD_AssReqProgress_L_Log(a_mypage_ahisModel_l_log_Model model)
+        {
+            LoginUser user = SessionAuthenticationHelper.GetUserFromSession();
+            model.SellerCD = user.UserID;
+            a_mypage_ahisBL bl = new a_mypage_ahisBL();
+            model = Getlogdata(model);
+            bl.InsertD_AssReqProgress_L_Log(model);
+            //return OKResult();
+
+        }
+        public a_mypage_ahisModel_l_log_Model Getlogdata(a_mypage_ahisModel_l_log_Model model)
+        { 
+            model.LoginKBN = 1;
+            model.LoginID = base.GetOperator();
+            model.RealECD = null;
+            model.LoginName = base.GetOperatorName(); 
+            model.IPAddress = base.GetClientIP();
+            model.PageID = "a_ssess_d";
+            model.ProcessKBN = "買取依頼";
+            model.Remarks =  Session["AssReqID"].ToStringOrNull() + " "+  model.Link;  
+            return model;
+        }
+        
     }
 }

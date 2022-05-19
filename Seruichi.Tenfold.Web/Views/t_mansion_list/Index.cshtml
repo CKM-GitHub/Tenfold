@@ -245,12 +245,12 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col" class="text-end text-decoration-underline" style="width:100px">No.</th>
-                                    <th scope="col" style="width: 100px" class="text-decoration-underline">マンションCD</th>
-                                    <th scope="col" style="width: 200px"><span class="text-decoration-underline pe-1 ps-1">マンション名</span></th>
-                                    <th scope="col" style="width: 600px" class="text-decoration-underline"><span class="text-decoration-underline pe-1 ps-1">住所</span></th>
-                                    <th scope="col" style="width: 80px" class="text-decoration-underline">築年月</th>
-                                    <th scope="col" style="width: 50px" class="text-decoration-underline text-end">築年数</th>
-                                    <th scope="col" style="width: 80px" class="text-decoration-underline text-end">総戸数</th>
+                                    <th scope="col" style="width: 100px" class="text-decoration-underline sort-by" ordercol-index="1">マンションCD</th>
+                                    <th scope="col" style="width: 200px"><span class="text-decoration-underline pe-1 ps-1 sort-by" ordercol-index="2_1">マンション名</span></th>
+                                    <th scope="col" style="width: 600px" class="text-decoration-underline"><span class="text-decoration-underline pe-1 ps-1 sort-by" ordercol-index="3_2_1">住所</span></th>
+                                    <th scope="col" style="width: 80px" class="text-decoration-underline sort-by" ordercol-index="4_2_1">築年月</th>
+                                    <th scope="col" style="width: 50px" class="text-decoration-underline text-end sort-by" data-type="number" ordercol-index="5_2_1">築年数</th>
+                                    <th scope="col" style="width: 80px" class="text-decoration-underline text-end sort-by" data-type="number" ordercol-index="6_2_1">総戸数</th>
                                     <th scope="col" style="width: auto" class="d-none d-md-block opacity-0">&nbsp;</th>
 
                                 </tr>
@@ -779,4 +779,5 @@
 @section Scripts{
     @Scripts.Render("~/bundles/t_mansion_list")
 }
+<script src="~/Content/scripts/table_header_sort.js"></script>
 
