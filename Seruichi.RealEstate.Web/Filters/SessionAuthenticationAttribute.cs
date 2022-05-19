@@ -44,19 +44,25 @@ namespace Seruichi.RealEstate.Web
 
             if (request.HttpMethod == WebRequestMethods.Http.Post)
             {
-                if (user == null)
-                {
-                    SetUnauthorized(request, filterContext);
-                    return;
-                }
+                bool ignoreVerificationToken = filterContext.ActionDescriptor.GetCustomAttributes(typeof(IgnoreVerificationTokenAttribute), true).Any()
+                                    || filterContext.ActionDescriptor.ControllerDescriptor.GetCustomAttributes(typeof(IgnoreVerificationTokenAttribute), true).Any();
 
-                string requestVerificationToken = request.IsAjaxRequest() ?
-                    request.Headers["RequestVerificationToken"] : request.Form["RequestVerificationToken"];
-
-                if (user.VerificationToken != requestVerificationToken)
+                if (!ignoreVerificationToken)
                 {
-                    SetUnauthorized(request, filterContext);
-                    return;
+                    if (user == null)
+                    {
+                        SetUnauthorized(request, filterContext);
+                        return;
+                    }
+
+                    string requestVerificationToken = request.IsAjaxRequest() ?
+                        request.Headers["RequestVerificationToken"] : request.Form["RequestVerificationToken"];
+
+                    if (user.VerificationToken != requestVerificationToken)
+                    {
+                        SetUnauthorized(request, filterContext);
+                        return;
+                    }
                 }
             }
         }

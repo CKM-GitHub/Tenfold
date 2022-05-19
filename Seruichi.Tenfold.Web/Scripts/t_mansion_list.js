@@ -43,6 +43,8 @@ function setValidation() {
 function addEvents() {
     common.bindValidationEvent('#form1', '');
 
+    sortTable.getSortingTable("mansiontable");
+
     $('#StartNum, #EndNum').on('change', function () {
 
         const $this = $(this), $start = $('#StartNum').val(), $end = $('#EndNum').val()
@@ -213,7 +215,7 @@ function addEvents() {
                         document.body.removeChild(downloadLink);
                     }
                     else {
-                        alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
+                        $('#site-error-modal').modal('show');
                     }
                 }
             )
@@ -243,7 +245,7 @@ function addEvents() {
                         document.body.removeChild(downloadLink);
                     }
                     else {
-                        alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
+                        $('#site-error-modal').modal('show');
                     }
                 }
             )
@@ -273,7 +275,7 @@ function addEvents() {
                         document.body.removeChild(downloadLink);
                     }
                     else {
-                        alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
+                        $('#site-error-modal').modal('show');
                     }
                 }
             )
@@ -371,7 +373,7 @@ function Bind_tbody(result) {
         $('#no_record').text("表示可能データがありません");
     }
     $('#mansiontable tbody').append(html);
-
+   
 }
 
 function l_logfunction(id) {

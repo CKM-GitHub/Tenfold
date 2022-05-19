@@ -214,7 +214,7 @@ function addEvents() {
                 }
                 else {
                     //alert("There is no data!");
-                    alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
+                    $('#site-error-modal').modal('show');
                 }
             }
         )
