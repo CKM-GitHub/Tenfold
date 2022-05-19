@@ -21,7 +21,14 @@ namespace Seruichi.Tenfold.Web.Controllers
             ViewBag.PrefDropDownListItems = bl.GetDropDownListItemsOfPrefecture();
             return View();
         }
-       
+        // POST: 
+        [HttpPost]
+        public ActionResult GotoNextPage()
+        {
+            return RedirectToAction("Index", "t_mansion_new");
+        }
+
+
         // Ajax: CheckZipCode
         [HttpPost]
         public ActionResult CheckZipCode(t_mansion_newModel model)
