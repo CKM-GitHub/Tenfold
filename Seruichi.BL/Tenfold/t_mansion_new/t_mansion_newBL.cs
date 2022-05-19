@@ -61,16 +61,10 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
 
             validator.CheckSelectionRequired("RightKBN", model.RightKBN);
 
-            //validator.CheckRequired("Noti", model.Noti);
-            //validator.CheckRequired("Katakana", model.Katakana);
-            //validator.CheckRequired("Katakana1", model.Katakana1);
-            //validator.CheckRequired("Hirakana", model.Hirakana);
-            //validator.CheckRequired("Other1", model.Other1);
-            //validator.CheckRequired("Other2", model.Other2);
-            //validator.CheckRequired("Other3", model.Other3);
-            //validator.CheckRequired("Other4", model.Other4);
-            //validator.CheckRequired("Other5", model.Other5);
-            //validator.CheckRequired("Other6", model.Other6);
+            validator.CheckRequired("Noti", model.Noti);
+            validator.CheckRequired("Katakana", model.Katakana);
+            validator.CheckRequired("Katakana1", model.Katakana1);
+            validator.CheckRequired("Hirakana", model.Hirakana);
             if (validator.IsValid)
             {
                 foreach (var item in model.MansionStationList)
@@ -235,7 +229,7 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
             try
             {
                 DBAccess db = new DBAccess();
-                return db.InsertUpdateDeleteData("", false, sqlParams);
+                return db.InsertUpdateDeleteData("pr_t_mansion_new_InsertMansionData", false, sqlParams);
             }
             catch (ExclusionException)
             {
