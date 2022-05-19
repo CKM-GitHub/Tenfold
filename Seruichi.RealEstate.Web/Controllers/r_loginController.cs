@@ -13,6 +13,7 @@ using Seruichi.Common;
 
 namespace Seruichi.RealEstate.Web.Controllers
 {
+    [IgnoreVerificationToken]
     [AllowAnonymous]
     public class r_loginController : BaseController
     {
