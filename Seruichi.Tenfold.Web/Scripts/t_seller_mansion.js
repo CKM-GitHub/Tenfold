@@ -136,9 +136,9 @@ function addEvents()
     $('#btnCSV').on('click', function () {
         $form = $('#form1').hideChildErrors();
         $('#mansiontable tbody').empty();
-        getM_SellerMansionList(model, $form)
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
+        getM_SellerMansionList(model, $form)
 
         common.callAjax(_url.generate_M_SellerMansionCSV, model,
             function (result) {
