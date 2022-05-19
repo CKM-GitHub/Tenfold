@@ -149,6 +149,7 @@ function addEvents() {
     });
 
     $('#btnCSVDownload').on('click', function () {
+        $form = $('#form1').hideChildErrors();
         $('#total_record').text("検索結果： 0件");
         $('#total_record_up').text("検索結果： 0件");
         $('#no_record').text("表示可能データがありません");
