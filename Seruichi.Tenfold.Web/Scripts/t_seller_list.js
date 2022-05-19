@@ -160,6 +160,8 @@ function addEvents() {
     });
 
     $('#btnCSV').on('click', function () {
+        $('#mansiontable tbody').empty();
+
         const $SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(), $PrefNameSelect = $('#PrefNameSelect option:selected').text(),
             $startdate = $("#StartDate").val(), $enddate = $("#EndDate").val(), $ValidCheck = $("#ValidCheck").val(),
             $InValidCheck = $("#InValidCheck").val(), $expectedCheck = $("#expectedCheck").val(), $negtiatioinsCheck = $("#negtiatioinsCheck").val(),
@@ -177,6 +179,8 @@ function addEvents() {
             negtiatioinsCheck: $negtiatioinsCheck,
             endCheck: $endCheck,
         };
+        getM_SellerList(model, $form);
+
         common.callAjax(_url.generate_CSV, model,
             function (result) {
                 //sucess
