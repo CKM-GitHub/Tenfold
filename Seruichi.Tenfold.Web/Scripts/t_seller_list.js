@@ -136,6 +136,9 @@ function addEvents() {
             return false;
         }
 
+        $('#total_record').text("検索結果： 0件")
+        $('#total_record_up').text("検索結果： 0件")
+        $('#no_record').text("表示可能データがありません");
         $('#mansiontable tbody').empty();
 
         const $SellerName = $("#SellerName").val().trim(), $RangeSelect = $("#RangeSelect").val(), $PrefNameSelect = $('#PrefNameSelect option:selected').text(),
@@ -160,6 +163,9 @@ function addEvents() {
     });
 
     $('#btnCSV').on('click', function () {
+        $('#total_record').text("検索結果： 0件")
+        $('#total_record_up').text("検索結果： 0件")
+        $('#no_record').text("表示可能データがありません");
         $('#mansiontable tbody').empty();
 
         const $SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(), $PrefNameSelect = $('#PrefNameSelect option:selected').text(),
@@ -303,10 +309,12 @@ function Bind_tbody(result) {
     
         $('#total_record').text("検索結果：" + data.length + "件")
         $('#total_record_up').text("検索結果：" + data.length + "件")
+        $('#no_record').text("");
     }
     else {
         $('#total_record').text("検索結果： 0件")
         $('#total_record_up').text("検索結果： 0件")
+        $('#no_record').text("表示可能データがありません");
     }
     $('#mansiontable tbody').append(html);
 
