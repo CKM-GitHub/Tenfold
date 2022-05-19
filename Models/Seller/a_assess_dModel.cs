@@ -10,6 +10,17 @@ namespace Models.Seller
     {
         public string SellerCD { get; set; }
         public string AssReqID { get; set; }
+        public string AssID { get; set; }
+        public string AssSEQ { get; set; }
+        public string ProgressKBN { get; set; }
+        public string RealECD { get; set; }
+        public string SellerMansionID { get; set; }
+        public string AssessAmount { get; set; }
+        //public string IpAddress { get; set; }
+        public string SellerName{ get; set; }
+        public string AssessType1{ get; set; }
+        public string AssessType2{ get; set; }
+        public string ConditionSEQ{ get; set; } 
     }
     public class a_assess_dModel_l_log_Model
     {
