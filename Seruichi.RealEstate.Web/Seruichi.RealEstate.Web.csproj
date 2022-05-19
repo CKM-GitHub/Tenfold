@@ -247,7 +247,6 @@
     <Content Include="Views\r_asmc_address\_r_asmc_address_searchbox_detail.cshtml" />
     <Content Include="Views\r_asmc_address\_r_asmc_address_tab_menu.cshtml" />
     <Content Include="Views\r_asmc_ms_reged_list\Index.cshtml" />
-    <Content Include="Views\r_asmc_ms_reged_list\_r_asmc_ms_reged_list_left_sideNavigation_menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
