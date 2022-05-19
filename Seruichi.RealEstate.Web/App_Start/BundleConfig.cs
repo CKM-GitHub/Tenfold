@@ -89,6 +89,11 @@ namespace Seruichi.RealEstate.Web
                      "~/Content/scripts/rating.js",
                      "~/Content/scripts/sidebar.js",
                      "~/Content/scripts/table_header_sort.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/r_asmc_ms_list_sh").Include(
+                    "~/Scripts/r_asmc_ms_list_sh.js",
+                    "~/Content/scripts/sidebar.js",
+                    "~/Content/scripts/table_header_sort.js"));
         }
     }
 }

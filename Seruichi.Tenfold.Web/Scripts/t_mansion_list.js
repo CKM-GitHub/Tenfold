@@ -43,6 +43,8 @@ function setValidation() {
 function addEvents() {
     common.bindValidationEvent('#form1', '');
 
+    sortTable.getSortingTable("mansiontable");
+
     $('#StartNum, #EndNum').on('change', function () {
 
         const $this = $(this), $start = $('#StartNum').val(), $end = $('#EndNum').val()
@@ -147,6 +149,7 @@ function addEvents() {
     });
 
     $('#btnCSVDownload').on('click', function () {
+        $form = $('#form1').hideChildErrors();
         $('#total_record').text("検索結果： 0件");
         $('#total_record_up').text("検索結果： 0件");
         $('#no_record').text("表示可能データがありません");
@@ -371,7 +374,7 @@ function Bind_tbody(result) {
         $('#no_record').text("表示可能データがありません");
     }
     $('#mansiontable tbody').append(html);
-
+   
 }
 
 function l_logfunction(id) {

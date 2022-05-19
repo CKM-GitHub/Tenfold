@@ -185,7 +185,7 @@ function addEvents() {
             negtiatioinsCheck: $negtiatioinsCheck,
             endCheck: $endCheck,
         };
-        getM_SellerList(model, $form);
+        getM_SellerList(model, this);
 
         common.callAjax(_url.generate_CSV, model,
             function (result) {

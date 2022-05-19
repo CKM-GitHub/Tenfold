@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonBL.cs" />
+    <Compile Include="RealEstate\r_asmc_ms_list_sh\r_asmc_ms_list_shBL.cs" />
     <Compile Include="RealEstate\r_asmc_ms_reged_list\r_asmc_ms_reged_listBL.cs" />
     <Compile Include="RealEstate\r_com_profile\r_com_profileBL.cs" />
     <Compile Include="RealEstate\r_contact\r_contactBL.cs" />
@@ -157,6 +158,13 @@
     <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForNewRequest.sql" />
     <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_ConsultationForChatConfirmation.sql" />
     <Content Include="Database\StoredProcedure\pr_t_login_Select_M_TenfoldStaff.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_mansion_list_csv1_generate.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_mansion_list_csv2_generate.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_mansion_list_csv3_generate.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_mansion_list_get_m_pref.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_mansion_list_get_m_pref_and_citygpcd.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_mansion_list_get_m_pref_and_citygpcd_and_citycd.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_mansion_list_Select_M_Mansion.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_List_csv_generate.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_list_Select_DropDownlistofPref.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_List_Select_M_SellerData.sql" />
