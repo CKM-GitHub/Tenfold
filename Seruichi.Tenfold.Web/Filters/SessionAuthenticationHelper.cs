@@ -2,6 +2,7 @@
 using System;
 using System.Web;
 using Seruichi.Common;
+using Models.Tenfold.Login;
 
 namespace Seruichi.Tenfold.Web
 {
@@ -26,11 +27,12 @@ namespace Seruichi.Tenfold.Web
             HttpContext.Current.Session[SESSION_KEY] = userInfo;
         }
 
-        public static void CreateLoginUser(string id)
+        public static void CreateLoginUser(t_loginModel model)
         {
             var userInfo = new LoginUser()
             {
-                UserID = id,
+                UserID = model.TenStaffCD,
+                UserName = model.TenStaffName,
                 VerificationToken = NewVerificationToken
             };
 
