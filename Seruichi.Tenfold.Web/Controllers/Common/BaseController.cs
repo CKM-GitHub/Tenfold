@@ -46,9 +46,7 @@ namespace Seruichi.Tenfold.Web.Controllers
             }
             else
             {
-                CommonBL bl = new CommonBL();
-                var StaffName = bl.GetTenstaffNamebyTenstaffcd(user.UserID);
-                return StaffName;
+                return user.UserName;
             }
         }
 
