@@ -1,0 +1,308 @@
+﻿@model Models.RealEstate.r_asmc_ms_list_sh.r_asmc_ms_list_shModel
+
+@{
+    ViewBag.Title = "査定条件[マンション・マンション名]";
+    Layout = "~/Views/Shared/_r_menuLayout.cshtml";
+}
+@section styles{
+    @Styles.Render("~/Content/r_asmc_ms_list_sh")
+}
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18" id="wrapper">
+
+    @Html.Partial("r_asmc_ms_list_sh_left_sideNavigation")
+
+    <div class="toggle-button">
+        <a href="#menu-toggle" class="btn" id="menu-toggle">
+            <span class="fa fa-angle-right glyphicon-chevron-right" aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <div class="col-md-12 col-12 mb-3 mb-sm-0">
+                            <h1 class="h2 mb-0 ls-tight">マンション一覧</h1>
+                            <span class="text-muted small">査定条件＞設定＞マンション指定から設定</span>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <h5>表示中のエリア</h5>
+                    </div>
+                    <div class="card-body">
+                        京都市東山区/京都市北区
+                    </div>
+                </div>
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <div class="card shadow-0 border rounded-3 h-100">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h5 class="d-md-inline-flex">
+                                                    <a href="#" class="text-decoration-underline">MansionName</a>
+                                                    <h6 class="text-success float-end">未登録</h6>
+                                                </h5>
+                                                <hr class="opacity-20 my-5 mt-2 mb-2">
+                                                <p class="text-dark mb-2 mb-md-0 small">
+                                                    AddressAddressAddressAddressAddressAddressAddress
+                                                </p>
+                                                <div class="mt-1 mb-2">
+                                                    <span>YYYY/MM</span>
+                                                    <span class="text-primary"> • </span>
+                                                    <span>築99年</span>
+                                                    <span class="text-primary"> • </span>
+                                                    <span>駅から徒歩99分</span>
+                                                    <span class="text-primary"> • </span>
+                                                    <span>99戸<br /></span>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <div class=" d-xxl-flex">
+                                                    <span class="small">最終更新日 : </span><span class="small">YYYY/MM/DD</span><span class="ps-2 ps-xxl-5 text-end small">(公開済)</span>
+                                                </div>
+                                                <div class="d-xxl-flex">
+                                                    <span class="small pt-1">有効期限日 : </span><span class="small pt-1">YYYY/MM/DD</span>
+                                                    <div class="d-flex flex-row ps-xxl-5">
+                                                        <div class="text-danger mb-1 me-2 em">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <div class="card shadow-0 border rounded-3 h-100">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h5 class="d-md-inline-flex">
+                                                    <a href="#" class="text-decoration-underline">MansionName</a>
+                                                    <h6 class="text-danger float-end">登録済</h6>
+                                                </h5>
+                                                <hr class="opacity-20 my-5 mt-2 mb-2">
+                                                <p class="text-dark mb-2 mb-md-0 small">
+                                                    AddressAddressAddressAddressAddressAddressAddress
+                                                </p>
+                                                <div class="mt-1 mb-2">
+                                                    <span>YYYY/MM</span>
+                                                    <span class="text-primary"> • </span>
+                                                    <span>築99年</span>
+                                                    <span class="text-primary"> • </span>
+                                                    <span>駅から徒歩99分</span>
+                                                    <span class="text-primary"> • </span>
+                                                    <span>99戸<br /></span>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <div class=" d-xxl-flex">
+                                                    <span class="small">最終更新日 : </span><span class="small">YYYY/MM/DD</span><span class="ps-2 ps-xxl-5 text-end small">(公開済)</span>
+                                                </div>
+                                                <div class="d-xxl-flex">
+                                                    <span class="small pt-1">有効期限日 : </span><span class="small pt-1">YYYY/MM/DD</span>
+                                                    <div class="d-flex flex-row ps-xxl-5">
+                                                        <div class="text-danger mb-1 me-2 em">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <div class="card shadow-0 border rounded-3 h-100">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h5 class="d-md-inline-flex">
+                                                    <a href="#" class="text-decoration-underline">MansionName</a>
+                                                    <h6 class="text-danger float-end">登録済</h6>
+                                                </h5>
+                                                <hr class="opacity-20 my-5 mt-2 mb-2">
+                                                <p class="text-dark mb-2 mb-md-0 small">
+                                                    AddressAddressAddressAddressAddressAddressAddress
+                                                </p>
+                                                <div class="mt-1 mb-2">
+                                                    <span>YYYY/MM</span>
+                                                    <span class="text-primary"> • </span>
+                                                    <span>築99年</span>
+                                                    <span class="text-primary"> • </span>
+                                                    <span>駅から徒歩99分</span>
+                                                    <span class="text-primary"> • </span>
+                                                    <span>99戸<br /></span>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <div class=" d-xxl-flex">
+                                                    <span class="small">最終更新日 : </span><span class="small">YYYY/MM/DD</span><span class="ps-2 ps-xxl-5 text-end small">(公開済)</span>
+                                                </div>
+                                                <div class="d-xxl-flex">
+                                                    <span class="small pt-1">有効期限日 : </span><span class="small pt-1">YYYY/MM/DD</span>
+                                                    <div class="d-flex flex-row ps-xxl-5">
+                                                        <div class="text-danger mb-1 me-2 em">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <div class="card shadow-0 border rounded-3 h-100">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h5 class="d-md-inline-flex">
+                                                    <a href="#" class="text-decoration-underline">MansionName</a>
+                                                    <h6 class="text-danger float-end">登録済</h6>
+                                                </h5>
+                                                <hr class="opacity-20 my-5 mt-2 mb-2">
+                                                <p class="text-dark mb-2 mb-md-0 small">
+                                                    AddressAddressAddressAddressAddressAddressAddress
+                                                </p>
+                                                <div class="mt-1 mb-2">
+                                                    <span>YYYY/MM</span>
+                                                    <span class="text-primary"> • </span>
+                                                    <span>築99年</span>
+                                                    <span class="text-primary"> • </span>
+                                                    <span>駅から徒歩99分</span>
+                                                    <span class="text-primary"> • </span>
+                                                    <span>99戸<br /></span>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <div class=" d-xxl-flex">
+                                                    <span class="small">最終更新日 : </span><span class="small">YYYY/MM/DD</span><span class="ps-2 ps-xxl-5 text-end small">(公開済)</span>
+                                                </div>
+                                                <div class="d-xxl-flex">
+                                                    <span class="small pt-1">有効期限日 : </span><span class="small pt-1">YYYY/MM/DD</span>
+                                                    <div class="d-flex flex-row ps-xxl-5">
+                                                        <div class="text-danger mb-1 me-2 em">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row justify-content-center">
+                            <div class="col-md-12">
+                                <div class="card shadow-0 border rounded-3 h-100">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h5 class="d-md-inline-flex">
+                                                    <a href="#" class="text-decoration-underline">MansionName</a>
+                                                    <h6 class="text-danger float-end">登録済</h6>
+                                                </h5>
+                                                <hr class="opacity-20 my-5 mt-2 mb-2">
+                                                <p class="text-dark mb-2 mb-md-0 small">
+                                                    AddressAddressAddressAddressAddressAddressAddress
+                                                </p>
+                                                <div class="mt-1 mb-2">
+                                                    <span>YYYY/MM</span>
+                                                    <span class="text-primary"> • </span>
+                                                    <span>築99年</span>
+                                                    <span class="text-primary"> • </span>
+                                                    <span>駅から徒歩99分</span>
+                                                    <span class="text-primary"> • </span>
+                                                    <span>99戸<br /></span>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <div class=" d-xxl-flex">
+                                                    <span class="small">最終更新日 : </span><span class="small">YYYY/MM/DD</span><span class="ps-2 ps-xxl-5 text-end small">(公開済)</span>
+                                                </div>
+                                                <div class="d-xxl-flex">
+                                                    <span class="small pt-1">有効期限日 : </span><span class="small pt-1">YYYY/MM/DD</span>
+                                                    <div class="d-flex flex-row ps-xxl-5">
+                                                        <div class="text-danger mb-1 me-2 em">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="aeramodal" tabindex="-1"
+                 aria-labelledby="aeramodalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="aeramodalLabel">表示エリア選択</h5>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                            <button type="button" class="btn btn-primary">確定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        @Html.Partial("~/Views/Shared/_r_footer.cshtml")
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/r_asmc_ms_list_sh")
+}

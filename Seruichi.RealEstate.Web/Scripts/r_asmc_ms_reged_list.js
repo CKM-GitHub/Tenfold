@@ -3,7 +3,6 @@ let Radio_Checkbox = 0;
 $(function () {
     setValidation();
     _url.Get_DataList = common.appPath + '/r_asmc_ms_reged_list/Get_DataList';
-    //_url.Get_Rating = common.appPath + '/r_asmc_ms_reged_list/Get_Rating';
     _url.InsertL_Log = common.appPath + '/r_asmc_ms_reged_list/Insert_l_log';   
     addEvents();
     $('#MansionName').focus();
@@ -32,9 +31,7 @@ function setValidation() {
 }
 function addEvents() {
     common.bindValidationEvent('#form1', '');
-    //Bind_Rating("[]");
     $('#StartYear, #EndYear').on('change', function () {
-
         const $this = $(this), $start = $('#StartYear').val(), $end = $('#EndYear').val()
 
         if (!common.checkValidityInput($this)) {
@@ -64,10 +61,9 @@ function addEvents() {
         }
         this.value = this.checked ? 1 : 0;
         Radio_Checkbox = this.value;
-       // alert(this.value);
-        //Get_Rating_List(this.value);
     });
 
+    sortTable.getSortingTable("r_table_List");
     $('#btnDisplay').on('click', function () {
         $form = $('#form1').hideChildErrors();
 
@@ -117,37 +113,27 @@ function addEvents() {
     }).on('click', '.node-item', function () {
         var parentNode = $(this).parents('.tree ul');
         if ($(this).is(':checked')) {
-            parentNode.find('li .node-parent').prop('checked', true);
+
+            var elementschk = parentNode.find('ul input[type="checkbox"]:checked');
+            var elements = parentNode.find('ul input[type="checkbox"]');
+            if (elements.length == elementschk.length) {
+                parentNode.find('li .node-parent').prop('checked', true);
+            }
+            else {
+                parentNode.find('li .node-parent').prop('checked', false);
+            }
         } else {
-            var elements = parentNode.find('ul input[type="checkbox"]:checked');
-            if (elements.length == 0) {
+            var elementschk = parentNode.find('ul input[type="checkbox"]:checked');
+            var elements = parentNode.find('ul input[type="checkbox"]');
+            if (elements.length == elementschk.length) {
+                parentNode.find('li .node-parent').prop('checked', true);
+            }
+            else {
                 parentNode.find('li .node-parent').prop('checked', false);
             }
         }
     });
 }
-function Get_Rating_List(checked) {
-    if (checked == 1) {
-        let model = {};
-        common.callAjax(_url.Get_Rating, model, function (result) {
-            if (result && result.isOK) {
-                Bind_Rating(result.data);
-            }
-            if (result && !result.isOK) {
-                const errors = result.data;
-                for (key in errors) {
-                    const target = document.getElementById(key);
-                    $(target).showError(errors[key]);
-                }
-            }
-        });
-    }
-    else
-    {
-        Bind_Rating("[]");
-    }
-}
-
 
 function Get_FT_Age(age, type) {
 
@@ -204,10 +190,13 @@ function Bind_tbody(result) {
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
             html += '<tr>\
-            <td class= "text-end" > ' + (i + 1) + '</td>\
+            <td class= "text-end">' + data[i]["NO"] + '</td>\
+            <td class="d-none">'+ data[i]["マンションCD"] + '</td>\
             <td> <a class="text-heading font-semibold text-decoration-underline" href="#"  onclick="l_logfunction(this.id)" id='+ data[i]["マンションCD"] + '&' + data[i]["マンション名"]+'>'+ data[i]["マンション名"] + '</a> </td>\
             <td> <a class="text-heading font-semibold">'+ data[i]["住所"] + '</a> </td>\
+            <td class="d-none"> '+ data[i]["住所カナ"] + '</td>\
             <td> '+ data[i]["登録日"] + '</td>\
+            <td class="d-none"> '+ data[i]["Priority"] + '</td>\
             <td>\
             <div class="d-flex flex-row mt-2">\
             <div class="text-danger mb-1 me-2">'
@@ -228,7 +217,7 @@ function Bind_tbody(result) {
     }
     $('#r_table_List tbody').append(html);
 
-    sortTable.getSortingTable("r_table_List");
+   
 }
 
 
@@ -260,77 +249,3 @@ function l_logfunction(id) {
         });
 }
 
-function Bind_Rating(result) {
-    alert(result);
-    $('#DivRadio').empty();
-    let data = JSON.parse(result);
-    let html_Rating = "";
-    if (data.length > 0) {
-        for (var i = 0; i < data.length; i++) {
-
-            if (data[i]["Rating"] == "4") {
-
-                _Rating = '<span class="fa fa-star" data-rating="1"></span>\
-                       <span class="fa fa-star" data-rating="2" ></span >\
-                       <span class="fa fa-star" data-rating="3"></span>\
-                       <span class="fa fa-star" data-rating="4"></span>\
-                       <span class="fa fa-star-o" data-rating="5"></span>';
-
-            }
-            if (data[i]["Rating"] == "3") {
-                _Rating = '<span class="fa fa-star" data-rating="1"></span>\
-                      <span class="fa fa-star" data-rating="2"></span>\
-                      <span class="fa fa-star" data-rating="3"></span>\
-                      <span class="fa fa-star-o" data-rating="4"></span>\
-                      <span class="fa fa-star-o" data-rating="5"></span>'
-            }
-            if (data[i]["Rating"] == "2") {
-                _Rating = '<span class="fa fa-star" data-rating="1"></span>\
-                       <span class="fa fa-star" data-rating="2"></span>\
-                       <span class="fa fa-star-o" data-rating="3"></span>\
-                       <span class="fa fa-star-o" data-rating="4"></span>\
-                       <span class="fa fa-star-o" data-rating="5"></span>'
-            }
-            if (data[i]["Rating"] == "1") {
-                _Rating = '<span class="fa fa-star" data-rating="1"></span>\
-                       <span class="fa fa-star-o" data-rating="2"></span>\
-                       <span class="fa fa-star-o" data-rating="3"></span>\
-                       <span class="fa fa-star-o" data-rating="4"></span>\
-                       <span class="fa fa-star-o" data-rating="5"></span>'
-
-            }
-
-            if (data[i]["Rating"] == "0") {
-                _Rating = '<span class="fa fa-star-o" data-rating="1"></span>\
-                       <span class="fa fa-star-o" data-rating="2"></span>\
-                       <span class="fa fa-star-o" data-rating="3"></span>\
-                       <span class="fa fa-star-o" data-rating="4"></span>\
-                       <span class="fa fa-star-o" data-rating="5"></span>'
-
-            }
-     
-
-            html_Rating += '<div class="ms-6">\
-                <input class="form-check-input" type = "radio" name = "Radios" id = "RadioCheck" value = '+ data[i]["Rating"] + ' >\
-                <span class="text-danger">'+_Rating+
-               '</span> <span><small>以上</small></span>\
-                </div>'
-        }
-        
-    }
-    else {
-
-        html_Rating= '<div class="ms-6">\
-                     <input class="form-check-input" type="radio" name="Radios" id="RadioRating" value="0">\
-                     <span class="text-danger">\
-                     <span class="fa fa-star-o" data-rating="1"></span>\
-                     <span class="fa fa-star-o" data-rating="2"></span>\
-                     <span class="fa fa-star-o" data-rating="3"></span>\
-                     <span class="fa fa-star-o" data-rating="4"></span>\
-                     <span class="fa fa-star-o" data-rating="5"></span>\
-                     </span><span><small>以上</small></span>\
-                     </div>'
- 
-           }
-$('#DivRadio').append(html_Rating);
-}

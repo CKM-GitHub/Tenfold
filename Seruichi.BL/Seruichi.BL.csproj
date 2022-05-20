@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonBL.cs" />
+    <Compile Include="RealEstate\r_asmc_ms_list_sh\r_asmc_ms_list_shBL.cs" />
     <Compile Include="RealEstate\r_asmc_ms_reged_list\r_asmc_ms_reged_listBL.cs" />
     <Compile Include="RealEstate\r_com_profile\r_com_profileBL.cs" />
     <Compile Include="RealEstate\r_contact\r_contactBL.cs" />

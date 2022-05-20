@@ -80,6 +80,7 @@ function addEvents() {
         EndDate: $EndDate,
     };
     getM_SellerMansionList(model, this);
+    sortTable.getSortingTable("mansiontable");
 
     $('.form-check-input').on('change', function () {
         this.value = this.checked ? 1 : 0;
@@ -115,20 +116,27 @@ function addEvents() {
     });
 
     $('#btnProcess').on('click', function () {
+        $('#total_record').text("")
+        $('#total_record_up').text("")
+        $('#no_record').text("");
+        $('#mansiontable tbody').empty();
         $form = $('#form1').hideChildErrors();
 
         if (!common.checkValidityOnSave('#form1')) {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
-        $('#mansiontable tbody').empty();
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         getM_SellerMansionList(model, $form);
+        
     });
     $('#btnCSV').on('click', function () {
-        $form = $('#form1').hideChildErrors();
+        $('#total_record').text("")
+        $('#total_record_up').text("")
+        $('#no_record').text("");
         $('#mansiontable tbody').empty();
+        $form = $('#form1').hideChildErrors();
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         getM_SellerMansionList(model, $form)
@@ -281,47 +289,47 @@ function Bind_tbody(result) {
             _letter = data[i]["ステータス"].charAt(0);
             if (_letter == "未") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal";
-                _sort_checkbox = "One";
+                _sort_checkbox = "1";
             }
             else if (_letter == "簡") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-info text-white fst-normal";
-                _sort_checkbox = "Two";
+                _sort_checkbox = "2";
             }
             else if (_letter == "詳" && data[i]["ステータス"] == "詳細査定") {
                 _letter = "査";
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal";
-                _sort_checkbox = "Three";
+                _sort_checkbox = "3";
             }
             else if (_letter == "買" && data[i]["ステータス"] == "買取依頼") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal";
-                _sort_checkbox = "Four";
+                _sort_checkbox = "4";
             }
             else if (_letter == "確") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark fst-normal";
-                _sort_checkbox = "Five";
+                _sort_checkbox = "5";
             }
             else if (_letter == "交") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark fst-normal";
-                _sort_checkbox = "Six";
+                _sort_checkbox = "6";
             }
             else if (_letter == "成") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary fst-normal";
-                _sort_checkbox = "Seven";
+                _sort_checkbox = "7";
             }
             else if (_letter == "売" && data[i]["ステータス"] == "売主辞退") {
                 _letter = "辞";
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger fst-normal";
-                _sort_checkbox = "Eight";
+                _sort_checkbox = "8";
             }
             else if (_letter == "買" && data[i]["ステータス"] == "買主辞退") {
                 _letter = "辞";
                 data[i]["ステータス"] = "買主辞退";
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-dark text-white fst-normal fst-normal";
-                _sort_checkbox = "Nine";
+                _sort_checkbox = "9";
             }
             else if (_letter == "削") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-danger text-white fst-normal fst-normal";
-                _sort_checkbox = "Ten";
+                _sort_checkbox = "10";
             }
 
         }
@@ -339,6 +347,7 @@ function Bind_tbody(result) {
             <td class="text-nowrap"> '+ data[i]["送客日時"] + ' </td>\
             <td class="text-nowrap"> '+ data[i]["終了日時"] + '</td>\
             <td class="d-none"> '+ data[i]["SellerMansionID"] + '</td>\
+            <td class="d-none">'+ _sort_checkbox + '</td>\
             </tr>'
     }
     if (data.length > 0) {
@@ -351,8 +360,6 @@ function Bind_tbody(result) {
         $('#no_record').text("表示可能データがありません");
     }
     $('#mansiontable tbody').append(html);
-
-    sortTable.getSortingTable("mansiontable");
 }
 function l_logfunction(id) {
     let model = {

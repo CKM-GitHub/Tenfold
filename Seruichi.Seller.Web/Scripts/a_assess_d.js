@@ -23,9 +23,9 @@ $(function () {
     _url.InsertL_Log = common.appPath + '/a_assess_d/InsertGetD_AssReqProgress_L_Log';
     _url.InsertAssess_d = common.appPath + '/a_assess_d/InsertAssess_d';
     SetMansionInfo(this);
-    SetSpecInfo(this);
-    SetMansionRank(this);
-    SetAreaRank(this);
+    //SetSpecInfo(this);
+    //SetMansionRank(this);
+    //SetAreaRank(this);
 });
 
 function SetModal(img, region, staff, rate, amount,realecd,assid,assseq,assreqid,asstype1,asstype2,conditionseq) {
@@ -60,14 +60,14 @@ function SetModal(img, region, staff, rate, amount,realecd,assid,assseq,assreqid
     _model.RealECD = realecd;
     _model.AssessAmount = amount;
 }
-function SetAreaRank($form) {
+function SetAreaRank(data) {
 
-    let model = {
-        SellerCD: null
-    }
-    return common.callAjaxWithLoading(_url.GetD_AreaRank_Info, model, this, function (result) {
-        if (result && result.isOK) {
-            var arr = ($.parseJSON(result.data));
+    //let model = {
+    //    SellerCD: null
+    //}
+    //return common.callAjaxWithLoading(_url.GetD_AreaRank_Info, model, this, function (result) {
+    //    if (result && result.isOK) {
+            var arr = ($.parseJSON(data));
             var attach = '';
             //var hidevl = '<th class="text-end text-nowrap">成約率</th>';
 
@@ -100,24 +100,23 @@ function SetAreaRank($form) {
             }
             $('#bdyArea').append(attach);
 
-        }
-    });
+    //    }
+    //});
 
 }
-function SetMansionRank($form) {
+function SetMansionRank(data) {
 
-    let model = {
-        SellerCD: null
+    //let model = {
+    //    SellerCD: null
+    //}
+    //return  common.callAjaxWithLoading(_url.GetD_MansionRank_Info, model, this, function (result) {
+    //    if (result && result.isOK) {
+    var arr = ($.parseJSON(data));
+    if (arr[0].Flg != '') {
+        $('.flg-rate').addClass('hideAssess');
+        _valFlg = true;
     }
-    return  common.callAjaxWithLoading(_url.GetD_MansionRank_Info, model, this, function (result) {
-        if (result && result.isOK) {
-            var arr = ($.parseJSON(result.data));
-            var attach = '';
-            //var hidevl = '<th class="text-end text-nowrap">成約率</th>';
-            //if (arr[0].Flg = '1')
-            //    $('.flg-rate').addClass('hideAssess');
-            //$('#Mansionrateval').append(hidevl);
-            //alert(result.data)
+            var attach = ''; 
             for (var i = 0; i < arr.length; i++) {
                 var f = (arr[i]);
                 attach += '<tr>\
@@ -141,20 +140,20 @@ function SetMansionRank($form) {
             }
             $('#bdyMansion').append(attach);
 
-        }
-    }, function (completedata) {
-           // $('.flg-rate').addClass('hideAssess');
-    });
+        //}
+    //}, function (completedata) {
+    //       // $('.flg-rate').addClass('hideAssess');
+    //});
 
 } 
-function SetSpecInfo($form) {
+function SetSpecInfo(data ) {
 
-    let model = {
-        SellerCD: null
-    }
-    return common.callAjaxWithLoading(_url.GetD_Spec_Info, model, this, function (result) {
-        if (result && result.isOK) {
-            var arrJson = ($.parseJSON(result.data));
+    //let model = {
+    //    SellerCD: null
+    //}
+    //return common.callAjaxWithLoading(_url.GetD_Spec_Info, model, this, function (result) {
+    //    if (result && result.isOK) {
+            var arrJson = ($.parseJSON(data));
             if (arrJson.length) {
                 var area = (arrJson[0]);
                 $('#specBuildingStructure').text(area.BuildingStructure);
@@ -176,8 +175,8 @@ function SetSpecInfo($form) {
                 $('#specOtherFee').text(area.ExtraFee);
             } 
              
-        }
-    });
+    //    }
+    //});
 
 }
 function SetMansionInfo($form) {
@@ -187,7 +186,11 @@ function SetMansionInfo($form) {
     }
     return common.callAjaxWithLoading(_url.GetD_Mansion_Info, model, this, function (result) {
         if (result && result.isOK) {
-            var arrJson = ($.parseJSON(result.data));
+            SetSpecInfo(result.data.split('Ʈ')[1]);
+            SetMansionRank(result.data.split('Ʈ')[2]);
+            SetAreaRank(result.data.split('Ʈ')[3]);
+
+            var arrJson = ($.parseJSON(result.data.split('Ʈ')[0]));
             if (arrJson.length) {
                 var header = (arrJson[0]);
                 $('#headerMansionName').text(header.MansionName);
@@ -219,7 +222,9 @@ function SetMansionInfo($form) {
 
              
            // Bind_tbody(result.data);
-        } 
+        }
+      
+
     });
 
 }

@@ -107,7 +107,7 @@ function addEvents() {
         }
         $('#total_record').text("検索結果： 0件");
         $('#total_record_up').text("検索結果： 0件");
-        $('#no_record').text("表示可能データがありません");
+        $('#no_record').text("");
         $('#mansiontable tbody').empty();
 
         const $Apartment = $("#txtApartment").val().trim(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
@@ -149,9 +149,10 @@ function addEvents() {
     });
 
     $('#btnCSVDownload').on('click', function () {
+        $form = $('#form1').hideChildErrors();
         $('#total_record').text("検索結果： 0件");
         $('#total_record_up').text("検索結果： 0件");
-        $('#no_record').text("表示可能データがありません");
+        $('#no_record').text("");
         $('#mansiontable tbody').empty();
 
         const $Apartment = $("#txtApartment").val().trim(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),

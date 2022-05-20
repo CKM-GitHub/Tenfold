@@ -81,10 +81,10 @@
                         <span class="cap-errormsg-right" id="errorYear"></span>
                         <div class="form-group input-group mb-3">
                             @*<span class="cap-errormsg-right" id="errorStartYear" name="errorStartYear"></span>*@
-                            <input type="text" class="form-control" id="StartYear">
+                            <input type="text" class="form-control" id="StartYear" style="text-align: right;">
                             <span class="input-group-inline text-center align-self-center p-2">年 ~</span>
                             @*<span class="cap-errormsg-right" id="errorEndYear" name="errorEndYear"></span>*@
-                            <input type="text" class="form-control" id="EndYear">
+                            <input type="text" class="form-control" id="EndYear" style="text-align: right;">
                             <span class="input-group-inline text-center align-self-center p-2">年</span>
                         </div>
                     </div>
@@ -187,11 +187,14 @@
                         <table class="table table-hover table-nowrap" id="r_table_List">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" class="text-end text-decoration-underline" style="width: 100px">No.</th>
-                                    <th scope="col" style="width: 300px" class="text-decoration-underline">マンション名</th>
-                                    <th scope="col" style="width: auto" class="text-decoration-underline">住所</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline">登録日</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline">優先度</th>
+                                    <th scope="col" class="text-end text-decoration-underline" ordercol-direction="asc" ordercol-index="1" style="width: 100px">No.</th>
+                                    <th class="d-none" ordercol-index="1">マンションCD</th>
+                                    <th scope="col" style="width: 300px" class="text-decoration-underline sort-by" ordercol-index="2_1">マンション名</th>
+                                    <th scope="col" style="width: auto" class="text-decoration-underline sort-by" ordercol-index="3_1">住所</th>
+                                    <th class="d-none"bordercol-index="4">住所カナ</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="5_1">登録日</th>
+                                    <th class="d-none" ordercol-index="6">Priority</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="7_1">優先度</th>
                                 </tr>
                             </thead>
                             <tbody>
