@@ -136,8 +136,9 @@ function addEvents() {
             return false;
         }
 
-        $('#total_record').text("検索結果： 0件")
-        $('#total_record_up').text("検索結果： 0件")
+        $('#total_record').text("検索結果： 0件");
+        $('#total_record_up').text("検索結果： 0件");
+        $('#no_record').text("");
         $('#mansiontable tbody').empty();
 
         const $SellerName = $("#SellerName").val().trim(), $RangeSelect = $("#RangeSelect").val(), $PrefNameSelect = $('#PrefNameSelect option:selected').text(),
@@ -162,8 +163,9 @@ function addEvents() {
     });
 
     $('#btnCSV').on('click', function () {
-        $('#total_record').text("検索結果： 0件")
-        $('#total_record_up').text("検索結果： 0件")
+        $('#total_record').text("検索結果： 0件");
+        $('#total_record_up').text("検索結果： 0件");
+        $('#no_record').text("");
         $('#mansiontable tbody').empty();
 
         const $SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(), $PrefNameSelect = $('#PrefNameSelect option:selected').text(),
