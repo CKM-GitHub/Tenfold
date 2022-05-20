@@ -4,83 +4,66 @@
         <li>
             <div class="text-center px-xl-3 pt-3">
                 <div class="mb-3 text-start">
-                    <label for="disabledSelect" class="form-label">マンション</label> 
-                    <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="マンション名">
+                    <label for="MansionName" class="form-label">マンション</label>
+                    <span class="cap-errormsg-right" id="errorMansionName" name="errorMansionName"></span>
+                    <input type="text" class="form-control mb-2" id="MansionName" name="MansionName" placeholder="マンション名">
                 </div>
             </div>
         </li>
         <li>
             <div class="px-xl-3 mb-3">
-                <label for="disabledSelect" class="form-label w-100">表示エリア</label>
+                <label for="tree" class="form-label w-100">表示エリア</label>
                 <ul id="tree" class="card">
-                    <li>
-                        <a>County/StateName</a>
-                        <ul>
-                            <li class="text-nowrap">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                <label class="form-check-label" for="flexCheckChecked">CityName</label>
-                                <ul>
-                                    <li>
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                        <label class="form-check-label" for="flexCheckChecked">TownshipName</label>
-                                    </li>
-                                    <li>
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                        <label class="form-check-label" for="flexCheckChecked">TownshipName</label>
-                                    </li>
-                                </ul>
-                            </li>
+                    @foreach (var item in ViewBag.PrefCD)
+                    {
+                        <li>
+                            <a>@item.PrefName </a>
+                            @foreach (var cityGPCD in ViewBag.CityGPCD)
+                            {
+                                if (cityGPCD.PrefCD == item.PrefCD)
+                                {
+                                    <ul>
+                                        <li class="text-nowrap">
+                                            <input class="form-check-input node-parent" type="checkbox" value="@cityGPCD.CityGPCD" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                @cityGPCD.CityGPName
+                                            </label>
 
-                        </ul>
-                    </li>
-                    <li>
-                        <a>County/StateName</a>
-                        <ul>
-                            <li class="text-nowrap">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                <label class="form-check-label" for="flexCheckChecked">CityName</label>
-                                <ul>
-                                    <li>
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                        <label class="form-check-label" for="flexCheckChecked">TownshipName</label>
-                                    </li>
-                                    <li>
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                        <label class="form-check-label" for="flexCheckChecked">TownshipName</label>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a>County/StateName</a>
-                        <ul>
-                            <li class="text-nowrap">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                <label class="form-check-label" for="flexCheckChecked">CityName</label>
-                                <ul>
-                                    <li>
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                        <label class="form-check-label" for="flexCheckChecked">TownshipName</label>
-                                    </li>
-                                    <li>
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                        <label class="form-check-label" for="flexCheckChecked">TownshipName</label>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
+                                            @foreach (var cityCD in ViewBag.CityCD)
+                                            {
+                                                if ((cityCD.CityGPCD == cityGPCD.CityGPCD) && (cityGPCD.PrefCD == cityCD.PrefCD))
+                                                {
+                                                    <ul>
+                                                        <li>
+                                                            <input class="form-check-input node-item" type="checkbox" value="@cityCD.CityCD" checked>
+                                                            <label class="form-check-label" for="flexCheckChecked">
+                                                                @cityCD.CityName
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                }
+
+                                            }
+                                        </li>
+                                    </ul>
+                                }
+                            }
+
+                        </li>
+                    }
                 </ul>
             </div>
         </li>
         <li>
             <div class="form-group ps-3 pe-3">
                 <label for="disabledSelect" class="form-label">築年数</label>
+                <span class="cap-errormsg-right" id="errorAge"></span>
                 <div class="form-group input-group mb-3">
-                    <input type="text" class="form-control">
+                    <span class="cap-errormsg-right" id="errorStartAge" name="errorStartAge"></span>
+                    <input type="text" class="form-control" id="StartAge" name="StartAge">
                     <span class="input-group-inline text-center align-self-center p-2">年 ~ </span>
-                    <input type="text" class="form-control">
+                    <span class="cap-errormsg-right" id="errorEndAge" name="errorEndAge"></span>
+                    <input type="text" class="form-control" id="EndAge" name="EndAge">
                     <span class="input-group-inline text-center align-self-center p-2">年</span>
                 </div>
             </div>
@@ -88,10 +71,13 @@
         <li>
             <div class="form-group ps-3 pe-3">
                 <label for="disabledSelect" class="form-label">駅距離</label>
+                <span class="cap-errormsg-right" id="errorDistance"></span>
                 <div class="form-group input-group mb-3">
-                    <input type="text" class="form-control">
+                    <span class="cap-errormsg-right" id="errorStartDistance" name="errorStartDistance"></span>
+                    <input type="text" class="form-control" id="StartDistance" name="EndDistance">
                     <span class="input-group-inline text-center align-self-center p-2">分 ~</span>
-                    <input type="text" class="form-control">
+                    <span class="cap-errormsg-right" id="errorEndDistance" name="errorEndDistance"></span>
+                    <input type="text" class="form-control" id="EndDistance" name="EndDistance">
                     <span class="input-group-inline text-center align-self-center p-2">分</span>
                 </div>
             </div>
@@ -99,10 +85,13 @@
         <li>
             <div class="form-group ps-3 pe-3">
                 <label for="disabledSelect" class="form-label">戸数</label>
+                <span class="cap-errormsg-right" id="errorRooms"></span>
                 <div class="form-group input-group mb-3">
-                    <input type="text" class="form-control">
+                    <span class="cap-errormsg-right" id="errorStartRooms" name="errorStartRooms"></span>
+                    <input type="text" class="form-control" id="StartRooms" name="StartRooms">
                     <span class="input-group-inline text-center align-self-center p-2">戸 ~</span>
-                    <input type="text" class="form-control">
+                    <span class="cap-errormsg-right" id="errorEndRooms" name="errorEndRooms"></span>
+                    <input type="text" class="form-control" id="EndRooms" name="EndRooms">
                     <span class="input-group-inline text-center align-self-center p-2">戸</span>
                 </div>
             </div>
@@ -110,14 +99,14 @@
         <li>
             <div class="form-group ps-3 pe-3">
                 <div class="form-check pb-3">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                    <label class="form-check-label" for="flexCheckChecked">未登録マンション表示</label>
+                    <input class="form-check-input" type="checkbox" value="1" id="UnregisteredMansion" name="UnregisteredMansion">
+                    <label class="form-check-label" for="UnregisteredMansion">未登録マンション表示</label>
                 </div>
                 <div class="form-check pb-3">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                    <label class="form-check-label" for="flexCheckChecked">優先度</label>
+                    <input class="form-check-input" type="checkbox" value="" id="PriorityCheckBox" name="PriorityCheckBox">
+                    <label class="form-check-label" for="Priority">優先度</label>
                     <div class="ms-6">
-                        <input class="form-check-input" type="radio" name="Radios" id="Radios2" value="option2">
+                        <input class="form-check-input" type="radio" name="Priority" id="Priority4" value="4">
                         <span class="text-danger">
                             <span class="fa fa-star" data-rating="1"></span>
                             <span class="fa fa-star" data-rating="2"></span>
@@ -127,7 +116,7 @@
                         </span><span><small>以上</small></span>
                     </div>
                     <div class="ms-6">
-                        <input class="form-check-input" type="radio" name="Radios" id="Radios2" value="option2">
+                        <input class="form-check-input" type="radio" name="Priority" id="Priority3" value="3">
                         <span class="text-danger">
                             <span class="fa fa-star" data-rating="1"></span>
                             <span class="fa fa-star" data-rating="2"></span>
@@ -137,7 +126,7 @@
                         </span><span><small>以上</small></span>
                     </div>
                     <div class="ms-6">
-                        <input class="form-check-input" type="radio" name="Radios" id="Radios2" value="option2">
+                        <input class="form-check-input" type="radio" name="Priority" id="Priority2" value="2">
                         <span class="text-danger">
                             <span class="fa fa-star" data-rating="1"></span>
                             <span class="fa fa-star" data-rating="2"></span>
@@ -147,7 +136,7 @@
                         </span><span><small>以上</small></span>
                     </div>
                     <div class="ms-6">
-                        <input class="form-check-input" type="radio" name="Radios" id="Radios2" value="option2">
+                        <input class="form-check-input" type="radio" name="Priority" id="Priority1" value="1" checked>
                         <span class="text-danger">
                             <span class="fa fa-star" data-rating="1"></span>
                             <span class="fa fa-star-o" data-rating="2"></span>
@@ -161,7 +150,7 @@
         </li>
         <li>
             <div class="form-group ps-3 pe-3">
-                <button type="button" class="btn btn-primary w-100 w-100 mb-3">表示</button>
+                <button type="button" class="btn btn-primary w-100 w-100 mb-3" id="btnDisplay">表示</button>
             </div>
         </li>
     </ul>

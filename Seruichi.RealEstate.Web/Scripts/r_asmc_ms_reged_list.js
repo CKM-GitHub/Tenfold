@@ -113,10 +113,22 @@ function addEvents() {
     }).on('click', '.node-item', function () {
         var parentNode = $(this).parents('.tree ul');
         if ($(this).is(':checked')) {
-            parentNode.find('li .node-parent').prop('checked', true);
+
+            var elementschk = parentNode.find('ul input[type="checkbox"]:checked');
+            var elements = parentNode.find('ul input[type="checkbox"]');
+            if (elements.length == elementschk.length) {
+                parentNode.find('li .node-parent').prop('checked', true);
+            }
+            else {
+                parentNode.find('li .node-parent').prop('checked', false);
+            }
         } else {
-            var elements = parentNode.find('ul input[type="checkbox"]:checked');
-            if (elements.length == 0) {
+            var elementschk = parentNode.find('ul input[type="checkbox"]:checked');
+            var elements = parentNode.find('ul input[type="checkbox"]');
+            if (elements.length == elementschk.length) {
+                parentNode.find('li .node-parent').prop('checked', true);
+            }
+            else {
                 parentNode.find('li .node-parent').prop('checked', false);
             }
         }

@@ -222,42 +222,42 @@ function Bind_tbody(result) {
             _letter = data[i]["ステータス"].charAt(0);            
             if (_letter == "未") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal";              
-                _sort_checkbox = "One";
+                _sort_checkbox = "1";
             }
             else if (_letter == "簡") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-info text-white fst-normal";                
-                _sort_checkbox = "Two";
+                _sort_checkbox = "2";
             }
             else if (_letter == "査") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal";               
-                _sort_checkbox = "Three";
+                _sort_checkbox = "3";
             }
             else if (_letter == "買" && data[i]["ステータス"] =="買取依頼") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal";               
-                _sort_checkbox = "Four";
+                _sort_checkbox = "4";
             }
             else if (_letter == "確") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark fst-normal";              
-                _sort_checkbox = "Five";
+                _sort_checkbox = "5";
             }
             else if (_letter == "交") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark fst-normal";               
-                _sort_checkbox = "Six";
+                _sort_checkbox = "6";
             }
             else if (_letter == "成") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary text-dark fst-normal";              
-                _sort_checkbox = "Seven";
+                _sort_checkbox = "7";
             }
             else if (_letter == "売" && data[i]["EndStatus"] == 2 && data[i]["ステータス"] == "売主辞退") {
                 _letter = "辞";
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger fst-normal";               
-                _sort_checkbox = "Eight";
+                _sort_checkbox = "8";
             }
             else if (_letter == "売" && data[i]["EndStatus"] == 3 && data[i]["ステータス"] == "売主辞退") {
                 _letter = "辞";
                 data[i]["ステータス"] = "買主辞退";
                 _class = "ms-1 ps-1 pe-1 rounded-circle  bg-dark text-white fst-normal";               
-                _sort_checkbox = "Nine";
+                _sort_checkbox = "9";
             }
 
         }
@@ -281,6 +281,7 @@ function Bind_tbody(result) {
              <td class="text-nowrap"> '+ data[i]["送客日時"] + ' </td>\
              <td class="text-nowrap"> '+ data[i]["成約日時"] + ' </td>\
              <td class="text-nowrap"> '+ data[i]["辞退日時"] + '</td>\
+             <td class="d-none">'+ _sort_checkbox + '</td>\
             </tr>'
     }
    
