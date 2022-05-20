@@ -1,7 +1,8 @@
 ﻿function setValidation() {
     $('#txtBusinessHours')
         .addvalidation_errorElement("#errorBusinessHours")
-        .addvalidation_maxlengthCheck(50);
+        .addvalidation_maxlengthCheck(25)//E105
+        .addvalidation_doublebyte();
 
     $('#txtCompanyHoliday')
         .addvalidation_errorElement("#errorCompanyHoliday")
