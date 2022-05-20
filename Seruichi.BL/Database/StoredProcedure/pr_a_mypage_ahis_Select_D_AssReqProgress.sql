@@ -41,8 +41,10 @@ BEGIN
 							 '08'   
 							end
 							) as [StatusIndex], 
-							(Cast (D.MansionName as varchar(30) ) + ' '+ Cast(Isnull(D.RoomNumber,'') as varchar(30))) as MansionName,
-							Cast((D.PrefName + D.CityName + D.TownName + D.Address) as varchar(160)) as Address,
+							(Cast (ISNULL(D.MansionName,'') as varchar(30) ) + ' '+ Cast(Isnull(D.RoomNumber,'') as varchar(30))) as MansionName,
+							Cast((ISNULL(D.PrefName,'') + ISNULL(D.CityName,'') + ISNULL(D.TownName,'') + ISNULL(D.Address,'')) as varchar(160)) as Address,
+							--(Cast (D.MansionName as varchar(30) ) + ' '+ Cast(Isnull(D.RoomNumber,'') as varchar(30))) as MansionName,
+							--Cast((D.PrefName + D.CityName + D.TownName + D.Address) as varchar(160)) as Address,
 							Cast(Isnull(C.REName,'') as varchar(30)) as REName ,
 							ISNULL(FORMAT(CONVERT(MONEY, A.AssessAmount), '###,###'),'0') +' '+N'円'as AssessAmount,
 							ISNULL(FORMAT(A.DeepAssDateTime, 'yyyy/MM/dd HH:mm:ss'),'') DeepAssDateTime,
