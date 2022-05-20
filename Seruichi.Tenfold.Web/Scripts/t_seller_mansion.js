@@ -122,20 +122,31 @@ function addEvents()
     });
 
     $('#btnProcess').on('click', function () {
+        $('#total_record').text("")
+        $('#total_record_up').text("")
+        $('#no_record').text("");
+        $('#mansiontable tbody').empty();
         $form = $('#form1').hideChildErrors();
 
         if (!common.checkValidityOnSave('#form1')) {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
-        $('#mansiontable tbody').empty();
+
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         getM_SellerMansionList(model, $form);
     });
     $('#btnCSV').on('click', function () {
+        $('#total_record').text("")
+        $('#total_record_up').text("")
+        $('#no_record').text("");
+        $('#mansiontable tbody').empty();
+        $form = $('#form1').hideChildErrors();
+      
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
+        getM_SellerMansionList(model, $form)
 
         common.callAjax(_url.generate_M_SellerMansionCSV, model,
             function (result) {
@@ -163,7 +174,7 @@ function addEvents()
                     document.body.removeChild(downloadLink);
                 }
                 else {
-                    alert("There is no data!");
+                    $('#site-error-modal').modal('show');
                 }
             }
         )
@@ -279,6 +290,7 @@ function Bind_tbody(result) {
     else {
         $('#total_record').text("検索結果： 0件")
         $('#total_record_up').text("検索結果： 0件")
+        $('#no_record').text("表示可能データがありません");
     }
     $('#mansiontable tbody').append(html);
     

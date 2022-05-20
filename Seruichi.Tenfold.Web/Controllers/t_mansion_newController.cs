@@ -21,7 +21,14 @@ namespace Seruichi.Tenfold.Web.Controllers
             ViewBag.PrefDropDownListItems = bl.GetDropDownListItemsOfPrefecture();
             return View();
         }
-       
+        // POST: 
+        [HttpPost]
+        public ActionResult GotoNextPage()
+        {
+            return RedirectToAction("Index", "t_mansion_new");
+        }
+
+
         // Ajax: CheckZipCode
         [HttpPost]
         public ActionResult CheckZipCode(t_mansion_newModel model)
@@ -108,37 +115,6 @@ namespace Seruichi.Tenfold.Web.Controllers
 
         // Ajax: InsertSellerMansionData
         [HttpPost]
-        public ActionResult InsertSellerMansionData(a_indexModel model)
-        {
-            if (model == null)
-            {
-                return BadRequestResult();
-            }
-
-            CommonBL blCmm = new CommonBL();
-            var longitude_latitude = blCmm.GetLongitudeAndLatitude(model.PrefName, model.CityName, model.TownName, model.Address);
-            model.Longitude = longitude_latitude[0];
-            model.Latitude = longitude_latitude[1];
-            model.SellerCD = base.GetOperator();
-            model.SellerName = base.GetOperatorName();
-            model.Operator = base.GetOperator();
-            model.IPAddress = base.GetClientIP();
-            model.MansionStationList = ConvertJsonToObject<List<a_indexModel.MansionStation>>(model.MansionStationListJson);
-
-            a_indexBL bl = new a_indexBL();
-            var validationResult = bl.ValidateAll(model);
-            if (validationResult.Count > 0)
-            {
-                return ErrorResult(validationResult);
-            }
-            if (!bl.InsertSellerMansionData(model, out string errorcd))
-            {
-                return ErrorMessageResult(errorcd);
-            }
-
-            return OKResult();
-        } // Ajax: InsertSellerMansionData
-        [HttpPost]
         public ActionResult InsertSellerMansionData(t_mansion_newModel model)
         {
             if (model == null)
@@ -168,6 +144,7 @@ namespace Seruichi.Tenfold.Web.Controllers
             }
 
             return OKResult();
-        }
+        } // Ajax: InsertSellerMansionData
+       
     }
 }

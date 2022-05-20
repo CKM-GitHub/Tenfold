@@ -237,7 +237,7 @@
                             <span class="ps-2 text-muted small align-self-end">管理</span>
                         </div>
                         <hr class="navbar-divider my-5 opacity-20"><div class="d-inline-flex">
-                            <h5 class="mb-0">マンション一覧</h5> <span class="ps-md-5 text-muted text-sm" id="total_record_up">検索結果：0件</span>
+                            <h5 class="mb-0">マンション一覧</h5> <span class="ps-md-5 text-muted text-sm" id="total_record_up">検索結果：0件</span><span style="color: red;" class="ps-md-5 text-sm" id="no_record">表示可能データがありません</span>
                         </div>
                     </div>
                     <div class="table-responsive">
@@ -245,86 +245,86 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col" class="text-end text-decoration-underline" style="width:100px">No.</th>
-                                    <th scope="col" style="width: 100px" class="text-decoration-underline">マンションCD</th>
-                                    <th scope="col" style="width: 200px"><span class="text-decoration-underline pe-1 ps-1">マンション名</span></th>
-                                    <th scope="col" style="width: 600px" class="text-decoration-underline"><span class="text-decoration-underline pe-1 ps-1">住所</span></th>
-                                    <th scope="col" style="width: 80px" class="text-decoration-underline">築年月</th>
-                                    <th scope="col" style="width: 50px" class="text-decoration-underline text-end">築年数</th>
-                                    <th scope="col" style="width: 80px" class="text-decoration-underline text-end">総戸数</th>
+                                    <th scope="col" style="width: 100px" class="text-decoration-underline sort-by" ordercol-index="1">マンションCD</th>
+                                    <th scope="col" style="width: 200px"><span col_ordertype="a" class="text-decoration-underline pe-1 ps-1 sort-multi" ordercol-index="2_1">マンション名</span></th>
+                                    <th scope="col" style="width: 600px" class="text-decoration-underline sort-by" ordercol-index="3_2_1"><span class="text-decoration-underline pe-1 ps-1 sort-by" ordercol-index="3_2_1">住所</span></th>
+                                    <th scope="col" style="width: 80px" class="text-decoration-underline sort-by" ordercol-index="4_2_1">築年月</th>
+                                    <th scope="col" style="width: 50px" class="text-decoration-underline text-end sort-by" data-type="number" ordercol-index="5_2_1">築年数</th>
+                                    <th scope="col" style="width: 80px" class="text-decoration-underline text-end sort-by" data-type="number" ordercol-index="6_2_1">総戸数</th>
                                     <th scope="col" style="width: auto" class="d-none d-md-block opacity-0">&nbsp;</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 @*<tr>
-                                        <td class="text-end"> 999999999 </td>
-                                        <td> HE9999999 </td>
-                                        <td><a href="#" class="text-heading font-semibold text-decoration-underline">MansionName3</a></td>
-                                        <td>MansionAddressMansionAddressMansionAddressMansionAddressMansionAddress6</td>
-                                        <td>YYYY/MM</td>
-                                        <td class="text-end">99</td>
-                                        <td class="text-end">99</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-end"> 999999999 </td>
-                                        <td> HE9999999 </td>
-                                        <td><a href="#" class="text-heading font-semibold text-decoration-underline">MansionName3</a></td>
-                                        <td>MansionAddressMansionAddressMansionAddressMansionAddressMansionAddress7</td>
-                                        <td>YYYY/MM</td>
-                                        <td class="text-end">99</td>
-                                        <td class="text-end">99</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-end"> 999999999 </td>
-                                        <td> HE9999999 </td>
-                                        <td><a href="#" class="text-heading font-semibold text-decoration-underline">MansionName3</a></td>
-                                        <td>MansionAddressMansionAddressMansionAddressMansionAddressMansionAddress5</td>
-                                        <td>YYYY/MM</td>
-                                        <td class="text-end">99</td>
-                                        <td class="text-end">99</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-end"> 999999999 </td>
-                                        <td> HE9999999 </td>
-                                        <td><a href="#" class="text-heading font-semibold text-decoration-underline">MansionName3</a></td>
-                                        <td>MansionAddressMansionAddressMansionAddressMansionAddressMansionAddress4</td>
-                                        <td>YYYY/MM</td>
-                                        <td class="text-end">99</td>
-                                        <td class="text-end">99</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-end"> 999999999 </td>
-                                        <td> HE9999999 </td>
-                                        <td><a href="#" class="text-heading font-semibold text-decoration-underline">MansionName3</a></td>
-                                        <td>MansionAddressMansionAddressMansionAddressMansionAddressMansionAddress2</td>
-                                        <td>YYYY/MM</td>
-                                        <td class="text-end">99</td>
-                                        <td class="text-end">99</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-end"> 999999999 </td>
-                                        <td> HE9999999 </td>
-                                        <td><a href="#" class="text-heading font-semibold text-decoration-underline">MansionName3</a></td>
-                                        <td>MansionAddressMansionAddressMansionAddressMansionAddressMansionAddress3</td>
-                                        <td>YYYY/MM</td>
-                                        <td class="text-end">99</td>
-                                        <td class="text-end">99</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-end"> 999999999 </td>
-                                        <td> HE9999999 </td>
-                                        <td><a href="#" class="text-heading font-semibold text-decoration-underline">MansionName3</a></td>
-                                        <td>MansionAddressMansionAddressMansionAddressMansionAddressMansionAddress1</td>
-                                        <td>YYYY/MM</td>
-                                        <td class="text-end">99</td>
-                                        <td class="text-end">99</td>
-                                    </tr>*@
+                                    <td class="text-end"> 999999999 </td>
+                                    <td> HE9999999 </td>
+                                    <td><a href="#" class="text-heading font-semibold text-decoration-underline">MansionName3</a></td>
+                                    <td>MansionAddressMansionAddressMansionAddressMansionAddressMansionAddress6</td>
+                                    <td>YYYY/MM</td>
+                                    <td class="text-end">99</td>
+                                    <td class="text-end">99</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999999999 </td>
+                                    <td> HE9999999 </td>
+                                    <td><a href="#" class="text-heading font-semibold text-decoration-underline">MansionName3</a></td>
+                                    <td>MansionAddressMansionAddressMansionAddressMansionAddressMansionAddress7</td>
+                                    <td>YYYY/MM</td>
+                                    <td class="text-end">99</td>
+                                    <td class="text-end">99</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999999999 </td>
+                                    <td> HE9999999 </td>
+                                    <td><a href="#" class="text-heading font-semibold text-decoration-underline">MansionName3</a></td>
+                                    <td>MansionAddressMansionAddressMansionAddressMansionAddressMansionAddress5</td>
+                                    <td>YYYY/MM</td>
+                                    <td class="text-end">99</td>
+                                    <td class="text-end">99</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999999999 </td>
+                                    <td> HE9999999 </td>
+                                    <td><a href="#" class="text-heading font-semibold text-decoration-underline">MansionName3</a></td>
+                                    <td>MansionAddressMansionAddressMansionAddressMansionAddressMansionAddress4</td>
+                                    <td>YYYY/MM</td>
+                                    <td class="text-end">99</td>
+                                    <td class="text-end">99</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999999999 </td>
+                                    <td> HE9999999 </td>
+                                    <td><a href="#" class="text-heading font-semibold text-decoration-underline">MansionName3</a></td>
+                                    <td>MansionAddressMansionAddressMansionAddressMansionAddressMansionAddress2</td>
+                                    <td>YYYY/MM</td>
+                                    <td class="text-end">99</td>
+                                    <td class="text-end">99</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999999999 </td>
+                                    <td> HE9999999 </td>
+                                    <td><a href="#" class="text-heading font-semibold text-decoration-underline">MansionName3</a></td>
+                                    <td>MansionAddressMansionAddressMansionAddressMansionAddressMansionAddress3</td>
+                                    <td>YYYY/MM</td>
+                                    <td class="text-end">99</td>
+                                    <td class="text-end">99</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999999999 </td>
+                                    <td> HE9999999 </td>
+                                    <td><a href="#" class="text-heading font-semibold text-decoration-underline">MansionName3</a></td>
+                                    <td>MansionAddressMansionAddressMansionAddressMansionAddressMansionAddress1</td>
+                                    <td>YYYY/MM</td>
+                                    <td class="text-end">99</td>
+                                    <td class="text-end">99</td>
+                                </tr>*@
                             </tbody>
                         </table>
                     </div>
                     <div class="card-footer border-0 py-5">
                         <span class="text-muted text-sm" id="total_record">見つかった0件の結果を表示されています。</span>
-                    </div> 
+                    </div>
                 </div>
             </div>
             <!-- ポップアップ -->
@@ -773,9 +773,11 @@
             </div>
         </main>
         @Html.Partial("_t_footer")
+        @Html.Partial("_ErrorPopup")
     </div>
 </div>
 @section Scripts{
     @Scripts.Render("~/bundles/t_mansion_list")
 }
+<script src="~/Content/scripts/table_header_sort.js"></script>
 

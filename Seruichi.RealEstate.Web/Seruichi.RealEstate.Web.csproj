@@ -138,6 +138,7 @@
     <Compile Include="Controllers\Common\CommonApiController.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
     <Compile Include="Controllers\r_asmc_address.cs" />
+    <Compile Include="Controllers\r_asmc_ms_list_shController.cs" />
     <Compile Include="Controllers\r_asmc_ms_reged_listController.cs" />
     <Compile Include="Controllers\r_com_profileController.cs" />
     <Compile Include="Controllers\r_contactController.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
     <Compile Include="Filters\BrowsingHistoryAttribute.cs" />
     <Compile Include="Filters\CustomHandleErrorAttribute.cs" />
+    <Compile Include="Filters\IgnoreVerificationToken.cs" />
     <Compile Include="Filters\SessionAuthenticationAttribute.cs" />
     <Compile Include="Filters\SessionAuthenticationHelper.cs" />
     <Compile Include="Global.asax.cs">
@@ -199,6 +201,7 @@
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
     <Content Include="Scripts\r_asmc_address.js" />
+    <Content Include="Scripts\r_asmc_ms_list_sh.js" />
     <Content Include="Scripts\r_asmc_ms_reged_list.js" />
     <Content Include="Scripts\r_com_profile.js" />
     <Content Include="Scripts\r_contact.js" />
@@ -247,6 +250,8 @@
     <Content Include="Views\r_asmc_address\_r_asmc_address_tab_menu.cshtml" />
     <Content Include="Views\r_asmc_ms_reged_list\Index.cshtml" />
     <Content Include="Views\r_asmc_ms_reged_list\_r_asmc_ms_reged_list_left_sideNavigation_menu.cshtml" />
+    <Content Include="Views\r_asmc_ms_list_sh\Index.cshtml" />
+    <Content Include="Views\r_asmc_ms_list_sh\r_asmc_ms_list_sh_left_sideNavigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

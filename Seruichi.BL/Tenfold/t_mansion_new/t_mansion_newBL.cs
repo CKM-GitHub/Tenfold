@@ -24,17 +24,17 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
             validator.CheckIsHalfWidth("ZipCode2", model.ZipCode2, 4, RegexFormat.Number);
             //都道府県
             validator.CheckSelectionRequired("PrefCD", model.PrefCD);
-            //マンション名
+            ////マンション名
             validator.CheckRequired("MansionName", model.MansionName);
             validator.CheckIsDoubleByte("MansionName", model.MansionName, 50);
-            //市区町村
+            ////市区町村
             validator.CheckSelectionRequired("CityCD", model.CityCD);
-            //町域
+            ////町域
             validator.CheckSelectionRequired("TownCD", model.TownCD);
-            //住所
+            ////住所
             validator.CheckRequired("Address", model.Address);
             validator.CheckIsDoubleByte("Address", model.Address, 50);
-            //交通アクセス
+            ////交通アクセス
             if (model.MansionStationList.Count == 0)
             {
                 validator.CheckSelectionRequired("LineCD_1", "");
@@ -48,29 +48,23 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
                     validator.CheckIsNumeric("Distance_1", item.Distance, 2, 0);
                 }
             }
-            //建物構造
+            ////建物構造
             validator.CheckSelectionRequired("StructuralKBN", model.StructuralKBN);
-            //築年月
+            ////築年月
             validator.CheckRequired("ConstYYYYMM", model.ConstYYYYMM);
             validator.CheckYMDate("ConstYYYYMM", model.ConstYYYYMM);
-            //総戸数
+            ////総戸数
             validator.CheckRequiredNumber("Rooms", model.Rooms, true);
             validator.CheckIsNumeric("Rooms", model.Rooms, 3, 0);
 
-           
-           
+
+
             validator.CheckSelectionRequired("RightKBN", model.RightKBN);
 
-            validator.CheckSelectionRequired("Noti", model.TownCD);
-            validator.CheckSelectionRequired("katakana", model.TownCD);
-            validator.CheckSelectionRequired("katakana1", model.TownCD);
-            validator.CheckSelectionRequired("hirakana", model.TownCD);
-            validator.CheckSelectionRequired("Other1", model.TownCD);
-            validator.CheckSelectionRequired("Other2", model.TownCD);
-            validator.CheckSelectionRequired("Other3", model.TownCD);
-            validator.CheckSelectionRequired("Other4", model.TownCD);
-            validator.CheckSelectionRequired("Other5", model.TownCD);
-            validator.CheckSelectionRequired("Other6", model.TownCD);
+            validator.CheckRequired("Noti", model.Noti);
+            validator.CheckRequired("Katakana", model.Katakana);
+            validator.CheckRequired("Katakana1", model.Katakana1);
+            validator.CheckRequired("Hirakana", model.Hirakana);
             if (validator.IsValid)
             {
                 foreach (var item in model.MansionStationList)
@@ -87,12 +81,12 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
                 {
                     validator.AddValidationResult("ConstYYYYMM", "E208");
                 }
-               
+
             }
 
             string errorcd = "";
 
-            //M_Pref
+            ////M_Pref
             if (!string.IsNullOrEmpty(model.ZipCode1) || !string.IsNullOrEmpty(model.ZipCode2))
             {
                 if (!CheckPrefecturesByZipCode(model.ZipCode1, model.ZipCode2, out errorcd, out string outPrefCD))
@@ -106,7 +100,7 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
                 }
             }
 
-            //M_Counter
+            ////M_Counter
             if (!commonBL.CheckExistsCounterMaster(CounterKey.MansionID, out errorcd))
             {
                 validator.AddValidationResult("btnShowConfirmation", errorcd);
@@ -235,7 +229,7 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
             try
             {
                 DBAccess db = new DBAccess();
-                return db.InsertUpdateDeleteData("", false, sqlParams);
+                return db.InsertUpdateDeleteData("pr_t_mansion_new_InsertMansionData", false, sqlParams);
             }
             catch (ExclusionException)
             {

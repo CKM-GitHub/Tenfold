@@ -21,6 +21,10 @@ namespace Seruichi.BL.Seller
              }; 
             DBAccess db = new DBAccess();
             var dt = db.SelectDatatable("pr_a_assess_d_Select_MansionInfo_by_AssReqID", sqlParams);
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+            foreach (DataRow dr in dt.Rows)
+                dr["SellerName"] = crypt.DecryptFromBase64(dr["SellerName"].ToString(), decryptionKey);
             return dt;
         }
         public DataTable GetD_Spec_Info(a_assess_dModel model)
@@ -43,6 +47,7 @@ namespace Seruichi.BL.Seller
              };
             DBAccess db = new DBAccess();
             var dt = db.SelectDatatable("pr_a_assess_d_Select_MansionRank_by_AssReqID", sqlParams);
+         
             return dt;
         }
         public DataTable GetD_AreaRank_Info(a_assess_dModel model)
@@ -73,6 +78,27 @@ namespace Seruichi.BL.Seller
 
             DBAccess db = new DBAccess();
             db.InsertUpdateDeleteData("pr_t_seller_mansion_list_Insert_L_Log", false, sqlParams);
+        }
+        public void InsertA_Assess(a_assess_dModel model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@AssID", SqlDbType.VarChar){ Value = model.AssID },
+                new SqlParameter("@AssSEQ", SqlDbType.VarChar){ Value = model.AssSEQ },
+                new SqlParameter("@AssReqID", SqlDbType.VarChar){ Value = model.AssReqID },
+                new SqlParameter("@ProgressKBN", SqlDbType.VarChar){ Value = model.ProgressKBN },
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD },
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD },
+                new SqlParameter("@SellerMansionID", SqlDbType.VarChar){ Value = model.SellerMansionID },
+                new SqlParameter("@AssessAmount", SqlDbType.VarChar){ Value = model.AssessAmount },
+                new SqlParameter("@IpAddress", SqlDbType.VarChar){ Value = model.IPAddress },
+                new SqlParameter("@SellerName", SqlDbType.VarChar){ Value = model.SellerName },
+                new SqlParameter("@AssessType1", SqlDbType.VarChar){ Value = model.AssessType1 },
+                new SqlParameter("@AssessType2", SqlDbType.VarChar){ Value = model.AssessType2 },
+                new SqlParameter("@ConditionSEQ", SqlDbType.VarChar){ Value = model.ConditionSEQ },
+             };
+            DBAccess db = new DBAccess();
+            db.InsertUpdateDeleteData("pr_a_assess_d_Insert_D_IntroReq_D_AssReqProgress_D_AssessResult", false, sqlParams);
         }
     }
 }
