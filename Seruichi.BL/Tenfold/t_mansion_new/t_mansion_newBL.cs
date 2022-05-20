@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -199,8 +201,7 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
 
             var sqlParams = new SqlParameter[]
             {
-                new SqlParameter("@SellerMansionID", SqlDbType.VarChar){ Value = null },
-                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD.ToStringOrNull() },
+                
                 new SqlParameter("@MansionName", SqlDbType.VarChar){ Value = model.MansionName.ToStringOrNull() },
                 new SqlParameter("@MansionCD", SqlDbType.VarChar){ Value = model.MansionCD.ToStringOrNull() },
                 new SqlParameter("@ZipCode1", SqlDbType.VarChar){ Value = model.ZipCode1.ToStringOrNull() },
@@ -216,7 +217,8 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
                 new SqlParameter("@ConstYYYYMM", SqlDbType.Int){ Value = model.ConstYYYYMM.Replace("/", "").ToInt32(0) },
                 new SqlParameter("@Rooms", SqlDbType.Int){ Value = model.Rooms.ToInt32(0) },
                 new SqlParameter("@RightKBN", SqlDbType.TinyInt){ Value = model.RightKBN.ToByte(0) },
-                new SqlParameter("@CurrentKBN", SqlDbType.TinyInt){ Value = model.CurrentKBN.ToByte(0) },
+                //new SqlParameter("@WordSEQ", SqlDbType.VarChar){ Value = model.Noti.ToStringOrNull() },
+                new SqlParameter("@MansionWord", SqlDbType.VarChar){ Value = model.Noti.ToStringOrNull() },
                 new SqlParameter("@Remark", SqlDbType.VarChar){ Value = model.Remark.ToStringOrNull() },
                 new SqlParameter("@Longitude", SqlDbType.Decimal){ Value = model.Longitude.ToDecimal(0) },
                 new SqlParameter("@Latitude", SqlDbType.Decimal){ Value = model.Latitude.ToDecimal(0) },
@@ -224,6 +226,7 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress.ToStringOrNull() },
                 new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.SellerName.ToStringOrNull() },
                 new SqlParameter("@MansionStationTable", SqlDbType.Structured) { TypeName = "dbo.T_MansionStation", Value = model.MansionStationList.ToDataTable() },
+                new SqlParameter("@MansionWordTable", SqlDbType.Structured) {TypeName = "dbo.T_MansionWord", Value = model.MansionWordList.ToDataTable() },
             };
 
             try
@@ -235,6 +238,40 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
             {
                 //msgid = "S004"; //他端末エラー
                 return false;
+            }
+        }
+         public (string, string) AddressSearch(string address)
+        {
+            string postUrl = "https://msearch.gsi.go.jp/address-search/AddressSearch?q=" + address;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(postUrl);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            try
+            {
+                using (Stream stream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(stream);
+                    var response1 = reader.ReadToEnd();
+                    if (response1 == "" || response1 == "[]")
+                    {
+                        return ("0", "0");
+                    }
+                    else
+                    {
+                        string[] xx = response1.Split(':');
+                        string[] yy = xx[2].Split(',');
+                        string longti = yy[0].Replace("[", "");
+                        string lati = yy[1].Replace("]", "");
+                        return (longti, lati);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return ("0", "0");
+            }
+            finally
+            {
+                response.Close();
             }
         }
     }
