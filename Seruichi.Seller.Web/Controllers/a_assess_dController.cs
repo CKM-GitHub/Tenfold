@@ -22,7 +22,7 @@ namespace Seruichi.Seller.Web.Controllers
             if (queryString.AssReqID != null && !String.IsNullOrEmpty(queryString.AssReqID.ToStringOrNull()))
                 Session["AssReqID"] = queryString.AssReqID;
              
-            if (Session["AssReqID"] == null  && String.IsNullOrEmpty(queryString.AssReqID.ToStringOrNull()))
+            if ( String.IsNullOrEmpty(queryString.AssReqID.ToStringOrNull()) || Session["AssReqID"] == null)
                 Session["AssReqID"] = "AR00000025";
             return View();
         }
