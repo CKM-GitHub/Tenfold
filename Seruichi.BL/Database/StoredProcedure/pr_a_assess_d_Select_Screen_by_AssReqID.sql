@@ -91,11 +91,13 @@ BEGIN
 			 else N'自主管理' End 
 			 ) as ManagementSystem,
 			 (case
-			 when da.DesiredTime = 0 then N'不明'
-			 when da.DesiredTime = 0 then N'２週間以内'
-			 when da.DesiredTime = 0 then N'１ヵ月以内'
-			 when da.DesiredTime = 0 then N'３ヵ月以内'
-			 else N'３ヵ月以降' End
+				 when da.DesiredTime = 0 then N'不明'
+			 when da.DesiredTime = 1 then N'２週間以内'
+			 when da.DesiredTime = 2 then N'１ヵ月以内'
+			 when da.DesiredTime = 3 then N'３ヵ月以内'
+			 when da.DesiredTime = 4 then N'６ヵ月以内'
+			 when da.DesiredTime = 5 then N'１年以内'
+			 else N'その他' End
 			 ) as DesiredTimeSale, 
 			 Case when (ISNULL(FORMAT(CONVERT(MONEY, da.RentFee), '###,###'),'0') +''+N'円') = N'円' then N'0円' else ISNULL(FORMAT(CONVERT(MONEY, da.RentFee), '###,###'),'0') + N'円' end as RentFee,
 			  

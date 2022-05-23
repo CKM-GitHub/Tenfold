@@ -109,7 +109,6 @@ function addEvents() {
         $('#total_record_up').text("検索結果： 0件");
         $('#no_record').text("");
         $('#mansiontable tbody').empty();
-        debugger;
         const $Apartment = $("#txtApartment").val().trim(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
             $StartUnit = $("#StartUnit").val(), $EndUnit = $("#EndUnit").val()
 

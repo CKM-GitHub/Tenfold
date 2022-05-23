@@ -9,19 +9,6 @@
     @Styles.Render("~/Content/tenfold_css_common")
 }
 
-
-    <style>
-        .js-word{
-
-        }
-        .js-wordContainer {
-        }
-
-        .noti {
-            
-        }
-    </style>
-
     <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
         <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
 
@@ -60,13 +47,13 @@
                                                             </div>
                                                             <div class="row">
                                                                 <div class="mb-4 pb-2 col-12 col-md-8">
-                                                                    <div class="form-outline ">
-                                                                        <div class="d-flex">
+                                                                    <div class="form-outline">
+                                                                        <div class="d-flex" style="margin-top:3px;">
                                                                             <label class="form-label">マンション名</label>
                                                                             <span class="cap-errormsg-right" id="errorName"></span>
                                                                         </div>
-                                                                        <input type="text" placeholder="マンション名" maxlength="5"
-                                                                               class="form-control form-control-lg" name="MansionName" id="MansionName" autocomplete="off" />
+                                                                        <input type="text" placeholder="マンション名" maxlength="50" class="form-control form-control-lg" name="MansionName" id="MansionName" autocomplete="off" />
+                                                                              
                                                                     </div>
                                                                 </div>
                                                                 <div class="mb-4 pb-2 col-12 col-md-6 d-none">
@@ -235,7 +222,7 @@
                                                                 <label class="form-label" for="form3Examplev4">交通アクセス</label>
                                                                 <div class="row justify-content-center mt-auto m-md-5 mt-md-0 pt-md-0 p-md-3" id="ekikoutsu"
                                                                      style="overflow-x: hidden;overflow-y: auto;max-height: 800px;">
-                                                                    <div class="js-station-template d-none">
+                                                                    <div class="js-station-template d-none" >
                                                                         <!--1-->
                                                                         <div class="js-station">
                                                                             <div class="card m-2 col-12 shadow-sm" id="Dline_1">
@@ -563,7 +550,7 @@
                                                                                         <div class="form-outline form-white">
                                                                                             <label class="form-label me-5">駅名</label>
                                                                                             <div class="dropdown ps-3">
-                                                                                                <span class="cap-errormsg-right" id="errorStationCD5"></span>
+                                                                                                <span class="cap-errormsg-right" id="errorStationCD6"></span>
                                                                                                 <div class="dropdown w-100">
                                                                                                     <select class="form-select js-stationcd" id="StationCD_6" disabled>
                                                                                                         <option selected value="">駅選択</option>
@@ -627,7 +614,7 @@
                                                                                         <div class="form-outline form-white d-flex">
                                                                                             <label class="form-label align-self-center pe-3">徒歩(分)</label>
                                                                                             <div class="text-start">
-                                                                                                <span class="cap-errormsg-right" id="errorDistanceCD4"></span>
+                                                                                                <span class="cap-errormsg-right" id="errorDistanceCD7"></span>
                                                                                                 <input type="number" class="form-control form-control-lg w-md-24 text-end js-distance" id="Distance_7" disabled />
                                                                                             </div>
                                                                                         </div>
@@ -1110,9 +1097,9 @@
                                                                                         <div class="form-outline form-white">
                                                                                             <label class="form-label me-5">路線名</label>
                                                                                             <div class="dropdown">
-                                                                                                <span class="cap-errormsg-right" id="errorLineCD16"></span>
+                                                                                                <span class="cap-errormsg-right" id="errorLineCD17"></span>
                                                                                                 <div class="dropdown w-100">
-                                                                                                    <select class="form-select js-linecd" id="LineCD_16" disabled>
+                                                                                                    <select class="form-select js-linecd" id="LineCD_17" disabled>
                                                                                                         <option selected value="">駅選択</option>
                                                                                                     </select>
                                                                                                 </div>
@@ -1123,8 +1110,8 @@
                                                                                         <div class="form-outline form-white">
                                                                                             <label class="form-label me-5">駅名</label>
                                                                                             <div class="dropdown ps-3">
-                                                                                                <span class="cap-errormsg-right" id="errorDistanceCD16"></span>
-                                                                                                <select class="form-select js-stationcd" id="StationCD_16" disabled>
+                                                                                                <span class="cap-errormsg-right" id="errorStationCD17"></span>
+                                                                                                <select class="form-select js-stationcd" id="StationCD_17" disabled>
                                                                                                     <option selected value="">駅選択</option>
                                                                                                 </select>
                                                                                             </div>
@@ -1136,8 +1123,8 @@
                                                                                         <label class="form-label align-self-center pe-3">徒歩(分)</label>
 
                                                                                         <div class="text-start">
-                                                                                            <span class="cap-errormsg-right" id="errorDistanceCD16"></span>
-                                                                                            <input type="number" class="form-control form-control-lg w-md-24 text-end js-distance" id="Distance_16"
+                                                                                            <span class="cap-errormsg-right" id="errorDistanceCD17"></span>
+                                                                                            <input type="number" class="form-control form-control-lg w-md-24 text-end js-distance" id="Distance_17"
                                                                                                    disabled />
                                                                                         </div>
                                                                                     </div>
@@ -1484,7 +1471,7 @@
                                                                                 <div class="card-body p-2 row collapse show" id="keyw-collapse-8">
                                                                                     <div class="col-12 pb-3">
                                                                                         <div class="form-outline form-white">
-                                                                                            <input type="text" class="form-control form-control-lg w-100" id="Other4" name="Other4" maxlength="50" autocomplete="off" />
+                                                                                            <input type="text" class="form-control form-control-lg w-100 noti" id="Other4" name="Other4" maxlength="50" autocomplete="off" />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1507,7 +1494,7 @@
                                                                                 <div class="card-body p-2 row collapse show" id="keyw-collapse-9">
                                                                                     <div class="col-12 pb-3">
                                                                                         <div class="form-outline form-white">
-                                                                                            <input type="text" class="form-control form-control-lg w-100" id="Other5" name="Other5" maxlength="5" autocomplete="off" />
+                                                                                            <input type="text" class="form-control form-control-lg w-100 noti" id="Other5" name="Other5" maxlength="50" autocomplete="off" />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1530,7 +1517,7 @@
                                                                                 <div class="card-body p-2 row collapse show" id="keyw-collapse-10">
                                                                                     <div class="col-12 pb-3">
                                                                                         <div class="form-outline form-white">
-                                                                                            <input type="text" class="form-control form-control-lg w-100" id="Other6" name="Other6" maxlength="50" autocomplete="off" />
+                                                                                            <input type="text" class="form-control form-control-lg w-100 noti" id="Other6" name="Other6" maxlength="50" autocomplete="off" />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1544,7 +1531,7 @@
                                                         <div class="mb-4 pb-2">
                                                             <div class="form-outline form-white p-5">
                                                                 <label class="form-label" for="form3Examplev4">メモ</label>
-                                                                <textarea class="form-control custom-control" rows="11" name="Memo" id="Memo"></textarea>
+                                                                <textarea class="form-control custom-control" rows="11" name="Remark" id="Remark"></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1589,7 +1576,7 @@
                                                                             <div class="mb-4 pb-2 col-12 col-md-6">
                                                                                 <div class="form-outline">
                                                                                     <label class="form-label">マンション名</label>
-                                                                                    <input class="form-control w-100" type="text" id="confirm_MansionName" disabled>
+                                                                                    <input class="form-control w-100" type="text" id="confirm_MansionName" maxlength="50" disabled>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="mb-4 pb-2 col-12 col-md-6 d-none">
@@ -1687,20 +1674,17 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-lg-4 js-confirm-station-template d-none">
-                                                                    <div class="mb-4 pb-2 js-confirm-station">
+                                                                <div class="col-lg-4">
+                                                                    <div class="mb-4 pb-2">
                                                                         <div class="form-outline form-white p-5">
                                                                             <label class="form-label" for="form3Examplev4">交通アクセス</label>
-                                                                            <div class="row justify-content-center mt-auto h-full m-md-5 p-md-3 pt-md-0 mt-md-0" id="ekikoutsu"
-                                                                                 style="overflow-x: hidden;overflow-y:hidden;max-height: 800px;">
-                                                                                @*<div class="js-confirm-station-template d-none">
-                                                                                    <div class="js-confirm-station">*@
-                                                                                        <div class="card m-2 col-12 shadow-sm bg-secondary ">
+                                                                                <div class="js-confirm-station-template d-none" >
+                                                                                    <div class="js-confirm-station">
+                                                                                        <div class="card m-2 col-12 shadow-sm bg-secondary">
                                                                                             <div class="card-header ps-md-2 pt-0 pb-0">
-                                                                                                <button class="btn btn-link js-paragraph-number" data-bs-toggle="collapse"
+                                                                                                <button class="btn btn-link" data-bs-toggle="collapse"
                                                                                                         data-bs-target="#access-collapse-1" aria-expanded="false"
                                                                                                         aria-controls="access-collapse-1">
                                                                                                     <h5>路線</h5>
@@ -1717,16 +1701,18 @@
                                                                                                 <input class="form-control text-end js-stationcd" type="text" disabled>
                                                                                             </div>
                                                                                             <!--addDistance-->
-                                                                                            <span class="align-self-center cap-min-w40">徒歩</span>
-                                                                                            <input class="form-control text-end js-distance" type="text" disabled>
-                                                                                        </div>
-                                                                                    @*</div>
-                                                                                </div>*@
-                                                                            </div>
+                                                                                            <div class="dropdown w-100">
+                                                                                                <span class="align-self-center cap-min-w40">徒歩</span>
+                                                                                                <input class="form-control text-end js-distance" type="text" disabled>
+                                                                                            </div>
 
-                                                                            <div class="js-confirm-stationContainer">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!delete-->
+                                                                                <div class="js-confirm-stationContainer">
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-4">
@@ -1737,12 +1723,13 @@
                                                                                  style="overflow-x: hidden;overflow-y: hidden;">
                                                                                 <!--1-->
                                                                                 <div class="card m-2 col-12 shadow-sm bg-secondary">
-                                                                                    <div class="card-header ps-md-2 pt-0 pb-0">
+                                                                                    <div class="card-header ps-md-2 pt-0 pb-0 ">
                                                                                         <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                                data-bs-target="#keyw-collapse-1" aria-expanded="false"
-                                                                                                aria-controls="keyw-collapse-1">
+                                                                                                data-bs-target="#access-collapse-1" aria-expanded="false"
+                                                                                                aria-controls="access-collapse-1">
                                                                                             <h5>謄本表記</h5>
                                                                                         </button>
+                                                                                       
                                                                                     </div>
                                                                                     <div class="card-body p-2 row collapse show" id="keyw-collapse-1">
                                                                                         <div class="col-12 pb-3">
@@ -1756,8 +1743,8 @@
                                                                                 <div class="card m-2 col-12 shadow-sm bg-secondary">
                                                                                     <div class="card-header ps-md-2 pt-0 pb-0">
                                                                                         <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                                data-bs-target="#keyw-collapse-2" aria-expanded="false"
-                                                                                                aria-controls="keyw-collapse-2">
+                                                                                                data-bs-target="#access-collapse-2" aria-expanded="false"
+                                                                                                aria-controls="access-collapse-2">
                                                                                             <h5>カタカナ</h5>
                                                                                         </button>
                                                                                     </div>
@@ -1773,8 +1760,8 @@
                                                                                 <div class="card m-2 col-12 shadow-sm bg-secondary">
                                                                                     <div class="card-header ps-md-2 pt-0 pb-0">
                                                                                         <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                                data-bs-target="#keyw-collapse-3" aria-expanded="false"
-                                                                                                aria-controls="keyw-collapse-3">
+                                                                                                data-bs-target="#access-collapse-3" aria-expanded="false"
+                                                                                                aria-controls="access-collapse-3">
                                                                                             <h5>ｶﾀｶﾅ</h5>
                                                                                         </button>
                                                                                     </div>
@@ -1792,8 +1779,8 @@
                                                                                 <div class="card m-2 col-12 shadow-sm bg-secondary">
                                                                                     <div class="card-header ps-md-2 pt-0 pb-0">
                                                                                         <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                                data-bs-target="#keyw-collapse-4" aria-expanded="false"
-                                                                                                aria-controls="keyw-collapse-4">
+                                                                                                data-bs-target="#access-collapse-4" aria-expanded="false"
+                                                                                                aria-controls="access-collapse-4">
                                                                                             <h5>ひらがな</h5>
                                                                                         </button>
                                                                                     </div>
@@ -1812,8 +1799,8 @@
                                                                                 <div class="card m-2 col-12 shadow-sm bg-secondary">
                                                                                     <div class="card-header ps-md-2 pt-0 pb-0">
                                                                                         <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                                data-bs-target="#keyw-collapse-5" aria-expanded="false"
-                                                                                                aria-controls="keyw-collapse-5">
+                                                                                                data-bs-target="#access-collapse-5" aria-expanded="false"
+                                                                                                aria-controls="access-collapse-5">
                                                                                             <h5>その他1</h5>
                                                                                         </button>
                                                                                     </div>
@@ -1832,8 +1819,8 @@
                                                                                 <div class="card m-2 col-12 shadow-sm bg-secondary">
                                                                                     <div class="card-header ps-md-2 pt-0 pb-0">
                                                                                         <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                                data-bs-target="#keyw-collapse-6" aria-expanded="false"
-                                                                                                aria-controls="keyw-collapse-6">
+                                                                                                data-bs-target="#access-collapse-6" aria-expanded="false"
+                                                                                                aria-controls="access-collapse-6">
                                                                                             <h5>その他2</h5>
                                                                                         </button>
                                                                                     </div>
@@ -1850,8 +1837,8 @@
                                                                                 <div class="card m-2 col-12 shadow-sm bg-secondary">
                                                                                     <div class="card-header ps-md-2 pt-0 pb-0">
                                                                                         <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                                data-bs-target="#keyw-collapse-7" aria-expanded="false"
-                                                                                                aria-controls="keyw-collapse-7">
+                                                                                                data-bs-target="#access-collapse-7" aria-expanded="false"
+                                                                                                aria-controls="access-collapse-7">
                                                                                             <h5>その他3</h5>
                                                                                         </button>
                                                                                     </div>
@@ -1868,8 +1855,8 @@
                                                                                 <div class="card m-2 col-12 shadow-sm bg-secondary">
                                                                                     <div class="card-header ps-md-2 pt-0 pb-0">
                                                                                         <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                                data-bs-target="#keyw-collapse-8" aria-expanded="false"
-                                                                                                aria-controls="keyw-collapse-8">
+                                                                                                data-bs-target="#access-collapse-8" aria-expanded="false"
+                                                                                                aria-controls="access-collapse-8">
                                                                                             <h5>その他4</h5>
                                                                                         </button>
                                                                                     </div>
@@ -1886,8 +1873,8 @@
                                                                                 <div class="card m-2 col-12 shadow-sm bg-secondary">
                                                                                     <div class="card-header ps-md-2 pt-0 pb-0">
                                                                                         <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                                data-bs-target="#keyw-collapse-9" aria-expanded="false"
-                                                                                                aria-controls="keyw-collapse-9">
+                                                                                                data-bs-target="#access-collapse-9" aria-expanded="false"
+                                                                                                aria-controls="access-collapse-9">
                                                                                             <h5>その他5</h5>
                                                                                         </button>
                                                                                     </div>
@@ -1904,8 +1891,8 @@
                                                                                 <div class="card m-2 col-12 shadow-sm bg-secondary">
                                                                                     <div class="card-header ps-md-2 pt-0 pb-0">
                                                                                         <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                                data-bs-target="#keyw-collapse-10" aria-expanded="false"
-                                                                                                aria-controls="keyw-collapse-10">
+                                                                                                data-bs-target="#access-collapse-10" aria-expanded="false"
+                                                                                                aria-controls="access-collapse-10">
                                                                                             <h5>その他6</h5>
                                                                                         </button>
                                                                                     </div>
@@ -1926,7 +1913,7 @@
                                                                     <div class="mb-4 pb-2">
                                                                         <div class="form-outline form-white">
                                                                             <label class="form-label" for="form3Examplev4">メモ</label>
-                                                                            <textarea class="form-control custom-control" rows="5" id="confirm_Memo" disabled></textarea>
+                                                                            <textarea class="form-control custom-control" rows="5" id="confirm_Remark" disabled></textarea>
                                                                         </div>
                                                                     </div>
 
