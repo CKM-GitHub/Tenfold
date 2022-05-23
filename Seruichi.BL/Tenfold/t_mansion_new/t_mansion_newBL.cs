@@ -64,9 +64,17 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
             validator.CheckSelectionRequired("RightKBN", model.RightKBN);
 
             validator.CheckRequired("Noti", model.Noti);
+            validator.CheckIsDoubleByte("Noti", model.Noti, 50);
+
             validator.CheckRequired("Katakana", model.Katakana);
+            validator.CheckIsDoubleByte("Katakana", model.Katakana, 50);
+
             validator.CheckRequired("Katakana1", model.Katakana1);
+            validator.CheckIsHalfWidth("Katakana1", model.Katakana1, 50);
+
             validator.CheckRequired("Hirakana", model.Hirakana);
+            validator.CheckIsDoubleByte("Hirakana", model.Hirakana, 50);
+
             if (validator.IsValid)
             {
                 foreach (var item in model.MansionStationList)
@@ -103,7 +111,7 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
             }
 
             ////M_Counter
-            if (!commonBL.CheckExistsCounterMaster(CounterKey.MansionID, out errorcd))
+            if (!commonBL.CheckExistsCounterMaster(CounterKey.MansionCD, out errorcd))
             {
                 validator.AddValidationResult("btnShowConfirmation", errorcd);
             }
