@@ -271,6 +271,7 @@ function setValidation() {
     $('#Katakana1')
         .addvalidation_errorElement("#errorKatakana1")
         .addvalidation_reqired()
+        .addvalidation_singlebyte();
     //ひらがな
     $('#Hirakana')
         .addvalidation_errorElement("#errorHirakana")
@@ -401,6 +402,7 @@ function addEvents() {
         })
     });
     $('.js-distance').on('click', function () {
+        debugger;
         const id = $(this).attr('id');
         const suffix = id.slice(-2).replace('_', '');
         var newValue = parseInt(suffix) + 1;
@@ -487,8 +489,9 @@ function setScreenComfirm(data) {
 
     $('#confirm_Other5').text($('#Other5').text());
     $('#confirm_Other6').text($('#Other6').text());
-    $('#confirm_Memo').text($('#Memo').text());
+    $('#confirm_Remark').text($('#Remark').text());
 
+    debugger;
     const stationContainer = $('.js-confirm-stationContainer');
     // stationContainer.children().remove();   
     let index = 0;

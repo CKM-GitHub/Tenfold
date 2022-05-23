@@ -147,9 +147,5 @@ namespace Seruichi.Tenfold.Web.Controllers
 
             return OKResult();
         } // Ajax: InsertSellerMansionData
-
-
-       
-
     }
 }
