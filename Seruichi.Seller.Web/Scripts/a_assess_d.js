@@ -111,7 +111,11 @@ function SetMansionRank(data) {
     //}
     //return  common.callAjaxWithLoading(_url.GetD_MansionRank_Info, model, this, function (result) {
     //    if (result && result.isOK) {
-            var arr = ($.parseJSON(data));
+    var arr = ($.parseJSON(data));
+    if (arr[0].Flg != '') {
+        $('.flg-rate').addClass('hideAssess');
+        _valFlg = true;
+    }
             var attach = ''; 
             for (var i = 0; i < arr.length; i++) {
                 var f = (arr[i]);
