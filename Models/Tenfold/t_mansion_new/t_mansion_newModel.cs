@@ -18,6 +18,12 @@ namespace Models.Tenfold.t_mansion_new
             public string StationCD { get; set; }
             public string Distance { get; set; }
         }
+        public class MansionWord
+        {
+            public int RowNo { get; set; }
+            public string WordSEQ { get; set; }
+            public string Word { get; set; }
+        }
         public string MansionCD { get; set; }
         public string MansionName { get; set; }
         public string PrefCD { get; set; }
@@ -54,5 +60,8 @@ namespace Models.Tenfold.t_mansion_new
         public string Other6 { get; set; }
         public List<MansionStation> MansionStationList { get; set; } = new List<MansionStation>();
         public string MansionStationListJson { get; set; }
+
+        public List<MansionWord> MansionWordList { get; set; } = new List<MansionWord>();
+        public string MansionWordListJson { get; set; }
     }
 }

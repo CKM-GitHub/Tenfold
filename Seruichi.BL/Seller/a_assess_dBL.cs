@@ -11,23 +11,8 @@ using Seruichi.Common;
 namespace Seruichi.BL.Seller
 {//pr_a_assess_d_Select_MansionInfo_by_AssReqID
     public class a_assess_dBL 
-    {
-        public DataTable GetD_Mansion_Info(a_assess_dModel model)
-        {
-            var sqlParams = new SqlParameter[]
-             {
-                new SqlParameter("@AssReqID", SqlDbType.VarChar){ Value = model.AssReqID }, 
-                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD }, 
-             }; 
-            DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_a_assess_d_Select_MansionInfo_by_AssReqID", sqlParams);
-            AESCryption crypt = new AESCryption();
-            string decryptionKey = StaticCache.GetDataCryptionKey();
-            foreach (DataRow dr in dt.Rows)
-                dr["SellerName"] = crypt.DecryptFromBase64(dr["SellerName"].ToString(), decryptionKey);
-            return dt;
-        }
-        public DataTable GetD_Spec_Info(a_assess_dModel model)
+    { 
+        public DataSet GetD_Screen_Info(a_assess_dModel model)
         {
             var sqlParams = new SqlParameter[]
              {
@@ -35,32 +20,13 @@ namespace Seruichi.BL.Seller
                 new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD },
              };
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_a_assess_d_Select_SpecInfo_by_AssReqID", sqlParams);
-            return dt;
-        }
-        public DataTable GetD_MansionRank_Info(a_assess_dModel model)
-        {
-            var sqlParams = new SqlParameter[]
-             {
-                new SqlParameter("@AssReqID", SqlDbType.VarChar){ Value = model.AssReqID },
-                //new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD },
-             };
-            DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_a_assess_d_Select_MansionRank_by_AssReqID", sqlParams);
-         
-            return dt;
-        }
-        public DataTable GetD_AreaRank_Info(a_assess_dModel model)
-        {
-            var sqlParams = new SqlParameter[]
-             {
-                new SqlParameter("@AssReqID", SqlDbType.VarChar){ Value = model.AssReqID },
-                //new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD },
-             };
-            DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_a_assess_d_Select_AreaRank_by_AssReqID", sqlParams);
-            return dt;
-        }
+            var ds = db.SelectDataSet("pr_a_assess_d_Select_Screen_by_AssReqID", sqlParams);
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+            foreach (DataRow dr in ds.Tables[0].Rows)
+                dr["SellerName"] = crypt.DecryptFromBase64(dr["SellerName"].ToString(), decryptionKey);
+            return ds;
+        } 
         public void InsertD_AssReqProgress_L_Log(a_mypage_ahisModel_l_log_Model model)
         {
             var sqlParams = new SqlParameter[]

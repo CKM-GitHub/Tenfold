@@ -166,6 +166,7 @@
     <Content Include="Content\css\jquery.dataTables.min.css" />
     <Content Include="Content\css\Soft-UI-Aside-Navbar.css" />
     <Content Include="Content\css\tree.css" />
+    <Content Include="Content\css\t_mansion_new.css" />
     <Content Include="Content\scripts\fileup.min.js" />
     <Content Include="Content\scripts\fileuploads.js" />
     <Content Include="Content\scripts\fileuploads1.js" />

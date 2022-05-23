@@ -109,7 +109,7 @@ function addEvents() {
         $('#total_record_up').text("検索結果： 0件");
         $('#no_record').text("");
         $('#mansiontable tbody').empty();
-
+        debugger;
         const $Apartment = $("#txtApartment").val().trim(), $StartAge = $("#StartNum").val(), $EndAge = $('#EndNum').val(),
             $StartUnit = $("#StartUnit").val(), $EndUnit = $("#EndUnit").val()
 
@@ -291,19 +291,31 @@ function addEvents() {
         window.location.href = common.appPath + '/t_mansion_new/Index';
     });
 
-    $(document).on('click', '.tree li  input[type="checkbox"]', function () {
-        $(this).closest('li').find('ul input[type="checkbox"]').prop('checked', $(this).is(':checked'));
-    }).on('click', '.node-item', function () {
-        var parentNode = $(this).parents('.tree ul');
-        if ($(this).is(':checked')) {
-            parentNode.find('li .node-parent').prop('checked', true);
-        } else {
-            var elements = parentNode.find('ul input[type="checkbox"]:checked');
-            if (elements.length == 0) {
-                parentNode.find('li .node-parent').prop('checked', false);
-            }
-        }
-    });
+    //$(document).on('click', '.tree li  input[type="checkbox"]', function () {
+    //    $(this).closest('li').find('ul input[type="checkbox"]').prop('checked', $(this).is(':checked'));
+    //}).on('click', '.node-item', function () {
+    //    var parentNode = $(this).parents('.tree ul');
+    //    if ($(this).is(':checked')) {
+
+    //        var elementschk = parentNode.find('ul input[type="checkbox"]:checked');
+    //        var elements = parentNode.find('ul input[type="checkbox"]');
+    //        if (elements.length == elementschk.length) {
+    //            parentNode.find('li .node-parent').prop('checked', true);
+    //        }
+    //        else {
+    //            parentNode.find('li .node-parent').prop('checked', false);
+    //        }
+    //    } else {
+    //        var elementschk = parentNode.find('ul input[type="checkbox"]:checked');
+    //        var elements = parentNode.find('ul input[type="checkbox"]');
+    //        if (elements.length == elementschk.length) {
+    //            parentNode.find('li .node-parent').prop('checked', true);
+    //        }
+    //        else {
+    //            parentNode.find('li .node-parent').prop('checked', false);
+    //        }
+    //    }
+    //});
 }
 
 function Get_FT_Age(age, type) {

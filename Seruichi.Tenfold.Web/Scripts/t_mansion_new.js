@@ -22,6 +22,8 @@ $(function () {
 });
 
 function setValidation() {
+
+    
     //マンション名
     $('#MansionName')
         .addvalidation_errorElement("#errorName")
@@ -269,7 +271,6 @@ function setValidation() {
     $('#Katakana1')
         .addvalidation_errorElement("#errorKatakana1")
         .addvalidation_reqired()
-        .addvalidation_singlebyte_number();
     //ひらがな
     $('#Hirakana')
         .addvalidation_errorElement("#errorHirakana")
@@ -286,6 +287,14 @@ function addEvents() {
 
     //共通チェック処理
     common.bindValidationEvent('#form1', ':not(#ZipCode1,#ZipCode2)');
+
+    $(function () { $("#form1").submit(function () { return false; }); });
+
+    $('.container-fluid .card-body').keypress(function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+        }
+    });
 
     //郵便番号
     $('#ZipCode1,#ZipCode2').on('change', function () {
@@ -405,8 +414,6 @@ function addEvents() {
             common.setFocusFirstError($form);
             return false;
         }
-
-
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         model.PrefName = $('#PrefCD option:selected').text();
@@ -414,6 +421,7 @@ function addEvents() {
         model.TownName = $('#TownCD option:selected').text();
         model.ConstYYYYMM = model.ConstYYYYMM.replace('-', '');
         model.MansionStationListJson = JSON.stringify(getMansionStationList());
+        model.MansionWordListJson = JSON.stringify(getMansionWordList());
         common.callAjaxWithLoading(_url.checkAll, model, this, function (result) {
             if (result && result.isOK) {
                 updateData = model;
@@ -430,7 +438,6 @@ function addEvents() {
     });
 
     $('#btnRegistration').on('click', function () {
-        alert("Hello! I am an alert box!!");
         common.callAjaxWithLoading(_url.insertSellerMansionData, updateData, this, function (result) {
             if (result && result.isOK) {
                 //sucess
@@ -645,5 +652,28 @@ function getParagraphNumber(number) {
     if (number === 19) return '路線19'
     if (number === 20) return '路線20'
 }
+
+function getMansionWordList() {
+    let array = [];
+    $('.js-wordContainer .js-word').each(function (index) {
+        const $this = $(this);
+        const data = {
+            RowNo: index + 1,
+            WordSEQ:  index+1,
+            Word: $this.find('.noti').val()
+        }
+        if (data.Word) {
+            array[array.length] = data;
+        }
+    });
+      
+    return array;
+}
+
+//function findRecords(e) {
+//    e.preventDefault();
+//    var formData = $(this).serialize(),
+//        fldMessage = $(this).find(".message-submit"),
+//        recordsBox = $("#user_records"),
 
 

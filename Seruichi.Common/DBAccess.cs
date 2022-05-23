@@ -45,6 +45,37 @@ namespace Seruichi.Common
             }
         }
 
+        public DataSet SelectDataSet(string sSQL, params SqlParameter[] para)
+        {
+            DataSet dt = new DataSet();
+
+            try
+            {
+                using (var conn = new SqlConnection(connectionString))
+                using (var adapt = new SqlDataAdapter(sSQL, conn))
+                {
+                    conn.Open();
+                    adapt.SelectCommand.CommandTimeout = commandTimeout;
+                    adapt.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+                    if (para != null)
+                    {
+                        para = ChangeToDBNull(para);
+                        adapt.SelectCommand.Parameters.AddRange(para);
+                    }
+
+                    adapt.Fill(dt);
+                    conn.Close();
+                }
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex, sSQL);
+                throw ex;
+            }
+        }
         public bool InsertUpdateDeleteData(string sSQL, bool useOptimisticExclusion, params SqlParameter[] para)
         {
             try
