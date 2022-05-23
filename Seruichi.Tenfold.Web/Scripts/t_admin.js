@@ -24,6 +24,24 @@ function setValidation() {
         .addvalidation_reqired()
         .addvalidation_doublebyte()
         .addvalidation_maxlengthCheck(15);
+
+    if ($('#txtPassword').val() != "" && $('#txtConfirmPassword').val() != "") {
+        $('#txtPassword')
+            .addvalidation_errorElement("#error_txtPassword")
+            .addvalidation_reqired()
+            .addvalidation_singlebyte()
+            .addvalidation_minlengthCheck(8)
+            .addvalidation_maxlengthCheck(30)
+           
+        $('#txtConfirmPassword')
+            .addvalidation_errorElement("#error_txtConfirmPassword")
+            .addvalidation_reqired()
+            .addvalidation_singlebyte()
+            .addvalidation_minlengthCheck(8)
+            .addvalidation_maxlengthCheck(30)
+            .addvalidation_passwordcompare()
+            
+    }
 }
 function addEvents() {
     common.bindValidationEvent('#form1', '');
@@ -53,16 +71,7 @@ function addEvents() {
                 }
             });
     });
-
-    //const $TenStaffCD = $("#TenStaffCD").val(), $TenStaffPW = $("#TenStaffPW").val(), $TenStaffName = $("#TenStaffName").val(),
-    //    $InvalidFLG = $("#InvalidFLG").val()
-
-    //let model = {
-    //    TenStaffCD: $TenStaffCD,
-    //    TenStaffPW: $TenStaffPW,
-    //    TenStaffName: $TenStaffName,
-    //    InvalidFLG: $InvalidFLG
-    //};
+    
 
     $('#btn_save_update').on('click', function () {
         $form = $('#form1').hideChildErrors();
@@ -70,6 +79,13 @@ function addEvents() {
         if (!common.checkValidityOnSave('#form1')) {
             $form.getInvalidItems().get(0).focus();
             return false;
+        }
+
+        if ($('#chk_Invalidflg').is(':checked')) {
+            $('#InvalidFLG').val(1);
+        }
+        else {
+            $('#InvalidFLG').val(0);
         }
         
         const fd = new FormData(document.forms.form1);
@@ -80,7 +96,7 @@ function addEvents() {
 function Save_M_TenfoldStaff(model, $form){
     common.callAjaxWithLoading(_url.save_M_TenfoldStaff, model, this, function (result) {
         if (result && result.isOK) {
-
+            clear_formdata();
         }
         if (result && !result.isOK) {
             const errors = result.data;
@@ -91,4 +107,12 @@ function Save_M_TenfoldStaff(model, $form){
             }
         }
     });
+}
+
+function clear_formdata() {
+    $('#TenStaffCD').val("");
+    $('#TenStaffPW').val("");
+    $('#TenStaffName').val("");
+    $('#chk_Invalidflg').prop("unchecked");
+    $('#InvalidFLG').val("");
 }

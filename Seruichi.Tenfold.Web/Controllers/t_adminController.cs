@@ -17,7 +17,11 @@ namespace Seruichi.Tenfold.Web.Controllers
         {
             t_adminBL bl = new t_adminBL();
             List<t_adminModel> lst = new List<t_adminModel>();
-            DataTable dt = bl.Get_M_TenfoldStaff_Not_Include_Admin();
+            DataTable dt = new DataTable();
+            if (GetOperator() != "admin")
+                dt = bl.Get_M_TenfoldStaff_By_LoginID("not_admin");
+            else
+                dt = bl.Get_M_TenfoldStaff_By_LoginID("admin");
             lst = (from DataRow dr in dt.Rows
                    select new t_adminModel()
                    {
@@ -27,6 +31,9 @@ namespace Seruichi.Tenfold.Web.Controllers
                        InvalidFLG = dr["InvalidFLG"].ToString() == "1" ? "checked" : "unchecked",
                    }).ToList();
             ViewBag.M_TenfoldStaff_list = lst;
+            if (lst[0].TenStaffCD == "admin")
+                ViewBag.AdminPW = lst[0].TenStaffPW;
+            else ViewBag.AdminPW = "";
             return View();
         }
         [HttpPost]
@@ -55,6 +62,9 @@ namespace Seruichi.Tenfold.Web.Controllers
             {
                 return ErrorResult(validationResult);
             }
+            model.LoginName = GetLoginStaffName();
+            model.Operator = GetOperator();
+            model.IPAddress = GetClientIP();
             bl.Save_M_TenfoldStaff(model);
             return OKResult();
         }

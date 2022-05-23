@@ -12,5 +12,7 @@ namespace Models.Tenfold.t_admin
         public string TenStaffPW { get; set; }
         public string TenStaffName { get; set; }
         public string InvalidFLG { get; set; }
+        public string DeleteFLG { get; set; }             
+        public string LoginName { get; set; }
     }
 }

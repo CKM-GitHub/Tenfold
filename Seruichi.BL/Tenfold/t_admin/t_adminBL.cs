@@ -53,16 +53,36 @@ namespace Seruichi.BL.Tenfold.t_admin
             return validator.GetValidationResult();
         }
 
-        public DataTable Get_M_TenfoldStaff_Not_Include_Admin()
+        public DataTable Get_M_TenfoldStaff_By_LoginID(string loginID)
         {
             var sqlParams = new SqlParameter[]
-             {};
+            {
+                new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = loginID.ToStringOrNull() }
+            };
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_t_admin_Select_M_TenfoldStaff_Not_Include_Admin", sqlParams);
+            var dt = db.SelectDatatable("pr_t_admin_Select_M_TenfoldStaff", sqlParams);
             return dt;
         }
         public void Save_M_TenfoldStaff(t_adminModel model)
+        {
+            
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@TenStaffCD", SqlDbType.VarChar){ Value = model.TenStaffCD.ToStringOrNull()},
+                new SqlParameter("@TenStaffPW", SqlDbType.VarChar){ Value = model.TenStaffPW.ToStringOrNull() },
+                new SqlParameter("@TenStaffName", SqlDbType.VarChar){ Value = model.TenStaffName.ToStringOrNull() },
+                new SqlParameter("@InvalidFLG", SqlDbType.TinyInt){ Value =  model.InvalidFLG.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value =  model.LoginName.ToStringOrNull() },
+                new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.Operator.ToStringOrNull() },
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress }
+             };
+
+            DBAccess db = new DBAccess();
+            db.InsertUpdateDeleteData("pr_t_admin_Insert_M_TenfoldStaff", false, sqlParams);
+        }
+
+        public void Update_M_TenfoldStaff(t_adminModel model)
         {
 
             var sqlParams = new SqlParameter[]
@@ -71,12 +91,14 @@ namespace Seruichi.BL.Tenfold.t_admin
                 new SqlParameter("@TenStaffPW", SqlDbType.VarChar){ Value = model.TenStaffPW.ToStringOrNull() },
                 new SqlParameter("@TenStaffName", SqlDbType.VarChar){ Value = model.TenStaffName.ToStringOrNull() },
                 new SqlParameter("@InvalidFLG", SqlDbType.TinyInt){ Value =  model.InvalidFLG.ToStringOrNull() },
+                new SqlParameter("@DeleteFlG", SqlDbType.TinyInt){ Value =  model.DeleteFLG.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value =  model.LoginName.ToStringOrNull() },
                 new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.Operator.ToStringOrNull() },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress }
              };
 
             DBAccess db = new DBAccess();
-            db.InsertUpdateDeleteData("pr_t_admin_Insert_M_TenfoldStaff", false, sqlParams);
+            db.InsertUpdateDeleteData("pr_t_admin_Update_M_TenfoldStaff", false, sqlParams);
         }
     }
 }
