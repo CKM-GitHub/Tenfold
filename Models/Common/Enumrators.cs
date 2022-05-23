@@ -5,6 +5,7 @@
         None = 0,
         MansionID = 7,
         SellerCD = 2,
+        MansionCD = 7,
     }
 
     public enum MailKBN : int

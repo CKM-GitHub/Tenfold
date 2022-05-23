@@ -21,8 +21,8 @@ namespace Models.Tenfold.t_mansion_new
         public class MansionWord
         {
             public int RowNo { get; set; }
-            public string Word1 { get; set; }
-            public string Word2 { get; set; }
+            public string WordSEQ { get; set; }
+            public string Word { get; set; }
         }
         public string MansionCD { get; set; }
         public string MansionName { get; set; }

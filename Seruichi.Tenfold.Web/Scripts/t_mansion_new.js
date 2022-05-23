@@ -22,6 +22,8 @@ $(function () {
 });
 
 function setValidation() {
+
+    
     //マンション名
     $('#MansionName')
         .addvalidation_errorElement("#errorName")
@@ -269,7 +271,6 @@ function setValidation() {
     $('#Katakana1')
         .addvalidation_errorElement("#errorKatakana1")
         .addvalidation_reqired()
-        .addvalidation_singlebyte_number();
     //ひらがな
     $('#Hirakana')
         .addvalidation_errorElement("#errorHirakana")
@@ -286,6 +287,14 @@ function addEvents() {
 
     //共通チェック処理
     common.bindValidationEvent('#form1', ':not(#ZipCode1,#ZipCode2)');
+
+    $(function () { $("#form1").submit(function () { return false; }); });
+
+    $('.container-fluid .card-body').keypress(function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+        }
+    });
 
     //郵便番号
     $('#ZipCode1,#ZipCode2').on('change', function () {
@@ -405,8 +414,6 @@ function addEvents() {
             common.setFocusFirstError($form);
             return false;
         }
-
-        debugger;
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         model.PrefName = $('#PrefCD option:selected').text();
@@ -431,7 +438,6 @@ function addEvents() {
     });
 
     $('#btnRegistration').on('click', function () {
-        alert("Hello! I am an alert box!!");
         common.callAjaxWithLoading(_url.insertSellerMansionData, updateData, this, function (result) {
             if (result && result.isOK) {
                 //sucess
@@ -485,7 +491,6 @@ function setScreenComfirm(data) {
 
     const stationContainer = $('.js-confirm-stationContainer');
     // stationContainer.children().remove();   
-    debugger;
     let index = 0;
     $('.js-stationContainer .js-station').each(function () {
         const $this = $(this);
@@ -653,7 +658,7 @@ function getMansionWordList() {
     $('.js-wordContainer .js-word').each(function (index) {
         const $this = $(this);
         const data = {
-            Row: index + 1,
+            RowNo: index + 1,
             WordSEQ:  index+1,
             Word: $this.find('.noti').val()
         }
