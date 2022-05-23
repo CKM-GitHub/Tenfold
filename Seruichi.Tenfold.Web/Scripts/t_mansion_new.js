@@ -406,7 +406,7 @@ function addEvents() {
             return false;
         }
 
-
+        debugger;
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         model.PrefName = $('#PrefCD option:selected').text();
@@ -414,6 +414,7 @@ function addEvents() {
         model.TownName = $('#TownCD option:selected').text();
         model.ConstYYYYMM = model.ConstYYYYMM.replace('-', '');
         model.MansionStationListJson = JSON.stringify(getMansionStationList());
+        model.MansionWordListJson = JSON.stringify(getMansionWordList());
         common.callAjaxWithLoading(_url.checkAll, model, this, function (result) {
             if (result && result.isOK) {
                 updateData = model;
@@ -484,6 +485,7 @@ function setScreenComfirm(data) {
 
     const stationContainer = $('.js-confirm-stationContainer');
     // stationContainer.children().remove();   
+    debugger;
     let index = 0;
     $('.js-stationContainer .js-station').each(function () {
         const $this = $(this);
@@ -645,5 +647,28 @@ function getParagraphNumber(number) {
     if (number === 19) return '路線19'
     if (number === 20) return '路線20'
 }
+
+function getMansionWordList() {
+    let array = [];
+    $('.js-wordContainer .js-word').each(function (index) {
+        const $this = $(this);
+        const data = {
+            Row: index + 1,
+            WordSEQ:  index+1,
+            Word: $this.find('.noti').val()
+        }
+        if (data.Word) {
+            array[array.length] = data;
+        }
+    });
+      
+    return array;
+}
+
+//function findRecords(e) {
+//    e.preventDefault();
+//    var formData = $(this).serialize(),
+//        fldMessage = $(this).find(".message-submit"),
+//        recordsBox = $("#user_records"),
 
 

@@ -121,18 +121,20 @@ namespace Seruichi.Tenfold.Web.Controllers
             {
                 return BadRequestResult();
             }
+            string addressSearch = model.PrefName + model.CityName + model.TownName + model.Address;
+            t_mansion_newBL bl = new t_mansion_newBL();
+            (string longi, string lati) = bl.AddressSearch(addressSearch);
 
             CommonBL blCmm = new CommonBL();
-            var longitude_latitude = blCmm.GetLongitudeAndLatitude(model.PrefName, model.CityName, model.TownName, model.Address);
-            model.Longitude = longitude_latitude[0];
-            model.Latitude = longitude_latitude[1];
+            model.Longitude = longi[0];
+            model.Latitude = lati[0];
             model.SellerCD = base.GetOperator();
             model.SellerName = base.GetOperatorName();
             model.Operator = base.GetOperator();
             model.IPAddress = base.GetClientIP();
             model.MansionStationList = ConvertJsonToObject<List<t_mansion_newModel.MansionStation>>(model.MansionStationListJson);
+            model.MansionWordList = ConvertJsonToObject<List<t_mansion_newModel.MansionWord>>(model.MansionWordListJson);
 
-            t_mansion_newBL bl = new t_mansion_newBL();
             var validationResult = bl.ValidateAll(model);
             if (validationResult.Count > 0)
             {
@@ -145,6 +147,9 @@ namespace Seruichi.Tenfold.Web.Controllers
 
             return OKResult();
         } // Ajax: InsertSellerMansionData
+
+
        
+
     }
 }

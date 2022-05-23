@@ -99,7 +99,7 @@ function l_logfunction(link) {
     common.callAjax(_url.InsertL_Log, model,
         function (result) {
             if (result && result.isOK) {
-                window.location.href = window.location.protocol + "//" + window.location.host + "/" + link + "?AssReqID=" + $('#assessreqid').text();  
+                window.location.href = window.location.href.replace('a_mypage_ahis', '')  + link + "?AssReqID=" + $('#assessreqid').text();  
             } 
         });
 }  
