@@ -34,7 +34,7 @@ namespace Seruichi.Seller.Web.Controllers
             var dt = bl.GetD_AssReqProgressList(model);
 
             foreach (DataRow dr in dt.Rows)
-                dr["AssessAmount"]=dr["AssessAmount"].ToString().Replace("0円", "").Replace("0 円","");
+                dr["AssessAmount"]=(dr["AssessAmount"].ToString()) ==  "0円" ? "": (dr["AssessAmount"].ToString()) == "0 円" ? "" : (dr["AssessAmount"].ToString());
 
             return OKResult(DataTableToJSON(dt));
         }
