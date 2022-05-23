@@ -28,6 +28,7 @@ namespace Models.RealEstate.r_asmc_ms_reged_list
         public string PrefName { get; set; }
         public string CityGPCD { get; set; }
         public string CityGPName { get; set; }
+        public string IsChild { get; set; }
     }
     public class M_Pref_And_CityGPCD_And_CityCD
     {
