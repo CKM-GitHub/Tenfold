@@ -45,46 +45,16 @@ namespace Seruichi.Seller.Web.Controllers
             model.SellerCD = user.UserID;
             model.AssReqID =  Session["AssReqID"].ToString();
             a_assess_dBL bl = new a_assess_dBL();
-            var dt = bl.GetD_Mansion_Info(model);
-            var jsonmerge = DataTableToJSON(dt) + "Ʈ" + GetD_Spec_Info(new a_assess_dModel()) + "Ʈ" + GetD_MansionRank_Info(new a_assess_dModel()) + "Ʈ" + GetD_AreaRank_Info(new a_assess_dModel());
+            var ds = bl.GetD_Screen_Info(model);
+            var jsonmerge = DataTableToJSON(ds.Tables[0]) + "Ʈ" + DataTableToJSON(ds.Tables[1]) + "Ʈ" + DataTableToJSON(ds.Tables[2]) + "Ʈ" + DataTableToJSON(ds.Tables[3]);
             return OKResult(jsonmerge);
         }
-       // [HttpPost]
-        public string GetD_Spec_Info(a_assess_dModel model)
-        {
-            LoginUser user = SessionAuthenticationHelper.GetUserFromSession();
-            model.SellerCD = user.UserID;
-            model.AssReqID = Session["AssReqID"].ToString();
-            a_assess_dBL bl = new a_assess_dBL();
-            var dt = bl.GetD_Spec_Info(model);
-            return   DataTableToJSON(dt);
-        }
-       // [HttpPost]
-        public string GetD_MansionRank_Info(a_assess_dModel model)
-        {
-            LoginUser user = SessionAuthenticationHelper.GetUserFromSession();
-            model.SellerCD = user.UserID;
-            model.AssReqID = Session["AssReqID"].ToString();
-            a_assess_dBL bl = new a_assess_dBL();
-            var dt = bl.GetD_MansionRank_Info(model);
-            return  DataTableToJSON(dt) ;
-        }
-        //[HttpPost]
-        public  string GetD_AreaRank_Info(a_assess_dModel model)
-        {
-            LoginUser user = SessionAuthenticationHelper.GetUserFromSession();
-            model.SellerCD = user.UserID;
-            model.AssReqID = Session["AssReqID"].ToString();
-            a_assess_dBL bl = new a_assess_dBL();
-            var dt = bl.GetD_AreaRank_Info(model);
-            return  DataTableToJSON(dt) ;
-        }
-        //[HttpPost]
+      
         public void InsertGetD_AssReqProgress_L_Log(a_mypage_ahisModel_l_log_Model model)
         {
             LoginUser user = SessionAuthenticationHelper.GetUserFromSession();
             model.SellerCD = user.UserID;
-            a_mypage_ahisBL bl = new a_mypage_ahisBL();
+            a_assess_dBL bl = new a_assess_dBL();
             model = Getlogdata(model);
             bl.InsertD_AssReqProgress_L_Log(model);
             //return OKResult();Ʈ
