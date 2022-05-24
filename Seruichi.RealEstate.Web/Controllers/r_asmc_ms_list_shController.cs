@@ -11,7 +11,7 @@ using Seruichi.BL.RealEstate.r_asmc_ms_list_sh;
 
 namespace Seruichi.RealEstate.Web.Controllers
 {
-    public class r_asmc_ms_list_shController : Controller
+    public class r_asmc_ms_list_shController : BaseController
     {
         // GET: r_asmc_ms_list_sh
         public ActionResult Index()
@@ -58,6 +58,28 @@ namespace Seruichi.RealEstate.Web.Controllers
             ViewBag.CityGPCD = prefcitygpcdList;
             ViewBag.CityCD = cityList;
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult get_DisplayData(r_asmc_ms_list_shModel model)
+        {
+            if (String.IsNullOrWhiteSpace(model.MansionName) && String.IsNullOrWhiteSpace(model.CityCD) && String.IsNullOrWhiteSpace(model.StartYear) && String.IsNullOrWhiteSpace(model.EndYear) && String.IsNullOrWhiteSpace(model.Radio_Priority))
+            {
+                return ErrorMessageResult("E303");
+            }
+            else
+            {
+                DataTable dt = new DataTable();
+                r_asmc_ms_list_shBL bl = new r_asmc_ms_list_shBL();
+                var validationResult = bl.ValidateAll(model);
+                if (validationResult.Count > 0)
+                {
+                    return ErrorResult(validationResult);
+                }
+                model.RealECD = base.GetOperator("RealECD");
+                dt = bl.get_DisplayData(model);
+                return OKResult(DataTableToJSON(dt));
+            }
         }
     }
 }

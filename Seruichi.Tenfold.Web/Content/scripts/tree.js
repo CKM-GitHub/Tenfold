@@ -12,8 +12,7 @@
         if (typeof o.closedClass != 'undefined'){
         closedClass = o.closedClass;
         }
-      };
-      
+        };
         //initialize each of the top levels
         var tree = $(this);
         tree.addClass("tree");
