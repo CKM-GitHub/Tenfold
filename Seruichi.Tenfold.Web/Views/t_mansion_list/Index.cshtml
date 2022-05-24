@@ -42,37 +42,37 @@
                                     {
                                         if (cityGPCD.PrefCD == item.PrefCD)
                                         {
-                                            
-                                                <li class="text-nowrap">
-                                                    <input class="form-check-input node-parent" type="checkbox" value="@cityGPCD.CityGPCD" id="flexCheckChecked">
-                                                    <label class="form-check-label" for="flexCheckChecked">
-                                                        @cityGPCD.CityGPName
-                                                    </label>
+                                            <li class="text-nowrap">
+                                                <input class="form-check-input node-parent" type="checkbox" value="@cityGPCD.CityGPCD" id="flexCheckChecked">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    @cityGPCD.CityGPName
+                                                </label>
 
+                                                @if (cityGPCD.AddressLevel == "2")
+                                                {
                                                     <ul>
-                                                        @foreach (var cityCD in ViewBag.CityCD)
-                                                        {
-                                                            if ((cityCD.CityGPCD == cityGPCD.CityGPCD) && (cityCD.PrefCD == cityGPCD.PrefCD))
-                                                            {
-                                                               
-                                                                    <li>
-                                                                        <input class="form-check-input node-item" type="checkbox" value="@cityCD.CityCD" id="flexCheckChecked">
-                                                                        <label class="form-check-label" for="flexCheckChecked">
-                                                                            @cityCD.CityName
-                                                                        </label>
-                                                                    </li>
+                                                           @foreach (var cityCD in ViewBag.CityCD)
+                                                           {
+                                                               if ((cityCD.CityGPCD == cityGPCD.CityGPCD) && (cityCD.PrefCD == cityGPCD.PrefCD))
+                                                               {
 
-                                                               
-                                                            }
+                                                                   <li>
+                                                                       <input class="form-check-input node-item" type="checkbox" value="@cityCD.CityCD" id="flexCheckChecked">
+                                                                       <label class="form-check-label" for="flexCheckChecked">
+                                                                           @cityCD.CityName
+                                                                       </label>
+                                                                   </li>
 
-                                                        }
-                                                    </ul>
 
-                                                    
+                                                               }
 
-                                                </li>
+                                                           }
+                                                     </ul>
 
-                                            
+                                                }
+
+                                            </li>
+
                                         }
 
                                     }

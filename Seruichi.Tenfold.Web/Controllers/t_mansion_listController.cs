@@ -35,7 +35,8 @@ namespace Seruichi.Tenfold.Web.Controllers
                                     PrefCD = dr["PrefCD"].ToString(),
                                     PrefName = dr["PrefName"].ToString(),
                                     CityGPCD = dr["CityGPCD"].ToString(),
-                                    CityGPName = dr["CityGPName"].ToString()
+                                    CityGPName = dr["CityGPName"].ToString(),
+                                    AddressLevel = dr["AddressLevel"].ToString()
                                 }).ToList();
             List<M_Pref_And_CityGPCD_And_CityCD> cityList = new List<M_Pref_And_CityGPCD_And_CityCD>();
             DataTable dt2 = bl.Get_Prefcd_and_CityGPCD_and_CityCD();
