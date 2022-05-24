@@ -12,7 +12,7 @@ using System.Web.Security;
 
 namespace Seruichi.Tenfold.Web.Controllers
 {
-    
+    [IgnoreVerificationToken]
     [AllowAnonymous]
     public class t_loginController : BaseController
     {
