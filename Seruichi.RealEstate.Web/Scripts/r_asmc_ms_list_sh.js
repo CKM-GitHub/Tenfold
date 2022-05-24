@@ -126,6 +126,14 @@ function addEvents() {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
+        if (!StartEndCompare('Distance')) {
+            $form.getInvalidItems().get(0).focus();
+            return false;
+        }
+        if (!StartEndCompare('Rooms')) {
+            $form.getInvalidItems().get(0).focus();
+            return false;
+        }
 
         const $MansionName = $("#MansionName").val().trim(), $StartYear = $("#StartYear").val(), $EndYear = $('#EndYear').val()
         var CityCD = '';
@@ -166,7 +174,7 @@ function StartEndCompare(type) {
         case 'Distance':
             if ($("#StartDistance").val() != "" && $("#EndDistance").val() != "") {
                 if (!start_endCompare($("#StartDistance").val(), $("#EndDistance").val())) {
-                    $("#StartDistance").showError(this.getMessage('E113'));
+                    $("#StartDistance").showError(common.getMessage('E113'));
                     $("#StartDistance").focus();
                     return false;
                 }
@@ -175,7 +183,7 @@ function StartEndCompare(type) {
         case 'Rooms':
             if ($("#StartRooms").val() != "" && $("#EndRooms").val() != "") {
                 if (!start_endCompare($("#StartRooms").val(), $("#EndRooms").val())) {
-                    $("#StartRooms").showError(this.getMessage('E113'));
+                    $("#StartRooms").showError(common.getMessage('E113'));
                     $("#StartRooms").focus();
                     return false;
                 }
@@ -244,11 +252,16 @@ function get_DisplayData(model, $form) {
 function Bind_Data(data) {
     var div_Display = '';
     for (var i = 0; i < data.length; i++) {
-        var txt_class = '';
+        var txt_class = '', validFLG_class = '';
         if (data[i]["登録有無"] == '未登録')
             txt_class = 'text-success';
         else if (data[i]["登録有無"] == '登録済')
             txt_class = 'text-danger';
+
+        if (data[i]["公開状況"] == '(未公開)')
+            validFLG_class = 'text-success';
+        else if (data[i]["公開状況"] == '(公開済)')
+            validFLG_class = 'text-danger';
 
         div_Display += '\
             <div class="col" >\
@@ -259,7 +272,7 @@ function Bind_Data(data) {
                                 <div class="row">\
                                     <div class="col-12">\
                                         <h5 class="d-md-inline-flex">\
-                                            <a href="#" id='+ data[i]["マンションCD"] + ' class="text-decoration-underline" onclick="MansionName_Click(this.id)">' + data[i]["マンション名"] + '</a>\
+                                            <a href="#" id='+ data[i]["マンションCD"] + ' class="text-decoration-underline" onclick="MansionName_Click(this)">' + data[i]["マンション名"] + '</a>\
                                             <h6 class="' + txt_class + ' float-end">' + data[i]["登録有無"] + '</h6>\
                                         </h5>\
                                         <hr class="opacity-20 my-5 mt-2 mb-2">\
@@ -277,7 +290,7 @@ function Bind_Data(data) {
                                         <div class="">\
                                             <div class=" d-xxl-flex">\
                                                 <span class="small">最終更新日 : </span><span class="small">' + data[i]["最終更新日"] + '</span>\
-                                                <span class="ps-2 ps-xxl-5 text-end small"> ' + data[i]["公開状況"] + '</span>\
+                                                <span class="' + validFLG_class + ' ps-2 ps-xxl-5 text-end small"> ' + data[i]["公開状況"] + '</span>\
                                             </div>\
                                             <div class="d-xxl-flex">\
                                                 <span class="small pt-1">有効期限日 : </span><span class="small pt-1">' + data[i]["有効期限日"] + '</span>\
@@ -295,4 +308,24 @@ function Bind_Data(data) {
     }
 
     $('#displayArea').append(div_Display);
+}
+
+function MansionName_Click(ctrl) {
+    let model = {
+        LogDateTime: null,
+        LoginKBN: '2',
+        LoginID: null,
+        RealECD: null,
+        LoginName: null,
+        IPAddress: null,
+        PageID: 'r_asmc_ms_list_sh',
+        ProcessKBN: 'link',
+        Remarks: 'r_asmc_set_ms ' + ctrl.id + ' ' + ctrl.innerHTML,
+    };
+    common.callAjax(_url.InsertL_Log, model,
+        function (result) {
+            if (result && result.isOK) {
+                window.location.href = common.appPath + '/r_asmc_set_ms/Index?MansionCD=' + ctrl.id;
+            }
+        });
 }
