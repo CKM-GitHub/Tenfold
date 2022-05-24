@@ -45,7 +45,7 @@
                                                     <label class="form-check-label" for="flexCheckChecked">
                                                         @cityGPCD.CityGPName
                                                     </label>
-                                                    @if (cityGPCD.IsChild == "1")
+                                                    @if (cityGPCD.AddressLevel == "2")
                                                     {
                                                     <ul>
                                                         @foreach (var cityCD in ViewBag.CityCD)
@@ -191,14 +191,16 @@
                         <table class="table table-hover table-nowrap" id="r_table_List">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" class="text-end text-decoration-underline" ordercol-direction="asc" ordercol-index="1" style="width: 100px">No.</th>
-                                    <th class="d-none" ordercol-index="1">マンションCD</th>
-                                    <th scope="col" style="width: 300px" class="text-decoration-underline sort-by" ordercol-index="2_1">マンション名</th>
-                                    <th scope="col" style="width: auto" class="text-decoration-underline sort-by" ordercol-index="3_1">住所</th>
-                                    <th class="d-none"bordercol-index="4">住所カナ</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="5_1">登録日</th>
-                                    <th class="d-none" ordercol-index="6">Priority</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="7_1">優先度</th>
+                                    <th scope="col" class="text-end text-decoration-underline" ordercol-direction="asc" ordercol-index="6" style="width: 100px">No.</th>
+                                    <th scope="col" style="width: 300px" class="text-decoration-underline sort-by" ordercol-index="1_6">マンション名</th>
+                                    <th scope="col" style="width: auto" class="text-decoration-underline sort-by" ordercol-index="2_6">住所</th>
+                                    <th scope="col" style="width: 50px" class="text-decoration-underline sort-by" ordercol-index="3_6">公開状況</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="4_6">登録日</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="5_6">優先度</th>
+                                    <th class="d-none" ordercol-index="6">マンションCD</th>
+                                    <th class="d-none" bordercol-index="7">住所カナ</th>
+                                    <th class="d-none" ordercol-index="8">Priority</th>
+
                                 </tr>
                             </thead>
                             <tbody>
