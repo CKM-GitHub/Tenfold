@@ -149,6 +149,7 @@
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
     <Compile Include="Filters\BrowsingHistoryAttribute.cs" />
     <Compile Include="Filters\CustomHandleErrorAttribute.cs" />
+    <Compile Include="Filters\IgnoreVerificationToken.cs" />
     <Compile Include="Filters\SessionAuthenticationAttribute.cs" />
     <Compile Include="Filters\SessionAuthenticationHelper.cs" />
     <Compile Include="Global.asax.cs">
