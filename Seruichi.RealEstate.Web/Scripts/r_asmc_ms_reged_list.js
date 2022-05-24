@@ -101,6 +101,8 @@ function addEvents() {
         {
             $('#btnDisplay').showError(common.getMessage('E303'));
             $('#MansionName').focus();
+            $('#total_record').text("");
+            $('#total_record_up').text("");
         }
         else
         {
@@ -189,14 +191,21 @@ function Bind_tbody(result) {
     let html = "";
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
+
+            if (data[i]["公開フラグ"] == "未公開") {
+                _class = "cap-text-primary";
+            }
+            else
+            {
+                _class = "text-danger";
+            }
+
             html += '<tr>\
             <td class= "text-end">' + data[i]["NO"] + '</td>\
-            <td class="d-none">'+ data[i]["マンションCD"] + '</td>\
             <td> <a class="text-heading font-semibold text-decoration-underline" href="#"  onclick="l_logfunction(this.id)" id='+ data[i]["マンションCD"] + '&' + data[i]["マンション名"]+'>'+ data[i]["マンション名"] + '</a> </td>\
             <td> <a class="text-heading font-semibold">'+ data[i]["住所"] + '</a> </td>\
-            <td class="d-none"> '+ data[i]["住所カナ"] + '</td>\
+            <td> <span class='+ _class + '>(' + data[i]["公開フラグ"] + ')</span></td>\
             <td> '+ data[i]["登録日"] + '</td>\
-            <td class="d-none"> '+ data[i]["Priority"] + '</td>\
             <td>\
             <div class="d-flex flex-row mt-2">\
             <div class="text-danger mb-1 me-2">'
@@ -204,6 +213,9 @@ function Bind_tbody(result) {
            </div>\
            </div>\
            </td>\
+            <td class="d-none">'+ data[i]["マンションCD"] + '</td>\
+            <td class="d-none"> '+ data[i]["住所カナ"] + '</td>\
+            <td class="d-none"> '+ data[i]["Priority"] + '</td>\
           </tr>'
         }
         $('#total_record').text("検索結果：" + data.length + "件")
