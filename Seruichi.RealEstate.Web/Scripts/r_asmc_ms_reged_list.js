@@ -193,7 +193,7 @@ function Bind_tbody(result) {
         for (var i = 0; i < data.length; i++) {
 
             if (data[i]["公開フラグ"] == "未公開") {
-                _class = "cap-text-primary";
+                _class = "text-primary";
             }
             else
             {
@@ -251,9 +251,9 @@ function l_logfunction(id) {
     common.callAjax(_url.InsertL_Log, model,
         function (result) {
             if (result && result.isOK) {
-                if (model.PageID == "r_issueslist")
-                window.location.href = common.appPath + '/r_asmc_set_ms/Index?MansionCD=' + model.MansionCD;
-                
+                if (model.PageID == "r_asmc_ms_reged_list")
+                   // window.location.href = common.appPath + '/r_asmc_set_ms/Index?MansionCD=' + model.MansionCD;
+                   alert("https://www.seruichi.com/r_asmc_set_ms/Index?MansionCD=" + model.MansionCD);
             }
             if (result && !result.isOK) {
 

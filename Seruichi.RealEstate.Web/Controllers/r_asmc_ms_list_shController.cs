@@ -81,5 +81,20 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return OKResult(DataTableToJSON(dt));
             }
         }
+
+        public ActionResult Insert_l_log(r_asmc_ms_list_shModel model)
+        {
+            r_asmc_ms_list_shBL bl = new r_asmc_ms_list_shBL();
+            model.LoginKBN = 2;
+            model.LoginID = base.GetOperator("UserID");
+            model.RealECD = base.GetOperator("RealECD");
+            model.LoginName = base.GetOperator("UserName");
+            model.IPAddress = base.GetClientIP();
+            model.PageID = model.PageID;
+            model.ProcessKBN = model.ProcessKBN;
+            model.Remarks = model.Remarks;
+            bl.Insert_r_asmc_ms_list_sh_L_Log(model);
+            return OKResult();
+        }
     }
 }
