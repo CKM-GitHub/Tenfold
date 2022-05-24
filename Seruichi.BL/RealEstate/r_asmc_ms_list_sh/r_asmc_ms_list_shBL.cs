@@ -74,5 +74,24 @@ namespace Seruichi.BL.RealEstate.r_asmc_ms_list_sh
 
             return dt;
         }
+
+        public void Insert_r_asmc_ms_list_sh_L_Log(r_asmc_ms_list_shModel model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@LoginKBN", SqlDbType.TinyInt){ Value = model.LoginKBN.ToByte(0)},
+                new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.LoginID.ToStringOrNull() },
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.LoginName.ToStringOrNull() },
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress },
+                new SqlParameter("@PageID", SqlDbType.VarChar){ Value = model.PageID },
+                new SqlParameter("@Processing", SqlDbType.VarChar){ Value = model.ProcessKBN },
+                new SqlParameter("@Remarks", SqlDbType.VarChar){ Value = model.Remarks },
+             };
+
+            DBAccess db = new DBAccess();
+            db.InsertUpdateDeleteData("pr_RealEstate_Insert_L_Log", false, sqlParams);
+        }
+
     }
 }
