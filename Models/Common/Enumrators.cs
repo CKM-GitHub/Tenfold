@@ -3,7 +3,7 @@
     public enum CounterKey: int
     {
         None = 0,
-        MansionID = 7,
+        MansionID = 1,
         SellerCD = 2,
         MansionCD = 7,
     }
