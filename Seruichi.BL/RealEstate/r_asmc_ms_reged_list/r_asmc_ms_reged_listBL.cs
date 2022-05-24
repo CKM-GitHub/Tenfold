@@ -68,6 +68,7 @@ namespace Seruichi.BL.RealEstate.r_asmc_ms_reged_list
                 new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = RealECD },
                 new SqlParameter("@MansionName", SqlDbType.VarChar){ Value =  model.MansionName.ToStringOrNull() },
                 new SqlParameter("@CityCD", SqlDbType.VarChar){ Value =  model.CityCD.ToStringOrNull() },
+                new SqlParameter("@CityGPCD", SqlDbType.VarChar){ Value =  model.CityGPCD.ToStringOrNull() },
                 new SqlParameter("@StartYear", SqlDbType.Int){ Value = model.StartYear },
                 new SqlParameter("@EndYear", SqlDbType.Int){ Value = model.EndYear },
                 new SqlParameter("@Rating", SqlDbType.Int){ Value = model.Radio_Rating}
