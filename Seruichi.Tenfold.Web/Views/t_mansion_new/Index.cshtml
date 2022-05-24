@@ -9,19 +9,6 @@
     @Styles.Render("~/Content/tenfold_css_common")
 }
 
-
-    <style>
-        .js-word{
-
-        }
-        .js-wordContainer {
-        }
-
-        .noti {
-            
-        }
-    </style>
-
     <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
         <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
 
@@ -35,8 +22,8 @@
                                     <div class="card-body ">
                                         <div class="justify-content-around align-items-center row">
                                             <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
+                                                <div class="border-end"><button type="button" class="btn btn-secondary me-2" id="btnreturn">  戻る</button></div>
 
-                                                <div class="border-end"><button type="button" class="btn btn-secondary me-2">戻る</button></div>
                                                 <h1 class="ps-2 h2 mb-0 ls-tight">マンション</h1>
                                                 <span class="ps-2 text-muted small align-self-end">管理</span>
                                             </div>
@@ -65,8 +52,8 @@
                                                                             <label class="form-label">マンション名</label>
                                                                             <span class="cap-errormsg-right" id="errorName"></span>
                                                                         </div>
-                                                                        <input type="text" placeholder="マンション名" maxlength="5"
-                                                                               class="form-control form-control-lg" name="MansionName" id="MansionName" autocomplete="off" />
+                                                                        <input type="text" placeholder="マンション名" maxlength="50" class="form-control form-control-lg" name="MansionName" id="MansionName" autocomplete="off" />
+                                                                              
                                                                     </div>
                                                                 </div>
                                                                 <div class="mb-4 pb-2 col-12 col-md-6 d-none">
@@ -173,7 +160,7 @@
                                                                         </div>
                                                                         <div class="w-100 d-md-flex">
                                                                             <div>
-                                                                                <input class="form-check-input" type="radio" name="RightKBN" id="RightKBN1" value="1" checked>
+                                                                                <input class="form-check-input" type="radio" name="RightKBN" id="RightKBN1" value="1" >
                                                                                 <label class="form-check-label" for="RightKBN1"> 所有権</label>
                                                                             </div>
                                                                             <div class="ps-md-3">
@@ -194,7 +181,7 @@
 
                                                                         <div class="w-100 d-md-flex">
                                                                             <div>
-                                                                                <input class="form-check-input" type="radio" name="StructuralKBN" id="StructuralKBN1" value="1" checked>
+                                                                                <input class="form-check-input" type="radio" name="StructuralKBN" id="StructuralKBN1" value="1" >
                                                                                 <label class="form-check-label" for="StructuralKBN1">SRC造  </label>
                                                                             </div>
                                                                             <div class="ps-md-3">
@@ -209,7 +196,7 @@
                                                                         <div class="d-flex">
                                                                             <label class="form-label" for="form3Examplea3">築年月</label><span class="cap-errormsg-right" id="errorConstYYYYMM"></span>
                                                                         </div>
-                                                                        <input type="month" min="1900-01" max="2100-12" class="form-control form-control-lg text-center cap-fon-form-w200" name="ConstYYYYMM" id="ConstYYYYMM" />
+                                                                        <input type="month" min="1900-01" max="2100-12" class="form-control form-control-lg text-center cap-fon-form-w200"  name="ConstYYYYMM" id="ConstYYYYMM" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="mb-4 pb-2 col-12 col-md-6">
@@ -563,7 +550,7 @@
                                                                                         <div class="form-outline form-white">
                                                                                             <label class="form-label me-5">駅名</label>
                                                                                             <div class="dropdown ps-3">
-                                                                                                <span class="cap-errormsg-right" id="errorStationCD5"></span>
+                                                                                                <span class="cap-errormsg-right" id="errorStationCD6"></span>
                                                                                                 <div class="dropdown w-100">
                                                                                                     <select class="form-select js-stationcd" id="StationCD_6" disabled>
                                                                                                         <option selected value="">駅選択</option>
@@ -627,7 +614,7 @@
                                                                                         <div class="form-outline form-white d-flex">
                                                                                             <label class="form-label align-self-center pe-3">徒歩(分)</label>
                                                                                             <div class="text-start">
-                                                                                                <span class="cap-errormsg-right" id="errorDistanceCD4"></span>
+                                                                                                <span class="cap-errormsg-right" id="errorDistanceCD7"></span>
                                                                                                 <input type="number" class="form-control form-control-lg w-md-24 text-end js-distance" id="Distance_7" disabled />
                                                                                             </div>
                                                                                         </div>
@@ -1110,9 +1097,9 @@
                                                                                         <div class="form-outline form-white">
                                                                                             <label class="form-label me-5">路線名</label>
                                                                                             <div class="dropdown">
-                                                                                                <span class="cap-errormsg-right" id="errorLineCD16"></span>
+                                                                                                <span class="cap-errormsg-right" id="errorLineCD17"></span>
                                                                                                 <div class="dropdown w-100">
-                                                                                                    <select class="form-select js-linecd" id="LineCD_16" disabled>
+                                                                                                    <select class="form-select js-linecd" id="LineCD_17" disabled>
                                                                                                         <option selected value="">駅選択</option>
                                                                                                     </select>
                                                                                                 </div>
@@ -1123,8 +1110,8 @@
                                                                                         <div class="form-outline form-white">
                                                                                             <label class="form-label me-5">駅名</label>
                                                                                             <div class="dropdown ps-3">
-                                                                                                <span class="cap-errormsg-right" id="errorDistanceCD16"></span>
-                                                                                                <select class="form-select js-stationcd" id="StationCD_16" disabled>
+                                                                                                <span class="cap-errormsg-right" id="errorStationCD17"></span>
+                                                                                                <select class="form-select js-stationcd" id="StationCD_17" disabled>
                                                                                                     <option selected value="">駅選択</option>
                                                                                                 </select>
                                                                                             </div>
@@ -1136,8 +1123,8 @@
                                                                                         <label class="form-label align-self-center pe-3">徒歩(分)</label>
 
                                                                                         <div class="text-start">
-                                                                                            <span class="cap-errormsg-right" id="errorDistanceCD16"></span>
-                                                                                            <input type="number" class="form-control form-control-lg w-md-24 text-end js-distance" id="Distance_16"
+                                                                                            <span class="cap-errormsg-right" id="errorDistanceCD17"></span>
+                                                                                            <input type="number" class="form-control form-control-lg w-md-24 text-end js-distance" id="Distance_17"
                                                                                                    disabled />
                                                                                         </div>
                                                                                     </div>
@@ -1484,7 +1471,7 @@
                                                                                 <div class="card-body p-2 row collapse show" id="keyw-collapse-8">
                                                                                     <div class="col-12 pb-3">
                                                                                         <div class="form-outline form-white">
-                                                                                            <input type="text" class="form-control form-control-lg w-100" id="Other4" name="Other4" maxlength="50" autocomplete="off" />
+                                                                                            <input type="text" class="form-control form-control-lg w-100 noti" id="Other4" name="Other4" maxlength="50" autocomplete="off" />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1507,7 +1494,7 @@
                                                                                 <div class="card-body p-2 row collapse show" id="keyw-collapse-9">
                                                                                     <div class="col-12 pb-3">
                                                                                         <div class="form-outline form-white">
-                                                                                            <input type="text" class="form-control form-control-lg w-100" id="Other5" name="Other5" maxlength="5" autocomplete="off" />
+                                                                                            <input type="text" class="form-control form-control-lg w-100 noti" id="Other5" name="Other5" maxlength="50" autocomplete="off" />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1530,7 +1517,7 @@
                                                                                 <div class="card-body p-2 row collapse show" id="keyw-collapse-10">
                                                                                     <div class="col-12 pb-3">
                                                                                         <div class="form-outline form-white">
-                                                                                            <input type="text" class="form-control form-control-lg w-100" id="Other6" name="Other6" maxlength="50" autocomplete="off" />
+                                                                                            <input type="text" class="form-control form-control-lg w-100 noti" id="Other6" name="Other6" maxlength="50" autocomplete="off" />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1589,7 +1576,7 @@
                                                                             <div class="mb-4 pb-2 col-12 col-md-6">
                                                                                 <div class="form-outline">
                                                                                     <label class="form-label">マンション名</label>
-                                                                                    <input class="form-control w-100" type="text" id="confirm_MansionName" disabled>
+                                                                                    <input class="form-control w-100" type="text" id="confirm_MansionName" maxlength="50" disabled>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="mb-4 pb-2 col-12 col-md-6 d-none">
