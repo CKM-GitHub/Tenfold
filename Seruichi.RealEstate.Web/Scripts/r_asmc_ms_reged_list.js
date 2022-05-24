@@ -253,7 +253,7 @@ function l_logfunction(id) {
         RealECD: null,
         LoginName: null,
         IPAddress: null,
-        PageID: null,
+        PageID: "r_asmc_ms_reged_list",
         Processing: null,
         Remarks: null,
         MansionCD: id.split('&')[0],
@@ -263,8 +263,10 @@ function l_logfunction(id) {
         function (result) {
             if (result && result.isOK) {
                 if (model.PageID == "r_asmc_ms_reged_list")
-                   // window.location.href = common.appPath + '/r_asmc_set_ms/Index?MansionCD=' + model.MansionCD;
-                   alert("https://www.seruichi.com/r_asmc_set_ms/Index?MansionCD=" + model.MansionCD);
+                {
+                    // window.location.href = common.appPath + '/r_asmc_set_ms/Index?MansionCD=' + model.MansionCD;
+                    alert("https://www.seruichi.com/r_asmc_set_ms/Index?MansionCD=" + model.MansionCD)
+                }
             }
             if (result && !result.isOK) {
 
