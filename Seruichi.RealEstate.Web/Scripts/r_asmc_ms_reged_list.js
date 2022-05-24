@@ -108,31 +108,31 @@ function addEvents() {
         }
     });
 
-    $(document).on('click', '.tree li  input[type="checkbox"]', function () {
-        $(this).closest('li').find('ul input[type="checkbox"]').prop('checked', $(this).is(':checked'));
-    }).on('click', '.node-item', function () {
-        var parentNode = $(this).parents('.tree ul');
-        if ($(this).is(':checked')) {
+    ////////$(document).on('click', '.tree li  input[type="checkbox"]', function () {
+    ////////    $(this).closest('li').find('ul input[type="checkbox"]').prop('checked', $(this).is(':checked'));
+    ////////}).on('click', '.node-item', function () {
+    ////////    var parentNode = $(this).parents('.tree ul');
+    ////////    if ($(this).is(':checked')) {
 
-            var elementschk = parentNode.find('ul input[type="checkbox"]:checked');
-            var elements = parentNode.find('ul input[type="checkbox"]');
-            if (elements.length == elementschk.length) {
-                parentNode.find('li .node-parent').prop('checked', true);
-            }
-            else {
-                parentNode.find('li .node-parent').prop('checked', false);
-            }
-        } else {
-            var elementschk = parentNode.find('ul input[type="checkbox"]:checked');
-            var elements = parentNode.find('ul input[type="checkbox"]');
-            if (elements.length == elementschk.length) {
-                parentNode.find('li .node-parent').prop('checked', true);
-            }
-            else {
-                parentNode.find('li .node-parent').prop('checked', false);
-            }
-        }
-    });
+    ////////        var elementschk = parentNode.find('ul input[type="checkbox"]:checked');
+    ////////        var elements = parentNode.find('ul input[type="checkbox"]');
+    ////////        if (elements.length == elementschk.length) {
+    ////////            parentNode.find('li .node-parent').prop('checked', true);
+    ////////        }
+    ////////        else {
+    ////////            parentNode.find('li .node-parent').prop('checked', false);
+    ////////        }
+    ////////    } else {
+    ////////        var elementschk = parentNode.find('ul input[type="checkbox"]:checked');
+    ////////        var elements = parentNode.find('ul input[type="checkbox"]');
+    ////////        if (elements.length == elementschk.length) {
+    ////////            parentNode.find('li .node-parent').prop('checked', true);
+    ////////        }
+    ////////        else {
+    ////////            parentNode.find('li .node-parent').prop('checked', false);
+    ////////        }
+    ////////    }
+    ////////});
 }
 
 function Get_FT_Age(age, type) {

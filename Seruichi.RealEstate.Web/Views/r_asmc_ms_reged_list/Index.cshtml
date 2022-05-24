@@ -45,23 +45,27 @@
                                                     <label class="form-check-label" for="flexCheckChecked">
                                                         @cityGPCD.CityGPName
                                                     </label>
-
-                                                    @foreach (var cityCD in ViewBag.CityCD)
+                                                    @if (cityGPCD.IsChild == "1")
                                                     {
-                                                        if ((cityCD.CityGPCD == cityGPCD.CityGPCD) && (cityGPCD.PrefCD == cityCD.PrefCD))
+                                                    <ul>
+                                                        @foreach (var cityCD in ViewBag.CityCD)
                                                         {
-                                                            <ul>
+                                                            if ((cityCD.CityGPCD == cityGPCD.CityGPCD) && (cityGPCD.PrefCD == cityCD.PrefCD))
+                                                            {
+
                                                                 <li>
                                                                     <input class="form-check-input node-item" type="checkbox" value="@cityCD.CityCD">
                                                                     <label class="form-check-label" for="flexCheckChecked">
                                                                         @cityCD.CityName
                                                                     </label>
                                                                 </li>
-                                                            </ul>
-                                                        }
 
+                                                            }
+
+                                                        }
+                                                    </ul>
                                                     }
-                                                </li>
+                                                    </li>
 
                                             </ul>
                                         }
