@@ -457,6 +457,10 @@ function addEvents() {
     $('#btnreturn').on('click', function () {
         $form = $('#form1').hideChildErrors();
         window.location.href = common.appPath + '/t_mansion_list/Index';
+    }); 
+
+    $('#btnCancel').on('click', function () {
+        window.location.href = window.location.href;
     });
 }
 function setScreenComfirm(data) {
