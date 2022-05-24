@@ -74,6 +74,14 @@ function addEvents() {
         $('#r_table_List tbody').empty();
 
         const $MansionName = $("#MansionName").val().trim(), $StartYear = $("#StartYear").val(), $EndYear = $('#EndYear').val()
+
+        var cityGPCD_check = '';
+        var gp_length = 0;
+        $('.node-parent:checkbox:checked').each(function () {
+            cityGPCD_check += $(this).val() + ',';
+            gp_length += 1;
+        });
+
         var cityCD_check = '';
         var city_lenght = 0;
         $('.node-item:checkbox:checked').each(function () {
@@ -93,19 +101,22 @@ function addEvents() {
             MansionName: $MansionName,
             StartYear: Get_FT_Age($EndYear, 'F'),
             EndYear: Get_FT_Age($StartYear, 'T'),
-            CityCD: cityCD_check,
+            CityCD: cityCD_check.slice(0, -1),
+            CityGPCD: cityGPCD_check.slice(0, -1),
             Radio_Rating: Rdo_Rating
         };
 
-        if (model.MansionName == "" && model.StartYear == "" && model.EndYear == "" && model.CityCD == "" && model.Radio_Rating == "")
+        if (model.MansionName == "" && model.StartYear == "" && model.EndYear == "" && model.CityCD == "" && model.CityGPCD == "" && model.Radio_Rating == "")
         {
             $('#btnDisplay').showError(common.getMessage('E303'));
             $('#MansionName').focus();
             $('#total_record').text("");
             $('#total_record_up').text("");
+            $('#no_record').text("");
         }
         else
         {
+            $('#btnDisplay').hideError();
             Get_DataList(model, $form);
         }
     });
