@@ -11,8 +11,14 @@ namespace Models.RealEstate.r_asmc_ms_list_sh
         public string MansionName { get; set; }
         public string StartYear { get; set; }
         public string EndYear { get; set; }
+        public string StartDistance { get; set; }
+        public string EndDistance { get; set; }
+        public string StartRooms { get; set; }
+        public string EndRooms { get; set; }
         public string CityCD { get; set; }
-        public string Radio_Rating { get; set; }
+        public string Unregistered { get; set; }
+        public string Priority { get; set; }
+        public string Radio_Priority { get; set; }
         public string MansionCD { get; set; }
     }
 
