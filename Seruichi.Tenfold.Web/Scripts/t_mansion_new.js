@@ -11,7 +11,6 @@ $(function () {
     _url.getTownDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfTown;
     _url.getLineDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfLine;
     _url.getStationDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfStation;
-    _url.getMansinoData = common.appPath + '/a_index/GetMansionData';
     _url.checkZipCode = common.appPath + '/t_mansion_new/CheckZipCode';
     _url.getMansionListByMansionWord = common.appPath + '/t_mansion_new/GetMansionListByMansionWord';
     _url.checkAll = common.appPath + '/t_mansion_new/CheckAll';
@@ -455,14 +454,10 @@ function addEvents() {
         });
     });
 
-    //$('#MansionName').on('change', function () {
-    //    $('#hdnMansionCD').val('');
-    //    const $MansionCD = $('.tt-mansioncd');
-    //    if ($MansionCD.get().length === 1) {
-    //        displayMansionData($MansionCD.text());
-    //    }
-    //});
-
+    $('#btnreturn').on('click', function () {
+        $form = $('#form1').hideChildErrors();
+        window.location.href = common.appPath + '/t_mansion_list/Index';
+    });
 }
 function setScreenComfirm(data) {
     for (key in data) {
