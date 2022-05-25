@@ -5,6 +5,10 @@ $(function () {
 
     setValidation();
     addEvents();
+
+    $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
+    $('#t_admin').addClass('font-bold text-underline');
+    
 });
 function setValidation() {
     $('#TenStaffCD')
