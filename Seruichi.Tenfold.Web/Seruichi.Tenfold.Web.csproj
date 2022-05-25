@@ -157,6 +157,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap\jquery-3.3.1.min.js" />
     <Content Include="Content\css\chat.css" />
     <Content Include="Content\css\Clients-UI.css" />
     <Content Include="Content\css\Contact-Form-Clean.css" />

@@ -456,6 +456,20 @@ namespace Seruichi.Common
             return true;
         }
 
+        public bool CheckMinLenght(string inputText, int maxLength, out string errorcd)
+        {
+            errorcd = "";
+
+            if (string.IsNullOrEmpty(inputText)) return true;
+
+            if (inputText.Length < maxLength)
+            {
+                errorcd = "E105"; //入力できる桁数を超えています。
+                return false;
+            }
+            return true;
+        }
+
         public bool CheckIsValidEmail(string mailAddress, out string errorcd)
         {
             errorcd = "";
@@ -562,6 +576,18 @@ namespace Seruichi.Common
             }
 
             outVal = inputText.ToDateTime().ToDateString(DateTimeFormat.yyyyMMdd);
+            return true;
+        }
+
+        public bool CheckComparePassword(string password, string confirmpassword, out string errorcd)
+        {
+            errorcd = "";
+           
+            if (password != confirmpassword)
+            {
+                errorcd = "E109"; 
+                return false;
+            }
             return true;
         }
     }

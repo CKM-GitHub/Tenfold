@@ -15,13 +15,15 @@ namespace Seruichi.Tenfold.Web.Controllers
         // GET: t_admin
         public ActionResult Index()
         {
+            string user = GetOperator();
+            if (user != "admin")
+            {
+                return RedirectToAction("Login", "t_login");
+            }
             t_adminBL bl = new t_adminBL();
             List<t_adminModel> lst = new List<t_adminModel>();
-            DataTable dt = new DataTable();
-            if (GetOperator() != "admin")
-                dt = bl.Get_M_TenfoldStaff_By_LoginID("not_admin");
-            else
-                dt = bl.Get_M_TenfoldStaff_By_LoginID("admin");
+            DataTable dt = bl.Get_M_TenfoldStaff_By_LoginID("not_admin");            
+            DataTable dt_admin = bl.Get_M_TenfoldStaff_By_LoginID("admin");
             lst = (from DataRow dr in dt.Rows
                    select new t_adminModel()
                    {
@@ -30,10 +32,8 @@ namespace Seruichi.Tenfold.Web.Controllers
                        TenStaffName = dr["TenStaffName"].ToString(),
                        InvalidFLG = dr["InvalidFLG"].ToString() == "1" ? "checked" : "unchecked",
                    }).ToList();
-            ViewBag.M_TenfoldStaff_list = lst;
-            if (lst[0].TenStaffCD == "admin")
-                ViewBag.AdminPW = lst[0].TenStaffPW;
-            else ViewBag.AdminPW = "";
+            ViewBag.M_TenfoldStaff_list = lst;            
+            ViewBag.AdminPW = dt_admin.Rows[0]["TenStaffPW"];            
             return View();
         }
         [HttpPost]
@@ -65,7 +65,11 @@ namespace Seruichi.Tenfold.Web.Controllers
             model.LoginName = GetLoginStaffName();
             model.Operator = GetOperator();
             model.IPAddress = GetClientIP();
-            bl.Save_M_TenfoldStaff(model);
+
+            if (!bl.Save_M_TenfoldStaff(model, out string errorcd))
+            {
+                return ErrorMessageResult(errorcd);
+            }
             return OKResult();
         }
     }
