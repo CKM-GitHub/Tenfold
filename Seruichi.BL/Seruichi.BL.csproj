@@ -86,6 +86,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\Function\fn_GetBuildingAge.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_assess_d_Insert_D_IntroReq_D_AssReqProgress_D_AssessResult.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_assess_d_Select_Screen_by_AssReqID.sql" />
     <Content Include="Database\StoredProcedure\pr_a_index_Insert_SellerMansionData.sql" />
     <Content Include="Database\StoredProcedure\pr_a_index_Select_Cities_by_ZipCode.sql" />
     <Content Include="Database\StoredProcedure\pr_a_index_Select_MansionData.sql" />
@@ -165,6 +167,7 @@
     <Content Include="Database\StoredProcedure\pr_t_mansion_list_get_m_pref_and_citygpcd.sql" />
     <Content Include="Database\StoredProcedure\pr_t_mansion_list_get_m_pref_and_citygpcd_and_citycd.sql" />
     <Content Include="Database\StoredProcedure\pr_t_mansion_list_Select_M_Mansion.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_mansion_new_InsertMansionData.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_List_csv_generate.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_list_Select_DropDownlistofPref.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_List_Select_M_SellerData.sql" />

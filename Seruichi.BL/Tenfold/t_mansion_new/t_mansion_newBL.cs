@@ -75,6 +75,10 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
             validator.CheckRequired("Hirakana", model.Hirakana);
             validator.CheckIsDoubleByte("Hirakana", model.Hirakana, 50);
 
+
+            validator.CheckByteCount("Remark", model.Remark, 1000);
+
+
             if (validator.IsValid)
             {
                 foreach (var item in model.MansionStationList)

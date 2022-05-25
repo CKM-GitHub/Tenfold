@@ -12,6 +12,7 @@ namespace Models.RealEstate.r_asmc_ms_reged_list
         public string StartYear { get; set; }
         public string EndYear { get; set; }
         public string CityCD { get; set; }
+        public string CityGPCD { get; set; }
         public string Radio_Rating { get; set; }
         public string MansionCD { get; set; }
 
@@ -28,6 +29,7 @@ namespace Models.RealEstate.r_asmc_ms_reged_list
         public string PrefName { get; set; }
         public string CityGPCD { get; set; }
         public string CityGPName { get; set; }
+        public string AddressLevel { get; set; }
     }
     public class M_Pref_And_CityGPCD_And_CityCD
     {

@@ -1,6 +1,6 @@
 ﻿
 <div id="sidebar-wrapper">
-    <ul class="navbar-nav mb-md-4 p-3 mt-5 p-md-0">
+    <ul class="navbar-nav mb-md-4 p-3 mt-5 p-md-0" id="form1">
         <li>
             <div class="text-center px-xl-3 pt-3">
                 <div class="mb-3 text-start">
@@ -24,7 +24,7 @@
                                 {
                                     <ul>
                                         <li class="text-nowrap">
-                                            <input class="form-check-input node-parent" type="checkbox" value="@cityGPCD.CityGPCD" checked>
+                                            <input class="form-check-input node-parent" type="checkbox" value="@cityGPCD.CityGPCD">
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 @cityGPCD.CityGPName
                                             </label>
@@ -35,7 +35,7 @@
                                                 {
                                                     <ul>
                                                         <li>
-                                                            <input class="form-check-input node-item" type="checkbox" value="@cityCD.CityCD" checked>
+                                                            <input class="form-check-input node-item" type="checkbox" value="@cityCD.CityCD">
                                                             <label class="form-check-label" for="flexCheckChecked">
                                                                 @cityCD.CityName
                                                             </label>
@@ -57,13 +57,13 @@
         <li>
             <div class="form-group ps-3 pe-3">
                 <label for="disabledSelect" class="form-label">築年数</label>
-                <span class="cap-errormsg-right" id="errorAge"></span>
+                <span class="cap-errormsg-right" id="errorYear"></span>
                 <div class="form-group input-group mb-3">
-                    <span class="cap-errormsg-right" id="errorStartAge" name="errorStartAge"></span>
-                    <input type="text" class="form-control" id="StartAge" name="StartAge">
+                    <span class="cap-errormsg-right" id="errorStartYear" name="errorStartYear"></span>
+                    <input type="text" class="form-control" id="StartYear" name="StartYear">
                     <span class="input-group-inline text-center align-self-center p-2">年 ~ </span>
-                    <span class="cap-errormsg-right" id="errorEndAge" name="errorEndAge"></span>
-                    <input type="text" class="form-control" id="EndAge" name="EndAge">
+                    <span class="cap-errormsg-right" id="errorEndYear" name="errorEndYear"></span>
+                    <input type="text" class="form-control" id="EndYear" name="EndYear">
                     <span class="input-group-inline text-center align-self-center p-2">年</span>
                 </div>
             </div>
@@ -103,10 +103,10 @@
                     <label class="form-check-label" for="UnregisteredMansion">未登録マンション表示</label>
                 </div>
                 <div class="form-check pb-3">
-                    <input class="form-check-input" type="checkbox" value="" id="PriorityCheckBox" name="PriorityCheckBox">
-                    <label class="form-check-label" for="Priority">優先度</label>
+                    <input class="form-check-input" type="checkbox" value="" id="chkPriority" name="chkPriority">
+                    <label class="form-check-label" for="chkPriority">優先度</label>
                     <div class="ms-6">
-                        <input class="form-check-input" type="radio" name="Priority" id="Priority4" value="4">
+                        <input class="form-check-input Priority" type="radio" name="Priority" id="Priority4" value="4">
                         <span class="text-danger">
                             <span class="fa fa-star" data-rating="1"></span>
                             <span class="fa fa-star" data-rating="2"></span>
@@ -116,7 +116,7 @@
                         </span><span><small>以上</small></span>
                     </div>
                     <div class="ms-6">
-                        <input class="form-check-input" type="radio" name="Priority" id="Priority3" value="3">
+                        <input class="form-check-input Priority" type="radio" name="Priority" id="Priority3" value="3">
                         <span class="text-danger">
                             <span class="fa fa-star" data-rating="1"></span>
                             <span class="fa fa-star" data-rating="2"></span>
@@ -126,7 +126,7 @@
                         </span><span><small>以上</small></span>
                     </div>
                     <div class="ms-6">
-                        <input class="form-check-input" type="radio" name="Priority" id="Priority2" value="2">
+                        <input class="form-check-input Priority" type="radio" name="Priority" id="Priority2" value="2">
                         <span class="text-danger">
                             <span class="fa fa-star" data-rating="1"></span>
                             <span class="fa fa-star" data-rating="2"></span>
@@ -136,7 +136,7 @@
                         </span><span><small>以上</small></span>
                     </div>
                     <div class="ms-6">
-                        <input class="form-check-input" type="radio" name="Priority" id="Priority1" value="1" checked>
+                        <input class="form-check-input Priority" type="radio" name="Priority" id="Priority1" value="1" checked>
                         <span class="text-danger">
                             <span class="fa fa-star" data-rating="1"></span>
                             <span class="fa fa-star-o" data-rating="2"></span>
@@ -149,6 +149,7 @@
             </div>
         </li>
         <li>
+            <span class="cap-errormsg-right" id="errorbtnDisplay"></span>
             <div class="form-group ps-3 pe-3">
                 <button type="button" class="btn btn-primary w-100 w-100 mb-3" id="btnDisplay">表示</button>
             </div>

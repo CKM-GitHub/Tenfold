@@ -74,6 +74,14 @@ function addEvents() {
         $('#r_table_List tbody').empty();
 
         const $MansionName = $("#MansionName").val().trim(), $StartYear = $("#StartYear").val(), $EndYear = $('#EndYear').val()
+
+        var cityGPCD_check = '';
+        var gp_length = 0;
+        $('.node-parent:checkbox:checked').each(function () {
+            cityGPCD_check += $(this).val() + ',';
+            gp_length += 1;
+        });
+
         var cityCD_check = '';
         var city_lenght = 0;
         $('.node-item:checkbox:checked').each(function () {
@@ -93,46 +101,51 @@ function addEvents() {
             MansionName: $MansionName,
             StartYear: Get_FT_Age($EndYear, 'F'),
             EndYear: Get_FT_Age($StartYear, 'T'),
-            CityCD: cityCD_check,
+            CityCD: cityCD_check.slice(0, -1),
+            CityGPCD: cityGPCD_check.slice(0, -1),
             Radio_Rating: Rdo_Rating
         };
 
-        if (model.MansionName == "" && model.StartYear == "" && model.EndYear == "" && model.CityCD == "" && model.Radio_Rating == "")
+        if (model.MansionName == "" && model.StartYear == "" && model.EndYear == "" && model.CityCD == "" && model.CityGPCD == "" && model.Radio_Rating == "")
         {
             $('#btnDisplay').showError(common.getMessage('E303'));
             $('#MansionName').focus();
+            $('#total_record').text("");
+            $('#total_record_up').text("");
+            $('#no_record').text("");
         }
         else
         {
+            $('#btnDisplay').hideError();
             Get_DataList(model, $form);
         }
     });
 
-    $(document).on('click', '.tree li  input[type="checkbox"]', function () {
-        $(this).closest('li').find('ul input[type="checkbox"]').prop('checked', $(this).is(':checked'));
-    }).on('click', '.node-item', function () {
-        var parentNode = $(this).parents('.tree ul');
-        if ($(this).is(':checked')) {
+    ////////$(document).on('click', '.tree li  input[type="checkbox"]', function () {
+    ////////    $(this).closest('li').find('ul input[type="checkbox"]').prop('checked', $(this).is(':checked'));
+    ////////}).on('click', '.node-item', function () {
+    ////////    var parentNode = $(this).parents('.tree ul');
+    ////////    if ($(this).is(':checked')) {
 
-            var elementschk = parentNode.find('ul input[type="checkbox"]:checked');
-            var elements = parentNode.find('ul input[type="checkbox"]');
-            if (elements.length == elementschk.length) {
-                parentNode.find('li .node-parent').prop('checked', true);
-            }
-            else {
-                parentNode.find('li .node-parent').prop('checked', false);
-            }
-        } else {
-            var elementschk = parentNode.find('ul input[type="checkbox"]:checked');
-            var elements = parentNode.find('ul input[type="checkbox"]');
-            if (elements.length == elementschk.length) {
-                parentNode.find('li .node-parent').prop('checked', true);
-            }
-            else {
-                parentNode.find('li .node-parent').prop('checked', false);
-            }
-        }
-    });
+    ////////        var elementschk = parentNode.find('ul input[type="checkbox"]:checked');
+    ////////        var elements = parentNode.find('ul input[type="checkbox"]');
+    ////////        if (elements.length == elementschk.length) {
+    ////////            parentNode.find('li .node-parent').prop('checked', true);
+    ////////        }
+    ////////        else {
+    ////////            parentNode.find('li .node-parent').prop('checked', false);
+    ////////        }
+    ////////    } else {
+    ////////        var elementschk = parentNode.find('ul input[type="checkbox"]:checked');
+    ////////        var elements = parentNode.find('ul input[type="checkbox"]');
+    ////////        if (elements.length == elementschk.length) {
+    ////////            parentNode.find('li .node-parent').prop('checked', true);
+    ////////        }
+    ////////        else {
+    ////////            parentNode.find('li .node-parent').prop('checked', false);
+    ////////        }
+    ////////    }
+    ////////});
 }
 
 function Get_FT_Age(age, type) {
@@ -189,14 +202,21 @@ function Bind_tbody(result) {
     let html = "";
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
+
+            if (data[i]["公開フラグ"] == "未公開") {
+                _class = "text-primary";
+            }
+            else
+            {
+                _class = "text-danger";
+            }
+
             html += '<tr>\
             <td class= "text-end">' + data[i]["NO"] + '</td>\
-            <td class="d-none">'+ data[i]["マンションCD"] + '</td>\
             <td> <a class="text-heading font-semibold text-decoration-underline" href="#"  onclick="l_logfunction(this.id)" id='+ data[i]["マンションCD"] + '&' + data[i]["マンション名"]+'>'+ data[i]["マンション名"] + '</a> </td>\
             <td> <a class="text-heading font-semibold">'+ data[i]["住所"] + '</a> </td>\
-            <td class="d-none"> '+ data[i]["住所カナ"] + '</td>\
+            <td> <span class='+ _class + '>(' + data[i]["公開フラグ"] + ')</span></td>\
             <td> '+ data[i]["登録日"] + '</td>\
-            <td class="d-none"> '+ data[i]["Priority"] + '</td>\
             <td>\
             <div class="d-flex flex-row mt-2">\
             <div class="text-danger mb-1 me-2">'
@@ -204,6 +224,9 @@ function Bind_tbody(result) {
            </div>\
            </div>\
            </td>\
+            <td class="d-none">'+ data[i]["マンションCD"] + '</td>\
+            <td class="d-none"> '+ data[i]["住所カナ"] + '</td>\
+            <td class="d-none"> '+ data[i]["Priority"] + '</td>\
           </tr>'
         }
         $('#total_record').text("検索結果：" + data.length + "件")
@@ -230,7 +253,7 @@ function l_logfunction(id) {
         RealECD: null,
         LoginName: null,
         IPAddress: null,
-        PageID: null,
+        PageID: "r_asmc_ms_reged_list",
         Processing: null,
         Remarks: null,
         MansionCD: id.split('&')[0],
@@ -239,9 +262,11 @@ function l_logfunction(id) {
     common.callAjax(_url.InsertL_Log, model,
         function (result) {
             if (result && result.isOK) {
-                if (model.PageID == "r_issueslist")
-                window.location.href = common.appPath + '/r_asmc_set_ms/Index?MansionCD=' + model.MansionCD;
-                
+                if (model.PageID == "r_asmc_ms_reged_list")
+                {
+                    // window.location.href = common.appPath + '/r_asmc_set_ms/Index?MansionCD=' + model.MansionCD;
+                    alert("https://www.seruichi.com/r_asmc_set_ms/Index?MansionCD=" + model.MansionCD)
+                }
             }
             if (result && !result.isOK) {
 
