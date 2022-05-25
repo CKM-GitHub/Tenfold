@@ -15,6 +15,7 @@ namespace Models.RealEstate.r_asmc_ms_list_sh
         public string EndDistance { get; set; }
         public string StartRooms { get; set; }
         public string EndRooms { get; set; }
+        public string CityGPCD { get; set; }
         public string CityCD { get; set; }
         public string Unregistered { get; set; }
         public string Priority { get; set; }

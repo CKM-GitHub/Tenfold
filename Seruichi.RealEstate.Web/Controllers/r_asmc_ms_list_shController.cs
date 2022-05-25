@@ -63,7 +63,7 @@ namespace Seruichi.RealEstate.Web.Controllers
         [HttpPost]
         public ActionResult get_DisplayData(r_asmc_ms_list_shModel model)
         {
-            if (String.IsNullOrWhiteSpace(model.MansionName) && String.IsNullOrWhiteSpace(model.CityCD) && String.IsNullOrWhiteSpace(model.StartYear) && String.IsNullOrWhiteSpace(model.EndYear) && String.IsNullOrWhiteSpace(model.Radio_Priority))
+            if (String.IsNullOrWhiteSpace(model.MansionName) && String.IsNullOrWhiteSpace(model.CityGPCD) && String.IsNullOrWhiteSpace(model.CityCD) && String.IsNullOrWhiteSpace(model.StartYear) && String.IsNullOrWhiteSpace(model.EndYear) && String.IsNullOrWhiteSpace(model.Radio_Priority))
             {
                 return ErrorMessageResult("E303");
             }
