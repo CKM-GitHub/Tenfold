@@ -39,7 +39,8 @@ namespace Seruichi.RealEstate.Web.Controllers
                                     PrefCD = dr["PrefCD"].ToString(),
                                     PrefName = dr["PrefName"].ToString(),
                                     CityGPCD = dr["CityGPCD"].ToString(),
-                                    CityGPName = dr["CityGPName"].ToString()
+                                    CityGPName = dr["CityGPName"].ToString(),
+                                    AddressLevel = dr["AddressLevel"].ToString()
                                 }).ToList();
             List<M_Pref_And_CityGPCD_And_CityCD> cityList = new List<M_Pref_And_CityGPCD_And_CityCD>();
             DataTable dt2 = bl.Get_Prefcd_and_CityGPCD_and_CityCD();
@@ -63,7 +64,7 @@ namespace Seruichi.RealEstate.Web.Controllers
         [HttpPost]
         public ActionResult get_DisplayData(r_asmc_ms_list_shModel model)
         {
-            if (String.IsNullOrWhiteSpace(model.MansionName) && String.IsNullOrWhiteSpace(model.CityCD) && String.IsNullOrWhiteSpace(model.StartYear) && String.IsNullOrWhiteSpace(model.EndYear) && String.IsNullOrWhiteSpace(model.Radio_Priority))
+            if (String.IsNullOrWhiteSpace(model.MansionName) && String.IsNullOrWhiteSpace(model.CityGPCD) && String.IsNullOrWhiteSpace(model.CityCD) && String.IsNullOrWhiteSpace(model.StartYear) && String.IsNullOrWhiteSpace(model.EndYear) && String.IsNullOrWhiteSpace(model.Radio_Priority))
             {
                 return ErrorMessageResult("E303");
             }

@@ -1,13 +1,14 @@
 ﻿using Models.RealEstate.r_asmc_address;
 using Seruichi.BL.RealEstate.r_asmc_address;
+using Seruichi.BL.RealEstate.r_asmc_railway;
 using Seruichi.Common;
 using System.Web.Mvc;
 
 namespace Seruichi.RealEstate.Web.Controllers
 {
-    public class r_asmc_addressController : BaseController
+    public class r_asmc_railwayController : BaseController
     {
-        // GET: r_asmc_address
+        // GET: r_asmc_railway
         [HttpGet]
         public ActionResult Index(string rc)
         {
@@ -16,7 +17,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return RedirectToAction("BadRequest", "Error");
             }
 
-            ViewBag.PageID = "r_asmc_address";
+            ViewBag.PageID = "r_asmc_railway";
             ViewBag.CurrentRegionCD = rc;
             return View();
         }
@@ -27,8 +28,8 @@ namespace Seruichi.RealEstate.Web.Controllers
             r_asmc_addressBL bl = new r_asmc_addressBL();
             ViewBag.Regions = bl.GetRegions();
             ViewBag.CurrentRegionCD = rc;
-            ViewBag.PageID = "r_asmc_address";
-            return PartialView("_r_asmc_address_tab_menu");
+            ViewBag.PageID = "r_asmc_railway";
+            return PartialView("~/Views/r_asmc_address/_r_asmc_address_tab_menu.cshtml");
         }
 
         [ChildActionOnly]
@@ -41,12 +42,12 @@ namespace Seruichi.RealEstate.Web.Controllers
             }
             else
             {
-                r_asmc_addressBL bl = new r_asmc_addressBL();
-                model = bl.GetCitiesByRegionCD(rc, base.GetOperator("RealECD"));
+                r_asmc_railwayBL bl = new r_asmc_railwayBL();
+                model = bl.GetLinesByRegionCD(rc, base.GetOperator("RealECD"));
             }
 
             ViewBag.PageID = pid;
-            return PartialView("_r_asmc_address_searchbox_main", model);
+            return PartialView("~/Views/r_asmc_address/_r_asmc_address_searchbox_main.cshtml", model);
         }
 
         [HttpPost]
@@ -59,13 +60,13 @@ namespace Seruichi.RealEstate.Web.Controllers
             }
             else
             {
-                r_asmc_addressBL bl = new r_asmc_addressBL();
-                model = bl.GetTownsByCitycdCsv(citycdCsv, base.GetOperator("RealECD"));
+                r_asmc_railwayBL bl = new r_asmc_railwayBL();
+                model = bl.GetStationsByLinecdCsv(citycdCsv, base.GetOperator("RealECD"));
             }
 
             model.Settings1 = settings1;
             model.Settings2 = settings2;
-            return PartialView("_r_asmc_address_searchbox_detail", model);
+            return PartialView("~/Views/r_asmc_address/_r_asmc_address_searchbox_detail.cshtml", model);
         }
 
         [HttpPost]
@@ -81,7 +82,7 @@ namespace Seruichi.RealEstate.Web.Controllers
 
             TempData["selectedList_Cities"] = selectedListCsv_cities;
             TempData["selectedList_Towns"] = selectedListCsv_towns;
-            return RedirectToAction("Index", "r_asmc_set_area");
+            return RedirectToAction("Index", "r_asmc_set_train");
         }
 
     }

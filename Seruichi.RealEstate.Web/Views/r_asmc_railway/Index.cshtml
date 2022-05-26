@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "査定条件[住所]";
+    ViewBag.Title = "査定条件[路線]";
     Layout = "~/Views/Shared/_r_menuLayout.cshtml";
 }
 @section styles{
@@ -7,7 +7,7 @@
 }
 
 <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18" id="wrapper">
-    @Html.Partial("_r_asmc_address_left_sideNavigation_menu")
+    @Html.Partial("~/Views/r_asmc_address/_r_asmc_address_left_sideNavigation_menu.cshtml")
 
     <div class="toggle-button">
         <a href="#menu-toggle" class="btn" id="menu-toggle">
@@ -20,8 +20,8 @@
                 <div class="card shadow border-0 mb-7">
                     <div class="card-header">
                         <div class="col-md-12 col-12 mb-3 mb-sm-0">
-                            <h1 class="h2 mb-0 ls-tight"> 都道府県選択</h1>
-                            <span class="text-muted small">査定条件＞設定＞住所・路線から設定＞住所から設定</span>
+                            <h1 class="h2 mb-0 ls-tight"> 路線選択</h1>
+                            <span class="text-muted small">査定条件＞設定＞住所・路線から設定＞路線から設定</span>
                         </div>
                         <div class="col-sm-6 col-12 text-sm-end">
                             <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
@@ -41,7 +41,7 @@
                 <div class="modal-dialog modal-dialog-centered modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">町名選択</h5>
+                            <h5 class="modal-title">駅選択</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body" id="searchbox_detail_result">
@@ -63,5 +63,5 @@
 </div>
 
 @section Scripts{
-    @Scripts.Render("~/bundles/r_asmc_address")
+    @Scripts.Render("~/bundles/r_asmc_railway")
 }

@@ -1,4 +1,12 @@
-﻿<div id="sidebar-wrapper">
+﻿@*r_asmc_address / r_asmc_railway 共通*@
+
+@{
+    string button_label = (ViewBag.PageID == "r_asmc_address" ? "さらに町名を絞り込む" 
+                         : ViewBag.PageID == "r_asmc_railway" ? "さらに駅を絞り込む" 
+                         : "");
+}
+
+<div id="sidebar-wrapper">
     <ul class="navbar-nav mb-md-4 p-3 mt-5 p-md-0">
         <li>
             <div class="text-center px-xl-3 pt-3">
@@ -32,7 +40,7 @@
         <li>
             <div class="form-group ps-3 pe-3 pb-3">
                 <button type="button" class="btn btn-primary w-100" id="btnSearchDetail">
-                    さらに町名を絞り込む
+                    @button_label
                 </button>
             </div>
         </li>

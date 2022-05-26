@@ -1,10 +1,11 @@
 ﻿@{
     Layout = "~/Views/Shared/_t_menuLayout.cshtml";
+    ViewBag.Title = "管理者";
 }
 @section styles{
 
-    @Styles.Render("~/Content/tenfold_css_common")
-}
+        @Styles.Render("~/Content/tenfold_css_common")
+    }
 
 <form id="form1">
     <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
@@ -37,9 +38,10 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
+                                        @{int i = 1;}
                                         @foreach (var item in ViewBag.M_TenfoldStaff_list)
                                         {
-                                            <div class="col-12 col-md-6 col-lg-4 pb-3">
+                                            <div class="col-12 col-md-6 col-lg-4 pb-3 update-data">
                                                 <div class="card">
                                                     <div class="card-header">
                                                         <h5>&nbsp;</h5>
@@ -53,21 +55,23 @@
                                                                         <div class="col-12 pb-2">
                                                                             <div class="form-group">
                                                                                 <label for="eMail">スタッフID</label>
-                                                                                <input type="text" class="form-control" value="@item.TenStaffCD" readonly>
+                                                                                <input type="text" class="form-control" value="@item.TenStaffCD" readonly id="txtcd_@i" name="txtcd_@i">
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-12 pb-2">
-                                                                            <div class="form-group">
+                                                                            <div class="d-flex">
                                                                                 <label for="website">パスワード</label>
-                                                                                <input type="text" class="form-control" value="@item.TenStaffPW">
+                                                                                <span class="cap-errormsg-right" id="error_pw_@i"></span>
                                                                             </div>
+                                                                            <input type="text" class="form-control" value="@item.TenStaffPW" id="txtpw_@i" name="txtpw_@i" maxlength="30">
                                                                         </div>
 
                                                                         <div class="col-12 pb-2">
-                                                                            <div class="form-group">
+                                                                            <div class="d-flex">
                                                                                 <label>スタッフ名</label>
-                                                                                <input type="text" class="form-control" value="@item.TenStaffName">
+                                                                                <span class="cap-errormsg-right" id="error_name_@i"></span>
                                                                             </div>
+                                                                            <input type="text" class="form-control" value="@item.TenStaffName" id="txtname_@i" name="txtname_@i" maxlength="15">
                                                                         </div>
                                                                     </div>
                                                                     <div class="row gutters">
@@ -80,7 +84,7 @@
                                                                                     </div>
                                                                                     <div class="col-auto">
                                                                                         <div class="form-check form-switch">
-                                                                                            <input class="form-check-input" type="checkbox" role="switch" @item.InvalidFLG />
+                                                                                            <input class="form-check-input" type="checkbox" role="switch" @item.InvalidFLG name="txtflg_@i" id="txtflg_@i" />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -93,7 +97,7 @@
                                                                             <div class="form-group">
                                                                                 <label for="Street">アカウント削除</label>
                                                                                 <div class="form-check">
-                                                                                    <input class="form-check-input" type="checkbox" value="" id="accdel">
+                                                                                    <input class="form-check-input" type="checkbox" value="" id="txtdel_@i" name="txtdel_@i">
                                                                                     <label class="form-check-label" for="accdel">
                                                                                         削除
                                                                                     </label>
@@ -108,74 +112,75 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            {i++;}
                                         }
 
 
-                                            <div class="col-12 col-md-6 col-lg-4 pb-3">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h5>新規登録</h5>
-                                                    </div>
-                                                    <div class="row gutters">
+                                        <div class="col-12 col-md-6 col-lg-4 pb-3">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>新規登録</h5>
+                                                </div>
+                                                <div class="row gutters">
 
-                                                        <div class="col-md-12 col-sm-12 col-12">
-                                                            <div class="h-100">
-                                                                <div class="card-body">
-                                                                    <div class="row gutters">
-                                                                        <div class="col-12 pb-2">
-                                                                            <div class="d-flex">
-                                                                                <label for="eMail">スタッフID</label>
-                                                                                <span class="cap-errormsg-right" id="errorTenStaffCD"></span>
-                                                                            </div>
-                                                                            <input type="text" name="TenStaffCD" id="TenStaffCD" class="form-control" value="" maxlength="10">
+                                                    <div class="col-md-12 col-sm-12 col-12">
+                                                        <div class="h-100">
+                                                            <div class="card-body">
+                                                                <div class="row gutters">
+                                                                    <div class="col-12 pb-2">
+                                                                        <div class="d-flex">
+                                                                            <label for="eMail">スタッフID</label>
+                                                                            <span class="cap-errormsg-right" id="errorTenStaffCD"></span>
                                                                         </div>
-                                                                        <div class="col-12 pb-2">
-                                                                            <div class="d-flex">
-                                                                                <label for="website">パスワード</label>
-                                                                                <span class="cap-errormsg-right" id="errorTenStaffPW"></span>
-                                                                            </div>
-                                                                            <input type="text" name="TenStaffPW" id="TenStaffPW" class="form-control" value="" maxlength="10">
-                                                                        </div>
-
-                                                                        <div class="col-12 pb-2">
-                                                                            <div class="d-flex">
-                                                                                <label>スタッフ名</label>
-                                                                                <span class="cap-errormsg-right" id="errorTenStaffName"></span>
-                                                                            </div>
-                                                                            <input type="text" name="TenStaffName" id="TenStaffName" class="form-control" value="" maxlength="15">
-                                                                        </div>
+                                                                        <input type="text" name="TenStaffCD" id="TenStaffCD" class="form-control" value="" maxlength="10">
                                                                     </div>
-                                                                    <div class="row gutters">
-                                                                        <div class="col-12">
-                                                                            <div class="form-group">
-                                                                                <label for="Street">アカウントフラグ</label>
-                                                                                <div class="row align-items-center">
-                                                                                    <div class="col">
-                                                                                        <label class="form-check-label text-muted">無効化</label>
-                                                                                    </div>
-                                                                                    <div class="col-auto">
-                                                                                        <div class="form-check form-switch">
-                                                                                            <input class="form-check-input" type="checkbox" role="switch" id="InvalidFLG" name="InvalidFLG" />
-                                                                                        </div>
+                                                                    <div class="col-12 pb-2">
+                                                                        <div class="d-flex">
+                                                                            <label for="website">パスワード</label>
+                                                                            <span class="cap-errormsg-right" id="errorTenStaffPW"></span>
+                                                                        </div>
+                                                                        <input type="text" name="TenStaffPW" id="TenStaffPW" class="form-control" value="" maxlength="30">
+                                                                    </div>
+
+                                                                    <div class="col-12 pb-2">
+                                                                        <div class="d-flex">
+                                                                            <label>スタッフ名</label>
+                                                                            <span class="cap-errormsg-right" id="errorTenStaffName"></span>
+                                                                        </div>
+                                                                        <input type="text" name="TenStaffName" id="TenStaffName" class="form-control" value="" maxlength="15">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row gutters">
+                                                                    <div class="col-12">
+                                                                        <div class="form-group">
+                                                                            <label for="Street">アカウントフラグ</label>
+                                                                            <div class="row align-items-center">
+                                                                                <div class="col">
+                                                                                    <label class="form-check-label text-muted">無効化</label>
+                                                                                </div>
+                                                                                <div class="col-auto">
+                                                                                    <div class="form-check form-switch">
+                                                                                        <input class="form-check-input" type="checkbox" role="switch" id="chk_Invalidflg" />
+                                                                                        <input type="text" id="InvalidFLG" name="InvalidFLG" class="d-none" value="">
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="row gutters">
-                                                                        <div class="col-12">
-                                                                            <div class="form-group">
-                                                                                <label for="Street">アカウント削除</label>
-                                                                                <div class="form-check">
-                                                                                    <input class="form-check-input" type="checkbox" value=""  disabled>
-                                                                                    <label class="form-check-label" for="accdel">
-                                                                                        削除
-                                                                                    </label>
-                                                                                </div>
+                                                                </div>
+                                                                <div class="row gutters">
+                                                                    <div class="col-12">
+                                                                        <div class="form-group">
+                                                                            <label for="Street">アカウント削除</label>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="checkbox" value="" disabled>
+                                                                                <label class="form-check-label" for="accdel">
+                                                                                    削除
+                                                                                </label>
                                                                             </div>
                                                                         </div>
-
                                                                     </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -183,6 +188,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
 
 
@@ -197,18 +203,22 @@
                                 </div>
                                 <div class="p-5 container">
                                     <div class="form-outline  pb-2">
-                                        <label class="form-label" for="form3Examplev4">パスワード</label>
-                                        <div class="passkey-box">
-                                            <input type="password"  class="passkey form-control"
-                                                   placeholder="パスワード" required="required" />
+                                        <div class="d-flex">
+                                            <label class="form-label" for="form3Examplev4">パスワード</label>
+                                            <span class="cap-errormsg-right" id="error_txtPassword"></span>
                                         </div>
+                                        <input type="password" class="passkey form-control"
+                                               placeholder="パスワード" required="required" value="@ViewBag.AdminPW" maxlength="30" id="txtPassword" name="AdminPassword" />
                                     </div>
 
                                     <div class="mb-4 pb-2">
                                         <div class="form-outline">
-                                            <label class="form-label" for="form3Examplev4">パスワード再確認</label>
+                                            <div class="d-flex">
+                                                <label class="form-label" for="form3Examplev4">パスワード再確認</label>
+                                                <span class="cap-errormsg-right" id="error_txtConfirmPassword"></span>
+                                            </div>
                                             <input type="password" class="passkey form-control"
-                                                   placeholder="パスワード" required="required">
+                                                   placeholder="パスワード" required="required" value="@ViewBag.AdminPW" maxlength="30" id="txtConfirmPassword" name="AdminConfirmPassword">
 
                                         </div>
                                     </div>
@@ -234,5 +244,5 @@
 </form>
 
 @section Scripts{
-    @Scripts.Render("~/bundles/t_admin")
-}
+        @Scripts.Render("~/bundles/t_admin")
+    }

@@ -136,7 +136,10 @@ function addEvents() {
         }
 
         const $MansionName = $("#MansionName").val().trim(), $StartYear = $("#StartYear").val(), $EndYear = $('#EndYear').val()
-        var CityCD = '';
+        var CityCD = '', CityGPCD = '';
+        $('.node-parent:checkbox:checked').each(function () {
+            CityGPCD += $(this).val() + ',';
+        });
         $('.node-item:checkbox:checked').each(function () {
             CityCD += $(this).val() + ',';
         });
@@ -146,6 +149,7 @@ function addEvents() {
 
         let model = {
             MansionName: $MansionName,
+            CityGPCD: CityGPCD,
             CityCD: CityCD,
             StartYear: Get_FT_Age($EndYear, 'F'),
             EndYear: Get_FT_Age($StartYear, 'T'),
@@ -158,7 +162,7 @@ function addEvents() {
             Radio_Rating: rdoPriority
         };
 
-        if (model.MansionName == "" && model.CityCD == "" && model.StartYear == "" && model.EndYear == "" && model.Radio_Rating == 0) {
+        if (model.MansionName == "" && model.CityGPCD == "" && model.CityCD == "" && model.StartYear == "" && model.EndYear == "" && model.Radio_Rating == 0) {
             $('#btnDisplay').showError(common.getMessage('E303'));
             $('#MansionName').focus();
         }

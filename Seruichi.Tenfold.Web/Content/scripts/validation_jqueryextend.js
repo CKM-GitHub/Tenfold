@@ -197,9 +197,23 @@
     };
     $.fn.removeValidation_checkboxlenght = function () {
         return this.removeAttr('data-validation-checkboxlenght')
-    };
-    
+    };    
 
+    $.fn.addvalidation_minlengthCheck = function (digits) {
+        return this
+            .attr('data-validation-minlengthCheck', 'true')
+            .attr('data-mindigits', digits)
+            .attr('inputmode', 'text')
+            .attr('autocomplete', 'off');
+    };
+
+    $.fn.addvalidation_passwordcompare = function () {
+        return this
+            .attr('data-validation-passwordcompare', 'true')
+    };
+    $.fn.removeValidation_passwordcompare = function () {
+        return this.removeAttr('data-validation-passwordcompare')
+    };
 
     $.fn.addvalidation_custom = function (validationName) {
         return this

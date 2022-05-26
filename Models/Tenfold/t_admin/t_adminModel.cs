@@ -11,6 +11,18 @@ namespace Models.Tenfold.t_admin
         public string TenStaffCD { get; set; }
         public string TenStaffPW { get; set; }
         public string TenStaffName { get; set; }
+        public string InvalidFLG { get; set; }         
+        public string LoginName { get; set; }
+        public string AdminPassword { get; set; }
+        public string AdminConfirmPassword { get; set; }
+        public List<Update_t_adminModel> lst_AdminModel { get; set; } = new List<Update_t_adminModel>();        
+    }
+    public class Update_t_adminModel
+    {
+        public string TenStaffCD { get; set; }
+        public string TenStaffPW { get; set; }
+        public string TenStaffName { get; set; }
         public string InvalidFLG { get; set; }
+        public string DeleteFLG { get; set; }
     }
 }

@@ -460,7 +460,7 @@ function addEvents() {
     }); 
 
     $('#btnCancel').on('click', function () {
-        window.location.href = window.location.href;
+        window.location.reload();
     });
 }
 function setScreenComfirm(data) {

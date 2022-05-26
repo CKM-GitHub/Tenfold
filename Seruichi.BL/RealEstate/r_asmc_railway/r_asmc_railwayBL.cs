@@ -8,18 +8,11 @@ using System.Threading.Tasks;
 using Models;
 using System.Linq;
 
-namespace Seruichi.BL.RealEstate.r_asmc_address
+namespace Seruichi.BL.RealEstate.r_asmc_railway
 {
-    public class r_asmc_addressBL
+    public class r_asmc_railwayBL
     {
-        public IEnumerable<r_asmc_address_Region> GetRegions()
-        {
-            DBAccess db = new DBAccess();
-            DataTable dt = db.SelectDatatable("pr_r_asmc_address_Select_M_Region");
-            return dt.AsEnumerableEntity<r_asmc_address_Region>();
-        }
-
-        public r_asmc_addressModel GetCitiesByRegionCD(string regionCD, string realECD)
+        public r_asmc_addressModel GetLinesByRegionCD(string regionCD, string realECD)
         {
             r_asmc_addressModel result = new r_asmc_addressModel();
 
@@ -30,7 +23,7 @@ namespace Seruichi.BL.RealEstate.r_asmc_address
             };
 
             DBAccess db = new DBAccess();
-            DataTable dt = db.SelectDatatable("pr_r_asmc_address_Select_Cities_by_RegionCD", sqlParams);
+            DataTable dt = db.SelectDatatable("pr_r_asmc_railway_Select_Lines_by_RegionCD", sqlParams);
 
             IEnumerable<r_asmc_address_City> e = dt.AsEnumerableEntity<r_asmc_address_City>();
 
@@ -56,18 +49,18 @@ namespace Seruichi.BL.RealEstate.r_asmc_address
             return result;
         }
 
-        public r_asmc_addressDetailModel GetTownsByCitycdCsv(string citycdCsv, string realECD)
+        public r_asmc_addressDetailModel GetStationsByLinecdCsv(string linecdCsv, string realECD)
         {
             r_asmc_addressDetailModel result = new r_asmc_addressDetailModel();
 
             var sqlParams = new SqlParameter[]
             {
-                new SqlParameter("@CitycdCsv", SqlDbType.VarChar){ Value = citycdCsv },
+                new SqlParameter("@LinecdCsv", SqlDbType.VarChar){ Value = linecdCsv },
                 new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = realECD },
             };
 
             DBAccess db = new DBAccess();
-            DataTable dt = db.SelectDatatable("pr_r_asmc_address_Select_Towns_by_Cities", sqlParams);
+            DataTable dt = db.SelectDatatable("pr_r_asmc_railway_Select_Stations_by_Lines", sqlParams);
 
             IEnumerable<r_asmc_address_Town> e = dt.AsEnumerableEntity<r_asmc_address_Town>();
 
