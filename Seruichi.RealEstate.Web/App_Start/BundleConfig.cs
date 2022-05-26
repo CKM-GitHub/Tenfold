@@ -30,7 +30,7 @@ namespace Seruichi.RealEstate.Web
                       "~/Content/scripts/validation_jqueryextend.js",
                       "~/Content/scripts/common.js"));
 
-            //t_login
+            //r_login
             bundles.Add(new StyleBundle("~/Content/r_login").Include(
                        "~/Content/fonts/ionicons.min.css",
                       "~/Content/css/Clients-UI.css",
@@ -103,6 +103,17 @@ namespace Seruichi.RealEstate.Web
                      "~/Content/scripts/rating.js",
                     "~/Content/scripts/sidebar.js",
                     "~/Content/scripts/table_header_sort.js"));
+
+            bundles.Add(new StyleBundle("~/Content/r_staff").Include(
+                     "~/Content/css/style.css",
+                     "~/Content/css/index.css",
+                      "~/Content/css/fileuploads.css",
+                      "~/Content/css/profileimg.css"
+                     ));
+            bundles.Add(new ScriptBundle("~/bundles/r_staff").Include(
+                    "~/Scripts/r_staff.js",
+                     "~/Content/scripts/sidebar.js",
+                      "~/Content/scripts/profileimg.js"));
         }
     }
 }
