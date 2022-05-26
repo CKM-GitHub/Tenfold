@@ -55,6 +55,7 @@
     <Compile Include="RealEstate\r_asmc_address\r_asmc_addressBL.cs" />
     <Compile Include="RealEstate\r_issueslist\r_issueslistBL.cs" />
     <Compile Include="RealEstate\r_login\r_loginBL.cs" />
+    <Compile Include="RealEstate\r_staff\r_staffBL.cs" />
     <Compile Include="Seller\a_assess_dBL.cs" />
     <Compile Include="Seller\a_contactBL.cs" />
     <Compile Include="Seller\a_mypage_ahisBL.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Tenfold\t_dashboard\t_dashboardBL.cs" />
     <Compile Include="Tenfold\t_mansion_list\t_mansion_listBL.cs" />
     <Compile Include="Tenfold\t_mansion_new\t_mansion_newBL.cs" />
+    <Compile Include="Tenfold\t_reale_list\t_reale_listBL.cs" />
     <Compile Include="Tenfold\t_seller_assessment\t_seller_assessmentBL.cs" />
     <Compile Include="Tenfold\t_seller_list\t_seller_listBL.cs" />
     <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionBL.cs" />
