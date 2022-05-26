@@ -87,6 +87,16 @@ namespace Seruichi.BL
             return GetDropDownListItems(spName);
         }
 
+        public List<DropDownListItem> GetDropDownListItemsOfMultPurpose(int dataID)
+        {
+            string spName = "pr_Common_Select_DropDownListOfMultPurpose";
+            SqlParameter[] sqlParams = new SqlParameter[] {
+                new SqlParameter("@DataID", SqlDbType.Int) { Value = dataID },
+            };
+
+            return GetDropDownListItems(spName, sqlParams);
+        }
+
         public List<DropDownListItem> GetDropDownListItemsOfStaff_by_RealECD(string realECD)
         {
             string spName = "pr_r_issuelist_select_DropDownListOfStaff_by_RealECD";

@@ -37,6 +37,8 @@ namespace Models
         public string BalconyArea { get; set; }
         public byte Direction { get; set; }
         public string FloorType { get; set; }
+        public string FloorType2 { get; set; }
+        public string AdditionalRooms { get; set; }
         public byte BathKBN { get; set; }
         public byte RightKBN { get; set; }
         public byte CurrentKBN { get; set; }

@@ -22,6 +22,7 @@ namespace Seruichi.Seller.Web.Controllers
 
             CommonBL bl = new CommonBL();
             ViewBag.PrefDropDownListItems = bl.GetDropDownListItemsOfPrefecture();
+            ViewBag.FloorTypeDropDownListItems = bl.GetDropDownListItemsOfMultPurpose(104);
             return View();
         }
 

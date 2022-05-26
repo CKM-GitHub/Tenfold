@@ -107,6 +107,7 @@
     <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Update_M_Seller.sql" />
     <Content Include="Database\StoredProcedure\pr_a_contact_Insert_D_Contact.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_whis_Select_D_SellerPossible_by_SellerCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfMultPurpose.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfContactType.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfPrefAll.sql" />
     <Content Include="Database\StoredProcedure\pr_common_tenfold_select_MansionName_by_MansionCD.sql" />

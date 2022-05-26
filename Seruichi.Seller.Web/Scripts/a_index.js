@@ -22,6 +22,7 @@ $(function () {
     addEvents();
     createBloodhound();
     setTypeahead('#MansionName');
+    $('#BalconyKBN1').prop('checked', true).change();
     $('#ZipCode1').focus();
 });
 
@@ -117,6 +118,9 @@ function setValidation() {
         .addvalidation_errorElement("#errorFloorType")
         .addvalidation_reqired(true)
         .addvalidation_singlebyte_number();
+    $('#FloorType2')
+        .addvalidation_errorElement("#errorFloorType")
+        .addvalidation_reqired();
     //バス・トイレ
     $('input[name="BathKBN"]:radio')
         .addvalidation_errorElement("#errorBathKBN")
@@ -151,13 +155,17 @@ function setValidation() {
     //その他費用
     $('#ExtraFee')
         .addvalidation_errorElement("#errorExtraFee")
-        .addvalidation_reqired()
+        //.addvalidation_reqired()
         .addvalidation_money(9);
     //固定資産税
     $('#PropertyTax')
         .addvalidation_errorElement("#errorPropertyTax")
         .addvalidation_reqired()
         .addvalidation_money(9);
+    //売却希望時期
+    $('input[name="DesiredTime"]:radio')
+        .addvalidation_errorElement("#errorDesiredTime")
+        .addvalidation_reqired();
 
     $('#btnShowConfirmation')
         .addvalidation_errorElement("#errorProcess");
@@ -334,6 +342,8 @@ function addEvents() {
         model.PrefName = $('#PrefCD option:selected').text();
         model.CityName = $('#CityCD option:selected').text();
         model.TownName = $('#TownCD option:selected').text();
+        model.FloorType2Name = $('#FloorType2 option:selected').text();
+        model.AdditionalRooms = $('#FloorType2 option:selected').data('addrooms')
         model.ConstYYYYMM = model.ConstYYYYMM.replace('-', '');
         model.MansionStationListJson = JSON.stringify(getMansionStationList());
 
@@ -385,6 +395,7 @@ function setScreenComfirm(data) {
     $('#confirm_PrefCD').val(data.PrefName);
     $('#confirm_CityCD').val(data.CityName);
     $('#confirm_TownCD').val(data.TownName);
+    $('#confirm_FloorType2').val(data.FloorType2Name);
 
     $('#confirm_StructuralKBN').val($('input[name="StructuralKBN"]:radio:checked').next().text());
 
@@ -439,6 +450,7 @@ function displayMansionData(mansionCD) {
                     //Clears the value of an element
                     $('.js-detail :input:not(.form-check-input):not(button):not([type=raido]):not(:hidden):not(:disabled):not([readonly])').val('').hideError();
                     $('.js-detail .form-check-input').val(["0"]).hideError(); //radio button
+                    $('#BalconyKBN1').prop('checked', true).change();
                     $('.js-stationContainer').children().remove();
                     for (let i = 0; i < 3; i++) {
                         const index = i + 1;
