@@ -17,11 +17,15 @@ BEGIN
         ,PRF.PrefName
         ,LIN.CompanyCD          AS CityGroupCD
         ,RCP.CompanyName        AS CityGroupName
-        ,STN.LineCD
-        ,LIN.LineName
+        ,STN.LineCD             AS CityCD
+        ,LIN.LineName           AS CityName
         ,ISNULL(MAN.Kensu,0)    AS MansionCount
         ,ISNULL(RES.Kensu,0)    AS RealEstateCount
         ,LIN.DisplayOrder
+
+        ,ISNULL(MyRES.ValidFLG, 9)  AS ValidFLG
+        ,MyRES.ExpDate
+
     FROM M_Pref PRF
     INNER JOIN M_Station STN ON PRF.PrefCD = STN.PrefCD
     INNER JOIN M_Line LIN ON STN.LineCD = LIN.LineCD

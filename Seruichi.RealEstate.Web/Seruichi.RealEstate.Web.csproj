@@ -201,6 +201,7 @@
     <Content Include="Content\fonts\ionicons.eot" />
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
+    <Content Include="Scripts\r_asmc_railway.js" />
     <Content Include="Scripts\r_asmc_address.js" />
     <Content Include="Scripts\r_asmc_ms_list_sh.js" />
     <Content Include="Scripts\r_asmc_ms_reged_list.js" />

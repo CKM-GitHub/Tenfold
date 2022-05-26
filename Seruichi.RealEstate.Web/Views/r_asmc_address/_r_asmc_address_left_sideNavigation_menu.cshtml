@@ -1,7 +1,9 @@
 ﻿@*r_asmc_address / r_asmc_railway 共通*@
 
 @{
-    string button_label = (ViewBag.PageID == "address" ? "さらに町名を絞り込む" : ViewBag.PageID == "railway" ? "さらに駅を絞り込む" : "");
+    string button_label = (ViewBag.PageID == "r_asmc_address" ? "さらに町名を絞り込む" 
+                         : ViewBag.PageID == "r_asmc_railway" ? "さらに駅を絞り込む" 
+                         : "");
 }
 
 <div id="sidebar-wrapper">

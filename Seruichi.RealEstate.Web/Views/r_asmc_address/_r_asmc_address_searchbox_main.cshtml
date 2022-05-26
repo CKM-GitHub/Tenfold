@@ -3,7 +3,9 @@
 @model Models.RealEstate.r_asmc_address.r_asmc_addressModel
 
 @{ 
-    string switch_label = (ViewBag.PageID == "address"? "行政区画表示" : ViewBag.PageID == "railway"? "路線表示" : "");
+    string switch_label = (ViewBag.PageID == "r_asmc_address" ? "行政区画表示" 
+                         : ViewBag.PageID == "r_asmc_railway" ? "路線表示" 
+                         : "");
 }
 
 @foreach (var item01 in Model.Prefectures)

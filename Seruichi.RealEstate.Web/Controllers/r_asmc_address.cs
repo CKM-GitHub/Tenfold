@@ -16,7 +16,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return RedirectToAction("BadRequest", "Error");
             }
 
-            ViewBag.PageID = "address";
+            ViewBag.PageID = "r_asmc_address";
             ViewBag.CurrentRegionCD = rc;
             return View();
         }
@@ -27,6 +27,7 @@ namespace Seruichi.RealEstate.Web.Controllers
             r_asmc_addressBL bl = new r_asmc_addressBL();
             ViewBag.Regions = bl.GetRegions();
             ViewBag.CurrentRegionCD = rc;
+            ViewBag.PageID = "r_asmc_address";
             return PartialView("_r_asmc_address_tab_menu");
         }
 

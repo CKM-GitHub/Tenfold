@@ -6,7 +6,7 @@
         if (item.RegionCD == ViewBag.CurrentRegionCD)
         {
             <li class="nav-item">
-                <a href="@Url.Action("Index", "r_asmc_address", new { rc = item.RegionCD })" class="nav-link active">
+                <a href="@Url.Action("Index", ViewBag.PageID, new { rc = item.RegionCD })" class="nav-link active">
                     @item.RegionName
                 </a>
             </li>
@@ -14,7 +14,7 @@
         else
         {
             <li class="nav-item">
-                <a href="@Url.Action("Index", "r_asmc_address", new { rc = item.RegionCD })" class="nav-link font-regular">
+                <a href="@Url.Action("Index", ViewBag.PageID, new { rc = item.RegionCD })" class="nav-link font-regular">
                     @item.RegionName
                 </a>
             </li>
