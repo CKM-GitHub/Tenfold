@@ -147,6 +147,7 @@
     <Compile Include="Controllers\r_asmc.cs" />
     <Compile Include="Controllers\r_issueslistController.cs" />
     <Compile Include="Controllers\r_loginController.cs" />
+    <Compile Include="Controllers\r_staffController.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
     <Compile Include="Filters\BrowsingHistoryAttribute.cs" />
     <Compile Include="Filters\CustomHandleErrorAttribute.cs" />
@@ -164,10 +165,12 @@
     <Content Include="Content\css\Clients-UI.css" />
     <Content Include="Content\css\Contact-Form-Clean.css" />
     <Content Include="Content\css\errorpage.css" />
+    <Content Include="Content\css\fileuploads.css" />
     <Content Include="Content\css\index.css" />
     <Content Include="Content\css\japanmap.css" />
     <Content Include="Content\css\loading.css" />
     <Content Include="Content\css\Login-Form-Clean.css" />
+    <Content Include="Content\css\profileimg.css" />
     <Content Include="Content\css\Soft-UI-Aside-Navbar.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\tree.css" />
@@ -179,6 +182,7 @@
     <Content Include="Content\images\map\japan_map_outline.png" />
     <Content Include="Content\modernizr\modernizr-2.8.3.js" />
     <Content Include="Content\scripts\common.js" />
+    <Content Include="Content\scripts\profileimg.js" />
     <Content Include="Content\scripts\rating.js" />
     <Content Include="Content\scripts\sidebar.js" />
     <Content Include="Content\scripts\table_header_sort.js" />
@@ -211,6 +215,7 @@
     <Content Include="Scripts\r_asmc.js" />
     <Content Include="Scripts\r_issueslist.js" />
     <Content Include="Scripts\r_login.js" />
+    <Content Include="Scripts\r_staff.js" />
     <Content Include="Views\Error\BadRequest.cshtml" />
     <Content Include="Views\Error\BusinessError.cshtml" />
     <Content Include="Views\Error\Forbidden.cshtml" />

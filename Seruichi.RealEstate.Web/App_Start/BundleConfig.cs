@@ -30,7 +30,7 @@ namespace Seruichi.RealEstate.Web
                       "~/Content/scripts/validation_jqueryextend.js",
                       "~/Content/scripts/common.js"));
 
-            //t_login
+            //r_login
             bundles.Add(new StyleBundle("~/Content/r_login").Include(
                        "~/Content/fonts/ionicons.min.css",
                       "~/Content/css/Clients-UI.css",
