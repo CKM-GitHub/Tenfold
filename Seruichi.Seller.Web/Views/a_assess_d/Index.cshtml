@@ -2,7 +2,7 @@
     ViewBag.Title = "査定 - セルイチ";
 }
 @section styles{
-    @*@Styles.Render("~/Content/css/a_mypage_ahis")*@
+    @Styles.Render("~/Content/css/a_assess_d")
 }
 
 <header class="text-center text-white masthead"
@@ -22,12 +22,12 @@
         <div class="row">
             <div class="col-12 col-md-6">
 
-
+                <input type="hidden" value="" id="realecd" />
                 <div class="">
                     <div class="card shadow border-0 w-100">
                         <div class="card-header">
-                            <h4 class="text-center">MansionName</h4>
-                            <small>AddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddress</small>
+                            <h4 class="text-center" id="headerMansionName">   </h4>
+                            <small id="headerAddress"> </small>
                         </div>
                     </div>
 
@@ -40,136 +40,7 @@
                             <div class=" pb-0 pm-0">
                                 <div class="row justify-content-center pb-2" id="ekikoutsu"
                                      style="overflow-x: hidden;overflow-y: auto;max-height: 265px;">
-                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                        <div class="card-body p-0 row">
-                                            <div class="col-12">
-                                                <h5> LineNameLineNameLineName</h5>
-                                            </div>
-                                            <div class="col-12">
-                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                            </div>
-                                            <div class="col-12 text-end">
-                                                <p class="text-dark">徒歩 99 分</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                        <div class="card-body p-0 row">
-                                            <div class="col-12">
-                                                <h5> LineNameLineNameLineName</h5>
-                                            </div>
-                                            <div class="col-12">
-                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                            </div>
-                                            <div class="col-12 text-end">
-                                                <p class="text-dark">徒歩 99 分</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                        <div class="card-body p-0 row">
-                                            <div class="col-12">
-                                                <h5> LineNameLineNameLineName</h5>
-                                            </div>
-                                            <div class="col-12">
-                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                            </div>
-                                            <div class="col-12 text-end">
-                                                <p class="text-dark">徒歩 99 分</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                        <div class="card-body p-0 row">
-                                            <div class="col-12">
-                                                <h5> LineNameLineNameLineName</h5>
-                                            </div>
-                                            <div class="col-12">
-                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                            </div>
-                                            <div class="col-12 text-end">
-                                                <p class="text-dark">徒歩 99 分</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                        <div class="card-body p-0 row">
-                                            <div class="col-12">
-                                                <h5> LineNameLineNameLineName</h5>
-                                            </div>
-                                            <div class="col-12">
-                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                            </div>
-                                            <div class="col-12 text-end">
-                                                <p class="text-dark">徒歩 99 分</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                        <div class="card-body p-0 row">
-                                            <div class="col-12">
-                                                <h5> LineNameLineNameLineName</h5>
-                                            </div>
-                                            <div class="col-12">
-                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                            </div>
-                                            <div class="col-12 text-end">
-                                                <p class="text-dark">徒歩 99 分</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                        <div class="card-body p-0 row">
-                                            <div class="col-12">
-                                                <h5> LineNameLineNameLineName</h5>
-                                            </div>
-                                            <div class="col-12">
-                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                            </div>
-                                            <div class="col-12 text-end">
-                                                <p class="text-dark">徒歩 99 分</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                        <div class="card-body p-0 row">
-                                            <div class="col-12">
-                                                <h5> LineNameLineNameLineName</h5>
-                                            </div>
-                                            <div class="col-12">
-                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                            </div>
-                                            <div class="col-12 text-end">
-                                                <p class="text-dark">徒歩 99 分</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                        <div class="card-body p-0 row">
-                                            <div class="col-12">
-                                                <h5> LineNameLineNameLineName</h5>
-                                            </div>
-                                            <div class="col-12">
-                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                            </div>
-                                            <div class="col-12 text-end">
-                                                <p class="text-dark">徒歩 99 分</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                        <div class="card-body p-0 row">
-                                            <div class="col-12">
-                                                <h5> LineNameLineNameLineName</h5>
-                                            </div>
-                                            <div class="col-12">
-                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                            </div>
-                                            <div class="col-12 text-end">
-                                                <p class="text-dark">徒歩 99 分</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -195,7 +66,7 @@
                                             <div class="">
                                                 <h6 class="align-self-center"><strong>建物構造</strong><br></h6>
                                             </div>
-                                            <div class=""><span class="align-self-start">AAAAAAAAAA<br></span></div>
+                                            <div class=""><span class="align-self-start" id="specBuildingStructure"> <br></span></div>
                                         </div>
                                     </div>
                                     <div class="d-inline-flex pb-1">
@@ -203,15 +74,15 @@
                                             <div class="">
                                                 <h6 class="align-self-center"><strong>築年月</strong><br></h6>
                                             </div>
-                                            <div class=""><span class="align-self-start">YYYY/MM<br></span></div>
+                                            <div class=""><span class="align-self-start" id="specYearContruction">   <br></span></div>
                                         </div>
                                     </div>
                                     <div class="d-inline-flex pb-1">
                                         <div class="row">
                                             <div class="">
-                                                <h6 class="align-self-center"><strong>部屋番号</strong><br></h6>
+                                                <h6 class="align-self-center"><strong >部屋番号</strong><br></h6>
                                             </div>
-                                            <div class=""><span class="align-self-start">999 号室<br></span></div>
+                                            <div class=""><span class="align-self-start" id="specRoomNo">   <br></span></div>
                                         </div>
                                     </div>
                                     <div class="d-inline-flex pb-1">
@@ -219,7 +90,7 @@
                                             <div class="">
                                                 <h6 class="align-self-center"><strong>専有面積</strong><br></h6>
                                             </div>
-                                            <div class=""><span class="align-self-start">999.99 ㎡<br></span></div>
+                                            <div class=""><span class="align-self-start" id="specArea"> <br></span></div>
                                         </div>
                                     </div>
                                     <div class="d-inline-flex pb-1">
@@ -227,7 +98,7 @@
                                             <div class="">
                                                 <h6 class="align-self-center"><strong>バルコニー面積　</strong><br></h6>
                                             </div>
-                                            <div class=""><span class="align-self-start">999.99 ㎡<br></span></div>
+                                            <div class=""><span class="align-self-start" id="specBalconArea"> <br></span></div>
                                         </div>
                                     </div>
                                     <div class="d-inline-flex pb-1">
@@ -235,7 +106,7 @@
                                             <div class="">
                                                 <h6 class="align-self-center"><strong>主採光</strong><br></h6>
                                             </div>
-                                            <div class=""><span class="align-self-start">AAAAAAAAAA<br></span></div>
+                                            <div class=""><span class="align-self-start" id="specSunlighting"> <br></span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -245,7 +116,7 @@
                                             <div class="">
                                                 <h6 class="align-self-center"><strong>部屋数</strong><br></h6>
                                             </div>
-                                            <div class=""><span class="align-self-start">99部屋<br></span></div>
+                                            <div class=""><span class="align-self-start" id="specNumberofRoom"> <br></span></div>
                                         </div>
                                     </div>
                                     <div class="d-inline-flex pb-1">
@@ -253,7 +124,7 @@
                                             <div class="">
                                                 <h6 class="align-self-center"><strong>バス・トイレ　</strong><br></h6>
                                             </div>
-                                            <div class=""><span class="align-self-start">AAAAAAAAAA<br></span></div>
+                                            <div class=""><span class="align-self-start" id="specBathRoomToilet"> <br></span></div>
                                         </div>
                                     </div>
                                     <div class="d-inline-flex pb-1">
@@ -261,7 +132,7 @@
                                             <div class="">
                                                 <h6 class="align-self-center"><strong>土地権利　</strong><br></h6>
                                             </div>
-                                            <div class=""><span class="align-self-start">AAAAAAAAAA<br></span></div>
+                                            <div class=""><span class="align-self-start" id="specLandLight"> <br></span></div>
                                         </div>
                                     </div>
                                     <div class="d-inline-flex pb-1">
@@ -269,7 +140,7 @@
                                             <div class="">
                                                 <h6 class="align-self-center"><strong>現況</strong><br></h6>
                                             </div>
-                                            <div class=""><span class="align-self-start">AAAAAAAAAA<br></span></div>
+                                            <div class=""><span class="align-self-start" id="specPresentState"> <br></span></div>
                                         </div>
                                     </div>
                                     <div class="d-inline-flex pb-1">
@@ -277,7 +148,7 @@
                                             <div class="">
                                                 <h6 class="align-self-center"><strong>管理方式</strong><br></h6>
                                             </div>
-                                            <div class=""><span class="align-self-start">AAAAAAAAAA<br></span></div>
+                                            <div class=""><span class="align-self-start" id="specManagementSystem" > <br></span></div>
                                         </div>
                                     </div>
                                     <div class="d-inline-flex pb-1">
@@ -285,7 +156,7 @@
                                             <div class="">
                                                 <h6 class="align-self-center"><strong>売却希望時期　</strong><br></h6>
                                             </div>
-                                            <div class=""><span class="align-self-start">AAAAAAAAAA<br></span></div>
+                                            <div class=""><span class="align-self-start" id="specDesiredTimeSale"> <br></span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -296,7 +167,7 @@
                                                 <h6 class="align-self-center"><strong>家賃</strong><br></h6>
                                             </div>
                                             <div class="">
-                                                <span class="align-self-start">9,999,999円<br></span>
+                                                <span class="align-self-start" id="specRentFee"> <br></span>
                                             </div>
                                         </div>
                                     </div>
@@ -306,7 +177,7 @@
                                                 <h6 class="align-self-center"><strong>管理賃</strong><br></h6>
                                             </div>
                                             <div class="">
-                                                <span class="align-self-start">9,999,999円<br></span>
+                                                <span class="align-self-start" id="specManagementFee"> <br></span>
                                             </div>
                                         </div>
                                     </div>
@@ -316,17 +187,7 @@
                                                 <h6 class="align-self-center"><strong>修繕積立金</strong><br></h6>
                                             </div>
                                             <div class="">
-                                                <span class="align-self-start">9,999,999円<br></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-inline-flex pb-1">
-                                        <div class="row">
-                                            <div class="">
-                                                <h6 class="align-self-center"><strong>その他費用</strong><br></h6>
-                                            </div>
-                                            <div class="">
-                                                <span class="align-self-start">9,999,999円<br></span>
+                                                <span class="align-self-start" id="specRepairFee"> <br></span>
                                             </div>
                                         </div>
                                     </div>
@@ -336,7 +197,18 @@
                                                 <h6 class="align-self-center"><strong>固定資産税</strong><br></h6>
                                             </div>
                                             <div class="">
-                                                <span class="align-self-start">9,999,999円<br></span>
+                                                <span class="align-self-start" id="specTax"> <br></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-inline-flex pb-1">
+                                        <div class="row">
+                                            <div class="">
+                                                <h6 class="align-self-center"><strong>その他費用</strong><br></h6>
+                                            </div>
+                                            <div class="">
+                                                <span class="align-self-start" id="specOtherFee"> <br></span>
                                             </div>
                                         </div>
                                     </div>
@@ -361,105 +233,21 @@
                         </div>
                         <h5 class="card-title mb-0">マンション査定結果トップ５</h5>
                     </div>
-                    <div class="card-body table-responsive">
-                        <table class="table table-striped" style="width:100%">
+                    <div class="card-body table-responsive" style="    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 425px;">
+                        <table class="table table-striped fixed" style="width:100%;     margin-top: -22px;">
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th class="text-nowrap">不動産業者</th>
-                                    <th class="text-end text-nowrap">成約率</th>
+                                    <th class="text-nowrap" id="Mansionrateval">不動産業者</th>
+                                    <th class="text-end text-nowrap flg-rate">成約率</th>
                                     <th class="text-end text-nowrap">査定価格</th>
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                             width="50" height="50" class="rounded-circle my-n1"
-                                             alt="Avatar">
-                                    </td>
-                                    <td>RegionsRegions<br>StaffNameStaffName</td>
-                                    <td class="text-nowrap align-middle text-end">99%</td>
-                                    <td class="text-nowrap align-middle text-end">
-                                        <span class="text-danger">9,999,999,999</span>円
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="#" class="btn btn-primary text-nowrap"
-                                           data-bs-target="#modal-1" data-bs-toggle="modal"
-                                           role="button" aria-pressed="true">買取依頼</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                                             width="50" height="50" class="rounded-circle my-n1"
-                                             alt="Avatar">
-                                    </td>
-                                    <td>RegionsRegions<br>StaffNameStaffName</td>
-                                    <td class="text-nowrap align-middle text-end">99%</td>
-                                    <td class="text-nowrap align-middle text-end">
-                                        <span class="text-danger">9,999,999,999</span>円
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="#" class="btn btn-primary text-nowrap"
-                                           data-bs-target="#modal-1" data-bs-toggle="modal"
-                                           role="button" aria-pressed="true">買取依頼</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                                             width="50" height="50" class="rounded-circle my-n1"
-                                             alt="Avatar">
-                                    </td>
-                                    <td>RegionsRegions<br>StaffNameStaffName</td>
-                                    <td class="text-nowrap align-middle text-end">99%</td>
-                                    <td class="text-nowrap align-middle text-end">
-                                        <span class="text-danger">9,999,999,999</span>円
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="#" class="btn btn-primary text-nowrap"
-                                           data-bs-target="#modal-1" data-bs-toggle="modal"
-                                           role="button" aria-pressed="true">買取依頼</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar4.png"
-                                             width="50" height="50" class="rounded-circle my-n1"
-                                             alt="Avatar">
-                                    </td>
-                                    <td>RegionsRegions<br>StaffNameStaffName</td>
-                                    <td class="text-nowrap align-middle text-end">99%</td>
-                                    <td class="text-nowrap align-middle text-end">
-                                        <span class="text-danger">9,999,999,999</span>円
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="#" class="btn btn-primary text-nowrap"
-                                           data-bs-target="#modal-1" data-bs-toggle="modal"
-                                           role="button" aria-pressed="true">買取依頼</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar5.png"
-                                             width="50" height="50" class="rounded-circle my-n1"
-                                             alt="Avatar">
-                                    </td>
-                                    <td class="align-middle">
-                                        RegionsRegions<br>StaffNameStaffName
-                                    </td>
-                                    <td class="text-nowrap align-middle text-end">99%</td>
-                                    <td class="text-nowrap align-middle text-end">
-                                        <span class="text-danger">9,999,999,999</span>円
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="#" class="btn btn-primary text-nowrap"
-                                           data-bs-target="#modal-1" data-bs-toggle="modal"
-                                           role="button" aria-pressed="true">買取依頼</a>
-                                    </td>
-                                </tr>
+                            <tbody id="bdyMansion">
+                              
                             </tbody>
                         </table>
                     </div>
@@ -477,110 +265,21 @@
                         </div>
                         <h5 class="card-title mb-0">エリア査定結果トップ５</h5>
                     </div>
-                    <div class="card-body table-responsive">
-                        <table class="table table-striped" style="width:100%">
+                    <div class="card-body table-responsive" style="    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 425px;">
+                        <table class="table table-striped fixed" style="width:100%;     margin-top: -22px;">
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th class="text-nowrap">不動産業者</th>
-                                    <th class="text-end text-nowrap">成約率</th>
+                                    <th class="text-nowrap" id="Arearateval">不動産業者</th> 
+                                    <th class="text-end text-nowrap flg-rate">成約率</th>
                                     <th class="text-end text-nowrap">査定価格</th>
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                             width="50" height="50" class="rounded-circle my-n1"
-                                             alt="Avatar">
-                                    </td>
-                                    <td>RegionsRegions<br>StaffNameStaffName</td>
-                                    <td class="text-nowrap align-middle text-end">99%</td>
-                                    <td class="text-nowrap align-middle text-end">
-                                        <span class="text-danger text-nowrap">9,999,999,999</span>円
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="#"
-                                           class="btn btn-primary text-nowrap"
-                                           data-bs-target="#modal-1" data-bs-toggle="modal"
-                                           role="button" aria-pressed="true">買取依頼</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                                             width="50" height="50" class="rounded-circle my-n1"
-                                             alt="Avatar">
-                                    </td>
-                                    <td>RegionsRegions<br>StaffNameStaffName</td>
-                                    <td class="text-nowrap align-middle text-end">99%</td>
-                                    <td class="text-nowrap align-middle text-end">
-                                        <span class="text-danger text-nowrap">9,999,999,999</span>円
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="#"
-                                           class="btn btn-primary  text-nowrap"
-                                           data-bs-target="#modal-1" data-bs-toggle="modal"
-                                           role="button" aria-pressed="true">買取依頼</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                                             width="50" height="50" class="rounded-circle my-n1"
-                                             alt="Avatar">
-                                    </td>
-                                    <td>RegionsRegions<br>StaffNameStaffName</td>
-                                    <td class="text-nowrap align-middle text-end">99%</td>
-                                    <td class="text-nowrap align-middle text-end">
-                                        <span class="text-danger text-nowrap">9,999,999,999</span>円
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="#"
-                                           class="btn btn-primary  text-nowrap"
-                                           data-bs-target="#modal-1" data-bs-toggle="modal"
-                                           role="button" aria-pressed="true">買取依頼</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar4.png"
-                                             width="50" height="50" class="rounded-circle my-n1"
-                                             alt="Avatar">
-                                    </td>
-                                    <td>RegionsRegions<br>StaffNameStaffName</td>
-                                    <td class="text-nowrap align-middle text-end">99%</td>
-                                    <td class="text-nowrap align-middle text-end">
-                                        <span class="text-danger text-nowrap">9,999,999,999</span>円
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="#"
-                                           class="btn btn-primary  text-nowrap"
-                                           data-bs-target="#modal-1" data-bs-toggle="modal"
-                                           role="button" aria-pressed="true">買取依頼</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar5.png"
-                                             width="50" height="50" class="rounded-circle my-n1"
-                                             alt="Avatar">
-                                    </td>
-                                    <td class="align-middle">
-                                        RegionsRegions<br>StaffNameStaffName
-                                    </td>
-                                    <td class="text-nowrap align-middle text-end">99%</td>
-                                    <td class="text-nowrap align-middle text-end">
-                                        <span class="text-danger text-nowrap">9,999,999,999</span>円
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="#"
-                                           class="btn btn-primary  text-nowrap"
-                                           data-bs-target="#modal-1" data-bs-toggle="modal"
-                                           role="button" aria-pressed="true">買取依頼</a>
-                                    </td>
-                                </tr>
+                            <tbody id="bdyArea">
+                         
                             </tbody>
                         </table>
                     </div>
@@ -607,9 +306,9 @@
                     <div class="card m-0 p-0">
                         <div class="card-header text-center ">
 
-                            <h4 class="text-center">MansionName</h4>
-                            <small>
-                                AddressAddressAddressAddressAddressAddressAddress
+                            <h4 class="text-center" id="popMansion"> </h4>
+                            <small  id="popAddress">
+                                 
                             </small>
                         </div>
 
@@ -619,27 +318,12 @@
                                     <tr>
                                         <th></th>
                                         <th class="text-nowrap">不動産業者</th>
-                                        <th class="text-end text-nowrap">成約率</th>
+                                        <th class="text-end text-nowrap flg-rate">成約率</th>
                                         <th class="text-end text-nowrap">査定価格</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                 width="50" height="50"
-                                                 class="rounded-circle my-n1"
-                                                 alt="Avatar">
-                                        </td>
-                                        <td>RegionsRegions<br>StaffNameStaffName</td>
-                                        <td class="text-nowrap align-middle text-end">
-                                            99%
-                                        </td>
-                                        <td class="text-nowrap align-middle text-end">
-                                            <span class="text-danger">9,999,999,999</span>円
-                                        </td>
-
-                                    </tr>
+                                <tbody id="popModal">
+                             
                                 </tbody>
                             </table>
                         </div>
@@ -656,7 +340,7 @@
                             aria-label="Close">
                         戻る
                     </button><button class="btn btn-primary btn-lg" type="button"
-                                     data-bs-target="#modal-2" data-bs-toggle="modal">
+                                     data-bs-target="#modal-2" data-bs-toggle="modal" id="applytoSell">
                         申請
                     </button>
                 </div>
@@ -697,5 +381,5 @@
 </div>
 
 @section Scripts{
-    @*@Scripts.Render("~/bundles/a_mypage_ahis")*@ 
+    @Scripts.Render("~/bundles/a_assess_d")
 }

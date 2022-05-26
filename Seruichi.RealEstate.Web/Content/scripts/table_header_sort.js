@@ -27,6 +27,7 @@
         };
 
         const sortColumn = function (index) {
+            const rows = tableBody.querySelectorAll('tr');
             var col_index = [], multiplier;
             if (headers[index].hasAttribute('ordercol-index'))
                 col_index = headers[index].getAttribute('ordercol-index').split('_');
@@ -99,12 +100,10 @@
                         }
                         else if (c !== d) {
                             if (col_type2 == 'number') {
-                                if (multiplier == 1) return c - d;
-                                else return d - c;
+                                return c - d;
                             }
                             else {
-                                if (multiplier == 1) return c.localeCompare(d, "ja-JP");
-                                else return d.localeCompare(c, "ja-JP");
+                                return c.localeCompare(d, "ja-JP");
                             }
                         }
 
@@ -146,22 +145,18 @@
                         }
                         else if (c !== d) {
                             if (col_type2 == 'number') {
-                                if (multiplier == 1) return c - d;
-                                else return d - c;
+                                return c - d;
                             }
                             else {
-                                if (multiplier == 1) return c.localeCompare(d, "ja-JP");
-                                else return d.localeCompare(c, "ja-JP");
+                                return c.localeCompare(d, "ja-JP");
                             }
                         }
                         else if (e !== f) {
                             if (col_type3 == 'number') {
-                                if (multiplier == 1) return e - f;
-                                else return f - e;
+                                return e - f;
                             }
                             else {
-                                if (multiplier == 1) return e.localeCompare(f, "ja-JP");
-                                else return f.localeCompare(e, "ja-JP");
+                                return e.localeCompare(f, "ja-JP");
                             }
                         }
                 }

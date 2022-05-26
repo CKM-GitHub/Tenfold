@@ -12,7 +12,7 @@ using System.Web.Security;
 
 namespace Seruichi.Tenfold.Web.Controllers
 {
-    
+    [IgnoreVerificationToken]
     [AllowAnonymous]
     public class t_loginController : BaseController
     {
@@ -46,9 +46,10 @@ namespace Seruichi.Tenfold.Web.Controllers
             DataTable dt = bl.GetM_TenfoldStaff(model);
             if (dt.Rows.Count > 0)
             {
+                model.TenStaffName = dt.Rows[0]["TenStaffName"].ToString();
                // FormsAuthentication.SetAuthCookie(model.TenStaffCD, false);
-                SessionAuthenticationHelper.CreateLoginUser(model.TenStaffCD);
-                return OKResult();
+                SessionAuthenticationHelper.CreateLoginUser(model);
+                return OKResult(new { UserID = model.TenStaffCD, UserName = model.TenStaffName });
             }
             else
             {

@@ -138,16 +138,18 @@
     <Compile Include="Controllers\Common\BaseController.cs" />
     <Compile Include="Controllers\Common\CommonApiController.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
+    <Compile Include="Controllers\t_adminController.cs" />
     <Compile Include="Controllers\t_dashboardController.cs" />
     <Compile Include="Controllers\t_loginController.cs" />
     <Compile Include="Controllers\t_mansion_listController.cs" />
-    <Compile Include="Controllers\t_mansion_newController.cs" />
     <Compile Include="Controllers\t_seller_assessmentController.cs" />
+    <Compile Include="Controllers\t_mansion_newController.cs" />
     <Compile Include="Controllers\t_seller_listController.cs" />
     <Compile Include="Controllers\t_seller_mansionController.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
     <Compile Include="Filters\BrowsingHistoryAttribute.cs" />
     <Compile Include="Filters\CustomHandleErrorAttribute.cs" />
+    <Compile Include="Filters\IgnoreVerificationToken.cs" />
     <Compile Include="Filters\SessionAuthenticationAttribute.cs" />
     <Compile Include="Filters\SessionAuthenticationHelper.cs" />
     <Compile Include="Global.asax.cs">
@@ -156,11 +158,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\chat.css" />
     <Content Include="Content\css\Clients-UI.css" />
     <Content Include="Content\css\Contact-Form-Clean.css" />
+    <Content Include="Content\css\fileup.min.css" />
+    <Content Include="Content\css\fileuploads.css" />
     <Content Include="Content\css\index.css" />
     <Content Include="Content\css\jquery.dataTables.min.css" />
     <Content Include="Content\css\Soft-UI-Aside-Navbar.css" />
+    <Content Include="Content\css\tree.css" />
+    <Content Include="Content\scripts\fileup.min.js" />
+    <Content Include="Content\scripts\fileuploads.js" />
+    <Content Include="Content\scripts\fileuploads1.js" />
     <Content Include="Content\scripts\sidebar.js" />
     <Content Include="Content\scripts\table_header_sort.js" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
@@ -177,6 +186,7 @@
     <Content Include="Content\fonts\ionicons.svg" />
     <Content Include="Content\modernizr\modernizr-2.8.3.js" />
     <Content Include="Content\scripts\common.js" />
+    <Content Include="Content\scripts\tree.js" />
     <Content Include="Content\scripts\validation_jqueryextend.js" />
     <Content Include="Content\typeahead\bloodhound.js" />
     <Content Include="Content\typeahead\bloodhound.min.js" />
@@ -195,9 +205,11 @@
     <Content Include="Content\fonts\ionicons.eot" />
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
+    <Content Include="Scripts\t_admin.js" />
     <Content Include="Scripts\t_dashboard.js" />
     <Content Include="Scripts\t_login.js" />
     <Content Include="Scripts\t_mansion_list.js" />
+    <Content Include="Scripts\t_mansion_new.js" />
     <Content Include="Scripts\t_seller_assessment.js" />
     <Content Include="Scripts\t_seller_list.js" />
     <Content Include="Scripts\t_seller_mansion.js" />
@@ -244,6 +256,8 @@
     <Content Include="Views\t_seller_assessment\_t_seller_assessment_menuPartial.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\t_mansion_new\Index.cshtml" />
+    <Content Include="Views\t_admin\Index.cshtml" />
+    <Content Include="Views\Shared\_ErrorPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

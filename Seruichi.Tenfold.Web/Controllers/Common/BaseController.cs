@@ -5,6 +5,7 @@ using System.Data;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Seruichi.BL;
 
 namespace Seruichi.Tenfold.Web.Controllers
 {
@@ -29,6 +30,19 @@ namespace Seruichi.Tenfold.Web.Controllers
             if (user == null)
             {
                 return "";
+            }
+            else
+            {
+                return user.UserName;
+            }
+        }
+
+        public static string GetLoginStaffName()
+        {
+            var user = SessionAuthenticationHelper.GetUserFromSession();
+            if (user == null)
+            {
+                return "unknown";
             }
             else
             {

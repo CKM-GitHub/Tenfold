@@ -136,6 +136,9 @@ function addEvents() {
             return false;
         }
 
+        $('#total_record').text("検索結果： 0件");
+        $('#total_record_up').text("検索結果： 0件");
+        $('#no_record').text("");
         $('#mansiontable tbody').empty();
 
         const $SellerName = $("#SellerName").val().trim(), $RangeSelect = $("#RangeSelect").val(), $PrefNameSelect = $('#PrefNameSelect option:selected').text(),
@@ -160,6 +163,11 @@ function addEvents() {
     });
 
     $('#btnCSV').on('click', function () {
+        $('#total_record').text("検索結果： 0件");
+        $('#total_record_up').text("検索結果： 0件");
+        $('#no_record').text("");
+        $('#mansiontable tbody').empty();
+
         const $SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(), $PrefNameSelect = $('#PrefNameSelect option:selected').text(),
             $startdate = $("#StartDate").val(), $enddate = $("#EndDate").val(), $ValidCheck = $("#ValidCheck").val(),
             $InValidCheck = $("#InValidCheck").val(), $expectedCheck = $("#expectedCheck").val(), $negtiatioinsCheck = $("#negtiatioinsCheck").val(),
@@ -177,6 +185,8 @@ function addEvents() {
             negtiatioinsCheck: $negtiatioinsCheck,
             endCheck: $endCheck,
         };
+        getM_SellerList(model, this);
+
         common.callAjax(_url.generate_CSV, model,
             function (result) {
                 //sucess
@@ -204,7 +214,7 @@ function addEvents() {
                 }
                 else {
                     //alert("There is no data!");
-                    alert("該当データがありません。もう一度、条件を変更の上表示ボタンを押してください。");
+                    $('#site-error-modal').modal('show');
                 }
             }
         )
@@ -251,32 +261,38 @@ function Bind_tbody(result) {
     let _letter = "";
     let _class = "";
     let _sort_checkbox = "";
+    let status = "";
     if (data.length > 0) {
     for (var i = 0; i < data.length; i++) {
         if (isEmptyOrSpaces(data[i]["ステータス"])) {
             _letter = "";
             _class = "ms-1 ps-1 pe-1 rounded-circle";
             _sort_checkbox = "";
+            status = "";
         }
         else {
             _letter = data[i]["ステータス"].charAt(0);
             if (_letter == "見") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal";
                 _sort_checkbox = "t_seller_list_one";
+                status = "1";
             }
             else if (_letter == "交") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark fst-normal";
                 _sort_checkbox = "t_seller_list_two";
+                status = "2";
             }
             else if (_letter == "終") {
                 _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary fst-normal";
                 _sort_checkbox = "t_seller_list_three";
+                status = "3";
             }
 
         }
         html += '<tr>\
             <td class= "text-end" > ' + (i + 1) + '</td>\
             <td class="'+ _sort_checkbox + '"><i class="' + _class + '">' + _letter + '</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td >\
+            <td class="d-none"> ' + status + ' </td>\
             <td class="text-center"> ' + data[i]["無効会員"] + ' </td>\
             <td> ' + data[i]["売主CD"] + ' </td>\
             <td> <a class="text-heading font-semibold text-decoration-underline" id='+ data[i]["売主CD"] + ' href="#" onclick="l_logfunction(this.id)">' + data[i]["売主名"] + '</a></td>\
@@ -293,10 +309,12 @@ function Bind_tbody(result) {
     
         $('#total_record').text("検索結果：" + data.length + "件")
         $('#total_record_up').text("検索結果：" + data.length + "件")
+        $('#no_record').text("");
     }
     else {
         $('#total_record').text("検索結果： 0件")
         $('#total_record_up').text("検索結果： 0件")
+        $('#no_record').text("表示可能データがありません");
     }
     $('#mansiontable tbody').append(html);
 

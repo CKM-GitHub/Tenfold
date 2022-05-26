@@ -1,5 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_t_menuLayout.cshtml";
+    ViewBag.Title = "管理 マンション一覧";
 }
 @section styles{
     @Styles.Render("~/Content/tenfold_css_common")
@@ -162,7 +163,7 @@
                     </div>
 
                     <div class="card-header d-md-inline-flex">
-                        <h5 class="mb-0">査定管理</h5> <span class="ps-md-5 text-muted text-sm" id="total_record_up"></span>
+                        <h5 class="mb-0">査定管理</h5> <span class="ps-md-5 text-muted text-sm" id="total_record_up"></span><span style="color: red;" class="ps-md-5 text-sm" id="no_record"></span>
                     </div>
 
                     <div class="table-responsive">
@@ -170,15 +171,17 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col" class="text-end text-decoration-underline" style="width: 50px">No.</th>
-                                    <th scope="col" style="width: 150px" class="text-decoration-underline sort-status-t-seller-assessment">ステータス</th>
-                                    <th scope="col" style="width: auto" class="text-decoration-underline sort-by">物件（マンション、部屋番号）</th>
-                                    <th scope="col" style="width: 200px" class="text-decoration-underline sort-by">不動産会社</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">登録日時</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">簡易査定日時</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">詳細査定日時</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">買取依頼日時</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">送客日時</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">終了日時</th>
+                                    <th scope="col" style="width: 150px" class="text-decoration-underline sort-by" ordercol-index="11_10">ステータス</th>
+                                    <th scope="col" style="width: auto"  class="text-decoration-underline sort-by" ordercol-index="2_10">物件（マンション、部屋番号）</th>
+                                    <th scope="col" style="width: 200px" class="text-decoration-underline sort-by" ordercol-index="3_10">不動産会社</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="4_10">登録日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="5_10">簡易査定日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="6_10">詳細査定日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="7_10">買取依頼日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="8_10">送客日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="9_10">終了日時</th>
+                                    <th class="d-none">SellerMansionID</th>
+                                    <th class="d-none">Status</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -419,6 +422,7 @@
             </div>
         </main>
         @Html.Partial("_t_footer")
+        @Html.Partial("_ErrorPopup")
     </div>
 </div>
 

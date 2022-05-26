@@ -23,7 +23,8 @@ namespace Seruichi.Tenfold.Web
                       "~/Content/css/validation.css",
                        "~/Content/bootstrap/bootstrap.min.css",
                       "~/Content/fonts/font-awesome.min.css",
-                      "~/Content/css/jquery.dataTables.min.css"
+                      "~/Content/css/jquery.dataTables.min.css",
+                      "~/Content/css/tree.css"
                       ));
 
             bundles.Add(new ScriptBundle("~/Content/scripts/application").Include(
@@ -63,8 +64,13 @@ namespace Seruichi.Tenfold.Web
                      "~/Scripts/t_seller_assessment.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/t_mansion_list").Include(
-                     "~/Scripts/t_mansion_list.js"));
+                     "~/Scripts/t_mansion_list.js"));          
 
+            bundles.Add(new ScriptBundle("~/bundles/t_mansion_new").Include(
+                     "~/Scripts/t_mansion_new.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/t_admin").Include(
+                     "~/Scripts/t_admin.js"));
 
         }
     }

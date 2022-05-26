@@ -144,6 +144,15 @@ namespace Seruichi.Seller.Web
                         "~/Content/css/Soft-UI-Aside-Navbar.css",
                         "~/Content/css/style.css",
                         "~/Content/css/Sidebar.css"));
+
+            //a_assess_d ---------- 
+            bundles.Add(new ScriptBundle("~/bundles/a_assess_d").Include(
+             "~/Scripts/a_assess_d.js"
+             //"~/Scripts/js141.js"
+             )
+             );
+            bundles.Add(new StyleBundle("~/Content/css/a_assess_d").Include(
+                  "~/Content/css/a_assess_d.css"));
         }
     }
 }

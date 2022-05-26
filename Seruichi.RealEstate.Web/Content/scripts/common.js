@@ -18,6 +18,7 @@ const messageConst = {
     E110: '入力すべき文字数を満たしていません',
     E111: '日付の大小が不正です',
     E112: '１つ以上選択してください',
+    E113: '値の大小が不正です',
 
     E201: '査定サービスの対象外地域です',
     E202: 'メールアドレスが入力されていません',
@@ -27,6 +28,7 @@ const messageConst = {
     E206: 'メールアドレスとパスワードの組合せが正しくありません',
     E207: 'この情報での登録はありません',
 
+    E303: '検索条件は必ずひとつ以上指定してください',
     E310: '会社IDが入力されていません',
     E311: '会社IDが未登録です',
     E312: 'スタッフIDが入力されていません',
@@ -316,10 +318,12 @@ const common = {
         const isMoney = $ctrl.attr("data-validation-money");
         const customValidation = $ctrl.attr("data-validation-custom");
         const isDate = $ctrl.attr("data-validation-datecheck");
-        const isMaxlengthCheck = $ctrl.attr("data-validation-MaxLength");
+        const isMaxlengthCheck = $ctrl.attr("data-validation-maxlengthCheck");
         const isDateCompare = $ctrl.attr("data-validation-datecompare");
         const isOneByteCharacter = $ctrl.attr("data-validation-onebyte-character");
         const ischeckboxLenght = $ctrl.attr("data-validation-checkboxlenght");
+        const ispasswordcompare = $ctrl.attr("data-validation-passwordcompare");
+        const isMinlengthCheck = $ctrl.attr("data-validation-minlengthcheck");
 
         let inputValue = "";
         if (type === 'radio') {
@@ -520,6 +524,18 @@ const common = {
                 }
             }
 
+            if (isMinlengthCheck) {
+                const minLength = $ctrl.data('mindigits');
+                if (minLength) {
+                    const byteLength = inputValue.length;
+                    if (byteLength < parseInt(minLength)) {
+                        $ctrl.showError(this.getMessage('E105'));
+                        return;
+                    }
+                }
+            }
+
+
             if (isDate) {
                 if (!inputValue.match(regexPattern.dateformat)) {
                     $ctrl.showError(this.getMessage('E108'));
@@ -534,10 +550,28 @@ const common = {
                     $("#StartDate").focus();
                     return;
                 }
+
+                if ($("#StartYear").val() != "" && $("#EndYear").val() != "") {
+                    if (!common.compareYear($("#StartYear").val(), $("#EndYear").val())) {
+                        $("#StartYear").showError(this.getMessage('E113'));
+                        $("#StartYear").focus();
+                        return;
+                    }
+                }
             }
+
             if (ischeckboxLenght) {                
                 if (!common.checkboxlengthCheck($ctrl.attr('class'))) {
                     $ctrl.showError(this.getMessage('E112'));
+                    return;
+                }
+            }
+
+            if (ispasswordcompare) {
+                if (!common.comparePassword($("#txtPassword").val(), $("#txtConfirmPassword").val())) {
+                    $("#txtPassword").showError(this.getMessage('E109'));
+                    $("#txtConfirmPassword").showError(this.getMessage('E109'));
+                    $("#txtPassword").focus();
                     return;
                 }
             }
@@ -567,6 +601,24 @@ const common = {
         const date2 = new Date(d2);
         let success = true;
         if (date1 > date2) {
+            success = false;
+        }
+        return success;
+    },
+
+    comparePassword: function compareTwoPassword(pw, c_pw) {
+        let success = true;
+        if (pw !== c_pw) {
+            success = false;
+        }
+        return success;
+    },
+
+    compareYear: function compareTwoDate(d1, d2) {
+        const Year1 = Number(d1);
+        const Year2 = Number(d2);
+        let success = true;
+        if (Year1 > Year2) {
             success = false;
         }
         return success;

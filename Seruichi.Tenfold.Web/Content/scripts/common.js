@@ -327,6 +327,8 @@ const common = {
         const isOneByteCharacter = $ctrl.attr("data-validation-onebyte-character");
         const ischeckboxLenght = $ctrl.attr("data-validation-checkboxlenght");
         const isNumCompare = $ctrl.attr("data_validation_numcompare");
+        const isPasswordcompare = $ctrl.attr("data-validation-passwordcompare");
+        const isMinlengthCheck = $ctrl.attr("data-validation-minlengthcheck");
         
 
         let inputValue = "";
@@ -355,7 +357,8 @@ const common = {
             && !isSingleDoubleByte
             && !isDoubleByte && !isDoubleByteKana
             && !isSingleByte && !isSingleByteNumber && !isSingleByteNumberAlpha
-            && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter && !ischeckboxLenght 
+            && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter && !ischeckboxLenght && !isMinlengthCheck
+            && isPasswordcompare
             && !customValidation) return true;
 
         if (isRequired) {
@@ -529,16 +532,36 @@ const common = {
                         return;
                     }
                 }
-               
             }
 
-            if (ischeckboxLenght) {                
+            if (ischeckboxLenght) {
                 if (!common.checkboxlengthCheck($ctrl.attr('class'))) {
                     $ctrl.showError(this.getMessage('E112'));
                     return;
                 }
+            }            
+
+            if (isMinlengthCheck) {
+                const minLength = $ctrl.data('mindigits');
+                if (minLength) {
+                    const byteLength = inputValue.length;
+                    if (byteLength < parseInt(minLength)) {
+                        $ctrl.showError(this.getMessage('E105'));
+                        return;
+                    }
+                }
+            }
+
+            if (isPasswordcompare) {
+                if (!common.comparePassword($("#txtPassword").val(), $("#txtConfirmPassword").val())) {
+                    $("#txtPassword").showError(this.getMessage('E109'));
+                    $("#txtConfirmPassword").showError(this.getMessage('E109'));
+                    $("#txtPassword").focus();
+                    return;
+                }
             }
         }
+       
 
         if (customValidation) {
             func = new Function('arg1', 'return ' + customValidation + '(arg1)')
@@ -570,9 +593,17 @@ const common = {
         return success;
     },
 
+    comparePassword: function compareTwoPassword(pw, c_pw) {
+        let success = true;
+        if (pw !== c_pw) {
+            success = false;
+        }
+        return success;
+    },
+
     compareNum: function compareTwoNum(n1, n2) {
-        const num1 = n1;
-        const num2 = n2;
+        const num1 = Number(n1);
+        const num2 = Number(n2);
         let success = true;
         if (num1 > num2) {
             success = false;

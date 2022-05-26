@@ -131,6 +131,13 @@ namespace Seruichi.Common
 
         }
 
+        public void CheckMinLenght(string elementId, string inputText, int maxLength)
+        {
+            if (!validator.CheckMinLenght(inputText, maxLength, out string errorcd))
+                AddValidationResult(elementId, errorcd);
+
+        }
+
         public void CheckIsValidEmail(string elementId, string mailAddress)
         {
             if (!validator.CheckIsValidEmail(mailAddress, out string errorcd))
@@ -146,6 +153,12 @@ namespace Seruichi.Common
         public void CheckBirthday(string elementId, string birthday)
         {
             if (!validator.CheckBirthday(birthday, out string errorcd, out string outVal))
+                AddValidationResult(elementId, errorcd);
+        }
+
+        public void CheckComparePassword(string elementId, string password,string confirmpassword)
+        {
+            if (!validator.CheckComparePassword(password,confirmpassword, out string errorcd))
                 AddValidationResult(elementId, errorcd);
         }
     }
