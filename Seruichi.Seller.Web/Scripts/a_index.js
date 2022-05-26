@@ -11,6 +11,7 @@ $(function () {
     _url.getTownDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfTown;
     _url.getLineDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfLine;
     _url.getStationDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfStation;
+    _url.getNearestStations = common.appPath + commonApiUrl.getNearestStations;
     _url.checkZipCode = common.appPath + '/a_index/CheckZipCode';
     _url.getMansionListByMansionWord = common.appPath + '/a_index/GetMansionListByMansionWord';
     _url.getMansinoData = common.appPath + '/a_index/GetMansionData';
@@ -227,27 +228,6 @@ function addEvents() {
             });
     });
 
-    //都道府県
-    $('#PrefCD').on('change', function () {
-        const inputval = $(this).val();
-        if (inputval) {
-            setCityList('add', inputval);
-            setTownList('remove');
-            setLineList('add', inputval);
-            setStationList('remove');
-            $('.js-distance').val('').hideError();
-            setTypeahead('#MansionName');
-        }
-        else {
-            setCityList('remove');
-            setTownList('remove');
-            setLineList('remove');
-            setStationList('remove');
-            $('.js-distance').val('').hideError();
-            setTypeahead('#MansionName');
-        }
-    });
-
     //マンション名
     $('#MansionName').on('change', function () {
         $('#hdnMansionCD').val('');
@@ -259,9 +239,37 @@ function addEvents() {
         displayMansionData(data.Value);
     });
 
+    //都道府県
+    $('#PrefCD').on('change', function () {
+        const inputval = $(this).val();
+        removeLineAndStation();
+
+        if (inputval) {
+            setCityList('add', inputval);
+            setTownList('remove');
+            setLineList('add', inputval);
+            //setStationList('remove');
+            //$('.js-distance').val('').hideError();
+            setTypeahead('#MansionName');
+        }
+        else {
+            setCityList('remove');
+            setTownList('remove');
+            //setLineList('remove');
+            //setStationList('remove');
+            //$('.js-distance').val('').hideError();
+            setTypeahead('#MansionName');
+        }
+    });
+
     //市区町村
     $('#CityCD').on('change', function () {
         setTownList('add', $('#PrefCD').val(), $(this).val());
+    });
+
+    //町域、住所
+    $('#TownCD, #Address').on('change', function () {
+        displayNearestStationData();
     });
 
     //路線選択
@@ -436,6 +444,77 @@ function setScreenComfirm(data) {
     });
 }
 
+function removeLineAndStation() {
+    $('.js-stationContainer').children().remove();
+    for (let i = 0; i < 3; i++) {
+        const index = i + 1;
+        const station = $('.js-station-template').find('.js-station').clone(true);
+        station.find('.js-paragraph-number').text(getParagraphNumber(index))
+        station.find('.js-linecd').attr('id', 'LineCD_' + index);
+        station.find('.js-stationcd').attr('id', 'StationCD_' + index);
+        station.find('.js-distance').attr('id', 'Distance_' + index);
+        $('.js-stationContainer').append(station);
+    }
+    $('#LineCD_1').hideError();
+}
+
+function displayNearestStationData() {
+
+    if ($('#hdnMansionCD').val()) return;
+
+    const model = {
+        PrefName: $('#PrefCD option:selected').text(),
+        CityName: $('#CityCD option:selected').text(),
+        TownName: $('#TownCD option:selected').text(),
+        Address: $('#Address').val()
+    }
+
+    if (model.PrefName && model.CityName && model.TownName && model.Address) {
+
+        common.showLoading();
+        common.callAjax(_url.getNearestStations, model,
+            function (result) {
+                if (result && result.isOK) {
+
+                    removeLineAndStation();
+
+                    if (result.data) {
+                        const dataArray = JSON.parse(result.data);
+                        const length = dataArray.length;
+
+                        if (length > 0) {
+                            let data = dataArray[0];
+                            for (let i = 0; i < length; i++) {
+                                data = dataArray[i];
+                                const index = i + 1;
+
+                                if (!document.getElementById('LineCD_' + index)) {
+                                    const station = $('.js-station-template').find('.js-station').clone(true);
+                                    station.find('.js-paragraph-number').text(getParagraphNumber(index))
+                                    station.find('.js-linecd').attr('id', 'LineCD_' + index);
+                                    station.find('.js-stationcd').attr('id', 'StationCD_' + index);
+                                    station.find('.js-distance').attr('id', 'Distance_' + index);
+                                    $('.js-stationContainer').append(station);
+                                }
+
+                                if (data.LineCD) {
+                                    $('#LineCD_' + index).val(data.LineCD);
+                                    setStationList('add', data.LineCD, '#StationCD_' + index, data.StationCD);
+                                }
+                                $('#Distance_' + index).val(data.Distance);
+                            }
+                        }
+                    }
+                }
+                common.hideLoading();
+            },
+            function () {
+                common.hideLoading(null, 0);
+            }
+        );
+    }
+}
+
 function displayMansionData(mansionCD) {
     $hdnMansionCD = $('#hdnMansionCD');
 
@@ -451,16 +530,7 @@ function displayMansionData(mansionCD) {
                     $('.js-detail :input:not(.form-check-input):not(button):not([type=raido]):not(:hidden):not(:disabled):not([readonly])').val('').hideError();
                     $('.js-detail .form-check-input').val(["0"]).hideError(); //radio button
                     $('#BalconyKBN1').prop('checked', true).change();
-                    $('.js-stationContainer').children().remove();
-                    for (let i = 0; i < 3; i++) {
-                        const index = i + 1;
-                        const station = $('.js-station-template').find('.js-station').clone(true);
-                        station.find('.js-paragraph-number').text(getParagraphNumber(index))
-                        station.find('.js-linecd').attr('id', 'LineCD_' + index);
-                        station.find('.js-stationcd').attr('id', 'StationCD_' + index);
-                        station.find('.js-distance').attr('id', 'Distance_' + index);
-                        $('.js-stationContainer').append(station);
-                    }
+                    removeLineAndStation();
 
                     let data = dataArray[0];
 
@@ -523,7 +593,7 @@ function displayMansionData(mansionCD) {
                         setLineAndStation();
 
                     $hdnMansionCD.val(mansionCD);
-                    $('#PrefCD, #CityCD, #TownCD, #MansionName, .js-linecd, .js-stationcd').hideError();
+                    $('#PrefCD, #CityCD, #TownCD, #MansionName').hideError();
                     common.hideLoading();
                 }
             }

@@ -4,14 +4,6 @@ namespace Models
 {
     public class a_indexModel : BaseModel
     {
-        public class MansionStation
-        {
-            public int RowNo { get; set; }
-            public string LineCD { get; set; }
-            public string StationCD { get; set; }
-            public string Distance { get; set; }
-        }
-
         public string SellerCD { get; set; }
         public string MansionName { get; set; }
         public string MansionCD { get; set; }

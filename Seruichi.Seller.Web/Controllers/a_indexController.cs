@@ -103,7 +103,7 @@ namespace Seruichi.Seller.Web.Controllers
                 return BadRequestResult();
             }
 
-            model.MansionStationList = ConvertJsonToObject<List<a_indexModel.MansionStation>>(model.MansionStationListJson);
+            model.MansionStationList = ConvertJsonToObject<List<MansionStation>>(model.MansionStationListJson);
 
             a_indexBL bl = new a_indexBL();
             var validationResult = bl.ValidateAll(model);
@@ -132,7 +132,7 @@ namespace Seruichi.Seller.Web.Controllers
             model.SellerName = base.GetOperatorName();
             model.Operator = base.GetOperator();
             model.IPAddress = base.GetClientIP();
-            model.MansionStationList = ConvertJsonToObject<List<a_indexModel.MansionStation>>(model.MansionStationListJson);
+            model.MansionStationList = ConvertJsonToObject<List<MansionStation>>(model.MansionStationListJson);
 
             a_indexBL bl = new a_indexBL();
             var validationResult = bl.ValidateAll(model);
