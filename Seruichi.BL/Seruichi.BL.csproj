@@ -54,6 +54,7 @@
     <Compile Include="RealEstate\r_asmc_address\r_asmc_addressBL.cs" />
     <Compile Include="RealEstate\r_issueslist\r_issueslistBL.cs" />
     <Compile Include="RealEstate\r_login\r_loginBL.cs" />
+    <Compile Include="RealEstate\r_staff\r_staffBL.cs" />
     <Compile Include="Seller\a_assess_dBL.cs" />
     <Compile Include="Seller\a_contactBL.cs" />
     <Compile Include="Seller\a_mypage_ahisBL.cs" />
