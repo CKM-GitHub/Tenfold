@@ -252,6 +252,7 @@
     <Content Include="Views\r_asmc_ms_reged_list\Index.cshtml" />
     <Content Include="Views\r_asmc_ms_list_sh\Index.cshtml" />
     <Content Include="Views\r_asmc_ms_list_sh\r_asmc_ms_list_sh_left_sideNavigation.cshtml" />
+    <Content Include="Views\r_asmc_railway\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
