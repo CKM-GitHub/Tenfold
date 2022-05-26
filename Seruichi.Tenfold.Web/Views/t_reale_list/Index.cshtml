@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewBag.Title = "不動産会社管理";
+    Layout = "~/Views/Shared/_t_menuLayout.cshtml";
+}
+
+@section styles{
+    @Styles.Render("~/Content/tenfold_css_common")
+}
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18" id="wrapper">
+    @Html.Partial("_t_reale_list_menuPartial")
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+
+                <div class="card shadow border-0 mb-7">
+
+                    <div class="card-header">
+
+                        <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
+
+                            <h1 class="h2 mb-0 ls-tight"> 不動産会社</h1>
+                            <span class="ps-2 text-muted small align-self-end">管理</span>
+                        </div>
+                        <hr class="navbar-divider my-5 opacity-20"><div class="d-inline-flex">
+                            <h5 class="mb-0">不動産会社一覧</h5> <span class="ps-md-5 text-muted text-sm">検索結果：999999件</span>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-nowrap">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col" class="text-end" style="width: 80px"><a class="text-decoration-underline" href="#">No.</a></th>
+                                    <th scope="col" style="width: 60px"><a class="text-decoration-underline text-center" href="#">無効会員</a></th>
+                                    <th scope="col" style="width: 120px"><a class="text-decoration-underline" href="#">不動産会社CD</a></th>
+                                    <th scope="col" style="width: 250px"><a class="text-decoration-underline" href="#">不動産会社</a></th>
+                                    <th scope="col" style="width: 100px"><a class="text-decoration-underline" href="#">住所</a></th>
+                                    <th scope="col" style="width: 100px"><a class="text-decoration-underline" href="#">メイン担当者</a></th>
+                                    <th scope="col" style="width: 250px"><a class="text-decoration-underline" href="#">定休日</a></th>
+                                    <th scope="col" style="width: 250px"><a class="text-decoration-underline" href="#">営業時間</a></th>
+                                    <th scope="col" style="width: 180px"><a class="text-decoration-underline" href="#">電話</a></th>
+                                    <th scope="col" style="width: auto" class="d-none d-md-block opacity-0">&nbsp;</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-end"> 999 </td>
+                                    <td class="text-center"> <i class="fa fa-check" aria-hidden="true"></i> </td>
+                                    <td> R999999999 </td>
+                                    <td> <a class="text-heading font-semibold text-decoration-underline" href="#">RealEstateCompanyName</a> </td>
+                                    <td> AddressAddressAddressAddressAddressAddressAddress </td>
+                                    <td> StaffName </td>
+                                    <td> TextTextTextTextTextTextTextText </td>
+                                    <td> TextTextTextTextTextTextTextText </td>
+                                    <td> 99-9999-9999 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999 </td>
+                                    <td class="text-center"> <i class="fa fa-check" aria-hidden="true"></i> </td>
+                                    <td> R999999999 </td>
+                                    <td> <a class="text-heading font-semibold text-decoration-underline" href="#">RealEstateCompanyName</a> </td>
+                                    <td> AddressAddressAddressAddressAddressAddressAddress </td>
+                                    <td> StaffName </td>
+                                    <td> TextTextTextTextTextTextTextText </td>
+                                    <td> TextTextTextTextTextTextTextText </td>
+                                    <td> 99-9999-9999 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999 </td>
+                                    <td class="text-center"> </td>
+                                    <td> R999999999 </td>
+                                    <td> <a class="text-heading font-semibold text-decoration-underline" href="#">RealEstateCompanyName</a> </td>
+                                    <td> AddressAddressAddressAddressAddressAddressAddress </td>
+                                    <td> StaffName </td>
+                                    <td> TextTextTextTextTextTextTextText </td>
+                                    <td> TextTextTextTextTextTextTextText </td>
+                                    <td> 99-9999-9999 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999 </td>
+                                    <td class="text-center"> </td>
+                                    <td> R999999999 </td>
+                                    <td> <a class="text-heading font-semibold text-decoration-underline" href="#">RealEstateCompanyName</a> </td>
+                                    <td> AddressAddressAddressAddressAddressAddressAddress </td>
+                                    <td> StaffName </td>
+                                    <td> TextTextTextTextTextTextTextText </td>
+                                    <td> TextTextTextTextTextTextTextText </td>
+                                    <td> 99-9999-9999 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999 </td>
+                                    <td class="text-center"> </td>
+                                    <td> R999999999 </td>
+                                    <td> <a class="text-heading font-semibold text-decoration-underline" href="#">RealEstateCompanyName</a> </td>
+                                    <td> AddressAddressAddressAddressAddressAddressAddress </td>
+                                    <td> StaffName </td>
+                                    <td> TextTextTextTextTextTextTextText </td>
+                                    <td> TextTextTextTextTextTextTextText </td>
+                                    <td> 99-9999-9999 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999 </td>
+                                    <td class="text-center"> </td>
+                                    <td> R999999999 </td>
+                                    <td> <a class="text-heading font-semibold text-decoration-underline" href="#">RealEstateCompanyName</a> </td>
+                                    <td> AddressAddressAddressAddressAddressAddressAddress </td>
+                                    <td> StaffName </td>
+                                    <td> TextTextTextTextTextTextTextText </td>
+                                    <td> TextTextTextTextTextTextTextText </td>
+                                    <td> 99-9999-9999 </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999 </td>
+                                    <td class="text-center"> </td>
+                                    <td> R999999999 </td>
+                                    <td> <a class="text-heading font-semibold text-decoration-underline" href="#">RealEstateCompanyName</a> </td>
+                                    <td> AddressAddressAddressAddressAddressAddressAddress </td>
+                                    <td> StaffName </td>
+                                    <td> TextTextTextTextTextTextTextText </td>
+                                    <td> TextTextTextTextTextTextTextText </td>
+                                    <td> 99-9999-9999 </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer border-0 py-5">
+                        <span class="text-muted text-sm">検索結果：999999件</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        @Html.Partial("_t_footer")
+        @Html.Partial("_ErrorPopup")
+
+    </div>
+
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/t_reale_list")
+}
+<script src="~/Content/scripts/table_header_sort.js"></script>
