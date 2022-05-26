@@ -142,6 +142,7 @@
     <Compile Include="Controllers\t_dashboardController.cs" />
     <Compile Include="Controllers\t_loginController.cs" />
     <Compile Include="Controllers\t_mansion_listController.cs" />
+    <Compile Include="Controllers\t_reale_listController.cs" />
     <Compile Include="Controllers\t_seller_assessmentController.cs" />
     <Compile Include="Controllers\t_mansion_newController.cs" />
     <Compile Include="Controllers\t_seller_listController.cs" />
@@ -258,6 +259,8 @@
     <Content Include="Views\t_mansion_new\Index.cshtml" />
     <Content Include="Views\t_admin\Index.cshtml" />
     <Content Include="Views\Shared\_ErrorPopup.cshtml" />
+    <Content Include="Views\t_reale_list\_t_reale_list_menuPartial.cshtml" />
+    <Content Include="Views\t_reale_list\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
