@@ -1693,37 +1693,56 @@
                                                                     <div class="mb-4 pb-2">
                                                                         <div class="form-outline form-white p-5">
                                                                             <label class="form-label" for="form3Examplev4">交通アクセス</label>
-                                                                                <div class="js-confirm-station-template d-none" >
-                                                                                    <div class="js-confirm-station">
-                                                                                        <div class="card m-2 col-12 shadow-sm bg-secondary">
-                                                                                            <div class="card-header ps-md-2 pt-0 pb-0">
-                                                                                                <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                                        data-bs-target="#access-collapse-1" aria-expanded="false"
-                                                                                                        aria-controls="access-collapse-1">
-                                                                                                    <h5>路線</h5>
-                                                                                                </button>
-                                                                                            </div>
+                                                                            <div class="row justify-content-center mt-auto h-full m-md-5 p-md-3 pt-md-0 mt-md-0 js-confirm-station-template d-none" style="overflow-x: hidden;overflow-y: hidden;">
+                                                                                <div class="js-confirm-station card m-2 col-12 shadow-sm bg-secondary">
+                                                                                    <div class="card-header ps-md-2 pt-0 pb-0">
+                                                                                        <button class="btn btn-link" data-bs-toggle="collapse"
+                                                                                                data-bs-target="#access-collapse-1" aria-expanded="false"
+                                                                                                aria-controls="access-collapse-1">
+                                                                                            <h5 class="js-paragraph-number"></h5>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="card-body p-2 row collapse show" id="access-collapse-2">
+                                                                                        <!--<div class="col-12 pb-3">-->
                                                                                             <!--addline-->
-                                                                                            <div class="dropdown  w-100">
-                                                                                                <span class="align-self-center cap-min-w40">路線選択</span>
-                                                                                                <input class="form-control text-end js-linecd" type="text" disabled>
-                                                                                            </div>
+                                                                                            <!--<div class="dropdown d-flex p-2">
+                                                                                                <span class="align-self-center w-40">路線選択</span>
+                                                                                                <input class="form-control form-control-lg js-linecd" type="text" disabled>
+                                                                                            </div>-->
                                                                                             <!--addStation-->
-                                                                                            <div class="dropdown w-100">
-                                                                                                <span class="align-self-center cap-min-w40">駅選択</span>
-                                                                                                <input class="form-control text-end js-stationcd" type="text" disabled>
-                                                                                            </div>
-                                                                                            <!--addDistance-->
-                                                                                            <div class="dropdown w-100">
-                                                                                                <span class="align-self-center cap-min-w40">徒歩</span>
-                                                                                                <input class="form-control text-end js-distance" maxlength="2" type="text" disabled>
+                                                                                            <!--<div class="dropdown d-flex p-2">
+                                                                                                <span class="align-self-center w-40">駅選択</span>
+                                                                                                <input class="form-control form-control-lg js-stationcd" type="text" disabled>
                                                                                             </div>
 
+
+                                                                                        </div>-->
+                                                                                        <!--addDistance-->
+                                                                                        <div class="col-12 pb-3">
+                                                                                            <div class="form-outline form-white d-flex">
+                                                                                                <span class="form-label align-self-center me-5" style="width:30%">路線名</span>
+                                                                                                <input class="form-control form-control-lg js-linecd" type="text" disabled>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <!--addDistance-->
+                                                                                        <div class="col-12 pb-3">
+                                                                                            <div class="form-outline form-white d-flex">
+                                                                                                <span class="form-label align-self-center me-5" style="width:30%">駅名</span>
+                                                                                                <input class="form-control form-control-lg js-stationcd" type="text" disabled>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <!--addDistance-->
+                                                                                        <div class="col-12 pb-3">
+                                                                                            <div class="form-outline form-white d-flex">
+                                                                                                <span class="form-label align-self-center me-5" style="width:22%">徒歩</span>
+                                                                                                <input class="form-control form-control-lg w-md-24  text-end js-distance" maxlength="2" type="text" disabled>
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
+                                                                            </div>
                                                                                 <!delete-->
-                                                                                <div class="js-confirm-stationContainer">
+                                                                                <div class="js-confirm-stationContainer row justify-content-center mt-auto h-full m-md-5 p-md-3 pt-md-0 mt-md-0" style="overflow-x: hidden;overflow-y: hidden;">
                                                                                 </div>
                                                                             </div>
                                                                     </div>
