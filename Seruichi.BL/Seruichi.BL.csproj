@@ -109,6 +109,8 @@
     <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Update_M_Seller.sql" />
     <Content Include="Database\StoredProcedure\pr_a_contact_Insert_D_Contact.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_whis_Select_D_SellerPossible_by_SellerCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_Common_Select_LineChange.sql" />
+    <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfMultPurpose.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfContactType.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfPrefAll.sql" />
     <Content Include="Database\StoredProcedure\pr_common_tenfold_select_MansionName_by_MansionCD.sql" />
@@ -180,6 +182,7 @@
     <Content Include="Database\StoredProcedure\pr_t_seller_mansion_list_Insert_L_Log.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_mansion_Select_M_SellerMansionData.sql" />
     <Content Include="Database\StoredProcedure\UpdateMansionData.sql" />
+    <Content Include="Database\TableType\T_MansionStationName.sql" />
     <Content Include="Database\TableType\T_MansionStation.sql" />
   </ItemGroup>
   <ItemGroup />

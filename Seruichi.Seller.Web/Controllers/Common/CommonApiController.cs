@@ -106,5 +106,29 @@ namespace Seruichi.Seller.Web.Controllers
                 return OKResult(formattedDate);
             }
         }
+
+
+        [HttpPost]
+        public HttpResponseMessage GetNearestStations([FromBody] JToken token)
+        {
+            string prefName = token["PrefName"].ToStringOrEmpty();
+            string cityName = token["CityName"].ToStringOrEmpty();
+            string townName = token["TownName"].ToStringOrEmpty();
+            string address = token["Address"].ToStringOrEmpty();
+
+            CommonBL blCmm = new CommonBL();
+            var longitude_latitude = blCmm.GetLongitudeAndLatitude(prefName, cityName, townName, address);
+            var nearestStations = blCmm.GetNearestStations(longitude_latitude);
+
+            if (nearestStations.Count == 0)
+            {
+                return OKResult();
+            }
+            else
+            {
+                return OKResult(base.ConvertToJson(nearestStations));
+            }
+        }
+
     }
 }
