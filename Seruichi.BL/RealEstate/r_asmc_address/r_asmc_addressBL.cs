@@ -12,14 +12,6 @@ namespace Seruichi.BL.RealEstate.r_asmc_address
 {
     public class r_asmc_addressBL
     {
-        public Dictionary<string, string> ValidateAll(r_asmc_addressModel model, List<string> lst_checkBox)
-        {
-            ValidatorAllItems validator = new ValidatorAllItems();
-
-
-            return validator.GetValidationResult();
-        }
-
         public IEnumerable<r_asmc_address_Region> GetRegions()
         {
             DBAccess db = new DBAccess();

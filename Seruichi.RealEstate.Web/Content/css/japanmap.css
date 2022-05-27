@@ -68,8 +68,8 @@
 }
 
 .areabox.areabox--tokai {
-	left: 200px;
-	top: 200px;
+	left: 220px;
+	top: 320px;
 	padding-top: 10px;
 }
 
@@ -81,8 +81,8 @@
 }
 
 .areabox.areabox--kansai {
-	top: 190px;
-	left: 150px;
+	top: 200px;
+	left: 160px;
 	padding-top: 10px;
 }
 
@@ -104,4 +104,70 @@
 	height: 110px;
 	padding-top: 1.3em;
 	font-size: 1.3em;
+}
+
+
+@media screen and (max-width: 768px){
+
+	.areamap .areamap-map {
+		width: auto;
+	}
+	.areamap .areamap-field {
+		background: none;
+		display:inline;
+	}
+
+	.areamap_monthly_background{
+		height: auto;
+		width: 100%;
+	}
+
+	#js-areamap_monthly_background{
+		display:inline;
+
+	}
+
+	.areabox .areabox-list li {
+		display:inline;
+	}
+
+	.areabox.areabox--kanto {
+		right: auto;
+		top: auto;
+		padding-top: 0;
+		width: 40%;
+		margin: auto;
+	}
+	.areabox.areabox--tokai {
+		left: auto;
+		top: auto;
+		padding-top: 0;
+		width: 40%;
+		margin: auto;
+		padding-top: 0.5em;
+	}
+
+	.areabox.areabox--kansai {
+		top: auto;
+		left: auto;
+		padding-top: 0;
+		width: 40%;
+		margin: auto;
+		padding-top: 0.5em;
+	}
+
+	.areabox.areabox--kyushu {
+		top: auto;
+		left: auto;
+		padding-bottom: 0;
+		width: 40%;
+		margin: auto;
+		padding-top: 0.5em;
+	}
+
+	.areabox {
+		position: relative;
+		text-align: center;
+	}
+	
 }

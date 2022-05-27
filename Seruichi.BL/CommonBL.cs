@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
 
 namespace Seruichi.BL
 {
@@ -87,6 +86,16 @@ namespace Seruichi.BL
             return GetDropDownListItems(spName);
         }
 
+        public List<DropDownListItem> GetDropDownListItemsOfMultPurpose(int dataID)
+        {
+            string spName = "pr_Common_Select_DropDownListOfMultPurpose";
+            SqlParameter[] sqlParams = new SqlParameter[] {
+                new SqlParameter("@DataID", SqlDbType.Int) { Value = dataID },
+            };
+
+            return GetDropDownListItems(spName, sqlParams);
+        }
+
         public List<DropDownListItem> GetDropDownListItemsOfStaff_by_RealECD(string realECD)
         {
             string spName = "pr_r_issuelist_select_DropDownListOfStaff_by_RealECD";
@@ -149,6 +158,87 @@ namespace Seruichi.BL
             {
                 return deserialized[0].geometry.coordinates;
             }
+        }
+
+        public List<MansionStation> GetNearestStations(params decimal[] longitudeAndLatitude)
+        {
+            List<MansionStation> result = new List<MansionStation>();
+            if (longitudeAndLatitude == null || longitudeAndLatitude.Length < 2)
+            {
+                return result;
+            }
+
+            string arg1 = longitudeAndLatitude[0].ToStringOrEmpty();
+            string arg2 = longitudeAndLatitude[1].ToStringOrEmpty();
+
+            string url = string.Format("https://express.heartrails.com/api/json?method=getStations&x={0}&y={1}", arg1, arg2);
+
+            string responseBody = "";
+            using (System.Net.Http.HttpClient client = new System.Net.Http.HttpClient())
+            {
+                using (System.Net.Http.HttpResponseMessage response = client.GetAsync(url).Result)
+                {
+                    responseBody = response.Content.ReadAsStringAsync().Result;
+                }
+            }
+
+            var def = new {
+                response = new {
+                    station = new[]
+                    {
+                        new {
+                            name = "",
+                            prefecture = "",
+                            line = "",
+                            x = (decimal)0,
+                            y = (decimal)0,
+                            postal = "",
+                            distance = "",
+                            prev = "",
+                            next = ""
+                        }
+                    }
+                }
+            };
+
+            var deserialized = Newtonsoft.Json.JsonConvert.DeserializeAnonymousType(responseBody, def);
+            if (deserialized == null)
+            {
+                return result;
+            }
+
+            DataTable dtParam = new DataTable();
+            dtParam.Columns.Add("RowNo", typeof(int));
+            dtParam.Columns.Add("LineName", typeof(string));
+            dtParam.Columns.Add("StationName", typeof(string));
+            dtParam.Columns.Add("Distance", typeof(int));
+
+            int rowNo = 0;
+            foreach (var data in deserialized.response.station)
+            {
+                rowNo++;
+                DataRow dr = dtParam.NewRow();
+                dr["LineName"] = data.line;
+                dr["StationName"] = data.name;
+                dr["Distance"] = data.distance.Replace("m", "").ToInt32(0);
+                dr["RowNo"] = rowNo;
+                dtParam.Rows.Add(dr);
+            }
+
+            var sqlParm = new SqlParameter("@MansionStationNameTable", SqlDbType.Structured)
+            {
+                TypeName = "dbo.T_MansionStationName",
+                Value = dtParam
+            };
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_Common_Select_LineChange", sqlParm);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                result.Add(dr.ToEntity<MansionStation>());
+            }
+
+            return result;
         }
 
         public int GetBuildingAge(string yearMonth)

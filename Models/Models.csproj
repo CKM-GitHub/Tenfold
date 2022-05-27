@@ -44,6 +44,7 @@
     <Compile Include="Common\BaseModel.cs" />
     <Compile Include="Common\DropDownListItem.cs" />
     <Compile Include="Common\Enumrators.cs" />
+    <Compile Include="Common\MansionStation.cs" />
     <Compile Include="Common\MessageModel.cs" />
     <Compile Include="Common\SendMailInfo.cs" />
     <Compile Include="Common\LoginUser.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="RealEstate\r_dashboard\r_dashboardModel.cs" />
     <Compile Include="RealEstate\r_issueslist\r_issueslistModel.cs" />
     <Compile Include="RealEstate\r_login\r_loginModel.cs" />
+    <Compile Include="RealEstate\r_staff\r_staffModel.cs" />
     <Compile Include="Seller\a_assess_dModel.cs" />
     <Compile Include="Seller\a_mypage_ahisModel.cs" />
     <Compile Include="Seller\a_mypage_plusModel.cs" />
@@ -74,6 +76,8 @@
     <Compile Include="Tenfold\t_dashboard\t_dashboardModel.cs" />
     <Compile Include="Tenfold\t_mansion_list\t_mansion_listModel.cs" />
     <Compile Include="Tenfold\t_mansion_new\t_mansion_newModel.cs" />
+    <Compile Include="Tenfold\t_reale_list\t_reale_listModel.cs" />
+    <Compile Include="Tenfold\t_reale_purchase\t_reale_purchaseModel.cs" />
     <Compile Include="Tenfold\t_seller_assessment\t_seller_assessmentModel.cs" />
     <Compile Include="Tenfold\t_seller_list\t_seller_listModel.cs" />
     <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionModel.cs" />

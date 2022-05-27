@@ -17,10 +17,22 @@
     <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
         <main class="py-6 bg-surface-secondary">
             <div class="container-fluid">
-                @Html.Action("Render_tab_menu", new { rc = ViewBag.CurrentRegionCD })
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <div class="col-md-12 col-12 mb-3 mb-sm-0">
+                            <h1 class="h2 mb-0 ls-tight"> 都道府県選択</h1>
+                            <span class="text-muted small">査定条件＞設定＞住所・路線から設定＞住所から設定</span>
+                        </div>
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
+                            <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+                        </div>
+                    </div>
+                    @Html.Action("Render_tab_menu", new { rc = ViewBag.CurrentRegionCD })
+                </div>
                 <div class="row">
                     <div class="col-12" id="searchbox_main">
-                        @Html.Action("Render_searchbox_main", new { rc = ViewBag.CurrentRegionCD })
+                        @Html.Action("Render_searchbox_main", new { rc = ViewBag.CurrentRegionCD, pid = ViewBag.PageID })
                     </div>
                 </div>
 

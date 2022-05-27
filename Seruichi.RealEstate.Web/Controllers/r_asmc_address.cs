@@ -16,6 +16,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return RedirectToAction("BadRequest", "Error");
             }
 
+            ViewBag.PageID = "r_asmc_address";
             ViewBag.CurrentRegionCD = rc;
             return View();
         }
@@ -26,11 +27,12 @@ namespace Seruichi.RealEstate.Web.Controllers
             r_asmc_addressBL bl = new r_asmc_addressBL();
             ViewBag.Regions = bl.GetRegions();
             ViewBag.CurrentRegionCD = rc;
+            ViewBag.PageID = "r_asmc_address";
             return PartialView("_r_asmc_address_tab_menu");
         }
 
         [ChildActionOnly]
-        public ActionResult Render_searchbox_main(string rc)
+        public ActionResult Render_searchbox_main(string rc, string pid)
         {
             r_asmc_addressModel model;
             if (string.IsNullOrEmpty(rc))
@@ -42,6 +44,8 @@ namespace Seruichi.RealEstate.Web.Controllers
                 r_asmc_addressBL bl = new r_asmc_addressBL();
                 model = bl.GetCitiesByRegionCD(rc, base.GetOperator("RealECD"));
             }
+
+            ViewBag.PageID = pid;
             return PartialView("_r_asmc_address_searchbox_main", model);
         }
 

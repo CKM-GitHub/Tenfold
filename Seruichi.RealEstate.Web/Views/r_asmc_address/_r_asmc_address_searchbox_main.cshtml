@@ -1,4 +1,12 @@
-﻿@model Models.RealEstate.r_asmc_address.r_asmc_addressModel
+﻿@*r_asmc_address / r_asmc_railway 共通*@
+
+@model Models.RealEstate.r_asmc_address.r_asmc_addressModel
+
+@{ 
+    string switch_label = (ViewBag.PageID == "r_asmc_address" ? "行政区画表示" 
+                         : ViewBag.PageID == "r_asmc_railway" ? "路線表示" 
+                         : "");
+}
 
 @foreach (var item01 in Model.Prefectures)
 {
@@ -17,7 +25,7 @@
                             <input class="form-check-input" type="checkbox" role="switch" id="@switch_id"
                                    data-toggle="toggle" data-bs-toggle="collapse" data-bs-target="@toggle_jid"
                                    aria-expanded="false" aria-controls="@toggle_id">
-                            <label class="form-check-label" for="@switch_id">行政区画表示</label>
+                            <label class="form-check-label" for="@switch_id">@switch_label</label>
                         </span>
                     </h5>
                 </div>

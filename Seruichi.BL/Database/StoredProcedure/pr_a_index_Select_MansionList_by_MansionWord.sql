@@ -21,7 +21,7 @@ BEGIN
     INNER JOIN M_Mansion MAN ON MAN.MansionCD = WRD.MansionCD
 
     WHERE WRD.MansionWord LIKE CONCAT('%', @MansionWord, '%')
-    AND   (@PrefCD IS NULL OR MAN.PrefCD = @PrefCD)
+    --AND   (@PrefCD IS NULL OR MAN.PrefCD = @PrefCD)
     AND   MAN.NoDisplayFLG = 0
 
     ORDER BY MAN.DisplayOrder, MAN.MansionName

@@ -4,14 +4,6 @@ namespace Models
 {
     public class a_indexModel : BaseModel
     {
-        public class MansionStation
-        {
-            public int RowNo { get; set; }
-            public string LineCD { get; set; }
-            public string StationCD { get; set; }
-            public string Distance { get; set; }
-        }
-
         public string SellerCD { get; set; }
         public string MansionName { get; set; }
         public string MansionCD { get; set; }
@@ -37,6 +29,8 @@ namespace Models
         public string BalconyArea { get; set; }
         public byte Direction { get; set; }
         public string FloorType { get; set; }
+        public string FloorType2 { get; set; }
+        public string AdditionalRooms { get; set; }
         public byte BathKBN { get; set; }
         public byte RightKBN { get; set; }
         public byte CurrentKBN { get; set; }
