@@ -88,6 +88,7 @@ namespace Seruichi.Seller.Web.Controllers
             return OKResult(bl.GetBuildingAge(constYYYYMM).ToStringOrEmpty());
         }
 
+        [IgnoreVerificationToken]
         [HttpPost]
         public HttpResponseMessage CheckBirthday([FromBody]string birthday)
         {

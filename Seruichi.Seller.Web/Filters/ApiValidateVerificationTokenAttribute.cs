@@ -12,19 +12,25 @@ namespace Seruichi.Seller.Web
     {
         public override void OnAuthorization(HttpActionContext actionContext)
         {
-            string requestVerificationToken = actionContext.Request.Headers.GetValues("RequestVerificationToken").FirstOrDefault();
+            bool ignoreVerificationToken = actionContext.ActionDescriptor.GetCustomAttributes<IgnoreVerificationTokenAttribute>(true).Any()
+                                || actionContext.ActionDescriptor.ControllerDescriptor.GetCustomAttributes<IgnoreVerificationTokenAttribute>(true).Any();
 
-            var user = SessionAuthenticationHelper.GetUserFromSession();
-            if (user == null)
+            if (!ignoreVerificationToken)
             {
-                SetUnauthorized(actionContext);
-                return;
-            }
+                string requestVerificationToken = actionContext.Request.Headers.GetValues("RequestVerificationToken").FirstOrDefault();
 
-            if (user.VerificationToken != requestVerificationToken)
-            {
-                SetUnauthorized(actionContext);
-                return;
+                var user = SessionAuthenticationHelper.GetUserFromSession();
+                if (user == null)
+                {
+                    SetUnauthorized(actionContext);
+                    return;
+                }
+
+                if (user.VerificationToken != requestVerificationToken)
+                {
+                    SetUnauthorized(actionContext);
+                    return;
+                }
             }
         }
 

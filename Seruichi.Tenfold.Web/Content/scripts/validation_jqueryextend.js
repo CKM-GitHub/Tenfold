@@ -92,6 +92,16 @@
             .removeAttr('data-validation-doublebyte-kana');
     };
 
+    $.fn.addvalidation_doublebyte_hira = function () {
+        return this
+            .attr('data-validation-doublebyte-hira', 'true')
+            .attr('inputmode', 'hira');
+    };
+    $.fn.removeValidation_doublebyte_hira = function () {
+        return this
+            .removeAttr('data-validation-doublebyte-hira');
+    };
+
     $.fn.addvalidation_singlebyte = function () {
         return this
             .attr('data-validation-singlebyte', 'true')
@@ -120,7 +130,15 @@
         return this.removeAttr('data-validation-singlebyte-numberalpha')
     };
 
-
+    $.fn.addvalidation_singlebyte_kana = function () {
+        return this
+            .attr('data-validation-singlebyte-kana', 'true')
+            .attr('inputmode', 'kana');
+    };
+    $.fn.removevalidation_singlebyte_kana = function () {
+        return this
+            .removeAttr('data-validation-singlebyte-kana');
+    };
     $.fn.addvalidation_numeric = function (integerdigits, decimaldigits) {
         return this
             .attr('data-validation-numeric', 'true')
