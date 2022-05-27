@@ -50,6 +50,19 @@ namespace Seruichi.Tenfold.Web.Controllers
             }
         }
 
+        public static string GetSuperAdminFLG()
+        {
+            var user = SessionAuthenticationHelper.GetUserFromSession();
+            if (user == null)
+            {
+                return "";
+            }
+            else
+            {
+                return user.SuperAdminFLG;
+            }
+        }
+
         protected string GetClientIP()
         {
             var clientIp = "";
