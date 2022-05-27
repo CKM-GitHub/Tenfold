@@ -9,7 +9,6 @@ $(function () {
 });
 
 function setValidation() {
-
     $('#txtrealEstateCompany')
         .addvalidation_errorElement("#errorRealEstate")
         .addvalidation_maxlengthCheck(50)
@@ -65,6 +64,24 @@ function addEvents() {
             };
         getM_RealList(model, $form);
 
+        let modellog = {
+            LogDateTime: null,
+            LoginKBN: null,
+            LoginID: null,
+            RealECD: null,
+            LoginName: null,
+            IPAddress: null,
+            Page: null,
+            Processing: 'Display',
+            Remarks: $PrefNameSelect + ' ' + $RealEstateCom,
+        }
+        common.callAjax(_url.InsertL_Log, modellog,
+            function (result) {
+                if (result && !result.isOK) {
+
+                }
+            });
+
     });
 
     $('#btnCSV').on('click', function () {
@@ -115,6 +132,24 @@ function addEvents() {
                 }
             }
         )
+
+        let modellog = {
+            LogDateTime: null,
+            LoginKBN: null,
+            LoginID: null,
+            RealECD: null,
+            LoginName: null,
+            IPAddress: null,
+            Page: null,
+            Processing: 'CSV',
+            Remarks: $PrefNameSelect + ' ' + $RealEstateCom,
+        }
+        common.callAjax(_url.InsertL_Log, modellog,
+            function (result) {
+                if (result && !result.isOK) {
+
+                }
+            });
     });
 
     $('#btnSignUp').on('click', function () {
@@ -148,7 +183,7 @@ function l_logfunction(id) {
         LoginName: null,
         IPAddress: null,
         Page: null,
-        Processing: null,
+        Processing: 'link',
         Remarks: null,
         RealeCD: id
     }

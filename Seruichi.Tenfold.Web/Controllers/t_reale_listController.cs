@@ -51,7 +51,6 @@ namespace Seruichi.Tenfold.Web.Controllers
         [HttpPost]
         public ActionResult InsertM_Reale_L_Log(t_reale_l_log_Model model)
         {
-
             t_reale_listBL bl = new t_reale_listBL();
             model = Getlogdata(model);
             bl.InsertM_Seller_L_Log(model);
@@ -68,7 +67,6 @@ namespace Seruichi.Tenfold.Web.Controllers
             model.LoginName = bl.GetTenstaffNamebyTenstaffcd(model.LoginID);
             model.IPAddress = base.GetClientIP();
             model.PageID = "t_reale_list";
-            model.ProcessKBN = "link";
             //model.Remarks = model.RealeCD + " " + bl.GetSellerNamebySellerCD(model.RealeCD);
             return model;
         }
