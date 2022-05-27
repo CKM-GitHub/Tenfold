@@ -9,7 +9,6 @@ $(function () {
 });
 
 function setValidation() {
-
     $('#txtrealEstateCompany')
         .addvalidation_errorElement("#errorRealEstate")
         .addvalidation_maxlengthCheck(50)
