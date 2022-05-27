@@ -77,6 +77,7 @@
     <Compile Include="Tenfold\t_mansion_list\t_mansion_listModel.cs" />
     <Compile Include="Tenfold\t_mansion_new\t_mansion_newModel.cs" />
     <Compile Include="Tenfold\t_reale_list\t_reale_listModel.cs" />
+    <Compile Include="Tenfold\t_reale_purchase\t_reale_purchaseModel.cs" />
     <Compile Include="Tenfold\t_seller_assessment\t_seller_assessmentModel.cs" />
     <Compile Include="Tenfold\t_seller_list\t_seller_listModel.cs" />
     <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionModel.cs" />
