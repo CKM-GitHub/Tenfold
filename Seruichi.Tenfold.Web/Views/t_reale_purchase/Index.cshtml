@@ -10,93 +10,100 @@
 }
 
 <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18" id="wrapper">
-    <div id="sidebar-wrapper" name="left_side_NavigationBar">
-        <ul class="navbar-nav mb-md-4 p-3 mt-5 p-md-0">
-            <li>
-                <div class="ls-wider px-xl-3" href="#">
-                </div>
-            </li>
-            <li>
-                <div class="text-center px-xl-3">
-                    <div class="mb-3 text-start">
-                        <label for="disabledSelect" class="form-label">ステータス</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                            <label class="form-check-label" for="defaultCheck1">
-                                <span class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white">買</span> 買取依頼
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                            <label class="form-check-label" for="defaultCheck1">
-                                <span class="ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark">確</span> 確認中
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                            <label class="form-check-label" for="defaultCheck1">
-                                <span class="ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark">交</span> 交渉中
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="ms-1 ps-1 pe-1 rounded-circle defaultCheck1" checked>
-                            <label class="form-check-label" for="defaultCheck1">
-                                <span class="ms-1 ps-1 pe-1 rounded-circle bg-secondary">成</span> 成約
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                            <label class="form-check-label" for="defaultCheck1">
-                                <span class="ms-1 ps-1 pe-1 rounded-circle bg-light text-danger">辞</span> 売主辞退
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                            <label class="form-check-label" for="defaultCheck1">
-                                <span class="ms-1 ps-1 pe-1 rounded-circle bg-dark text-white">辞</span> 買主辞退
-                            </label>
+    <form id="form1">
+        <div id="sidebar-wrapper" name="left_side_NavigationBar">
+            <ul class="navbar-nav mb-md-4 p-3 mt-5 p-md-0">
+                <li>
+                    <div class="ls-wider px-xl-3" href="#">
+                    </div>
+                </li>
+                <li>
+                    <div class="text-center px-xl-3">
+                        <div class="mb-3 text-start">
+                            <label for="disabledSelect" class="form-label">ステータス</label>
+                            <span class="cap-errormsg-right" id="CheckBoxError" name="CheckBoxError"></span>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="chk_Purchase" name="chk_Purchase" checked>
+                                <label class="form-check-label" for="chk_Purchase">
+                                    <span class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white">買</span> 買取依頼
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="chk_Checking" name="chk_Checking" checked>
+                                <label class="form-check-label" for="chk_Checking">
+                                    <span class="ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark">確</span> 確認中
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="chk_Nego" name="chk_Nego" checked>
+                                <label class="form-check-label" for="chk_Nego">
+                                    <span class="ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark">交</span> 交渉中
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="chk_Contract" name="chk_Contract" checked>
+                                <label class="form-check-label" for="chk_Contract">
+                                    <span class="ms-1 ps-1 pe-1 rounded-circle bg-secondary">成</span> 成約
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="chk_SellerDeclined" name="chk_SellerDeclined" checked>
+                                <label class="form-check-label" for="chk_SellerDeclined">
+                                    <span class="ms-1 ps-1 pe-1 rounded-circle bg-light text-danger">辞</span> 売主辞退
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="chk_BuyerDeclined" name="chk_BuyerDeclined" checked>
+                                <label class="form-check-label" for="chk_BuyerDeclined">
+                                    <span class="ms-1 ps-1 pe-1 rounded-circle bg-dark text-white">辞</span> 買主辞退
+                                </label>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </li>
-            <li>
-                <div class="text-center px-xl-3">
-                    <div class="mb-3 text-start">
-                        <label for="disabledSelect" class="form-label">範囲指定</label> <select id="disabledSelect" class="form-select mb-2">
-                            <option>登録日</option>
-                            <option>簡易査定日</option>
-                            <option>詳細査定日</option>
-                            <option>買取依頼日</option>
-                            <option>送客日</option>
-                            <option>成約日</option>
-                            <option>売主辞退日</option>
-                            <option>買主辞退日</option>
-                        </select> <label for="disabledSelect" class="form-label">開始日</label>
-                        <input class="form-control mb-2" required="" type="date">
-                        <label for="disabledSelect" class="form-label">終了日</label>
-                        <input class="form-control mb-2" required="" type="date">
-                        <div class="row mb-3">
-                            <div class="col-6"> <button type="button" class="btn btn-primary w-100">今日</button></div>
-                            <div class="col-6"><button type="button" class="btn btn-primary w-100">今週</button></div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-6"><button type="button" class="btn btn-primary w-100">今月</button></div>
-                            <div class="col-6"><button type="button" class="btn btn-primary w-100">先月</button></div>
+                </li>
+                <li>
+                    <div class="text-center px-xl-3">
+                        <div class="mb-3 text-start">
+                            <label for="ddlRange" class="form-label">範囲指定</label>
+                            <select id="ddlRange" name="ddlRange" class="form-select mb-2">
+                                <option>登録日</option>
+                                <option>簡易査定日</option>
+                                <option>詳細査定日</option>
+                                <option>買取依頼日</option>
+                                <option>送客日</option>
+                                <option>成約日</option>
+                                <option>売主辞退日</option>
+                                <option>買主辞退日</option>
+                            </select>
+                            <label for="StartDate" class="form-label">開始日</label>
+                            <span class="cap-errormsg-right" id="errorStartDate"></span>
+                            <input class="form-control mb-2" id="StartDate" name="StartDate" type="date">
+                            <label for="EndDate" class="form-label">終了日</label>
+                            <span class="cap-errormsg-right" id="errorEndDate"></span>
+                            <input class="form-control mb-2" id="EndDate" name="EndDate" type="date">
+                            <div class="row mb-3">
+                                <div class="col-6"> <button type="button" id="btnToday" name="btnToday" class="btn btn-primary w-100">今日</button></div>
+                                <div class="col-6"><button type="button" id="btnThisWeek" name="btnThisWeek" class="btn btn-primary w-100">今週</button></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-6"><button type="button" id="btnThisMonth" name="btnThisMonth" class="btn btn-primary w-100">今月</button></div>
+                                <div class="col-6"><button type="button" id="btnLastMonth" name="btnLastMonth" class="btn btn-primary w-100">先月</button></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </li>
-            <li>
-                <div class="form-group ps-3 pe-3">
-                    <button type="button" class="btn btn-primary w-100 w-100 mb-3">表示</button>
-                </div>
-                <div class="form-group ps-3 pe-3">
-                    <button type="button" class="btn btn-primary w-100 w-100 mb-3">CSVダウンロード</button>
-                </div>
-            </li>
-        </ul>
-        <div class="mt-auto pb-20"></div>
-    </div>
+                </li>
+                <li>
+                    <div class="form-group ps-3 pe-3">
+                        <button type="button" id="btnDisplay" class="btn btn-primary w-100 w-100 mb-3">表示</button>
+                    </div>
+                    <div class="form-group ps-3 pe-3">
+                        <button type="button" id="btnCSV" class="btn btn-primary w-100 w-100 mb-3">CSVダウンロード</button>
+                    </div>
+                </li>
+            </ul>
+            <div class="mt-auto pb-20"></div>
+        </div>
+    </form>
 
     <div class="toggle-button" name="left_side_NavigationBar_ShowHide_Icon">
         <a href="#menu-toggle" class="btn" id="menu-toggle">
@@ -114,8 +121,10 @@
                             <div class="card-body ">
                                 <div class="justify-content-around align-items-center row">
                                     <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
-                                        <div class="border-end"><button type="button" class="btn btn-secondary me-2">戻る</button></div>
-                                        <h1 class="ps-2 h2 mb-0 ls-tight">不動産会社</h1>
+                                        <div class="border-end">
+                                            <button type="button" class="btn btn-secondary me-2">戻る</button>
+                                        </div>
+                                        <h1 id="CompanyName" name="CompanyName" class="ps-2 h2 mb-0 ls-tight">不動産会社</h1>
                                         <span class="ps-2 text-muted small align-self-end">管理</span>
                                     </div>
                                     <hr class="navbar-divider my-5 opacity-20">
@@ -125,14 +134,13 @@
                                             <div class="text-muted text-nowrap">RealEstateCompanyName1</div>
                                             <div class="text-muted"><h2>RealEstateCompanyName2</h2></div>
                                             <div class="p-md-1 text-muted">
-                                                <span class="fa fa-id-card bg-light p-1 rounded-circle"></span>
-                                                R0000008
+                                                <span class="fa fa-id-card bg-light p-1 rounded-circle">R0000008</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column col-sm-6 col-lg-4  p-0 m-0 border-end" id="info">
                                         <div class="p-md-1 text-muted cap-fon-form-w500 ">
-                                            <span class="fa fa-home bg-light p-1 rounded-circle"></span>
+                                            <span class="fa fa-home bg-light p-1 rounded-circle" id="address" name="address"></span>
                                             AddressAddressAddressAddressAddressAddressAddress
                                         </div>
                                         <div class="p-md-1 pt-sm-1 text-muted">
@@ -245,25 +253,25 @@
 
                     <div class="card-header d-md-inline-flex">
                         <h5 class="mb-0">買取管理</h5>
-                        <span class="ps-md-5 text-muted text-sm">検索結果：999999件</span>
+                        <span class="ps-md-5 text-muted text-sm" id="total_record_up"></span> <span style="color: red;" class="ps-md-5 text-sm" id="no_record"></span>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-hover table-nowrap">
+                        <table id="tblPurchaseDetails" class="table table-hover table-nowrap">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" class="text-end text-decoration-underline" style="width: 100px">No.</th>
-                                    <th scope="col" style="width: 150px" class="text-decoration-underline">ステータス</th>
-                                    <th scope="col" style="width: 100px" class="text-decoration-underline">査定ID</th>
-                                    <th scope="col" style="width: 200px" class="text-decoration-underline">物件（マンション、部屋番号）</th>
-                                    <th scope="col" style="width: 150px" class="text-decoration-underline">売主名</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline">登録日時</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline">簡易査定日時</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline">詳細査定日時</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline">買取依頼日時</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline">送客日時</th>
-                                    <th scope="col" style="width: 160px" class="text-decoration-underline">成約日時</th>
-                                    <th scope="col" style="width: 160px" class="text-decoration-underline">売主辞退日時</th>
-                                    <th scope="col" style="width: 160px" class="text-decoration-underline">買主辞退日時</th>
+                                    <th scope="col" class="text-end text-decoration-underline sort-by" ordercol-index="" style="width: 100px">No.</th>
+                                    <th scope="col" style="width: 150px" class="text-decoration-underline sort-by" ordercol-index="">ステータス</th>
+                                    <th scope="col" style="width: 100px" class="text-decoration-underline sort-by" ordercol-index="">査定ID</th>
+                                    <th scope="col" style="width: 200px" class="text-decoration-underline sort-by" ordercol-index="">物件（マンション、部屋番号）</th>
+                                    <th scope="col" style="width: 150px" class="text-decoration-underline sort-by" ordercol-index="">売主名</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="">登録日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="">簡易査定日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="">詳細査定日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="">買取依頼日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="">送客日時</th>
+                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by" ordercol-index="">成約日時</th>
+                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by" ordercol-index="">売主辞退日時</th>
+                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by" ordercol-index="">買主辞退日時</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -291,132 +299,11 @@
                                     <td>  </td>
                                     <td> </td>
                                 </tr>
-
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td><label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark">確</span> 確認中</label> </td>
-                                    <td> A9999999 </td>
-                                    <td> <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal" data-bs-target="#mansion">Mansion name Room number</a> </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#">
-                                            Seller name Seller
-                                            name
-                                        </a>
-                                    </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#">
-                                            YYYY/MM/DD hh:mm:ss
-                                        </a>
-                                    </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td>  </td>
-                                    <td>  </td>
-                                    <td> </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td> <label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark">交</span> 交渉中</label></td>
-                                    <td> A9999999 </td>
-                                    <td> <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal" data-bs-target="#mansion">Mansion name Room number</a> </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#">
-                                            Seller name Seller
-                                            name
-                                        </a>
-                                    </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#">
-                                            YYYY/MM/DD hh:mm:ss
-                                        </a>
-                                    </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td>  </td>
-                                    <td>  </td>
-                                    <td> </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td> <label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-secondary">成</span> 成約</label> </td>
-                                    <td> A9999999 </td>
-                                    <td> <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal" data-bs-target="#mansion">Mansion name Room number</a> </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#">
-                                            Seller name Seller
-                                            name
-                                        </a>
-                                    </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#">
-                                            YYYY/MM/DD hh:mm:ss
-                                        </a>
-                                    </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td> </td>
-                                    <td> </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td> <label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-light text-danger">辞</span> 売主辞退</label> </td>
-                                    <td> A9999999 </td>
-                                    <td> <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal" data-bs-target="#mansion">Mansion name Room number</a> </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#">
-                                            Seller name Seller
-                                            name
-                                        </a>
-                                    </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#">
-                                            YYYY/MM/DD hh:mm:ss
-                                        </a>
-                                    </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td> </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td> </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td>   <label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-dark text-white">辞</span> 買主辞退</label> </td>
-                                    <td> A9999999 </td>
-                                    <td> <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal" data-bs-target="#mansion">Mansion name Room number</a> </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#">
-                                            Seller name Seller
-                                            name
-                                        </a>
-                                    </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#">
-                                            YYYY/MM/DD hh:mm:ss
-                                        </a>
-                                    </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="card-footer border-0 py-5">
-                        <span class="text-muted text-sm">検索結果：999999件</span>
+                        <span class="text-muted text-sm" id="total_record"></span>
                     </div>
                 </div>
             </div>
@@ -679,7 +566,8 @@
                                                                                 </div>
                                                                                 <div class=""><span class="align-self-start">999.99 ㎡<br></span></div>
                                                                             </div>
-                                                                        </div>  <div class="d-inline-flex pb-1">
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
                                                                             <div class="row">
                                                                                 <div class="">
                                                                                     <h6 class="align-self-center"><strong>主採光</strong><br></h6>
@@ -786,7 +674,6 @@
                                                     </div>
                                                     <div class="tab-pane fade" data-bs-keyboard="false" data-bs-backdrop="static" id="pills-contact" role="tabpanel"
                                                          aria-labelledby="pills-contact-tab">
-
                                                         <hr class="navbar-divider my-5 opacity-20">
                                                         <div class="card shadow border-0">
                                                             <div class="card-body ">
@@ -868,7 +755,6 @@
                                                                 <hr class="navbar-divider my-3 opacity-20">
                                                                 <div class="justify-content-around align-items-center row">
                                                                     <div class="d-flex flex-column col-12 cap-profile-icon" id="info">
-
                                                                         <div class="p-md-1 text-muted">
                                                                             <span class="fa fa-id-card bg-light p-1 rounded-circle"></span>
                                                                             E0000008
@@ -880,7 +766,6 @@
                                                                         <div class="p-md-1 pt-sm-1 text-muted">
                                                                             <i class="fa fa-phone bg-light p-1 rounded-circle"></i> 02-6865-5551
                                                                         </div>
-
                                                                         <div class="p-md-1 pt-sm-1 text-muted">
                                                                             <i class="fa fa-fax bg-light p-1 ps-2 pe-2 rounded-circle"></i>
                                                                             999-9999-9999
@@ -1276,7 +1161,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mansion">戻る</button>
+                            <button type="button" id="btnModalClose" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mansion">戻る</button>
                         </div>
                     </div>
                 </div>
