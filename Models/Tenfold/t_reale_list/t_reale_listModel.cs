@@ -10,8 +10,8 @@ namespace Models.Tenfold.t_reale_list
     {
         public string PrefNameSelect { get; set; }
         public string RealEStateCom { get; set; }
-        public string EffectiveChk { get; set; }
-        public string InValidCheck { get; set; }
+        public byte EffectiveChk { get; set; }
+        public byte InValidCheck { get; set; }
     }
 
     public class t_reale_l_log_Model
