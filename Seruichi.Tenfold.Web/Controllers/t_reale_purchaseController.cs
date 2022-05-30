@@ -19,6 +19,22 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
 
         [HttpPost]
+        public ActionResult get_t_reale_purchase_CompanyInfo(t_reale_purchaseModel model)
+        {
+            t_reale_purchaseBL bl = new t_reale_purchaseBL();
+            var dt = bl.get_t_reale_purchase_CompanyInfo(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult get_t_reale_purchase_CompanyCountingInfo(t_reale_purchaseModel model)
+        {
+            t_reale_purchaseBL bl = new t_reale_purchaseBL();
+            var dt = bl.get_t_reale_purchase_CompanyCountingInfo(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
         public ActionResult get_t_reale_purchase_DisplayData(t_reale_purchaseModel model)
         {
             t_reale_purchaseBL bl = new t_reale_purchaseBL();
@@ -56,7 +72,7 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Generate_M_SellerMansionCSV(t_reale_purchaseModel model)
+        public ActionResult get_t_reale_purchase_CSVData(t_reale_purchaseModel model)
         {
             t_reale_purchaseBL bl = new t_reale_purchaseBL();
             var dt = bl.get_t_reale_purchase_CSVData(model);

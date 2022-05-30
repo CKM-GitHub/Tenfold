@@ -24,6 +24,38 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
             return validator.GetValidationResult();
         }
 
+        public DataTable get_t_reale_purchase_CompanyInfo(t_reale_purchaseModel model)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull() },
+            };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_reale_purchase_get_CompanyInfo", sqlParams);
+
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+            var e = dt.AsEnumerable();
+            return dt;
+        }
+
+        public DataTable get_t_reale_purchase_CompanyCountingInfo(t_reale_purchaseModel model)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull() },
+            };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_reale_purchase_get_CompanyCountingInfo", sqlParams);
+
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+            var e = dt.AsEnumerable();
+            return dt;
+        }
+
         public DataTable get_t_reale_purchase_DisplayData(t_reale_purchaseModel model)
         {
             var sqlParams = new SqlParameter[]
