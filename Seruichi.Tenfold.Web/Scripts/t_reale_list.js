@@ -73,7 +73,7 @@ function addEvents() {
             IPAddress: null,
             Page: null,
             Processing: 'Display',
-            Remarks: $PrefNameSelect + ' ' + $RealEstateCom,
+            Remarks: $PrefNameSelect + ' ' + $RealEstateCom
         }
         common.callAjax(_url.InsertL_Log, modellog,
             function (result) {
@@ -142,8 +142,7 @@ function addEvents() {
             IPAddress: null,
             Page: null,
             Processing: 'CSV',
-            Remarks: $PrefNameSelect + ' ' + $RealEstateCom,
-            RealeCD: null
+            Remarks: $PrefNameSelect + ' ' + $RealEstateCom
         }
         common.callAjax(_url.InsertL_Log, modellog,
             function (result) {
@@ -217,15 +216,14 @@ function l_logfunction(id) {
         IPAddress: null,
         Page: null,
         Processing: null,
-        Remarks: null,
-        RealeCD: id
+        Remarks: null
     }
     common.callAjax(_url.InsertL_Log, model,
         function (result) {
             if (result && result.isOK) {
                 //window.location.href = common.appPath + '/t_reale_profile/Index?RealeCD=' + model.RealeCD;
                 //window.location.href = '/t_seller_assessment/Index';
-                alert("https://www.seruichi.com/t_reale_profile?RealeCD" + model.RealeCD);
+                alert("https://www.seruichi.com/t_reale_profile?RealeCD" + model.RealECD);
             }
             if (result && !result.isOK) {
 

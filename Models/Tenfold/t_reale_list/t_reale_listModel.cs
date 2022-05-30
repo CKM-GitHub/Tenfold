@@ -25,6 +25,5 @@ namespace Models.Tenfold.t_reale_list
         public string PageID { get; set; }
         public string ProcessKBN { get; set; }
         public string Remarks { get; set; }
-        public string RealeCD { get; set; }
     }
 }
