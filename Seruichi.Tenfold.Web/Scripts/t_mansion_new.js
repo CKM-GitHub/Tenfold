@@ -21,8 +21,6 @@ $(function () {
 });
 
 function setValidation() {
-
-    
     //マンション名
     $('#MansionName')
         .addvalidation_errorElement("#errorName")
@@ -264,18 +262,18 @@ function setValidation() {
     $('#Katakana')
         .addvalidation_errorElement("#errorKatakana")
         .addvalidation_reqired()
-        .addvalidation_doublebyte();
+        .addvalidation_doublebyte_kana();
 
     //ｶﾀｶﾅ
     $('#Katakana1')
         .addvalidation_errorElement("#errorKatakana1")
         .addvalidation_reqired()
-        .addvalidation_singlebyte();
+        .addvalidation_singlebyte_kana();
     //ひらがな
     $('#Hirakana')
         .addvalidation_errorElement("#errorHirakana")
         .addvalidation_reqired()
-        .addvalidation_doublebyte();
+        .addvalidation_doublebyte_hira();
    
 
     $('#btnShowConfirmation')
@@ -401,7 +399,7 @@ function addEvents() {
         })
     });
     $('.js-distance').on('click', function () {
-        debugger;
+       
         const id = $(this).attr('id');
         const suffix = id.slice(-2).replace('_', '');
         var newValue = parseInt(suffix) + 1;
@@ -489,7 +487,7 @@ function setScreenComfirm(data) {
     $('#confirm_Other6').text($('#Other6').text());
     $('#confirm_Remark').text($('#Remark').text());
 
-    debugger;
+   
     const stationContainer = $('.js-confirm-stationContainer');
     // stationContainer.children().remove();   
     let index = 0;

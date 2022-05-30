@@ -33,6 +33,7 @@ namespace Seruichi.Tenfold.Web
             {
                 UserID = model.TenStaffCD,
                 UserName = model.TenStaffName,
+                SuperAdminFLG = model.SuperAdminFLG,
                 VerificationToken = NewVerificationToken
             };
 
@@ -60,6 +61,19 @@ namespace Seruichi.Tenfold.Web
             else
             {
                 return user.VerificationToken;
+            }
+        }
+
+        public static string GetSuperAdminFLG()
+        {
+            var user = GetUserFromSession();
+            if (user == null)
+            {
+                return "";
+            }
+            else
+            {
+                return user.SuperAdminFLG;
             }
         }
 

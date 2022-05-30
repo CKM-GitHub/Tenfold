@@ -141,8 +141,10 @@
     <Compile Include="Controllers\t_adminController.cs" />
     <Compile Include="Controllers\t_dashboardController.cs" />
     <Compile Include="Controllers\t_loginController.cs" />
+    <Compile Include="Controllers\t_mansionController.cs" />
     <Compile Include="Controllers\t_mansion_listController.cs" />
     <Compile Include="Controllers\t_reale_listController.cs" />
+    <Compile Include="Controllers\t_reale_purchaseController.cs" />
     <Compile Include="Controllers\t_seller_assessmentController.cs" />
     <Compile Include="Controllers\t_mansion_newController.cs" />
     <Compile Include="Controllers\t_seller_listController.cs" />
@@ -209,8 +211,11 @@
     <Content Include="Scripts\t_admin.js" />
     <Content Include="Scripts\t_dashboard.js" />
     <Content Include="Scripts\t_login.js" />
+    <Content Include="Scripts\t_mansion.js" />
     <Content Include="Scripts\t_mansion_list.js" />
     <Content Include="Scripts\t_mansion_new.js" />
+    <Content Include="Scripts\t_reale_list.js" />
+    <Content Include="Scripts\t_reale_purchase.js" />
     <Content Include="Scripts\t_seller_assessment.js" />
     <Content Include="Scripts\t_seller_list.js" />
     <Content Include="Scripts\t_seller_mansion.js" />
@@ -261,6 +266,8 @@
     <Content Include="Views\Shared\_ErrorPopup.cshtml" />
     <Content Include="Views\t_reale_list\_t_reale_list_menuPartial.cshtml" />
     <Content Include="Views\t_reale_list\Index.cshtml" />
+    <Content Include="Views\t_reale_purchase\Index.cshtml" />
+    <Content Include="Views\t_mansion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

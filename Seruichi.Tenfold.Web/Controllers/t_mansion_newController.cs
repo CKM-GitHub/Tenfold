@@ -126,8 +126,8 @@ namespace Seruichi.Tenfold.Web.Controllers
             (string longi, string lati) = bl.AddressSearch(addressSearch);
 
             CommonBL blCmm = new CommonBL();
-            model.Longitude = longi[0];
-            model.Latitude = lati[0];
+            model.Longitude = longi.ToDecimal();
+            model.Latitude = lati.ToDecimal();
             model.SellerCD = base.GetOperator();
             model.SellerName = base.GetOperatorName();
             model.Operator = base.GetOperator();

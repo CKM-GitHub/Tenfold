@@ -1,0 +1,1170 @@
+﻿@model Models.Tenfold.t_reale_purchase.t_reale_purchaseModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_t_menuLayout.cshtml";
+}
+
+@section styles{
+    @Styles.Render("~/Content/tenfold_css_common")
+}
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18" id="wrapper">
+    <form id="form1">
+        <div id="sidebar-wrapper" name="left_side_NavigationBar">
+            <ul class="navbar-nav mb-md-4 p-3 mt-5 p-md-0">
+                <li>
+                    <div class="ls-wider px-xl-3" href="#">
+                    </div>
+                </li>
+                <li>
+                    <div class="text-center px-xl-3">
+                        <div class="mb-3 text-start">
+                            <label for="disabledSelect" class="form-label">ステータス</label>
+                            <span class="cap-errormsg-right" id="CheckBoxError" name="CheckBoxError"></span>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="chk_Purchase" name="chk_Purchase" checked>
+                                <label class="form-check-label" for="chk_Purchase">
+                                    <span class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white">買</span> 買取依頼
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="chk_Checking" name="chk_Checking" checked>
+                                <label class="form-check-label" for="chk_Checking">
+                                    <span class="ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark">確</span> 確認中
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="chk_Nego" name="chk_Nego" checked>
+                                <label class="form-check-label" for="chk_Nego">
+                                    <span class="ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark">交</span> 交渉中
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="chk_Contract" name="chk_Contract" checked>
+                                <label class="form-check-label" for="chk_Contract">
+                                    <span class="ms-1 ps-1 pe-1 rounded-circle bg-secondary">成</span> 成約
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="chk_SellerDeclined" name="chk_SellerDeclined" checked>
+                                <label class="form-check-label" for="chk_SellerDeclined">
+                                    <span class="ms-1 ps-1 pe-1 rounded-circle bg-light text-danger">辞</span> 売主辞退
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="chk_BuyerDeclined" name="chk_BuyerDeclined" checked>
+                                <label class="form-check-label" for="chk_BuyerDeclined">
+                                    <span class="ms-1 ps-1 pe-1 rounded-circle bg-dark text-white">辞</span> 買主辞退
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="text-center px-xl-3">
+                        <div class="mb-3 text-start">
+                            <label for="ddlRange" class="form-label">範囲指定</label>
+                            <select id="ddlRange" name="ddlRange" class="form-select mb-2">
+                                <option>登録日</option>
+                                <option>簡易査定日</option>
+                                <option>詳細査定日</option>
+                                <option>買取依頼日</option>
+                                <option>送客日</option>
+                                <option>成約日</option>
+                                <option>売主辞退日</option>
+                                <option>買主辞退日</option>
+                            </select>
+                            <label for="StartDate" class="form-label">開始日</label>
+                            <span class="cap-errormsg-right" id="errorStartDate"></span>
+                            <input class="form-control mb-2" id="StartDate" name="StartDate" type="date">
+                            <label for="EndDate" class="form-label">終了日</label>
+                            <span class="cap-errormsg-right" id="errorEndDate"></span>
+                            <input class="form-control mb-2" id="EndDate" name="EndDate" type="date">
+                            <div class="row mb-3">
+                                <div class="col-6"> <button type="button" id="btnToday" name="btnToday" class="btn btn-primary w-100">今日</button></div>
+                                <div class="col-6"><button type="button" id="btnThisWeek" name="btnThisWeek" class="btn btn-primary w-100">今週</button></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-6"><button type="button" id="btnThisMonth" name="btnThisMonth" class="btn btn-primary w-100">今月</button></div>
+                                <div class="col-6"><button type="button" id="btnLastMonth" name="btnLastMonth" class="btn btn-primary w-100">先月</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="form-group ps-3 pe-3">
+                        <button type="button" id="btnDisplay" class="btn btn-primary w-100 w-100 mb-3">表示</button>
+                    </div>
+                    <div class="form-group ps-3 pe-3">
+                        <button type="button" id="btnCSV" class="btn btn-primary w-100 w-100 mb-3">CSVダウンロード</button>
+                    </div>
+                </li>
+            </ul>
+            <div class="mt-auto pb-20"></div>
+        </div>
+    </form>
+
+    <div class="toggle-button" name="left_side_NavigationBar_ShowHide_Icon">
+        <a href="#menu-toggle" class="btn" id="menu-toggle">
+            <span class="fa fa-angle-right glyphicon-chevron-right" aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                <!-- Card stats -->
+                <div class="row g-6 mb-6">
+                    <div class="col-12">
+                        <div class="card shadow border-0">
+                            <div class="card-body ">
+                                <div class="justify-content-around align-items-center row">
+                                    <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
+                                        <div class="border-end">
+                                            <button type="button" class="btn btn-secondary me-2">戻る</button>
+                                        </div>
+                                        <h1 class="ps-2 h2 mb-0 ls-tight">不動産会社</h1>
+                                        <span class="ps-2 text-muted small align-self-end">管理</span>
+                                    </div>
+                                    <hr class="navbar-divider my-5 opacity-20">
+                                    <div class="align-items-center col-sm-6 col-lg-3  p-0 m-0 border-end">
+                                        <div class="p-md-2 p-1" id="info">
+                                            <div class="text-muted"><span id="InvalidFLG" name="InvalidFLG" class="text-success">有効会員</span></div>
+                                            <div id="REKana" name="REKana" class="text-muted text-nowrap"></div>
+                                            <div class="text-muted"><h2 id="REName" name="REName"></h2></div>
+                                            <div class="p-md-1 text-muted"><span id="RealECD" name="RealECD" class="fa fa-id-card bg-light p-1 rounded-circle"></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column col-sm-6 col-lg-4  p-0 m-0 border-end" id="info">
+                                        <div class="p-md-1 text-muted cap-fon-form-w500 ">
+                                            <span class="fa fa-home bg-light p-1 rounded-circle" id="Address" name="Address"></span>
+                                        </div>
+                                        <div class="p-md-1 pt-sm-1 text-muted">
+                                            <span class="fa fa-phone bg-light p-1 rounded-circle" id="HousePhone" name="HousePhone"></span>
+                                        </div>
+                                        <div class="p-md-1 pt-sm-1 text-muted">
+                                            <span class="fa fa-fax bg-light p-1 ps-2 pe-2 rounded-circle" id="Fax" name="Fax"></span>
+                                        </div>
+                                        <div class="p-md-1 text-muted">
+                                            <span class="fa fa-envelope-o bg-light p-1 rounded-circle" id="MailAddress" name="MailAddress"></span>
+                                        </div>
+                                        <div class="p-md-1 pt-sm-1 text-muted">
+                                            <span class="fa fa-user bg-light p-1 rounded-circle" id="PICName" name="PICName"></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column col-sm-6 col-lg-2 p-0 m-0 border-end" id="info">
+                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                                            <div class="col">
+                                                <span class="fa fa-money bg-light p-1 rounded-circle"></span>
+                                                <span class="text-nowrap">査定数</span>
+                                            </div>
+                                            <div class="col text-end"><span id="Constant" name="Constant" class="dark text-dark text-nowrap"></span></div>
+                                        </div>
+                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                                            <div class="col">
+                                                <span class="fa fa-calculator bg-light p-1 rounded-circle"></span>
+                                                <span class="text-nowrap">Top5</span>
+                                            </div>
+                                            <div class="col text-end"><span id="Top5" name="Top5" class="dark text-dark text-nowrap"></span></div>
+                                        </div>
+                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                                            <div class="col">
+                                                <span class="fa fa-thumbs-o-up bg-light p-1 rounded-circle"></span>
+                                                <span class="text-nowrap">Top1</span>
+                                            </div>
+                                            <div class="col text-end"><span id="Top1" name="Top1" class="dark text-dark text-nowrap"></span></div>
+                                        </div>
+                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                                            <div class="col">
+                                                <span class="fa fa-calendar bg-light p-1 rounded-circle">送客数</span>
+                                            </div>
+                                            <div class="col text-end"><span id="Customers" name="Customers" class="dark text-dark text-nowrap"></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column col-sm-6 col-lg-2 p-0 m-0" id="info">
+                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                                            <div class="col p-md-0 m-md-0">
+                                                <span class="fa fa-calendar  bg-light p-1 rounded-circle">商談数</span>
+                                            </div>
+                                            <div class="col p-md-0 m-md-0 text-end"><span id="Deals" name="Deals" class="dark text-dark text-nowrap"></span></div>
+                                        </div>
+                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                                            <div class="col p-md-0 m-md-0">
+                                                <span class="fa fa-calendar  bg-light p-1 rounded-circle">成約数</span>
+                                            </div>
+                                            <div class="col p-md-0 m-md-0 text-end"><span id="Contracts" name="Contracts" class="dark text-dark text-nowrap">99</span></div>
+                                        </div>
+                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                                            <div class="col p-md-0 m-md-0">
+                                                <span class="fa fa-calendar  bg-light p-1 rounded-circle">売主辞退数</span>
+                                            </div>
+                                            <div class="col p-md-0 m-md-0 text-end"><span id="Seller_Declines" name="Seller_Declines" class="dark text-dark text-nowrap">99</span></div>
+                                        </div>
+                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                                            <div class="col p-md-0 m-md-0">
+                                                <span class="fa fa-calendar  bg-light p-1 rounded-circle">買主辞退数</span>
+                                            </div>
+                                            <div class="col p-md-0 m-md-0 text-end"><span id="Buyer_Declines" name="Buyer_Declines" class="dark text-dark text-nowrap">99</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card stats -->
+
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header pt-2 pb-2 ps-4 pe-4">
+                        <ul class="nav nav-tabs overflow-x border-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">買取管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">査定履歴</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">情報管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">プラン管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">請求管理</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">メモ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">アカウントフラグ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">送客契約</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card-header d-md-inline-flex">
+                        <h5 class="mb-0">買取管理</h5>
+                        <span class="ps-md-5 text-muted text-sm" id="total_record_up"></span> <span style="color: red;" class="ps-md-5 text-sm" id="no_record"></span>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="tblPurchaseDetails" class="table table-hover table-nowrap">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col" class="text-end text-decoration-underline sort-by" ordercol-index="" style="width: 100px">No.</th>
+                                    <th scope="col" style="width: 150px" class="text-decoration-underline sort-by" ordercol-index="">ステータス</th>
+                                    <th scope="col" style="width: 100px" class="text-decoration-underline sort-by" ordercol-index="">査定ID</th>
+                                    <th scope="col" style="width: 200px" class="text-decoration-underline sort-by" ordercol-index="">物件（マンション、部屋番号）</th>
+                                    <th scope="col" style="width: 150px" class="text-decoration-underline sort-by" ordercol-index="">売主名</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="">登録日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="">簡易査定日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="">詳細査定日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="">買取依頼日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="">送客日時</th>
+                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by" ordercol-index="">成約日時</th>
+                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by" ordercol-index="">売主辞退日時</th>
+                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by" ordercol-index="">買主辞退日時</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-end"> 999 </td>
+                                    <td><label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white">買</span> 買取依頼</label> </td>
+                                    <td> A9999999 </td>
+                                    <td> <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal" data-bs-target="#mansion">Mansion name Room number</a> </td>
+                                    <td>
+                                        <a class="text-heading font-semibold text-decoration-underline" href="#">
+                                            Seller name Seller
+                                            name
+                                        </a>
+                                    </td>
+                                    <td> YYYY/MM/DD hh:mm:ss </td>
+                                    <td> YYYY/MM/DD hh:mm:ss </td>
+                                    <td>
+                                        <a class="text-heading font-semibold text-decoration-underline" href="#">
+                                            YYYY/MM/DD hh:mm:ss
+                                        </a>
+                                    </td>
+                                    <td> YYYY/MM/DD hh:mm:ss </td>
+                                    <td> YYYY/MM/DD hh:mm:ss </td>
+                                    <td> </td>
+                                    <td>  </td>
+                                    <td> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer border-0 py-5">
+                        <span class="text-muted text-sm" id="total_record"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ポップアップ -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="mansion" tabindex="-1" aria-labelledby="mansion" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl cap-modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="mansionLabel">査定結果 </h5>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12 col-md-5">
+                                    <div class="col-12">
+                                        <div class="users-container">
+                                            <div class="users p-3">
+                                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                                                                data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                                                                aria-selected="true">
+                                                            物件情報
+                                                        </button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                                                data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                                                                aria-selected="false">
+                                                            詳細情報
+                                                        </button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                                                                data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                                                                aria-selected="false">
+                                                            売主情報
+                                                        </button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="pills-com-tab"
+                                                                data-bs-toggle="pill" data-bs-target="#pills-com" type="button" role="tab"
+                                                                aria-controls="pills-com" aria-selected="false">
+                                                            不動産会社情報
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content" id="pills-tabContent">
+                                                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                        <section class="highlight-clean">
+                                                            <div>
+                                                                <div class="intro">
+                                                                    <hr class="navbar-divider my-5 opacity-20">
+                                                                    <div class="card shadow border-0">
+                                                                        <div class="card-body ">
+                                                                            <h4 class="text-center fw-bold">Mansion name Room number</h4>
+                                                                            <p class="font-monospace small text-start pt-3">
+                                                                                AddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddress
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <hr class="navbar-divider my-5 opacity-20">
+                                                                    <div class="card shadow border-0">
+                                                                        <div class="card-body ">
+                                                                            <div class=" pb-0 pm-0">
+                                                                                <h6>交通アクセス</h6>
+                                                                                <div class="row justify-content-center" id="ekikoutsu"
+                                                                                     style="width:100%;overflow-x: hidden;overflow-y: auto;max-height: 300px;">
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> 路線名路線名路線名</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">駅名駅名駅名駅名駅名</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> 路線名路線名路線名</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">駅名駅名駅名駅名駅名</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> 路線名路線名路線名</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">駅名駅名駅名駅名駅名</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> 路線名路線名路線名</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">駅名駅名駅名駅名駅名</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> 路線名路線名路線名</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">駅名駅名駅名駅名駅名</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> 路線名路線名路線名</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">駅名駅名駅名駅名駅名</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> 路線名路線名路線名</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">駅名駅名駅名駅名駅名</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> 路線名路線名路線名</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">駅名駅名駅名駅名駅名</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> 路線名路線名路線名</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">駅名駅名駅名駅名駅名</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> 路線名路線名路線名</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">駅名駅名駅名駅名駅名</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+                                                    <div class="tab-pane fade" data-bs-keyboard="false" data-bs-backdrop="static" id="pills-profile" role="tabpanel"
+                                                         aria-labelledby="pills-profile-tab">
+                                                        <hr class="navbar-divider my-5 opacity-20">
+                                                        <div class="card shadow border-0">
+                                                            <div class="card-body ">
+                                                                <h4 class="text-center fw-bold">Mansion name Room number</h4>
+                                                                <p class="font-monospace small text-start pt-3">
+                                                                    AddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddress
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <hr class="navbar-divider my-5 opacity-20">
+                                                        <div class="card shadow border-0">
+                                                            <div class="card-body ">
+                                                                <div class="row">
+                                                                    <div class="col-4">
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>建物構造</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">SRC造<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>築年月</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">1990/1<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>部屋番号</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">999 号室<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>専有面積</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">999.99 ㎡<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>バルコニー面積　</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">999.99 ㎡<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>主採光</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">南向き<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>部屋数</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">99部屋<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>バス・トイレ　</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">セパレート<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>土地権利　</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">所有権<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>現況</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">サブリース<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>管理方式</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">委託管理<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>売却希望時期　</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">1ヶ月以内<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>家賃</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">9,999,999円<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>管理賃</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">9,999,999円<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>修繕積立金</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">9,999,999円<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>その他費用</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">9,999,999円<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>固定資産税</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">9,999,999円<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" data-bs-keyboard="false" data-bs-backdrop="static" id="pills-contact" role="tabpanel"
+                                                         aria-labelledby="pills-contact-tab">
+                                                        <hr class="navbar-divider my-5 opacity-20">
+                                                        <div class="card shadow border-0">
+                                                            <div class="card-body ">
+                                                                <h4 class="text-center fw-bold">Mansion name Room number</h4>
+                                                                <p class="font-monospace small text-start pt-3">
+                                                                    AddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddress
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <hr class="navbar-divider my-3 opacity-20">
+                                                        <div class="card shadow border-0">
+                                                            <div class="card-body ">
+                                                                <div class="justify-content-around align-items-center row">
+                                                                    <div class="align-items-center col-12">
+                                                                        <div class="p-md-2 p-1" id="info">
+                                                                            <div class="text-muted"><span class="text-success">有効会員</span></div>
+                                                                            <div class="text-muted">キャピタル イチロー</div>
+                                                                            <div class="text-muted">
+                                                                                <h2>キャピタル 一郎</h2>
+                                                                            </div>
+                                                                            <div class="p-md-1 text-muted">
+                                                                                <span class="fa fa-id-card bg-light p-1 rounded-circle"></span>
+                                                                                U0000008
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <hr class="navbar-divider my-5 opacity-20">
+                                                                <div class="justify-content-around align-items-center row">
+                                                                    <div class="d-flex flex-column col-12" id="info">
+
+                                                                        <div class="p-md-1 text-muted cap-fon-form-w500 ">
+                                                                            <span class="fa fa-home bg-light p-1 rounded-circle"></span>
+                                                                            京都府京都市東山区三条通南裏二筋目白川筋西入二丁目北側北木之元町一丁目七番地七号
+                                                                        </div>
+                                                                        <div class="p-md-1 pt-sm-1 text-muted">
+                                                                            <span class="fa fa-phone bg-light p-1 rounded-circle"></span> 02-6865-5551
+                                                                        </div>
+
+                                                                        <div class="p-md-1 pt-sm-1 text-muted">
+                                                                            <span class="fa fa-mobile bg-light p-1 ps-2 pe-2 rounded-circle"></span> 080-6865-5551
+                                                                        </div>
+                                                                        <div class="p-md-1 text-muted">
+                                                                            <span class="fa fa-envelope-o bg-light p-1 rounded-circle"></span>
+                                                                            AAAA999999@9999.aaaamail.com
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" data-bs-keyboard="false" data-bs-backdrop="static" id="pills-com" role="tabpanel"
+                                                         aria-labelledby="pills-com-tab">
+                                                        <hr class="navbar-divider my-5 opacity-20">
+                                                        <div class="card shadow border-0">
+                                                            <div class="card-body ">
+                                                                <h4 class="text-center fw-bold">Mansion name Room number</h4>
+                                                                <p class="font-monospace small text-start pt-3">
+                                                                    AddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddress
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <hr class="navbar-divider my-3 opacity-20">
+                                                        <div class="card shadow border-0">
+                                                            <div class="card-body "
+                                                                 style="width:100%;overflow-x: hidden;overflow-y: auto;min-height: 405px;">
+                                                                <div class="justify-content-around align-items-center row">
+                                                                    <div class="align-items-center col-12">
+                                                                        <div class="p-md-2 p-1 row" id="info">
+                                                                            <div class="col-12">
+                                                                                <div class="text-muted">RealEstateCompanyName1</div>
+                                                                                <div class="text-muted">
+                                                                                    <h3>RealEstateCompanyName2</h3>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <hr class="navbar-divider my-3 opacity-20">
+                                                                <div class="justify-content-around align-items-center row">
+                                                                    <div class="d-flex flex-column col-12 cap-profile-icon" id="info">
+                                                                        <div class="p-md-1 text-muted">
+                                                                            <span class="fa fa-id-card bg-light p-1 rounded-circle"></span>
+                                                                            E0000008
+                                                                        </div>
+                                                                        <div class="p-md-1 text-muted cap-fon-form-w500">
+                                                                            <i class="fa fa-home bg-light p-1 rounded-circle"></i>
+                                                                            AddressAddressAddressAddressAddressAddressAddressAddress
+                                                                        </div>
+                                                                        <div class="p-md-1 pt-sm-1 text-muted">
+                                                                            <i class="fa fa-phone bg-light p-1 rounded-circle"></i> 02-6865-5551
+                                                                        </div>
+                                                                        <div class="p-md-1 pt-sm-1 text-muted">
+                                                                            <i class="fa fa-fax bg-light p-1 ps-2 pe-2 rounded-circle"></i>
+                                                                            999-9999-9999
+                                                                        </div>
+                                                                        <div class="p-md-1 text-muted">
+                                                                            <i class="fa fa-envelope-o bg-light p-1 rounded-circle"></i>
+                                                                            MailMailMailMailMailMail
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-7">
+                                    <div class="card shadow border-0">
+                                        <div class="card-body ">
+                                            <h4 class="text-center fw-bold">査定日時</h4>
+                                            <p class="font-monospace small text-center pt-0">
+                                                2021/12/15  20:33:00
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-12">
+                                            <div class="w-100 p-1 pt-3">
+                                                <div class="w-100">
+                                                    <div class="row">
+                                                        <div class="col-xl-12">
+                                                            <div class="card">
+                                                                <div class="card-header pb-0">
+                                                                    <div class="card-actions float-right">
+                                                                    </div>
+                                                                    <h5 class="card-title mb-0">マンション査定結果トップ５</h5>
+                                                                </div>
+                                                                <div class="card-body" style="width:100%;overflow-x: auto;max-height: 480px;">
+                                                                    <table class="table table-striped" style="width:100%;overflow-x: auto;">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th></th>
+                                                                                <th>不動産会社</th>
+                                                                                <th class="text-end">買取価格</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>①</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>②</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>④</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>④</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>⑤</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>⑤</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="w-100 p-1 pt-3">
+                                                <div class="w-100">
+                                                    <div class="row">
+                                                        <div class="col-xl-12">
+                                                            <div class="card">
+                                                                <div class="card-header pb-0">
+                                                                    <div class="card-actions float-right">
+
+                                                                    </div>
+                                                                    <h5 class="card-title mb-0">エリア査定結果トップ５</h5>
+                                                                </div>
+                                                                <div class="card-body" style="width:100%;overflow-x: auto;max-height: 480px;">
+                                                                    <table class="table table-striped" style="width:100%;overflow-x: auto;">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th></th>
+                                                                                <th>不動産会社</th>
+                                                                                <th class="text-end">買取価格</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>①</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>②</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>③</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>④</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>④</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>⑤</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>⑤</td>
+                                                                                <td>不動産会社名不動産会社名</td>
+                                                                                <td class="align-middle text-end">
+                                                                                    <span class="text-danger">9,999,999,999</span>円
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="btnModalClose" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">戻る</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        @Html.Partial("_t_footer")
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/t_reale_purchase")
+}

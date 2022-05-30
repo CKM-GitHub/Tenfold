@@ -11,5 +11,6 @@ namespace Models.Tenfold.Login
         public string TenStaffCD { get; set; }
         public string TenStaffPW { get; set; }
         public string TenStaffName { get; set; }
+        public string SuperAdminFLG { get; set; }
     }
 }

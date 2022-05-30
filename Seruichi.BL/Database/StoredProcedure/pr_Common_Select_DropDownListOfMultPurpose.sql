@@ -16,11 +16,11 @@ BEGIN
         SELECT
          DataKey        AS [Value]
         ,Char1          AS DisplayText
-        ,DataKey        AS DisplayOrder
+        ,Num2           AS DisplayOrder
         ,Num1           AS HiddenItem
         FROM M_MultPurpose
         WHERE DataID = @DataID
-        ORDER BY DataKey
+        ORDER BY Num2, DataKey
     END
     ELSE
     BEGIN

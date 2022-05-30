@@ -46,7 +46,9 @@ const regexPattern = {
     moeney: "^[0-9,]+$",
     numeric: "^[0-9.]+$",
     dateformat: /^\d{4}-\d{2}-\d{2}$/,
-    doublebyteKana: "^[ァ-ヶー　]+$",
+    doublebyteKana: /^([ァ-ンａ-ｚＡ-Ｚ０-９]+)$/,
+    singlebyteKana: /^([ｧ-ﾝﾞﾟa-zA-Z0-9]+)$/,
+    doublebyteHira: /^([ぁ-んａ-ｚＡ-Ｚ０-９]+)$/
 }
 
 const kanaMap = {
@@ -305,6 +307,13 @@ const common = {
             .replace(/ﾟ/g, '゜');
     },
 
+    replaceAlphabetandnumberSingleToDouble: function convertToFull(str) {         
+         const rval=   str.replace(/[A-Za-z0-9]/g, function (s) {
+                 String.fromCharCode(s.charCodeAt(0) + 0xFEE0);
+         });        
+        return rval;
+    },
+
     checkValidityInput: function checkValidityInput(ctrl) {
         const $ctrl = $(ctrl);
         const type = $ctrl.attr('type');
@@ -329,7 +338,9 @@ const common = {
         const isNumCompare = $ctrl.attr("data_validation_numcompare");
         const isPasswordcompare = $ctrl.attr("data-validation-passwordcompare");
         const isMinlengthCheck = $ctrl.attr("data-validation-minlengthcheck");
-        
+        const isSingleByteKana = $ctrl.attr("data-validation-singlebyte-kana");
+        const isDoubleByteHira = $ctrl.attr("data-validation-doublebyte-hira");
+
 
         let inputValue = "";
         if (type === 'radio') {
@@ -341,12 +352,12 @@ const common = {
         }
 
         //replace text
-        if (isSingleByte || isSingleByteNumber || isSingleByteNumberAlpha || isNumeric || isMoney) {
+        if (isSingleByte || isSingleByteNumber || isSingleByteNumberAlpha || isNumeric || isMoney || isSingleByteKana) {
             inputValue = this.replaceDoubleToSingle(inputValue);
             $ctrl.val(inputValue);
         }
 
-        if (isDoubleByte || isDoubleByteKana) {
+        if (isDoubleByte || isDoubleByteKana || isDoubleByteHira) {
             inputValue = this.replaceSingleToDouble(inputValue);
             inputValue = this.replaceSingleToDoubleKana(inputValue);
             $ctrl.val(inputValue);
@@ -405,9 +416,10 @@ const common = {
             }
 
             if (isDoubleByteKana) {
+                const tem_val = common.replaceAlphabetandnumberSingleToDouble(inputValue);                
                 const regex = new RegExp(regexPattern.doublebyteKana);
-                if (!regex.test(inputValue)) {
-                    $ctrl.showError(this.getMessage('E104'));
+                if (!regex.test(tem_val)) {                   
+                    $ctrl.showError(this.getMessage('E107'));
                     return;
                 }
             }
@@ -539,7 +551,7 @@ const common = {
                     $ctrl.showError(this.getMessage('E112'));
                     return;
                 }
-            }            
+            }
 
             if (isMinlengthCheck) {
                 const minLength = $ctrl.data('mindigits');
@@ -560,8 +572,22 @@ const common = {
                     return;
                 }
             }
+            if (isSingleByteKana) {
+                const regex = new RegExp(regexPattern.singlebyteKana);
+                if (!regex.test(inputValue)) {
+                    $ctrl.showError(this.getMessage('E104'));
+                    return;
+                }
+            }
+            if (isDoubleByteHira) {                
+                const hira_val = common.replaceAlphabetandnumberSingleToDouble(inputValue);
+                const regex = new RegExp(regexPattern.doublebyteHira);
+                if (!regex.test(hira_val)) {
+                    $ctrl.showError(this.getMessage('E107'));
+                    return;
+                }
+            }
         }
-       
 
         if (customValidation) {
             func = new Function('arg1', 'return ' + customValidation + '(arg1)')
@@ -707,6 +733,22 @@ const common = {
             if ($target) {
                 $target.focus();
                 return true;
+            }
+        }
+        return false;
+    },
+
+    //to get Parameter Value from Url
+    getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
             }
         }
         return false;
