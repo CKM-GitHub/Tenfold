@@ -28,7 +28,7 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
             validator.CheckSelectionRequired("PrefCD", model.PrefCD);
             ////マンション名
             validator.CheckRequired("MansionName", model.MansionName);
-            validator.CheckIsDoubleByte("MansionName", model.MansionName, 50);
+            validator.CheckIsDoubleByte("MansionName", model.MansionName, 100);
             ////市区町村
             validator.CheckSelectionRequired("CityCD", model.CityCD);
             ////町域

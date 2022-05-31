@@ -16,7 +16,7 @@ namespace Seruichi.BL.Tenfold.t_seller_mansion
             ValidatorAllItems validator = new ValidatorAllItems();
 
             validator.CheckMaxLenght("MansionName",model.MansionName,50);//E105
-            validator.CheckIsDoubleByte("MansionName", model.MansionName, 50);//E107
+            validator.CheckIsDoubleByte("MansionName", model.MansionName, 100);//E107
 
             validator.CheckDate("StartDate", model.StartDate);//E108
             validator.CheckDate("EndDate", model.EndDate);//E108
