@@ -207,11 +207,12 @@ function Bind_tbody(result) {
 }
 
 function l_logfunction(id) {
+    debugger;
     let model = {
         LogDateTime: null,
         LoginKBN: null,
         LoginID: null,
-        RealECD: null,
+        RealECD: id,
         LoginName: null,
         IPAddress: null,
         Page: null,
