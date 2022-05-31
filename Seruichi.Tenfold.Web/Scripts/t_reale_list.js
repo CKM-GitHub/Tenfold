@@ -78,7 +78,7 @@ function addEvents() {
         common.callAjax(_url.InsertL_Log, modellog,
             function (result) {
                 if (result && !result.isOK) {
-                    alert("Insert into L_log Successful");
+                    
                 }
             });
 
@@ -147,13 +147,13 @@ function addEvents() {
         common.callAjax(_url.InsertL_Log, modellog,
             function (result) {
                 if (result && !result.isOK) {
-                    alert("Insert into L_log Successful");
+                   
                 }
             });
     });
 
     $('#btnSignUp').on('click', function () {
-        
+        alert("go to r_reale_new")
     });
 
 }
@@ -201,8 +201,6 @@ function Bind_tbody(result) {
         $('#no_record').text("表示可能データがありません");
     }
     $('#Datatable tbody').append(html);
-
-    sortTable.getSortingTable("Datatable");
 }
 
 function l_logfunction(id) {

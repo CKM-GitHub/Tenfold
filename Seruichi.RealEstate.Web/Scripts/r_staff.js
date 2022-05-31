@@ -184,8 +184,32 @@ function addEvents() {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
-        const fd = new FormData(document.forms.form1);
-        const model = Object.fromEntries(fd);
+        $('#modal-changesave').modal('show');
+    });
+
+    $('#btnOKChange').on('click', function () {
+        $form = $('#form1').hideChildErrors();
+
+        if (!common.checkValidityOnSave('#form1')) {
+            $form.getInvalidItems().get(0).focus();
+            return false;
+        }
+
+        const $REStaffCD = $("#newStaffCD").val(), $REStaffName = $('#newStaffName').val(), $REIntroduction = $('#newStaffIntro').val(), $REPassword = $('#newStaffpsw').val()
+        //var new_REFaceImage = $("#newpic_holder").find("img").attr("src");
+      
+        let model = {
+            REFaceImage: $("#newpic_holder").find("img").attr("src"),
+            REStaffCD: $REStaffCD,
+            REStaffName: $REStaffName,
+            REIntroduction: $REIntroduction,
+            REPassword: $REPassword,
+            PermissionChat: $('#New_chkChat').is(':checked') ? "1" : "0",
+            PermissionSetting: $('#New_chkSetting').is(':checked') ? "1" : "0",
+            PermissionPlan: $('#New_chkPlan').is(':checked') ? "1" : "0",
+            PermissionInvoice: $('#New_chkInvoice').is(':checked') ? "1" : "0",
+        };
+
         model.lst_StaffModel = Update_list_M_REStaff();
         Save_M_REStaff(model, $form)
     });
@@ -196,7 +220,8 @@ function Update_list_M_REStaff() {
     $(".update-data").each(function (index) {
         var i = index + 1;
         const data = {
-            REFaceImage: $('#newProfilePhoto_' + i).val(),
+            REFaceImage: null, //$('#newpic_holder_' + i).find("img").attr("src"),
+            RealECD: $('#RealECD_' + i).val(),
             REStaffCD: $('#REStaffCD_' + i).val(),
             REStaffName: $('#REStaffName_' + i).val(),
             REIntroduction: $('#REIntroduction_' + i).val(),

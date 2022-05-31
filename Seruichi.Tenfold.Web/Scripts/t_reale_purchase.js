@@ -1,8 +1,8 @@
 ﻿const _url = {};
 $(function () {
     setValidation();
-    _url.get_t_reale_purchase_CompanyInfo = common.appPath + '/t_reale_purchase/get_t_reale_purchase_CompanyInfo';
-    _url.get_t_reale_purchase_CompanyCountingInfo = common.appPath + '/t_reale_purchase/get_t_reale_purchase_CompanyCountingInfo';
+    _url.get_t_reale_purchase_CompanyInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyInfo';
+    _url.get_t_reale_purchase_CompanyCountingInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyCountingInfo';
     _url.get_t_reale_purchase_DisplayData = common.appPath + '/t_reale_purchase/get_t_reale_purchase_DisplayData';
     _url.get_t_reale_purchase_CSVData = common.appPath + '/t_reale_purchase/get_t_reale_purchase_CSVData';
     _url.Insert_L_Log = common.appPath + '/t_reale_purchase/Insert_L_Log';
@@ -95,7 +95,10 @@ function addEvents() {
         StartDate: $("#StartDate").val(),
         EndDate: $("#EndDate").val()
     };
-    //get_purchase_Data(model, this);
+
+    Bind_Company_Data(model, this);         //Bind Company Info Data to the title part of the page
+
+    get_purchase_Data(model, this, 'page_load');
 
     sortTable.getSortingTable("tblPurchaseDetails");
 
@@ -108,7 +111,10 @@ function addEvents() {
         $('#tblPurchaseDetails tbody').empty();
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
-        get_purchase_Data(model, $form);
+        model = {
+            RealECD: common.getUrlParameter('reale')
+        };
+        get_purchase_Data(model, $form, 'Display');
     });
 
     $('#btnCSV').on('click', function () {
@@ -146,6 +152,8 @@ function addEvents() {
                     document.body.appendChild(downloadLink);
                     downloadLink.click();
                     document.body.removeChild(downloadLink);
+
+                    l_logfunction(model.RealECD + ' ' + model.REName, 'display', '');
                 }
                 else {
                     alert("There is no data!");
@@ -155,20 +163,12 @@ function addEvents() {
     });
 }
 
-function get_purchase_Data(model, $form) {
-    common.callAjaxWithLoading(_url.get_t_reale_purchase_CompanyInfo, model, this, function (result) {
+function get_purchase_Data(model, $form, state) {
+    common.callAjaxWithLoading(_url.get_t_reale_purchase_DisplayData, model, this, function (result) {
         if (result && result.isOK) {
-            Bind_CompanyInfo(result.data);
-            common.callAjaxWithLoading(_url.get_t_reale_purchase_CompanyCountingInfo, model, this, function (result) {
-                if (result && result.isOK) {
-                    Bind_CountingInfo(result.data);
-                    common.callAjaxWithLoading(_url.get_t_reale_purchase_DisplayData, model, this, function (result) {
-                        if (result && result.isOK) {
-                            Bind_DisplayData(result.data);
-                        }
-                    })
-                }
-            })
+            Bind_DisplayData(result.data);
+            if (state == 'Display')
+                l_logfunction(model.RealECD + ' ' + model.REName, 'display', '');
         }
 
         if (result && !result.isOK) {
@@ -186,37 +186,8 @@ function isEmptyOrSpaces(str) {
     return str === null || str.match(/^ *$/) !== null;
 }
 
-function Bind_CompanyInfo(result) {
-    var data = JSON.parse(result);
-    if (data.length > 0) {
-        $('#InvalidFLG').text(data[0]['InvalidFLG']);
-        $('#REKana').text(data[0]['REKana']);
-        $('#REName').text(data[0]['REName']);
-        $('#RealECD').text(data[0]['RealECD']);
-        $('#Address').text(data[0]['Address']);
-        $('#HousePhone').text(data[0]['HousePhone']);
-        $('#Fax').text(data[0]['Fax']);
-        $('#MailAddress').text(data[0]['MailAddress']);
-        $('#PICName').text(data[0]['PICName']);
-    }
-}
-
-function Bind_CountingInfo(result) {
-    var data = JSON.parse(result);
-    if (data.length > 0) {
-        $('#Constant').text(data[0]['査定数']);
-        $('#Top5').text(data[0]['Top5']);
-        $('#Top1').text(data[0]['Top1']);
-        $('#Customers').text(data[0]['送客数']);
-        $('#Deals').text(data[0]['商談数']);
-        $('#Contracts').text(data[0]['成約数']);
-        $('#Seller_Declines').text(data[0]['売主辞退数']);
-        $('#Buyer_Declines').text(data[0]['買主辞退数']);
-    }
-}
-
 function Bind_DisplayData(result) {
-    let _letter = "", _class = "";
+    let _letter = "", _class = "", _status = "";
     let data = JSON.parse(result);
     let html = "";
     if (data.length > 0) {
@@ -224,54 +195,57 @@ function Bind_DisplayData(result) {
 
             if (isEmptyOrSpaces(data[i]["ステータス"])) {
                 _letter = "";
+                _status = "0";
                 _class = "ms-1 ps-1 pe-1 rounded-circle";
             }
             else {
-                if (data[i]["ステータス"] == "1") {
+                if (data[i]["ステータス"] == "買取依頼") {
                     _letter = "買";
+                    _status = "1";
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white";
                 }
-                else if (data[i]["ステータス"] == "2") {
+                else if (data[i]["ステータス"] == "確認中") {
                     _letter = "確";
+                    _status = "2";
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark";
                 }
-                else if (data[i]["ステータス"] == "3") {
+                else if (data[i]["ステータス"] == "交渉中") {
                     _letter = "交";
+                    _status = "3";
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark";
                 }
-                else if (data[i]["ステータス"] == "4") {
+                else if (data[i]["ステータス"] == "成約") {
                     _letter = "成";
+                    _status = "4";
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary";
                 }
-                else if (data[i]["ステータス"] == "5") {
+                else if (data[i]["ステータス"] == "売主辞退") {
                     _letter = "辞";
+                    _status = "5";
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger";
                 }
-                else if (data[i]["ステータス"] == "6") {
+                else if (data[i]["ステータス"] == "買主辞退") {
                     _letter = "辞";
+                    _status = "6";
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-dark text-white";
                 }
             }
 
             html += '<tr>\
             <td class= "text-end"> ' + (i + 1) + '</td>\
-            <td><span class="' + _class + '">' + _letter + '</span><span class="font-semibold"> ' + data[i]["ステータス名"] + '</span></td>\
-            <td>'+ data[i]["ステータス"] + '</td>\
-            <td>'+ data[i]["査定依頼ID"] + '</td>\
-            <td>'+ data[i]["売主保持物件ID"] + '</td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["査定依頼ID"] + '&r_issueslist' + '  href="#" onclick="l_logfunction(this.id)"><span>' + data[i]["物件名"] + '</span><span>' + data[i]["部屋番号"] + '</span></a></td>\
-            <td>'+ data[i]["依頼売主CD"] + '</td>\
-            <td>'+ data[i]["売主_カナ"] + '</td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" data-bs-toggle="modal" data-bs-target="#SellerDetails" id='+ data[i]["依頼売主CD"] + ' href="#" onclick="Bind_SellerDetails_Popup(this)">' + data[i]["お客様名"] + '</a></td>\
-            <td>'+ data[i]["売主_住所１"] + data[i]["売主_住所２"] + data[i]["売主_住所３"] + data[i]["売主_住所４"] + data[i]["売主_住所５"] + '</td>\
-            <td>'+ data[i]["売主_固定電話番号"] + '</td>\
-            <td>'+ data[i]["売主_携帯電話番号"] + '</td>\
-            <td>'+ data[i]["売主_メールアドレス"] + '</td>\
+            <td><span class="' + _class + '">' + _letter + '</span><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
+            <td class="d-none">'+ _status + '</td>\
+            <td class="text-nowrap">'+ data[i]["査定依頼ID"] + '</td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["査定依頼ID"] + '&' + data[i]["SellerCD"] + ' data-bs-toggle="modal" data-bs-target="#mansion" href="#" onclick="Bind_ModalDetails(this.id)"><span>' + data[i]["物件名"] + '</span></a></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id="' + data[i]["SellerCD"] + '" href="#" onclick="l_logfunction(' + 't_seller_assessment ' + data[i]["SellerCD"] + ', ' + 'link' + ', this.id)">' + data[i]["売主名"] + '</a></td>\
+            <td class="text-nowrap">'+ data[i]["登録日時"] + '</td>\
+            <td class="text-nowrap">'+ data[i]["簡易査定日時"] + '</td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id="' + data[i]["査定依頼ID"] + '" href="#" onclick="l_logfunction(' + 't_seller_assessment_detail ' + data[i]["査定依頼ID"] + ', ' + 'link' + ', this.id)">' + data[i]["詳細査定日時"] + '</a></td>\
             <td class="text-nowrap">'+ data[i]["買取依頼日時"] + '</td>\
-            <td class="text-nowrap"> '+ data[i]["終了日時"] + '</td>\
-            <td class="text-end text-nowrap"> '+ data[i]["査定価格"] + '</td>\
-            <td>'+ data[i]["不動産担当者CD"] + '</td>\
-            <td class="text-nowrap"> '+ data[i]["担当者名"] + '</td>\
+            <td class="text-nowrap"> '+ data[i]["送客日時"] + '</td>\
+            <td class="text-nowrap"> '+ data[i]["成約日時"] + '</td>\
+            <td class="text-nowrap"> '+ data[i]["売主辞退日時"] + '</td>\
+            <td class="text-nowrap"> '+ data[i]["買主辞退日時"] + '</td>\
             </tr>'
         }
 
@@ -287,43 +261,28 @@ function Bind_DisplayData(result) {
     $('#tblPurchaseDetails tbody').append(html);
 }
 
-function l_logfunction(id) {
+function l_logfunction(remark, Process, id) {
     let model = {
-        LoginKBN: null,
+        LoginKBN: '3',
         LoginID: null,
         RealECD: null,
         LoginName: null,
         IPAddress: null,
-        Page: null,
-        Processing: null,
-        Remarks: null,
-        LogId: id.split('&')[0],
-        LogStatus: id.split('&')[1]
-
+        Page: 't_reale_purchase',
+        Processing: Process,
+        Remarks: remark,
     };
-    common.callAjax(_url.insert_l_log, model,
-        function (result) {
-            if (result && result.isOK) {
-                if (model.LogStatus == "t_mansion_detail")
-                    alert("https://www.seruichi.com/t_mansion_detail?ｍansionCD=" + model.LogId);
-                else if (model.LogStatus == "t_seller_assessment")
-                    // alert("https://www.seruichi.com/t_seller_assessment?seller=" + model.LogId);
-                    window.location.href = common.appPath + '/t_seller_assessment/Index?SellerCD=' + model.LogId;
-                else if (model.LogStatus == "t_seller_assessment_detail")
-                    alert("https://www.seruichi.com/t_seller_assessment_detail?AssReqID=" + model.LogId);
-                else if (model.LogStatus == "t_seller_assessment_detail_GReal")
-                    alert("https://www.seruichi.com/t_reale_purchase?realestate=" + model.LogId);
-                else if (model.LogStatus == "t_seller_assessment_detail_EReal")
-                    alert("https://www.seruichi.com/t_reale_purchase?realestate=" + model.LogId);
-                else if (model.LogStatus == "t_seller_assessment_detail_IRealECD")
-                    alert("https://www.seruichi.com/t_reale_purchase?realestate=" + model.LogId);
-            }
-            if (result && !result.isOK) {
-            }
-        });
+    common.callAjax(_url.Insert_L_Log, model, function (result) {
+        if (result && result.isOK) {
+            if (remark == 't_seller_assessment ' + id)
+                window.location.href = "https://www.seruichi.com/t_seller_assessment/Index?SellerCD=" + id;
+            else if (remark == 't_seller_assessment_detail ' + id)
+                window.location.href = "https://www.seruichi.com/t_seller_assessment_detail/Index?AssReqID=" + id;
+        }
+    });
 }
 
-function modal_popup(id) {
+function Bind_ModalDetails(id) {
     var seller_CD = id.split('&')[0];
     var sellerMansion_ID = id.split('&')[1];
 
