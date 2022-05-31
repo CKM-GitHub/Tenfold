@@ -39,7 +39,7 @@ namespace Models.Tenfold.t_mansion_new
         public byte StructuralKBN { get; set; }
         public string ConstYYYYMM { get; set; }
         public string Rooms { get; set; }
-
+        public string Floors { get; set; }
         public byte RightKBN { get; set; }
         public byte CurrentKBN { get; set; }
 

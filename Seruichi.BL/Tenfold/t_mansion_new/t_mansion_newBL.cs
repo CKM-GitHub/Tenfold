@@ -58,8 +58,9 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
             ////総戸数
             validator.CheckRequiredNumber("Rooms", model.Rooms, true);
             validator.CheckIsNumeric("Rooms", model.Rooms, 3, 0);
-
-
+            //階建て
+            validator.CheckRequiredNumber("Floors", model.Floors, true);
+            validator.CheckIsNumeric("Floors", model.Floors, 3, 0);
 
             validator.CheckSelectionRequired("RightKBN", model.RightKBN);
 
@@ -229,7 +230,7 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
                 new SqlParameter("@ConstYYYYMM", SqlDbType.Int){ Value = model.ConstYYYYMM.Replace("/", "").ToInt32(0) },
                 new SqlParameter("@Rooms", SqlDbType.Int){ Value = model.Rooms.ToInt32(0) },
                 new SqlParameter("@RightKBN", SqlDbType.TinyInt){ Value = model.RightKBN.ToByte(0) },
-                //new SqlParameter("@WordSEQ", SqlDbType.VarChar){ Value = model.Noti.ToStringOrNull() },
+                 new SqlParameter("@Floors", SqlDbType.Int){ Value = model.Floors.ToInt32(0) },
                 new SqlParameter("@MansionWord", SqlDbType.VarChar){ Value = model.Noti.ToStringOrNull() },
                 new SqlParameter("@Remark", SqlDbType.VarChar){ Value = model.Remark.ToStringOrNull() },
                 new SqlParameter("@Longitude", SqlDbType.Decimal){ Value = model.Longitude.ToDecimal(0) },

@@ -48,6 +48,7 @@
                                                             <div class="row">
                                                                 <div class="mb-4 pb-2 col-12 col-md-8">
                                                                     <div class="form-outline">
+                                                                        <input class="d-none" type="text" name="MansionCD" id="hdnMansionCD">
                                                                         <div class="d-flex" style="margin-top:3px;">
                                                                             <label class="form-label">マンション名</label>
                                                                             <span class="cap-errormsg-right" id="errorName"></span>
@@ -191,7 +192,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="mb-4 pb-2 col-12 col-md-6">
+                                                                <div class="mb-4 pb-2 col-12 col-md-4">
                                                                     <div class="form-outline form-white">
                                                                         <div class="d-flex">
                                                                             <label class="form-label" for="form3Examplea3">築年月</label><span class="cap-errormsg-right" id="errorConstYYYYMM"></span>
@@ -199,13 +200,25 @@
                                                                         <input type="month" min="1900-01" max="2100-12" class="form-control form-control-lg text-center cap-fon-form-w200" name="ConstYYYYMM" id="ConstYYYYMM" />
                                                                     </div>
                                                                 </div>
-                                                                <div class="mb-4 pb-2 col-12 col-md-6">
+                                                                <div class="mb-4 pb-2 col-12 col-md-3">
                                                                     <div class="form-outline form-white">
                                                                         <div class="d-flex">
                                                                             <label class="form-label" for="form3Examplea3">総戸数</label><span class="cap-errormsg-right" id="errorRooms"></span>
                                                                         </div>
 
                                                                         <input type="number" class="form-control form-control-lg text-center cap-fon-form-w200" name="Rooms" id="Rooms"
+                                                                               oninput="javascript:if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                                               maxlength="3" />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="mb-4 pb-2 col-12 col-md-3">
+                                                                    <div class="form-outline form-white">
+                                                                        <div class="d-flex">
+                                                                            <label class="form-label" for="form3Examplea3">階数</label><span class="cap-errormsg-right" id="errorFloors"></span>
+                                                                        </div>
+                                                                        <input type="number" id="Floors" name="Floors"
+                                                                               class="form-control form-control-lg text-center cap-fon-form-w200"
                                                                                oninput="javascript:if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                                                                maxlength="3" />
                                                                     </div>
@@ -1543,7 +1556,11 @@
 
                                                         <div class="mb-4 pb-2">
                                                             <div class="form-outline form-white p-5">
-                                                                <label class="form-label" for="form3Examplev4">メモ</label>
+                                                                
+                                                                <div class="d-flex">
+                                                                    <label class="form-label" for="form3Examplev4">メモ</label>
+                                                                    <span class="cap-errormsg-right" id="errorRemark"></span>
+                                                                </div>
                                                                 <textarea class="form-control custom-control" rows="11" maxlength="1000" name="Remark" id="Remark"></textarea>
                                                             </div>
                                                         </div>
@@ -1671,18 +1688,27 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="mb-4 pb-2 col-12 col-md-6">
+                                                                            <div class="mb-4 pb-2 col-12 col-md-4">
                                                                                 <div class="form-outline form-white">
                                                                                     <label class="form-label" for="form3Examplea3">築年月</label>
                                                                                     <input type="month" id="confirm_ConstYYYYMM"
                                                                                            class="form-control form-control-lg text-center cap-fon-form-w200" disabled />
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="mb-4 pb-2 col-12 col-md-6">
+                                                                            <div class="mb-4 pb-2 col-12 col-md-3">
                                                                                 <div class="form-outline form-white">
                                                                                     <label class="form-label" for="form3Examplea3">総戸数</label>
                                                                                     <input type="number" id="confirm_Rooms"
                                                                                            class="form-control form-control-lg text-center cap-fon-form-w150"
+                                                                                           maxlength="3" disabled />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="mb-4 pb-2 col-12 col-md-3">
+                                                                                <div class="form-outline form-white">
+                                                                                    <label class="form-label" for="form3Examplea3">階数</label>
+                                                                                    <input type="number"  id="confirm_Floors" 
+                                                                                           class="form-control form-control-lg text-center cap-fon-form-w150"
+                                                                                           oninput="javascript:if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                                                                            maxlength="3" disabled />
                                                                                 </div>
                                                                             </div>
