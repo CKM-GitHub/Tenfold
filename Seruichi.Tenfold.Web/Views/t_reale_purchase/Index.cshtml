@@ -66,14 +66,14 @@
                         <div class="mb-3 text-start">
                             <label for="ddlRange" class="form-label">範囲指定</label>
                             <select id="ddlRange" name="ddlRange" class="form-select mb-2">
-                                <option>登録日</option>
-                                <option>簡易査定日</option>
-                                <option>詳細査定日</option>
-                                <option>買取依頼日</option>
-                                <option>送客日</option>
-                                <option>成約日</option>
-                                <option>売主辞退日</option>
-                                <option>買主辞退日</option>
+                                <option value="登録日">登録日</option>
+                                <option value="簡易査定日">簡易査定日</option>
+                                <option value="詳細査定日">詳細査定日</option>
+                                <option value="買取依頼日">買取依頼日</option>
+                                <option value="送客日">送客日</option>
+                                <option value="成約日">成約日</option>
+                                <option value="売主辞退日">売主辞退日</option>
+                                <option value="買主辞退日">買主辞退日</option>
                             </select>
                             <label for="StartDate" class="form-label">開始日</label>
                             <span class="cap-errormsg-right" id="errorStartDate"></span>
@@ -114,143 +114,9 @@
     <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
         <main class="py-6 bg-surface-secondary">
             <div class="container-fluid">
-                <!-- Card stats -->
-                <div class="row g-6 mb-6">
-                    <div class="col-12">
-                        <div class="card shadow border-0">
-                            <div class="card-body ">
-                                <div class="justify-content-around align-items-center row">
-                                    <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
-                                        <div class="border-end">
-                                            <button type="button" class="btn btn-secondary me-2">戻る</button>
-                                        </div>
-                                        <h1 id="CompanyName" name="CompanyName" class="ps-2 h2 mb-0 ls-tight">不動産会社</h1>
-                                        <span class="ps-2 text-muted small align-self-end">管理</span>
-                                    </div>
-                                    <hr class="navbar-divider my-5 opacity-20">
-                                    <div class="align-items-center col-sm-6 col-lg-3  p-0 m-0 border-end">
-                                        <div class="p-md-2 p-1" id="info">
-                                            <div class="text-muted"><span class="text-success">有効会員</span></div>
-                                            <div class="text-muted text-nowrap">RealEstateCompanyName1</div>
-                                            <div class="text-muted"><h2>RealEstateCompanyName2</h2></div>
-                                            <div class="p-md-1 text-muted">
-                                                <span class="fa fa-id-card bg-light p-1 rounded-circle">R0000008</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex flex-column col-sm-6 col-lg-4  p-0 m-0 border-end" id="info">
-                                        <div class="p-md-1 text-muted cap-fon-form-w500 ">
-                                            <span class="fa fa-home bg-light p-1 rounded-circle" id="address" name="address"></span>
-                                            AddressAddressAddressAddressAddressAddressAddress
-                                        </div>
-                                        <div class="p-md-1 pt-sm-1 text-muted">
-                                            <span class="fa fa-phone bg-light p-1 rounded-circle"></span> 99-9999-9999
-                                        </div>
-                                        <div class="p-md-1 pt-sm-1 text-muted">
-                                            <span class="fa fa-fax bg-light p-1 ps-2 pe-2 rounded-circle"></span> 99-9999-9999
-                                        </div>
-                                        <div class="p-md-1 text-muted">
-                                            <span class="fa fa-envelope-o bg-light p-1 rounded-circle"></span>
-                                            AAAA999999@9999.aaaamail.com
-                                        </div>
-                                        <div class="p-md-1 pt-sm-1 text-muted">
-                                            <span class="fa fa-user bg-light p-1 rounded-circle"></span> MainStaffName
-                                        </div>
-                                    </div>
-                                    <div class="d-flex flex-column col-sm-6 col-lg-2 p-0 m-0 border-end" id="info">
-                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                            <div class="col">
-                                                <span class="fa fa-money bg-light p-1 rounded-circle"></span>
-                                                <span class="text-nowrap">査定数</span>
-                                            </div>
-                                            <div class="col text-end">
-                                                <span class="dark text-dark text-nowrap">99</span>
-                                            </div>
-                                        </div>
-                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                            <div class="col">
-                                                <span class="fa fa-calculator bg-light p-1 rounded-circle"></span>
-                                                <span class="text-nowrap">Top5</span>
-                                            </div>
-                                            <div class="col text-end"><span class="dark text-dark text-nowrap">99</span></div>
-                                        </div>
-                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                            <div class="col">
-                                                <span class="fa fa-thumbs-o-up bg-light p-1 rounded-circle"></span>
-                                                <span class="text-nowrap">Top1</span>
-                                            </div>
-                                            <div class="col text-end"><span class="dark text-dark text-nowrap">99</span></div>
-                                        </div>
-                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                            <div class="col">
-                                                <span class="fa fa-calendar bg-light p-1 rounded-circle">送客数</span>
-                                            </div>
-                                            <div class="col text-end"><span class="dark text-dark text-nowrap">99</span></div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex flex-column col-sm-6 col-lg-2 p-0 m-0" id="info">
-                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                            <div class="col p-md-0 m-md-0">
-                                                <span class="fa fa-calendar  bg-light p-1 rounded-circle">商談数</span>
-                                            </div>
-                                            <div class="col p-md-0 m-md-0 text-end"><span class="dark text-dark text-nowrap">99</span></div>
-                                        </div>
-                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                            <div class="col p-md-0 m-md-0">
-                                                <span class="fa fa-calendar  bg-light p-1 rounded-circle">成約数</span>
-                                            </div>
-                                            <div class="col p-md-0 m-md-0 text-end"><span class="dark text-dark text-nowrap">99</span></div>
-                                        </div>
-                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                            <div class="col p-md-0 m-md-0">
-                                                <span class="fa fa-calendar  bg-light p-1 rounded-circle">売主辞退数</span>
-                                            </div>
-                                            <div class="col p-md-0 m-md-0 text-end"><span class="dark text-dark text-nowrap">99</span></div>
-                                        </div>
-                                        <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                            <div class="col p-md-0 m-md-0">
-                                                <span class="fa fa-calendar  bg-light p-1 rounded-circle">買主辞退数</span>
-                                            </div>
-                                            <div class="col p-md-0 m-md-0 text-end"><span class="dark text-dark text-nowrap">99</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card stats -->
+                @Html.Partial("t_reale_Info")
 
-                <div class="card shadow border-0 mb-7">
-                    <div class="card-header pt-2 pb-2 ps-4 pe-4">
-                        <ul class="nav nav-tabs overflow-x border-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">買取管理</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">査定履歴</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">情報管理</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">プラン管理</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">請求管理</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">メモ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">アカウントフラグ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">送客契約</a>
-                            </li>
-                        </ul>
-                    </div>
-
+                <div class="card shadow border-0 mb-7" style="border-top-left-radius: unset;border-top-right-radius: unset;">
                     <div class="card-header d-md-inline-flex">
                         <h5 class="mb-0">買取管理</h5>
                         <span class="ps-md-5 text-muted text-sm" id="total_record_up"></span> <span style="color: red;" class="ps-md-5 text-sm" id="no_record"></span>
@@ -259,46 +125,23 @@
                         <table id="tblPurchaseDetails" class="table table-hover table-nowrap">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" class="text-end text-decoration-underline sort-by" ordercol-index="" style="width: 100px">No.</th>
-                                    <th scope="col" style="width: 150px" class="text-decoration-underline sort-by" ordercol-index="">ステータス</th>
-                                    <th scope="col" style="width: 100px" class="text-decoration-underline sort-by" ordercol-index="">査定ID</th>
-                                    <th scope="col" style="width: 200px" class="text-decoration-underline sort-by" ordercol-index="">物件（マンション、部屋番号）</th>
-                                    <th scope="col" style="width: 150px" class="text-decoration-underline sort-by" ordercol-index="">売主名</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="">登録日時</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="">簡易査定日時</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="">詳細査定日時</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="">買取依頼日時</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="">送客日時</th>
-                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by" ordercol-index="">成約日時</th>
-                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by" ordercol-index="">売主辞退日時</th>
-                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by" ordercol-index="">買主辞退日時</th>
+                                    <th scope="col" class="text-end text-decoration-underline sort-by" style="width: 100px">No.</th>
+                                    <th scope="col" style="width: 150px" class="text-decoration-underline sort-by" ordercol-index="2">ステータス</th>
+                                    <th scope="col" class="d-none">ステータス</th>
+                                    <th scope="col" style="width: 100px" class="text-decoration-underline sort-by">査定ID</th>
+                                    <th scope="col" style="width: 200px" class="text-decoration-underline sort-by">物件（マンション、部屋番号）</th>
+                                    <th scope="col" style="width: 150px" class="text-decoration-underline sort-by">売主名</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">登録日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">簡易査定日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">詳細査定日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">買取依頼日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">送客日時</th>
+                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by">成約日時</th>
+                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by">売主辞退日時</th>
+                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by">買主辞退日時</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-end"> 999 </td>
-                                    <td><label class="form-check-label" for="defaultCheck1"> <span class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white">買</span> 買取依頼</label> </td>
-                                    <td> A9999999 </td>
-                                    <td> <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal" data-bs-target="#mansion">Mansion name Room number</a> </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#">
-                                            Seller name Seller
-                                            name
-                                        </a>
-                                    </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" href="#">
-                                            YYYY/MM/DD hh:mm:ss
-                                        </a>
-                                    </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td> YYYY/MM/DD hh:mm:ss </td>
-                                    <td> </td>
-                                    <td>  </td>
-                                    <td> </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -1161,7 +1004,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" id="btnModalClose" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mansion">戻る</button>
+                            <button type="button" id="btnModalClose" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">戻る</button>
                         </div>
                     </div>
                 </div>

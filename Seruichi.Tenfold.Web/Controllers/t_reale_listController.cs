@@ -36,7 +36,7 @@ namespace Seruichi.Tenfold.Web.Controllers
                 return ErrorResult(validationResult);
             }
 
-            var dt = bl.getM_RealList(model);
+            var dt = bl.getM_RealListData(model);
             return OKResult(DataTableToJSON(dt));
         }
 
@@ -49,11 +49,12 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult InsertM_Reale_L_Log(t_reale_l_log_Model model)
+        public ActionResult InsertM_Mansion_L_Log(t_reale_l_log_Model model)
         {
+
             t_reale_listBL bl = new t_reale_listBL();
             model = Getlogdata(model);
-            bl.InsertM_Seller_L_Log(model);
+            bl.InsertM_Mansion_List_L_Log(model);
             return OKResult();
 
         }

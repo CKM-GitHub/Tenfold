@@ -11,7 +11,7 @@
     display: none;
 }
 
-input.cap-is-invalid:not([type="radio"]):not([type="checkbox"]), textarea.cap-is-invalid {
+input.cap-is-invalid:not([type="radio"]):not([type="checkbox"]) {
     border-color: #dc3545;
 }
 

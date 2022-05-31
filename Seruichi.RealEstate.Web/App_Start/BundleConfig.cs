@@ -112,8 +112,8 @@ namespace Seruichi.RealEstate.Web
                      ));
             bundles.Add(new ScriptBundle("~/bundles/r_staff").Include(
                     "~/Scripts/r_staff.js",
-                     "~/Content/scripts/sidebar.js",
-                      "~/Content/scripts/profileimg.js"));
+                     "~/Content/scripts/sidebar.js"));
+
         }
     }
 }
