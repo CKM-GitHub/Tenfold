@@ -72,7 +72,7 @@ function addEvents() {
             LoginName: null,
             IPAddress: null,
             Page: null,
-            Processing: 'Display',
+            ProcessKBN: 'Display',
             Remarks: $PrefNameSelect + ' ' + $RealEstateCom
         }
         common.callAjax(_url.InsertL_Log, modellog,
@@ -141,7 +141,7 @@ function addEvents() {
             LoginName: null,
             IPAddress: null,
             Page: null,
-            Processing: 'CSV',
+            ProcessKBN: 'CSV',
             Remarks: $PrefNameSelect + ' ' + $RealEstateCom
         }
         common.callAjax(_url.InsertL_Log, modellog,
@@ -174,7 +174,6 @@ function getM_RealList(model, $form) {
 }
 
 function Bind_tbody(result) {
-    debugger;
     let data = JSON.parse(result);
     let html = "";
     if (data.length > 0) {
@@ -207,7 +206,6 @@ function Bind_tbody(result) {
 }
 
 function l_logfunction(id) {
-    debugger;
     let model = {
         LogDateTime: null,
         LoginKBN: null,
@@ -216,8 +214,8 @@ function l_logfunction(id) {
         LoginName: null,
         IPAddress: null,
         Page: null,
-        Processing: null,
-        Remarks: null
+        ProcessKBN: 'link',
+        Remarks: 't_reale_purchase' + '&' +'RealeStateCD'
     }
     common.callAjax(_url.InsertL_Log, model,
         function (result) {
