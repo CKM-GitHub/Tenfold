@@ -1,53 +1,74 @@
-.cap-header{padding-top: 50px;padding-bottom: 50px;background: #6792da;}
-	.cap-error-icon{font-size: 15em;}
-	.cap-error-title{color: #c2c2c2;}
-	.cap-error-p{color: rgb(194,194,194);font-size: 13px;margin: 34px;}
+.cap-header {
+	padding-top: 50px;
+	padding-bottom: 50px;
+	background: #6792da;
+}
+
+.cap-error-icon {
+	font-size: 15em;
+}
+
+.cap-error-title {
+	color: #c2c2c2;
+}
+
+.cap-error-p {
+	color: rgb(194, 194, 194);
+	font-size: 13px;
+	margin: 34px;
+}
 
 
-	.cap-con-form{
-	max-width: 640px;width: 100%;
-	}
+.cap-con-form {
+	max-width: 640px;
+	width: 100%;
+}
 
-	.cap-fon-form-w60mw250
-	{
-		width: 60%;min-width: 250px;
-	}
+.cap-fon-form-w60mw250 {
+	width: 60%;
+	min-width: 250px;
+}
 
-	.cap-fon-form-w350{
-		max-width: 350px;
-	}
+.cap-fon-form-w350 {
+	max-width: 350px;
+}
 
-	.cap-fon-form-w200{
-		max-width: 200px;
-	}	
-	.cap-fon-form-w250{
-		max-width: 250px;
-	}
-	.cap-fon-form-w150{
-		max-width:150px;
-	}
-	.cap-icon-h1{
-		border-radius: 100px;border: 15px solid var(--bs-green);
-	}
+.cap-fon-form-w200 {
+	max-width: 200px;
+}
 
-	.cap-icon-i{
-		font-size: 150px;
-	}
+.cap-fon-form-w250 {
+	max-width: 250px;
+}
 
-	.cap-card-shadow{
-		box-shadow: 0px 0px 2px 0px var(--bs-gray-300);
-	}
+.cap-fon-form-w150 {
+	max-width: 150px;
+}
 
-	.cap-main {
-		min-height: 73vh;
-	}
-	.cap-btn-slg {
-		padding: 1.8rem 3.6rem;
-		font-size: 1.2rem;
-	}
+.cap-icon-h1 {
+	border-radius: 100px;
+	border: 15px solid var(--bs-green);
+}
 
-	  
-	
+.cap-icon-i {
+	font-size: 150px;
+}
+
+.cap-card-shadow {
+	box-shadow: 0px 0px 2px 0px var(--bs-gray-300);
+}
+
+.cap-main {
+	min-height: 73vh;
+}
+
+.cap-btn-slg {
+	padding: 1.8rem 3.6rem;
+	font-size: 1.2rem;
+}
+
+
+
 .toggle-button {
 	position: fixed;
 	top: 50%;
@@ -55,26 +76,27 @@
 	background-color: white;
 	padding: 10px 10px 10px 5px;
 	border-radius: 0px 10px 10px 0px;
-  }
-  
-  .toggle-button span{
-	  font-size: 2em;
+}
+
+.toggle-button span {
+	font-size: 2em;
 	font-weight: 500;
-  }
-  #wrapper {
+}
+
+#wrapper {
 	padding-left: 0;
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
 	transition: all 0.5s ease;
-  }
-  
-  #wrapper.toggled {
+}
+
+#wrapper.toggled {
 	padding-left: 250px;
-  }
-  
-  
-  #sidebar-wrapper {
+}
+
+
+#sidebar-wrapper {
 	z-index: 1000;
 	position: fixed;
 	left: 250px;
@@ -88,157 +110,169 @@
 	-moz-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;
 	transition: all 0.5s ease;
-  }
-  
-  #wrapper.toggled #sidebar-wrapper {
+}
+
+#wrapper.toggled #sidebar-wrapper {
 	width: 250px;
-  }
-  
-  #page-content-wrapper {
+}
+
+#page-content-wrapper {
 	width: 100%;
 	position: absolute;
 	padding: 15px;
-  }
-  
-  #wrapper.toggled #page-content-wrapper {
+	background-color: #f5f9fc !important;
+}
+
+#wrapper.toggled #page-content-wrapper {
 	position: absolute;
 	margin-right: -250px;
-  }
-  
-  .sidebar-nav {
+}
+
+.sidebar-nav {
 	position: absolute;
 	top: 0;
 	width: 250px;
 	margin: 0;
 	padding: 0;
 	list-style: none;
-  }
-  
-  .sidebar-nav li {
+}
+
+.sidebar-nav li {
 	text-indent: 20px;
 	line-height: 40px;
-  }
-  
-  .sidebar-nav li a {
+}
+
+.sidebar-nav li a {
 	display: block;
 	text-decoration: none;
 	color: #000000;
-  }
-  
-  .sidebar-nav li a:hover {
+}
+
+.sidebar-nav li a:hover {
 	text-decoration: none;
 	color: #fff;
-	background: rgba(255,255,255,0.2);
-  }
-  
-  .sidebar-nav li a:active,
-  .sidebar-nav li a:focus {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
 	text-decoration: none;
-  }
-  
-  .sidebar-nav > .sidebar-brand {
+}
+
+.sidebar-nav>.sidebar-brand {
 	height: 65px;
 	font-size: 18px;
 	line-height: 60px;
-  }
-  
-  .sidebar-nav > .sidebar-brand a {
+}
+
+.sidebar-nav>.sidebar-brand a {
 	color: #000000;
-  }
-  
-  .sidebar-nav > .sidebar-brand a:hover {
+}
+
+.sidebar-nav>.sidebar-brand a:hover {
 	color: #fff;
 	background: none;
-  }
-  
-  #menu-toggle {
+}
+
+#menu-toggle {
 	color: #333;
 	border: none;
 	border-radius: 0;
 	padding: 6px 8px;
-  }
-  
-  #menu-toggle:hover { 
+}
+
+#menu-toggle:hover {
 	background-color: #4286f4b7;
-  }
-  
-  .glyphicon-chevron-right {
+}
+
+.glyphicon-chevron-right {
 	transform: rotate(0deg);
 	transition: all 0.5s;
-  }
-	
-  #wrapper.toggled .glyphicon-chevron-right {
+}
+
+#wrapper.toggled .glyphicon-chevron-right {
 	transform: rotate(180deg);
-  }
-  
-  /* Scrollbar */
-  #sidebar-wrapper::-webkit-scrollbar {
+}
+
+/* Scrollbar */
+#sidebar-wrapper::-webkit-scrollbar {
 	width: 12px;
-  }
-   
-  #sidebar-wrapper::-webkit-scrollbar-thumb {
-	box-shadow: inset 0 0 3px rgba(0,0,0,0.5); 
-  }
-  
-  @media(min-width:768px) {
+}
+
+#sidebar-wrapper::-webkit-scrollbar-thumb {
+	box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+@media(min-width:768px) {
 	#wrapper {
-	  padding-left: 250px;
+		padding-left: 250px;
 	}
-  
+
 	#wrapper.toggled {
-	  padding-left: 0;
+		padding-left: 0;
 	}
-  
+
 	#sidebar-wrapper {
-	  width: 250px;
+		width: 250px;
 	}
-  
+
 	#wrapper.toggled #sidebar-wrapper {
-	  width: 0;
+		width: 0;
 	}
-  
+
 	#page-content-wrapper {
-	  padding: 20px;
-	  position: relative;
+		padding: 20px;
+		position: relative;
 	}
-  
+
 	#wrapper.toggled #page-content-wrapper {
-	  position: relative;
-	  margin-right: 0;
+		position: relative;
+		margin-right: 0;
 	}
-	
+
 	.glyphicon-chevron-right {
 		transform: rotate(180deg);
 	}
-	
+
 	#wrapper.toggled .glyphicon-chevron-right {
 		transform: rotate(0deg);
 	}
-  }
+}
 
 
-  ::-webkit-scrollbar {
+::-webkit-scrollbar {
 	height: 4px;
 	width: 5px;
 	background-color: #F5F5F5;
 	scrollbar-color: #4285F4 #F5F5F5;
-  }
-  
-  ::-webkit-scrollbar-thumb {
+}
+
+::-webkit-scrollbar-thumb {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
 	background-color: #4286f4b7;
-  }
+}
 
-  #sidebar-wrapper::-webkit-scrollbar {
+#sidebar-wrapper::-webkit-scrollbar {
 	height: 4px;
 	width: 5px;
 	background-color: #F5F5F5;
 	scrollbar-color: #4285F4 #F5F5F5;
-  }
-  
-  #sidebar-wrapper::-webkit-scrollbar-thumb {
+}
+
+#sidebar-wrapper::-webkit-scrollbar-thumb {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
 	background-color: #4286f4b7;
-  }
+}
+
+
+@media (min-width: 1200px) {
+	.modal-xxl {
+		max-width: 1500px!important;
+	}
+}
+
+.cap-planarea label{
+	min-width: 140px
+}
