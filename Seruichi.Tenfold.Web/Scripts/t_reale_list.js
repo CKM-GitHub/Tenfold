@@ -72,13 +72,13 @@ function addEvents() {
             LoginName: null,
             IPAddress: null,
             Page: null,
-            Processing: 'Display',
+            ProcessKBN: 'Display',
             Remarks: $PrefNameSelect + ' ' + $RealEstateCom
         }
         common.callAjax(_url.InsertL_Log, modellog,
             function (result) {
                 if (result && !result.isOK) {
-                    alert("Insert into L_log Successful");
+                    
                 }
             });
 
@@ -141,19 +141,19 @@ function addEvents() {
             LoginName: null,
             IPAddress: null,
             Page: null,
-            Processing: 'CSV',
+            ProcessKBN: 'CSV',
             Remarks: $PrefNameSelect + ' ' + $RealEstateCom
         }
         common.callAjax(_url.InsertL_Log, modellog,
             function (result) {
                 if (result && !result.isOK) {
-                    alert("Insert into L_log Successful");
+                   
                 }
             });
     });
 
     $('#btnSignUp').on('click', function () {
-        
+        alert("go to r_reale_new")
     });
 
 }
@@ -174,7 +174,6 @@ function getM_RealList(model, $form) {
 }
 
 function Bind_tbody(result) {
-    debugger;
     let data = JSON.parse(result);
     let html = "";
     if (data.length > 0) {
@@ -202,8 +201,6 @@ function Bind_tbody(result) {
         $('#no_record').text("表示可能データがありません");
     }
     $('#Datatable tbody').append(html);
-
-    sortTable.getSortingTable("Datatable");
 }
 
 function l_logfunction(id) {
@@ -211,12 +208,12 @@ function l_logfunction(id) {
         LogDateTime: null,
         LoginKBN: null,
         LoginID: null,
-        RealECD: null,
+        RealECD: id,
         LoginName: null,
         IPAddress: null,
         Page: null,
-        Processing: null,
-        Remarks: null
+        ProcessKBN: 'link',
+        Remarks: 't_reale_purchase' + '&' +'RealeStateCD'
     }
     common.callAjax(_url.InsertL_Log, model,
         function (result) {

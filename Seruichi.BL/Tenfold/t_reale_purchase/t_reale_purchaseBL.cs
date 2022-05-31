@@ -24,7 +24,7 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
             return validator.GetValidationResult();
         }
 
-        public DataTable get_t_reale_purchase_CompanyInfo(t_reale_purchaseModel model)
+        public DataTable get_t_reale_CompanyInfo(t_reale_purchaseModel model)
         {
             var sqlParams = new SqlParameter[]
             {
@@ -32,15 +32,12 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
             };
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_t_reale_purchase_get_CompanyInfo", sqlParams);
+            var dt = db.SelectDatatable("pr_t_get_CompanyInfo", sqlParams);
 
-            AESCryption crypt = new AESCryption();
-            string decryptionKey = StaticCache.GetDataCryptionKey();
-            var e = dt.AsEnumerable();
             return dt;
         }
 
-        public DataTable get_t_reale_purchase_CompanyCountingInfo(t_reale_purchaseModel model)
+        public DataTable get_t_reale_CompanyCountingInfo(t_reale_purchaseModel model)
         {
             var sqlParams = new SqlParameter[]
             {
@@ -48,11 +45,8 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
             };
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_t_reale_purchase_get_CompanyCountingInfo", sqlParams);
+            var dt = db.SelectDatatable("pr_t_get_CompanyCountingInfo", sqlParams);
 
-            AESCryption crypt = new AESCryption();
-            string decryptionKey = StaticCache.GetDataCryptionKey();
-            var e = dt.AsEnumerable();
             return dt;
         }
 
@@ -66,6 +60,7 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
                 new SqlParameter("@chk_Contract", SqlDbType.TinyInt){ Value = model.chk_Contract.ToByte(0) },
                 new SqlParameter("@chk_SellerDeclined", SqlDbType.TinyInt){ Value = model.chk_SellerDeclined.ToByte(0) },
                 new SqlParameter("@chk_BuyerDeclined", SqlDbType.TinyInt){ Value = model.chk_BuyerDeclined.ToByte(0) },
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull() },
                 new SqlParameter("@Range", SqlDbType.VarChar){ Value = model.Range.ToStringOrNull() },
                 new SqlParameter("@StartDate", SqlDbType.VarChar){ Value = model.StartDate.ToStringOrNull() },
                 new SqlParameter("@EndDate", SqlDbType.VarChar){ Value = model.EndDate.ToStringOrNull() }
@@ -77,6 +72,10 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
             AESCryption crypt = new AESCryption();
             string decryptionKey = StaticCache.GetDataCryptionKey();
             var e = dt.AsEnumerable();
+            foreach (DataRow row in dt.Rows)
+            {
+                row["売主名"] = crypt.DecryptFromBase64(row.Field<string>("売主名"), decryptionKey);
+            }
             return dt;
         }
 
@@ -113,13 +112,13 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
                 new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull() },
                 new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.LoginName.ToStringOrNull() },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress },
-                new SqlParameter("@PageID", SqlDbType.VarChar){ Value = model.Page },
+                new SqlParameter("@Page", SqlDbType.VarChar){ Value = model.Page },
                 new SqlParameter("@Processing", SqlDbType.VarChar){ Value = model.Processing },
                 new SqlParameter("@Remarks", SqlDbType.VarChar){ Value = model.Remarks },
              };
 
             DBAccess db = new DBAccess();
-            db.InsertUpdateDeleteData("pr_t_seller_mansion_list_Insert_L_Log", false, sqlParams);
+            db.InsertUpdateDeleteData("pr_Tenfold_Insert_L_Log", false, sqlParams);
         }
 
         public DataTable Get_Pills_Home(t_reale_purchaseModel model)

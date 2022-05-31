@@ -19,18 +19,18 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult get_t_reale_purchase_CompanyInfo(t_reale_purchaseModel model)
+        public ActionResult get_t_reale_CompanyInfo(t_reale_purchaseModel model)
         {
             t_reale_purchaseBL bl = new t_reale_purchaseBL();
-            var dt = bl.get_t_reale_purchase_CompanyInfo(model);
+            var dt = bl.get_t_reale_CompanyInfo(model);
             return OKResult(DataTableToJSON(dt));
         }
 
         [HttpPost]
-        public ActionResult get_t_reale_purchase_CompanyCountingInfo(t_reale_purchaseModel model)
+        public ActionResult get_t_reale_CompanyCountingInfo(t_reale_purchaseModel model)
         {
             t_reale_purchaseBL bl = new t_reale_purchaseBL();
-            var dt = bl.get_t_reale_purchase_CompanyCountingInfo(model);
+            var dt = bl.get_t_reale_CompanyCountingInfo(model);
             return OKResult(DataTableToJSON(dt));
         }
 
@@ -60,13 +60,9 @@ namespace Seruichi.Tenfold.Web.Controllers
         public ActionResult Insert_L_Log(t_reale_purchase_l_log_Model model)
         {
             t_reale_purchaseBL bl = new t_reale_purchaseBL();
-            model.LoginKBN = 3;
             model.LoginID = base.GetOperator();
-            model.RealECD = null;
-            model.LoginName = "";//bl.GetTenstaffNamebyTenstaffcd(model.LoginID);
+            model.LoginName = "";
             model.IPAddress = base.GetClientIP();
-            model.Page = model.LogStatus;
-            model.Processing = "link";
             bl.Insert_L_Log(model);
             return OKResult();
         }
