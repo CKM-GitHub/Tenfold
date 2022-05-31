@@ -153,7 +153,7 @@ function addEvents() {
     });
 
     $('#btnSignUp').on('click', function () {
-        
+        alert("go to r_reale_new")
     });
 
 }
@@ -201,8 +201,6 @@ function Bind_tbody(result) {
         $('#no_record').text("表示可能データがありません");
     }
     $('#Datatable tbody').append(html);
-
-    sortTable.getSortingTable("Datatable");
 }
 
 function l_logfunction(id) {
