@@ -78,7 +78,7 @@ function addEvents() {
         common.callAjax(_url.InsertL_Log, modellog,
             function (result) {
                 if (result && !result.isOK) {
-                    alert("Insert into L_log Successful");
+                    
                 }
             });
 
@@ -147,7 +147,7 @@ function addEvents() {
         common.callAjax(_url.InsertL_Log, modellog,
             function (result) {
                 if (result && !result.isOK) {
-                    alert("Insert into L_log Successful");
+                   
                 }
             });
     });
