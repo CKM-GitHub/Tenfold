@@ -268,6 +268,7 @@
     <Content Include="Views\t_reale_list\Index.cshtml" />
     <Content Include="Views\t_reale_purchase\Index.cshtml" />
     <Content Include="Views\t_mansion\Index.cshtml" />
+    <Content Include="Views\Shared\t_reale_Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

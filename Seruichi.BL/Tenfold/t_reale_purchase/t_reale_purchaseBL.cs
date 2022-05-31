@@ -32,7 +32,7 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
             };
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_t_reale_purchase_get_CompanyInfo", sqlParams);
+            var dt = db.SelectDatatable("pr_t_get_CompanyInfo", sqlParams);
 
             AESCryption crypt = new AESCryption();
             string decryptionKey = StaticCache.GetDataCryptionKey();
@@ -48,7 +48,7 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
             };
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_t_reale_purchase_get_CompanyCountingInfo", sqlParams);
+            var dt = db.SelectDatatable("pr_t_get_CompanyCountingInfo", sqlParams);
 
             AESCryption crypt = new AESCryption();
             string decryptionKey = StaticCache.GetDataCryptionKey();

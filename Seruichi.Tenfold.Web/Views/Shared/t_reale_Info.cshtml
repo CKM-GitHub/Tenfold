@@ -1,0 +1,131 @@
+﻿<!-- Card stats -->
+<div class="row g-6 mb-6">
+    <div class="col-12">
+        <div class="card shadow border-0">
+            <div class="card-body ">
+                <div class="justify-content-around align-items-center row">
+                    <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
+                        <div class="border-end">
+                            <button type="button" class="btn btn-secondary me-2">戻る</button>
+                        </div>
+                        <h1 class="ps-2 h2 mb-0 ls-tight">不動産会社</h1>
+                        <span class="ps-2 text-muted small align-self-end">管理</span>
+                    </div>
+                    <hr class="navbar-divider my-5 opacity-20">
+                    <div class="align-items-center col-sm-6 col-lg-3  p-0 m-0 border-end">
+                        <div class="p-md-2 p-1" id="info">
+                            <div class="text-muted"><span id="InvalidFLG" name="InvalidFLG" class="text-success">有効会員</span></div>
+                            <div id="REKana" name="REKana" class="text-muted text-nowrap"></div>
+                            <div class="text-muted"><h2 id="REName" name="REName"></h2></div>
+                            <div class="p-md-1 text-muted"><span id="RealECD" name="RealECD" class="fa fa-id-card bg-light p-1 rounded-circle"></span></div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column col-sm-6 col-lg-4  p-0 m-0 border-end" id="info">
+                        <div class="p-md-1 text-muted cap-fon-form-w500 ">
+                            <span class="fa fa-home bg-light p-1 rounded-circle" id="Address" name="Address"></span>
+                        </div>
+                        <div class="p-md-1 pt-sm-1 text-muted">
+                            <span class="fa fa-phone bg-light p-1 rounded-circle" id="HousePhone" name="HousePhone"></span>
+                        </div>
+                        <div class="p-md-1 pt-sm-1 text-muted">
+                            <span class="fa fa-fax bg-light p-1 ps-2 pe-2 rounded-circle" id="Fax" name="Fax"></span>
+                        </div>
+                        <div class="p-md-1 text-muted">
+                            <span class="fa fa-envelope-o bg-light p-1 rounded-circle" id="MailAddress" name="MailAddress"></span>
+                        </div>
+                        <div class="p-md-1 pt-sm-1 text-muted">
+                            <span class="fa fa-user bg-light p-1 rounded-circle" id="PICName" name="PICName"></span>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column col-sm-6 col-lg-2 p-0 m-0 border-end" id="info">
+                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                            <div class="col">
+                                <span class="fa fa-money bg-light p-1 rounded-circle"></span>
+                                <span class="text-nowrap">査定数</span>
+                            </div>
+                            <div class="col text-end"><span id="Constant" name="Constant" class="dark text-dark text-nowrap"></span></div>
+                        </div>
+                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                            <div class="col">
+                                <span class="fa fa-calculator bg-light p-1 rounded-circle"></span>
+                                <span class="text-nowrap">Top5</span>
+                            </div>
+                            <div class="col text-end"><span id="Top5" name="Top5" class="dark text-dark text-nowrap"></span></div>
+                        </div>
+                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                            <div class="col">
+                                <span class="fa fa-thumbs-o-up bg-light p-1 rounded-circle"></span>
+                                <span class="text-nowrap">Top1</span>
+                            </div>
+                            <div class="col text-end"><span id="Top1" name="Top1" class="dark text-dark text-nowrap"></span></div>
+                        </div>
+                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                            <div class="col">
+                                <span class="fa fa-calendar bg-light p-1 rounded-circle">送客数</span>
+                            </div>
+                            <div class="col text-end"><span id="Customers" name="Customers" class="dark text-dark text-nowrap"></span></div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column col-sm-6 col-lg-2 p-0 m-0" id="info">
+                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                            <div class="col p-md-0 m-md-0">
+                                <span class="fa fa-calendar  bg-light p-1 rounded-circle">商談数</span>
+                            </div>
+                            <div class="col p-md-0 m-md-0 text-end"><span id="Deals" name="Deals" class="dark text-dark text-nowrap"></span></div>
+                        </div>
+                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                            <div class="col p-md-0 m-md-0">
+                                <span class="fa fa-calendar  bg-light p-1 rounded-circle">成約数</span>
+                            </div>
+                            <div class="col p-md-0 m-md-0 text-end"><span id="Contracts" name="Contracts" class="dark text-dark text-nowrap">99</span></div>
+                        </div>
+                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                            <div class="col p-md-0 m-md-0">
+                                <span class="fa fa-calendar  bg-light p-1 rounded-circle">売主辞退数</span>
+                            </div>
+                            <div class="col p-md-0 m-md-0 text-end"><span id="Seller_Declines" name="Seller_Declines" class="dark text-dark text-nowrap">99</span></div>
+                        </div>
+                        <div class="p-md-1 text-muted w-100 row text-nowrap">
+                            <div class="col p-md-0 m-md-0">
+                                <span class="fa fa-calendar  bg-light p-1 rounded-circle">買主辞退数</span>
+                            </div>
+                            <div class="col p-md-0 m-md-0 text-end"><span id="Buyer_Declines" name="Buyer_Declines" class="dark text-dark text-nowrap">99</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Card stats -->
+
+<div class="card shadow border-0" style="border-bottom-left-radius: unset;border-bottom-right-radius: unset;">
+    <div class="card-header pt-2 pb-2 ps-4 pe-4">
+        <ul class="nav nav-tabs overflow-x border-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">買取管理</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">査定履歴</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">情報管理</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">プラン管理</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">請求管理</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">メモ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">アカウントフラグ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">送客契約</a>
+            </li>
+        </ul>
+    </div>
+</div>

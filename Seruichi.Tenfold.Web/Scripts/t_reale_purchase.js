@@ -95,7 +95,7 @@ function addEvents() {
         StartDate: $("#StartDate").val(),
         EndDate: $("#EndDate").val()
     };
-    get_purchase_Data(model, this);
+    //get_purchase_Data(model, this);
 
     sortTable.getSortingTable("tblPurchaseDetails");
 
