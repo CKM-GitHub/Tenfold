@@ -94,9 +94,9 @@ namespace Seruichi.Common
                 AddValidationResult(elementId, errorcd);
         }
 
-        public void CheckIsDoubleByte(string elementId, string inputText, int maxLength)
+        public void CheckIsDoubleByte(string elementId, string inputText, int maxByteLength)
         {
-            if (!validator.CheckIsDoubleByte(inputText, maxLength, out string errorcd))
+            if (!validator.CheckIsDoubleByte(inputText, maxByteLength, out string errorcd))
                 AddValidationResult(elementId, errorcd);
         }
 
