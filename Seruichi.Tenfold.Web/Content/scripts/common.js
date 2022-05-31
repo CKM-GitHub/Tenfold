@@ -739,7 +739,7 @@ const common = {
     },
 
     //to get Parameter Value from Url
-    getUrlParameter = function getUrlParameter(sParam) {
+    getUrlParameter : function getUrlParameter(sParam) {
         var sPageURL = window.location.search.substring(1),
             sURLVariables = sPageURL.split('&'),
             sParameterName,
@@ -752,5 +752,5 @@ const common = {
             }
         }
         return false;
-    },
+    }
 }
