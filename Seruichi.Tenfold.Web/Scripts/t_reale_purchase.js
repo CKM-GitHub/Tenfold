@@ -1,8 +1,8 @@
 ﻿const _url = {};
 $(function () {
     setValidation();
-    _url.get_t_reale_purchase_CompanyInfo = common.appPath + '/t_reale_purchase/get_t_reale_purchase_CompanyInfo';
-    _url.get_t_reale_purchase_CompanyCountingInfo = common.appPath + '/t_reale_purchase/get_t_reale_purchase_CompanyCountingInfo';
+    _url.get_t_reale_purchase_CompanyInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyInfo';
+    _url.get_t_reale_purchase_CompanyCountingInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyCountingInfo';
     _url.get_t_reale_purchase_DisplayData = common.appPath + '/t_reale_purchase/get_t_reale_purchase_DisplayData';
     _url.get_t_reale_purchase_CSVData = common.appPath + '/t_reale_purchase/get_t_reale_purchase_CSVData';
     _url.Insert_L_Log = common.appPath + '/t_reale_purchase/Insert_L_Log';
@@ -95,6 +95,9 @@ function addEvents() {
         StartDate: $("#StartDate").val(),
         EndDate: $("#EndDate").val()
     };
+
+    Bind_Company_Data(model, this);         //Bind Company Info Data to the title part of the page
+
     //get_purchase_Data(model, this);
 
     sortTable.getSortingTable("tblPurchaseDetails");
@@ -156,19 +159,9 @@ function addEvents() {
 }
 
 function get_purchase_Data(model, $form) {
-    common.callAjaxWithLoading(_url.get_t_reale_purchase_CompanyInfo, model, this, function (result) {
+    common.callAjaxWithLoading(_url.get_t_reale_purchase_DisplayData, model, this, function (result) {
         if (result && result.isOK) {
-            Bind_CompanyInfo(result.data);
-            common.callAjaxWithLoading(_url.get_t_reale_purchase_CompanyCountingInfo, model, this, function (result) {
-                if (result && result.isOK) {
-                    Bind_CountingInfo(result.data);
-                    common.callAjaxWithLoading(_url.get_t_reale_purchase_DisplayData, model, this, function (result) {
-                        if (result && result.isOK) {
-                            Bind_DisplayData(result.data);
-                        }
-                    })
-                }
-            })
+            Bind_DisplayData(result.data);
         }
 
         if (result && !result.isOK) {
@@ -184,35 +177,6 @@ function get_purchase_Data(model, $form) {
 
 function isEmptyOrSpaces(str) {
     return str === null || str.match(/^ *$/) !== null;
-}
-
-function Bind_CompanyInfo(result) {
-    var data = JSON.parse(result);
-    if (data.length > 0) {
-        $('#InvalidFLG').text(data[0]['InvalidFLG']);
-        $('#REKana').text(data[0]['REKana']);
-        $('#REName').text(data[0]['REName']);
-        $('#RealECD').text(data[0]['RealECD']);
-        $('#Address').text(data[0]['Address']);
-        $('#HousePhone').text(data[0]['HousePhone']);
-        $('#Fax').text(data[0]['Fax']);
-        $('#MailAddress').text(data[0]['MailAddress']);
-        $('#PICName').text(data[0]['PICName']);
-    }
-}
-
-function Bind_CountingInfo(result) {
-    var data = JSON.parse(result);
-    if (data.length > 0) {
-        $('#Constant').text(data[0]['査定数']);
-        $('#Top5').text(data[0]['Top5']);
-        $('#Top1').text(data[0]['Top1']);
-        $('#Customers').text(data[0]['送客数']);
-        $('#Deals').text(data[0]['商談数']);
-        $('#Contracts').text(data[0]['成約数']);
-        $('#Seller_Declines').text(data[0]['売主辞退数']);
-        $('#Buyer_Declines').text(data[0]['買主辞退数']);
-    }
 }
 
 function Bind_DisplayData(result) {

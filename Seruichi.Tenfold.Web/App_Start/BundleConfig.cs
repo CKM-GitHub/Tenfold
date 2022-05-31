@@ -77,6 +77,7 @@ namespace Seruichi.Tenfold.Web
 
             bundles.Add(new ScriptBundle("~/bundles/t_reale_purchase").Include(
                      "~/Scripts/t_reale_purchase.js",
+                     "~/Scripts/t_common.js",
                      "~/Content/scripts/table_header_sort.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/t_mansion").Include(
