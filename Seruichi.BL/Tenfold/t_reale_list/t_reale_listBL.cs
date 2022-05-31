@@ -35,14 +35,24 @@ namespace Seruichi.BL.Tenfold.t_reale_list
             return items;
         }
 
-        public DataTable getM_RealList(t_reale_listModel model)        {            var sqlParams = new SqlParameter[]             {                                new SqlParameter("@PrefNameSelect", SqlDbType.VarChar){ Value = model.PrefNameSelect.ToString() },                new SqlParameter("@RealEStateCom", SqlDbType.TinyInt){ Value = model.RealEStateCom.ToString() },                new SqlParameter("@EffectiveChk", SqlDbType.TinyInt){ Value = model.EffectiveChk.ToByte(0) },                new SqlParameter("@InValidCheck", SqlDbType.TinyInt){ Value = model.InValidCheck.ToByte(0) }                             };            DBAccess db = new DBAccess();            var dt = db.SelectDatatable("pr_t_reale_List_Select_M_RealEstate", sqlParams);            return dt;        }
+        public DataTable getM_RealListData(t_reale_listModel model)        {           
+                var sqlParams = new SqlParameter[]                {
+
+                new SqlParameter("@PrefNameSelect", SqlDbType.VarChar){ Value = model.PrefNameSelect.ToStringOrNull() },                new SqlParameter("@RealEStateCom", SqlDbType.VarChar){ Value = model.RealEStateCom.ToStringOrNull()},                new SqlParameter("@EffectiveChk", SqlDbType.TinyInt){ Value = model.EffectiveChk.ToByte(0) },                new SqlParameter("@InValidCheck", SqlDbType.TinyInt){ Value = model.InValidCheck.ToByte(0)}
+
+                };
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_reale_List_Select_M_RealEstate", sqlParams);
+            return dt;
+
+        }
         public async Task<DataTable> Generate_CSV(t_reale_listModel model)
         {
             return await Task.Run(() =>
             {
                 var sqlParams = new SqlParameter[]
              {
-                new SqlParameter("@PrefNameSelect", SqlDbType.VarChar){ Value = model.PrefNameSelect.ToString() },                new SqlParameter("@RealEStateCom", SqlDbType.TinyInt){ Value = model.RealEStateCom.ToString() },                new SqlParameter("@EffectiveChk", SqlDbType.TinyInt){ Value = model.EffectiveChk.ToByte(0) },                new SqlParameter("@InValidCheck", SqlDbType.TinyInt){ Value = model.InValidCheck.ToByte(0) }
+                new SqlParameter("@PrefNameSelect", SqlDbType.VarChar){ Value = model.PrefNameSelect.ToStringOrNull() },                new SqlParameter("@RealEStateCom", SqlDbType.TinyInt){ Value = model.RealEStateCom.ToStringOrNull() },                new SqlParameter("@EffectiveChk", SqlDbType.TinyInt){ Value = model.EffectiveChk.ToByte(0) },                new SqlParameter("@InValidCheck", SqlDbType.TinyInt){ Value = model.InValidCheck.ToByte(0) }
              };
 
                 DBAccess db = new DBAccess();
@@ -62,7 +72,7 @@ namespace Seruichi.BL.Tenfold.t_reale_list
             return validator.GetValidationResult();
         }
 
-        public void InsertM_Seller_L_Log(t_reale_l_log_Model model)
+        public void InsertM_Mansion_List_L_Log(t_reale_l_log_Model model)
         {
             var sqlParams = new SqlParameter[]
              {

@@ -15,8 +15,8 @@ namespace Seruichi.Tenfold.Web.Controllers
         // GET: t_admin
         public ActionResult Index()
         {
-            string user = GetOperator();
-            if (user != "admin")
+            string flg = GetSuperAdminFLG();
+            if (flg != "1")
             {
                 return RedirectToAction("Login", "t_login");
             }

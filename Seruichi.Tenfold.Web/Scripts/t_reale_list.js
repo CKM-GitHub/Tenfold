@@ -4,12 +4,11 @@ $(function () {
     setValidation();
     _url.getM_RealList = common.appPath + '/t_reale_list/getM_RealList';
     _url.generate_CSV = common.appPath + '/t_reale_list/Generate_CSV';
-    _url.InsertL_Log = common.appPath + '/t_reale_list/InsertM_Reale_L_Log';
+    _url.InsertL_Log = common.appPath + '/t_reale_list/InsertM_Mansion_L_Log';
     addEvents();
 });
 
 function setValidation() {
-
     $('#txtrealEstateCompany')
         .addvalidation_errorElement("#errorRealEstate")
         .addvalidation_maxlengthCheck(50)
@@ -19,7 +18,6 @@ function setValidation() {
         .addvalidation_checkboxlenght();
 }
 function addEvents() {
-
     common.bindValidationEvent('#form1', '');
 
     $('.StatusChk').on('change', function () {
@@ -63,7 +61,26 @@ function addEvents() {
                 EffectiveChk: $EffectiveChk,
                 InValidCheck: $InValidCheck
             };
+
         getM_RealList(model, $form);
+
+        let modellog = {
+            LogDateTime: null,
+            LoginKBN: null,
+            LoginID: null,
+            RealECD: null,
+            LoginName: null,
+            IPAddress: null,
+            Page: null,
+            ProcessKBN: 'Display',
+            Remarks: $PrefNameSelect + ' ' + $RealEstateCom
+        }
+        common.callAjax(_url.InsertL_Log, modellog,
+            function (result) {
+                if (result && !result.isOK) {
+                    alert("Insert into L_log Successful");
+                }
+            });
 
     });
 
@@ -114,7 +131,25 @@ function addEvents() {
                     $('#site-error-modal').modal('show');
                 }
             }
-        )
+        );
+
+        let modellog = {
+            LogDateTime: null,
+            LoginKBN: null,
+            LoginID: null,
+            RealECD: null,
+            LoginName: null,
+            IPAddress: null,
+            Page: null,
+            ProcessKBN: 'CSV',
+            Remarks: $PrefNameSelect + ' ' + $RealEstateCom
+        }
+        common.callAjax(_url.InsertL_Log, modellog,
+            function (result) {
+                if (result && !result.isOK) {
+                    alert("Insert into L_log Successful");
+                }
+            });
     });
 
     $('#btnSignUp').on('click', function () {
@@ -125,7 +160,6 @@ function addEvents() {
 function getM_RealList(model, $form) {
     common.callAjaxWithLoading(_url.getM_RealList, model, this, function (result) {
         if (result && result.isOK) {
-
             Bind_tbody(result.data);
         }
         if (result && !result.isOK) {
@@ -139,25 +173,56 @@ function getM_RealList(model, $form) {
     });
 }
 
+function Bind_tbody(result) {
+    let data = JSON.parse(result);
+    let html = "";
+    if (data.length > 0) {
+        for (var i = 0; i < data.length; i++) {
+            html += '<tr>\
+            <td class="text-end">' + (i + 1) + '</td>\
+            <td class="text-center">' + data[i]["無効"] + ' </td>\
+            <td>' + data[i]["不動産会社CD"] + '</td>\
+            <td> <a class="text-heading font-semibold text-decoration-underline" id='+ data[i]["不動産会社CD"] + ' href="#" onclick="l_logfunction(this.id)">' + data[i]["不動産会社"] + '</a></td>\
+            <td>' + data[i]["住所"] + ' </td>\
+            <td>' + data[i]["メイン担当者"] + ' </td>\
+            <td>' + data[i]["営業時間"] + ' </td >\
+            <td>' + data[i]["定休日"] + ' </td>\
+            <td>' + data[i]["電話"] + ' </td>\
+            </tr>'
+        }
+
+        $('#total_record').text("検索結果：" + data.length + "件")
+        $('#total_record_up').text("検索結果：" + data.length + "件")
+        $('#no_record').text("");
+    }
+    else {
+        $('#total_record').text("検索結果： 0件")
+        $('#total_record_up').text("検索結果： 0件")
+        $('#no_record').text("表示可能データがありません");
+    }
+    $('#Datatable tbody').append(html);
+
+    sortTable.getSortingTable("Datatable");
+}
+
 function l_logfunction(id) {
     let model = {
         LogDateTime: null,
         LoginKBN: null,
         LoginID: null,
-        RealECD: null,
+        RealECD: id,
         LoginName: null,
         IPAddress: null,
         Page: null,
-        Processing: null,
-        Remarks: null,
-        RealeCD: id
+        ProcessKBN: 'link',
+        Remarks: 't_reale_purchase' + '&' +'RealeStateCD'
     }
     common.callAjax(_url.InsertL_Log, model,
         function (result) {
             if (result && result.isOK) {
-                window.location.href = common.appPath + '/t_reale_purchase/Index?RealeCD=' + model.RealeCD;
+                //window.location.href = common.appPath + '/t_reale_profile/Index?RealeCD=' + model.RealeCD;
                 //window.location.href = '/t_seller_assessment/Index';
-                alert("https://www.seruichi.com/t_reale_purchase?RealeCD" + model.RealeCD);
+                alert("https://www.seruichi.com/t_reale_profile?RealeCD" + model.RealECD);
             }
             if (result && !result.isOK) {
 

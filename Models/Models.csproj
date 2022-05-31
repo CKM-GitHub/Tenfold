@@ -74,6 +74,7 @@
     <Compile Include="Tenfold\Login\t_loginModel.cs" />
     <Compile Include="Tenfold\t_admin\t_adminModel.cs" />
     <Compile Include="Tenfold\t_dashboard\t_dashboardModel.cs" />
+    <Compile Include="Tenfold\t_mansion\t_mansionModel.cs" />
     <Compile Include="Tenfold\t_mansion_list\t_mansion_listModel.cs" />
     <Compile Include="Tenfold\t_mansion_new\t_mansion_newModel.cs" />
     <Compile Include="Tenfold\t_reale_list\t_reale_listModel.cs" />

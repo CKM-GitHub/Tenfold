@@ -70,6 +70,7 @@
     <Compile Include="Tenfold\Login\t_loginBL.cs" />
     <Compile Include="Tenfold\t_admin\t_adminBL.cs" />
     <Compile Include="Tenfold\t_dashboard\t_dashboardBL.cs" />
+    <Compile Include="Tenfold\t_mansion\t_mansionBL.cs" />
     <Compile Include="Tenfold\t_mansion_list\t_mansion_listBL.cs" />
     <Compile Include="Tenfold\t_mansion_new\t_mansion_newBL.cs" />
     <Compile Include="Tenfold\t_reale_list\t_reale_listBL.cs" />

@@ -7,6 +7,7 @@ using Seruichi.BL.RealEstate.r_staff;
 using Models.RealEstate.r_login;
 using Models.RealEstate.r_staff;
 using System.Data;
+using Seruichi.BL;
 
 namespace Seruichi.RealEstate.Web.Controllers
 {
@@ -44,16 +45,49 @@ namespace Seruichi.RealEstate.Web.Controllers
         [HttpPost]
         public ActionResult Get_select_M_REStaff(r_staffModel model)
         {
+            string errorcd = "";
+            model.RealECD = base.GetOperator("RealECD");
             r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
             r_staffBL bl = new r_staffBL();
-            if(!bl.Get_select_M_REStaff(user.RealECD,model.REStaffCD))
+            if(!bl.Get_select_M_REStaff(model, out errorcd))
             {
-                return OKResult();
+                return ErrorMessageResult(errorcd);
+                
             }
-            else
+            return OKResult();
+        }
+
+        [HttpPost]
+        public ActionResult Save_M_REStaff(r_staffModel model)
+        {
+            r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
+            r_staffBL bl = new r_staffBL();
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
             {
-                return ErrorMessageResult("E314");
+                return ErrorResult(validationResult);
             }
+            model = Getlogdata(model);
+
+            if (!bl.Save_M_REStaff(model, out string errorcd))
+            {
+                return ErrorMessageResult(errorcd);
+            }
+            return OKResult();
+        }
+
+        public r_staffModel Getlogdata(r_staffModel model)
+        {
+            CommonBL bl = new CommonBL();
+            //model.LoginKBN = 2;
+            model.LoginID = base.GetOperator("UserID");
+            model.RealECD = base.GetOperator("RealECD");
+            model.LoginName = base.GetOperator("UserName");
+            model.IPAddress = base.GetClientIP();
+            //model.PageID = "r_staff";
+            //model.ProcessKBN = "INSERT/UPDATE";
+            //model.Remarks = "INS=" + " " + model.REStaffCD + " " + model.MansionName;
+            return model;
         }
     }
 }
