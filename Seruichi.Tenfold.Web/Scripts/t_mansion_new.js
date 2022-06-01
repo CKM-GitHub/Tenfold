@@ -11,6 +11,7 @@ $(function () {
     _url.getTownDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfTown;
     _url.getLineDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfLine;
     _url.getStationDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfStation;
+    _url.getNearestStations = common.appPath + commonApiUrl.getNearestStations;
     _url.checkZipCode = common.appPath + '/t_mansion_new/CheckZipCode';
     _url.getMansionListByMansionWord = common.appPath + '/t_mansion_new/GetMansionListByMansionWord';
     _url.checkAll = common.appPath + '/t_mansion_new/CheckAll';
@@ -21,8 +22,6 @@ $(function () {
 });
 
 function setValidation() {
-
-    
     //マンション名
     $('#MansionName')
         .addvalidation_errorElement("#errorName")
@@ -64,6 +63,12 @@ function setValidation() {
 
     $('#Rooms')
         .addvalidation_errorElement("#errorRooms")
+        .addvalidation_reqired(true)
+        .addvalidation_singlebyte_number();
+
+
+    $('#Floors')
+        .addvalidation_errorElement("#errorFloors")
         .addvalidation_reqired(true)
         .addvalidation_singlebyte_number();
 
@@ -264,22 +269,26 @@ function setValidation() {
     $('#Katakana')
         .addvalidation_errorElement("#errorKatakana")
         .addvalidation_reqired()
-        .addvalidation_doublebyte();
+        .addvalidation_doublebyte_kana();
 
     //ｶﾀｶﾅ
     $('#Katakana1')
         .addvalidation_errorElement("#errorKatakana1")
         .addvalidation_reqired()
-        .addvalidation_singlebyte();
+        .addvalidation_singlebyte_kana();
     //ひらがな
     $('#Hirakana')
         .addvalidation_errorElement("#errorHirakana")
         .addvalidation_reqired()
-        .addvalidation_doublebyte();
-   
+        .addvalidation_doublebyte_hira();
+
+    $('#Remark')
+        .addvalidation_errorElement("#errorRemark")
+        .addvalidation_singlebyte_doublebyte();
 
     $('#btnShowConfirmation')
         .addvalidation_errorElement("#errorProcess");
+
 }
 
 function addEvents() {
@@ -287,6 +296,7 @@ function addEvents() {
 
     //共通チェック処理
     common.bindValidationEvent('#form1', ':not(#ZipCode1,#ZipCode2)');
+
 
     $(function () { $("#form1").submit(function () { return false; }); });
 
@@ -370,6 +380,7 @@ function addEvents() {
         setTownList('add', $('#PrefCD').val(), $(this).val());
     });
 
+   
     ////路線選択
     $('.js-linecd').on('change', function () {
         const id = $(this).attr('id');
@@ -401,7 +412,7 @@ function addEvents() {
         })
     });
     $('.js-distance').on('click', function () {
-        debugger;
+       
         const id = $(this).attr('id');
         const suffix = id.slice(-2).replace('_', '');
         var newValue = parseInt(suffix) + 1;
@@ -488,10 +499,9 @@ function setScreenComfirm(data) {
     $('#confirm_Other5').text($('#Other5').text());
     $('#confirm_Other6').text($('#Other6').text());
     $('#confirm_Remark').text($('#Remark').text());
-
-    debugger;
+    $('#confirm_Floors').text($('#Floors').text());
     const stationContainer = $('.js-confirm-stationContainer');
-    // stationContainer.children().remove();   
+    stationContainer.children().remove();   
     let index = 0;
     $('.js-stationContainer .js-station').each(function () {
         const $this = $(this);
@@ -671,10 +681,5 @@ function getMansionWordList() {
     return array;
 }
 
-//function findRecords(e) {
-//    e.preventDefault();
-//    var formData = $(this).serialize(),
-//        fldMessage = $(this).find(".message-submit"),
-//        recordsBox = $("#user_records"),
 
 

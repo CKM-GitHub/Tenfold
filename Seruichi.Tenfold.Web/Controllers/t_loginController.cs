@@ -47,6 +47,7 @@ namespace Seruichi.Tenfold.Web.Controllers
             if (dt.Rows.Count > 0)
             {
                 model.TenStaffName = dt.Rows[0]["TenStaffName"].ToString();
+                model.SuperAdminFLG = dt.Rows[0]["SuperAdminFLG"].ToString();
                // FormsAuthentication.SetAuthCookie(model.TenStaffCD, false);
                 SessionAuthenticationHelper.CreateLoginUser(model);
                 return OKResult(new { UserID = model.TenStaffCD, UserName = model.TenStaffName });

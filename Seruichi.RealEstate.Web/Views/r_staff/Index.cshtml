@@ -8,6 +8,7 @@
     @Styles.Render("~/Content/r_staff")
 }
 
+
 <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
     <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
 
@@ -30,14 +31,15 @@
                     </div>
                     <ul class="nav nav-tabs mt-0 overflow-x border-0 ps-5">
                         <li class="nav-item"> <a href="#" class="nav-link active">担当者設定</a></li>
-                        <li class="nav-item"> <a href="#" class="nav-link font-regular">送客数上限</a></li>
-                        <li class="nav-item "> <a href="#" class="nav-link font-regular">プラン変更</a></li>
-                        <li class="nav-item"> <a href="#" class="nav-link font-regular">請求書</a></li>
-                        <li class="nav-item"> <a href="#" class="nav-link font-regular">集計</a></li>
-                        <li class="nav-item"> <a href="#" class="nav-link font-regular">倍率</a></li>
+                        <li class="nav-item"> <a href="@Url.Action("Index", "r_sendcus_max")" class="nav-link font-regular">送客数上限</a></li>
+                        <li class="nav-item"> <a href="@Url.Action("Index", "r_plan")" class="nav-link font-regular">プラン変更</a></li>
+                        <li class="nav-item"> <a href="@Url.Action("Index", "r_invoice")" class="nav-link font-regular">請求書</a></li>
+                        <li class="nav-item"> <a href="@Url.Action("Index", "r_statistic")" class="nav-link font-regular">集計</a></li>
+                        <li class="nav-item"> <a href="@Url.Action("Index", "r_pricedown")" class="nav-link font-regular">倍率</a></li>
                     </ul>
                 </div>
 
+                <form id="form1">
                 <div class="w-100">
                     <div class="card shadow border-0 mb-7">
                         <div class="card-header">
@@ -45,601 +47,334 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-12 col-md-6 pb-3">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5>&nbsp;</h5>
-                                        </div>
-                                        <div class="row gutters">
-                                            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                                                <div class="h-100">
-                                                    <div class="card-body">
-                                                        <div class="account-settings">
-                                                            <div class="profile-pic-wrapper pt-6">
-                                                                <div class="pic-holder">
+                                @{int i = 1;}
+                                @foreach (var Staff in ViewBag.StaffInfo)
+                                {
+                                    <div class="col-12 col-md-6 pb-3 update-data">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>&nbsp;</h5>
+                                            </div>
+                                            <div class="row gutters">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                                                    <div class="h-100">
+                                                        <div class="card-body">
+                                                            <div class="account-settings">
+                                                                <div class="profile-pic-wrapper pt-6">
+                                                                    <div class="pic-holder" id="newpic_holder_@i">
 
-                                                                    <img id="profilePic" class="pic" src="https://source.unsplash.com/random/150x150?Girls">
+                                                                        <img id="profilePic" class="pic" src="data:image/png;base64,@Staff.REFaceImage">
 
-                                                                    <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
-                                                                    <label for="newProfilePhoto" class="upload-file-block">
-                                                                        <div class="text-center">
-                                                                            <div class="mb-2">
-                                                                                <i class="fa fa-camera fa-2x"></i>
+                                                                        <Input class="uploadProfileInput" type="file" name="profile_pic_@i" id="newProfilePhoto_@i" accept="image/*" style="opacity: 0;" />
+                                                                        <label for="newProfilePhoto_@i" class="upload-file-block">
+                                                                            <div class="text-center">
+                                                                                <div class="mb-2">
+                                                                                    <i class="fa fa-camera fa-2x"></i>
+                                                                                </div>
+                                                                                <div class="text-uppercase">
+                                                                                    画像 <br /> アップロード
+                                                                                </div>
                                                                             </div>
-                                                                            <div class="text-uppercase">
-                                                                                画像 <br /> アップロード
-                                                                            </div>
-                                                                        </div>
-                                                                    </label>
+                                                                        </label>
+                                                                    </div>
+                                                                    <span class="cap-errormsg-right" id="CheckImageFileError_@i"></span>
+                                                                    @*<div class="alert alert-danger d-inline-block p-2 small" role="alert" id="CheckImageFileError"></div>*@
                                                                 </div>
-
-
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-                                                <div class="h-100">
-                                                    <div class="card-body">
-                                                        <div class="row gutters">
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="eMail">スタッフID</label>
-                                                                    <input type="text" class="form-control" value="A000001" readonly>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="fullName">表示名</label>
-                                                                    <input type="text" class="form-control" value="StaffName">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="phone">紹介</label>
-                                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="website">パスワード</label>
-                                                                    <input type="password" class="form-control" value="A000001">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row gutters">
-                                                            <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <label for="Street" class="me-md-3" class="me-md-3">権限設定</label>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken14" checked
-                                                                               value="option1">
-                                                                        <label class="form-check-label" for="kennken1">チャット</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken24" checked
-                                                                               value="option2">
-                                                                        <label class="form-check-label" for="kennken2">設定</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken34" checked
-                                                                               value="option3">
-                                                                        <label class="form-check-label" for="kennken3">プラン変更</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken44" checked
-                                                                               value="option4">
-                                                                        <label class="form-check-label" for="kennken3">請求書　</label>
+                                                <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                                                    <div class="h-100">
+                                                        <div class="card-body">
+                                                            <div class="row gutters">
+                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
+                                                                    <div class="form-group">
+                                                                        <label for="eMail">スタッフID</label>
+                                                                        <input type="text" class="form-control d-none" value="@Staff.RealECD" readonly id="RealECD_@i" name="RealECD_@i">
+                                                                        <input type="text" class="form-control" value="@Staff.REStaffCD" readonly id="REStaffCD_@i" name="REStaffCD_@i">
+                                                                        <span class="cap-errormsg-right" id="error_REStaffCD_@i"></span>
                                                                     </div>
                                                                 </div>
+                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
+                                                                    <div class="form-group">
+                                                                        <label for="fullName">表示名</label>
+                                                                        <input type="text" class="form-control" value="@Staff.REStaffName" id="REStaffName_@i" name="REStaffName_@i">
+                                                                        <span class="cap-errormsg-right" id="error_REStaffName_@i"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
+                                                                    <div class="form-group">
+                                                                        <label for="phone">紹介</label>
+                                                                        <textarea class="form-control" rows="3" value="@Staff.REIntroduction" id="REIntroduction_@i" name="REIntroduction_@i"></textarea>
+                                                                        <span class="cap-errormsg-right" id="error_REIntroduction_@i"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
+                                                                    <div class="form-group">
+                                                                        <label for="website">パスワード</label>
+                                                                        @if (ViewBag.IsAdmin == "admin" || ViewBag.IsAdmin == Staff.REStaffCD)
+                                                                        {
+                                                                            <input type="password" class="form-control" value="@Staff.REPassword" id="REPassword_@i" name="REPassword_@i">
+                                                                            <span class="cap-errormsg-right" id="error_REPassword_@i"></span>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <input type="password" class="form-control" value="@Staff.REPassword" readonly id="REPassword_@i" name="REPassword_@i">
+                                                                            <span class="cap-errormsg-right" id="error_REPassword_@i"></span>
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row gutters">
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="Street" class="me-md-3" class="me-md-3">権限設定</label>
+                                                                        <div class="form-check form-check-inline">
+                                                                            @if (ViewBag.IsAdmin == "admin")
+                                                                            {
+                                                                                if (Staff.PermissionChat == "1")
+                                                                                {
+                                                                                    <input class="form-check-input" type="checkbox" id="chkChat_@i" checked
+                                                                                           value="option1">
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <input class="form-check-input" type="checkbox" id="chkChat_@i"
+                                                                                           value="option1">
+                                                                                }
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                if (Staff.PermissionChat == "1")
+                                                                                {
+                                                                                    <input class="form-check-input" type="checkbox" id="chkChat_@i" checked
+                                                                                           value="option1" disabled="disabled">
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <input class="form-check-input" type="checkbox" id="chkChat_@i"
+                                                                                           value="option1" disabled="disabled">
+                                                                                }
+
+                                                                            }
+                                                                            <label class="form-check-label" for="kennken1">チャット</label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            @if (ViewBag.IsAdmin == "admin")
+                                                                            {
+                                                                                if (Staff.PermissionSetting == "1")
+                                                                                {
+                                                                                    <input class="form-check-input" type="checkbox" id="chkSetting_@i" checked
+                                                                                           value="option2">
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <input class="form-check-input" type="checkbox" id="chkSetting_@i"
+                                                                                           value="option2">
+                                                                                }
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                if (Staff.PermissionSetting == "1")
+                                                                                {
+                                                                                    <input class="form-check-input" type="checkbox" id="chkSetting_@i" checked
+                                                                                           value="option2" disabled="disabled">
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <input class="form-check-input" type="checkbox" id="chkSetting_@i"
+                                                                                           value="option2" disabled="disabled">
+                                                                                }
+
+                                                                            }
+                                                                            <label class="form-check-label" for="kennken2">設定</label>
+
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            @if (ViewBag.IsAdmin == "admin")
+                                                                            {
+                                                                                if (Staff.PermissionPlan == "1")
+                                                                                {
+                                                                                    <input class="form-check-input" type="checkbox" id="chkPlan_@i" checked
+                                                                                           value="option3">
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <input class="form-check-input" type="checkbox" id="chkPlan_@i"
+                                                                                           value="option3">
+                                                                                }
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                if (Staff.PermissionPlan == "1")
+                                                                                {
+                                                                                    <input class="form-check-input" type="checkbox" id="chkPlan_@i" checked
+                                                                                           value="option3" disabled="disabled">
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <input class="form-check-input" type="checkbox" id="chkPlan_@i"
+                                                                                           value="option3" disabled="disabled">
+                                                                                }
+                                                                            }
+                                                                            <label class="form-check-label" for="kennken3">プラン変更</label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            @if (ViewBag.IsAdmin == "admin")
+                                                                            {
+                                                                                if (Staff.PermissionInvoice == "1")
+                                                                                {
+                                                                                    <input class="form-check-input" type="checkbox" id="chkInvoice_@i" checked
+                                                                                           value="option4">
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <input class="form-check-input" type="checkbox" id="chkInvoice_@i"
+                                                                                           value="option4">
+                                                                                }
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                if (Staff.PermissionInvoice == "1")
+                                                                                {
+                                                                                    <input class="form-check-input" type="checkbox" id="chkInvoice_@i" checked
+                                                                                           value="option4" disabled="disabled">
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <input class="form-check-input" type="checkbox" id="chkInvoice_@i"
+                                                                                           value="option4" disabled="disabled">
+                                                                                }
+                                                                            }
+                                                                            <label class="form-check-label" for="kennken3">請求書　</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
                                                             </div>
 
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-12 col-md-6 pb-3">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5>&nbsp;</h5>
-                                        </div>
-                                        <div class="row gutters">
-                                            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                                                <div class="h-100">
-                                                    <div class="card-body">
-                                                        <div class="account-settings">
-                                                            <div class="profile-pic-wrapper pt-6">
-                                                                <div class="pic-holder">
+                                    { i++; }
+                                }
 
-                                                                    <img id="profilePic" class="pic" src="https://source.unsplash.com/random/150x150?beauty">
+                                @if (ViewBag.IsAdmin == "admin")
+                                {
+                                    <div class="col-12 col-md-6 pb-3">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>新規担当者登録</h5>
+                                            </div>
+                                            <div class="row gutters">
+                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                                                    <div class="h-100">
+                                                        <div class="card-body">
+                                                            <div class="account-settings">
+                                                                <div class="profile-pic-wrapper pt-6">
+                                                                    <div class="pic-holder bg-secondary" id="newpic_holder">
 
-                                                                    <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
-                                                                    <label for="newProfilePhoto" class="upload-file-block">
-                                                                        <div class="text-center">
-                                                                            <div class="mb-2">
-                                                                                <i class="fa fa-camera fa-2x"></i>
+                                                                        <img id="profilePicNew" class="pic" src="">
+                                                                        <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
+                                                                        <label for="newProfilePhoto" class="upload-file-block">
+                                                                            <div class="text-center">
+                                                                                <div class="mb-2">
+                                                                                    <i class="fa fa-camera fa-2x"></i>
+                                                                                </div>
+                                                                                <div class="text-uppercase">
+                                                                                    画像 <br /> アップロード
+                                                                                </div>
                                                                             </div>
-                                                                            <div class="text-uppercase">
-                                                                                画像 <br /> アップロード
-                                                                            </div>
-                                                                        </div>
-                                                                    </label>
+                                                                        </label>
+                                                                    </div>
+                                                                    <span class="cap-errormsg-right" id="CheckImageFileError"></span>
                                                                 </div>
-
-
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-                                                <div class="h-100">
-                                                    <div class="card-body">
-                                                        <div class="row gutters">
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="eMail">スタッフID</label>
-                                                                    <input type="text" class="form-control" value="A000001" readonly>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="fullName">表示名</label>
-                                                                    <input type="text" class="form-control" value="StaffName">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="phone">紹介</label>
-                                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="website">パスワード</label>
-                                                                    <input type="password" class="form-control" value="A000001">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row gutters">
-                                                            <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <label for="Street" class="me-md-3">権限設定</label>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken15" checked
-                                                                               value="option1">
-                                                                        <label class="form-check-label" for="kennken1">チャット</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken25"
-                                                                               value="option2">
-                                                                        <label class="form-check-label" for="kennken2">設定</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken35" checked
-                                                                               value="option3">
-                                                                        <label class="form-check-label" for="kennken3">プラン変更</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken45"
-                                                                               value="option4">
-                                                                        <label class="form-check-label" for="kennken3">請求書　</label>
+                                                <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                                                    <div class="h-100">
+                                                        <div class="card-body">
+                                                            <div class="row gutters">
+                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
+                                                                    <div class="form-group">
+                                                                        <label for="eMail">スタッフID</label>
+                                                                        <input type="text" class="form-control" value="" id="newStaffCD">
+                                                                        <span class="cap-errormsg-right" id="newStaffCDError"></span>
                                                                     </div>
                                                                 </div>
+                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
+                                                                    <div class="form-group">
+                                                                        <label for="fullName">表示名</label>
+                                                                        <input type="text" class="form-control" value="" id="newStaffName">
+                                                                        <span class="cap-errormsg-right" id="newStaffNameError"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
+                                                                    <div class="form-group">
+                                                                        <label for="phone">紹介</label>
+                                                                        <textarea class="form-control" id="newStaffIntro" rows="3"></textarea>
+                                                                        <span class="cap-errormsg-right" id="newStaffIntroError"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
+                                                                    <div class="form-group">
+                                                                        <label for="website">パスワード</label>
+                                                                        <input type="password" class="form-control" value="" id="newStaffpsw">
+                                                                        <span class="cap-errormsg-right" id="newStaffpswError"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row gutters">
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="Street" class="me-md-3">権限設定</label>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="checkbox" id="New_chkChat" checked
+                                                                                   value="option1">
+                                                                            <label class="form-check-label" for="kennken1">チャット</label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="checkbox" id="New_chkSetting"
+                                                                                   value="option2">
+                                                                            <label class="form-check-label" for="kennken2">設定</label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="checkbox" id="New_chkPlan"
+                                                                                   value="option3">
+                                                                            <label class="form-check-label" for="kennken3">プラン変更</label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="checkbox" id="New_chkInvoice"
+                                                                                   value="option4">
+                                                                            <label class="form-check-label" for="kennken3">請求書　</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
                                                             </div>
 
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-12 col-md-6 pb-3">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5>&nbsp;</h5>
-                                        </div>
-                                        <div class="row gutters">
-                                            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                                                <div class="h-100">
-                                                    <div class="card-body">
-                                                        <div class="account-settings">
-                                                            <div class="profile-pic-wrapper pt-6">
-                                                                <div class="pic-holder">
-
-                                                                    <img id="profilePic" class="pic" src="https://source.unsplash.com/random/150x150?Asian">
-
-                                                                    <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
-                                                                    <label for="newProfilePhoto" class="upload-file-block">
-                                                                        <div class="text-center">
-                                                                            <div class="mb-2">
-                                                                                <i class="fa fa-camera fa-2x"></i>
-                                                                            </div>
-                                                                            <div class="text-uppercase">
-                                                                                画像 <br /> アップロード
-                                                                            </div>
-                                                                        </div>
-                                                                    </label>
-                                                                </div>
-
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-                                                <div class="h-100">
-                                                    <div class="card-body">
-                                                        <div class="row gutters">
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="eMail">スタッフID</label>
-                                                                    <input type="text" class="form-control" value="A000001" readonly>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="fullName">表示名</label>
-                                                                    <input type="text" class="form-control" value="StaffName">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="phone">紹介</label>
-                                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="website">パスワード</label>
-                                                                    <input type="password" class="form-control" value="A000001">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row gutters">
-                                                            <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <label for="Street" class="me-md-3">権限設定</label>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken16" checked
-                                                                               value="option1">
-                                                                        <label class="form-check-label" for="kennken1">チャット</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken26"
-                                                                               value="option2">
-                                                                        <label class="form-check-label" for="kennken2">設定</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken36"
-                                                                               value="option3">
-                                                                        <label class="form-check-label" for="kennken3">プラン変更</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken46"
-                                                                               value="option4">
-                                                                        <label class="form-check-label" for="kennken3">請求書　</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 pb-3">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5>&nbsp;</h5>
-                                        </div>
-                                        <div class="row gutters">
-                                            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                                                <div class="h-100">
-                                                    <div class="card-body">
-                                                        <div class="account-settings">
-                                                            <div class="profile-pic-wrapper pt-6">
-                                                                <div class="pic-holder">
-                                                                    <img id="profilePic" class="pic" src="https://source.unsplash.com/random/150x150?Female">
-
-                                                                    <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
-                                                                    <label for="newProfilePhoto" class="upload-file-block">
-                                                                        <div class="text-center">
-                                                                            <div class="mb-2">
-                                                                                <i class="fa fa-camera fa-2x"></i>
-                                                                            </div>
-                                                                            <div class="text-uppercase">
-                                                                                画像 <br /> アップロード
-                                                                            </div>
-                                                                        </div>
-                                                                    </label>
-                                                                </div>
-
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-                                                <div class="h-100">
-                                                    <div class="card-body">
-                                                        <div class="row gutters">
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="eMail">スタッフID</label>
-                                                                    <input type="text" class="form-control" value="A000001" readonly>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="fullName">表示名</label>
-                                                                    <input type="text" class="form-control" value="StaffName">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="phone">紹介</label>
-                                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="website">パスワード</label>
-                                                                    <input type="password" class="form-control" value="A000001">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row gutters">
-                                                            <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <label for="Street" class="me-md-3">権限設定</label>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken11" checked
-                                                                               value="option1">
-                                                                        <label class="form-check-label" for="kennken1">チャット</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken21"
-                                                                               value="option2">
-                                                                        <label class="form-check-label" for="kennken2">設定</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken31"
-                                                                               value="option3">
-                                                                        <label class="form-check-label" for="kennken3">プラン変更</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken41"
-                                                                               value="option4">
-                                                                        <label class="form-check-label" for="kennken3">請求書　</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 pb-3">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5>&nbsp;</h5>
-                                        </div>
-                                        <div class="row gutters">
-                                            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                                                <div class="h-100">
-                                                    <div class="card-body">
-                                                        <div class="account-settings">
-                                                            <div class="profile-pic-wrapper pt-6">
-                                                                <div class="pic-holder">
-
-                                                                    <img id="profilePic" class="pic" src="https://source.unsplash.com/random/150x150?Male">
-
-                                                                    <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
-                                                                    <label for="newProfilePhoto" class="upload-file-block">
-                                                                        <div class="text-center">
-                                                                            <div class="mb-2">
-                                                                                <i class="fa fa-camera fa-2x"></i>
-                                                                            </div>
-                                                                            <div class="text-uppercase">
-                                                                                画像 <br /> アップロード
-                                                                            </div>
-                                                                        </div>
-                                                                    </label>
-                                                                </div>
-
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-                                                <div class="h-100">
-                                                    <div class="card-body">
-                                                        <div class="row gutters">
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="eMail">スタッフID</label>
-                                                                    <input type="text" class="form-control" value="A000001" readonly>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-
-                                                                <div class="form-group">
-                                                                    <label for="fullName">表示名</label>
-                                                                    <input type="text" class="form-control" value="StaffName">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="phone">紹介</label>
-                                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="website">パスワード</label>
-                                                                    <input type="password" class="form-control" value="A000001">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row gutters">
-                                                            <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <label for="Street" class="me-md-3">権限設定</label>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken12" checked
-                                                                               value="option1">
-                                                                        <label class="form-check-label" for="kennken1">チャット</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken22"
-                                                                               value="option2">
-                                                                        <label class="form-check-label" for="kennken2">設定</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken32"
-                                                                               value="option3">
-                                                                        <label class="form-check-label" for="kennken3">プラン変更</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken42"
-                                                                               value="option4">
-                                                                        <label class="form-check-label" for="kennken3">請求書　</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 pb-3">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5>新規担当者登録</h5>
-                                        </div>
-                                        <div class="row gutters">
-                                            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                                                <div class="h-100">
-                                                    <div class="card-body">
-                                                        <div class="account-settings">
-                                                            <div class="profile-pic-wrapper pt-6">
-                                                                <div class="pic-holder bg-secondary">
-
-
-                                                                    <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
-                                                                    <label for="newProfilePhoto" class="upload-file-block">
-                                                                        <div class="text-center">
-                                                                            <div class="mb-2">
-                                                                                <i class="fa fa-camera fa-2x"></i>
-                                                                            </div>
-                                                                            <div class="text-uppercase">
-                                                                                画像 <br /> アップロード
-                                                                            </div>
-                                                                        </div>
-                                                                    </label>
-                                                                </div>
-
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-                                                <div class="h-100">
-                                                    <div class="card-body">
-                                                        <div class="row gutters">
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="eMail">スタッフID</label>
-                                                                    <input type="text" class="form-control" value="">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="fullName">表示名</label>
-                                                                    <input type="text" class="form-control" value="">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="phone">紹介</label>
-                                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                <div class="form-group">
-                                                                    <label for="website">パスワード</label>
-                                                                    <input type="password" class="form-control" value="">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row gutters">
-                                                            <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <label for="Street" class="me-md-3">権限設定</label>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken13" checked
-                                                                               value="option1">
-                                                                        <label class="form-check-label" for="kennken1">チャット</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken23"
-                                                                               value="option2">
-                                                                        <label class="form-check-label" for="kennken2">設定</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken33"
-                                                                               value="option3">
-                                                                        <label class="form-check-label" for="kennken3">プラン変更</label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox" id="kennken43"
-                                                                               value="option4">
-                                                                        <label class="form-check-label" for="kennken3">請求書　</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                }
                             </div>
                         </div>
                         <div class="card-footer">
                             <div class="text-right mt-3 float-end">
-                                <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#modal-changesave">
+                                <button type="button" class="btn btn-lg btn-primary"
+                                         id="btnSaveChange">
                                     変更保存
                                 </button>
+                                <span class="cap-errormsg-right" id="btnSaveChangeError"></span>
                                 <button type="button" class="btn btn-lg btn-default" data-bs-toggle="modal"
                                         data-bs-target="#modal-changecal">
                                     取消
@@ -649,10 +384,7 @@
                     </div>
 
                 </div>
-
-
-
-
+                </form>
             </div>
 
             <!-- 変更保存 -->
@@ -679,7 +411,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#modal-changeok">
+                                    data-bs-target="#modal-changeok" id="btnOKChange">
                                 保存
                             </button><button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
                         </div>

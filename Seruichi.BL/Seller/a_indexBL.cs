@@ -22,7 +22,7 @@ namespace Seruichi.BL
             validator.CheckSelectionRequired("PrefCD", model.PrefCD);
             //マンション名
             validator.CheckRequired("MansionName", model.MansionName);
-            validator.CheckIsDoubleByte("MansionName", model.MansionName, 50);
+            validator.CheckIsDoubleByte("MansionName", model.MansionName, 100);
             //市区町村
             validator.CheckSelectionRequired("CityCD", model.CityCD);
             //町域
@@ -81,6 +81,7 @@ namespace Seruichi.BL
             //間取り
             validator.CheckRequiredNumber("FloorType", model.FloorType, true);
             validator.CheckIsNumeric("FloorType", model.FloorType, 2, 0);
+            validator.CheckSelectionRequired("FloorType2", model.FloorType2);
             //バス・トイレ
             validator.CheckSelectionRequired("BathKBN", model.BathKBN);
             //土地・権利
@@ -99,11 +100,13 @@ namespace Seruichi.BL
             validator.CheckRequiredNumber("RepairFee", model.RepairFee, false);
             validator.CheckIsNumeric("RepairFee", model.RepairFee, 9, 0);
             //その他費用
-            validator.CheckRequiredNumber("ExtraFee", model.ExtraFee, false);
+            //validator.CheckRequiredNumber("ExtraFee", model.ExtraFee, false);
             validator.CheckIsNumeric("ExtraFee", model.ExtraFee, 9, 0);
             //固定資産税
             validator.CheckRequiredNumber("PropertyTax", model.PropertyTax, false);
             validator.CheckIsNumeric("PropertyTax", model.PropertyTax, 9, 0);
+            //売却希望時期
+            validator.CheckSelectionRequired("DesiredTime", model.DesiredTime);
 
             if (validator.IsValid)
             {
@@ -277,7 +280,9 @@ namespace Seruichi.BL
                 new SqlParameter("@BalconyKBN", SqlDbType.TinyInt){ Value = model.BalconyKBN.ToByte(0) },
                 new SqlParameter("@BalconyArea", SqlDbType.Decimal){ Value = model.BalconyArea.ToDecimal(0) },
                 new SqlParameter("@Direction", SqlDbType.TinyInt){ Value = model.Direction.ToByte(0) },
-                new SqlParameter("@FloorType", SqlDbType.Int){ Value = model.FloorType.ToInt32(0) },
+                new SqlParameter("@FloorType", SqlDbType.Int){ Value = model.FloorType.ToInt32(0) + model.AdditionalRooms.ToInt32(0) },
+                new SqlParameter("@FloorType1", SqlDbType.Int){ Value = model.FloorType.ToInt32(0) },
+                new SqlParameter("@FloorType2", SqlDbType.TinyInt){ Value = model.FloorType2.ToByte(0) },
                 new SqlParameter("@BathKBN", SqlDbType.TinyInt){ Value = model.BathKBN.ToByte(0) },
                 new SqlParameter("@RightKBN", SqlDbType.TinyInt){ Value = model.RightKBN.ToByte(0) },
                 new SqlParameter("@CurrentKBN", SqlDbType.TinyInt){ Value = model.CurrentKBN.ToByte(0) },

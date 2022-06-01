@@ -12,5 +12,6 @@ namespace Models
         public string UserID { get; set; }
         public string UserName { get; set; }
         public string VerificationToken { get; set; }
+        public string SuperAdminFLG { get; set; }
     }
 }

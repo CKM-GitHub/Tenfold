@@ -32,6 +32,8 @@ CREATE PROCEDURE [dbo].[pr_a_index_Insert_SellerMansionData]
     ,@BalconyArea               decimal(5,2)
     ,@Direction                 tinyint
     ,@FloorType                 int
+    ,@FloorType1                int
+    ,@FloorType2                tinyint
     ,@BathKBN                   tinyint
     ,@RightKBN                  tinyint
     ,@CurrentKBN                tinyint
@@ -114,6 +116,8 @@ BEGIN
         ,BalconyArea
         ,Direction
         ,FloorType
+        ,FloorType1
+        ,FloorType2
         ,BathKBN
         ,RightKBN
         ,RightKBNChangeFLG
@@ -171,6 +175,8 @@ BEGIN
         ,@BalconyArea
         ,@Direction
         ,@FloorType
+        ,@FloorType1
+        ,@FloorType2
         ,@BathKBN
         ,@RightKBN
         ,@RightKBNChangeFLG

@@ -320,13 +320,13 @@ namespace Seruichi.Common
             return true;
         }
 
-        public bool CheckIsDoubleByte(string inputText, int maxLength, out string errorcd)
+        public bool CheckIsDoubleByte(string inputText, int maxByteLength, out string errorcd)
         {
             errorcd = "";
 
             if (string.IsNullOrEmpty(inputText)) return true;
 
-            if (!CheckByteCount(inputText, maxLength, out errorcd, out string dummy))
+            if (!CheckByteCount(inputText, maxByteLength, out errorcd, out string dummy))
             {
                 return false;
             }

@@ -28,13 +28,14 @@
             <li>
                 <div class="text-center px-xl-3">
                     <div class="mb-3 text-start">
-                        <label for="disabledSelect" class="form-label">会員状態</label>
+                        <label for="StatusChk" class="form-label">会員状態</label>
+                        <span class="cap-errormsg-right" id="errorStatusChkLenght"></span>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="chkEffective" name="chkEffective"
+                            <input class="StatusChk form-check-input" type="checkbox" value="1" id="chkEffective" name="chkEffective"
                                    checked> <label class="form-check-label" for="defaultCheck1"> 有効会員 </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="chkInvalid" name="chkInvalid"
+                            <input class="StatusChk form-check-input" type="checkbox" value="1" id="chkInvalid" name="chkInvalid"
                                    checked> <label class="form-check-label" for="defaultCheck1"> 無効会員 </label>
                         </div>
                     </div>

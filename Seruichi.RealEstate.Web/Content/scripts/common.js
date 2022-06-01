@@ -29,10 +29,12 @@ const messageConst = {
     E207: 'この情報での登録はありません',
 
     E303: '検索条件は必ずひとつ以上指定してください',
+    E304: '画像ファイルを指定してください',
     E310: '会社IDが入力されていません',
     E311: '会社IDが未登録です',
     E312: 'スタッフIDが入力されていません',
     E313: 'スタッフIDが未入力です。',
+    E314: '入力されたスタッフIDは登録済です',
 }
 
 const commonApiUrl = {
@@ -526,7 +528,16 @@ const common = {
 
             if (isMinlengthCheck) {
                 const minLength = $ctrl.data('mindigits');
-                if (minLength) {
+                if (minLength == 8 && $("#newStaffpsw").val() != "")
+                {
+                    const byteLength = inputValue.length;
+                    if (byteLength < parseInt(minLength)) {
+                        $ctrl.showError(this.getMessage('E110'));
+                        return;
+                    }
+                }
+                else
+                {
                     const byteLength = inputValue.length;
                     if (byteLength < parseInt(minLength)) {
                         $ctrl.showError(this.getMessage('E105'));

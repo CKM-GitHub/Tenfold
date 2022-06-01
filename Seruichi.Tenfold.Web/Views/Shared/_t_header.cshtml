@@ -20,10 +20,13 @@
                         管理
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item shadow-hover text-underline-hover" href="#">不動産会社</a>
+                        <a class="dropdown-item shadow-hover text-underline-hover" id="t_reale_list" href="@Url.Action("Index", "t_reale_list")">不動産会社</a>
                         <a class="dropdown-item shadow-hover text-underline-hover" id="t_seller_list" href="@Url.Action("Index", "t_seller_list")">売主</a>
                         <a class="dropdown-item shadow-hover text-underline-hover" id="t_seller_mansion" href="@Url.Action("Index", "t_seller_mansion")">物件(部屋)</a>
-                        <a class="dropdown-item shadow-hover text-underline-hover" id="t_admin" href="@Url.Action("Index", "t_admin")">管理者</a>
+                        @if (@SessionAuthenticationHelper.GetSuperAdminFLG() == "1")
+                        {
+                            <a class="dropdown-item shadow-hover text-underline-hover" id="t_admin" href="@Url.Action("Index", "t_admin")">管理者</a>
+                        }
                         <a class="dropdown-item shadow-hover text-underline-hover" id="t_mansion_list" href="@Url.Action("Index", "t_mansion_list")">マンション</a>
                         <a class="dropdown-item shadow-hover text-underline-hover" href="#">集計</a>
                     </div>
