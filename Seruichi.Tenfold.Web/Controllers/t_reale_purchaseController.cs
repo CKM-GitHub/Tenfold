@@ -76,26 +76,34 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Get_Pills_Home(t_reale_purchaseModel model)
+        public ActionResult get_Modal_HomeData(t_reale_purchaseModel model)
         {
             t_reale_purchaseBL bl = new t_reale_purchaseBL();
-            var dt = bl.Get_Pills_Home(model);
+            var dt = bl.get_Modal_HomeData(model);
             return OKResult(DataTableToJSON(dt));
         }
 
         [HttpPost]
-        public ActionResult Get_Pills_Profile(t_reale_purchaseModel model)
+        public ActionResult get_Modal_ProfileData(t_reale_purchaseModel model)
         {
             t_reale_purchaseBL bl = new t_reale_purchaseBL();
-            var dt = bl.Get_Pills_Profile(model);
+            var dt = bl.get_Modal_ProfileData(model);
             return OKResult(DataTableToJSON(dt));
         }
 
         [HttpPost]
-        public ActionResult Get_Pills_Contact(t_reale_purchaseModel model)
+        public ActionResult get_Modal_ContactData(t_reale_purchaseModel model)
         {
             t_reale_purchaseBL bl = new t_reale_purchaseBL();
-            var dt = bl.Get_Pills_Contact(model);
+            var dt = bl.get_Modal_ContactData(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult get_Modal_DetailData(t_reale_purchaseModel model)
+        {
+            t_reale_purchaseBL bl = new t_reale_purchaseBL();
+            var dt = bl.get_Modal_DetailData(model);
             return OKResult(DataTableToJSON(dt));
         }
     }
