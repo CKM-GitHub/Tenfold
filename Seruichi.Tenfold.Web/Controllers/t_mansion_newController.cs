@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using Models;
 using Seruichi.BL;
 using Seruichi.Common;
-using Models;
-using Seruichi.BL.Tenfold.t_mansion_new;
-using Models.Tenfold.t_mansion_new;
+using System.Collections.Generic;
+using System.Web;
+using System.Web.Mvc;
 
 namespace Seruichi.Tenfold.Web.Controllers
 {
