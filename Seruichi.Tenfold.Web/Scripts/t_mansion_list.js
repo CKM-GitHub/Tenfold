@@ -404,8 +404,8 @@ function l_logfunction(id) {
     common.callAjax(_url.InsertL_Log, model,
         function (result) {
             if (result && result.isOK) {
-                alert("go to t_mansion")
-                //window.location.href = common.appPath + '/t_mansion/Index?MansionCD=' + model.MansionCD;              
+               // alert("go to t_mansion")
+                window.location.href = common.appPath + '/t_mansion/Index?MansionCD=' + model.MansionCD;              
             }
             if (result && !result.isOK) {
 
