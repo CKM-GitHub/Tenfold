@@ -61,7 +61,7 @@
                                                         <div class="card-body">
                                                             <div class="account-settings">
                                                                 <div class="profile-pic-wrapper pt-6">
-                                                                    <div class="pic-holder">
+                                                                    <div class="pic-holder" id="newpic_holder_@i">
 
                                                                         <img id="profilePic" class="pic" src="data:image/png;base64,@Staff.REFaceImage">
 
@@ -91,6 +91,7 @@
                                                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
                                                                     <div class="form-group">
                                                                         <label for="eMail">スタッフID</label>
+                                                                        <input type="text" class="form-control d-none" value="@Staff.RealECD" readonly id="RealECD_@i" name="RealECD_@i">
                                                                         <input type="text" class="form-control" value="@Staff.REStaffCD" readonly id="REStaffCD_@i" name="REStaffCD_@i">
                                                                         <span class="cap-errormsg-right" id="error_REStaffCD_@i"></span>
                                                                     </div>
@@ -275,9 +276,9 @@
                                                         <div class="card-body">
                                                             <div class="account-settings">
                                                                 <div class="profile-pic-wrapper pt-6">
-                                                                    <div class="pic-holder bg-secondary">
+                                                                    <div class="pic-holder bg-secondary" id="newpic_holder">
 
-                                                                        <img id="profilePic" class="pic" src="">
+                                                                        <img id="profilePicNew" class="pic" src="">
                                                                         <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
                                                                         <label for="newProfilePhoto" class="upload-file-block">
                                                                             <div class="text-center">

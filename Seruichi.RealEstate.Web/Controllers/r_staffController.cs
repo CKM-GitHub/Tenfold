@@ -27,6 +27,7 @@ namespace Seruichi.RealEstate.Web.Controllers
             StaffList = (from DataRow dr in dt.Rows
                                 select new r_staffModel()
                                 {
+                                    RealECD   = dr["RealECD"].ToString(),
                                     REFaceImage = dr["REFaceImage"].ToString(),
                                     REStaffCD = dr["REStaffCD"].ToString(),
                                     REStaffName = dr["REStaffName"].ToString(),

@@ -23,7 +23,7 @@ namespace Models.RealEstate.r_staff
 
     public class Update_r_staffModel
     {
-       
+        public string RealECD { get; set; }
         public string REFaceImage { get; set; }
         public string REStaffCD { get; set; }
         public string REStaffName { get; set; }
@@ -34,5 +34,6 @@ namespace Models.RealEstate.r_staff
         public string PermissionPlan { get; set; }
         public string PermissionInvoice { get; set; }
     }
+
 
 }

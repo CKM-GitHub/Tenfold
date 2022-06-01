@@ -106,12 +106,12 @@ namespace Seruichi.BL.RealEstate.r_staff
                 new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull()},
                 new SqlParameter("@REStaffCD", SqlDbType.VarChar){ Value = model.REStaffCD.ToStringOrNull() },
                 new SqlParameter("@REPassword", SqlDbType.VarChar){ Value = model.REPassword.ToStringOrNull() },
-                new SqlParameter("@REStaffName", SqlDbType.TinyInt){ Value =  model.REStaffName.ToStringOrNull() },
-                new SqlParameter("@REIntroduction", SqlDbType.TinyInt){ Value =  model.REIntroduction.ToStringOrNull() },
-                new SqlParameter("@PermissionChat", SqlDbType.TinyInt){ Value =  model.PermissionChat.ToStringOrNull() },
-                new SqlParameter("@PermissionSetting", SqlDbType.TinyInt){ Value =  model.PermissionSetting.ToStringOrNull() },
-                new SqlParameter("@PermissionPlan", SqlDbType.TinyInt){ Value =  model.PermissionPlan.ToStringOrNull() },
-                new SqlParameter("@PermissionInvoice", SqlDbType.TinyInt){ Value =  model.PermissionInvoice.ToStringOrNull() },
+                new SqlParameter("@REStaffName", SqlDbType.VarChar){ Value =  model.REStaffName.ToStringOrNull() },
+                new SqlParameter("@REIntroduction", SqlDbType.VarChar){ Value =  model.REIntroduction.ToStringOrNull() },
+                new SqlParameter("@PermissionChat", SqlDbType.TinyInt){ Value =  model.PermissionChat.ToByte() },
+                new SqlParameter("@PermissionSetting", SqlDbType.TinyInt){ Value =  model.PermissionSetting.ToByte() },
+                new SqlParameter("@PermissionPlan", SqlDbType.TinyInt){ Value =  model.PermissionPlan.ToByte() },
+                new SqlParameter("@PermissionInvoice", SqlDbType.TinyInt){ Value =  model.PermissionInvoice.ToByte() },
                 new SqlParameter("@LoginName", SqlDbType.VarChar){ Value =   model.LoginName.ToStringOrNull() },
                 new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.LoginID },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value =  model.IPAddress },
@@ -125,9 +125,15 @@ namespace Seruichi.BL.RealEstate.r_staff
                 DBAccess db = new DBAccess();
                 return db.InsertUpdateDeleteData("pr_r_staff_Insert_M_REStaff", false, sqlParams);
             }
-            catch (ExclusionException)
+            //catch (ExclusionException)
+            //{
+            //    //msgid = "S004"; //他端末エラー
+            //    return false;
+            //}
+
+            catch (Exception ex)
             {
-                //msgid = "S004"; //他端末エラー
+                string str = ex.ToString();
                 return false;
             }
         }

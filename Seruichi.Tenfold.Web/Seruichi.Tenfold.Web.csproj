@@ -143,6 +143,7 @@
     <Compile Include="Controllers\t_loginController.cs" />
     <Compile Include="Controllers\t_mansionController.cs" />
     <Compile Include="Controllers\t_mansion_listController.cs" />
+    <Compile Include="Controllers\t_reale_asmhisController.cs" />
     <Compile Include="Controllers\t_reale_listController.cs" />
     <Compile Include="Controllers\t_reale_purchaseController.cs" />
     <Compile Include="Controllers\t_seller_assessmentController.cs" />
@@ -244,6 +245,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="bin\ja\" />
     <Folder Include="bin\roslyn\" />
+    <Folder Include="Views\t_reale_asmhis\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
