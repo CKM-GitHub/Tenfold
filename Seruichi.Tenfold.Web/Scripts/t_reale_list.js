@@ -49,7 +49,7 @@ function addEvents() {
         $('#total_record').text("検索結果： 0件");
         $('#total_record_up').text("検索結果： 0件");
         $('#no_record').text("");
-        $('#Datatable tbody').empty();
+        $('#mansiontable tbody').empty();
 
         const $RealEstateCom = $("#txtrealEstateCompany").val(), $PrefNameSelect = $('#PrefNameSelect option:selected').text(),
             $EffectiveChk = $("#chkEffective").val(),
@@ -88,7 +88,7 @@ function addEvents() {
         $('#total_record').text("検索結果： 0件");
         $('#total_record_up').text("検索結果： 0件");
         $('#no_record').text("");
-        $('#Datatable tbody').empty();
+        $('#mansiontable tbody').empty();
 
         const $RealEstateCom = $("#txtrealEstateCompany").val(), $PrefNameSelect = $('#PrefNameSelect option:selected').text(),
             $EffectiveChk = $("#chkEffective").val(),
@@ -185,9 +185,10 @@ function Bind_tbody(result) {
             <td> <a class="text-heading font-semibold text-decoration-underline" id='+ data[i]["不動産会社CD"] + ' href="#" onclick="l_logfunction(this.id)">' + data[i]["不動産会社"] + '</a></td>\
             <td>' + data[i]["住所"] + ' </td>\
             <td>' + data[i]["メイン担当者"] + ' </td>\
-            <td>' + data[i]["営業時間"] + ' </td >\
             <td>' + data[i]["定休日"] + ' </td>\
+            <td>' + data[i]["営業時間"]+ ' </td >\
             <td>' + data[i]["電話"] + ' </td>\
+            <td class="d-none"> '+ data[i]["PrefCD"] + ' </td>\
             </tr>'
         }
 
@@ -200,7 +201,8 @@ function Bind_tbody(result) {
         $('#total_record_up').text("検索結果： 0件")
         $('#no_record').text("表示可能データがありません");
     }
-    $('#Datatable tbody').append(html);
+    $('#mansiontable tbody').append(html);
+    sortTable.getSortingTable("mansiontable");
 }
 
 function l_logfunction(id) {
