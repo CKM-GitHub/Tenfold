@@ -19,6 +19,7 @@ namespace Models.Tenfold.t_reale_purchase
         public string Range { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
+        public string AssReqID { get; set; }
         public string SellerCD { get; set; }
         public string SellerMansionID { get; set; }
     }

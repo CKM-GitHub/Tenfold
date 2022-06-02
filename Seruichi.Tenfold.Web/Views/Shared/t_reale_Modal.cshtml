@@ -1,0 +1,331 @@
+﻿<!-- ポップアップ -->
+<div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="t_reale" tabindex="-1" aria-labelledby="t_reale" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl cap-modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mansionLabel">査定結果 </h5>
+                <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 col-md-5">
+                        <div class="col-12">
+                            <div class="users-container">
+                                <div class="users p-3">
+                                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                                                    data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                                                    aria-selected="true">
+                                                物件情報
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                                    data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                                                    aria-selected="false">
+                                                詳細情報
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                                                    data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                                                    aria-selected="false">
+                                                売主情報
+                                            </button>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="pills-tabContent">
+                                        <hr class="navbar-divider my-5 opacity-20">
+                                        <div class="card shadow border-0">
+                                            <div class="card-body" id="H_MansionInfo">
+                                                @*Display Data of H_MansionInfo*@
+                                            </div>
+                                        </div>
+                                        <hr class="navbar-divider my-5 opacity-20">
+                                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                            <section class="highlight-clean">
+                                                <div>
+                                                    <div class="intro">
+                                                        <div class="card shadow border-0">
+                                                            <div class="card-body ">
+                                                                <div class=" pb-0 pm-0">
+                                                                    <h6>交通アクセス</h6>
+                                                                    <div class="row justify-content-center" id="ekikoutsu" style="width:100%;overflow-x: hidden;overflow-y: auto;max-height: 300px;">
+                                                                        @*Bind Data of ekikoutsu*@
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <div class="tab-pane fade" data-bs-keyboard="false" data-bs-backdrop="static" id="pills-profile" role="tabpanel"
+                                             aria-labelledby="pills-profile-tab">
+                                            <div class="card shadow border-0">
+                                                <div class="card-body ">
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <div class="d-inline-flex pb-1">
+                                                                <div class="row">
+                                                                    <div class="">
+                                                                        <h6 class="align-self-center"><strong>建物構造</strong><br></h6>
+                                                                    </div>
+                                                                    <div class=""><span class="align-self-start" id="Building_structure"><br></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-inline-flex pb-1">
+                                                                <div class="row">
+                                                                    <div class="">
+                                                                        <h6 class="align-self-center"><strong>築年月</strong><br></h6>
+                                                                    </div>
+                                                                    <div class=""><span class="align-self-start" id="Year_of_construction"><br></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-inline-flex pb-1">
+                                                                <div class="row">
+                                                                    <div class="">
+                                                                        <h6 class="align-self-center"><strong>部屋番号</strong><br></h6>
+                                                                    </div>
+                                                                    <div class=""><span class="align-self-start" id="Room_No"><br></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-inline-flex pb-1">
+                                                                <div class="row">
+                                                                    <div class="">
+                                                                        <h6 class="align-self-center"><strong>専有面積</strong><br></h6>
+                                                                    </div>
+                                                                    <div class=""><span class="align-self-start" id="Area"><br></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-inline-flex pb-1">
+                                                                <div class="row">
+                                                                    <div class="">
+                                                                        <h6 class="align-self-center"><strong>バルコニー面積　</strong><br></h6>
+                                                                    </div>
+                                                                    <div class=""><span class="align-self-start" id="Balcony_area"><br></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-inline-flex pb-1">
+                                                                <div class="row">
+                                                                    <div class="">
+                                                                        <h6 class="align-self-center"><strong>主採光</strong><br></h6>
+                                                                    </div>
+                                                                    <div class=""><span class="align-self-start" id="Sunlighting"><br></span></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="d-inline-flex pb-1">
+                                                                <div class="row">
+                                                                    <div class="">
+                                                                        <h6 class="align-self-center"><strong>部屋数</strong><br></h6>
+                                                                    </div>
+                                                                    <div class=""><span class="align-self-start" id="Number_of_rooms"><br></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-inline-flex pb-1">
+                                                                <div class="row">
+                                                                    <div class="">
+                                                                        <h6 class="align-self-center"><strong>バス・トイレ　</strong><br></h6>
+                                                                    </div>
+                                                                    <div class=""><span class="align-self-start" id="Bathrooms_and_toilets"><br></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-inline-flex pb-1">
+                                                                <div class="row">
+                                                                    <div class="">
+                                                                        <h6 class="align-self-center"><strong>土地権利　</strong><br></h6>
+                                                                    </div>
+                                                                    <div class=""><span class="align-self-start" id="land_rights"><br></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-inline-flex pb-1">
+                                                                <div class="row">
+                                                                    <div class="">
+                                                                        <h6 class="align-self-center"><strong>現況</strong><br></h6>
+                                                                    </div>
+                                                                    <div class=""><span class="align-self-start" id="present_state"><br></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-inline-flex pb-1">
+                                                                <div class="row">
+                                                                    <div class="">
+                                                                        <h6 class="align-self-center"><strong>管理方式</strong><br></h6>
+                                                                    </div>
+                                                                    <div class=""><span class="align-self-start" id="management_system"><br></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-inline-flex pb-1">
+                                                                <div class="row">
+                                                                    <div class="">
+                                                                        <h6 class="align-self-center"><strong>売却希望時期　</strong><br></h6>
+                                                                    </div>
+                                                                    <div class=""><span class="align-self-start" id="Desired_time_of_sale"><br></span></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="d-inline-flex pb-1">
+                                                                <div class="row">
+                                                                    <div class="">
+                                                                        <h6 class="align-self-center"><strong>家賃</strong><br></h6>
+                                                                    </div>
+                                                                    <div class=""><span class="align-self-start" id="rent_fee"><br></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-inline-flex pb-1">
+                                                                <div class="row">
+                                                                    <div class="">
+                                                                        <h6 class="align-self-center"><strong>管理賃</strong><br></h6>
+                                                                    </div>
+                                                                    <div class=""><span class="align-self-start" id="management_fee"><br></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-inline-flex pb-1">
+                                                                <div class="row">
+                                                                    <div class="">
+                                                                        <h6 class="align-self-center"><strong>修繕積立金</strong><br></h6>
+                                                                    </div>
+                                                                    <div class=""><span class="align-self-start" id="repair_fee"><br></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-inline-flex pb-1">
+                                                                <div class="row">
+                                                                    <div class="">
+                                                                        <h6 class="align-self-center"><strong>その他費用</strong><br></h6>
+                                                                    </div>
+                                                                    <div class=""><span class="align-self-start" id="etc_fee"><br></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-inline-flex pb-1">
+                                                                <div class="row">
+                                                                    <div class="">
+                                                                        <h6 class="align-self-center"><strong>固定資産税</strong><br></h6>
+                                                                    </div>
+                                                                    <div class=""><span class="align-self-start" id="tax"><br></span></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" data-bs-keyboard="false" data-bs-backdrop="static" id="pills-contact" role="tabpanel"
+                                             aria-labelledby="pills-contact-tab">
+                                            <div class="card shadow border-0">
+                                                <div class="card-body ">
+                                                    <div class="justify-content-around align-items-center row">
+                                                        <div class="align-items-center col-12">
+                                                            <div class="p-md-2 p-1" id="info">
+                                                                <div class="text-muted"><span class="" id="Enable_or_Disable"></span></div>
+                                                                <div class="text-muted" id="Name_Katakana"></div>
+                                                                <div class="text-muted"><h2 id="Name_Kanji"></h2></div>
+                                                                <div class="p-md-1 text-muted">
+                                                                    <span class="fa fa-id-card bg-light p-1 rounded-circle"></span> <span id="pc_SellerCD"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="navbar-divider my-5 opacity-20">
+                                                    <div class="justify-content-around align-items-center row">
+                                                        <div class="d-flex flex-column col-12" id="info">
+                                                            <div class="p-md-1 text-muted cap-fon-form-w500 ">
+                                                                <span class="fa fa-home bg-light p-1 rounded-circle"></span> <span id="pc_Address"></span>
+                                                            </div>
+                                                            <div class="p-md-1 pt-sm-1 text-muted">
+                                                                <span class="fa fa-phone bg-light p-1 rounded-circle"></span> <span id="pc_Phone"></span>
+                                                            </div>
+                                                            <div class="p-md-1 pt-sm-1 text-muted">
+                                                                <span class="fa fa-mobile bg-light p-1 ps-2 pe-2 rounded-circle"></span> <span id="pc_Mobile_phone"></span>
+                                                            </div>
+                                                            <div class="p-md-1 text-muted">
+                                                                <span class="fa fa-envelope-o bg-light p-1 rounded-circle"></span> <span id="pc_mail_address"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-7">
+                        <div class="card shadow border-0">
+                            <div class="card-body ">
+                                <h4 class="text-center fw-bold">査定日時</h4>
+                                <p class="font-monospace small text-center pt-0" id="DeepAssDateTime"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="w-100 p-1 pt-3">
+                                    <div class="w-100">
+                                        <div class="row">
+                                            <div class="col-xl-12">
+                                                <div class="card">
+                                                    <div class="card-header pb-0">
+                                                        <div class="card-actions float-right"></div>
+                                                        <h5 class="card-title mb-0">マンション査定結果トップ５</h5>
+                                                    </div>
+                                                    <div class="card-body" style="width:100%;overflow-x: auto;max-height: 480px;">
+                                                        <table class="table table-striped" id="CondominiumAssResults" style="width:100%;overflow-x: auto;">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th>不動産会社</th>
+                                                                    <th class="text-end">買取価格</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="w-100 p-1 pt-3">
+                                    <div class="w-100">
+                                        <div class="row">
+                                            <div class="col-xl-12">
+                                                <div class="card">
+                                                    <div class="card-header pb-0">
+                                                        <div class="card-actions float-right"></div>
+                                                        <h5 class="card-title mb-0">エリア査定結果トップ５</h5>
+                                                    </div>
+                                                    <div class="card-body" style="width:100%;overflow-x: auto;max-height: 480px;">
+                                                        <table class="table table-striped" id="AreaAssResults" style="width:100%;overflow-x: auto;">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th>不動産会社</th>
+                                                                    <th class="text-end">買取価格</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnModalClose" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">戻る</button>
+            </div>
+        </div>
+    </div>
+</div>
