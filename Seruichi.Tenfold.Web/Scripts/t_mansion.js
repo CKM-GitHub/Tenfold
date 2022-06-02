@@ -300,6 +300,8 @@ function setValidation() {
 }
 
 function addEvents() {
+
+
     $('.container-fluid .card-body').keypress(function (event) {
         if (event.keyCode == 13) {
             event.preventDefault();
@@ -483,7 +485,7 @@ function setStationList(mode, lineCd, selector, defaultValue) {
 
 function removeLineAndStation() {
     $('.js-stationContainer').children().remove();
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 20; i++) {
         const index = i + 1;
         const station = $('.js-station-template').find('.js-station').clone(true);
         station.find('.js-paragraph-number').text(getParagraphNumber(index))
