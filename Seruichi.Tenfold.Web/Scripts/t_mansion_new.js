@@ -11,6 +11,7 @@ $(function () {
     _url.getTownDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfTown;
     _url.getLineDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfLine;
     _url.getStationDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfStation;
+    _url.getNearestStations = common.appPath + commonApiUrl.getNearestStations;
     _url.checkZipCode = common.appPath + '/t_mansion_new/CheckZipCode';
     _url.getMansionListByMansionWord = common.appPath + '/t_mansion_new/GetMansionListByMansionWord';
     _url.checkAll = common.appPath + '/t_mansion_new/CheckAll';
@@ -379,6 +380,10 @@ function addEvents() {
         setTownList('add', $('#PrefCD').val(), $(this).val());
     });
 
+    //町域、住所
+    $('#TownCD, #Address').on('change', function () {
+        displayNearestStationData();
+    });
    
     ////路線選択
     $('.js-linecd').on('change', function () {
@@ -678,6 +683,72 @@ function getMansionWordList() {
     });
       
     return array;
+}
+
+function displayNearestStationData() {
+    debugger;
+    if ($('#hdnMansionCD').val()) return;
+
+    const model = {
+        PrefName: $('#PrefCD option:selected').text(),
+        CityName: $('#CityCD option:selected').text(),
+        TownName: $('#TownCD option:selected').text(),
+        Address: $('#Address').val()
+    }
+
+    if (model.PrefName && model.CityName && model.TownName && model.Address) {
+
+        common.showLoading();
+        common.callAjax(_url.getNearestStations, model,
+            function (result) {
+                if (result && result.isOK) {
+
+                    //removeLineAndStation();
+
+                    if (result.data) {
+                        const dataArray = JSON.parse(result.data);
+                        const length = dataArray.length;
+
+                        if (length > 0) {
+                            let data = dataArray[0];
+                            for (let i = 0; i < length; i++) {
+                                data = dataArray[i];
+                                const index = i + 1;
+
+                                if (!document.getElementById('LineCD_' + index)) {
+                                    const station = $('.js-station-template').find('.js-station').clone(true);
+                                    station.find('.js-paragraph-number').text(getParagraphNumber(index))
+                                    station.find('.js-linecd').attr('id', 'LineCD_' + index);
+                                    station.find('.js-stationcd').attr('id', 'StationCD_' + index);
+                                    station.find('.js-distance').attr('id', 'Distance_' + index);
+                                    $('.js-stationContainer').append(station);
+                                }
+
+                                if (data.LineCD) {
+                                    $('#LineCD_' + index).val(data.LineCD);
+                                    setStationList('add', data.LineCD, '#StationCD_' + index, data.StationCD);
+                                }
+
+                                $('#Distance_' + index).val(data.Distance);
+
+                                if (data.Distance) {
+                                    const lastDistance = index + 1;
+                                    $('#Dline_' + lastDistance ).removeClass("bg-secondary");
+                                    $('#Dline_' + lastDistance ).find("*").prop("disabled", false);
+                                }
+                                
+                            }
+
+                        }
+                    }
+                }
+                common.hideLoading();
+            },
+            function () {
+                common.hideLoading(null, 0);
+            }
+        );
+    }
 }
 
 
