@@ -105,14 +105,14 @@ namespace Seruichi.BL.RealEstate.r_staff
 
             DataTable dtUpdate = new DataTable();
             dtUpdate.Columns.Add("RealECD", typeof(String));
-            dtUpdate.Columns.Add("REStaffCD", typeof(String));
+            dtUpdate.Columns.Add("REStaffCD", typeof(String));  
+            dtUpdate.Columns.Add("PermissionChat", typeof(int));
+            dtUpdate.Columns.Add("PermissionSetting", typeof(int));
+            dtUpdate.Columns.Add("PermissionPlan", typeof(int));
+            dtUpdate.Columns.Add("PermissionInvoice", typeof(int));
+            dtUpdate.Columns.Add("REPassword", typeof(String));
             dtUpdate.Columns.Add("REStaffName", typeof(String));
             dtUpdate.Columns.Add("REIntroduction", typeof(String));
-            dtUpdate.Columns.Add("REPassword", typeof(String));
-            dtUpdate.Columns.Add("PermissionChat", typeof(String));
-            dtUpdate.Columns.Add("PermissionSetting", typeof(String));
-            dtUpdate.Columns.Add("PermissionPlan", typeof(String));
-            dtUpdate.Columns.Add("PermissionInvoice", typeof(String));
 
 
             DataTable dtUpdateImage = new DataTable();
