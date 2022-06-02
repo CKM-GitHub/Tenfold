@@ -38,10 +38,6 @@ function Bind_CompanyInfo(model, result) {
         $('#Fax').text(data[0]['Fax']);
         $('#MailAddress').text(data[0]['MailAddress']);
         $('#PICName').text(data[0]['PICName']);
-
-        model = {
-            REName: data[0]['REName']
-        }
     }
 }
 
