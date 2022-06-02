@@ -85,7 +85,8 @@ namespace Seruichi.Tenfold.Web
 
             bundles.Add(new ScriptBundle("~/bundles/t_reale_asmhis").Include(
                      "~/Scripts/t_reale_asmhis.js",
-                      "~/Scripts/t_common.js"
+                      "~/Scripts/t_common.js",
+                     "~/Content/scripts/table_header_sort.js" 
                      ));
         }
     }

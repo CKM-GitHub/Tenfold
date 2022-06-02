@@ -22,7 +22,7 @@ $(function () {
 });
 
 function setValidation() {
-    $('.form-check-input')
+    $('.form-areamansion')
         .addvalidation_errorElement("#CheckBoxError")
         .addvalidation_checkboxlenght(); //E112
 
@@ -112,23 +112,14 @@ function addEvents() {
 
     get_purchase_Data(model, this, 'page_load');
 
-    //sortTable.getSortingTable("tblPurchaseDetails");
-
-    $('#btnDisplay').on('click', function () {
-        
+    sortTable.getSortingTable("tblPurchaseDetails"); 
+    $('#btnDisplay').on('click', function () { 
         $form = $('#form1').hideChildErrors();
         if (!common.checkValidityOnSave('#form1')) {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
-        $('#tblPurchaseDetails tbody').empty();
-        
-        const fd = new FormData(document.forms.form1);
-        //const model = Object.fromEntries(fd);
-        //alert(model.length)
-        //const model = {
-        //    RealECD: common.getUrlParameter('reale')
-        //}; 
+        $('#tblPurchaseDetails tbody').empty(); 
         model = {
             RealECD: common.getUrlParameter('reale'),
             Chk_Area: $("#Chk_Area").val(),
@@ -153,7 +144,7 @@ function addEvents() {
             return false;
         }
         $('#tblPurchaseDetails tbody').empty();
-        const fd = new FormData(document.forms.form1);
+        //const fd = new FormData(document.forms.form1);
         //const model = Object.fromEntries(fd);
         model = {
             RealECD: common.getUrlParameter('reale'),

@@ -22,7 +22,7 @@ namespace Seruichi.BL.Tenfold.t_reale_asmhis
             List<string> AreaMansion = new List<string>();
             AreaMansion.Add(model.Chk_Area.ToString());
             AreaMansion.Add(model.Chk_Mansion.ToString());
-            validator.CheckCheckboxLenght("CheckBoxError", AreaMansion);//E112
+            validator.CheckCheckboxLenght("Chk_Area", AreaMansion);//E112
 
             return validator.GetValidationResult();
         }
