@@ -73,6 +73,8 @@ function Bind_ModalDetails(id) {
         AssReqID: id.split('&')[2]
     };
 
+    $('#pills-home-tab').click();
+
     common.callAjax(_url.get_Modal_HomeData, model, function (result) {
         if (result && result.isOK) {
             Bind_Modal_HomeData(result.data);

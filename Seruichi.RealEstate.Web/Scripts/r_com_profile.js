@@ -42,10 +42,6 @@ function addEvents(model) {
 
     Get_ModalData(model.RealECD);
 
-    $('#btnCancel').on('click', function () {
-        window.location.reload();
-    });
-
     $('#btnConfirm').on('click', function () {
         $form = $('#maindiv').hideChildErrors();
         if (!common.checkValidityOnSave('#maindiv')) {
@@ -68,6 +64,10 @@ function addEvents(model) {
     $('#btnC_alert').on('click', function () {
         window.location.reload();
     });
+
+    $('#btnDestruction').on('click', function () {
+        window.location.reload();
+    })
 }
 
 function Get_ModalData(RealECD) {

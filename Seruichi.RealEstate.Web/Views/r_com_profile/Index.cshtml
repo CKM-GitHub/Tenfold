@@ -250,7 +250,7 @@
                     <div class="card-footer">
                         <div class="text-right mt-3 float-end">
                             <button type="button" class="btn btn-primary" id="btnConfirm" data-bs-toggle="modal">確認</button>&nbsp;
-                            <button type="button" class="btn btn-default" id="btnCancel">取消</button>
+                            <button type="button" class="btn btn-lg btn-default" id="btnCancel" data-bs-toggle="modal" data-bs-target="#modal-changecal">取消</button>
                         </div>
                     </div>
                 </div>
@@ -304,9 +304,9 @@
                                                             <label class="form-label" for="form3Examplea4">郵便番号</label>
                                                             <div class="col-12 col-md-8 d-inline-flex mb-4 mb-md-0 pb-md-0 pb-2">
                                                                 <span class="align-self-center pe-2 text-dark">〒</span>
-                                                                <input readonly class="form-control text-center w-50" type="text" id="m_txtZipCode1" >
+                                                                <input readonly class="form-control text-center w-50" type="text" id="m_txtZipCode1">
                                                                 <span class="align-self-center pe-2 ps-2 text-dark">-</span>
-                                                                <input readonly class="form-control w-50 text-center" type="text" id="m_txtZipCode2" >
+                                                                <input readonly class="form-control w-50 text-center" type="text" id="m_txtZipCode2">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -363,11 +363,11 @@
                                                         </div>
                                                     </div>
                                                     @*<div class="mb-4">
-                                                        <div class="form-outline form-white">
-                                                            <label class="form-label" for="m_txtCellPhone">携帯番号</label>
-                                                            <input readonly type="text" id="m_txtCellPhone" class="form-control form-control-lg" />
-                                                        </div>
-                                                    </div>*@
+                                                <div class="form-outline form-white">
+                                                    <label class="form-label" for="m_txtCellPhone">携帯番号</label>
+                                                    <input readonly type="text" id="m_txtCellPhone" class="form-control form-control-lg" />
+                                                </div>
+                                            </div>*@
                                                     <div class="mb-4">
                                                         <div class="form-outline form-white">
                                                             <label class="form-label" for="m_txtFax">FAX番号</label>
@@ -478,6 +478,33 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" id="btnC_alert" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">閉じる</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 変更取消 -->
+                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1" id="modal-changecal">
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">変更取消</h4>
+                                <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <section class="newsletter-subscribe pt-0 p-0">
+                                    <div class="container">
+                                        <div class="intro"></div>
+                                        <form class="d-flex justify-content-center flex-wrap mx-auto" method="post" style="text-align: center;">
+                                            <h1 class="cap-icon-h1 border border-danger border-8"><i class="fa fa-exclamation-circle pt-1 pb-1 ps-3 pe-3 cap-icon-i text-danger"></i></h1>
+                                        </form>
+                                    </div>
+                                    <h4 class="text-center align-self-center">変更内容を破棄してもよろしいですか？</h4>
+                                </section>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-lg btn-primary" data-bs-dismiss="modal" id="btnDestruction">破棄</button>
+                                <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal" aria-label="Close">閉じる</button>
                             </div>
                         </div>
                     </div>

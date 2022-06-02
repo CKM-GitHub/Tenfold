@@ -43,7 +43,7 @@
                 direction = directions[col_index[0]] || 'asc';
 
             // A factor based on the direction
-            if (index == 0) {
+            if (index == 0 &&  headers[0].innerHTML == 'No') { 
                 multiplier = 1;
                 if (headers[index].hasAttribute('ordercol-direction'))
                     multiplier = headers[index].getAttribute('ordercol-direction') === 'asc' ? 1 : -1;
@@ -176,11 +176,13 @@
             // Reverse the direction
             directions[col_index[0]] = direction === 'asc' ? 'desc' : 'asc';
 
-            // Append new row
+            // Append new row 
             var count = 0;
-            newRows.forEach(function (newRow) {
-                count = count + 1;
-                newRow.querySelectorAll('td')[0].innerHTML = count;
+            newRows.forEach(function (newRow) { 
+                if (headers[0].innerHTML == 'No') { 
+                    count = count + 1;
+                    newRow.querySelectorAll('td')[0].innerHTML = count;
+                }
                 tableBody.appendChild(newRow);
             });
         };

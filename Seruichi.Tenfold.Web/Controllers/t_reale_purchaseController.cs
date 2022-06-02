@@ -15,6 +15,7 @@ namespace Seruichi.Tenfold.Web.Controllers
         // GET: t_reale_purchase
         public ActionResult Index()
         {
+            ViewBag.Url = System.Web.HttpContext.Current.Request.UrlReferrer;
             return View();
         }
 
