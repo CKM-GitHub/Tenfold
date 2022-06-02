@@ -60,7 +60,6 @@ $(document).on('change','input[type="checkbox"]',function(e) {
   var checked = $(this).prop("checked");
   var container = $(this).parent();
   var siblings = container.siblings();
-   
     
   container.find('input[type="checkbox"]').prop({
     indeterminate: false,
@@ -74,7 +73,8 @@ $(document).on('change','input[type="checkbox"]',function(e) {
       var all = true;
 
         el.siblings().each(function () {
-            parent.children('a').attr("style", "color:red");
+
+            parent.children('a').attr("style", "color:" + "#0d6efd");
       return all = ($(this).children('input[type="checkbox"]').prop("checked") === checked);
     });
 
@@ -85,7 +85,7 @@ $(document).on('change','input[type="checkbox"]',function(e) {
         checked: checked
       });
 
-        parent.children('a').attr("style", "color:red");
+            parent.children('a').attr("style", "color:" + "#0d6efd");
        // checkSiblings(parent);
         
 
@@ -104,7 +104,7 @@ $(document).on('change','input[type="checkbox"]',function(e) {
         indeterminate: true,
         checked: false
       });
-            el.parents("li").parents().children("a").attr("style", "color:red");
+            el.parents("li").parents().children("a").attr("style", "color:" + "#0d6efd");
        
           
         
