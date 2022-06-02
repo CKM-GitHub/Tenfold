@@ -226,14 +226,14 @@ function l_logfunction(id) {
         IPAddress: null,
         Page: null,
         ProcessKBN: 'link',
-        Remarks: 't_reale_purchase' + '&' +'RealeStateCD'
+        Remarks: 't_reale_profile' + '&' + id
     }
     common.callAjax(_url.InsertL_Log, model,
         function (result) {
             if (result && result.isOK) {
                 //window.location.href = common.appPath + '/t_reale_profile/Index?RealeCD=' + model.RealeCD;
                 //window.location.href = '/t_seller_assessment/Index';
-                alert("https://www.seruichi.com/t_reale_profile?RealeCD" + model.RealECD);
+                alert("https://www.seruichi.com/t_reale_profile?RealeCD=" + model.RealECD);
             }
             if (result && !result.isOK) {
 

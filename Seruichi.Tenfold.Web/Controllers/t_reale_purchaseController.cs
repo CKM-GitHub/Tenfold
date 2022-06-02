@@ -61,7 +61,7 @@ namespace Seruichi.Tenfold.Web.Controllers
         {
             t_reale_purchaseBL bl = new t_reale_purchaseBL();
             model.LoginID = base.GetOperator();
-            model.LoginName = "";
+            model.LoginName = base.GetOperatorName();
             model.IPAddress = base.GetClientIP();
             bl.Insert_L_Log(model);
             return OKResult();
