@@ -216,6 +216,7 @@
     <Content Include="Scripts\t_mansion.js" />
     <Content Include="Scripts\t_mansion_list.js" />
     <Content Include="Scripts\t_mansion_new.js" />
+    <Content Include="Scripts\t_reale_asmhis.js" />
     <Content Include="Scripts\t_reale_list.js" />
     <Content Include="Scripts\t_reale_purchase.js" />
     <Content Include="Scripts\t_seller_assessment.js" />
@@ -245,7 +246,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="bin\ja\" />
     <Folder Include="bin\roslyn\" />
-    <Folder Include="Views\t_reale_asmhis\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -272,6 +272,7 @@
     <Content Include="Views\t_reale_purchase\Index.cshtml" />
     <Content Include="Views\t_mansion\Index.cshtml" />
     <Content Include="Views\Shared\t_reale_Info.cshtml" />
+    <Content Include="Views\t_reale_asmhis\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
