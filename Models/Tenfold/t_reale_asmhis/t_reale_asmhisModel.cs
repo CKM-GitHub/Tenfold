@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models.Tenfold.t_reale_purchase
+namespace Models.Tenfold.t_reale_asmhis
 {
-    public class t_reale_purchaseModel
+    public class t_reale_asmhisModel
     {
         public string RealECD { get; set; }
-        public string RealEName { get; set; }
+        public string REName { get; set; }
         public byte chk_Purchase { get; set; }
         public byte chk_Checking { get; set; }
         public byte chk_Nego { get; set; }
@@ -22,9 +22,17 @@ namespace Models.Tenfold.t_reale_purchase
         public string AssReqID { get; set; }
         public string SellerCD { get; set; }
         public string SellerMansionID { get; set; }
+        public byte Chk_Area { get; set; }
+        public byte Chk_Mansion { set; get; }
+        public byte Chk_SendCustomer { get; set; }
+        public byte Chk_Top5 { get; set; }
+        public byte Chk_Top5Out { get; set; }
+        public byte Chk_NonMemberSeller { get; set; }
+        public bool IsCSV { get; set; }
+
     }
 
-    public class t_reale_purchase_l_log_Model
+    public class t_reale_asmhis_l_log_Model
     {
         public byte LoginKBN { get; set; }
         public string LoginID { get; set; }
