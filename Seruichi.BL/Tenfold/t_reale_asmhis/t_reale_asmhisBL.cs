@@ -19,8 +19,10 @@ namespace Seruichi.BL.Tenfold.t_reale_asmhis
 
             validator.CheckCompareDate("StartDate", model.StartDate, model.EndDate);//E111
             validator.CheckCompareDate("EndDate", model.StartDate, model.EndDate);//E111
-
-            //validator.CheckCheckboxLenght("chk_Purchase", lst_checkBox);//E112
+            List<string> AreaMansion = new List<string>();
+            AreaMansion.Add(model.Chk_Area.ToString());
+            AreaMansion.Add(model.Chk_Mansion.ToString());
+            validator.CheckCheckboxLenght("CheckBoxError", AreaMansion);//E112
 
             return validator.GetValidationResult();
         }

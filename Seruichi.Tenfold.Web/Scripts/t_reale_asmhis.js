@@ -11,8 +11,9 @@ $(function () {
     _url.get_Modal_ProfileData = common.appPath + '/t_reale_purchase/get_Modal_ProfileData';
     _url.get_Modal_ContactData = common.appPath + '/t_reale_purchase/get_Modal_ContactData';
     _url.get_Modal_DetailData = common.appPath + '/t_reale_purchase/get_Modal_DetailData';
-    addEvents();
-    $('#assessmentMenu').click();
+    addEvents(); 
+    $('#subMenu li').children('a').removeClass("active"); 
+    $('#subMenu li').children('a').eq(1).addClass('active');
     $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
     $('#t_reale_asmhis').addClass('font-bold text-underline');
    
@@ -38,7 +39,7 @@ function setValidation() {
 
 function addEvents() {
     common.bindValidationEvent('#form1', '');
-
+ 
     $('.form-check-input').on('change', function () {
         this.value = this.checked ? 1 : 0;
         if ($("input[type=checkbox]:checked").length > 0) {
@@ -88,7 +89,10 @@ function addEvents() {
         $('#StartDate').val(firstdaypremonth);
         $('#EndDate').val(lastdaypremonth);
     });
-
+    $('#subMenu li').children('a').on('click', function () {
+        $('#subMenu li').children('a').removeClass("active");
+        $(this).addClass('active');
+    });
     let model = {
         RealECD: common.getUrlParameter('reale'),
         Chk_Area: $("#Chk_Area").val(),
@@ -199,20 +203,24 @@ function addEvents() {
             }
         )
     });
+
+
 }
 
 function get_purchase_Data(model, $form, state) {
     common.callAjaxWithLoading(_url.get_t_reale_purchase_DisplayData, model, this, function (result) {
         if (result && result.isOK) {
-            //alert(result.data);
+           
             Bind_DisplayData(result.data);
             if (state == 'Display')
                 l_logfunction(model.RealECD + ' ' + model.REName, 'display', '');
         }
 
         if (result && !result.isOK) {
+            // alert(result.data);
             const errors = result.data;
             for (key in errors) {
+                //alert(errors.count)
                 const target = document.getElementById(key);
                 $(target).showError(errors[key]);
                 $form.getInvalidItems().get(0).focus();
