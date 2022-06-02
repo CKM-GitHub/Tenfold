@@ -8,6 +8,9 @@ using Models.RealEstate.r_login;
 using Models.RealEstate.r_staff;
 using System.Data;
 using Seruichi.BL;
+using System.IO;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace Seruichi.RealEstate.Web.Controllers
 {
@@ -28,7 +31,8 @@ namespace Seruichi.RealEstate.Web.Controllers
                                 select new r_staffModel()
                                 {
                                     RealECD   = dr["RealECD"].ToString(),
-                                    REFaceImage = dr["REFaceImage"].ToString(),
+                                    //REFaceImage = dr["REFaceImage"].ToString(),
+                                    REFaceImage = dr["REFaceImage"].ToString() == "" ? dr["REFaceImage"].ToString() : Convert.ToBase64String((byte[])dr["REFaceImage"]),
                                     REStaffCD = dr["REStaffCD"].ToString(),
                                     REStaffName = dr["REStaffName"].ToString(),
                                     REIntroduction = dr["REIntroduction"].ToString(),
@@ -59,22 +63,79 @@ namespace Seruichi.RealEstate.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save_M_REStaff(r_staffModel model)
-        {
-            r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
-            r_staffBL bl = new r_staffBL();
-            var validationResult = bl.ValidateAll(model);
-            if (validationResult.Count > 0)
-            {
-                return ErrorResult(validationResult);
-            }
-            model = Getlogdata(model);
+        //public ActionResult Save_M_REStaff(r_staffModel model)
+        //{
+        //    r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
+        //    r_staffBL bl = new r_staffBL();
+        //    var validationResult = bl.ValidateAll(model);
+        //    if (validationResult.Count > 0)
+        //    {
+        //        return ErrorResult(validationResult);
+        //    }
+        //    model = Getlogdata(model);
 
-            if (!bl.Save_M_REStaff(model, out string errorcd))
+        //    if (!bl.Save_M_REStaff(model, out string errorcd))
+        //    {
+        //        return ErrorMessageResult(errorcd);
+        //    }
+        //    return OKResult();
+        //}
+
+
+        public ActionResult Save_M_REStaff(r_staffModel model)        {            r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();            r_staffBL bl = new r_staffBL();            var validationResult = bl.ValidateAll(model);            if (validationResult.Count > 0)            {                return ErrorResult(validationResult);            }            model = Getlogdata(model);
+            string Dirtemp = @"C:\Temp";
+            string DirSelichi = @"C:\Temp\Selichi";
+            string Dirupload = @"C:\Temp\Selichi\UploadImage";
+            if (!Directory.Exists(Dirtemp))
             {
-                return ErrorMessageResult(errorcd);
+                Directory.CreateDirectory(Dirtemp);
             }
-            return OKResult();
+            if (!Directory.Exists(DirSelichi))
+            {
+                Directory.CreateDirectory(DirSelichi);
+            }
+            if (!Directory.Exists(Dirupload))
+            {
+                Directory.CreateDirectory(Dirupload);
+            }
+            if (model.lst_StaffModel.Count > 0)
+            {
+                for (int i = 0; i < model.lst_StaffModel.Count; i++)
+                {
+                    string Updatebase64result = model.lst_StaffModel[i].REFaceImage.Split(',')[1];
+                    if (!String.IsNullOrWhiteSpace(Updatebase64result))
+                    {
+                        string UpdatefileName = "r_staff_" + model.lst_StaffModel[i].RealECD + "_" + model.lst_StaffModel[i].REStaffCD + "_" + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".png";
+                        model.lst_StaffModel[i].REFaceImage = byteArrayToImage(Updatebase64result, UpdatefileName);//LoadBase64(str);
+                    }
+                    else
+                    {
+                        model.lst_StaffModel[i].REFaceImage = null;
+                    }
+                }
+            }
+
+            if (user.REStaffCD == "admin")
+            {
+                string Newbase64result = model.REFaceImage.Split(',')[1];
+                if (!String.IsNullOrWhiteSpace(Newbase64result))
+                {
+                    string NewfileName = "r_staff_" + model.RealECD + "_" + model.REStaffCD + "_" + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".png";
+                    model.REFaceImage = byteArrayToImage(Newbase64result, NewfileName);
+                }
+                else
+                {
+                    model.REFaceImage = null;
+                }
+            }            if (!bl.Save_M_REStaff(model, out string errorcd))            {                return ErrorMessageResult(errorcd);            }            return OKResult();        }
+        public string byteArrayToImage(string base64,string FileName)
+        {
+            byte[] byteArrayIn = Convert.FromBase64String(base64);
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Bitmap returnImage = new Bitmap(Image.FromStream(ms, true, true), 100, 100);
+            string FilePath = @"C:\Temp\Selichi\UploadImage\" + FileName;
+            returnImage.Save(FilePath);
+            return FilePath;
         }
 
         public r_staffModel Getlogdata(r_staffModel model)
