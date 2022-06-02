@@ -260,6 +260,7 @@ function Bind_tbody(result) {
     let html = "";
     let _letter = "";
     let _class = "";
+    let _class1 = "";
     let _sort_checkbox = "";
     let status = "";
     if (data.length > 0) {
@@ -289,11 +290,19 @@ function Bind_tbody(result) {
             }
 
         }
+
+        if (isEmptyOrSpaces(data[i]["無効会員"])) {
+            _class1 = "";
+        }
+        else {
+            _class1 = "fa fa-check";
+        }
+
         html += '<tr>\
             <td class= "text-end" > ' + (i + 1) + '</td>\
             <td class="'+ _sort_checkbox + '"><i class="' + _class + '">' + _letter + '</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td >\
             <td class="d-none"> ' + status + ' </td>\
-            <td class="text-center"> ' + data[i]["無効会員"] + ' </td>\
+            <td class="text-center"><i class="' + _class1 + '">' + '</i> </td>\
             <td> ' + data[i]["売主CD"] + ' </td>\
             <td> <a class="text-heading font-semibold text-decoration-underline" id='+ data[i]["売主CD"] + ' href="#" onclick="l_logfunction(this.id)">' + data[i]["売主名"] + '</a></td>\
             <td> ' + data[i]["居住地"] + ' </td>\
