@@ -92,11 +92,11 @@ function addEvents() {
         chk_Contract: $("#chk_Contract").val(),
         chk_SellerDeclined: $("#chk_SellerDeclined").val(),
         chk_BuyerDeclined: $("#chk_BuyerDeclined").val(),
-        Range: $("#ddlRange").val(),
+        Range: $("#Range").val(),
         StartDate: $("#StartDate").val(),
         EndDate: $("#EndDate").val()
     };
-
+    $('#RealECD').val(model.RealECD);
     Bind_Company_Data(model, this);         //Bind Company Info Data to the title part of the page
 
     get_purchase_Data(model, this, 'page_load');
@@ -104,6 +104,7 @@ function addEvents() {
     sortTable.getSortingTable("tblPurchaseDetails");
 
     $('#btnDisplay').on('click', function () {
+        $('#RealEName').val($('#REName').text());
         $form = $('#form1').hideChildErrors();
         if (!common.checkValidityOnSave('#form1')) {
             $form.getInvalidItems().get(0).focus();
@@ -112,13 +113,11 @@ function addEvents() {
         $('#tblPurchaseDetails tbody').empty();
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
-        model = {
-            RealECD: common.getUrlParameter('reale')
-        };
         get_purchase_Data(model, $form, 'Display');
     });
 
     $('#btnCSV').on('click', function () {
+        $('#RealEName').val($('#REName').text());
         $form = $('#form1').hideChildErrors();
         if (!common.checkValidityOnSave('#form1')) {
             $form.getInvalidItems().get(0).focus();
@@ -127,7 +126,7 @@ function addEvents() {
         $('#tblPurchaseDetails tbody').empty();
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
-        get_purchase_Data(model, $form);
+        get_purchase_Data(model, $form, 'csv');
 
         common.callAjax(_url.get_t_reale_purchase_CSVData, model,
             function (result) {
@@ -136,6 +135,8 @@ function addEvents() {
 
                 var csv = common.getJSONtoCSV(table_data);
                 if (!(csv == "ERROR")) {
+                    l_logfunction(model.RealECD + ' ' + model.RealEName, 'csv', '');
+
                     var downloadLink = document.createElement("a");
                     var blob = new Blob(["\ufeff", csv]);
                     var url = URL.createObjectURL(blob);
@@ -153,8 +154,6 @@ function addEvents() {
                     document.body.appendChild(downloadLink);
                     downloadLink.click();
                     document.body.removeChild(downloadLink);
-
-                    l_logfunction(model.RealECD + ' ' + model.REName, 'display', '');
                 }
                 else {
                     alert("There is no data!");
@@ -169,7 +168,7 @@ function get_purchase_Data(model, $form, state) {
         if (result && result.isOK) {
             Bind_DisplayData(result.data);
             if (state == 'Display')
-                l_logfunction(model.RealECD + ' ' + model.REName, 'display', '');
+                l_logfunction(model.RealECD + ' ' + model.RealEName, 'display', '');
         }
 
         if (result && !result.isOK) {
@@ -238,11 +237,11 @@ function Bind_DisplayData(result) {
             <td><span class="' + _class + '">' + _letter + '</span><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
             <td class="d-none">'+ _status + '</td>\
             <td class="text-nowrap">'+ data[i]["査定依頼ID"] + '</td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["AssReqID"] + '&' + DeepDatetime + ' data-bs-toggle="modal" data-bs-target="#t_reale" href="#" onclick="Bind_ModalDetails(this.id)"><span>' + data[i]["物件名"] + '</span></a></td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id="' + data[i]["SellerCD"] + '" href="#" onclick="l_logfunction(' + 't_seller_assessment ' + data[i]["SellerCD"] + ', ' + 'link' + ', this.id)">' + data[i]["売主名"] + '</a></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["査定依頼ID"] + '&' + DeepDatetime + ' data-bs-toggle="modal" data-bs-target="#t_reale" href="#" onclick="Bind_ModalDetails(this.id)"><span>' + data[i]["物件名"] + '</span></a></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id="' + data[i]["SellerCD"] + '" href="#" onclick="l_logfunction(' + '\'t_seller_assessment ' + data[i]["SellerCD"] + '\', ' + '\'link\'' + ', this.id)">' + data[i]["売主名"] + '</a></td>\
             <td class="text-nowrap">'+ data[i]["登録日時"] + '</td>\
             <td class="text-nowrap">'+ data[i]["簡易査定日時"] + '</td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id="' + data[i]["査定依頼ID"] + '" href="#" onclick="l_logfunction(' + 't_seller_assessment_detail ' + data[i]["査定依頼ID"] + ', ' + 'link' + ', this.id)">' + data[i]["詳細査定日時"] + '</a></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id="' + data[i]["査定依頼ID"] + '" href="#" onclick="l_logfunction(' + '\'t_seller_assessment_detail ' + data[i]["査定依頼ID"] + '\', ' + '\'link\'' + ', this.id)">' + data[i]["詳細査定日時"] + '</a></td>\
             <td class="text-nowrap">'+ data[i]["買取依頼日時"] + '</td>\
             <td class="text-nowrap"> '+ data[i]["送客日時"] + '</td>\
             <td class="text-nowrap"> '+ data[i]["成約日時"] + '</td>\
@@ -277,10 +276,9 @@ function l_logfunction(remark, Process, id) {
     common.callAjax(_url.Insert_L_Log, model, function (result) {
         if (result && result.isOK) {
             if (remark == 't_seller_assessment ' + id)
-                window.location.href = "https://www.seruichi.com/t_seller_assessment/Index?SellerCD=" + id;
+                window.location.href = "http://163.43.105.244/Seruichi.tenfold.dev/t_seller_assessment/Index?SellerCD=" + id;
             else if (remark == 't_seller_assessment_detail ' + id)
-                window.location.href = "https://www.seruichi.com/t_seller_assessment_detail/Index?AssReqID=" + id;
+                window.location.href = "http://163.43.105.244/Seruichi.tenfold.dev/t_seller_assessment_detail/Index?AssReqID=" + id;
         }
     });
 }
-

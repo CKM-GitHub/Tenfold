@@ -34,11 +34,12 @@
                             {
                                 <li>
                                     <a>@item.PrefName </a>
-                                    @foreach (var cityGPCD in ViewBag.CityGPCD)
-                                    {
-                                        if (cityGPCD.PrefCD == item.PrefCD)
+                                    <ul>
+                                        @foreach (var cityGPCD in ViewBag.CityGPCD)
                                         {
-                                            <ul>
+                                            if (cityGPCD.PrefCD == item.PrefCD)
+                                            {
+
                                                 <li class="text-nowrap">
                                                     <span class="cap-errormsg-right" id="CheckBoxError"></span>
                                                     <input class="form-check-input node-parent" type="checkbox" value="@cityGPCD.CityGPCD">
@@ -64,14 +65,14 @@
 
                                                         }
                                                     </ul>
-                                                    }
-                                                    </li>
 
-                                            </ul>
-                                        }
-                                    }
-
-                                </li>
+                                                       }
+                                                    
+                                               </li>
+                                             }
+                                         }
+                                    </ul>
+                            </li>
                             }
 
                         </ul>

@@ -38,10 +38,6 @@ function Bind_CompanyInfo(model, result) {
         $('#Fax').text(data[0]['Fax']);
         $('#MailAddress').text(data[0]['MailAddress']);
         $('#PICName').text(data[0]['PICName']);
-
-        model = {
-            REName: data[0]['REName']
-        }
     }
 }
 
@@ -76,6 +72,8 @@ function Bind_ModalDetails(id) {
         SellerCD: id.split('&')[1],
         AssReqID: id.split('&')[2]
     };
+
+    $('#pills-home-tab').click();
 
     common.callAjax(_url.get_Modal_HomeData, model, function (result) {
         if (result && result.isOK) {

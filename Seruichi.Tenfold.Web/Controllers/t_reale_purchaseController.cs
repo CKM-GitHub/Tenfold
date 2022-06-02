@@ -15,6 +15,7 @@ namespace Seruichi.Tenfold.Web.Controllers
         // GET: t_reale_purchase
         public ActionResult Index()
         {
+            ViewBag.Url = System.Web.HttpContext.Current.Request.UrlReferrer;
             return View();
         }
 
@@ -61,7 +62,7 @@ namespace Seruichi.Tenfold.Web.Controllers
         {
             t_reale_purchaseBL bl = new t_reale_purchaseBL();
             model.LoginID = base.GetOperator();
-            model.LoginName = "";
+            model.LoginName = base.GetOperatorName();
             model.IPAddress = base.GetClientIP();
             bl.Insert_L_Log(model);
             return OKResult();

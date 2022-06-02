@@ -15,6 +15,8 @@
             <ul class="navbar-nav mb-md-4 p-3 mt-5 p-md-0">
                 <li>
                     <div class="ls-wider px-xl-3" href="#">
+                        <input type="text" id="RealECD" name="RealECD" readonly="readonly" class="d-none" />
+                        <input type="text" id="RealEName" name="RealEName" readonly="readonly" class="d-none" />
                     </div>
                 </li>
                 <li>
@@ -64,8 +66,8 @@
                 <li>
                     <div class="text-center px-xl-3">
                         <div class="mb-3 text-start">
-                            <label for="ddlRange" class="form-label">範囲指定</label>
-                            <select id="ddlRange" name="ddlRange" class="form-select mb-2">
+                            <label for="Range" class="form-label">範囲指定</label>
+                            <select id="Range" name="Range" class="form-select mb-2">
                                 <option value="登録日">登録日</option>
                                 <option value="簡易査定日">簡易査定日</option>
                                 <option value="詳細査定日">詳細査定日</option>
@@ -125,20 +127,20 @@
                         <table id="tblPurchaseDetails" class="table table-hover table-nowrap">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" class="text-end text-decoration-underline sort-by" style="width: 100px">No.</th>
-                                    <th scope="col" style="width: 150px" class="text-decoration-underline sort-by" ordercol-index="2">ステータス</th>
-                                    <th scope="col" class="d-none">ステータス</th>
-                                    <th scope="col" style="width: 100px" class="text-decoration-underline sort-by">査定ID</th>
-                                    <th scope="col" style="width: 200px" class="text-decoration-underline sort-by">物件（マンション、部屋番号）</th>
-                                    <th scope="col" style="width: 150px" class="text-decoration-underline sort-by">売主名</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">登録日時</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">簡易査定日時</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">詳細査定日時</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">買取依頼日時</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">送客日時</th>
-                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by">成約日時</th>
-                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by">売主辞退日時</th>
-                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by">買主辞退日時</th>
+                                    <th scope="col" class="text-end text-decoration-underline sort-by" ordercol-direction="asc" ordercol-index="9_3" style="width: 100px">No.</th>
+                                    <th scope="col" style="width: 150px" class="text-decoration-underline sort-by" ordercol-index="2_9_3">ステータス</th>
+                                    <th scope="col" class="d-none" data-type="number">ステータス</th>
+                                    <th scope="col" style="width: 100px" class="text-decoration-underline sort-by" ordercol-index="3">査定ID</th>
+                                    <th scope="col" style="width: 200px" class="text-decoration-underline sort-by" ordercol-index="4_9_3">物件（マンション、部屋番号）</th>
+                                    <th scope="col" style="width: 150px" class="text-decoration-underline sort-by" ordercol-index="5_9_3">売主名</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="6_9_3">登録日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="7_9_3">簡易査定日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="8_9_3">詳細査定日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="9_3">買取依頼日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="10_9_3">送客日時</th>
+                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by" ordercol-index="11_9_3">成約日時</th>
+                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by" ordercol-index="12_9_3">売主辞退日時</th>
+                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by" ordercol-index="13_9_3">買主辞退日時</th>
                                 </tr>
                             </thead>
                             <tbody>

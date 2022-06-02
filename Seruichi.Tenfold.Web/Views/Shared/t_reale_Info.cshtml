@@ -6,7 +6,7 @@
                 <div class="justify-content-around align-items-center row">
                     <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
                         <div class="border-end">
-                            <button type="button" class="btn btn-secondary me-2">戻る</button>
+                            <a type="button" href="@ViewBag.Url" class="btn btn-secondary me-2">戻る</a>
                         </div>
                         <h1 class="ps-2 h2 mb-0 ls-tight">不動産会社</h1>
                         <span class="ps-2 text-muted small align-self-end">管理</span>
@@ -105,13 +105,13 @@
 <!-- Card stats -->
 
 <div class="card shadow border-0" style="border-bottom-left-radius: unset;border-bottom-right-radius: unset;">
-    <div class="card-header pt-2 pb-2 ps-4 pe-4">
-        <ul class="nav nav-tabs overflow-x border-0">
+    <div class="card-header pt-2 pb-2 ps-4 pe-4" >
+        <ul class="nav nav-tabs overflow-x border-0" id="subMenu">
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">買取管理</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">査定履歴</a>
+                <a class="nav-link" href="#" id="assessmentMenu">査定履歴</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">情報管理</a>
