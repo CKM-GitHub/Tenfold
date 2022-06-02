@@ -276,9 +276,9 @@ function l_logfunction(remark, Process, id) {
     common.callAjax(_url.Insert_L_Log, model, function (result) {
         if (result && result.isOK) {
             if (remark == 't_seller_assessment ' + id)
-                window.location.href = "https://www.seruichi.com/t_seller_assessment/Index?SellerCD=" + id;
+                window.location.href = "http://163.43.105.244/Seruichi.tenfold.dev/t_seller_assessment/Index?SellerCD=" + id;
             else if (remark == 't_seller_assessment_detail ' + id)
-                window.location.href = "https://www.seruichi.com/t_seller_assessment_detail/Index?AssReqID=" + id;
+                window.location.href = "http://163.43.105.244/Seruichi.tenfold.dev/t_seller_assessment_detail/Index?AssReqID=" + id;
         }
     });
 }
