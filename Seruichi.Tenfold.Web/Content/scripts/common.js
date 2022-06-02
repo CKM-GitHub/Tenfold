@@ -36,6 +36,7 @@ const commonApiUrl = {
     getDropDownListItemsOfTown: "/api/CommonApi/GetDropDownListItemsOfTown",
     getDropDownListItemsOfLine: "/api/CommonApi/GetDropDownListItemsOfLine",
     getDropDownListItemsOfStation: "/api/CommonApi/GetDropDownListItemsOfStation",
+    getNearestStations: "/api/CommonApi/GetNearestStations",
 }
 
 const regexPattern = {

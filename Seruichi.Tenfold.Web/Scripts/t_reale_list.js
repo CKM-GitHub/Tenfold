@@ -173,14 +173,25 @@ function getM_RealList(model, $form) {
     });
 }
 
+function isEmptyOrSpaces(str) {
+    return str === null || str.match(/^ *$/) !== null;
+}
+
 function Bind_tbody(result) {
     let data = JSON.parse(result);
     let html = "";
+    let _class = "";
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
+            if (isEmptyOrSpaces(data[i]["無効"])) {
+                _class = "";
+            }
+            else {
+                _class = "fa fa-check";
+            }
             html += '<tr>\
             <td class="text-end">' + (i + 1) + '</td>\
-            <td class="text-center">' + data[i]["無効"] + ' </td>\
+            <td class="text-center"> <i class="' + _class + '">'+ '</i> </td>\
             <td>' + data[i]["不動産会社CD"] + '</td>\
             <td> <a class="text-heading font-semibold text-decoration-underline" id='+ data[i]["不動産会社CD"] + ' href="#" onclick="l_logfunction(this.id)">' + data[i]["不動産会社"] + '</a></td>\
             <td>' + data[i]["住所"] + ' </td>\
