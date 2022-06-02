@@ -10,6 +10,7 @@ using Models.RealEstate.r_staff;
 using Models;
 using System.IO;
 using System.Xml.Serialization;
+using System.Data.SqlTypes;
 
 namespace Seruichi.BL.RealEstate.r_staff
 {
@@ -99,10 +100,74 @@ namespace Seruichi.BL.RealEstate.r_staff
         public bool Save_M_REStaff(r_staffModel model, out string msgid)
         {
             msgid = "";
+            byte[] Newphoto = {};
+            byte[] Updatephoto = {};
+
+            DataTable dtUpdate = new DataTable();
+            dtUpdate.Columns.Add("RealECD", typeof(String));
+            dtUpdate.Columns.Add("REStaffCD", typeof(String));
+            dtUpdate.Columns.Add("REStaffName", typeof(String));
+            dtUpdate.Columns.Add("REIntroduction", typeof(String));
+            dtUpdate.Columns.Add("REPassword", typeof(String));
+            dtUpdate.Columns.Add("PermissionChat", typeof(String));
+            dtUpdate.Columns.Add("PermissionSetting", typeof(String));
+            dtUpdate.Columns.Add("PermissionPlan", typeof(String));
+            dtUpdate.Columns.Add("PermissionInvoice", typeof(String));
+
+
+            DataTable dtUpdateImage = new DataTable();
+            dtUpdateImage.Columns.Add("RealECD", typeof(String));
+            dtUpdateImage.Columns.Add("REFaceImage", typeof(String));
+            dtUpdateImage.Columns.Add("REStaffCD", typeof(String));
+
+            if (model.lst_StaffModel.Count > 0)
+            {
+                for (int i = 0; i < model.lst_StaffModel.Count; i++)
+                {
+                    DataRow rowImg = dtUpdateImage.NewRow();
+                    DataRow row = dtUpdate.NewRow();
+                    row["RealECD"] = model.lst_StaffModel[i].RealECD;
+                    rowImg["RealECD"] = model.lst_StaffModel[i].RealECD;
+                    if (!String.IsNullOrWhiteSpace(model.lst_StaffModel[i].REFaceImage))
+                    {
+                        //Updatephoto = GetPhoto(model.lst_StaffModel[i].REFaceImage);
+                        // row["REFaceImage"] = Convert.ToBase64String(Updatephoto);
+                        rowImg["REFaceImage"] = model.lst_StaffModel[i].REFaceImage;
+                    }
+                    else
+                    {
+                        rowImg["REFaceImage"] = DBNull.Value;//model.lst_StaffModel[i].REFaceImage;
+                    }
+                    rowImg["REStaffCD"] = model.lst_StaffModel[i].REStaffCD;
+                    row["REStaffCD"] = model.lst_StaffModel[i].REStaffCD;
+                    row["REStaffName"] = model.lst_StaffModel[i].REStaffName;
+                    row["REIntroduction"] = model.lst_StaffModel[i].REIntroduction;
+                    row["REPassword"] = model.lst_StaffModel[i].REPassword;
+                    row["PermissionChat"] = model.lst_StaffModel[i].PermissionChat;
+                    row["PermissionSetting"] = model.lst_StaffModel[i].PermissionSetting;
+                    row["PermissionPlan"] = model.lst_StaffModel[i].PermissionPlan;
+                    row["PermissionInvoice"] = model.lst_StaffModel[i].PermissionInvoice;
+                    dtUpdate.Rows.Add(row);
+                    dtUpdateImage.Rows.Add(rowImg);
+                }
+             }
+
+            if (model.LoginID =="admin")
+            {
+                if (!String.IsNullOrWhiteSpace(model.REFaceImage))
+                {
+                    Newphoto = GetPhoto(model.REFaceImage);
+                }
+            }
+
+            //dtUpdate.TableName = "test";
+            //System.IO.StringWriter writer = new System.IO.StringWriter();
+            //dtUpdate.WriteXml(writer, XmlWriteMode.WriteSchema, false);
+            //string XMLresult = writer.ToString();
 
             var sqlParams = new SqlParameter[]
              {
-                new SqlParameter("@REFaceImage", SqlDbType.VarChar){ Value = model.REFaceImage.ToStringOrNull()},
+                new SqlParameter("@REFaceImage", SqlDbType.Image,Newphoto.Length){ Value = Newphoto},
                 new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull()},
                 new SqlParameter("@REStaffCD", SqlDbType.VarChar){ Value = model.REStaffCD.ToStringOrNull() },
                 new SqlParameter("@REPassword", SqlDbType.VarChar){ Value = model.REPassword.ToStringOrNull() },
@@ -115,10 +180,12 @@ namespace Seruichi.BL.RealEstate.r_staff
                 new SqlParameter("@LoginName", SqlDbType.VarChar){ Value =   model.LoginName.ToStringOrNull() },
                 new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.LoginID },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value =  model.IPAddress },
-                //new SqlParameter("@RealECD", SqlDbType.VarChar){ Value =  model.RealECD },
-                new SqlParameter("@M_REStaff", SqlDbType.Structured){ TypeName = "dbo.R_REStaff", Value = model.lst_StaffModel.ToDataTable() },
+             //new SqlParameter("@RealECD", SqlDbType.VarChar){ Value =  model.RealECD },
+               new SqlParameter("@M_REStaff", SqlDbType.Structured){ TypeName = "dbo.R_REStaff", Value = dtUpdate },
+             //new SqlParameter("@xml", SqlDbType.Xml){Value = XMLresult },
+             //cmd.Parameters.Add("@xml", SqlDbType.Xml).Value = xml;
                
-             };
+        };
 
             try
             {
@@ -136,6 +203,17 @@ namespace Seruichi.BL.RealEstate.r_staff
                 string str = ex.ToString();
                 return false;
             }
+        }
+        public static byte[] GetPhoto(string filePath)
+        {
+            FileStream stream = new FileStream(
+            filePath, FileMode.Open, FileAccess.Read);
+            BinaryReader reader = new BinaryReader(stream);
+            byte[] photo = reader.ReadBytes((int)stream.Length);
+            reader.Close();
+            stream.Close();
+
+            return photo;
         }
 
         //public void Update_M_REStaff(r_staffModel model)

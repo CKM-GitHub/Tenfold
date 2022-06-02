@@ -1,4 +1,5 @@
 ﻿const _url = {};
+var TempFilepath;
 $(function () {
     setValidation();
     _url.Get_select_M_REStaff = common.appPath + '/r_staff/Get_select_M_REStaff';
@@ -85,10 +86,12 @@ function addEvents() {
         }
         if (/^image/.test(files[0].type)) {
             // only image file
+           
             var reader = new FileReader(); // instance of the FileReader
             reader.readAsDataURL(files[0]); // read the local file
 
             reader.onloadend = function () {
+                //TempFilepath = this.result;
                 $(holder).addClass("uploadInProgress");
                 $(holder).find(".pic").attr("src", this.result);
                 $(holder).append(
@@ -136,7 +139,7 @@ function addEvents() {
     });
 
     
-    $(document).on("change",".form-control" ,function () {
+    $('#newStaffCD').on("change",".form-control" ,function () {
         if ($('#newStaffCD').val().trim().length !== 0) {
             $('#newStaffCD')
                 .addvalidation_errorElement("#newStaffCDError")
@@ -194,10 +197,7 @@ function addEvents() {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
-
         const $REStaffCD = $("#newStaffCD").val(), $REStaffName = $('#newStaffName').val(), $REIntroduction = $('#newStaffIntro').val(), $REPassword = $('#newStaffpsw').val()
-        //var new_REFaceImage = $("#newpic_holder").find("img").attr("src");
-      
         let model = {
             REFaceImage: $("#newpic_holder").find("img").attr("src"),
             REStaffCD: $REStaffCD,
@@ -210,8 +210,8 @@ function addEvents() {
             PermissionInvoice: $('#New_chkInvoice').is(':checked') ? "1" : "0",
         };
 
-        model.lst_StaffModel = Update_list_M_REStaff();
-        Save_M_REStaff(model, $form)
+          model.lst_StaffModel = Update_list_M_REStaff();
+          Save_M_REStaff(model, $form)
     });
 }
 
@@ -220,7 +220,7 @@ function Update_list_M_REStaff() {
     $(".update-data").each(function (index) {
         var i = index + 1;
         const data = {
-            REFaceImage: null, //$('#newpic_holder_' + i).find("img").attr("src"),
+            REFaceImage:$('#newpic_holder_' + i).find("img").attr("src"),
             RealECD: $('#RealECD_' + i).val(),
             REStaffCD: $('#REStaffCD_' + i).val(),
             REStaffName: $('#REStaffName_' + i).val(),
@@ -237,7 +237,7 @@ function Update_list_M_REStaff() {
     return lst_update_StaffModel;
 }
 function Save_M_REStaff(model, $form) {
-    common.callAjaxWithLoading(_url.save_M_REStaff, model, this, function (result) {
+    common.callAjaxWithLoading(_url.save_M_REStaff, model, this , function (result) {
         if (result && result.isOK) {
             window.location.reload();
         }
