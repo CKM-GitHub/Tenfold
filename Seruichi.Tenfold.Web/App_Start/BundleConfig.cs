@@ -39,7 +39,7 @@ namespace Seruichi.Tenfold.Web
                       "~/Content/css/Contact-Form-Clean.css",
                       "~/Content/css/Login-Form-Clean.css",
                       "~/Content/css/Soft-UI-Aside-Navbar.css",
-                      "~/Content/css/style.css"
+                      "~/Content/css/style.css"  
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/t_login").Include(
@@ -82,6 +82,11 @@ namespace Seruichi.Tenfold.Web
 
             bundles.Add(new ScriptBundle("~/bundles/t_mansion").Include(
                      "~/Scripts/t_mansion.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/t_reale_asmhis").Include(
+                     "~/Scripts/t_reale_asmhis.js",
+                      "~/Scripts/t_common.js"
+                     ));
         }
     }
 }
