@@ -1,13 +1,9 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Models.a_indexModel;
 
-namespace Models.Tenfold.t_mansion_new
+namespace Models
 {
-   public class t_mansion_newModel:BaseModel
+    public class t_mansion_newModel : BaseModel
     {
 
 

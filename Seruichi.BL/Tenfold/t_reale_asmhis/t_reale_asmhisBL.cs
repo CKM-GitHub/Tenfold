@@ -4,12 +4,13 @@ using System.Data;
 using System.Data.SqlClient;
 using Seruichi.Common;
 using Models.Tenfold.t_reale_purchase;
+using Models.Tenfold.t_reale_asmhis;
 
-namespace Seruichi.BL.Tenfold.t_reale_purchase
+namespace Seruichi.BL.Tenfold.t_reale_asmhis
 {
-    public class t_reale_purchaseBL
+    public class t_reale_asmhisBL
     {
-        public Dictionary<string, string> ValidateAll(t_reale_purchaseModel model, List<string> lst_checkBox)
+        public Dictionary<string, string> ValidateAll(t_reale_asmhisModel model, List<string> lst_checkBox)
         {
             ValidatorAllItems validator = new ValidatorAllItems();
 
@@ -18,8 +19,10 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
 
             validator.CheckCompareDate("StartDate", model.StartDate, model.EndDate);//E111
             validator.CheckCompareDate("EndDate", model.StartDate, model.EndDate);//E111
-
-            validator.CheckCheckboxLenght("chk_Purchase", lst_checkBox);//E112
+            List<string> AreaMansion = new List<string>();
+            AreaMansion.Add(model.Chk_Area.ToString());
+            AreaMansion.Add(model.Chk_Mansion.ToString());
+            validator.CheckCheckboxLenght("Chk_Area", AreaMansion);//E112
 
             return validator.GetValidationResult();
         }
@@ -77,7 +80,34 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
             }
             return dt;
         }
+        public DataTable get_t_reale_asmhis_DisplayData(t_reale_asmhisModel model)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD },
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD },
+                new SqlParameter("@Range", SqlDbType.VarChar){ Value = model.Range.ToStringOrNull() },
+                new SqlParameter("@StartDate", SqlDbType.VarChar){ Value = model.StartDate.ToStringOrNull() },
+                new SqlParameter("@EndDate", SqlDbType.VarChar){ Value = model.EndDate.ToStringOrNull() },
+                new SqlParameter("@Chk_Area", SqlDbType.TinyInt){ Value = model.Chk_Area.ToByte(0) },
+                new SqlParameter("@Chk_Mansion", SqlDbType.TinyInt){ Value = model.Chk_Mansion.ToByte(0) },
+                new SqlParameter("@Chk_SendCustomer", SqlDbType.TinyInt){ Value = model.Chk_SendCustomer.ToByte(0) },
+                new SqlParameter("@Chk_Top5", SqlDbType.TinyInt){ Value = model.Chk_Top5.ToByte(0) },
+                new SqlParameter("@Chk_Top5Out", SqlDbType.TinyInt){ Value = model.Chk_Top5Out.ToStringOrNull() },
+                new SqlParameter("@Chk_NonMemberSeller", SqlDbType.TinyInt){ Value = model.Chk_NonMemberSeller.ToStringOrNull() }, 
+            };
 
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_reale_asmhis_get_DisplayData", sqlParams);
+
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+            foreach (DataRow row in dt.Rows)
+            {
+                row["SellerName"] = crypt.DecryptFromBase64(row.Field<string>("SellerName"), decryptionKey);
+            }
+            return dt;
+        }
         public DataTable get_t_reale_purchase_CSVData(t_reale_purchaseModel model)
         {
             var sqlParams = new SqlParameter[]
@@ -135,7 +165,7 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
             var dt = db.SelectDatatable("pr_tenfold_get_Modal_HomeData", sqlParams);
             return dt;
         }
-        
+
         public DataTable get_Modal_ProfileData(t_reale_purchaseModel model)
         {
             var sqlParams = new SqlParameter[]
@@ -146,7 +176,7 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
             var dt = db.SelectDatatable("pr_tenfold_get_Modal_ProfileData", sqlParams);
             return dt;
         }
-        
+
         public DataTable get_Modal_ContactData(t_reale_purchaseModel model)
         {
             var sqlParams = new SqlParameter[]
@@ -182,5 +212,7 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
             var dt = db.SelectDatatable("pr_tenfold_get_Modal_DetailData", sqlParams);
             return dt;
         }
+
+      
     }
 }

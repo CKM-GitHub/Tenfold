@@ -2,21 +2,27 @@
 $(function () {
     setValidation();
     _url.get_t_reale_purchase_CompanyInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyInfo';
-    _url.get_t_reale_purchase_CompanyCountingInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyCountingInfo';
-    _url.get_t_reale_purchase_DisplayData = common.appPath + '/t_reale_purchase/get_t_reale_purchase_DisplayData';
-    _url.get_t_reale_purchase_CSVData = common.appPath + '/t_reale_purchase/get_t_reale_purchase_CSVData';
+    _url.get_t_reale_purchase_CompanyCountingInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyCountingInfo'; 
+    _url.get_t_reale_purchase_DisplayData = common.appPath + '/t_reale_asmhis/get_t_reale_asmhis_DisplayData';
+
+    _url.get_t_reale_purchase_CSVData = common.appPath + '/t_reale_asmhis/get_t_reale_asmhis_DisplayData';
     _url.Insert_L_Log = common.appPath + '/t_reale_purchase/Insert_L_Log';
     _url.get_Modal_HomeData = common.appPath + '/t_reale_purchase/get_Modal_HomeData';
     _url.get_Modal_ProfileData = common.appPath + '/t_reale_purchase/get_Modal_ProfileData';
     _url.get_Modal_ContactData = common.appPath + '/t_reale_purchase/get_Modal_ContactData';
     _url.get_Modal_DetailData = common.appPath + '/t_reale_purchase/get_Modal_DetailData';
-    addEvents();
+    addEvents(); 
+    $('#subMenu li').children('a').removeClass("active"); 
+    $('#subMenu li').children('a').eq(1).addClass('active');
     $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
-    $('#t_reale_purchase').addClass('font-bold text-underline');
+    $('#t_reale_asmhis').addClass('font-bold text-underline');
+   
+
+    //assessmentMenu
 });
 
 function setValidation() {
-    $('.form-check-input')
+    $('.form-areamansion')
         .addvalidation_errorElement("#CheckBoxError")
         .addvalidation_checkboxlenght(); //E112
 
@@ -33,7 +39,7 @@ function setValidation() {
 
 function addEvents() {
     common.bindValidationEvent('#form1', '');
-
+ 
     $('.form-check-input').on('change', function () {
         this.value = this.checked ? 1 : 0;
         if ($("input[type=checkbox]:checked").length > 0) {
@@ -83,50 +89,77 @@ function addEvents() {
         $('#StartDate').val(firstdaypremonth);
         $('#EndDate').val(lastdaypremonth);
     });
-
+    $('#subMenu li').children('a').on('click', function () {
+        $('#subMenu li').children('a').removeClass("active");
+        $(this).addClass('active');
+    });
     let model = {
         RealECD: common.getUrlParameter('reale'),
-        chk_Purchase: $("#chk_Purchase").val(),
-        chk_Checking: $("#chk_Checking").val(),
-        chk_Nego: $("#chk_Nego").val(),
-        chk_Contract: $("#chk_Contract").val(),
-        chk_SellerDeclined: $("#chk_SellerDeclined").val(),
-        chk_BuyerDeclined: $("#chk_BuyerDeclined").val(),
-        Range: $("#Range").val(),
+        Chk_Area: $("#Chk_Area").val(),
+        Chk_Mansion: $("#Chk_Mansion").val(),
+        Chk_SendCustomer: $("#Chk_SendCustomer").val(),
+        Chk_Top5: $("#Chk_Top5").val(),
+        Chk_Top5Out: $("#Chk_Top5Out").val(),
+        Chk_NonMemberSeller: $("#Chk_NonMemberSeller").val(),
+        Range: $("#ddlRange").val(),
         StartDate: $("#StartDate").val(),
-        EndDate: $("#EndDate").val()
+        EndDate: $("#EndDate").val(),
+        IsCSV: false
+
     };
-    $('#RealECD').val(model.RealECD);
+
     Bind_Company_Data(model, this);         //Bind Company Info Data to the title part of the page
 
     get_purchase_Data(model, this, 'page_load');
 
-    sortTable.getSortingTable("tblPurchaseDetails");
-
-    $('#btnDisplay').on('click', function () {
-        $('#RealEName').val($('#REName').text());
+    sortTable.getSortingTable("tblPurchaseDetails"); 
+    $('#btnDisplay').on('click', function () { 
         $form = $('#form1').hideChildErrors();
         if (!common.checkValidityOnSave('#form1')) {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
-        $('#tblPurchaseDetails tbody').empty();
-        const fd = new FormData(document.forms.form1);
-        const model = Object.fromEntries(fd);
+        $('#tblPurchaseDetails tbody').empty(); 
+        model = {
+            RealECD: common.getUrlParameter('reale'),
+            Chk_Area: $("#Chk_Area").val(),
+            Chk_Mansion: $("#Chk_Mansion").val(),
+            Chk_SendCustomer: $("#Chk_SendCustomer").val(),
+            Chk_Top5: $("#Chk_Top5").val(),
+            Chk_Top5Out: $("#Chk_Top5Out").val(),
+            Chk_NonMemberSeller: $("#Chk_NonMemberSeller").val(),
+            Range: $("#ddlRange").val(),
+            StartDate: $("#StartDate").val(),
+            EndDate: $("#EndDate").val(),
+            IsCSV: false
+        };
+
         get_purchase_Data(model, $form, 'Display');
     });
 
     $('#btnCSV').on('click', function () {
-        $('#RealEName').val($('#REName').text());
         $form = $('#form1').hideChildErrors();
         if (!common.checkValidityOnSave('#form1')) {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
         $('#tblPurchaseDetails tbody').empty();
-        const fd = new FormData(document.forms.form1);
-        const model = Object.fromEntries(fd);
-        get_purchase_Data(model, $form, 'csv');
+        //const fd = new FormData(document.forms.form1);
+        //const model = Object.fromEntries(fd);
+        model = {
+            RealECD: common.getUrlParameter('reale'),
+            Chk_Area: $("#Chk_Area").val(),
+            Chk_Mansion: $("#Chk_Mansion").val(),
+            Chk_SendCustomer: $("#Chk_SendCustomer").val(),
+            Chk_Top5: $("#Chk_Top5").val(),
+            Chk_Top5Out: $("#Chk_Top5Out").val(),
+            Chk_NonMemberSeller: $("#Chk_NonMemberSeller").val(),
+            Range: $("#ddlRange").val(),
+            StartDate: $("#StartDate").val(),
+            EndDate: $("#EndDate").val(),
+            IsCSV: true
+        };
+        get_purchase_Data(model, $form);
 
         common.callAjax(_url.get_t_reale_purchase_CSVData, model,
             function (result) {
@@ -135,8 +168,6 @@ function addEvents() {
 
                 var csv = common.getJSONtoCSV(table_data);
                 if (!(csv == "ERROR")) {
-                    l_logfunction(model.RealECD + ' ' + model.RealEName, 'csv', '');
-
                     var downloadLink = document.createElement("a");
                     var blob = new Blob(["\ufeff", csv]);
                     var url = URL.createObjectURL(blob);
@@ -149,11 +180,13 @@ function addEvents() {
                         ("0" + m.getHours()).slice(-2) + "" +
                         ("0" + m.getMinutes()).slice(-2) + "" +
                         ("0" + m.getSeconds()).slice(-2);
-                    downloadLink.download = "案件一覧_" + dateString + ".csv";
-
+                    downloadLink.download = "不動産会社査定状況リスト_" + dateString + ".csv";
+                    //"不動産会社査定状況リスト_YYYYMMDD_HHMMSS.csv"
                     document.body.appendChild(downloadLink);
                     downloadLink.click();
                     document.body.removeChild(downloadLink);
+
+                    l_logfunction(model.RealECD + ' ' + model.REName, 'display', '');
                 }
                 else {
                     alert("There is no data!");
@@ -161,19 +194,24 @@ function addEvents() {
             }
         )
     });
+
+
 }
 
 function get_purchase_Data(model, $form, state) {
     common.callAjaxWithLoading(_url.get_t_reale_purchase_DisplayData, model, this, function (result) {
         if (result && result.isOK) {
+           
             Bind_DisplayData(result.data);
             if (state == 'Display')
-                l_logfunction(model.RealECD + ' ' + model.RealEName, 'display', '');
+                l_logfunction(model.RealECD + ' ' + model.REName, 'display', '');
         }
 
         if (result && !result.isOK) {
+            // alert(result.data);
             const errors = result.data;
             for (key in errors) {
+                //alert(errors.count)
                 const target = document.getElementById(key);
                 $(target).showError(errors[key]);
                 $form.getInvalidItems().get(0).focus();
@@ -192,61 +230,32 @@ function Bind_DisplayData(result) {
     let html = "";
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
-
-            if (isEmptyOrSpaces(data[i]["ステータス"])) {
-                _letter = "";
-                _status = "0";
-                _class = "ms-1 ps-1 pe-1 rounded-circle";
+            var spantxt = '';
+            if (data[i]["AssessType"] == "エリア") {
+                spantxt += '<label> <span class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white">エ</span> エリア</label>';
             }
             else {
-                if (data[i]["ステータス"] == "買取依頼") {
-                    _letter = "買";
-                    _status = "1";
-                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white";
-                }
-                else if (data[i]["ステータス"] == "確認中") {
-                    _letter = "確";
-                    _status = "2";
-                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning ext-dark";
-                }
-                else if (data[i]["ステータス"] == "交渉中") {
-                    _letter = "交";
-                    _status = "3";
-                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark";
-                }
-                else if (data[i]["ステータス"] == "成約") {
-                    _letter = "成";
-                    _status = "4";
-                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary";
-                }
-                else if (data[i]["ステータス"] == "売主辞退") {
-                    _letter = "辞";
-                    _status = "5";
-                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-light text-danger";
-                }
-                else if (data[i]["ステータス"] == "買主辞退") {
-                    _letter = "辞";
-                    _status = "6";
-                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-dark text-white";
-                }
+                spantxt += '<label> <span  class="ms-1 ps-1 pe-1 rounded-circle bg-warning txt-dark" > マ</span > マンション</label> '; 
             }
+            if (data[i]["SendCustomer"] == '送客') {
+                spantxt+= '<label> <span class="ms-1 ps-1 pe-1 rounded-circle bg-danger text-white">送</span> 送客</label>';
+            }  
 
-            var DeepDatetime = data[i]["詳細査定日時"].replace(" ", "&");
+            var DeepDatetime = data[i]["DeepDate"].replace(" ", "&");
+            var paramSeller = '\'t_seller_assessment ' + data[i]["SellerCD"] + '\',\'' + 'link' + '\',\'' + data[i]["SellerCD"] + '\'';
+            var paramDetail = '\'t_seller_assessment_detail ' + data[i]["AssessReqID"] + '\',\'' + 'link' + '\',\'' + data[i]["AssessReqID"] + '\'';
+
             html += '<tr>\
-            <td class= "text-end"> ' + (i + 1) + '</td>\
-            <td><span class="' + _class + '">' + _letter + '</span><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
-            <td class="d-none">'+ _status + '</td>\
-            <td class="text-nowrap">'+ data[i]["査定依頼ID"] + '</td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["査定依頼ID"] + '&' + DeepDatetime + ' data-bs-toggle="modal" data-bs-target="#t_reale" href="#" onclick="Bind_ModalDetails(this.id)"><span>' + data[i]["物件名"] + '</span></a></td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id="' + data[i]["SellerCD"] + '" href="#" onclick="l_logfunction(' + '\'t_seller_assessment ' + data[i]["SellerCD"] + '\', ' + '\'link\'' + ', this.id)">' + data[i]["売主名"] + '</a></td>\
-            <td class="text-nowrap">'+ data[i]["登録日時"] + '</td>\
-            <td class="text-nowrap">'+ data[i]["簡易査定日時"] + '</td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id="' + data[i]["査定依頼ID"] + '" href="#" onclick="l_logfunction(' + '\'t_seller_assessment_detail ' + data[i]["査定依頼ID"] + '\', ' + '\'link\'' + ', this.id)">' + data[i]["詳細査定日時"] + '</a></td>\
-            <td class="text-nowrap">'+ data[i]["買取依頼日時"] + '</td>\
-            <td class="text-nowrap"> '+ data[i]["送客日時"] + '</td>\
-            <td class="text-nowrap"> '+ data[i]["成約日時"] + '</td>\
-            <td class="text-nowrap"> '+ data[i]["売主辞退日時"] + '</td>\
-            <td class="text-nowrap"> '+ data[i]["買主辞退日時"] + '</td>\
+            <td class="text-nowrap">'+ spantxt + '</td>\
+            <td class="text-nowrap">' + data[i]["AssessReqID"] + '</td>\
+             <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["AssessReqID"] + '&' + DeepDatetime + ' data-bs-toggle="modal" data-bs-target="#t_reale" href="#" onclick="Bind_ModalDetails(this.id)"><span>' + data[i]["RoomNumber"] + '</span></a></td>\
+            <td> <a class="text-heading font-semibold text-decoration-underline text-nowrap" id="' + data[i][" SellerCD"] + '"   onclick="l_logfunction(' + paramSeller +')" > ' + data[i]["SellerName"] + '</a ></td>\
+            <td class="text-nowrap">'+ data[i]["InsertDate"] + '</td>\
+            <td class="text-nowrap">'+ data[i]["EasyDate"] + '</td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id="' + data[i]["AssessReqID"] + '"  onclick="l_logfunction(' + paramDetail + ')">' + data[i]["DeepDate"] + '</a></td>\
+            <td class="text-nowrap">'+ data[i]["PurchaseDate"] + '</td>\
+            <td class="text-nowrap"> '+ data[i]["IntroDate"] + '</td>\
+            <td class="text-nowrap" style="text-align:right;"> '+ data[i]["Rank"] + '</td>\
             </tr>'
         }
 
@@ -263,22 +272,25 @@ function Bind_DisplayData(result) {
 }
 
 function l_logfunction(remark, Process, id) {
+   
     let model = {
         LoginKBN: '3',
         LoginID: null,
         RealECD: null,
         LoginName: null,
         IPAddress: null,
-        Page: 't_reale_purchase',
+        Page: 't_reale_asmhis',
         Processing: Process,
         Remarks: remark,
     };
     common.callAjax(_url.Insert_L_Log, model, function (result) {
-        if (result && result.isOK) {
-            if (remark == 't_seller_assessment ' + id)
-                window.location.href = "https://www.seruichi.com/t_seller_assessment/Index?SellerCD=" + id;
-            else if (remark == 't_seller_assessment_detail ' + id)
-                window.location.href = "https://www.seruichi.com/t_seller_assessment_detail/Index?AssReqID=" + id;
+        if (result && result.isOK) { 
+            if (remark == 't_seller_assessment ' + id) {  
+                window.location.href = window.location.href.replace('t_reale_asmhis', 't_seller_assessment')  + "&SellerCD=" + id;
+            }
+            else if (remark == 't_seller_assessment_detail ' + id) { 
+                window.location.href = window.location.href.replace('t_reale_asmhis', 't_seller_assessment_detail')  + "&AssReqID=" + id;
+            }
         }
     });
 }

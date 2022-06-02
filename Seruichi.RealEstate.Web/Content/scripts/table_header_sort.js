@@ -5,6 +5,7 @@
         const headers = table.querySelectorAll('th');
         const tableBody = table.querySelector('tbody');
         const rows = tableBody.querySelectorAll('tr');
+        let old_colIndex = 0;
 
         const left_right_headers = table.querySelectorAll('th left_sort-by');
 
@@ -28,13 +29,18 @@
 
         const sortColumn = function (index) {
             const rows = tableBody.querySelectorAll('tr');
-            var col_index = [], multiplier;
+            var col_index = [], multiplier, direction;
             if (headers[index].hasAttribute('ordercol-index'))
                 col_index = headers[index].getAttribute('ordercol-index').split('_');
             else
                 col_index[0] = index;
             // Get the current direction
-            const direction = directions[col_index[0]] || 'asc';
+            if (old_colIndex !== col_index[0]) {
+                direction = 'asc';
+                old_colIndex = col_index[0];
+            }
+            else
+                direction = directions[col_index[0]] || 'asc';
 
             // A factor based on the direction
             if (index == 0) {

@@ -1,5 +1,4 @@
 ﻿using Models;
-using Models.Tenfold.t_mansion_new;
 using Seruichi.Common;
 using System;
 using System.Collections.Generic;
@@ -8,10 +7,8 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Seruichi.BL.Tenfold.t_mansion_new
+namespace Seruichi.BL
 {
    public  class t_mansion_newBL
     {

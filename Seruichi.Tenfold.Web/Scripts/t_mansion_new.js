@@ -11,7 +11,6 @@ $(function () {
     _url.getTownDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfTown;
     _url.getLineDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfLine;
     _url.getStationDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfStation;
-    _url.getNearestStations = common.appPath + commonApiUrl.getNearestStations;
     _url.checkZipCode = common.appPath + '/t_mansion_new/CheckZipCode';
     _url.getMansionListByMansionWord = common.appPath + '/t_mansion_new/GetMansionListByMansionWord';
     _url.checkAll = common.appPath + '/t_mansion_new/CheckAll';
