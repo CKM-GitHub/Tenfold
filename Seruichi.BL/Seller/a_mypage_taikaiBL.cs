@@ -24,6 +24,26 @@ namespace Seruichi.BL.Seller
             return model;
 
         }
+
+        public bool Update_M_Seller_Data(a_mypage_taikaiModel model,out string msgid)
+        {
+            msgid = "";
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD},
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress},
+                new SqlParameter("@loginName", SqlDbType.VarChar){ Value = model.LoginName}
+            };
+            try
+            {
+                DBAccess db = new DBAccess();
+                return db.InsertUpdateDeleteData("pr_a_mypage_taikai_Update_M_Seller_Data", false, sqlParams);
+            }
+            catch(ExclusionException ex)
+            {
+                return false;
+            }
+        }
     }
 
         
