@@ -46,10 +46,10 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Generate_CSV(t_seller_listModel model)
+        public ActionResult Generate_CSV(t_seller_listModel model)
         {
             t_seller_listBL bl = new t_seller_listBL();
-            var dt = await bl.Generate_CSV(model);
+            var dt =bl.Generate_CSV(model);
             return OKResult(DataTableToJSON(dt));
         }
 
