@@ -156,7 +156,7 @@ function addEvents() {
                     document.body.removeChild(downloadLink);
                 }
                 else {
-                    alert("There is no data!");
+                    $('#site-error-modal').modal('show');
                 }
             }
         )
