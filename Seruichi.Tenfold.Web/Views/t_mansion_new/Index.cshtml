@@ -155,9 +155,10 @@
                                                             <div class="row">
                                                                 <div class="mb-4 pb-2 col-12 col-md-6">
                                                                     <div class="form-outline form-white">
-                                                                        <div class="d-flex">
+                                                                        <div class="d-flex" style="width:280px">
                                                                             <label class="form-label" for="form3Examplea3">土地権利区分</label>
-                                                                            <span class="cap-errormsg-right" id="errorRightKBN"></span>
+                                                                            <span class="cap-errormsg-right"
+                                                                                  id="errorRightKBN"></span>
                                                                         </div>
                                                                         <div class="w-100 d-md-flex">
                                                                             <div>
@@ -212,7 +213,7 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="mb-4 pb-2 col-12 col-md-5" >
+                                                                <div class="mb-4 pb-2 col-12 col-md-5">
                                                                     <div class="form-outline form-white">
                                                                         <div class="d-flex">
                                                                             <label class="form-label" for="form3Examplea3">階数</label>
@@ -1557,7 +1558,7 @@
 
                                                         <div class="mb-4 pb-2">
                                                             <div class="form-outline form-white p-5">
-                                                                
+
                                                                 <div class="d-flex">
                                                                     <label class="form-label" for="form3Examplev4">メモ</label>
                                                                     <span class="cap-errormsg-right" id="errorRemark"></span>
@@ -1572,7 +1573,10 @@
                                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="btnShowConfirmation" data-bs-target="#exampleModal">
                                                             確認
                                                         </button>&nbsp;
-                                                        <button type="button" class="btn btn-default" id="btnCancel">取消</button>
+                                                        <button type="button" class="btn btn-lg btn-default" data-bs-toggle="modal"
+                                                                data-bs-target="#modal-changecal">
+                                                            取消
+                                                        </button>
                                                     </div>
                                                     <div class="text-center">
                                                         <span class="cap-errormsg-bottom" id="errorProcess"></span>
@@ -1707,7 +1711,7 @@
                                                                             <div class="mb-4 pb-2 col-12 col-md-5">
                                                                                 <div class="form-outline form-white">
                                                                                     <label class="form-label" for="form3Examplea3">階数</label>
-                                                                                    <input type="number"  id="confirm_Floors" 
+                                                                                    <input type="number" id="confirm_Floors"
                                                                                            class="form-control form-control-lg text-center cap-fon-form-w150"
                                                                                            oninput="javascript:if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                                                                            maxlength="3" disabled />
@@ -2031,8 +2035,36 @@
                     </div>
                 </div>
 
-            </main>
+                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                     id="modal-changecal">
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">変更取消</h4><button type="button" class="btn-close d-none" data-bs-dismiss="modal"
+                                                                         aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <section class="newsletter-subscribe pt-0 p-0">
+                                    <div class="container">
+                                        <div class="intro"></div>
+                                        <form class="d-flex justify-content-center flex-wrap mx-auto" method="post"
+                                              style="text-align: center;">
+                                            <h1 class="cap-icon-h1 border border-danger border-8"><i class="fa fa-exclamation-circle pt-1 pb-1 ps-3 pe-3 cap-icon-i text-danger"></i></h1>
+                                        </form>
+                                    </div>
+                                    <h4 class="text-center align-self-center">変更内容を破棄してもよろしいですか？</h4>
 
+                                </section>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-lg btn-primary" data-bs-dismiss="modal" id="btnCancel">破棄</button><button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </main>
         </div>
     </div>
 
