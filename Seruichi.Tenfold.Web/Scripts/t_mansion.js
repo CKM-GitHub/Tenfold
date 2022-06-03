@@ -15,10 +15,20 @@ $(function () {
     _url.getLineDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfLine;
     _url.getStationDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfStation;    
     _url.getNearestStations = common.appPath + commonApiUrl.getNearestStations;
+    _url.getlineStationDistanceByMansionCD = common.appPath + '/t_mansion/GetLineStationDistanceByMansionCD';
 
     setValidation();
+
     addEvents();
+
+    Bind_Update_Data();
 });
+
+function Bind_Update_Data() {
+    
+    setlineStationDistanceByMansionCD($("#MansionCD").val(),$('#PrefCD').val())
+  
+}
 
 function setValidation() {
     //マンション名
@@ -83,6 +93,174 @@ function setValidation() {
    
 
     ////交通アクセス
+    ErrorLineStationDistance();
+    
+
+    ////謄本表記
+    //$('#Noti')
+    //    .addvalidation_errorElement("#errorNoti")
+    //    .addvalidation_reqired()
+    //    .addvalidation_doublebyte();
+    ////カタカナ
+    //$('#Katakana')
+    //    .addvalidation_errorElement("#errorKatakana")
+    //    .addvalidation_reqired()
+    //    .addvalidation_doublebyte_kana();
+
+    ////ｶﾀｶﾅ
+    //$('#Katakana1')
+    //    .addvalidation_errorElement("#errorKatakana1")
+    //    .addvalidation_reqired()
+    //    .addvalidation_singlebyte_kana();
+    ////ひらがな
+    //$('#Hirakana')
+    //    .addvalidation_errorElement("#errorHirakana")
+    //    .addvalidation_reqired()
+    //    .addvalidation_doublebyte_hira();
+
+    //$('#Remark')
+    //    .addvalidation_errorElement("#errorRemark")
+    //    .addvalidation_singlebyte_doublebyte();
+
+    //$('#btnShowConfirmation')
+    //    .addvalidation_errorElement("#errorProcess");
+
+}
+
+function addEvents() {
+
+
+    $('.container-fluid .card-body').keypress(function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+        }
+    });
+
+    common.bindValidationEvent('#form1', ':not(#ZipCode1,#ZipCode2)');
+
+    //郵便番号
+    $('#ZipCode1,#ZipCode2').on('change', function () {
+        const $this = $(this), $zipCode1 = $('#ZipCode1'), $zipCode2 = $('#ZipCode2')
+
+        if (!common.checkValidityInput($this)) {
+            return false;
+        }
+
+        let model = {
+            ZipCode1: $zipCode1.val(),
+            ZipCode2: $zipCode2.val()
+        };
+
+        if (!model.ZipCode1 && !model.ZipCode2) {
+            $($zipCode1, $zipCode2).hideError();
+            return;
+        }
+
+        common.callAjax(_url.checkZipCode, model,
+            function (result) {
+                if (result && result.isOK) {
+                    $($zipCode1).hideError();
+                    $($zipCode2).hideError();
+
+                    const data = result.data;
+
+                    if (data.PrefCD) {
+                        $('#PrefCD').val(data.PrefCD).hideError();
+                        setCityList('add', data.PrefCD, data.CityCD);
+                        setTownList('remove');
+                        setLineList('add', data.PrefCD);
+                        setStationList('remove');
+                        $('.js-distance').val('');
+                    }
+                    if (data.CityCD) {
+                        setTownList('add', data.PrefCD, data.CityCD, data.TownCD);
+                        $('#CityCD').hideError();
+                    }
+                    if (data.TownCD) {
+                        $('#TownCD').val(data.TownCD).hideError();
+                    }
+                }
+                if (result && !result.isOK) {
+                    const message = result.message;
+                    $this.showError(message.MessageText1);
+                }
+            });
+    });
+
+    //都道府県
+    $('#PrefCD').on('change', function () {
+        const inputval = $(this).val();
+        removeLineAndStation();
+
+        if (inputval) {
+            setCityList('add', inputval);
+            setTownList('remove');
+            setLineList('add', inputval);
+            //setStationList('remove');
+            //$('.js-distance').val('').hideError();          
+        }
+        else {
+            setCityList('remove');
+            setTownList('remove');
+            //setLineList('remove');
+            //setStationList('remove');
+            //$('.js-distance').val('').hideError();
+        }
+    });
+
+    //市区町村
+    $('#CityCD').on('change', function () {
+        setTownList('add', $('#PrefCD').val(), $(this).val());
+    });
+
+    //町域、住所
+    $('#TownCD, #Address').on('change', function () {
+        displayNearestStationData();
+    });
+
+    //築年月
+    $('#ConstYYYYMM').on('blur', function () {
+        const $this = $(this);
+        common.callAjax(_url.getBuildingAge, $this.val(), function (result) {
+            if (result && result.isOK) {
+                if (result.data) {
+                    $('#BuildingAge').text('（築' + result.data + '年）').data('building-age', result.data);
+                    if (result.data == 0)
+                        $this.showError(common.getMessage('E208'));
+                    else
+                        $this.hideError();
+                }
+                else
+                    $('#BuildingAge').text('（築　年）')
+            }
+        })
+    });
+
+    ////路線選択
+    $('.js-linecd').on('change', function () {
+        const id = $(this).attr('id');
+        const suffix = id.slice(-2).replace('_', '');
+        const inputval = $(this).val();
+        if (inputval) {
+            setStationList('add', inputval, '#StationCD_' + suffix);
+        }
+        else {
+            setStationList('remove', inputval, '#StationCD_' + suffix);
+        }
+    });
+
+    $('.js-distance').on('click', function () {
+
+        const id = $(this).attr('id');
+        const suffix = id.slice(-2).replace('_', '');
+        var newValue = parseInt(suffix) + 1;
+        $('#Dline_' + newValue).removeClass("bg-secondary");
+        $('#Dline_' + newValue).find("*").prop("disabled", false);
+    });
+
+}
+
+function ErrorLineStationDistance() {
     $('#LineCD_1')
         .addvalidation_errorElement("#errorLineCD1")
         .addvalidation_reqired();
@@ -259,7 +437,7 @@ function setValidation() {
     //.addvalidation_reqired();
     $('#Distance_20')
         .addvalidation_errorElement("#errorDistanceCD20")
-        //.addvalidation_reqired();
+    //.addvalidation_reqired();
 
 
     $('.js-stationcd')
@@ -267,159 +445,6 @@ function setValidation() {
     $('.js-distance')
         .addvalidation_singlebyte_number()
         .addvalidation_custom('customValidation_checkDistance');
-
-    ////謄本表記
-    //$('#Noti')
-    //    .addvalidation_errorElement("#errorNoti")
-    //    .addvalidation_reqired()
-    //    .addvalidation_doublebyte();
-    ////カタカナ
-    //$('#Katakana')
-    //    .addvalidation_errorElement("#errorKatakana")
-    //    .addvalidation_reqired()
-    //    .addvalidation_doublebyte_kana();
-
-    ////ｶﾀｶﾅ
-    //$('#Katakana1')
-    //    .addvalidation_errorElement("#errorKatakana1")
-    //    .addvalidation_reqired()
-    //    .addvalidation_singlebyte_kana();
-    ////ひらがな
-    //$('#Hirakana')
-    //    .addvalidation_errorElement("#errorHirakana")
-    //    .addvalidation_reqired()
-    //    .addvalidation_doublebyte_hira();
-
-    //$('#Remark')
-    //    .addvalidation_errorElement("#errorRemark")
-    //    .addvalidation_singlebyte_doublebyte();
-
-    //$('#btnShowConfirmation')
-    //    .addvalidation_errorElement("#errorProcess");
-
-}
-
-function addEvents() {
-
-
-    $('.container-fluid .card-body').keypress(function (event) {
-        if (event.keyCode == 13) {
-            event.preventDefault();
-        }
-    });
-
-    common.bindValidationEvent('#form1', ':not(#ZipCode1,#ZipCode2)');
-
-    //郵便番号
-    $('#ZipCode1,#ZipCode2').on('change', function () {
-        const $this = $(this), $zipCode1 = $('#ZipCode1'), $zipCode2 = $('#ZipCode2')
-
-        if (!common.checkValidityInput($this)) {
-            return false;
-        }
-
-        let model = {
-            ZipCode1: $zipCode1.val(),
-            ZipCode2: $zipCode2.val()
-        };
-
-        if (!model.ZipCode1 && !model.ZipCode2) {
-            $($zipCode1, $zipCode2).hideError();
-            return;
-        }
-
-        common.callAjax(_url.checkZipCode, model,
-            function (result) {
-                if (result && result.isOK) {
-                    $($zipCode1).hideError();
-                    $($zipCode2).hideError();
-
-                    const data = result.data;
-
-                    if (data.PrefCD) {
-                        $('#PrefCD').val(data.PrefCD).hideError();
-                        setCityList('add', data.PrefCD, data.CityCD);
-                        setTownList('remove');
-                        setLineList('add', data.PrefCD);
-                        setStationList('remove');
-                    }
-                    if (data.CityCD) {
-                        setTownList('add', data.PrefCD, data.CityCD, data.TownCD);
-                        $('#CityCD').hideError();
-                    }
-                    if (data.TownCD) {
-                        $('#TownCD').val(data.TownCD).hideError();
-                    }
-                }
-                if (result && !result.isOK) {
-                    const message = result.message;
-                    $this.showError(message.MessageText1);
-                }
-            });
-    });
-
-    //都道府県
-    $('#PrefCD').on('change', function () {
-        const inputval = $(this).val();
-        removeLineAndStation();
-
-        if (inputval) {
-            setCityList('add', inputval);
-            setTownList('remove');
-            setLineList('add', inputval);
-            //setStationList('remove');
-            //$('.js-distance').val('').hideError();          
-        }
-        else {
-            setCityList('remove');
-            setTownList('remove');
-            //setLineList('remove');
-            //setStationList('remove');
-            //$('.js-distance').val('').hideError();
-        }
-    });
-
-    //市区町村
-    $('#CityCD').on('change', function () {
-        setTownList('add', $('#PrefCD').val(), $(this).val());
-    });
-
-    //町域、住所
-    $('#TownCD, #Address').on('change', function () {
-        displayNearestStationData();
-    });
-
-    //築年月
-    $('#ConstYYYYMM').on('blur', function () {
-        const $this = $(this);
-        common.callAjax(_url.getBuildingAge, $this.val(), function (result) {
-            if (result && result.isOK) {
-                if (result.data) {
-                    $('#BuildingAge').text('（築' + result.data + '年）').data('building-age', result.data);
-                    if (result.data == 0)
-                        $this.showError(common.getMessage('E208'));
-                    else
-                        $this.hideError();
-                }
-                else
-                    $('#BuildingAge').text('（築　年）')
-            }
-        })
-    });
-
-    ////路線選択
-    $('.js-linecd').on('change', function () {
-        const id = $(this).attr('id');
-        const suffix = id.slice(-2).replace('_', '');
-        const inputval = $(this).val();
-        if (inputval) {
-            setStationList('add', inputval, '#StationCD_' + suffix);
-        }
-        else {
-            setStationList('remove', inputval, '#StationCD_' + suffix);
-        }
-    });
-
 }
 
 function setCityList(mode, prefCd, defaultValue) {
@@ -483,22 +508,58 @@ function setStationList(mode, lineCd, selector, defaultValue) {
     }
 }
 
+function setlineStationDistanceByMansionCD(MansionCD, PrefCD) {
+    common.callAjax(_url.getlineStationDistanceByMansionCD, { MansionCD: MansionCD, PrefCD: PrefCD},
+        function (result) {
+            if (result && result.isOK) {
+                const dataArray = JSON.parse(result.data);
+                for (let i = 0; i < dataArray.length; i++) {
+                    const data = dataArray[i];
+                    const j = i + 1;
+
+                    setLineList('add', PrefCD, '#LineCD_' + j, data.LineCD);
+                    
+                    if (data.LineCD) {
+                        setStationList('add', data.LineCD, '#StationCD_' + j, data.StationCD);
+                    }
+                    
+                    $('#Distance_' + j).val(data.Distance)
+
+                    $('#Dline_' + j).removeClass("bg-secondary");
+                    $('#Dline_' + j).find("*").prop("disabled", false);
+                }
+                const l = dataArray.length + 1;
+                $('#Dline_' + l ).removeClass("bg-secondary");
+                $('#Dline_' + l).find("*").prop("disabled", false);
+                setLineList('add', PrefCD, '#LineCD_' + l);
+            }
+        });
+}
+
 function removeLineAndStation() {
     $('.js-stationContainer').children().remove();
     for (let i = 0; i < 20; i++) {
-        const index = i + 1;
+        const index = i + 1;  
         const station = $('.js-station-template').find('.js-station').clone(true);
-        station.find('.js-paragraph-number').text(getParagraphNumber(index))
+        station.find('.card').attr('id', 'Dline_' + index);        
+        station.find('.js-paragraph-number').text(getParagraphNumber(index));
+        station.find('.line-error').attr( 'id', 'errorLineCD' + index );
         station.find('.js-linecd').attr('id', 'LineCD_' + index);
+        station.find('.station-error').attr('id', 'errorStationCD' + index);
         station.find('.js-stationcd').attr('id', 'StationCD_' + index);
+        station.find('.distance-error').attr('id', 'errorDistanceCD' + index);
         station.find('.js-distance').attr('id', 'Distance_' + index);
         $('.js-stationContainer').append(station);
+        if (i != 0) {
+            $('#Dline_' + index).addClass("bg-secondary");
+            $('#Dline_' + index).find("*").prop("disabled", true);
+        }
     }
-    $('#LineCD_1').hideError();
+    ErrorLineStationDistance();
 }
 
 function displayNearestStationData() {
-
+    
     if ($('#MansionCD').val()) return;
 
     const model = {
@@ -526,7 +587,7 @@ function displayNearestStationData() {
                             for (let i = 0; i < length; i++) {
                                 data = dataArray[i];
                                 const index = i + 1;
-
+                                
                                 if (!document.getElementById('LineCD_' + index)) {
                                     const station = $('.js-station-template').find('.js-station').clone(true);
                                     station.find('.js-paragraph-number').text(getParagraphNumber(index))
@@ -540,8 +601,17 @@ function displayNearestStationData() {
                                     $('#LineCD_' + index).val(data.LineCD);
                                     setStationList('add', data.LineCD, '#StationCD_' + index, data.StationCD);
                                 }
+
                                 $('#Distance_' + index).val(data.Distance);
+
+                                if (data.Distance) {
+                                    const lastDistance = index + 1;
+                                    $('#Dline_' + lastDistance).removeClass("bg-secondary");
+                                    $('#Dline_' + lastDistance).find("*").prop("disabled", false);
+                                }
+
                             }
+
                         }
                     }
                 }

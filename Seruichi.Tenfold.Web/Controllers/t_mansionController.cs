@@ -39,7 +39,15 @@ namespace Seruichi.Tenfold.Web.Controllers
             model.TownCD = dt.Rows[0]["TownCD"].ToString();
             model.TownName = dt.Rows[0]["TownName"].ToString();
             model.Address = dt.Rows[0]["Address"].ToString();
+           // model.StructuralKBN = dt.Rows[0]["StructuralKBN"].ToString() == "0" ?  false : true;
             return model;
+        }
+        [HttpPost]
+        public ActionResult GetLineStationDistanceByMansionCD(string MansionCD,string PrefCD)
+        {
+            t_mansionBL t_bl = new t_mansionBL();
+            var dt = t_bl.GetLineStationDistanceByMansionCD(MansionCD, PrefCD);
+            return OKResult(DataTableToJSON(dt));
         }
     }
 }
