@@ -22,6 +22,9 @@ namespace Seruichi.Seller.Web.Controllers
             {
                 return RedirectToAction("Index", "a_login");
             }
+            a_mypage_taikaiBL bl = new a_mypage_taikaiBL();
+            a_mypage_taikaiModel model = bl.Get_Count(user.UserID);
+            ViewBag.PossibleTime = model.Possible_Time;
             return View();
         }
     }
