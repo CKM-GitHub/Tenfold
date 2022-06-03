@@ -234,6 +234,7 @@
     <Content Include="Scripts\a_contact.js" />
     <Content Include="Scripts\a_mypage_ahis.js" />
     <Content Include="Scripts\a_mypage_plus.js" />
+    <Content Include="Scripts\a_mypage_taikai.js" />
     <Content Include="Scripts\a_mypage_whis.js" />
     <Content Include="Scripts\a_mypage_uinfo.js" />
     <Content Include="Scripts\a_mailregister.js" />
