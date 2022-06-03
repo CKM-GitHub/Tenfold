@@ -83,10 +83,10 @@ function setValidation() {
         .addvalidation_reqired();
     $('#StationCD_1')
         .addvalidation_errorElement("#errorStationCD1")
-        .addvalidation_reqired();
+       // .addvalidation_reqired();
     $('#Distance_1')
         .addvalidation_errorElement("#errorDistanceCD1")
-        .addvalidation_reqired();
+       // .addvalidation_reqired();
     $('#StationCD_2')
         .addvalidation_errorElement("#errorStationCD2")
         //.addvalidation_reqired();
