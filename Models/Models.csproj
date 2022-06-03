@@ -63,6 +63,7 @@
     <Compile Include="Seller\a_assess_dModel.cs" />
     <Compile Include="Seller\a_mypage_ahisModel.cs" />
     <Compile Include="Seller\a_mypage_plusModel.cs" />
+    <Compile Include="Seller\a_mypage_taikaiModel.cs" />
     <Compile Include="Seller\a_mypage_whisModel.cs" />
     <Compile Include="Seller\a_mypage_uinfo_passwordModel.cs" />
     <Compile Include="Seller\a_mypage_uinfoModel.cs" />

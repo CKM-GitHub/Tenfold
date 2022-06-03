@@ -1,4 +1,4 @@
-﻿
+﻿@model Models.a_mypage_taikaiModel
 @{
     ViewBag.Title = "査定 - セルイチ";
 }
@@ -33,7 +33,7 @@
                                     <div class="card-body h-auto">
                                         <h6 class="card-title">現在</h6>
                                         <p>残り</p>
-                                        <h3 class="card-title text-center">0</h3>
+                                        <h3 class="card-title text-center" id="currentValue">@ViewBag.PossibleTime</h3>
                                         <p class="text-end">件</p>
                                     </div>
                                 </div>
