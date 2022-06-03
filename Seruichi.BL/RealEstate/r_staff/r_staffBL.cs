@@ -117,8 +117,12 @@ namespace Seruichi.BL.RealEstate.r_staff
 
             DataTable dtUpdateImage = new DataTable();
             dtUpdateImage.Columns.Add("RealECD", typeof(String));
-            dtUpdateImage.Columns.Add("REFaceImage", typeof(String));
             dtUpdateImage.Columns.Add("REStaffCD", typeof(String));
+            DataColumn column = new DataColumn("REFaceImage"); //Create the column.
+            column.DataType = System.Type.GetType("System.Byte[]"); //Type byte[] to store image bytes.
+            column.AllowDBNull = true;
+            column.Caption = "My Image";
+            dtUpdateImage.Columns.Add(column);
 
             if (model.lst_StaffModel.Count > 0)
             {
@@ -130,13 +134,12 @@ namespace Seruichi.BL.RealEstate.r_staff
                     rowImg["RealECD"] = model.lst_StaffModel[i].RealECD;
                     if (!String.IsNullOrWhiteSpace(model.lst_StaffModel[i].REFaceImage))
                     {
-                        //Updatephoto = GetPhoto(model.lst_StaffModel[i].REFaceImage);
-                        // row["REFaceImage"] = Convert.ToBase64String(Updatephoto);
-                        rowImg["REFaceImage"] = model.lst_StaffModel[i].REFaceImage;
+                        Updatephoto = GetPhoto(model.lst_StaffModel[i].REFaceImage);
+                        rowImg["REFaceImage"] = Updatephoto;
                     }
                     else
                     {
-                        rowImg["REFaceImage"] = DBNull.Value;//model.lst_StaffModel[i].REFaceImage;
+                        rowImg["REFaceImage"] = DBNull.Value;
                     }
                     rowImg["REStaffCD"] = model.lst_StaffModel[i].REStaffCD;
                     row["REStaffCD"] = model.lst_StaffModel[i].REStaffCD;
@@ -160,9 +163,9 @@ namespace Seruichi.BL.RealEstate.r_staff
                 }
             }
 
-            //dtUpdate.TableName = "test";
+            //dtUpdateImage.TableName = "test";
             //System.IO.StringWriter writer = new System.IO.StringWriter();
-            //dtUpdate.WriteXml(writer, XmlWriteMode.WriteSchema, false);
+            //dtUpdateImage.WriteXml(writer, XmlWriteMode.WriteSchema, false);
             //string XMLresult = writer.ToString();
 
             var sqlParams = new SqlParameter[]
@@ -182,8 +185,9 @@ namespace Seruichi.BL.RealEstate.r_staff
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value =  model.IPAddress },
              //new SqlParameter("@RealECD", SqlDbType.VarChar){ Value =  model.RealECD },
                new SqlParameter("@M_REStaff", SqlDbType.Structured){ TypeName = "dbo.R_REStaff", Value = dtUpdate },
-             //new SqlParameter("@xml", SqlDbType.Xml){Value = XMLresult },
-             //cmd.Parameters.Add("@xml", SqlDbType.Xml).Value = xml;
+               new SqlParameter("@M_REImage", SqlDbType.Structured){ TypeName = "dbo.R_REFaceImage", Value = dtUpdateImage },
+             // SqlParameter("@xml", SqlDbType.Xml){Value = XMLresult },
+           
                
         };
 
@@ -192,17 +196,15 @@ namespace Seruichi.BL.RealEstate.r_staff
                 DBAccess db = new DBAccess();
                 return db.InsertUpdateDeleteData("pr_r_staff_Insert_M_REStaff", false, sqlParams);
             }
-            //catch (ExclusionException)
-            //{
-            //    //msgid = "S004"; //他端末エラー
-            //    return false;
-            //}
-
-            catch (Exception ex)
+            catch (ExclusionException)
             {
-                string str = ex.ToString();
                 return false;
             }
+            //catch (Exception ex)
+            //{
+            //    string str = ex.ToString();
+            //    return false;
+            //}
         }
         public static byte[] GetPhoto(string filePath)
         {
@@ -215,22 +217,5 @@ namespace Seruichi.BL.RealEstate.r_staff
 
             return photo;
         }
-
-        //public void Update_M_REStaff(r_staffModel model)
-        //{
-        //    var sqlParams = new SqlParameter[]
-        //     {
-        //        new SqlParameter("@TenStaffCD", SqlDbType.VarChar){ Value = model.TenStaffCD.ToStringOrNull()},
-        //        new SqlParameter("@TenStaffPW", SqlDbType.VarChar){ Value = model.TenStaffPW.ToStringOrNull() },
-        //        new SqlParameter("@TenStaffName", SqlDbType.VarChar){ Value = model.TenStaffName.ToStringOrNull() },
-        //        new SqlParameter("@InvalidFLG", SqlDbType.TinyInt){ Value =  model.InvalidFLG.ToStringOrNull() },
-        //        new SqlParameter("@LoginName", SqlDbType.VarChar){ Value =  model.LoginName.ToStringOrNull() },
-        //        new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.Operator.ToStringOrNull() },
-        //        new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress }
-        //     };
-
-        //    DBAccess db = new DBAccess();
-        //    db.InsertUpdateDeleteData("pr_r_staff_Update_M_REStaff", false, sqlParams);
-        //}
     }
 }

@@ -242,3 +242,22 @@ function Bind_Modal_DetailData(result, DeepAssDateTime) {
 }
 
 //End script code of t_reale_Modal.cshtml
+
+//Start SubMenu
+$(function () {
+     Bind_SubMennuURL();
+})
+function Bind_SubMennuURL() {
+    var listItems = $("#subMenu li");
+    $('#subMenu li').children('a').removeAttr("href");
+    let current = window.location.href;
+    listItems.each(function (idx, li) {
+        var anchor = $(li).children('a'); 
+        var target = current;
+        target = target.slice(0, target.lastIndexOf('/')); 
+        target = target.substring(target.lastIndexOf('/') + 1);
+        var newHref = current.replace(target, anchor.attr('name'));
+        anchor.prop('href', newHref);
+    });
+}
+//EndSubMenu

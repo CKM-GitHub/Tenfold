@@ -151,7 +151,7 @@ function addEvents() {
                     document.body.removeChild(downloadLink);
                 }
                 else {
-                    alert("There is no data!");
+                    $('#csv-error-modal').modal('show');
                 }
             }
         )
