@@ -15,10 +15,7 @@ $(function () {
     $('#subMenu li').children('a').removeClass("active"); 
     $('#subMenu li').children('a').eq(1).addClass('active');
     $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
-    $('#t_reale_asmhis').addClass('font-bold text-underline');
-   
-
-    //assessmentMenu
+    $('#t_reale_asmhis').addClass('font-bold text-underline'); 
 });
 
 function setValidation() {
@@ -189,7 +186,7 @@ function addEvents() {
                     l_logfunction(model.RealECD + ' ' + model.REName, 'display', '');
                 }
                 else {
-                    alert("There is no data!");
+                    $('#site-error-modal').modal('show');
                 }
             }
         )
