@@ -5,7 +5,6 @@ $(function () {
     _url.Get_select_M_REStaff = common.appPath + '/r_staff/Get_select_M_REStaff';
     _url.save_M_REStaff = common.appPath + '/r_staff/Save_M_REStaff';
     addEvents();
-    //$('#newStaffCD').focus();
 });
 
 function setValidation() {
@@ -14,29 +13,35 @@ function setValidation() {
         var i = index + 1;
 
         $('#newProfilePhoto_' + i)
-            .addvalidation_errorElement("#CheckImageFileError_" + i)
+            .addvalidation_errorElement("#CheckImageFileError_" + i);
 
         $('#REStaffCD_' + i)
             .addvalidation_errorElement("#error_REStaffCD_" + i)
             .addvalidation_reqired()  //E101
-            .addvalidation_onebyte_character() //E104
-            .addvalidation_maxlengthCheck(10); //E105
+            .addvalidation_maxlengthCheck(10) //E105
+            .addvalidation_singlebyte_numberAlphabet(); //E104
+           
 
         $('#REStaffName_' + i)
             .addvalidation_errorElement("#error_REStaffName_" + i)
             .addvalidation_reqired()  //E101
-            .addvalidation_maxlengthCheck(30); //E105
+            .addvalidation_singlebyte_doublebyte(); //E105
+           
+            
 
         $('#REIntroduction_' + i)
             .addvalidation_errorElement("#error_REIntroduction_" + i)
-            .addvalidation_maxlengthCheck(500); //E105
+            .addvalidation_singlebyte_doublebyte(); //E105
+           
+           
 
         $('#REPassword_' + i)
             .addvalidation_errorElement("#error_REPassword_" + i)
             .addvalidation_reqired()  //E101
             .addvalidation_onebyte_character() //E104
-            .addvalidation_minlengthCheck(8)   //E110
-            .addvalidation_maxlengthCheck(20); //E105
+            .addvalidation_maxlengthCheck(20) //E105
+            .addvalidation_minlengthCheck(8); //E110
+          
     });
 
     $('#newProfilePhoto')
@@ -45,29 +50,27 @@ function setValidation() {
     $('#newStaffCD')
         .addvalidation_errorElement("#newStaffCDError")
         .addvalidation_reqired()  //E101
-        .addvalidation_onebyte_character() //E104
-        .addvalidation_maxlengthCheck(10); //E105
-      //  .addvalidation_checkisexist();//E314
+        .addvalidation_maxlengthCheck(10) //E105
+        .addvalidation_singlebyte_numberAlphabet();//E104
+       
+      //.addvalidation_checkisexist();//E314
 
     $('#newStaffName')
         .addvalidation_errorElement("#newStaffNameError")
         .addvalidation_reqired()  //E101
-        .addvalidation_maxlengthCheck(30); //E105
-
+        .addvalidation_singlebyte_doublebyte();//E105
 
     $('#newStaffIntro')
         .addvalidation_errorElement("#newStaffIntroError")
-        .addvalidation_maxlengthCheck(500); //E105
+        .addvalidation_singlebyte_doublebyte();//E105
 
     $('#newStaffpsw')
         .addvalidation_errorElement("#newStaffpswError")
         .addvalidation_reqired()  //E101
         .addvalidation_onebyte_character() //E104
-        .addvalidation_minlengthCheck(8)   //E110
-        .addvalidation_maxlengthCheck(20); //E105
-
-    //$('#btnSaveChange')
-    //    .addvalidation_errorElement("#btnSaveChangeError");
+        .addvalidation_maxlengthCheck(20)  //E105
+        .addvalidation_minlengthCheck(8); //E110
+   
 }
 
 function addEvents() {
@@ -139,20 +142,21 @@ function addEvents() {
     });
 
     
-    $('#newStaffCD').on("change",".form-control" ,function () {
-        if ($('#newStaffCD').val().trim().length !== 0) {
-            $('#newStaffCD')
-                .addvalidation_errorElement("#newStaffCDError")
-                .addvalidation_reqired()  //E101
-                .addvalidation_onebyte_character() //E104
-                .addvalidation_maxlengthCheck(10); //E105
-        }
-        else
-        {
-            $('#newStaffCD')
-           .addvalidation_errorElement("#newStaffCDError")
-           .addvalidation_reqired(); //E101
-        }
+    $('#newStaffCD').on("change",function () {
+        //if ($('#newStaffCD').val().trim().length !== 0) {
+        //    $('#newStaffCD')
+        //        .addvalidation_errorElement("#newStaffCDError")
+        //        .addvalidation_reqired()  //E101
+        //        .addvalidation_onebyte_character() //E104
+        //        .addvalidation_maxlengthCheck(10); //E105
+        //}
+        //else
+        //{
+        //    $('#newStaffCD')
+        //   .addvalidation_errorElement("#newStaffCDError")
+        //   .addvalidation_reqired(); //E101
+        //}
+        alert(123);
 
         const $this = $(this), $newStaffCD = $('#newStaffCD')
         if (!common.checkValidityInput($this)) {
@@ -187,7 +191,35 @@ function addEvents() {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
-        $('#modal-changesave').modal('show');
+
+        const $this = $(this), $newStaffCD = $('#newStaffCD')
+
+        if ($newStaffCD.val() == undefined) {
+            $('#modal-changesave').modal('show');
+        }
+        else {
+        let model = {
+            REStaffCD: $newStaffCD.val()
+        };
+
+            if (!model.REStaffCD)
+            {
+            $($newStaffCD).hideError();
+            return;
+             }
+            common.callAjax(_url.Get_select_M_REStaff, model,
+                function (result) {
+                    if (result && result.isOK) {
+                        $($newStaffCD).hideError();
+                        const data = result.data;
+                        $('#modal-changesave').modal('show');
+                    }
+                    if (result && !result.isOK) {
+                        const message = result.message;
+                        $('#newStaffCD').showError(common.getMessage('E314'));
+                    }
+                });
+        }
     });
 
     $('#btnOKChange').on('click', function () {
@@ -212,6 +244,16 @@ function addEvents() {
 
           model.lst_StaffModel = Update_list_M_REStaff();
           Save_M_REStaff(model, $form)
+    });
+
+
+    $('#CancleOK').on('click', function ()
+    {
+        window.location.reload();
+    });
+
+    $('#btnComplete').on('click', function () {
+        window.location.reload();
     });
 }
 
@@ -239,7 +281,7 @@ function Update_list_M_REStaff() {
 function Save_M_REStaff(model, $form) {
     common.callAjaxWithLoading(_url.save_M_REStaff, model, this , function (result) {
         if (result && result.isOK) {
-            window.location.reload();
+            $('#modal-changeok').modal('show');
         }
         if (result && !result.isOK) {
             const errors = result.data;
@@ -252,56 +294,7 @@ function Save_M_REStaff(model, $form) {
     });
 }
 
-function Check_IsExist(model, $this)
-{
-    common.callAjax(_url.Get_select_M_REStaff, model, function (result) {
-        let check = true;
-        if (result && result.isOK) {
-            // $('#newStaffCD').hideError();
-            check = true;
-        }
-        if (result && !result.isOK) {
-            if (result.message != null) {
-                const message = result.message;
-               // $this.showError(message.MessageText1);
-                //$('#newStaffCD').addvalidation_errorElement("#newStaffCDError");
-                //$('#newStaffCD').showError(common.getMessage('E314'));
-                //$('#newStaffCD').focus();
-                //$('#newStaffCD').onkeydown(false);
-                check = false;
-            }
-            //else {
-            //    const errors = result.data;
-            //    for (key in errors) {
-            //        const target = document.getElementById(key);
-            //        $(target).showError(errors[key]);
-            //        $form.getInvalidItems().get(0).focus();
-            //    }
-            //}
-        }
-        return check;
-    });
-}
 
 
 
 
-function fileValidation() {
-    var fileInput = document.getElementById('file');
-    var filePath = fileInput.value;
-    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-    if (!allowedExtensions.exec(filePath)) {
-        alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
-        fileInput.value = '';
-        return false;
-    } else {
-        //Image preview
-        if (fileInput.files && fileInput.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                document.getElementById('imagePreview').innerHTML = '<img src="' + e.target.result + '"/>';
-            };
-            reader.readAsDataURL(fileInput.files[0]);
-        }
-    }
-}

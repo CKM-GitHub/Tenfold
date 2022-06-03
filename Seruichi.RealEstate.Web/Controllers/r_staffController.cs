@@ -31,7 +31,6 @@ namespace Seruichi.RealEstate.Web.Controllers
                                 select new r_staffModel()
                                 {
                                     RealECD   = dr["RealECD"].ToString(),
-                                    //REFaceImage = dr["REFaceImage"].ToString(),
                                     REFaceImage = dr["REFaceImage"].ToString() == "" ? dr["REFaceImage"].ToString() : Convert.ToBase64String((byte[])dr["REFaceImage"]),
                                     REStaffCD = dr["REStaffCD"].ToString(),
                                     REStaffName = dr["REStaffName"].ToString(),
@@ -63,25 +62,6 @@ namespace Seruichi.RealEstate.Web.Controllers
         }
 
         [HttpPost]
-        //public ActionResult Save_M_REStaff(r_staffModel model)
-        //{
-        //    r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
-        //    r_staffBL bl = new r_staffBL();
-        //    var validationResult = bl.ValidateAll(model);
-        //    if (validationResult.Count > 0)
-        //    {
-        //        return ErrorResult(validationResult);
-        //    }
-        //    model = Getlogdata(model);
-
-        //    if (!bl.Save_M_REStaff(model, out string errorcd))
-        //    {
-        //        return ErrorMessageResult(errorcd);
-        //    }
-        //    return OKResult();
-        //}
-
-
         public ActionResult Save_M_REStaff(r_staffModel model)        {            r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();            r_staffBL bl = new r_staffBL();            var validationResult = bl.ValidateAll(model);            if (validationResult.Count > 0)            {                return ErrorResult(validationResult);            }            model = Getlogdata(model);
             string Dirtemp = @"C:\Temp";
             string DirSelichi = @"C:\Temp\Selichi";
