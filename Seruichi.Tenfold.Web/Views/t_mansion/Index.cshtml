@@ -44,6 +44,7 @@
                                                         <div class="mb-4 pb-2">
                                                             <div class="form-outline">
                                                                 <label class="form-label">マンションCD</label>
+                                                                <input type="text" value="@ViewBag.MansionModel.MansionCD" id="MansionCD" name="MansionCD" class="d-none" />
                                                                 <h4>@ViewBag.MansionModel.MansionCD</h4>
                                                             </div>
                                                         </div>
@@ -261,12 +262,13 @@
                                                             <label class="form-label" for="form3Examplev4">交通アクセス</label>
                                                             <div class="row justify-content-center mt-auto m-md-5 mt-md-0 pt-md-0 p-md-3" id="ekikoutsu"
                                                                  style="overflow-x: hidden;overflow-y: auto;max-height: 800px;">
+
                                                                 <div class="js-station-template d-none">
                                                                     <!--1-->
                                                                     <div class="js-station">
-                                                                        <div class="card m-2 col-12 shadow-sm" id="Dline_1">
+                                                                        <div class="card m-2 col-12 shadow-sm">
                                                                             <div class="card-header ps-md-2 pt-0 pb-0">
-                                                                                <button class="btn btn-link js-paragraph-number" data-bs-toggle="collapse"
+                                                                                <button class="btn btn-link" data-bs-toggle="collapse"
                                                                                         data-bs-target="#access-collapse-1" aria-expanded="false"
                                                                                         aria-controls="access-collapse-1">
                                                                                     <h5 class="js-paragraph-number">路線1</h5>
@@ -277,8 +279,9 @@
                                                                                     <div class="form-outline form-white">
                                                                                         <label class="form-label me-5">路線名</label>
                                                                                         <div class="dropdown">
+                                                                                            <span class="cap-errormsg-right line-error"></span>
                                                                                             <div class="dropdown w-100">
-                                                                                                <select class="form-select js-linecd" id="">
+                                                                                                <select class="form-select js-linecd">
                                                                                                     <option selected value="">路線選択</option>
                                                                                                 </select>
                                                                                             </div>
@@ -289,8 +292,9 @@
                                                                                     <div class="form-outline form-white">
                                                                                         <label class="form-label me-5">駅名</label>
                                                                                         <div class="dropdown ps-3">
+                                                                                            <span class="cap-errormsg-right station-error"></span>
                                                                                             <div class="dropdown w-100">
-                                                                                                <select class="form-select js-stationcd" id="">
+                                                                                                <select class="form-select js-stationcd">
                                                                                                     <option selected value="">駅選択</option>
                                                                                                 </select>
                                                                                             </div>
@@ -300,9 +304,12 @@
                                                                                 <div class="col-12 pb-3">
                                                                                     <div class="form-outline form-white d-flex">
                                                                                         <label class="form-label align-self-center pe-3">徒歩(分)</label>
-                                                                                        <input type="number" class="form-control form-control-lg w-md-24 text-end js-distance" maxlength="2" id=""
-                                                                                               placeholder="二丁目北木之元町3-5-5" />
-
+                                                                                        <div class="text-start">
+                                                                                            <span class="cap-errormsg-right distance-error"></span>
+                                                                                            <input type="number" class="form-control form-control-lg w-md-24 text-end js-distance"
+                                                                                                   oninput="javascript:if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                                                                   maxlength="2" />
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -329,7 +336,7 @@
                                                                                             <span class="cap-errormsg-right" id="errorLineCD1"></span>
                                                                                             <div class="dropdown w-100">
                                                                                                 <select class="form-select js-linecd" id="LineCD_1">
-                                                                                                    <option selected value="">路線選択</option>
+                                                                                                    <option value="">路線選択</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -342,7 +349,7 @@
                                                                                             <span class="cap-errormsg-right" id="errorStationCD1"></span>
                                                                                             <div class="dropdown w-100">
                                                                                                 <select class="form-select js-stationcd" id="StationCD_1">
-                                                                                                    <option selected value="">駅選択</option>
+                                                                                                    <option value="">駅選択</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -381,7 +388,7 @@
                                                                                             <span class="cap-errormsg-right" id="errorLineCD2"></span>
                                                                                             <div class="dropdown w-100">
                                                                                                 <select class="form-select js-linecd" id="LineCD_2" disabled>
-                                                                                                    <option selected value="">路線選択</option>
+                                                                                                    <option  value="">路線選択</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -394,7 +401,7 @@
                                                                                             <span class="cap-errormsg-right" id="errorStationCD2"></span>
                                                                                             <div class="dropdown w-100">
                                                                                                 <select class="form-select js-stationcd" id="StationCD_2" disabled>
-                                                                                                    <option selected value="">駅選択</option>
+                                                                                                    <option  value="">駅選択</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -432,7 +439,7 @@
                                                                                             <span class="cap-errormsg-right" id="errorLineCD2"></span>
                                                                                             <div class="dropdown w-100">
                                                                                                 <select class="form-select js-linecd" id="LineCD_3" disabled>
-                                                                                                    <option selected value="">路線選択</option>
+                                                                                                    <option  value="">路線選択</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -445,7 +452,7 @@
                                                                                             <div class="dropdown w-100">
                                                                                                 <span class="cap-errormsg-right" id="errorStationCD3"></span>
                                                                                                 <select class="form-select js-stationcd" id="StationCD_3" disabled>
-                                                                                                    <option selected value="">駅選択</option>
+                                                                                                    <option  value="">駅選択</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -483,7 +490,7 @@
                                                                                             <span class="cap-errormsg-right" id="errorLineCD4"></span>
                                                                                             <div class="dropdown w-100">
                                                                                                 <select class="form-select js-linecd" id="LineCD_4" disabled>
-                                                                                                    <option selected value="">路線選択</option>
+                                                                                                    <option  value="">路線選択</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -496,7 +503,7 @@
                                                                                             <span class="cap-errormsg-right" id="errorStationCD4"></span>
                                                                                             <div class="dropdown w-100">
                                                                                                 <select class="form-select js-stationcd" id="StationCD_4" disabled>
-                                                                                                    <option selected value="">駅選択</option>
+                                                                                                    <option  value="">駅選択</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -533,7 +540,7 @@
                                                                                         <div class="dropdown">
                                                                                             <span class="cap-errormsg-right" id="errorLineCD5"></span>
                                                                                             <select class="form-select js-linecd" id="LineCD_5" disabled>
-                                                                                                <option selected value="">路線選択</option>
+                                                                                                <option  value="">路線選択</option>
                                                                                             </select>
                                                                                         </div>
                                                                                     </div>
@@ -545,7 +552,7 @@
                                                                                             <div class="dropdown w-100">
                                                                                                 <span class="cap-errormsg-right" id="errorStationCD5"></span>
                                                                                                 <select class="form-select js-stationcd" id="StationCD_5" disabled>
-                                                                                                    <option selected value="">駅選択</option>
+                                                                                                    <option  value="">駅選択</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -583,7 +590,7 @@
                                                                                             <span class="cap-errormsg-right" id="errorLineCD6"></span>
                                                                                             <div class="dropdown w-100">
                                                                                                 <select class="form-select js-linecd" id="LineCD_6" disabled>
-                                                                                                    <option selected value="">路線選択</option>
+                                                                                                    <option  value="">路線選択</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -596,7 +603,7 @@
                                                                                             <span class="cap-errormsg-right" id="errorStationCD6"></span>
                                                                                             <div class="dropdown w-100">
                                                                                                 <select class="form-select js-stationcd" id="StationCD_6" disabled>
-                                                                                                    <option selected value="">駅選択</option>
+                                                                                                    <option  value="">駅選択</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -635,7 +642,7 @@
                                                                                             <span class="cap-errormsg-right" id="errorLineCD7"></span>
                                                                                             <div class="dropdown w-100">
                                                                                                 <select class="form-select js-linecd" id="LineCD_7" disabled>
-                                                                                                    <option selected value="">駅選択</option>
+                                                                                                    <option  value="">駅選択</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -648,7 +655,7 @@
                                                                                             <span class="cap-errormsg-right" id="errorStationCD7"></span>
                                                                                             <div class="dropdown w-100">
                                                                                                 <select class="form-select js-stationcd" id="StationCD_7" disabled>
-                                                                                                    <option selected value="">駅選択</option>
+                                                                                                    <option  value="">駅選択</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -686,7 +693,7 @@
                                                                                             <span class="cap-errormsg-right" id="errorDLineCD8"></span>
                                                                                             <div class="dropdown w-100">
                                                                                                 <select class="form-select js-linecd" id="LineCD_8" disabled>
-                                                                                                    <option selected value="">駅選択</option>
+                                                                                                    <option  value="">駅選択</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -699,7 +706,7 @@
                                                                                             <span class="cap-errormsg-right" id="errorStationCD8"></span>
                                                                                             <div class="dropdown w-100">
                                                                                                 <select class="form-select js-stationcd" id="StationCD_8" disabled>
-                                                                                                    <option selected value="">駅選択</option>
+                                                                                                    <option  value="">駅選択</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -737,7 +744,7 @@
                                                                                             <span class="cap-errormsg-right" id="errorLineCD9"></span>
                                                                                             <div class="dropdown w-100">
                                                                                                 <select class="form-select js-linecd" id="LineCD_9" disabled>
-                                                                                                    <option selected value="">駅選択</option>
+                                                                                                    <option  value="">駅選択</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -750,7 +757,7 @@
                                                                                             <span class="cap-errormsg-right" id="errorStationCD9"></span>
                                                                                             <div class="dropdown w-100">
                                                                                                 <select class="form-select js-stationcd" id="StationCD_9" disabled>
-                                                                                                    <option selected value="">駅選択</option>
+                                                                                                    <option  value="">駅選択</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
@@ -1326,6 +1333,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+
                                                             </div>
                                                         </div>
                                                     </div>

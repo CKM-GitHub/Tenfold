@@ -528,21 +528,10 @@ const common = {
 
             if (isMinlengthCheck) {
                 const minLength = $ctrl.data('mindigits');
-                if (minLength == 8 && $("#newStaffpsw").val() != "")
-                {
-                    const byteLength = inputValue.length;
-                    if (byteLength < parseInt(minLength)) {
+                const byteLength = inputValue.length;
+                if (byteLength < parseInt(minLength)) {
                         $ctrl.showError(this.getMessage('E110'));
                         return;
-                    }
-                }
-                else
-                {
-                    const byteLength = inputValue.length;
-                    if (byteLength < parseInt(minLength)) {
-                        $ctrl.showError(this.getMessage('E105'));
-                        return;
-                    }
                 }
             }
 
