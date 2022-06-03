@@ -163,6 +163,8 @@ function addEvents() {
     });
 
     $('#btnCSV').on('click', function () {
+        $form = $('#form1').hideChildErrors();
+
         $('#total_record').text("検索結果： 0件");
         $('#total_record_up').text("検索結果： 0件");
         $('#no_record').text("");
@@ -185,7 +187,8 @@ function addEvents() {
             negtiatioinsCheck: $negtiatioinsCheck,
             endCheck: $endCheck,
         };
-        getM_SellerList(model, this);
+        $('#btnDisplay').hideError();
+        getM_SellerList(model, $form);
 
         common.callAjax(_url.generate_CSV, model,
             function (result) {
@@ -213,7 +216,6 @@ function addEvents() {
                     document.body.removeChild(downloadLink);
                 }
                 else {
-                    //alert("There is no data!");
                     $('#site-error-modal').modal('show');
                 }
             }
