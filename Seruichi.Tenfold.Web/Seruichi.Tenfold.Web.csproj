@@ -146,6 +146,7 @@
     <Compile Include="Controllers\t_reale_asmhisController.cs" />
     <Compile Include="Controllers\t_reale_listController.cs" />
     <Compile Include="Controllers\t_reale_purchaseController.cs" />
+    <Compile Include="Controllers\t_seller_accountController.cs" />
     <Compile Include="Controllers\t_seller_assessmentController.cs" />
     <Compile Include="Controllers\t_mansion_newController.cs" />
     <Compile Include="Controllers\t_seller_listController.cs" />
@@ -274,6 +275,7 @@
     <Content Include="Views\Shared\t_reale_Info.cshtml" />
     <Content Include="Views\t_reale_asmhis\Index.cshtml" />
     <Content Include="Views\Shared\t_reale_Modal.cshtml" />
+    <Content Include="Views\t_seller_account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
