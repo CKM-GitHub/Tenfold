@@ -17,6 +17,9 @@ $(function () {
     _url.getNearestStations = common.appPath + commonApiUrl.getNearestStations;
     _url.getlineStationDistanceByMansionCD = common.appPath + '/t_mansion/GetLineStationDistanceByMansionCD';
     _url.setMansionWordByMansionCD = common.appPath + '/t_mansion/GetMansionWordByMansionCD';
+    _url.checkAll = common.appPath + '/t_mansion/CheckAll';
+    _url.updateMansionData = common.appPath + '/t_mansion/UpdateMansionData';
+
 
     setValidation();
 
@@ -255,7 +258,61 @@ function addEvents() {
         $('#Dline_' + newValue).find("*").prop("disabled", false);
     });
 
-    $('#btnConfirmation').cli
+    $('#btnConfirmation').click(function () {
+        $form = $('#form1').hideChildErrors();
+        if (!common.checkValidityOnSave('#form1')) {
+            common.setFocusFirstError($form);
+            return false;
+        }
+        const fd = new FormData(document.forms.form1);
+        const model = Object.fromEntries(fd);
+        model.PrefName = $('#PrefCD option:selected').text();
+        model.CityName = $('#CityCD option:selected').text();
+        model.TownName = $('#TownCD option:selected').text();
+        model.ConstYYYYMM = model.ConstYYYYMM.replace('-', '');
+        model.MansionStationListJson = JSON.stringify(getMansionStationList());
+        model.MansionWordListJson = JSON.stringify(getMansionWordList());
+        common.callAjaxWithLoading(_url.checkAll, model, this, function (result) {
+            if (result && result.isOK) {
+                updateData = model;
+                setScreenComfirm(updateData);
+                $('#modal_1').modal('show');
+            }
+            if (result && result.data) {
+                common.setValidationErrors(result.data);
+                common.setFocusFirstError($form);
+            }
+        });
+    });
+
+    $('#btnreturn').on('click', function () {
+        $form = $('#form1').hideChildErrors();
+        window.location.href = common.appPath + '/t_mansion_list/Index';
+    });
+
+    $('#btnCancel').click(function () {
+        $('#changecal').modal('show');
+    });
+    $('#btn_reload').click(function () {
+        window.location.reload();
+    });
+
+    $('#btnRegistration').on('click', function () {
+        common.callAjaxWithLoading(_url.updateMansionData, updateData, this, function (result) {
+            if (result && result.isOK) {
+                //sucess
+                $('#modal_1').modal('hide');
+                $('#modal_2').modal('show');
+                window.location.href = common.appPath + "/t_mansion_list/index";
+            }
+            if (result && result.data) {
+                //error
+                $('#modal_1').modal('hide');
+                common.setValidationErrors(result.data);
+                common.setFocusFirstError($form);
+            }
+        });
+    });
 
 }
 
@@ -551,13 +608,14 @@ function setMansionWordByMansionCD(MansionCD) {
                         $('#Katakana1').val(data.MansionWord)
                     else if (j == data.WordSEQ && j == 4)
                         $('#Hirakana').val(data.MansionWord)
-                    else
-                        $('#Other' + j).val(data.MansionWord)
+                    else {
+                        const l = j-4;
+                        $('#Other' + l).val(data.MansionWord)
+                    }
                 }
             }
         });
 }
-
 
 function removeLineAndStation() {
     $('.js-stationContainer').children().remove();
@@ -707,5 +765,90 @@ function getParagraphNumber(number) {
     if (number === 18) return '路線18'
     if (number === 19) return '路線19'
     if (number === 20) return '路線20'
+}
+
+function getMansionWordList() {
+    let array = [];
+    $('.js-wordContainer .js-word').each(function (index) {
+        const $this = $(this);
+        const data = {
+            RowNo: index + 1,
+            WordSEQ: index + 1,
+            Word: $this.find('.noti').val()
+        }
+        if (data.Word) {
+            array[array.length] = data;
+        }
+    });
+
+    return array;
+}
+
+function getMansionStationList() {
+    let array = [];
+
+    $('.js-stationContainer .js-station').each(function (index) {
+        const $this = $(this);
+        const data = {
+            RowNo: index + 1,
+            LineCD: $this.find('.js-linecd').val(),
+            StationCD: $this.find('.js-stationcd').val(),
+            Distance: $this.find('.js-distance').val()
+        }
+        if (data.LineCD) {
+            array[array.length] = data;
+        }
+    });
+
+    return array;
+}
+
+function setScreenComfirm(data) {
+    for (key in data) {
+        const target = document.getElementById('confirm_' + key);
+        if (target) $(target).val(data[key]);
+    }
+    $('#confirm_PrefCD').val(data.PrefName);
+    $('#confirm_CityCD').val(data.CityName);
+    $('#confirm_TownCD').val(data.TownName);
+
+    $('#confirm_StructuralKBN').val($('input[name="StructuralKBN"]:radio:checked').next().text());
+
+    $('#confirm_ConstYYYYMM').val($('#ConstYYYYMM').val());
+    $('#confirm_RightKBN').val($('input[name="RightKBN"]:radio:checked').next().text());
+
+    $('#confirm_Noti').text($('#Noti').text());
+    $('#confirm_Katakana').text($('#Katakana').text());
+    $('#confirm_Katakana1').text($('#Katakana1').text());
+    $('#confirm_Hirakana').text($('#Hirakana').text());
+    $('#confirm_Other1').text($('#Other1').text());
+    $('#confirm_Other2').text($('#Other2').text());
+    $('#confirm_Other3').text($('#Other3').text());
+    $('#confirm_Other4').text($('#Other4').text());
+    $('#confirm_Other5').text($('#Other5').text());
+    $('#confirm_Other6').text($('#Other6').text());
+    $('#confirm_Remark').text($('#Remark').text());
+    $('#confirm_Floors').text($('#Floors').text());
+    const stationContainer = $('.js-confirm-stationContainer');
+    stationContainer.children().remove();
+    let index = 0;
+    $('.js-stationContainer .js-station').each(function () {
+        const $this = $(this);
+        const data = {
+            LineCD: $this.find('.js-linecd').val(),
+            LineName: $this.find('.js-linecd option:selected').text(),
+            StationName: $this.find('.js-stationcd option:selected').text(),
+            Distance: $this.find('.js-distance').val()
+        }
+        if (data.LineName) {
+            const station = $('.js-confirm-station-template').find('.js-confirm-station').clone(true);
+            index++;
+            station.find('.js-paragraph-number').text(getParagraphNumber(index))
+            station.find('.js-linecd').attr('id', 'confirm_LineCD_' + index).val(data.LineName);
+            station.find('.js-stationcd').attr('id', 'confirm_StationCD_' + index).val(data.StationName);
+            station.find('.js-distance').attr('id', 'confirm_Distance_' + index).val(data.Distance);
+            stationContainer.append(station);
+        }
+    });
 }
 
