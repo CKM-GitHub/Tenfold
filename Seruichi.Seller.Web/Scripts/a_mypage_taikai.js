@@ -4,6 +4,7 @@ $(function () {
     _url.UpdateData = common.appPath + '/a_mypage_taikai/UpdateData';
     setValidation();
     addEvents();
+    $('#mypage_taikai').addClass('active');
 });
 
 function setValidation() {
