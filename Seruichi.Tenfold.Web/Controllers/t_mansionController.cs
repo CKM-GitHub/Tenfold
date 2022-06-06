@@ -39,14 +39,29 @@ namespace Seruichi.Tenfold.Web.Controllers
             model.TownCD = dt.Rows[0]["TownCD"].ToString();
             model.TownName = dt.Rows[0]["TownName"].ToString();
             model.Address = dt.Rows[0]["Address"].ToString();
-           // model.StructuralKBN = dt.Rows[0]["StructuralKBN"].ToString() == "0" ?  false : true;
+            model.RightKBN = dt.Rows[0]["RightKBN"].ToString() == "1" ? 1 : 2;
+            model.StructuralKBN = dt.Rows[0]["StructuralKBN"].ToString() == "1" ?  1 : 2;
+            string yyyy = dt.Rows[0]["ConstYYYYMM"].ToString().Substring(0, 4);
+            string mm = dt.Rows[0]["ConstYYYYMM"].ToString().Substring(dt.Rows[0]["ConstYYYYMM"].ToString().Length - 2);
+            model.ConstYYYYMM = yyyy + "-" + mm;
+            model.Rooms = dt.Rows[0]["Rooms"].ToString();
+            model.Floors = dt.Rows[0]["Floors"].ToString();
+            model.Remark = dt.Rows[0]["Remark"].ToString();
             return model;
         }
         [HttpPost]
-        public ActionResult GetLineStationDistanceByMansionCD(string MansionCD,string PrefCD)
+        public ActionResult GetLineStationDistanceByMansionCD(string MansionCD)
         {
             t_mansionBL t_bl = new t_mansionBL();
-            var dt = t_bl.GetLineStationDistanceByMansionCD(MansionCD, PrefCD);
+            var dt = t_bl.GetLineStationDistanceByMansionCD(MansionCD);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult GetMansionWordByMansionCD(string MansionCD)
+        {
+            t_mansionBL t_bl = new t_mansionBL();
+            var dt = t_bl.GetMansionWordByMansionCD(MansionCD);
             return OKResult(DataTableToJSON(dt));
         }
     }

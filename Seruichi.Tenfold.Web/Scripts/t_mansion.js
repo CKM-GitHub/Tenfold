@@ -16,6 +16,7 @@ $(function () {
     _url.getStationDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfStation;    
     _url.getNearestStations = common.appPath + commonApiUrl.getNearestStations;
     _url.getlineStationDistanceByMansionCD = common.appPath + '/t_mansion/GetLineStationDistanceByMansionCD';
+    _url.setMansionWordByMansionCD = common.appPath + '/t_mansion/GetMansionWordByMansionCD';
 
     setValidation();
 
@@ -24,10 +25,9 @@ $(function () {
     Bind_Update_Data();
 });
 
-function Bind_Update_Data() {
-    
-    setlineStationDistanceByMansionCD($("#MansionCD").val(),$('#PrefCD').val())
-  
+function Bind_Update_Data() {    
+    setlineStationDistanceByMansionCD($("#MansionCD").val(), $('#PrefCD').val());
+    setMansionWordByMansionCD($('#MansionCD').val());
 }
 
 function setValidation() {
@@ -96,34 +96,31 @@ function setValidation() {
     ErrorLineStationDistance();
     
 
-    ////謄本表記
-    //$('#Noti')
-    //    .addvalidation_errorElement("#errorNoti")
-    //    .addvalidation_reqired()
-    //    .addvalidation_doublebyte();
-    ////カタカナ
-    //$('#Katakana')
-    //    .addvalidation_errorElement("#errorKatakana")
-    //    .addvalidation_reqired()
-    //    .addvalidation_doublebyte_kana();
+    //謄本表記
+    $('#Noti')
+        .addvalidation_errorElement("#errorNoti")
+        .addvalidation_reqired()
+        .addvalidation_doublebyte();
+    //カタカナ
+    $('#Katakana')
+        .addvalidation_errorElement("#errorKatakana")
+        .addvalidation_reqired()
+        .addvalidation_doublebyte_kana();
 
-    ////ｶﾀｶﾅ
-    //$('#Katakana1')
-    //    .addvalidation_errorElement("#errorKatakana1")
-    //    .addvalidation_reqired()
-    //    .addvalidation_singlebyte_kana();
-    ////ひらがな
-    //$('#Hirakana')
-    //    .addvalidation_errorElement("#errorHirakana")
-    //    .addvalidation_reqired()
-    //    .addvalidation_doublebyte_hira();
+    //ｶﾀｶﾅ
+    $('#Katakana1')
+        .addvalidation_errorElement("#errorKatakana1")
+        .addvalidation_reqired()
+        .addvalidation_singlebyte_kana();
+    //ひらがな
+    $('#Hirakana')
+        .addvalidation_errorElement("#errorHirakana")
+        .addvalidation_reqired()
+        .addvalidation_doublebyte_hira();
 
-    //$('#Remark')
-    //    .addvalidation_errorElement("#errorRemark")
-    //    .addvalidation_singlebyte_doublebyte();
-
-    //$('#btnShowConfirmation')
-    //    .addvalidation_errorElement("#errorProcess");
+    $('#Remark')
+        .addvalidation_errorElement("#errorRemark")
+        .addvalidation_singlebyte_doublebyte();
 
 }
 
@@ -257,6 +254,8 @@ function addEvents() {
         $('#Dline_' + newValue).removeClass("bg-secondary");
         $('#Dline_' + newValue).find("*").prop("disabled", false);
     });
+
+    $('#btnConfirmation').cli
 
 }
 
@@ -509,7 +508,7 @@ function setStationList(mode, lineCd, selector, defaultValue) {
 }
 
 function setlineStationDistanceByMansionCD(MansionCD, PrefCD) {
-    common.callAjax(_url.getlineStationDistanceByMansionCD, { MansionCD: MansionCD, PrefCD: PrefCD},
+    common.callAjax(_url.getlineStationDistanceByMansionCD, { MansionCD: MansionCD},
         function (result) {
             if (result && result.isOK) {
                 const dataArray = JSON.parse(result.data);
@@ -535,6 +534,30 @@ function setlineStationDistanceByMansionCD(MansionCD, PrefCD) {
             }
         });
 }
+
+function setMansionWordByMansionCD(MansionCD) {
+    common.callAjax(_url.setMansionWordByMansionCD, { MansionCD: MansionCD },
+        function (result) {
+            if (result && result.isOK) {
+                const dataArray = JSON.parse(result.data);
+                for (let i = 0; i < dataArray.length; i++) {
+                    const data = dataArray[i];
+                    const j = i + 1;
+                    if (j == data.WordSEQ && j == 1)
+                        $('#Noti').val(data.MansionWord)
+                    else if (j == data.WordSEQ && j == 2)
+                        $('#Katakana').val(data.MansionWord)
+                    else if (j == data.WordSEQ && j == 3)
+                        $('#Katakana1').val(data.MansionWord)
+                    else if (j == data.WordSEQ && j == 4)
+                        $('#Hirakana').val(data.MansionWord)
+                    else
+                        $('#Other' + j).val(data.MansionWord)
+                }
+            }
+        });
+}
+
 
 function removeLineAndStation() {
     $('.js-stationContainer').children().remove();
