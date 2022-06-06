@@ -1,9 +1,17 @@
 ﻿window.addEventListener('pageshow', function (event) {
     if (event.persisted) {
         window.location.reload();
+      
+       
     }
 });
-
+$('#form1').bind('keypress', function (e) { 
+    if (e.keyCode == 13) {
+        if (document.activeElement.id != 'btnDisplay' && document.activeElement.getAttribute('type') != 'button') {
+            return e.preventDefault();
+        } 
+    }
+});  
 //in Layout.cshtml, the database values are set
 const messageConst = {
     E101: '入力が必要です',
