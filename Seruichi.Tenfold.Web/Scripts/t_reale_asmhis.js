@@ -141,8 +141,7 @@ function addEvents() {
             return false;
         }
         $('#tblPurchaseDetails tbody').empty();
-        //const fd = new FormData(document.forms.form1);
-        //const model = Object.fromEntries(fd);
+     
         model = {
             RealECD: common.getUrlParameter('reale'),
             Chk_Area: $("#Chk_Area").val(),
@@ -155,9 +154,8 @@ function addEvents() {
             StartDate: $("#StartDate").val(),
             EndDate: $("#EndDate").val(),
             IsCSV: true
-        };
-        get_purchase_Data(model, $form);
-
+        }; 
+        get_purchase_Data(model, $form, 'csv');
         common.callAjax(_url.get_t_reale_purchase_CSVData, model,
             function (result) {
                 //sucess
@@ -165,6 +163,7 @@ function addEvents() {
 
                 var csv = common.getJSONtoCSV(table_data);
                 if (!(csv == "ERROR")) {
+                    l_logfunction(model.RealECD + ' ' + $('#REName').text(), 'csv', '');
                     var downloadLink = document.createElement("a");
                     var blob = new Blob(["\ufeff", csv]);
                     var url = URL.createObjectURL(blob);
@@ -181,9 +180,7 @@ function addEvents() {
                     //"不動産会社査定状況リスト_YYYYMMDD_HHMMSS.csv"
                     document.body.appendChild(downloadLink);
                     downloadLink.click();
-                    document.body.removeChild(downloadLink);
-
-                    l_logfunction(model.RealECD + ' ' + model.REName, 'display', '');
+                    document.body.removeChild(downloadLink); 
                 }
                 else {
                     $('#site-error-modal').modal('show');
@@ -196,12 +193,13 @@ function addEvents() {
 }
 
 function get_purchase_Data(model, $form, state) {
+model.IsCSV = false;
     common.callAjaxWithLoading(_url.get_t_reale_purchase_DisplayData, model, this, function (result) {
         if (result && result.isOK) {
-           
+            
             Bind_DisplayData(result.data);
             if (state == 'Display')
-                l_logfunction(model.RealECD + ' ' + model.REName, 'display', '');
+                l_logfunction(model.RealECD + ' ' + $('#REName').text(), 'display', '');
         }
 
         if (result && !result.isOK) {
@@ -236,8 +234,11 @@ function Bind_DisplayData(result) {
             }
             if (data[i]["SendCustomer"] == '送客') {
                 spantxt+= '<label> <span class="ms-1 ps-1 pe-1 rounded-circle bg-danger text-white">送</span> 送客</label>';
-            }  
-
+            }
+            //debugger;
+            //var DeepDatetime = '';
+        //    if (data[i]["DeepDate"])
+            //DeepDatetime = '2020'//data[i]["DeepDate"].replace(" ", "&");
             var DeepDatetime = data[i]["DeepDate"].replace(" ", "&");
             var paramSeller = '\'t_seller_assessment ' + data[i]["SellerCD"] + '\',\'' + 'link' + '\',\'' + data[i]["SellerCD"] + '\'';
             var paramDetail = '\'t_seller_assessment_detail ' + data[i]["AssessReqID"] + '\',\'' + 'link' + '\',\'' + data[i]["AssessReqID"] + '\'';

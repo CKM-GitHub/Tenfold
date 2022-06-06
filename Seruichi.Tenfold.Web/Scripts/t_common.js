@@ -30,14 +30,18 @@ function Bind_CompanyInfo(model, result) {
             $('#InvalidFLG').addClass('text-danger');
 
         $('#InvalidFLG').text(data[0]['InvalidFLG']);
-        $('#REKana').text(data[0]['REKana']);
+        $('#REKana').text(data[0]['REKana']); 
         $('#REName').text(data[0]['REName']);
+        
         $('#RealECD').text(data[0]['RealECD']);
         $('#Address').text(data[0]['Address']);
         $('#HousePhone').text(data[0]['HousePhone']);
         $('#Fax').text(data[0]['Fax']);
         $('#MailAddress').text(data[0]['MailAddress']);
         $('#PICName').text(data[0]['PICName']);
+        $('#RealName').text(data[0]['REName']);
+
+
     }
 }
 
