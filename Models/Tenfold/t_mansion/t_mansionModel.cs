@@ -53,6 +53,10 @@ namespace Models.Tenfold.t_mansion
         public string Other4 { get; set; }
         public string Other5 { get; set; }
         public string Other6 { get; set; }
+        public string InsertOperatorName { get; set; }
+        public string InsertDateTime { get; set; }
+        public string UpdateOperatorName { get; set; }
+        public string UpdateDateTime { get; set; }
         public List<MansionStation> MansionStationList { get; set; } = new List<MansionStation>();
         public string MansionStationListJson { get; set; }
 

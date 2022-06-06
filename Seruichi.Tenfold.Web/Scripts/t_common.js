@@ -1,61 +1,118 @@
 ﻿//Start script code of t_reale_Info.cshtml -> Row No. 2 ~ 52
-function Bind_Company_Data(model, $form) {
-    common.callAjaxWithLoading(_url.get_t_reale_purchase_CompanyInfo, model, this, function (result) {
-        if (result && result.isOK) {
-            Bind_CompanyInfo(model, result.data);
-            common.callAjaxWithLoading(_url.get_t_reale_purchase_CompanyCountingInfo, model, this, function (result) {
-                if (result && result.isOK) {
-                    Bind_CountingInfo(result.data);
-                }
-            })
-        }
+function Bind_Company_Data($form) {
+    //t_reale Info
+    if (!$('#reale').hasClass('d-none')) {
+        let model = {
+            RealECD: common.getUrlParameter('RealECD')
+        };
 
-        if (result && !result.isOK) {
-            const errors = result.data;
-            for (key in errors) {
-                const target = document.getElementById(key);
-                $(target).showError(errors[key]);
-                $form.getInvalidItems().get(0).focus();
+        common.callAjaxWithLoading(_url.get_t_reale_CompanyInfo, model, this, function (result) {
+            if (result && result.isOK) {
+                Bind_CompanyInfo(model, result.data);
+                common.callAjaxWithLoading(_url.get_t_reale_CompanyCountingInfo, model, this, function (result) {
+                    if (result && result.isOK) {
+                        Bind_CompanyCountingInfo(result.data);
+                    }
+                })
             }
-        }
-    });
+
+            if (result && !result.isOK) {
+                const errors = result.data;
+                for (key in errors) {
+                    const target = document.getElementById(key);
+                    $(target).showError(errors[key]);
+                    $form.getInvalidItems().get(0).focus();
+                }
+            }
+        });
+    }
+    //t_seller Info
+    else if (!$('#seller').hasClass('d-none')) {
+        let model = {
+            SellerCD: common.getUrlParameter('SellerCD')
+        };
+
+        common.callAjaxWithLoading(_url.get_t_seller_Info, model, this, function (result) {
+            if (result && result.isOK) {
+                Bind_SellerInfo(model, result.data);
+            }
+
+            if (result && !result.isOK) {
+                const errors = result.data;
+                for (key in errors) {
+                    const target = document.getElementById(key);
+                    $(target).showError(errors[key]);
+                    $form.getInvalidItems().get(0).focus();
+                }
+            }
+        });
+    }
 }
 
 function Bind_CompanyInfo(model, result) {
     var data = JSON.parse(result);
     if (data.length > 0) {
         if (data[0]['InvalidFLG'] == '有効会員')
-            $('#InvalidFLG').addClass('text-success');
+            $('#r_InvalidFLG').addClass('text-success');
         else
-            $('#InvalidFLG').addClass('text-danger');
+            $('#r_InvalidFLG').addClass('text-danger');
 
-        $('#InvalidFLG').text(data[0]['InvalidFLG']);
-        $('#REKana').text(data[0]['REKana']); 
-        $('#REName').text(data[0]['REName']);
-        
-        $('#RealECD').text(data[0]['RealECD']);
-        $('#Address').text(data[0]['Address']);
-        $('#HousePhone').text(data[0]['HousePhone']);
-        $('#Fax').text(data[0]['Fax']);
-        $('#MailAddress').text(data[0]['MailAddress']);
-        $('#PICName').text(data[0]['PICName']);
-        $('#RealName').text(data[0]['REName']);
+        $('#r_InvalidFLG').text(data[0]['InvalidFLG']);
+        $('#r_REKana').text(data[0]['REKana']);
+        $('#r_REName').text(data[0]['REName']);
 
-
+        $('#r_RealECD').text(data[0]['RealECD']);
+        $('#r_Address').text(data[0]['Address']);
+        $('#r_HousePhone').text(data[0]['HousePhone']);
+        $('#r_Fax').text(data[0]['Fax']);
+        $('#r_MailAddress').text(data[0]['MailAddress']);
+        $('#r_PICName').text(data[0]['PICName']);
+        $('#r_RealName').text(data[0]['REName']);
     }
 }
 
-function Bind_CountingInfo(result) {
+function Bind_CompanyCountingInfo(result) {
     var data = JSON.parse(result);
     if (data.length > 0) {
-        $('#Constant').text(data[0]['査定数']);
-        $('#Top5').text(data[0]['Top5']);
-        $('#Top1').text(data[0]['Top1']);
-        $('#Customers').text(data[0]['送客数']);
-        $('#Deals').text(data[0]['商談数']);
-        $('#Contracts').text(data[0]['成約数']);
-        $('#Seller_Declines').text(data[0]['売主辞退数']);
-        $('#Buyer_Declines').text(data[0]['買主辞退数']);
+        $('#r_Constant').text(data[0]['査定数']);
+        $('#r_Top5').text(data[0]['Top5']);
+        $('#r_Top1').text(data[0]['Top1']);
+        $('#r_Customers').text(data[0]['送客数']);
+        $('#r_Deals').text(data[0]['商談数']);
+        $('#r_Contracts').text(data[0]['成約数']);
+        $('#r_Seller_Declines').text(data[0]['売主辞退数']);
+        $('#r_Buyer_Declines').text(data[0]['買主辞退数']);
+    }
+}
+
+function Bind_SellerInfo(model, result) {
+    var data = JSON.parse(result);
+    if (data.length > 0) {
+        if (data[0]['InvalidFLG'] == '有効会員')
+            $('#s_InvalidFLG').addClass('text-success');
+        else
+            $('#s_InvalidFLG').addClass('text-danger');
+
+        $('#s_InvalidFLG').text(data[0]['InvalidFLG']);
+        $('#s_SellerKana').text(data[0]['SellerKana']);
+        $('#s_SellerName').text(data[0]['SellerName']);
+        $('#s_SellerCD').text(data[0]['SellerCD']);
+
+        $('#s_Address').text(data[0]['PrefName'] + data[0]['CityName'] + data[0]['TownName'] + data[0]['Address1'] + data[0]['Address2']);
+        $('#s_HousePhone').text(data[0]['HousePhone']);
+        $('#s_HandyPhone').text(data[0]['HandyPhone']);
+        $('#s_MailAddress').text(data[0]['MailAddress']);
+
+        $('#s_BillingAmt').text(data[0]['今月課金']);
+        $('#s_Assessment_constant').text(data[0]['査定数']);
+        $('#s_Num_contracts').text(data[0]['成約数']);
+        $('#s_Num_seller_declines').text(data[0]['売主辞退数']);
+        $('#s_Num_buyer_declines').text(data[0]['買主辞退数']);
+
+        $('#s_InsertDateTime').text(data[0]['会員登録日']);
+        $('#s_DeepAssDateTime').text(data[0]['査定依頼日']);
+        $('#s_PurchReqDateTime').text(data[0]['買取依頼日']);
+        $('#s_LoginDateTime').text(data[0]['最終ログイン日']);
     }
 }
 //End script code of t_reale_Info.cshtml

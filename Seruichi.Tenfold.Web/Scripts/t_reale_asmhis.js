@@ -1,8 +1,8 @@
 ﻿const _url = {};
 $(function () {
     setValidation();
-    _url.get_t_reale_purchase_CompanyInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyInfo';
-    _url.get_t_reale_purchase_CompanyCountingInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyCountingInfo'; 
+    _url.get_t_reale_CompanyInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyInfo';
+    _url.get_t_reale_CompanyCountingInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyCountingInfo';
     _url.get_t_reale_purchase_DisplayData = common.appPath + '/t_reale_asmhis/get_t_reale_asmhis_DisplayData';
 
     _url.get_t_reale_purchase_CSVData = common.appPath + '/t_reale_asmhis/get_t_reale_asmhis_DisplayData';
@@ -105,7 +105,8 @@ function addEvents() {
 
     };
 
-    Bind_Company_Data(model, this);         //Bind Company Info Data to the title part of the page
+    $('#seller').addClass('d-none');
+    Bind_Company_Data(this);         //Bind Company Info Data to the title part of the page
 
     get_purchase_Data(model, this, 'page_load');
 
@@ -163,7 +164,7 @@ function addEvents() {
 
                 var csv = common.getJSONtoCSV(table_data);
                 if (!(csv == "ERROR")) {
-                    l_logfunction(model.RealECD + ' ' + $('#REName').text(), 'csv', '');
+                    l_logfunction(model.RealECD + ' ' + $('#r_REName').text(), 'csv', '');
                     var downloadLink = document.createElement("a");
                     var blob = new Blob(["\ufeff", csv]);
                     var url = URL.createObjectURL(blob);
@@ -199,7 +200,7 @@ model.IsCSV = false;
             
             Bind_DisplayData(result.data);
             if (state == 'Display')
-                l_logfunction(model.RealECD + ' ' + $('#REName').text(), 'display', '');
+                l_logfunction(model.RealECD + ' ' + $('#r_REName').text(), 'display', '');
         }
 
         if (result && !result.isOK) {
