@@ -156,7 +156,7 @@ function addEvents() {
         //   .addvalidation_errorElement("#newStaffCDError")
         //   .addvalidation_reqired(); //E101
         //}
-        alert(123);
+        //alert(123);
 
         const $this = $(this), $newStaffCD = $('#newStaffCD')
         if (!common.checkValidityInput($this)) {

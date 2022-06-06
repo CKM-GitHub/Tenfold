@@ -59,11 +59,9 @@ namespace Seruichi.BL.Tenfold.t_seller_list
             if (!string.IsNullOrEmpty(model.SellerName))            {                var query = dt.AsEnumerable().Where(dr => dr.Field<string>("売主名").Contains(model.SellerName) || dr.Field<string>("売主CD").Contains(model.SellerName));                if (query.Any())                {                    int i = 0;                    foreach (var row in query)                    {                        i++;                        row["NO"] = i;                    }                    return query.OrderBy(row => row["SellerKana"])                           .ThenBy(row => row["売主CD"]).CopyToDataTable();                }                else                {                    DataTable newTable = dt.Clone();                    return newTable;                }            }
             //dt.DefaultView.Sort = "SellerKana,売主CD";
             DataView dv = dt.DefaultView;            dv.Sort = "SellerKana,売主CD";            DataTable dtSort = dv.ToTable();            return dtSort;        }
-        public async Task<DataTable>  Generate_CSV(t_seller_listModel model)
+        public DataTable  Generate_CSV(t_seller_listModel model)
         {
-            return await Task.Run(() =>
-            {
-                var sqlParams = new SqlParameter[]
+            var sqlParams = new SqlParameter[]
              {
                   new SqlParameter("@ValidCheck", SqlDbType.TinyInt){ Value = model.ValidCheck.ToByte(0) },
                 new SqlParameter("@InValidCheck", SqlDbType.TinyInt){ Value = model.InValidCheck.ToByte(0) },
@@ -77,56 +75,64 @@ namespace Seruichi.BL.Tenfold.t_seller_list
                 new SqlParameter("@endCheck", SqlDbType.TinyInt){ Value = model.endCheck.ToByte(0) }
              };
 
-                DBAccess db = new DBAccess();
-                var dt = db.SelectDatatable("pr_t_seller_List_csv_generate", sqlParams);
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_seller_List_csv_generate", sqlParams);
 
-                AESCryption crypt = new AESCryption();
-                string decryptionKey = StaticCache.GetDataCryptionKey();
-                for (int i = 0; i < dt.Rows.Count; i++)
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                string sellerName = dt.Rows[i]["売主名"].ToString();
+                dt.Rows[i]["売主名"] = !string.IsNullOrEmpty(sellerName) ? crypt.DecryptFromBase64(sellerName, decryptionKey) : sellerName;
+
+                string SellerKana = dt.Rows[i]["カナ名"].ToString();
+                dt.Rows[i]["カナ名"] = !string.IsNullOrEmpty(SellerKana) ? crypt.DecryptFromBase64(SellerKana, decryptionKey) : SellerKana;
+
+                string MailAddress = dt.Rows[i]["メールアドレス"].ToString();
+                dt.Rows[i]["メールアドレス"] = !string.IsNullOrEmpty(MailAddress) ? crypt.DecryptFromBase64(MailAddress, decryptionKey) : MailAddress;
+
+                string TownName = dt.Rows[i]["町域名"].ToString();
+                dt.Rows[i]["町域名"] = !string.IsNullOrEmpty(TownName) ? crypt.DecryptFromBase64(TownName, decryptionKey) : TownName;
+
+                string Address1 = dt.Rows[i]["番地"].ToString();
+                dt.Rows[i]["番地"] = !string.IsNullOrEmpty(Address1) ? crypt.DecryptFromBase64(Address1, decryptionKey) : Address1;
+
+                string Address2 = dt.Rows[i]["建物名･部屋番号"].ToString();
+                dt.Rows[i]["建物名･部屋番号"] = !string.IsNullOrEmpty(Address2) ? crypt.DecryptFromBase64(Address2, decryptionKey) : Address2;
+
+                string HandyPhone = dt.Rows[i]["携帯電話番号"].ToString();
+                dt.Rows[i]["携帯電話番号"] = !string.IsNullOrEmpty(HandyPhone) ? crypt.DecryptFromBase64(HandyPhone, decryptionKey) : HandyPhone;
+
+                string HousePhone = dt.Rows[i]["固定電話番号"].ToString();
+                dt.Rows[i]["固定電話番号"] = !string.IsNullOrEmpty(HousePhone) ? crypt.DecryptFromBase64(HousePhone, decryptionKey) : HousePhone;
+
+                string Fax = dt.Rows[i]["FAX番号"].ToString();
+                dt.Rows[i]["FAX番号"] = !string.IsNullOrEmpty(Fax) ? crypt.DecryptFromBase64(Fax, decryptionKey) : Fax;
+
+                string bd = dt.Rows[i]["生年月日"].ToString();
+                dt.Rows[i]["生年月日"] = !string.IsNullOrEmpty(bd) ? crypt.DecryptFromBase64(bd, decryptionKey) : bd;
+
+            }
+
+            if (!string.IsNullOrEmpty(model.SellerName))
+            {
+                //var dtLinq = dt;
+                //if (dt.Rows.Count > 0)
+                //{
+                var dtLinqdt = new DataTable();
+                var dtLinq = dt.AsEnumerable().Where(dr => dr.Field<string>("売主名").Contains(model.SellerName) || dr.Field<string>("売主CD").Contains(model.SellerName));
+                if (dtLinq != null && dtLinq.Count() > 0)
                 {
-                    string sellerName = dt.Rows[i]["売主名"].ToString();
-                    dt.Rows[i]["売主名"] = !string.IsNullOrEmpty(sellerName) ? crypt.DecryptFromBase64(sellerName, decryptionKey) : sellerName;
-
-                    string SellerKana = dt.Rows[i]["カナ名"].ToString();
-                    dt.Rows[i]["カナ名"] = !string.IsNullOrEmpty(SellerKana) ? crypt.DecryptFromBase64(SellerKana, decryptionKey) : SellerKana;
-
-                    string MailAddress = dt.Rows[i]["メールアドレス"].ToString();
-                    dt.Rows[i]["メールアドレス"] = !string.IsNullOrEmpty(MailAddress) ? crypt.DecryptFromBase64(MailAddress, decryptionKey) : MailAddress;
-
-                    string TownName = dt.Rows[i]["町域名"].ToString();
-                    dt.Rows[i]["町域名"] = !string.IsNullOrEmpty(TownName) ? crypt.DecryptFromBase64(TownName, decryptionKey) : TownName;
-
-                    string Address1 = dt.Rows[i]["番地"].ToString();
-                    dt.Rows[i]["番地"] = !string.IsNullOrEmpty(Address1) ? crypt.DecryptFromBase64(Address1, decryptionKey) : Address1;
-
-                    string Address2 = dt.Rows[i]["建物名･部屋番号"].ToString();
-                    dt.Rows[i]["建物名･部屋番号"] = !string.IsNullOrEmpty(Address2) ? crypt.DecryptFromBase64(Address2, decryptionKey) : Address2;
-
-                    string HandyPhone = dt.Rows[i]["携帯電話番号"].ToString();
-                    dt.Rows[i]["携帯電話番号"] = !string.IsNullOrEmpty(HandyPhone) ? crypt.DecryptFromBase64(HandyPhone, decryptionKey) : HandyPhone;
-
-                    string HousePhone = dt.Rows[i]["固定電話番号"].ToString();
-                    dt.Rows[i]["固定電話番号"] = !string.IsNullOrEmpty(HousePhone) ? crypt.DecryptFromBase64(HousePhone, decryptionKey) : HousePhone;
-
-                    string Fax = dt.Rows[i]["FAX番号"].ToString();
-                    dt.Rows[i]["FAX番号"] = !string.IsNullOrEmpty(Fax) ? crypt.DecryptFromBase64(Fax, decryptionKey) : Fax;
-
-                    string bd = dt.Rows[i]["生年月日"].ToString();
-                    dt.Rows[i]["生年月日"] = !string.IsNullOrEmpty(bd) ? crypt.DecryptFromBase64(bd, decryptionKey) : bd;
-
-                }
-
-                if (!string.IsNullOrEmpty(model.SellerName))
-                {
-                    var dtLinq = dt.AsEnumerable().Where(dr => dr.Field<string>("売主名").Contains(model.SellerName) || dr.Field<string>("売主CD").Contains(model.SellerName)).CopyToDataTable();
-                    for (int i = 0; i < dtLinq.Rows.Count; i++)
+                    dtLinqdt = dtLinq.CopyToDataTable();
+                    for (int i = 0; i < dtLinqdt.Rows.Count; i++)
                     {
-                        dtLinq.Rows[i]["NO"] = i + 1;
+                        dtLinqdt.Rows[i]["NO"] = i + 1;
                     }
-                    return dtLinq;
                 }
-                return dt;
-            });
+                //}
+                return dtLinqdt;
+            }
+            return dt;
         }
         public Dictionary<string, string> ValidateAll(t_seller_listModel model, List<string> lst_checkBox)
         {

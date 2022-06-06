@@ -21,4 +21,8 @@ function addEvents() {
         common.callSubmit(document.forms.form5101, _url.redirect_208railway);
     });
 
+    $('#btnReg_list').on('click', function () {
+        window.location.href = common.appPath + '/r_asmc_ms_reged_list/Index'; 
+    });
+
 }
