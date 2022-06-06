@@ -47,6 +47,11 @@ namespace Seruichi.Tenfold.Web.Controllers
             model.Rooms = dt.Rows[0]["Rooms"].ToString();
             model.Floors = dt.Rows[0]["Floors"].ToString();
             model.Remark = dt.Rows[0]["Remark"].ToString();
+            CommonBL bl = new CommonBL();
+            model.InsertOperatorName = bl.GetTenstaffNamebyTenstaffcd(dt.Rows[0]["InsertOperator"].ToString());
+            model.UpdateOperatorName = string.IsNullOrEmpty(dt.Rows[0]["UpdateOperator"].ToString())? "" : bl.GetTenstaffNamebyTenstaffcd(dt.Rows[0]["UpdateOperator"].ToString());
+            model.InsertDateTime = dt.Rows[0]["InsertDateTime"].ToString();
+            model.UpdateDateTime = dt.Rows[0]["UpdateDateTime"].ToString();
             return model;
         }
         [HttpPost]
@@ -64,5 +69,57 @@ namespace Seruichi.Tenfold.Web.Controllers
             var dt = t_bl.GetMansionWordByMansionCD(MansionCD);
             return OKResult(DataTableToJSON(dt));
         }
+        [HttpPost]
+        public ActionResult CheckAll(t_mansionModel model)
+        {
+            if (model == null)
+            {
+                return BadRequestResult();
+            }
+
+            model.MansionStationList = ConvertJsonToObject<List<t_mansionModel.MansionStation>>(model.MansionStationListJson);
+
+            t_mansionBL bl = new t_mansionBL();
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+
+            return OKResult();
+        }
+
+        [HttpPost]
+        public ActionResult UpdateMansionData(t_mansionModel model)
+        {
+            if (model == null)
+            {
+                return BadRequestResult();
+            }
+            string addressSearch = model.PrefName + model.CityName + model.TownName + model.Address;
+            t_mansionBL bl = new t_mansionBL();
+            CommonBL blCmm = new CommonBL();
+            var longitude_latitude = blCmm.GetLongitudeAndLatitude(model.PrefName, model.CityName, model.TownName, model.Address);
+            model.Longitude = longitude_latitude[0];
+            model.Latitude = longitude_latitude[1];
+            model.SellerCD = base.GetOperator();
+            model.SellerName = base.GetOperatorName();
+            model.Operator = base.GetOperator();
+            model.IPAddress = base.GetClientIP();
+            model.MansionStationList = ConvertJsonToObject<List<t_mansionModel.MansionStation>>(model.MansionStationListJson);
+            model.MansionWordList = ConvertJsonToObject<List<t_mansionModel.MansionWord>>(model.MansionWordListJson);
+
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+            if (!bl.UpdateMansionData(model, out string errorcd))
+            {
+                return ErrorMessageResult(errorcd);
+            }
+
+            return OKResult();
+        } 
     }
 }
