@@ -321,11 +321,11 @@ function l_logfunction(id) {
                 else if (model.LogStatus == "t_seller_assessment_detail")
                     alert("https://www.seruichi.com/t_seller_assessment_detail?AssReqID=" + model.LogId);
                 else if (model.LogStatus == "t_seller_assessment_detail_GReal")
-                    window.location.href = common.appPath + '/t_reale_purchase?RealECD=' + model.LogId;
+                    window.location.href = common.appPath + '/t_reale_purchase/Index?RealECD=' + model.LogId;
                 else if (model.LogStatus == "t_seller_assessment_detail_EReal")
-                    window.location.href = common.appPath + '/t_reale_purchase?RealECD=' + model.LogId;
+                    window.location.href = common.appPath + '/t_reale_purchase/Index?RealECD=' + model.LogId;
                 else if (model.LogStatus == "t_seller_assessment_detail_IRealECD")
-                    window.location.href = common.appPath + '/t_reale_purchase?RealECD=' + model.LogId;
+                    window.location.href = common.appPath + '/t_reale_purchase/Index?RealECD=' + model.LogId;
             }
             if (result && !result.isOK) {                
             }
