@@ -1,9 +1,10 @@
 ﻿const _url = {};
 var TempFilepath;
 $(function () {
-    setValidation();
+    
     _url.Get_select_M_REStaff = common.appPath + '/r_staff/Get_select_M_REStaff';
     _url.save_M_REStaff = common.appPath + '/r_staff/Save_M_REStaff';
+    setValidation();
     addEvents();
 });
 
@@ -43,34 +44,7 @@ function setValidation() {
             .addvalidation_minlengthCheck(8); //E110
           
     });
-
-    $('#newProfilePhoto')
-        .addvalidation_errorElement("#CheckImageFileError");
-
-    $('#newStaffCD')
-        .addvalidation_errorElement("#newStaffCDError")
-        .addvalidation_reqired()  //E101
-        .addvalidation_maxlengthCheck(10) //E105
-        .addvalidation_singlebyte_numberAlphabet();//E104
-       
       //.addvalidation_checkisexist();//E314
-
-    $('#newStaffName')
-        .addvalidation_errorElement("#newStaffNameError")
-        .addvalidation_reqired()  //E101
-        .addvalidation_singlebyte_doublebyte();//E105
-
-    $('#newStaffIntro')
-        .addvalidation_errorElement("#newStaffIntroError")
-        .addvalidation_singlebyte_doublebyte();//E105
-
-    $('#newStaffpsw')
-        .addvalidation_errorElement("#newStaffpswError")
-        .addvalidation_reqired()  //E101
-        .addvalidation_onebyte_character() //E104
-        .addvalidation_maxlengthCheck(20)  //E105
-        .addvalidation_minlengthCheck(8); //E110
-   
 }
 
 function addEvents() {
@@ -143,20 +117,39 @@ function addEvents() {
 
     
     $('#newStaffCD').on("change",function () {
-        //if ($('#newStaffCD').val().trim().length !== 0) {
-        //    $('#newStaffCD')
-        //        .addvalidation_errorElement("#newStaffCDError")
-        //        .addvalidation_reqired()  //E101
-        //        .addvalidation_onebyte_character() //E104
-        //        .addvalidation_maxlengthCheck(10); //E105
-        //}
-        //else
-        //{
-        //    $('#newStaffCD')
-        //   .addvalidation_errorElement("#newStaffCDError")
-        //   .addvalidation_reqired(); //E101
-        //}
-        //alert(123);
+        if ($('#newStaffCD').val().trim().length !== 0) {
+            $('#newProfilePhoto')
+                .addvalidation_errorElement("#CheckImageFileError");
+            $('#newStaffCD')
+                .addvalidation_errorElement("#newStaffCDError")
+                .addvalidation_reqired()  //E101
+                .addvalidation_maxlengthCheck(10) //E105
+                .addvalidation_singlebyte_numberAlphabet();//E104
+
+            $('#newStaffName')
+                .addvalidation_errorElement("#newStaffNameError")
+                .addvalidation_reqired()  //E101
+                .addvalidation_singlebyte_doublebyte();//E105
+
+            $('#newStaffIntro')
+                .addvalidation_errorElement("#newStaffIntroError")
+                .addvalidation_singlebyte_doublebyte();//E105
+
+            $('#newStaffpsw')
+                .addvalidation_errorElement("#newStaffpswError")
+                .addvalidation_reqired()  //E101
+                .addvalidation_onebyte_character() //E104
+                .addvalidation_maxlengthCheck(20)  //E105
+                .addvalidation_minlengthCheck(8); //E110
+        }
+        else
+        {
+            $('#newProfilePhoto').hideError();
+            $('#newStaffName').hideError();
+            $('#newStaffIntro').hideError();
+            $('#newStaffpsw').hideError();
+        }
+       
 
         const $this = $(this), $newStaffCD = $('#newStaffCD')
         if (!common.checkValidityInput($this)) {
@@ -186,27 +179,71 @@ function addEvents() {
 
     $('#btnSaveChange').on('click', function () {
         $form = $('#form1').hideChildErrors();
-
+        
         if (!common.checkValidityOnSave('#form1')) {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
 
+        //if (!common.checkValidityOnSave('#form1')) {
+        //    $form.getInvalidItems().get(0).focus();
+        //    return false;
+        //}
+
         const $this = $(this), $newStaffCD = $('#newStaffCD')
 
-        if ($newStaffCD.val() == undefined) {
+        //alert($newStaffCD.val());
+        //if ($newStaffCD.val() == "") {
+        //    $('#modal-changesave').modal('show');
+        //}
+
+
+        if ($newStaffCD.val() == "" || $newStaffCD.val() == undefined) {
             $('#modal-changesave').modal('show');
         }
         else {
-        let model = {
-            REStaffCD: $newStaffCD.val()
-        };
+        if ($('#newStaffCD').val().trim().length !== 0)
+        {
+            $('#newProfilePhoto')
+                .addvalidation_errorElement("#CheckImageFileError");
+            $('#newStaffCD')
+                .addvalidation_errorElement("#newStaffCDError")
+                .addvalidation_reqired()  //E101
+                .addvalidation_maxlengthCheck(10) //E105
+                .addvalidation_singlebyte_numberAlphabet();//E104
 
-            if (!model.REStaffCD)
-            {
-            $($newStaffCD).hideError();
-            return;
-             }
+            $('#newStaffName')
+                .addvalidation_errorElement("#newStaffNameError")
+                .addvalidation_reqired()  //E101
+                .addvalidation_singlebyte_doublebyte();//E105
+
+            $('#newStaffIntro')
+                .addvalidation_errorElement("#newStaffIntroError")
+                .addvalidation_singlebyte_doublebyte();//E105
+
+            $('#newStaffpsw')
+                .addvalidation_errorElement("#newStaffpswError")
+                .addvalidation_reqired()  //E101
+                .addvalidation_onebyte_character() //E104
+                .addvalidation_maxlengthCheck(20)  //E105
+                .addvalidation_minlengthCheck(8); //E110
+        }
+        else {
+            $('#newProfilePhoto').hideError();
+            $('#newStaffName').hideError();
+            $('#newStaffIntro').hideError();
+            $('#newStaffpsw').hideError();
+            
+            }
+       
+            let model = {
+                REStaffCD: $newStaffCD.val()
+            };
+
+            if (!model.REStaffCD) {
+                $($newStaffCD).hideError();
+                return;
+            }
             common.callAjax(_url.Get_select_M_REStaff, model,
                 function (result) {
                     if (result && result.isOK) {
@@ -223,12 +260,7 @@ function addEvents() {
     });
 
     $('#btnOKChange').on('click', function () {
-        $form = $('#form1').hideChildErrors();
-
-        if (!common.checkValidityOnSave('#form1')) {
-            $form.getInvalidItems().get(0).focus();
-            return false;
-        }
+        
         const $REStaffCD = $("#newStaffCD").val(), $REStaffName = $('#newStaffName').val(), $REIntroduction = $('#newStaffIntro').val(), $REPassword = $('#newStaffpsw').val()
         let model = {
             REFaceImage: $("#newpic_holder").find("img").attr("src"),

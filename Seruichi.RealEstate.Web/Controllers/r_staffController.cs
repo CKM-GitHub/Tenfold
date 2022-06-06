@@ -110,9 +110,10 @@ namespace Seruichi.RealEstate.Web.Controllers
 
             if (user.REStaffCD == "admin")
             {
-                string Newbase64result = model.REFaceImage.Split(',')[1];
-                if (!String.IsNullOrWhiteSpace(Newbase64result))
+                if (!String.IsNullOrWhiteSpace(model.REFaceImage))
                 {
+                    string Newbase64result = model.REFaceImage.Split(',')[1];
+                
                     string NewfileName = "r_staff_" + model.RealECD + "_" + model.REStaffCD + "_" + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".png";
                     model.REFaceImage = byteArrayToImage(Newbase64result, NewfileName);
                 }
@@ -148,15 +149,18 @@ namespace Seruichi.RealEstate.Web.Controllers
             model.IPAddress = base.GetClientIP();
             //model.PageID = "r_staff";
             //model.ProcessKBN = "INSERT/UPDATE";
-            if(model.LoginID == "admin")
-            {
-                model.Remarks = "INS=" + model.REStaffCD + "," + "UPD=" + UpdateRemark.TrimEnd(',');
-            }
-            else
-            {
-                model.Remarks = "UPD=" + UpdateRemark.TrimEnd(',');
-            }
-           
+            //if (model.LoginID == "admin")
+            //{
+                if (!string.IsNullOrWhiteSpace(model.REStaffCD))
+                {
+
+                    model.Remarks = "INS=" + model.REStaffCD + "," + "UPD=" + UpdateRemark.TrimEnd(',');
+                }
+                else
+                {
+                    model.Remarks = "UPD=" + UpdateRemark.TrimEnd(',');
+                }
+            //}
             return model;
         }
     }

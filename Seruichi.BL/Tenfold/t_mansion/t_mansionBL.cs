@@ -21,16 +21,25 @@ namespace Seruichi.BL.Tenfold.t_mansion
             var dt = db.SelectDatatable("pr_t_mansion_Select_M_Mansion", sqlParams);
             return dt;
         }
-        public DataTable GetLineStationDistanceByMansionCD(string MansionCD,string PrefCD)
+        public DataTable GetLineStationDistanceByMansionCD(string MansionCD)
         {
             var sqlParams = new SqlParameter[]
             {
-                new SqlParameter("@MansionCD", SqlDbType.VarChar){ Value = MansionCD.ToStringOrNull() },
-                new SqlParameter("@PrefCD", SqlDbType.VarChar){ Value = PrefCD.ToStringOrNull() }
+                new SqlParameter("@MansionCD", SqlDbType.VarChar){ Value = MansionCD.ToStringOrNull() }
             };
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_t_mansion_select_line_by_mansioncd_and_prefcd", sqlParams);
+            var dt = db.SelectDatatable("pr_t_mansion_select_line_station_distance_by_mansioncd", sqlParams);
             return dt;
+        }
+        public DataTable GetMansionWordByMansionCD(string MansionCD)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@MansionCD", SqlDbType.VarChar){ Value = MansionCD.ToStringOrNull() }
+            };
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_mansion_select_mansionword_by_mansioncd", sqlParams);
+            return dt;            
         }
     }
 }

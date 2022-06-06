@@ -33,13 +33,11 @@ namespace Models.Tenfold.t_mansion
         public string TownCD { get; set; }
         public string TownName { get; set; }
         public string Address { get; set; }
-        public byte StructuralKBN { get; set; }
+        public int StructuralKBN { get; set; }
         public string ConstYYYYMM { get; set; }
         public string Rooms { get; set; }
         public string Floors { get; set; }
-        public byte RightKBN { get; set; }
-        public byte CurrentKBN { get; set; }
-
+        public int RightKBN { get; set; }
         public string Remark { get; set; }
         public decimal Longitude { get; set; }
         public decimal Latitude { get; set; }
