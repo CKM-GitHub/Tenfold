@@ -144,6 +144,14 @@ function addEvents() {
         }
         else
         {
+            $('#newStaffCD')
+                .removeValidation_required();
+            $('#newStaffName')
+                .removeValidation_required();
+
+            $('#newStaffpsw')
+                .removeValidation_required();
+            $('#newStaffCD').hideError(); 
             $('#newProfilePhoto').hideError();
             $('#newStaffName').hideError();
             $('#newStaffIntro').hideError();
@@ -229,6 +237,15 @@ function addEvents() {
                 .addvalidation_minlengthCheck(8); //E110
         }
         else {
+
+            $('#newStaffCD')
+                .removeValidation_required();
+            $('#newStaffName')
+                .removeValidation_required();
+                
+            $('#newStaffpsw')
+                .removeValidation_required();
+            $('#newStaffCD').hideError(); 
             $('#newProfilePhoto').hideError();
             $('#newStaffName').hideError();
             $('#newStaffIntro').hideError();

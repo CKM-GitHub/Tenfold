@@ -1,8 +1,8 @@
 ﻿const _url = {};
 $(function () {
     setValidation();
-    _url.get_t_reale_purchase_CompanyInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyInfo';
-    _url.get_t_reale_purchase_CompanyCountingInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyCountingInfo';
+    _url.get_t_reale_CompanyInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyInfo';
+    _url.get_t_reale_CompanyCountingInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyCountingInfo';
     _url.get_t_reale_purchase_DisplayData = common.appPath + '/t_reale_purchase/get_t_reale_purchase_DisplayData';
     _url.get_t_reale_purchase_CSVData = common.appPath + '/t_reale_purchase/get_t_reale_purchase_CSVData';
     _url.Insert_L_Log = common.appPath + '/t_reale_purchase/Insert_L_Log';
@@ -85,7 +85,7 @@ function addEvents() {
     });
 
     let model = {
-        RealECD: common.getUrlParameter('reale'),
+        RealECD: common.getUrlParameter('RealECD'),
         chk_Purchase: $("#chk_Purchase").val(),
         chk_Checking: $("#chk_Checking").val(),
         chk_Nego: $("#chk_Nego").val(),
@@ -104,7 +104,7 @@ function addEvents() {
     sortTable.getSortingTable("tblPurchaseDetails");
 
     $('#btnDisplay').on('click', function () {
-        $('#RealEName').val($('#REName').text());
+        $('#RealEName').val($('#r_REName').text());
         $form = $('#form1').hideChildErrors();
         if (!common.checkValidityOnSave('#form1')) {
             $form.getInvalidItems().get(0).focus();
@@ -117,7 +117,7 @@ function addEvents() {
     });
 
     $('#btnCSV').on('click', function () {
-        $('#RealEName').val($('#REName').text());
+        $('#RealEName').val($('#r_REName').text());
         $form = $('#form1').hideChildErrors();
         if (!common.checkValidityOnSave('#form1')) {
             $form.getInvalidItems().get(0).focus();
@@ -276,9 +276,10 @@ function l_logfunction(remark, Process, id) {
     common.callAjax(_url.Insert_L_Log, model, function (result) {
         if (result && result.isOK) {
             if (remark == 't_seller_assessment ' + id)
-                window.location.href = "http://163.43.105.244/Seruichi.tenfold.dev/t_seller_assessment/Index?SellerCD=" + id;
+                window.location.href = common.appPath + '/t_seller_assessment/Index?SellerCD=' + id;
             else if (remark == 't_seller_assessment_detail ' + id)
-                window.location.href = "http://163.43.105.244/Seruichi.tenfold.dev/t_seller_assessment_detail/Index?AssReqID=" + id;
+                alert(common.appPath + '/t_seller_assessment_detail/Index?AssReqID=' + id);
+                //window.location.href = common.appPath + '/t_seller_assessment_detail/Index?AssReqID=' + id;
         }
     });
 }
