@@ -1,17 +1,11 @@
 ﻿window.addEventListener('pageshow', function (event) {
     if (event.persisted) {
-        window.location.reload();
-      
-       
+        window.location.reload(); 
     }
+
 });
-$('#form1').bind('keypress', function (e) { 
-    if (e.keyCode == 13) {
-        if (document.activeElement.id != 'btnDisplay' && document.activeElement.getAttribute('type') != 'button') {
-            return e.preventDefault();
-        } 
-    }
-});  
+
+
 //in Layout.cshtml, the database values are set
 const messageConst = {
     E101: '入力が必要です',
@@ -81,7 +75,20 @@ const kanaMap = {
     'ｯ': 'ッ', 'ｬ': 'ャ', 'ｭ': 'ュ', 'ｮ': 'ョ',
     '｡': '。', '､': '、', 'ｰ': 'ー', '｢': '「', '｣': '」', '･': '・'
 };
-
+$(function () {
+    $('#menu-toggle').on('click', function () {
+        if ($('#wrapper').hasClass('toggled'))
+            $('#wrapper').removeClass("toggled");
+        else
+            $('#wrapper').attr("class", "toggled");
+    });
+    $("form").bind("keypress", function (e) {
+        if (e.keyCode == 13) {
+            if (document.activeElement.id != 'btnDisplay' && document.activeElement.id != 'btnProcess')
+            return false;
+        }
+    }); 
+})
 const common = {
 
     appPath: "", //set in Layout.cshtml

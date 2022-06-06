@@ -15,7 +15,7 @@ $(function () {
     $('#subMenu li').children('a').removeClass("active"); 
     $('#subMenu li').children('a').eq(1).addClass('active');
     $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
-    $('#t_reale_asmhis').addClass('font-bold text-underline'); 
+    $('#t_reale_asmhis').addClass('font-bold text-underline');  
 });
 
 function setValidation() {
