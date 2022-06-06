@@ -198,7 +198,7 @@ function addEvents() {
         //}
 
 
-        if ($newStaffCD.val() == undefined) {
+        if ($newStaffCD.val() == "" || $newStaffCD.val() == undefined) {
             $('#modal-changesave').modal('show');
         }
         else {
