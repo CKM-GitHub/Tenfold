@@ -289,7 +289,14 @@ function addEvents() {
         $form = $('#form1').hideChildErrors();
         window.location.href = common.appPath + '/t_mansion_new/Index';
     });
-
+       
+        $('#menu-toggle').on('click', function () {
+            if ($('#wrapper').hasClass('toggled'))
+                $('#wrapper').removeClass("toggled");
+            else
+                $('#wrapper').attr("class", "toggled");
+        });
+   
     //$(document).on('click', '.tree li  input[type="checkbox"]', function () {
     //    $(this).closest('li').find('ul input[type="checkbox"]').prop('checked', $(this).is(':checked'));
     //}).on('click', '.node-item', function () {

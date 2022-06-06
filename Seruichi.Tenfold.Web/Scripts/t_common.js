@@ -264,11 +264,6 @@ function Bind_SubMennuURL() {
         var newHref = current.replace(target, anchor.attr('name'));
         anchor.prop('href', newHref);
     });
-    $('#menu-toggle').on('click', function () {
-        if ($('#wrapper').hasClass('toggled'))
-            $('#wrapper').removeClass("toggled");
-        else
-            $('#wrapper').attr("class", "toggled");
-    });
+   
 }
 //EndSubMenu
