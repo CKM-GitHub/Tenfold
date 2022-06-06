@@ -11,12 +11,13 @@ using Seruichi.BL;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
+using Newtonsoft.Json;
 
 namespace Seruichi.RealEstate.Web.Controllers
 {
     public class r_staffController : BaseController
     {
-        
+        public static DataTable dtTemp;
         public static string UpdateRemark = string.Empty;
         // GET: r_staff
         public ActionResult Index()
@@ -64,6 +65,17 @@ namespace Seruichi.RealEstate.Web.Controllers
         }
 
         [HttpPost]
+        public ActionResult Check_Update_M_REStaff(r_staffModel model)
+        {
+            List<Update_r_staffModel> List_to_Update= Get_Changes_Data(model);
+            if (List_to_Update.Count > 0)
+            {
+                return OKResult();
+            }
+            return ErrorResult();
+        }
+
+        [HttpPost]
         public ActionResult Save_M_REStaff(r_staffModel model)
         {
             r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
@@ -89,14 +101,19 @@ namespace Seruichi.RealEstate.Web.Controllers
             {
                 Directory.CreateDirectory(Dirupload);
             }
+
+            List<Update_r_staffModel> List_to_Update = Get_Changes_Data(model);
+            model.lst_StaffModel = List_to_Update;
+
             if (model.lst_StaffModel.Count > 0)
             {
                 UpdateRemark = "";
                 for (int i = 0; i < model.lst_StaffModel.Count; i++)
                 {
-                    string Updatebase64result = model.lst_StaffModel[i].REFaceImage.Split(',')[1];
-                    if (!String.IsNullOrWhiteSpace(Updatebase64result))
+                    if (!String.IsNullOrWhiteSpace(model.lst_StaffModel[i].REFaceImage))
                     {
+                        //string Updatebase64result = model.lst_StaffModel[i].REFaceImage.Split(',')[1];
+                        string Updatebase64result = model.lst_StaffModel[i].REFaceImage;
                         string UpdatefileName = "r_staff_" + model.lst_StaffModel[i].RealECD + "_" + model.lst_StaffModel[i].REStaffCD + "_" + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".png";
                         model.lst_StaffModel[i].REFaceImage = byteArrayToImage(Updatebase64result, UpdatefileName);//LoadBase64(str);
                     }
@@ -104,6 +121,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                     {
                         model.lst_StaffModel[i].REFaceImage = null;
                     }
+
                     UpdateRemark += model.lst_StaffModel[i].REStaffCD + ",";
                 }
             }
@@ -129,7 +147,7 @@ namespace Seruichi.RealEstate.Web.Controllers
             }
             return OKResult();
         }
-        public string byteArrayToImage(string base64,string FileName)
+        private string byteArrayToImage(string base64,string FileName)
         {
             byte[] byteArrayIn = Convert.FromBase64String(base64);
             MemoryStream ms = new MemoryStream(byteArrayIn);
@@ -139,7 +157,7 @@ namespace Seruichi.RealEstate.Web.Controllers
             return FilePath;
         }
 
-        public r_staffModel Getlogdata(r_staffModel model)
+        private r_staffModel Getlogdata(r_staffModel model)
         {
             CommonBL bl = new CommonBL();
             //model.LoginKBN = 2;
@@ -149,19 +167,73 @@ namespace Seruichi.RealEstate.Web.Controllers
             model.IPAddress = base.GetClientIP();
             //model.PageID = "r_staff";
             //model.ProcessKBN = "INSERT/UPDATE";
-            //if (model.LoginID == "admin")
-            //{
-                if (!string.IsNullOrWhiteSpace(model.REStaffCD))
-                {
+            if (!string.IsNullOrWhiteSpace(model.REStaffCD) && !string.IsNullOrWhiteSpace(UpdateRemark))
+            {
+                model.Remarks = "INS=" + model.REStaffCD + "," + "UPD=" + UpdateRemark.TrimEnd(',');
+                model.ProcessKBN = "5";
+            }
+            else if(!string.IsNullOrWhiteSpace(model.REStaffCD) && string.IsNullOrWhiteSpace(UpdateRemark))
+            {
+                model.Remarks = "INS=" + model.REStaffCD;
+                model.ProcessKBN = "1";
+            }
+            else
+            {
+                model.Remarks = "UPD=" + UpdateRemark.TrimEnd(',');
+                model.ProcessKBN = "2";
+            }
+            return model;
+        }
 
-                    model.Remarks = "INS=" + model.REStaffCD + "," + "UPD=" + UpdateRemark.TrimEnd(',');
+
+        private List<Update_r_staffModel> Get_Changes_Data(r_staffModel model)
+        {
+            r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
+            r_staffBL bl = new r_staffBL();
+            // List<r_staffModel> StaffList = new List<r_staffModel>();
+            DataTable dt = bl.Get_M_REStaff_By_RealECD_IsAdmin(user.RealECD, user.REStaffCD);
+            List<Update_r_staffModel> StaffList = (from DataRow dr in dt.Rows
+                                                   select new Update_r_staffModel()
+                                                   {
+                                                       RealECD = dr["RealECD"].ToString(),
+                                                       REFaceImage = dr["REFaceImage"].ToString() == "" ? dr["REFaceImage"].ToString() : Convert.ToBase64String((byte[])dr["REFaceImage"]),
+                                                       REStaffCD = dr["REStaffCD"].ToString(),
+                                                       REStaffName = dr["REStaffName"].ToString(),
+                                                       REIntroduction = dr["REIntroduction"].ToString() == ""? null : dr["REIntroduction"].ToString(),
+                                                       REPassword = dr["REPassword"].ToString(),
+                                                       PermissionChat = dr["PermissionChat"].ToString(),
+                                                       PermissionSetting = dr["PermissionSetting"].ToString(),
+                                                       PermissionPlan = dr["PermissionPlan"].ToString(),
+                                                       PermissionInvoice = dr["PermissionInvoice"].ToString()
+                                                   }).ToList();
+
+            string JSONStringDB = string.Empty;
+            string JSONStringUpdate = string.Empty;
+
+
+            List<Update_r_staffModel> listtoupdate = new List<Update_r_staffModel>();
+            for (int i = 0; i < StaffList.Count; i++)
+            {
+                if (!String.IsNullOrWhiteSpace(model.lst_StaffModel[i].REFaceImage))
+                {
+                    string Updatebase64result = model.lst_StaffModel[i].REFaceImage.Split(',')[1];
+                    model.lst_StaffModel[i].REFaceImage = Updatebase64result;
                 }
                 else
                 {
-                    model.Remarks = "UPD=" + UpdateRemark.TrimEnd(',');
+                    model.lst_StaffModel[i].REFaceImage = null;
                 }
-            //}
-            return model;
+                JSONStringDB = JsonConvert.SerializeObject(StaffList[i]);
+                JSONStringUpdate = JsonConvert.SerializeObject(model.lst_StaffModel[i]);
+                bool issame = JSONStringDB == JSONStringUpdate;
+                issame = false;
+                if (JSONStringDB != JSONStringUpdate)
+                {
+                    listtoupdate.Add(model.lst_StaffModel[i]);
+                }
+            }
+
+            return listtoupdate;
         }
     }
 }
