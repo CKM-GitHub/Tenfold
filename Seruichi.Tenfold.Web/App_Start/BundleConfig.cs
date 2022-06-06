@@ -90,7 +90,8 @@ namespace Seruichi.Tenfold.Web
                      ));
 
             bundles.Add(new ScriptBundle("~/bundles/t_seller_account").Include(
-                     "~/Scripts/t_seller_account.js"));
+                     "~/Scripts/t_seller_account.js",
+                     "~/Scripts/t_common.js"));
         }
     }
 }

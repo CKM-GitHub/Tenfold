@@ -242,10 +242,11 @@
                                                                         <div class="js-station">
                                                                             <div class="card m-2 col-12 shadow-sm" id="Dline_1">
                                                                                 <div class="card-header ps-md-2 pt-0 pb-0">
-                                                                                    <button class="btn btn-link js-paragraph-number" data-bs-toggle="collapse"
+
+                                                                                    <button class="btn btn-link" data-bs-toggle="collapse"
                                                                                             data-bs-target="#access-collapse-1" aria-expanded="false"
                                                                                             aria-controls="access-collapse-1">
-                                                                                        <h5>路線1</h5>
+                                                                                        <h5 class="js-paragraph-number">路線1</h5>
                                                                                     </button>
                                                                                     @*<span class="js-paragraph-number" style="min-width: 20px;">路線1</span>*@
                                                                                 </div>
@@ -253,7 +254,8 @@
                                                                                     <div class="col-12 pb-3">
                                                                                         <div class="form-outline form-white">
                                                                                             <label class="form-label me-5">路線名</label>
-                                                                                            <div class="dropdown">
+                                                                                            <div class="dropdown ">
+                                                                                                <span class="cap-errormsg-right line-error"></span>
                                                                                                 <div class="dropdown w-100">
                                                                                                     <select class="form-select js-linecd" id="">
                                                                                                         <option selected value="">路線選択</option>
@@ -266,6 +268,7 @@
                                                                                         <div class="form-outline form-white">
                                                                                             <label class="form-label me-5">駅名</label>
                                                                                             <div class="dropdown ps-3">
+                                                                                                <span class="cap-errormsg-right station-error"></span>
                                                                                                 <div class="dropdown w-100">
                                                                                                     <select class="form-select js-stationcd" id="">
                                                                                                         <option selected value="">駅選択</option>
@@ -276,9 +279,13 @@
                                                                                     </div>
                                                                                     <div class="col-12 pb-3">
                                                                                         <div class="form-outline form-white d-flex">
+                                                                                            
                                                                                             <label class="form-label align-self-center pe-3">徒歩(分)</label>
-                                                                                            <input type="number" class="form-control form-control-lg w-md-24 text-end js-distance" maxlength="2" id=""
-                                                                                                   placeholder="二丁目北木之元町3-5-5" />
+                                                                                            <div class="text-start">
+                                                                                                <span class="cap-errormsg-right distance-error"></span>
+                                                                                                <input type="number" class="form-control form-control-lg w-md-24 text-end js-distance" maxlength="2" id="" />
+
+                                                                                            </div>
 
                                                                                         </div>
                                                                                     </div>
@@ -290,7 +297,7 @@
                                                                     <div class="js-stationContainer">
                                                                         <!--1-->
                                                                         <div class="js-station">
-                                                                            <div class="card m-2 col-12 shadow-sm" id="Dline_1">
+                                                                            <div class="card m-2 col-12 shadow-sm " >
                                                                                 <div class="card-header ps-md-2 pt-0 pb-0">
                                                                                     <button class="btn btn-link" data-bs-toggle="collapse"
                                                                                             data-bs-target="#access-collapse-1" aria-expanded="false"
