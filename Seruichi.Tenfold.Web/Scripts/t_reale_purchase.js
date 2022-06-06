@@ -1,8 +1,8 @@
 ﻿const _url = {};
 $(function () {
     setValidation();
-    _url.get_t_reale_purchase_CompanyInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyInfo';
-    _url.get_t_reale_purchase_CompanyCountingInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyCountingInfo';
+    _url.get_t_reale_CompanyInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyInfo';
+    _url.get_t_reale_CompanyCountingInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyCountingInfo';
     _url.get_t_reale_purchase_DisplayData = common.appPath + '/t_reale_purchase/get_t_reale_purchase_DisplayData';
     _url.get_t_reale_purchase_CSVData = common.appPath + '/t_reale_purchase/get_t_reale_purchase_CSVData';
     _url.Insert_L_Log = common.appPath + '/t_reale_purchase/Insert_L_Log';
@@ -104,7 +104,7 @@ function addEvents() {
     sortTable.getSortingTable("tblPurchaseDetails");
 
     $('#btnDisplay').on('click', function () {
-        $('#RealEName').val($('#REName').text());
+        $('#RealEName').val($('#r_REName').text());
         $form = $('#form1').hideChildErrors();
         if (!common.checkValidityOnSave('#form1')) {
             $form.getInvalidItems().get(0).focus();
@@ -117,7 +117,7 @@ function addEvents() {
     });
 
     $('#btnCSV').on('click', function () {
-        $('#RealEName').val($('#REName').text());
+        $('#RealEName').val($('#r_REName').text());
         $form = $('#form1').hideChildErrors();
         if (!common.checkValidityOnSave('#form1')) {
             $form.getInvalidItems().get(0).focus();
