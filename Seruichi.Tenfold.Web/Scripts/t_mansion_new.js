@@ -61,6 +61,8 @@ function setValidation() {
         .addvalidation_reqired()
         .addvalidation_custom('customValidation_checkConstYYYYMM');
 
+    $('#confirm_BuildingAge').text($('#BuildingAge').text());
+
     $('#Rooms')
         .addvalidation_errorElement("#errorRooms")
         .addvalidation_reqired(true)
@@ -312,7 +314,7 @@ function setScreenComfirm(data) {
 
     $('#confirm_ConstYYYYMM').val($('#ConstYYYYMM').val());
     $('#confirm_RightKBN').val($('input[name="RightKBN"]:radio:checked').next().text());
-
+    $('#confirm_BuildingAge').text($('#BuildingAge').text());
     $('#confirm_Noti').text($('#Noti').text());
     $('#confirm_Katakana').text($('#Katakana').text());
     $('#confirm_Katakana1').text($('#Katakana1').text());
