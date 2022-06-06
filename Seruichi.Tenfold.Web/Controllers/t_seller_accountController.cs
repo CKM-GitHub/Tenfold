@@ -13,9 +13,20 @@ namespace Seruichi.Tenfold.Web.Controllers
 {
     public class t_seller_accountController : BaseController
     {
+        static string strSellerCD = string.Empty;
         // GET: t_seller_account
-        public ActionResult Index()
+        public ActionResult Index(String SellerCD)
         {
+            SellerCD = "S000000017";
+            if (!String.IsNullOrWhiteSpace(SellerCD))
+            {
+                ViewBag.Url = System.Web.HttpContext.Current.Request.UrlReferrer;
+                strSellerCD = SellerCD;
+                t_seller_accountBL bl = new t_seller_accountBL();
+                var dt = bl.GetM_SellerBy_SellerCD(strSellerCD);
+                ViewBag.TestFLG = dt.Rows[0]["TestFLG"].ToString() == "1" ? "checked" : "unchecked";
+                ViewBag.InvalidFLG = dt.Rows[0]["InvalidFLG"].ToString() == "1" ? "checked" : "unchecked";
+            }
             return View();
         }
     }

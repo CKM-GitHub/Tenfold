@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models.Tenfold.t_seller_account
 {
-    class t_seller_accountModel
+    public class t_seller_accountModel
     {
     }
 }
