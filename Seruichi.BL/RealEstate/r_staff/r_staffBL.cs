@@ -183,6 +183,7 @@ namespace Seruichi.BL.RealEstate.r_staff
                 new SqlParameter("@LoginName", SqlDbType.VarChar){ Value =   model.LoginName.ToStringOrNull() },
                 new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.LoginID },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value =  model.IPAddress },
+                 new SqlParameter("@Remarks", SqlDbType.VarChar){ Value =  model.Remarks },
              //new SqlParameter("@RealECD", SqlDbType.VarChar){ Value =  model.RealECD },
                new SqlParameter("@M_REStaff", SqlDbType.Structured){ TypeName = "dbo.R_REStaff", Value = dtUpdate },
                new SqlParameter("@M_REImage", SqlDbType.Structured){ TypeName = "dbo.R_REFaceImage", Value = dtUpdateImage },

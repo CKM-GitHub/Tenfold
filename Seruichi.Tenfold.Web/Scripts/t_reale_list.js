@@ -226,7 +226,7 @@ function l_logfunction(id) {
         IPAddress: null,
         Page: null,
         ProcessKBN: 'link',
-        Remarks: 't_reale_profile' + '&' + id
+        Remarks: 't_reale_profile' + ' ' + id
     }
     common.callAjax(_url.InsertL_Log, model,
         function (result) {

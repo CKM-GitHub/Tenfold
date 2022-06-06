@@ -16,6 +16,8 @@ namespace Seruichi.RealEstate.Web.Controllers
 {
     public class r_staffController : BaseController
     {
+        
+        public static string UpdateRemark = string.Empty;
         // GET: r_staff
         public ActionResult Index()
         {
@@ -62,7 +64,16 @@ namespace Seruichi.RealEstate.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save_M_REStaff(r_staffModel model)        {            r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();            r_staffBL bl = new r_staffBL();            var validationResult = bl.ValidateAll(model);            if (validationResult.Count > 0)            {                return ErrorResult(validationResult);            }            model = Getlogdata(model);
+        public ActionResult Save_M_REStaff(r_staffModel model)
+        {
+            r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
+            r_staffBL bl = new r_staffBL();
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+           
             string Dirtemp = @"C:\Temp";
             string DirSelichi = @"C:\Temp\Selichi";
             string Dirupload = @"C:\Temp\Selichi\UploadImage";
@@ -80,6 +91,7 @@ namespace Seruichi.RealEstate.Web.Controllers
             }
             if (model.lst_StaffModel.Count > 0)
             {
+                UpdateRemark = "";
                 for (int i = 0; i < model.lst_StaffModel.Count; i++)
                 {
                     string Updatebase64result = model.lst_StaffModel[i].REFaceImage.Split(',')[1];
@@ -92,14 +104,16 @@ namespace Seruichi.RealEstate.Web.Controllers
                     {
                         model.lst_StaffModel[i].REFaceImage = null;
                     }
+                    UpdateRemark += model.lst_StaffModel[i].REStaffCD + ",";
                 }
             }
 
             if (user.REStaffCD == "admin")
             {
-                string Newbase64result = model.REFaceImage.Split(',')[1];
-                if (!String.IsNullOrWhiteSpace(Newbase64result))
+                if (!String.IsNullOrWhiteSpace(model.REFaceImage))
                 {
+                    string Newbase64result = model.REFaceImage.Split(',')[1];
+                
                     string NewfileName = "r_staff_" + model.RealECD + "_" + model.REStaffCD + "_" + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".png";
                     model.REFaceImage = byteArrayToImage(Newbase64result, NewfileName);
                 }
@@ -107,7 +121,14 @@ namespace Seruichi.RealEstate.Web.Controllers
                 {
                     model.REFaceImage = null;
                 }
-            }            if (!bl.Save_M_REStaff(model, out string errorcd))            {                return ErrorMessageResult(errorcd);            }            return OKResult();        }
+            }
+            model = Getlogdata(model);
+            if (!bl.Save_M_REStaff(model, out string errorcd))
+            {
+                return ErrorMessageResult(errorcd);
+            }
+            return OKResult();
+        }
         public string byteArrayToImage(string base64,string FileName)
         {
             byte[] byteArrayIn = Convert.FromBase64String(base64);
@@ -128,7 +149,18 @@ namespace Seruichi.RealEstate.Web.Controllers
             model.IPAddress = base.GetClientIP();
             //model.PageID = "r_staff";
             //model.ProcessKBN = "INSERT/UPDATE";
-            //model.Remarks = "INS=" + " " + model.REStaffCD + " " + model.MansionName;
+            //if (model.LoginID == "admin")
+            //{
+                if (!string.IsNullOrWhiteSpace(model.REStaffCD))
+                {
+
+                    model.Remarks = "INS=" + model.REStaffCD + "," + "UPD=" + UpdateRemark.TrimEnd(',');
+                }
+                else
+                {
+                    model.Remarks = "UPD=" + UpdateRemark.TrimEnd(',');
+                }
+            //}
             return model;
         }
     }
