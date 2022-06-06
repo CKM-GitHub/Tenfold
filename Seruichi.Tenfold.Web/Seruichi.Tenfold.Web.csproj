@@ -212,7 +212,6 @@
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
     <Content Include="Scripts\t_admin.js" />
-    <Content Include="Scripts\t_seller_account.js" />
     <Content Include="Scripts\t_common.js" />
     <Content Include="Scripts\t_dashboard.js" />
     <Content Include="Scripts\t_login.js" />
