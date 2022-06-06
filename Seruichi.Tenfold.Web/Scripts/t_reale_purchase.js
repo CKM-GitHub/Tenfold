@@ -85,7 +85,7 @@ function addEvents() {
     });
 
     let model = {
-        RealECD: common.getUrlParameter('reale'),
+        RealECD: common.getUrlParameter('RealECD'),
         chk_Purchase: $("#chk_Purchase").val(),
         chk_Checking: $("#chk_Checking").val(),
         chk_Nego: $("#chk_Nego").val(),
@@ -276,9 +276,10 @@ function l_logfunction(remark, Process, id) {
     common.callAjax(_url.Insert_L_Log, model, function (result) {
         if (result && result.isOK) {
             if (remark == 't_seller_assessment ' + id)
-                window.location.href = "http://163.43.105.244/Seruichi.tenfold.dev/t_seller_assessment/Index?SellerCD=" + id;
+                window.location.href = common.appPath + '/t_seller_assessment/Index?SellerCD=' + id;
             else if (remark == 't_seller_assessment_detail ' + id)
-                window.location.href = "http://163.43.105.244/Seruichi.tenfold.dev/t_seller_assessment_detail/Index?AssReqID=" + id;
+                alert(common.appPath + '/t_seller_assessment_detail/Index?AssReqID=' + id);
+                //window.location.href = common.appPath + '/t_seller_assessment_detail/Index?AssReqID=' + id;
         }
     });
 }

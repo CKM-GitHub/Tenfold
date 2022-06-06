@@ -187,14 +187,27 @@
                                                                         <label class="form-label" for="form3Examplea3">土地権利区分</label>
                                                                         <span class="cap-errormsg-right" id="errorRightKBN"></span>
                                                                     </div>
-                                                                    <div class="w-100 d-md-flex">
+                                                                    <div class="w-100 d-md-flex">                                                                        
                                                                         <div>
-                                                                            <input class="form-check-input" type="radio" name="RightKBN" id="RightKBN1" value="1">
+                                                                            @if (@ViewBag.MansionModel.RightKBN == 1)
+                                                                            {
+                                                                                <input class="form-check-input" type="radio" name="RightKBN" checked id="RightKBN1" value="1">
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <input class="form-check-input" type="radio" name="RightKBN" id="RightKBN1" value="1">
+                                                                            }
                                                                             <label class="form-check-label" for="RightKBN1"> 所有権</label>
                                                                         </div>
                                                                         <div class="ps-md-3">
-                                                                            <input class="form-check-input" type="radio" name="RightKBN"
-                                                                                   id="RightKBN2" value="2">
+                                                                            @if (@ViewBag.MansionModel.RightKBN == 2)
+                                                                            {
+                                                                                <input class="form-check-input" type="radio" name="RightKBN" checked id="RightKBN2" value="2">
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <input class="form-check-input" type="radio" name="RightKBN" id="RightKBN2" value="2">
+                                                                            }
                                                                             <label class="form-check-label" for="RightKBN2"> 借地権</label>
                                                                         </div>
                                                                     </div>
@@ -208,22 +221,37 @@
                                                                     </div>
                                                                     <div class="w-100 d-md-flex">
                                                                         <div>
-                                                                            <input class="form-check-input" type="radio" name="StructuralKBN" id="StructuralKBN1" value="1">
-                                                                            <label class="form-check-label" for="StructuralKBN1">SRC造  </label>
+                                                                            @if (@ViewBag.MansionModel.StructuralKBN == 1)
+                                                                            {
+                                                                                <input class="form-check-input" type="radio" name="StructuralKBN" checked id="StructuralKBN1" value="1">
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <input class="form-check-input" type="radio" name="StructuralKBN" id="StructuralKBN1" value="1">
+                                                                            }
+                                                                            <label class="form-check-label">SRC造  </label>
                                                                         </div>
                                                                         <div class="ps-md-3">
-                                                                            <input class="form-check-input" type="radio" name="StructuralKBN" id="StructuralKBN2" value="2">
-                                                                            <label class="form-check-label" for="StructuralKBN2"> RC造 </label>
+                                                                            @if (@ViewBag.MansionModel.StructuralKBN == 2)
+                                                                            {
+                                                                                <input class="form-check-input" type="radio" name="StructuralKBN" checked id="StructuralKBN2" value="2">
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <input class="form-check-input" type="radio" name="StructuralKBN" id="StructuralKBN2" value="2">
+                                                                            }
+                                                                            <label class="form-check-label"> RC造 </label>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="mb-4 pb-2 col-12 col-md-6">
+                                                            <div class="mb-4 pb-2 col-12 col-md-12">
                                                                 <div class="form-outline form-white">
                                                                     <div class="d-flex">
-                                                                        <label class="form-label" for="form3Examplea3">築年月</label><span class="cap-errormsg-right" id="errorConstYYYYMM"></span>
+                                                                        <label class="form-label" for="form3Examplea3">築年月</label>
+                                                                        <span class="cap-errormsg-right" id="errorConstYYYYMM"></span>
                                                                     </div>
-                                                                    <input type="month" min="1900-01" max="2100-12" class="form-control form-control-lg text-center cap-fon-form-w200" name="ConstYYYYMM" id="ConstYYYYMM" />
+                                                                    <input type="month" min="1900-01" max="2100-12" class="form-control form-control-lg text-center cap-fon-form-w200" name="ConstYYYYMM" id="ConstYYYYMM" value="@ViewBag.MansionModel.ConstYYYYMM" />
                                                                 </div>
                                                             </div>
                                                             <div class="mb-4 pb-2 col-12 col-md-6">
@@ -235,11 +263,11 @@
 
                                                                         <input type="number" class="form-control form-control-lg text-center cap-fon-form-w150" name="Rooms" id="Rooms"
                                                                                oninput="javascript:if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                                                               maxlength="3" />
+                                                                          value="@ViewBag.MansionModel.Rooms" maxlength="3" />
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="mb-4 pb-2 col-12 col-md-5">
+                                                            <div class="mb-4 pb-2 col-12 col-md-6">
                                                                 <div class="form-outline form-white">
                                                                     <div class="d-flex">
                                                                         <label class="form-label" for="form3Examplea3">階数</label>
@@ -248,7 +276,7 @@
                                                                     <input type="number" id="Floors" name="Floors"
                                                                            class="form-control form-control-lg text-center cap-fon-form-w150"
                                                                            oninput="javascript:if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                                                           maxlength="3" />
+                                                                           value="@ViewBag.MansionModel.Floors" maxlength="3" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1342,217 +1370,223 @@
                                                 <div class="col-lg-4">
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline form-white p-5">
-                                                            <label class="form-label" for="form3Examplea3">検索用キーワード</label>
-                                                            <div class="row justify-content-center mt-auto m-md-5 p-md-3 mt-md-0 pt-md-0" id="ekikoutsu"
-                                                                 style="overflow-x: hidden;overflow-y: auto;max-height: 500px;">
-                                                                <!--1-->
-                                                                <div class="card m-2 col-12 shadow-sm">
-                                                                    <div class="card-header ps-md-2 pt-0 pb-0">
-                                                                        <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                data-bs-target="#keyw-collapse-1" aria-expanded="false"
-                                                                                aria-controls="keyw-collapse-1">
-                                                                            <h5>謄本表記</h5>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="card-body p-2 row collapse show" id="keyw-collapse-1">
-                                                                        <div class="col-12 pb-3">
-                                                                            <div class="form-outline form-white">
-
-                                                                                <input type="text" class="form-control form-control-lg w-100" />
-
+                                                            <div class="js-wordContainer">
+                                                                <label class="form-label" for="form3Examplea3">検索用キーワード</label>
+                                                                <div class="row justify-content-center mt-auto m-md-5 p-md-3 mt-md-0 pt-md-0" id="ekikoutsu"
+                                                                     style="overflow-x: hidden;overflow-y: auto;max-height: 500px;">
+                                                                    <!--1-->
+                                                                    <div class="js-word">
+                                                                        <div class="card m-2 col-12 shadow-sm">
+                                                                            <div class="card-header ps-md-2 pt-0 pb-0">
+                                                                                <button class="btn btn-link" data-bs-toggle="collapse"
+                                                                                        data-bs-target="#keyw-collapse-1" aria-expanded="false"
+                                                                                        aria-controls="keyw-collapse-1">
+                                                                                    <h5>謄本表記</h5>
+                                                                                </button>
+                                                                                <span class="cap-errormsg-right" id="errorNoti"></span>
+                                                                            </div>
+                                                                            <div class="card-body p-2 row collapse show" id="keyw-collapse-1">
+                                                                                <div class="col-12 pb-3">
+                                                                                    <div class="form-outline form-white">
+                                                                                        <input type="text" class="form-control form-control-lg  noti" Name="Noti" id="Noti" maxlength="50" autocomplete="off" />
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <!--2-->
-                                                                <div class="card m-2 col-12 shadow-sm ">
-                                                                    <div class="card-header ps-md-2 pt-0 pb-0">
-                                                                        <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                data-bs-target="#keyw-collapse-2" aria-expanded="false"
-                                                                                aria-controls="keyw-collapse-2">
-                                                                            <h5>カタカナ</h5>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="card-body p-2 row collapse show" id="keyw-collapse-2">
-                                                                        <div class="col-12 pb-3">
-                                                                            <div class="form-outline form-white">
-
-                                                                                <input type="text" class="form-control form-control-lg w-100" />
-
+                                                                    <!--2-->
+                                                                    <div class="js-word">
+                                                                        <div class="card m-2 col-12 shadow-sm ">
+                                                                            <div class="card-header ps-md-2 pt-0 pb-0">
+                                                                                <button class="btn btn-link" data-bs-toggle="collapse"
+                                                                                        data-bs-target="#keyw-collapse-2" aria-expanded="false"
+                                                                                        aria-controls="keyw-collapse-2">
+                                                                                    <h5>カタカナ</h5>
+                                                                                </button>
+                                                                                <span class="cap-errormsg-right" id="errorKatakana"></span>
+                                                                            </div>
+                                                                            <div class="card-body p-2 row collapse show" id="keyw-collapse-2">
+                                                                                <div class="col-12 pb-3">
+                                                                                    <div class="form-outline form-white">
+                                                                                        <input type="text" class="form-control form-control-lg w-100 noti" maxlength="50" name="Katakana" id="Katakana" autocomplete="off" />
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <!--3-->
-                                                                <div class="card m-2 col-12 shadow-sm ">
-                                                                    <div class="card-header ps-md-2 pt-0 pb-0">
-                                                                        <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                data-bs-target="#keyw-collapse-3" aria-expanded="false"
-                                                                                aria-controls="keyw-collapse-3">
-                                                                            <h5>ｶﾀｶﾅ</h5>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="card-body p-2 row collapse show" id="keyw-collapse-3">
+                                                                    <!--3-->
+                                                                    <div class="js-word">
+                                                                        <div class="card m-2 col-12 shadow-sm ">
+                                                                            <div class="card-header ps-md-2 pt-0 pb-0">
+                                                                                <button class="btn btn-link" data-bs-toggle="collapse"
+                                                                                        data-bs-target="#keyw-collapse-3" aria-expanded="false"
+                                                                                        aria-controls="keyw-collapse-3">
+                                                                                    <h5>ｶﾀｶﾅ</h5>
+                                                                                </button>
+                                                                                <span class="cap-errormsg-right" id="errorKatakana1"></span>
+                                                                            </div>
+                                                                            <div class="card-body p-2 row collapse show" id="keyw-collapse-3">
 
-                                                                        <div class="col-12 pb-3">
-                                                                            <div class="form-outline form-white">
-
-                                                                                <input type="text" class="form-control form-control-lg w-100" />
-
+                                                                                <div class="col-12 pb-3">
+                                                                                    <div class="form-outline form-white">
+                                                                                        <input type="text" class="form-control form-control-lg w-100 noti" name="Katakana1" id="Katakana1" maxlength="50" autocomplete="off" />
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <!--4-->
-                                                                <div class="card m-2 col-12 shadow-sm ">
-                                                                    <div class="card-header ps-md-2 pt-0 pb-0">
-                                                                        <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                data-bs-target="#keyw-collapse-4" aria-expanded="false"
-                                                                                aria-controls="keyw-collapse-4">
-                                                                            <h5>ひらがな</h5>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="card-body p-2 row collapse show" id="keyw-collapse-4">
+                                                                    <!--4-->
+                                                                    <div class="js-word">
+                                                                        <div class="card m-2 col-12 shadow-sm ">
+                                                                            <div class="card-header ps-md-2 pt-0 pb-0">
+                                                                                <button class="btn btn-link" data-bs-toggle="collapse"
+                                                                                        data-bs-target="#keyw-collapse-4" aria-expanded="false"
+                                                                                        aria-controls="keyw-collapse-4">
+                                                                                    <h5>ひらがな</h5>
+                                                                                </button>
+                                                                                <span class="cap-errormsg-right" id="errorHirakana"></span>
+                                                                            </div>
+                                                                            <div class="card-body p-2 row collapse show" id="keyw-collapse-4">
 
-                                                                        <div class="col-12 pb-3">
-                                                                            <div class="form-outline form-white">
-
-                                                                                <input type="text" class="form-control form-control-lg w-100" />
-
+                                                                                <div class="col-12 pb-3">
+                                                                                    <div class="form-outline form-white">
+                                                                                        <input type="text" class="form-control form-control-lg w-100 noti" name="Hirakana" id="Hirakana" maxlength="50" autocomplete="off" />
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <!--5-->
-                                                                <div class="card m-2 col-12 shadow-sm ">
-                                                                    <div class="card-header ps-md-2 pt-0 pb-0">
-                                                                        <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                data-bs-target="#keyw-collapse-5" aria-expanded="false"
-                                                                                aria-controls="keyw-collapse-5">
-                                                                            <h5>その他1</h5>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="card-body p-2 row collapse show" id="keyw-collapse-5">
+                                                                    <!--5-->
+                                                                    <div class="js-word">
+                                                                        <div class="card m-2 col-12 shadow-sm ">
+                                                                            <div class="card-header ps-md-2 pt-0 pb-0">
+                                                                                <button class="btn btn-link" data-bs-toggle="collapse"
+                                                                                        data-bs-target="#keyw-collapse-5" aria-expanded="false"
+                                                                                        aria-controls="keyw-collapse-5">
+                                                                                    <h5>その他1</h5>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="card-body p-2 row collapse show" id="keyw-collapse-5">
 
-                                                                        <div class="col-12 pb-3">
-                                                                            <div class="form-outline form-white">
-
-                                                                                <input type="text" class="form-control form-control-lg w-100" />
-
+                                                                                <div class="col-12 pb-3">
+                                                                                    <div class="form-outline form-white">
+                                                                                        <input type="text" class="form-control form-control-lg w-100 noti" name="Other1" id="Other1" maxlength="50" autocomplete="off" />
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <!--6-->
-                                                                <div class="card m-2 col-12 shadow-sm ">
-                                                                    <div class="card-header ps-md-2 pt-0 pb-0">
-                                                                        <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                data-bs-target="#keyw-collapse-6" aria-expanded="false"
-                                                                                aria-controls="keyw-collapse-6">
-                                                                            <h5>その他2</h5>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="card-body p-2 row collapse show" id="keyw-collapse-6">
+                                                                    <!--6-->
+                                                                    <div class="js-word">
+                                                                        <div class="card m-2 col-12 shadow-sm ">
+                                                                            <div class="card-header ps-md-2 pt-0 pb-0">
+                                                                                <button class="btn btn-link" data-bs-toggle="collapse"
+                                                                                        data-bs-target="#keyw-collapse-6" aria-expanded="false"
+                                                                                        aria-controls="keyw-collapse-6">
+                                                                                    <h5>その他2</h5>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="card-body p-2 row collapse show" id="keyw-collapse-6">
 
-                                                                        <div class="col-12 pb-3">
-                                                                            <div class="form-outline form-white">
-
-                                                                                <input type="text" class="form-control form-control-lg w-100" />
-
+                                                                                <div class="col-12 pb-3">
+                                                                                    <div class="form-outline form-white">
+                                                                                        <input type="text" class="form-control form-control-lg w-100 noti" name="Other2" id="Other2" maxlength="50" autocomplete="off" />
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <!--7-->
-                                                                <div class="card m-2 col-12 shadow-sm ">
-                                                                    <div class="card-header ps-md-2 pt-0 pb-0">
-                                                                        <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                data-bs-target="#keyw-collapse-7" aria-expanded="false"
-                                                                                aria-controls="keyw-collapse-7">
-                                                                            <h5>その他3</h5>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="card-body p-2 row collapse show" id="keyw-collapse-7">
+                                                                    <!--7-->
+                                                                    <div class="js-word">
+                                                                        <div class="card m-2 col-12 shadow-sm ">
+                                                                            <div class="card-header ps-md-2 pt-0 pb-0">
+                                                                                <button class="btn btn-link" data-bs-toggle="collapse"
+                                                                                        data-bs-target="#keyw-collapse-7" aria-expanded="false"
+                                                                                        aria-controls="keyw-collapse-7">
+                                                                                    <h5>その他3</h5>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="card-body p-2 row collapse show" id="keyw-collapse-7">
 
-                                                                        <div class="col-12 pb-3">
-                                                                            <div class="form-outline form-white">
-
-                                                                                <input type="text" class="form-control form-control-lg w-100" />
-
+                                                                                <div class="col-12 pb-3">
+                                                                                    <div class="form-outline form-white">
+                                                                                        <input type="text" class="form-control form-control-lg w-100 noti" id="Other3" name="Other3" maxlength="50" autocomplete="off" />
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <!--8-->
-                                                                <div class="card m-2 col-12 shadow-sm ">
-                                                                    <div class="card-header ps-md-2 pt-0 pb-0">
-                                                                        <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                data-bs-target="#keyw-collapse-8" aria-expanded="false"
-                                                                                aria-controls="keyw-collapse-8">
-                                                                            <h5>その他4</h5>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="card-body p-2 row collapse show" id="keyw-collapse-8">
-
-                                                                        <div class="col-12 pb-3">
-                                                                            <div class="form-outline form-white">
-
-                                                                                <input type="text" class="form-control form-control-lg w-100" />
-
+                                                                    <!--8-->
+                                                                    <div class="js-word">
+                                                                        <div class="card m-2 col-12 shadow-sm ">
+                                                                            <div class="card-header ps-md-2 pt-0 pb-0">
+                                                                                <button class="btn btn-link" data-bs-toggle="collapse"
+                                                                                        data-bs-target="#keyw-collapse-8" aria-expanded="false"
+                                                                                        aria-controls="keyw-collapse-8">
+                                                                                    <h5>その他4</h5>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="card-body p-2 row collapse show" id="keyw-collapse-8">
+                                                                                <div class="col-12 pb-3">
+                                                                                    <div class="form-outline form-white">
+                                                                                        <input type="text" class="form-control form-control-lg w-100 noti" id="Other4" name="Other4" maxlength="50" autocomplete="off" />
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <!--9-->
-                                                                <div class="card m-2 col-12 shadow-sm ">
-                                                                    <div class="card-header ps-md-2 pt-0 pb-0">
-                                                                        <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                data-bs-target="#keyw-collapse-9" aria-expanded="false"
-                                                                                aria-controls="keyw-collapse-9">
-                                                                            <h5>その他5</h5>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="card-body p-2 row collapse show" id="keyw-collapse-9">
+                                                                    <!--9-->
+                                                                    <div class="js-word">
+                                                                        <div class="card m-2 col-12 shadow-sm ">
+                                                                            <div class="card-header ps-md-2 pt-0 pb-0">
+                                                                                <button class="btn btn-link" data-bs-toggle="collapse"
+                                                                                        data-bs-target="#keyw-collapse-9" aria-expanded="false"
+                                                                                        aria-controls="keyw-collapse-9">
+                                                                                    <h5>その他5</h5>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="card-body p-2 row collapse show" id="keyw-collapse-9">
 
-                                                                        <div class="col-12 pb-3">
-                                                                            <div class="form-outline form-white">
-
-                                                                                <input type="text" class="form-control form-control-lg w-100" />
-
+                                                                                <div class="col-12 pb-3">
+                                                                                    <div class="form-outline form-white">
+                                                                                        <input type="text" class="form-control form-control-lg w-100 noti" id="Other5" name="Other5" maxlength="50" autocomplete="off" />
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <!--10-->
-                                                                <div class="card m-2 col-12 shadow-sm ">
-                                                                    <div class="card-header ps-md-2 pt-0 pb-0">
-                                                                        <button class="btn btn-link" data-bs-toggle="collapse"
-                                                                                data-bs-target="#keyw-collapse-10" aria-expanded="false"
-                                                                                aria-controls="keyw-collapse-10">
-                                                                            <h5>その他6</h5>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="card-body p-2 row collapse show" id="keyw-collapse-10">
+                                                                    <!--10-->
+                                                                    <div class="js-word">
+                                                                        <div class="card m-2 col-12 shadow-sm ">
+                                                                            <div class="card-header ps-md-2 pt-0 pb-0">
+                                                                                <button class="btn btn-link" data-bs-toggle="collapse"
+                                                                                        data-bs-target="#keyw-collapse-10" aria-expanded="false"
+                                                                                        aria-controls="keyw-collapse-10">
+                                                                                    <h5>その他6</h5>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="card-body p-2 row collapse show" id="keyw-collapse-10">
 
-                                                                        <div class="col-12 pb-3">
-                                                                            <div class="form-outline form-white">
-
-                                                                                <input type="text" class="form-control form-control-lg w-100" />
-
+                                                                                <div class="col-12 pb-3">
+                                                                                    <div class="form-outline form-white">
+                                                                                        <input type="text" class="form-control form-control-lg w-100 noti" id="Other6" name="Other6" maxlength="50" autocomplete="off" />
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </div>
-
                                                     </div>
 
                                                     <div class="mb-4 pb-2">
-                                                        <div class="form-outline form-white">
-                                                            <label class="form-label" for="form3Examplev4">メモ</label>
-                                                            <textarea class="form-control custom-control" rows="5"></textarea>
+                                                        <div class="form-outline form-white p-5">
+                                                            <div class="d-flex">
+                                                                <label class="form-label" for="form3Examplev4">メモ</label>
+                                                                <span class="cap-errormsg-right" id="errorRemark"></span>
+                                                            </div>
+                                                            <textarea class="form-control custom-control" rows="11" maxlength="1000" value="@ViewBag.MansionModel.Remark" name="Remark" id="Remark"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="mb-4 pb-2">
@@ -1581,7 +1615,7 @@
                                             <div class="card-footer">
                                                 <div class="text-right mt-3 float-end">
                                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModal">
+                                                      id="btnConfirmation" data-bs-target="#exampleModal">
                                                         確認
                                                     </button>&nbsp;
                                                     <button type="button" class="btn btn-default">取消</button>

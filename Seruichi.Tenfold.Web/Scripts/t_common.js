@@ -249,7 +249,8 @@ function Bind_Modal_DetailData(result, DeepAssDateTime) {
 
 //Start SubMenu
 $(function () {
-     Bind_SubMennuURL();
+    Bind_SubMennuURL();
+
 })
 function Bind_SubMennuURL() {
     var listItems = $("#subMenu li");
@@ -262,6 +263,12 @@ function Bind_SubMennuURL() {
         target = target.substring(target.lastIndexOf('/') + 1);
         var newHref = current.replace(target, anchor.attr('name'));
         anchor.prop('href', newHref);
+    });
+    $('#menu-toggle').on('click', function () {
+        if ($('#wrapper').hasClass('toggled'))
+            $('#wrapper').removeClass("toggled");
+        else
+            $('#wrapper').attr("class", "toggled");
     });
 }
 //EndSubMenu
