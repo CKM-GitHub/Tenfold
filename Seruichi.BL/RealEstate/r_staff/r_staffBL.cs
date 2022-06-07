@@ -170,7 +170,7 @@ namespace Seruichi.BL.RealEstate.r_staff
 
             var sqlParams = new SqlParameter[]
              {
-                new SqlParameter("@REFaceImage", SqlDbType.Image,Newphoto.Length){ Value = Newphoto},
+                new SqlParameter("@REFaceImage", SqlDbType.Image,Newphoto.Length){ Value = model.REFaceImage == null ? null : Newphoto},
                 new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull()},
                 new SqlParameter("@REStaffCD", SqlDbType.VarChar){ Value = model.REStaffCD.ToStringOrNull() },
                 new SqlParameter("@REPassword", SqlDbType.VarChar){ Value = model.REPassword.ToStringOrNull() },
