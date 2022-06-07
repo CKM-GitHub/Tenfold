@@ -276,3 +276,9 @@
 .cap-planarea label{
 	min-width: 140px
 }
+
+#cap-fixed-button {
+	position: fixed;
+	bottom: 15vh;
+	right: 5vw;
+}

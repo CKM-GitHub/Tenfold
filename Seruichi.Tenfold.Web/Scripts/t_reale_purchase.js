@@ -99,6 +99,7 @@ function addEvents() {
     $('#RealECD').val(model.RealECD);
 
     $('#seller').addClass('d-none');
+    $('#submenu_seller').addClass('d-none');
     Bind_Company_Data(this);         //Bind Company Info Data to the title part of the page
 
     get_purchase_Data(model, this, 'page_load');
