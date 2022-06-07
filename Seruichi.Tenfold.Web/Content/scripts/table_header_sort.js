@@ -179,7 +179,7 @@
             // Append new row 
             var count = 0;
             newRows.forEach(function (newRow) {
-                if (headers[0].innerText == 'NO.') {
+                if (headers[0].innerText == 'NO.' || headers[0].innerText == 'No.') {
                     count = count + 1;
                     newRow.querySelectorAll('td')[0].innerHTML = count;
                 }
