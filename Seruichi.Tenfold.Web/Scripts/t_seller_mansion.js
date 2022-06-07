@@ -638,7 +638,7 @@ function Bind_popup_contact(result) {
         $('#contact-second').append(contact_second);
     }
     else {
-        contact_first = '<div class="align-items-center col-12">非会員による登録のため、情報がありません。</div>'
+        contact_first = '非会員による登録のため、情報がありません。'
         $('#contact-first').append(contact_first);        
     }
 }
