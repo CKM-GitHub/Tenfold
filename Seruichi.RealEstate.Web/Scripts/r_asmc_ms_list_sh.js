@@ -263,7 +263,7 @@ function Bind_Data(data) {
             txt_class = 'text-danger';
 
         if (data[i]["公開状況"] == '(未公開)')
-            validFLG_class = 'text-success';
+            validFLG_class = 'text-primary';
         else if (data[i]["公開状況"] == '(公開済)')
             validFLG_class = 'text-danger';
 
