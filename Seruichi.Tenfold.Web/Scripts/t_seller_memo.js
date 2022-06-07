@@ -3,6 +3,7 @@ $(function () {
     _url.get_t_seller_Info = common.appPath + '/t_seller_memo/get_t_seller_Info';
     _url.get_t_seller_memo_DisplayData = common.appPath + '/t_seller_memo/get_t_seller_memo_DisplayData';
     _url.Insert_L_Log = common.appPath + '/t_seller_memo/Insert_L_Log';
+    _url.Delete_Cmd = common.appPath + '/t_seller_memo/Delete_Cmd';
     addEvents();
     $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
     $('#t_reale_purchase').addClass('font-bold text-underline');
@@ -53,7 +54,7 @@ function Bind_memo_Data(result) {
                 <p>\
                 <button type="button" class="float-right btn btn-outline-primary ml-2" onclick="Reply_Cmd(\'' + data[i]['SellerMemoSEQ'] + '\')">\
                     <i class="fa fa-reply"></i> コメント </button>\
-                <button type="button" id="btnDelete" class="float-right btn text-white btn-danger" onclick="Delete_Cmd(\'' + data[i]['ParentSEQ'] + ',' + data[i]['SellerMemoSEQ'] + '\')">\
+                <button type="button" id="btnDelete" class="float-right btn text-white btn-danger" onclick="Delete_Cmd(\'' + data[i]['SellerMemoSEQ'] + '\')">\
                     <i class="fa fa-times"></i> 削除 </button>\
                 </p>\
                 </div>\
@@ -71,7 +72,7 @@ function Bind_memo_Data(result) {
                 </div>\
                 <p ondblclick="Edit_Cmd(\'' + data[i]['SellerMemoSEQ'] + '\')">' + data[i]['MemoText'] + '</p>\
                 <p>\
-                <button type="button" id="btnDelete" class="float-right btn text-white btn-danger" onclick="Delete_Cmd(\'' + data[i]['ParentSEQ'] + ',' + data[i]['SellerMemoSEQ'] + '\')">\
+                <button type="button" id="btnDelete" class="float-right btn text-white btn-danger" onclick="Delete_Cmd(\'' + data[i]['SellerMemoSEQ'] + '\')">\
                     <i class="fa fa-times"></i> 削除 </button>\
                 </p>\
                 </div>\
@@ -106,10 +107,29 @@ function Reply_Cmd(SellerMemoSEQ) {
     $('#message-com').modal('show');
 }
 
-function Delete_Cmd(SellerMemoSEQ, ParentSEQ) {
+function Delete_Cmd(SellerMemoSEQ) {
     var model = {
-        SellerCD: common.getUrlParameter('SellerCD'),
-        SellerMemoSEQ: SellerMemoSEQ
+        SellerMemoSEQ: SellerMemoSEQ,
     }
+    $('#d_cmd').on('click', function () {
+        Delete(model);
+    });
     $('#message-del').modal('show');
+}
+
+function Delete(model) {
+    $('#message-del').modal('hide');
+    common.callAjaxWithLoadingSync(_url.Delete_Cmd, model, this, function (result) {
+        if (result && result.isOK) {
+            $('#message-delok').modal('show');
+        }
+        else {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                this.getInvalidItems().get(0).focus();
+            }
+        }
+    })
 }

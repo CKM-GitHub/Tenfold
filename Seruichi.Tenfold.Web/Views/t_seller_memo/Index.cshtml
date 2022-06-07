@@ -44,18 +44,13 @@
                                 <div class="box-footer">
                                     <div class="input-group align-middle">
                                         <textarea class="form-control custom-control" rows="5"></textarea>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                                    data-bs-target="#menu-modal">
-                                戻る
-                            </button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
                             <button type="button" class="btn btn-primary">送信</button>
-
                         </div>
                     </div>
                 </div>
@@ -73,19 +68,13 @@
                             重要: 「メモ」を削除すると、メモは完全に削除されます。<br>復元することはできません。
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                                    data-bs-target="#menu-modal">
-                                戻る
-                            </button>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#message-delok">
-                                確定
-                            </button>
-
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
+                            <button type="button" id="d_cmd" class="btn btn-primary">確定</button>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-delok" tabindex="-1"
                  aria-labelledby="message-delModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
