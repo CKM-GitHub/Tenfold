@@ -1,7 +1,11 @@
 ﻿//Start script code of t_reale_Info.cshtml -> Row No. 2 ~ 52
-function Bind_Company_Data(model, $form) {
+function Bind_Company_Data($form) {
     //t_reale Info
     if (!$('#reale').hasClass('d-none')) {
+        let model = {
+            RealECD: common.getUrlParameter('RealECD')
+        };
+
         common.callAjaxWithLoading(_url.get_t_reale_CompanyInfo, model, this, function (result) {
             if (result && result.isOK) {
                 Bind_CompanyInfo(model, result.data);
@@ -24,6 +28,10 @@ function Bind_Company_Data(model, $form) {
     }
     //t_seller Info
     else if (!$('#seller').hasClass('d-none')) {
+        let model = {
+            SellerCD: common.getUrlParameter('SellerCD')
+        };
+
         common.callAjaxWithLoading(_url.get_t_seller_Info, model, this, function (result) {
             if (result && result.isOK) {
                 Bind_SellerInfo(model, result.data);
@@ -90,7 +98,7 @@ function Bind_SellerInfo(model, result) {
         $('#s_SellerName').text(data[0]['SellerName']);
         $('#s_SellerCD').text(data[0]['SellerCD']);
 
-        $('#s_Address').text(data[0]['Address']);
+        $('#s_Address').text(data[0]['PrefName'] + data[0]['CityName'] + data[0]['TownName'] + data[0]['Address1'] + data[0]['Address2']);
         $('#s_HousePhone').text(data[0]['HousePhone']);
         $('#s_HandyPhone').text(data[0]['HandyPhone']);
         $('#s_MailAddress').text(data[0]['MailAddress']);

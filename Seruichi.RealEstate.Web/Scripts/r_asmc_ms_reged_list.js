@@ -204,11 +204,11 @@ function Bind_tbody(result) {
         for (var i = 0; i < data.length; i++) {
 
             if (data[i]["公開フラグ"] == "未公開") {
-                _class = "text-primary";
+                _class = "text-danger";
             }
             else
             {
-                _class = "text-danger";
+                _class = "text-primary";
             }
 
             html += '<tr>\

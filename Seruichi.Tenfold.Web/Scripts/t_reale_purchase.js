@@ -97,7 +97,10 @@ function addEvents() {
         EndDate: $("#EndDate").val()
     };
     $('#RealECD').val(model.RealECD);
-    Bind_Company_Data(model, this);         //Bind Company Info Data to the title part of the page
+
+    $('#seller').addClass('d-none');
+    $('#submenu_seller').addClass('d-none');
+    Bind_Company_Data(this);         //Bind Company Info Data to the title part of the page
 
     get_purchase_Data(model, this, 'page_load');
 

@@ -7,14 +7,30 @@ $(function () {
     $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
     $('#t_reale_purchase').addClass('font-bold text-underline');
 });
+
 function addEvents() {
     $('#reale').addClass('d-none');
-    let model = {
-        SellerCD: common.getUrlParameter('SellerCD')
-    };
+    $('#submenu_reale').addClass('d-none');
+    Bind_Company_Data(this);         //Bind Company Info Data to the title part of the page
 
-    Bind_Company_Data(model, this);         //Bind Company Info Data to the title part of the page
+    var model = {
+        RealECD: common.getUrlParameter('RealECD');
+    }
+    get_memo_Data(model, this);
+}
 
-    //get_purchase_Data(model, this, 'page_load');
-
+function get_memo_Data(model, $form) {
+    common.callAjaxWithLoadingSync(_url.get_t_seller_memo_DisplayData, model, this, function (result) {
+        if (result && result.isOK) {
+            Bind_memo_Data(result);
+        }
+        else {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                $form.getInvalidItems().get(0).focus();
+            }
+        }
+    })
 }

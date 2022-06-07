@@ -26,7 +26,7 @@
                         </div>
                         <div class="col-sm-6 col-12 text-sm-end">
                             <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
-                            <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+                    <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
                         </div>
                     </div>
                     <ul class="nav nav-tabs mt-0 overflow-x border-0 ps-5">
@@ -40,350 +40,350 @@
                 </div>
 
                 <form id="form1">
-                <div class="w-100">
-                    <div class="card shadow border-0 mb-7">
-                        <div class="card-header">
-                            <h5 class="mb-0">担当者設定管理</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                @{int i = 1;}
-                                @foreach (var Staff in ViewBag.StaffInfo)
-                                {
-                                    <div class="col-12 col-md-6 pb-3 update-data">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>&nbsp;</h5>
-                                            </div>
-                                            <div class="row gutters">
-                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                                                    <div class="h-100">
-                                                        <div class="card-body">
-                                                            <div class="account-settings">
-                                                                <div class="profile-pic-wrapper pt-6">
-                                                                    <div class="pic-holder" id="newpic_holder_@i">
+                    <div class="w-100">
+                        <div class="card shadow border-0 mb-7">
+                            <div class="card-header">
+                                <h5 class="mb-0">担当者設定管理</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    @{int i = 1;}
+                                    @foreach (var Staff in ViewBag.StaffInfo)
+                                    {
+                                        <div class="col-12 col-md-6 pb-3 update-data">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>&nbsp;</h5>
+                                                </div>
+                                                <div class="row gutters">
+                                                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                                                        <div class="h-100">
+                                                            <div class="card-body">
+                                                                <div class="account-settings">
+                                                                    <div class="profile-pic-wrapper pt-6">
+                                                                        <div class="pic-holder" id="newpic_holder_@i">
 
-                                                                        <img id="profilePic" class="pic" src="data:image/png;base64,@Staff.REFaceImage">
+                                                                            <img id="profilePic" class="pic" src="data:image/png;base64,@Staff.REFaceImage">
 
-                                                                        <Input class="uploadProfileInput" type="file" name="profile_pic_@i" id="newProfilePhoto_@i" accept="image/*" style="opacity: 0;" />
-                                                                        <label for="newProfilePhoto_@i" class="upload-file-block">
-                                                                            <div class="text-center">
-                                                                                <div class="mb-2">
-                                                                                    <i class="fa fa-camera fa-2x"></i>
+                                                                            <Input class="uploadProfileInput" type="file" name="profile_pic_@i" id="newProfilePhoto_@i" accept="image/*" style="opacity: 0;" />
+                                                                            <label for="newProfilePhoto_@i" class="upload-file-block">
+                                                                                <div class="text-center">
+                                                                                    <div class="mb-2">
+                                                                                        <i class="fa fa-camera fa-2x"></i>
+                                                                                    </div>
+                                                                                    <div class="text-uppercase">
+                                                                                        画像 <br /> アップロード
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="text-uppercase">
-                                                                                    画像 <br /> アップロード
-                                                                                </div>
-                                                                            </div>
-                                                                        </label>
+                                                                            </label>
+                                                                        </div>
+                                                                        <span class="cap-errormsg-right" id="CheckImageFileError_@i"></span>
+                                                                        @*<div class="alert alert-danger d-inline-block p-2 small" role="alert" id="CheckImageFileError"></div>*@
                                                                     </div>
-                                                                    <span class="cap-errormsg-right" id="CheckImageFileError_@i"></span>
-                                                                    @*<div class="alert alert-danger d-inline-block p-2 small" role="alert" id="CheckImageFileError"></div>*@
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-                                                    <div class="h-100">
-                                                        <div class="card-body">
-                                                            <div class="row gutters">
-                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                    <div class="form-group">
-                                                                        <label for="eMail">スタッフID</label>
-                                                                        <input type="text" class="form-control d-none" value="@Staff.RealECD" readonly id="RealECD_@i" name="RealECD_@i">
-                                                                        <input type="text" class="form-control" value="@Staff.REStaffCD" readonly id="REStaffCD_@i" name="REStaffCD_@i">
-                                                                        <span class="cap-errormsg-right" id="error_REStaffCD_@i"></span>
+                                                    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                                                        <div class="h-100">
+                                                            <div class="card-body">
+                                                                <div class="row gutters">
+                                                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
+                                                                        <div class="form-group">
+                                                                            <label for="eMail">スタッフID</label>
+                                                                            <input type="text" class="form-control d-none" value="@Staff.RealECD" readonly id="RealECD_@i" name="RealECD_@i">
+                                                                            <input type="text" class="form-control" value="@Staff.REStaffCD" readonly id="REStaffCD_@i" name="REStaffCD_@i">
+                                                                            <span class="cap-errormsg-right" id="error_REStaffCD_@i"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
+                                                                        <div class="form-group">
+                                                                            <label for="fullName">表示名</label>
+                                                                            <input type="text" class="form-control" value="@Staff.REStaffName" id="REStaffName_@i" name="REStaffName_@i" maxlength="30">
+                                                                            <span class="cap-errormsg-right" id="error_REStaffName_@i"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
+                                                                        <div class="form-group">
+                                                                            <label for="phone">紹介</label>
+                                                                            <textarea class="form-control" rows="3" value="" id="REIntroduction_@i" name="REIntroduction_@i" maxlength="500">@Staff.REIntroduction</textarea>
+                                                                            <span class="cap-errormsg-right" id="error_REIntroduction_@i"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
+                                                                        <div class="form-group">
+                                                                            <label for="website">パスワード</label>
+                                                                            @if (ViewBag.IsAdmin == "admin" || ViewBag.IsAdmin == Staff.REStaffCD)
+                                                                            {
+                                                                                <input type="password" class="form-control" value="@Staff.REPassword" id="REPassword_@i" name="REPassword_@i">
+                                                                                <span class="cap-errormsg-right" id="error_REPassword_@i"></span>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <input type="password" class="form-control" value="@Staff.REPassword" readonly id="REPassword_@i" name="REPassword_@i">
+                                                                                <span class="cap-errormsg-right" id="error_REPassword_@i"></span>
+                                                                            }
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                    <div class="form-group">
-                                                                        <label for="fullName">表示名</label>
-                                                                        <input type="text" class="form-control" value="@Staff.REStaffName" id="REStaffName_@i" name="REStaffName_@i" maxlength="30">
-                                                                        <span class="cap-errormsg-right" id="error_REStaffName_@i"></span>
+                                                                <div class="row gutters">
+                                                                    <div class="col-12">
+                                                                        <div class="form-group">
+                                                                            <label for="Street" class="me-md-3" class="me-md-3">権限設定</label>
+                                                                            <div class="form-check form-check-inline">
+                                                                                @if (ViewBag.IsAdmin == "admin")
+                                                                                {
+                                                                                    if (Staff.PermissionChat == "1")
+                                                                                    {
+                                                                                        <input class="form-check-input" type="checkbox" id="chkChat_@i" checked
+                                                                                               value="option1">
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <input class="form-check-input" type="checkbox" id="chkChat_@i"
+                                                                                               value="option1">
+                                                                                    }
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    if (Staff.PermissionChat == "1")
+                                                                                    {
+                                                                                        <input class="form-check-input" type="checkbox" id="chkChat_@i" checked
+                                                                                               value="option1" disabled="disabled">
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <input class="form-check-input" type="checkbox" id="chkChat_@i"
+                                                                                               value="option1" disabled="disabled">
+                                                                                    }
+
+                                                                                }
+                                                                                <label class="form-check-label" for="kennken1">チャット</label>
+                                                                            </div>
+                                                                            <div class="form-check form-check-inline">
+                                                                                @if (ViewBag.IsAdmin == "admin")
+                                                                                {
+                                                                                    if (Staff.PermissionSetting == "1")
+                                                                                    {
+                                                                                        <input class="form-check-input" type="checkbox" id="chkSetting_@i" checked
+                                                                                               value="option2">
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <input class="form-check-input" type="checkbox" id="chkSetting_@i"
+                                                                                               value="option2">
+                                                                                    }
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    if (Staff.PermissionSetting == "1")
+                                                                                    {
+                                                                                        <input class="form-check-input" type="checkbox" id="chkSetting_@i" checked
+                                                                                               value="option2" disabled="disabled">
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <input class="form-check-input" type="checkbox" id="chkSetting_@i"
+                                                                                               value="option2" disabled="disabled">
+                                                                                    }
+
+                                                                                }
+                                                                                <label class="form-check-label" for="kennken2">設定</label>
+
+                                                                            </div>
+                                                                            <div class="form-check form-check-inline">
+                                                                                @if (ViewBag.IsAdmin == "admin")
+                                                                                {
+                                                                                    if (Staff.PermissionPlan == "1")
+                                                                                    {
+                                                                                        <input class="form-check-input" type="checkbox" id="chkPlan_@i" checked
+                                                                                               value="option3">
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <input class="form-check-input" type="checkbox" id="chkPlan_@i"
+                                                                                               value="option3">
+                                                                                    }
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    if (Staff.PermissionPlan == "1")
+                                                                                    {
+                                                                                        <input class="form-check-input" type="checkbox" id="chkPlan_@i" checked
+                                                                                               value="option3" disabled="disabled">
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <input class="form-check-input" type="checkbox" id="chkPlan_@i"
+                                                                                               value="option3" disabled="disabled">
+                                                                                    }
+                                                                                }
+                                                                                <label class="form-check-label" for="kennken3">プラン変更</label>
+                                                                            </div>
+                                                                            <div class="form-check form-check-inline">
+                                                                                @if (ViewBag.IsAdmin == "admin")
+                                                                                {
+                                                                                    if (Staff.PermissionInvoice == "1")
+                                                                                    {
+                                                                                        <input class="form-check-input" type="checkbox" id="chkInvoice_@i" checked
+                                                                                               value="option4">
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <input class="form-check-input" type="checkbox" id="chkInvoice_@i"
+                                                                                               value="option4">
+                                                                                    }
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    if (Staff.PermissionInvoice == "1")
+                                                                                    {
+                                                                                        <input class="form-check-input" type="checkbox" id="chkInvoice_@i" checked
+                                                                                               value="option4" disabled="disabled">
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <input class="form-check-input" type="checkbox" id="chkInvoice_@i"
+                                                                                               value="option4" disabled="disabled">
+                                                                                    }
+                                                                                }
+                                                                                <label class="form-check-label" for="kennken3">請求書　</label>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
+
                                                                 </div>
-                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                    <div class="form-group">
-                                                                        <label for="phone">紹介</label>
-                                                                        <textarea class="form-control" rows="3" value="" id="REIntroduction_@i" name="REIntroduction_@i" maxlength="500">@Staff.REIntroduction</textarea>
-                                                                        <span class="cap-errormsg-right" id="error_REIntroduction_@i"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                    <div class="form-group">
-                                                                        <label for="website">パスワード</label>
-                                                                        @if (ViewBag.IsAdmin == "admin" || ViewBag.IsAdmin == Staff.REStaffCD)
-                                                                        {
-                                                                            <input type="password" class="form-control" value="@Staff.REPassword" id="REPassword_@i" name="REPassword_@i">
-                                                                            <span class="cap-errormsg-right" id="error_REPassword_@i"></span>
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            <input type="password" class="form-control" value="@Staff.REPassword" readonly id="REPassword_@i" name="REPassword_@i">
-                                                                            <span class="cap-errormsg-right" id="error_REPassword_@i"></span>
-                                                                        }
-                                                                    </div>
-                                                                </div>
+
                                                             </div>
-                                                            <div class="row gutters">
-                                                                <div class="col-12">
-                                                                    <div class="form-group">
-                                                                        <label for="Street" class="me-md-3" class="me-md-3">権限設定</label>
-                                                                        <div class="form-check form-check-inline">
-                                                                            @if (ViewBag.IsAdmin == "admin")
-                                                                            {
-                                                                                if (Staff.PermissionChat == "1")
-                                                                                {
-                                                                                    <input class="form-check-input" type="checkbox" id="chkChat_@i" checked
-                                                                                           value="option1">
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                    <input class="form-check-input" type="checkbox" id="chkChat_@i"
-                                                                                           value="option1">
-                                                                                }
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                if (Staff.PermissionChat == "1")
-                                                                                {
-                                                                                    <input class="form-check-input" type="checkbox" id="chkChat_@i" checked
-                                                                                           value="option1" disabled="disabled">
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                    <input class="form-check-input" type="checkbox" id="chkChat_@i"
-                                                                                           value="option1" disabled="disabled">
-                                                                                }
-
-                                                                            }
-                                                                            <label class="form-check-label" for="kennken1">チャット</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            @if (ViewBag.IsAdmin == "admin")
-                                                                            {
-                                                                                if (Staff.PermissionSetting == "1")
-                                                                                {
-                                                                                    <input class="form-check-input" type="checkbox" id="chkSetting_@i" checked
-                                                                                           value="option2">
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                    <input class="form-check-input" type="checkbox" id="chkSetting_@i"
-                                                                                           value="option2">
-                                                                                }
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                if (Staff.PermissionSetting == "1")
-                                                                                {
-                                                                                    <input class="form-check-input" type="checkbox" id="chkSetting_@i" checked
-                                                                                           value="option2" disabled="disabled">
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                    <input class="form-check-input" type="checkbox" id="chkSetting_@i"
-                                                                                           value="option2" disabled="disabled">
-                                                                                }
-
-                                                                            }
-                                                                            <label class="form-check-label" for="kennken2">設定</label>
-
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            @if (ViewBag.IsAdmin == "admin")
-                                                                            {
-                                                                                if (Staff.PermissionPlan == "1")
-                                                                                {
-                                                                                    <input class="form-check-input" type="checkbox" id="chkPlan_@i" checked
-                                                                                           value="option3">
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                    <input class="form-check-input" type="checkbox" id="chkPlan_@i"
-                                                                                           value="option3">
-                                                                                }
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                if (Staff.PermissionPlan == "1")
-                                                                                {
-                                                                                    <input class="form-check-input" type="checkbox" id="chkPlan_@i" checked
-                                                                                           value="option3" disabled="disabled">
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                    <input class="form-check-input" type="checkbox" id="chkPlan_@i"
-                                                                                           value="option3" disabled="disabled">
-                                                                                }
-                                                                            }
-                                                                            <label class="form-check-label" for="kennken3">プラン変更</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            @if (ViewBag.IsAdmin == "admin")
-                                                                            {
-                                                                                if (Staff.PermissionInvoice == "1")
-                                                                                {
-                                                                                    <input class="form-check-input" type="checkbox" id="chkInvoice_@i" checked
-                                                                                           value="option4">
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                    <input class="form-check-input" type="checkbox" id="chkInvoice_@i"
-                                                                                           value="option4">
-                                                                                }
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                if (Staff.PermissionInvoice == "1")
-                                                                                {
-                                                                                    <input class="form-check-input" type="checkbox" id="chkInvoice_@i" checked
-                                                                                           value="option4" disabled="disabled">
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                    <input class="form-check-input" type="checkbox" id="chkInvoice_@i"
-                                                                                           value="option4" disabled="disabled">
-                                                                                }
-                                                                            }
-                                                                            <label class="form-check-label" for="kennken3">請求書　</label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    { i++; }
-                                }
+                                        { i++; }
+                                    }
 
-                                @if (ViewBag.IsAdmin == "admin")
-                                {
-                                    <div class="col-12 col-md-6 pb-3">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>新規担当者登録</h5>
-                                            </div>
-                                            <div class="row gutters">
-                                                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                                                    <div class="h-100">
-                                                        <div class="card-body">
-                                                            <div class="account-settings">
-                                                                <div class="profile-pic-wrapper pt-6">
-                                                                    <div class="pic-holder bg-secondary" id="newpic_holder">
+                                    @if (ViewBag.IsAdmin == "admin")
+                                    {
+                                        <div class="col-12 col-md-6 pb-3">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>新規担当者登録</h5>
+                                                </div>
+                                                <div class="row gutters">
+                                                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                                                        <div class="h-100">
+                                                            <div class="card-body">
+                                                                <div class="account-settings">
+                                                                    <div class="profile-pic-wrapper pt-6">
+                                                                        <div class="pic-holder bg-secondary" id="newpic_holder">
 
-                                                                        <img id="profilePicNew" class="pic" src="">
-                                                                        <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
-                                                                        <label for="newProfilePhoto" class="upload-file-block">
-                                                                            <div class="text-center">
-                                                                                <div class="mb-2">
-                                                                                    <i class="fa fa-camera fa-2x"></i>
+                                                                            <img id="profilePicNew" class="pic" src="">
+                                                                            <Input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
+                                                                            <label for="newProfilePhoto" class="upload-file-block">
+                                                                                <div class="text-center">
+                                                                                    <div class="mb-2">
+                                                                                        <i class="fa fa-camera fa-2x"></i>
+                                                                                    </div>
+                                                                                    <div class="text-uppercase">
+                                                                                        画像 <br /> アップロード
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="text-uppercase">
-                                                                                    画像 <br /> アップロード
-                                                                                </div>
-                                                                            </div>
-                                                                        </label>
+                                                                            </label>
+                                                                        </div>
+                                                                        <span class="cap-errormsg-right" id="CheckImageFileError"></span>
                                                                     </div>
-                                                                    <span class="cap-errormsg-right" id="CheckImageFileError"></span>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-                                                    <div class="h-100">
-                                                        <div class="card-body">
-                                                            <div class="row gutters">
-                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                    <div class="form-group">
-                                                                        <label for="eMail">スタッフID</label>
-                                                                        <input type="text" class="form-control" value="" id="newStaffCD">
-                                                                        <span class="cap-errormsg-right" id="newStaffCDError"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                    <div class="form-group">
-                                                                        <label for="fullName">表示名</label>
-                                                                        <input type="text" class="form-control" value="" id="newStaffName" maxlength="30">
-                                                                        <span class="cap-errormsg-right" id="newStaffNameError"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                    <div class="form-group">
-                                                                        <label for="phone">紹介</label>
-                                                                        <textarea class="form-control" id="newStaffIntro" rows="3" maxlength="500"></textarea>
-                                                                        <span class="cap-errormsg-right" id="newStaffIntroError"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
-                                                                    <div class="form-group">
-                                                                        <label for="website">パスワード</label>
-                                                                        <input type="password" class="form-control" value="" id="newStaffpsw">
-                                                                        <span class="cap-errormsg-right" id="newStaffpswError"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row gutters">
-                                                                <div class="col-12">
-                                                                    <div class="form-group">
-                                                                        <label for="Street" class="me-md-3">権限設定</label>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="checkbox" id="New_chkChat" checked
-                                                                                   value="option1">
-                                                                            <label class="form-check-label" for="kennken1">チャット</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="checkbox" id="New_chkSetting"
-                                                                                   value="option2">
-                                                                            <label class="form-check-label" for="kennken2">設定</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="checkbox" id="New_chkPlan"
-                                                                                   value="option3">
-                                                                            <label class="form-check-label" for="kennken3">プラン変更</label>
-                                                                        </div>
-                                                                        <div class="form-check form-check-inline">
-                                                                            <input class="form-check-input" type="checkbox" id="New_chkInvoice"
-                                                                                   value="option4">
-                                                                            <label class="form-check-label" for="kennken3">請求書　</label>
+                                                    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                                                        <div class="h-100">
+                                                            <div class="card-body">
+                                                                <div class="row gutters">
+                                                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
+                                                                        <div class="form-group">
+                                                                            <label for="eMail">スタッフID</label>
+                                                                            <input type="text" class="form-control" value="" id="newStaffCD">
+                                                                            <span class="cap-errormsg-right" id="newStaffCDError"></span>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
+                                                                        <div class="form-group">
+                                                                            <label for="fullName">表示名</label>
+                                                                            <input type="text" class="form-control" value="" id="newStaffName" maxlength="30">
+                                                                            <span class="cap-errormsg-right" id="newStaffNameError"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
+                                                                        <div class="form-group">
+                                                                            <label for="phone">紹介</label>
+                                                                            <textarea class="form-control" id="newStaffIntro" rows="3" maxlength="500"></textarea>
+                                                                            <span class="cap-errormsg-right" id="newStaffIntroError"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
+                                                                        <div class="form-group">
+                                                                            <label for="website">パスワード</label>
+                                                                            <input type="password" class="form-control" value="" id="newStaffpsw">
+                                                                            <span class="cap-errormsg-right" id="newStaffpswError"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row gutters">
+                                                                    <div class="col-12">
+                                                                        <div class="form-group">
+                                                                            <label for="Street" class="me-md-3">権限設定</label>
+                                                                            <div class="form-check form-check-inline">
+                                                                                <input class="form-check-input" type="checkbox" id="New_chkChat" checked
+                                                                                       value="option1">
+                                                                                <label class="form-check-label" for="kennken1">チャット</label>
+                                                                            </div>
+                                                                            <div class="form-check form-check-inline">
+                                                                                <input class="form-check-input" type="checkbox" id="New_chkSetting"
+                                                                                       value="option2">
+                                                                                <label class="form-check-label" for="kennken2">設定</label>
+                                                                            </div>
+                                                                            <div class="form-check form-check-inline">
+                                                                                <input class="form-check-input" type="checkbox" id="New_chkPlan"
+                                                                                       value="option3">
+                                                                                <label class="form-check-label" for="kennken3">プラン変更</label>
+                                                                            </div>
+                                                                            <div class="form-check form-check-inline">
+                                                                                <input class="form-check-input" type="checkbox" id="New_chkInvoice"
+                                                                                       value="option4">
+                                                                                <label class="form-check-label" for="kennken3">請求書　</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
                                                                 </div>
 
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                }
+                                    }
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="text-right mt-3 float-end">
+                                    <button type="button" class="btn btn-lg btn-primary"
+                                            id="btnSaveChange">
+                                        変更保存
+                                    </button>
+                                    <span class="cap-errormsg-right" id="btnSaveChangeError"></span>
+                                    <button type="button" class="btn btn-lg btn-default" data-bs-toggle="modal"
+                                            data-bs-target="#modal-changecal">
+                                        取消
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-footer">
-                            <div class="text-right mt-3 float-end">
-                                <button type="button" class="btn btn-lg btn-primary"
-                                         id="btnSaveChange">
-                                    変更保存
-                                </button>
-                                <span class="cap-errormsg-right" id="btnSaveChangeError"></span>
-                                <button type="button" class="btn btn-lg btn-default" data-bs-toggle="modal"
-                                        data-bs-target="#modal-changecal">
-                                    取消
-                                </button>
-                            </div>
-                        </div>
+
                     </div>
-
-                </div>
                 </form>
             </div>
 
@@ -410,8 +410,8 @@
                             </section>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"
-                               id="btnOKChange">
+                            <button type="button" class="btn btn-lg btn-primary" 
+                                    id="btnOKChange">
                                 保存
                             </button><button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
                         </div>
@@ -471,6 +471,36 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal" id="btnComplete">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- No Change -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                 id="modal-nochange">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title d-none">変更保存</h4><button type="button" class="btn-close d-none" data-bs-dismiss="modal"
+                                                                     aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe pt-0 p-0">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post"
+                                          style="text-align: center;">
+                                        <h1 class="cap-icon-h1"><i class="fa fa-check cap-icon-i"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center">更新対象項目がありませんでした</h4>
+
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal" id="btnNoChange">閉じる</button>
                         </div>
                     </div>
                 </div>
