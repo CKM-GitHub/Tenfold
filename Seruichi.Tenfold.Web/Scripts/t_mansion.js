@@ -307,7 +307,7 @@ function addEvents() {
                 //sucess
                 $('#modal_1').modal('hide');
                 $('#modal_2').modal('show');
-                window.location.href = common.appPath + "/t_mansion_list/index";
+                //window.location.href = common.appPath + "/t_mansion_list/index";
             }
             if (result && result.data) {
                 //error
@@ -318,6 +318,9 @@ function addEvents() {
         });
     });
 
+    $('#btnSuccessPopup').click(function () {
+        window.location.href = common.appPath + "/t_mansion_list/index";
+    });
 }
 
 function ErrorLineStationDistance() {
@@ -698,6 +701,8 @@ function displayNearestStationData() {
                                     station.find('.js-distance').attr('id', 'Distance_' + index);
                                     $('.js-stationContainer').append(station);
                                 }
+
+                                setLineList('add', $('#PrefCD').val(), '#LineCD_' + index, data.LineCD);
 
                                 if (data.LineCD) {
                                     $('#LineCD_' + index).val(data.LineCD);
