@@ -297,9 +297,11 @@ function addEvents() {
         window.location.href = common.appPath + '/t_mansion_list/Index';
     }); 
 
-    $('#btnCancel').on('click', function () {
+    $('#btnComplete, #btnCancel').on('click', function () {
         window.location.reload();
     });
+
+   
 }
 function setScreenComfirm(data) {
     for (key in data) {
