@@ -55,7 +55,8 @@ namespace Seruichi.RealEstate.Web
                      "~/Scripts/r_login.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/r_contact").Include(
-                    "~/Scripts/r_contact.js"));
+                    "~/Scripts/r_contact.js",
+                    "~/Scripts/r_common_popup.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/r_dashboard").Include(
                     "~/Scripts/r_dashboard.js"));
