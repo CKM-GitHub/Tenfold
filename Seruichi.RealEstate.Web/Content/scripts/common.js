@@ -35,7 +35,11 @@ const messageConst = {
     E312: 'スタッフIDが入力されていません',
     E313: 'スタッフIDが未入力です。',
     E314: '入力されたスタッフIDは登録済です',
-}
+    E315: '変更内容を保存しますか？',
+    E316: '変更内容を保存しました',
+    E317: '変更内容を取消しますか？',
+    E318: '更新対象項目がありませんでした',
+    }
 
 const commonApiUrl = {
     getMessage: "/api/CommonApi/GetMessage",   
