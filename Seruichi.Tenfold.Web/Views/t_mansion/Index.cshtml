@@ -184,7 +184,7 @@
                                                         <div class="row">
                                                             <div class="mb-4 pb-2 col-12 col-md-6">
                                                                 <div class="form-outline form-white">
-                                                                    <div class="d-flex">
+                                                                    <div class="d-flex" style="width:280px">
                                                                         <label class="form-label" for="form3Examplea3">土地権利区分</label>
                                                                         <span class="cap-errormsg-right" id="errorRightKBN"></span>
                                                                     </div>
@@ -252,7 +252,10 @@
                                                                         <label class="form-label" for="form3Examplea3">築年月</label>
                                                                         <span class="cap-errormsg-right" id="errorConstYYYYMM"></span>
                                                                     </div>
-                                                                    <input type="month" min="1900-01" max="2100-12" class="form-control form-control-lg text-center cap-fon-form-w200" name="ConstYYYYMM" id="ConstYYYYMM" value="@ViewBag.MansionModel.ConstYYYYMM" />
+                                                                    <div class="d-flex">
+                                                                        <input type="month" min="1900-01" max="2100-12" class="form-control form-control-lg text-center cap-fon-form-w200" name="ConstYYYYMM" id="ConstYYYYMM" value="@ViewBag.MansionModel.ConstYYYYMM" />
+                                                                        <span class="align-self-center" id="BuildingAge">（築　年）</span>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-4 pb-2 col-12 col-md-6">
@@ -1737,8 +1740,11 @@
                                                                         <div class="mb-4 pb-2 col-12 col-md-12">
                                                                             <div class="form-outline form-white">
                                                                                 <label class="form-label" for="form3Examplea3">築年月</label>
-                                                                                <input type="month" id="confirm_ConstYYYYMM"
-                                                                                       class="form-control form-control-lg text-center cap-fon-form-w200" disabled />
+                                                                                <div class="d-flex">
+                                                                                    <input type="month" id="confirm_ConstYYYYMM"
+                                                                                           class="form-control form-control-lg text-center cap-fon-form-w200" disabled />
+                                                                                    <span class="align-self-center" id="confirm_BuildingAge">（築　年）</span>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-4 pb-2 col-12 col-md-5">
