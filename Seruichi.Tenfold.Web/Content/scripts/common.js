@@ -84,6 +84,8 @@ $(function () {
     });
     $("form").bind("keypress", function (e) {
         if (e.keyCode == 13) {
+            if (document.activeElement.id == 'btnLogin')
+                return true;
             if (document.activeElement.id != 'btnDisplay' && document.activeElement.id != 'btnProcess')
             return false;
         }

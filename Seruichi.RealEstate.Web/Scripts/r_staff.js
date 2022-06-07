@@ -337,6 +337,7 @@ function Update_list_M_REStaff() {
 function Save_M_REStaff(model, $form) {
     common.callAjaxWithLoading(_url.save_M_REStaff, model, this , function (result) {
         if (result && result.isOK) {
+            $('#modal-changesave').modal('hide');
             $('#modal-changeok').modal('show');
         }
         if (result && !result.isOK) {
