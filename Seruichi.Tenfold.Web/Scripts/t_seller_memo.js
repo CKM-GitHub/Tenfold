@@ -14,7 +14,7 @@ function addEvents() {
     Bind_Company_Data(this);         //Bind Company Info Data to the title part of the page
 
     var model = {
-        RealECD: common.getUrlParameter('RealECD');
+        SellerCD: common.getUrlParameter('SellerCD')
     }
     get_memo_Data(model, this);
 }
@@ -22,7 +22,7 @@ function addEvents() {
 function get_memo_Data(model, $form) {
     common.callAjaxWithLoadingSync(_url.get_t_seller_memo_DisplayData, model, this, function (result) {
         if (result && result.isOK) {
-            Bind_memo_Data(result);
+            Bind_memo_Data(result.data);
         }
         else {
             const errors = result.data;
@@ -33,4 +33,83 @@ function get_memo_Data(model, $form) {
             }
         }
     })
+}
+
+function Bind_memo_Data(result) {
+    var data = JSON.parse(result);
+    var p_html = '', c_html = '';
+    var loginID = $('#loginID').text();
+    for (var i = 0; i < data.length; i++) {
+        if (data[i]['ParentChildKBN'] == '1') {
+            p_html =
+                '<div id="p_' + data[i]['SellerMemoSEQ'] + '" class="p-md-5 container">\
+                <div class="row pb-3 col-md-12">\
+                <div class="d-md-flex">\
+                <strong>' + data[i]['TenStaffName'] + '</strong>\
+                <p class="ps-md-5 text-secondary text-start">' + data[i]['UpdateDateTime'] + '</p>\
+                </div>\
+                <div class="clearfix"></div>\
+                <p ondblclick="Edit_Cmd(\'' + data[i]['SellerMemoSEQ'] + '\')">' + data[i]['MemoText'] + '</p>\
+                <p>\
+                <button type="button" class="float-right btn btn-outline-primary ml-2" onclick="Reply_Cmd(\'' + data[i]['SellerMemoSEQ'] + '\')">\
+                    <i class="fa fa-reply"></i> コメント </button>\
+                <button type="button" id="btnDelete" class="float-right btn text-white btn-danger" onclick="Delete_Cmd(\'' + data[i]['ParentSEQ'] + ',' + data[i]['SellerMemoSEQ'] + '\')">\
+                    <i class="fa fa-times"></i> 削除 </button>\
+                </p>\
+                </div>\
+                </div>';
+
+            $('#display_area').append(p_html);
+        }
+        else if (data[i]['ParentChildKBN'] == '2') {
+            c_html =
+                '<div class="card-body">\
+                <div class="row col-md-12">\
+                <div class="d-md-flex">\
+                <strong>' + data[i]['TenStaffName'] + '</strong>\
+                <p class="ps-md-5 text-secondary text-start">' + data[i]['UpdateDateTime'] + '</p>\
+                </div>\
+                <p ondblclick="Edit_Cmd(\'' + data[i]['SellerMemoSEQ'] + '\')">' + data[i]['MemoText'] + '</p>\
+                <p>\
+                <button type="button" id="btnDelete" class="float-right btn text-white btn-danger" onclick="Delete_Cmd(\'' + data[i]['ParentSEQ'] + ',' + data[i]['SellerMemoSEQ'] + '\')">\
+                    <i class="fa fa-times"></i> 削除 </button>\
+                </p>\
+                </div>\
+                </div>'
+
+            if ($('#c_' + data[i]['ParentSEQ']).length < 1)
+                $('#p_' + data[i]['ParentSEQ']).append('<div id="c_' + data[i]['ParentSEQ'] + '" class="card card-inner bg-gray-50 ms-md-24"></div>');  /*for the first child of the parent*/
+            else
+                $('#c_' + data[i]['ParentSEQ']).append('<hr class="navbar-divider my-5 opacity-20">');  /*to separate child div with space*/
+
+            $('#c_' + data[i]['ParentSEQ']).append(c_html);
+        }
+    }
+    if (loginID !== 'admin')
+        $('#btnDelete').addClass('d-none');
+}
+
+function Edit_Cmd(SellerMemoSEQ) {
+    var model = {
+        SellerCD: common.getUrlParameter('SellerCD'),
+        SellerMemoSEQ: SellerMemoSEQ
+    }
+    $('#message-com').modal('show');
+}
+
+function Reply_Cmd(SellerMemoSEQ) {
+    var model = {
+        SellerCD: common.getUrlParameter('SellerCD'),
+        ParentChildKBN: '2',
+        ParentSEQ: SellerMemoSEQ
+    }
+    $('#message-com').modal('show');
+}
+
+function Delete_Cmd(SellerMemoSEQ, ParentSEQ) {
+    var model = {
+        SellerCD: common.getUrlParameter('SellerCD'),
+        SellerMemoSEQ: SellerMemoSEQ
+    }
+    $('#message-del').modal('show');
 }
