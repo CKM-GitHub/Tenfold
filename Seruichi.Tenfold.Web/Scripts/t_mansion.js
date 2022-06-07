@@ -131,12 +131,13 @@ function setValidation() {
 
 function addEvents() {
 
-
     $('.container-fluid .card-body').keypress(function (event) {
         if (event.keyCode == 13) {
             event.preventDefault();
         }
     });
+
+    $(function () { $("#form1").submit(function () { return false; }); });
 
     common.bindValidationEvent('#form1', ':not(#ZipCode1,#ZipCode2)');
 
@@ -620,6 +621,7 @@ function setMansionWordByMansionCD(MansionCD) {
 }
 
 function setBuildingAge(age) {
+    const $this = $("#ConstYYYYMM");
     common.callAjax(_url.getBuildingAge, age, function (result) {
         if (result && result.isOK) {
             if (result.data) {
