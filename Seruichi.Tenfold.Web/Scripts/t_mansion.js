@@ -699,6 +699,8 @@ function displayNearestStationData() {
                                     $('.js-stationContainer').append(station);
                                 }
 
+                                setLineList('add', $('#PrefCD').val(), '#LineCD_' + index, data.LineCD);
+
                                 if (data.LineCD) {
                                     $('#LineCD_' + index).val(data.LineCD);
                                     setStationList('add', data.LineCD, '#StationCD_' + index, data.StationCD);
