@@ -78,7 +78,7 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage GetBuildingAge([FromBody]string constYYYYMM)
+        public HttpResponseMessage GetBuildingAge([FromBody] string constYYYYMM)
         {
             if (string.IsNullOrEmpty(constYYYYMM))
             {
