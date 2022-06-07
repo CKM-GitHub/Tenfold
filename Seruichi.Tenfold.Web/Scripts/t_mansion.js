@@ -9,6 +9,7 @@ $(function () {
     $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
     $('#t_mansion_list').addClass('font-bold text-underline');
 
+    _url.getBuildingAge = common.appPath + commonApiUrl.getBuildingAge;
     _url.checkZipCode = common.appPath + '/t_mansion_new/CheckZipCode';
     _url.getCityDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfCity;
     _url.getTownDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfTown;
@@ -31,6 +32,7 @@ $(function () {
 function Bind_Update_Data() {    
     setlineStationDistanceByMansionCD($("#MansionCD").val(), $('#PrefCD').val());
     setMansionWordByMansionCD($('#MansionCD').val());
+    setBuildingAge($("#ConstYYYYMM").val());
 }
 
 function setValidation() {
@@ -325,7 +327,7 @@ function ErrorLineStationDistance() {
         .addvalidation_reqired();
     $('#Distance_1')
         .addvalidation_errorElement("#errorDistanceCD1")
-        .addvalidation_reqired();
+        //.addvalidation_reqired();
     $('#LineCD_2')
         .addvalidation_errorElement("#errorLineCD2")
     //.addvalidation_reqired();
@@ -617,6 +619,22 @@ function setMansionWordByMansionCD(MansionCD) {
         });
 }
 
+function setBuildingAge(age) {
+    common.callAjax(_url.getBuildingAge, age, function (result) {
+        if (result && result.isOK) {
+            if (result.data) {
+                $('#BuildingAge').text('（築' + result.data + '年）').data('building-age', result.data);
+                if (result.data == 0)
+                    $this.showError(common.getMessage('E208'));
+                else
+                    $this.hideError();
+            }
+            else
+                $('#BuildingAge').text('（築　年）')
+        }
+    })
+}
+
 function removeLineAndStation() {
     $('.js-stationContainer').children().remove();
     for (let i = 0; i < 20; i++) {
@@ -815,6 +833,7 @@ function setScreenComfirm(data) {
     $('#confirm_StructuralKBN').val($('input[name="StructuralKBN"]:radio:checked').next().text());
 
     $('#confirm_ConstYYYYMM').val($('#ConstYYYYMM').val());
+    $('#confirm_BuildingAge').text($('#BuildingAge').text());
     $('#confirm_RightKBN').val($('input[name="RightKBN"]:radio:checked').next().text());
 
     $('#confirm_Noti').text($('#Noti').text());
