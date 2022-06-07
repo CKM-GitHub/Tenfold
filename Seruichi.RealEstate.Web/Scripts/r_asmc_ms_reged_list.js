@@ -208,7 +208,7 @@ function Bind_tbody(result) {
             }
             else
             {
-                _class = "text-primary";
+                _class = "cap-text-primary";
             }
 
             html += '<tr>\
