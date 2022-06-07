@@ -17,8 +17,6 @@ namespace Seruichi.RealEstate.Web.Controllers
 {
     public class r_staffController : BaseController
     {
-        public static DataTable dtTemp;
-        public static string UpdateRemark = string.Empty;
         // GET: r_staff
         public ActionResult Index()
         {
@@ -101,13 +99,13 @@ namespace Seruichi.RealEstate.Web.Controllers
             {
                 Directory.CreateDirectory(Dirupload);
             }
-
+            string UpdateRemark = string.Empty;
             List<Update_r_staffModel> List_to_Update = Get_Changes_Data(model);
             model.lst_StaffModel = List_to_Update;
 
             if (model.lst_StaffModel.Count > 0)
             {
-                UpdateRemark = "";
+               
                 for (int i = 0; i < model.lst_StaffModel.Count; i++)
                 {
                     if (!String.IsNullOrWhiteSpace(model.lst_StaffModel[i].REFaceImage))
@@ -123,6 +121,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                     }
 
                     UpdateRemark += model.lst_StaffModel[i].REStaffCD + ",";
+                    
                 }
             }
 
@@ -140,7 +139,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                     model.REFaceImage = null;
                 }
             }
-            model = Getlogdata(model);
+            model = Getlogdata(model, UpdateRemark);
             if (!bl.Save_M_REStaff(model, out string errorcd))
             {
                 return ErrorMessageResult(errorcd);
@@ -157,7 +156,7 @@ namespace Seruichi.RealEstate.Web.Controllers
             return FilePath;
         }
 
-        private r_staffModel Getlogdata(r_staffModel model)
+        private r_staffModel Getlogdata(r_staffModel model,string Remarks)
         {
             CommonBL bl = new CommonBL();
             //model.LoginKBN = 2;
@@ -167,19 +166,19 @@ namespace Seruichi.RealEstate.Web.Controllers
             model.IPAddress = base.GetClientIP();
             //model.PageID = "r_staff";
             //model.ProcessKBN = "INSERT/UPDATE";
-            if (!string.IsNullOrWhiteSpace(model.REStaffCD) && !string.IsNullOrWhiteSpace(UpdateRemark))
+            if (!string.IsNullOrWhiteSpace(model.REStaffCD) && !string.IsNullOrWhiteSpace(Remarks))
             {
-                model.Remarks = "INS=" + model.REStaffCD + "," + "UPD=" + UpdateRemark.TrimEnd(',');
+                model.Remarks = "INS=" + model.REStaffCD + "," + "UPD=" + Remarks.TrimEnd(',');
                 model.ProcessKBN = "5";
             }
-            else if(!string.IsNullOrWhiteSpace(model.REStaffCD) && string.IsNullOrWhiteSpace(UpdateRemark))
+            else if(!string.IsNullOrWhiteSpace(model.REStaffCD) && string.IsNullOrWhiteSpace(Remarks))
             {
                 model.Remarks = "INS=" + model.REStaffCD;
                 model.ProcessKBN = "1";
             }
-            else
+            else if(!string.IsNullOrWhiteSpace(Remarks))
             {
-                model.Remarks = "UPD=" + UpdateRemark.TrimEnd(',');
+                model.Remarks = "UPD=" + Remarks.TrimEnd(',');
                 model.ProcessKBN = "2";
             }
             return model;
