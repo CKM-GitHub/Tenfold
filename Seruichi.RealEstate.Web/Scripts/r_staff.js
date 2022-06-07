@@ -271,7 +271,7 @@ function addEvents() {
                         const data = result.data;
                         clear_data();
                         $('#modal-changesave').modal('show');
-                        $('#PE315').append(common.getMessage("PE315"));
+                        $('#PE315').append(common.getMessage("E315"));
                     }
                     if (result && !result.isOK) {
                         const message = result.message;
@@ -344,8 +344,8 @@ function Update_list_M_REStaff() {
 function Save_M_REStaff(model, $form) {
     common.callAjaxWithLoading(_url.save_M_REStaff, model, this , function (result) {
         if (result && result.isOK) {
-            $('#modal-changesave').modal('hide');
             clear_data();
+            $('#modal-changesave').modal('hide');
             $('#modal-changeok').modal('show');
             $('#PE316').append(common.getMessage("E316"));
         }

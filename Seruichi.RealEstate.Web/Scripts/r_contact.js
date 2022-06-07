@@ -94,6 +94,17 @@ function addEvents() {
     $('#btn-modal-2').on('click', function () {
         window.location.href = common.appPath + '/r_dashboard/Index';
     });
+
+    $('#btnAllClear').on('click', function () {
+        $('#ContactName').val('');
+        $('#ContactKana').val('');
+        $('#ContactAddress').val('');
+        $('#ContactPhone').val('');
+        $('#ContactTypeCD').val('');
+        $('#ContactAssID').val('');
+        $('#ContactSubject').val('');
+        $('#ContactIssue').val('');
+    });
 }
 
 function customValidation_checkContactAddress(e) {
