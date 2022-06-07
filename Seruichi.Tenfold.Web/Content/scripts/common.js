@@ -435,7 +435,7 @@ const common = {
                 const tem_val = common.replaceAlphabetandnumberSingleToDouble(inputValue);                
                 const regex = new RegExp(regexPattern.doublebyteKana);
                 if (!regex.test(tem_val)) {                   
-                    $ctrl.showError(this.getMessage('E107'));
+                    $ctrl.showError(this.getMessage('E104'));
                     return;
                 }
             }
@@ -599,7 +599,7 @@ const common = {
                 const hira_val = common.replaceAlphabetandnumberSingleToDouble(inputValue);
                 const regex = new RegExp(regexPattern.doublebyteHira);
                 if (!regex.test(hira_val)) {
-                    $ctrl.showError(this.getMessage('E107'));
+                    $ctrl.showError(this.getMessage('E104'));
                     return;
                 }
             }
