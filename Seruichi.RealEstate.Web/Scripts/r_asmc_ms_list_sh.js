@@ -265,7 +265,7 @@ function Bind_Data(data) {
         if (data[i]["公開状況"] == '(未公開)')
             validFLG_class = 'text-danger';
         else if (data[i]["公開状況"] == '(公開済)')
-            validFLG_class = 'text-primary';
+            validFLG_class = 'cap-text-primary';
 
         div_Display += '\
             <div class="col" >\
