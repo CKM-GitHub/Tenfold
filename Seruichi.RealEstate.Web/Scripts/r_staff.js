@@ -4,6 +4,7 @@ $(function () {
     
     _url.Get_select_M_REStaff = common.appPath + '/r_staff/Get_select_M_REStaff';
     _url.save_M_REStaff = common.appPath + '/r_staff/Save_M_REStaff';
+    _url.check_Update_M_REStaff = common.appPath + '/r_staff/Check_Update_M_REStaff';
     setValidation();
     addEvents();
 });
@@ -207,7 +208,9 @@ function addEvents() {
 
 
         if ($newStaffCD.val() == "" || $newStaffCD.val() == undefined) {
-            $('#modal-changesave').modal('show');
+            let model = {};
+            model.lst_StaffModel = Update_list_M_REStaff();
+            Check_Update_M_REStaff(model, $form);
         }
         else {
         if ($('#newStaffCD').val().trim().length !== 0)
@@ -304,6 +307,10 @@ function addEvents() {
     $('#btnComplete').on('click', function () {
         window.location.reload();
     });
+    $('#btnNoChange').on('click', function () {
+        window.location.reload();
+    });
+    
 }
 
 function Update_list_M_REStaff() {
@@ -339,6 +346,23 @@ function Save_M_REStaff(model, $form) {
                 $(target).showError(errors[key]);
                 $form.getInvalidItems().get(0).focus();
             }
+        }
+    });
+}
+
+function Check_Update_M_REStaff(model, $form) {
+    common.callAjaxWithLoading(_url.check_Update_M_REStaff, model, this, function (result) {
+        if (result && result.isOK) {
+            $('#modal-changesave').modal('show');
+        }
+        if (result && !result.isOK) {
+            $('#modal-nochange').modal('show');
+            //const errors = result.data;
+            //for (key in errors) {
+            //    const target = document.getElementById(key);
+            //    $(target).showError(errors[key]);
+            //    $form.getInvalidItems().get(0).focus();
+            //}
         }
     });
 }

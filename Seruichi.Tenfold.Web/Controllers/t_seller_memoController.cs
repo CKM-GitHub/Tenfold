@@ -13,8 +13,11 @@ namespace Seruichi.Tenfold.Web.Controllers
     public class t_seller_memoController : BaseController
     {
         // GET: t_seller_memo
-        public ActionResult Index()
+        public ActionResult Index(string SellerCD)
         {
+            t_seller_memoBL bl = new t_seller_memoBL();
+            string sellername = bl.get_t_sellerName(SellerCD);
+            ViewBag.Title = "管理－売主－" + sellername;
             return View();
         }
 

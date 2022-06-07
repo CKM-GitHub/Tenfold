@@ -9,11 +9,7 @@ $(function () {
 });
 function addEvents() {
     $('#reale').addClass('d-none');
-    let model = {
-        SellerCD: common.getUrlParameter('SellerCD')
-    };
-
-    Bind_Company_Data(model, this);         //Bind Company Info Data to the title part of the page
+    Bind_Company_Data(this);         //Bind Company Info Data to the title part of the page
 
     //get_purchase_Data(model, this, 'page_load');
 
