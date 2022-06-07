@@ -307,7 +307,7 @@ function addEvents() {
                 //sucess
                 $('#modal_1').modal('hide');
                 $('#modal_2').modal('show');
-                window.location.href = common.appPath + "/t_mansion_list/index";
+                //window.location.href = common.appPath + "/t_mansion_list/index";
             }
             if (result && result.data) {
                 //error
@@ -318,6 +318,9 @@ function addEvents() {
         });
     });
 
+    $('#btnSuccessPopup').click(function () {
+        window.location.href = common.appPath + "/t_mansion_list/index";
+    });
 }
 
 function ErrorLineStationDistance() {
