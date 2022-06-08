@@ -596,6 +596,8 @@ function Bind_popup_contact(result) {
 
     let data = JSON.parse(result);
 
+    $('#_header_mantion_info_contact').append(_header_mantion_info);
+
     if (data.length > 0) {
         if (data[0]["InvalidFLG"] == "無効会員") {
             _classFlag = "text-danger";
@@ -632,8 +634,11 @@ function Bind_popup_contact(result) {
                     </div>\
                 </div>'
 
-        $('#_header_mantion_info_contact').append(_header_mantion_info);
         $('#contact-first').append(contact_first);
         $('#contact-second').append(contact_second);
+    }
+    else {
+        contact_first = '非会員による登録のため、情報がありません。'
+        $('#contact-first').append(contact_first);        
     }
 }

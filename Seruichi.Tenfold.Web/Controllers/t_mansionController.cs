@@ -1,6 +1,8 @@
-﻿using Models.Tenfold.t_mansion;
+﻿using Models;
+using Models.Tenfold.t_mansion;
 using Seruichi.BL;
 using Seruichi.BL.Tenfold.t_mansion;
+using Seruichi.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -69,6 +71,7 @@ namespace Seruichi.Tenfold.Web.Controllers
             var dt = t_bl.GetMansionWordByMansionCD(MansionCD);
             return OKResult(DataTableToJSON(dt));
         }
+
         [HttpPost]
         public ActionResult CheckAll(t_mansionModel model)
         {
@@ -120,6 +123,40 @@ namespace Seruichi.Tenfold.Web.Controllers
             }
 
             return OKResult();
-        } 
+        }
+
+        [HttpPost]
+        public ActionResult CheckZipCode(t_mansionModel model)
+        {
+            if (model == null)
+            {
+                return BadRequestResult();
+            }
+
+            Validator validator = new Validator();
+            string errorcd = "";
+            string outPrefCD = "";
+
+            if (!validator.CheckIsHalfWidth(model.ZipCode1, 3, RegexFormat.Number, out errorcd))
+            {
+                return ErrorMessageResult(errorcd);
+            }
+
+            if (!validator.CheckIsHalfWidth(model.ZipCode2, 4, RegexFormat.Number, out errorcd))
+            {
+                return ErrorMessageResult(errorcd);
+            }
+
+            t_mansion_newBL bl = new t_mansion_newBL();
+            if (!bl.CheckPrefecturesByZipCode(model.ZipCode1, model.ZipCode2, out errorcd, out outPrefCD))
+            {
+                return ErrorMessageResult(errorcd);
+            }
+
+            string outCityCD = bl.GetCityCDByZipCode(model.ZipCode1, model.ZipCode2);
+            string outTownCD = bl.GetTownCDByZipCode(model.ZipCode1, model.ZipCode2);
+
+            return OKResult(new { PrefCD = outPrefCD, CityCD = outCityCD, TownCD = outTownCD });
+        }
     }
 }

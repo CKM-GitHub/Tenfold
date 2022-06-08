@@ -209,6 +209,7 @@
     <Content Include="Scripts\r_asmc_address.js" />
     <Content Include="Scripts\r_asmc_ms_list_sh.js" />
     <Content Include="Scripts\r_asmc_ms_reged_list.js" />
+    <Content Include="Scripts\r_common_popup.js" />
     <Content Include="Scripts\r_com_profile.js" />
     <Content Include="Scripts\r_contact.js" />
     <Content Include="Scripts\r_dashboard.js" />

@@ -269,7 +269,9 @@ function addEvents() {
                     if (result && result.isOK) {
                         $($newStaffCD).hideError();
                         const data = result.data;
+                        clear_data();
                         $('#modal-changesave').modal('show');
+                        $('#PE315').append(common.getMessage("E315"));
                     }
                     if (result && !result.isOK) {
                         const message = result.message;
@@ -297,7 +299,12 @@ function addEvents() {
           model.lst_StaffModel = Update_list_M_REStaff();
           Save_M_REStaff(model, $form)
     });
-
+    
+    $('#btnChangeCal').on('click', function () {
+        clear_data();
+        $('#modal-changecal').modal('show');
+        $('#PE317').append(common.getMessage("E317"));
+    });
 
     $('#CancleOK').on('click', function ()
     {
@@ -337,8 +344,10 @@ function Update_list_M_REStaff() {
 function Save_M_REStaff(model, $form) {
     common.callAjaxWithLoading(_url.save_M_REStaff, model, this , function (result) {
         if (result && result.isOK) {
+            clear_data();
             $('#modal-changesave').modal('hide');
             $('#modal-changeok').modal('show');
+            $('#PE316').append(common.getMessage("E316"));
         }
         if (result && !result.isOK) {
             const errors = result.data;
@@ -354,10 +363,15 @@ function Save_M_REStaff(model, $form) {
 function Check_Update_M_REStaff(model, $form) {
     common.callAjaxWithLoading(_url.check_Update_M_REStaff, model, this, function (result) {
         if (result && result.isOK) {
+            clear_data();
             $('#modal-changesave').modal('show');
+            $('#PE315').append(common.getMessage("E315"));
         }
         if (result && !result.isOK) {
+            clear_data();
             $('#modal-nochange').modal('show');
+            $('#PE318').append(common.getMessage("E318"));
+                
             //const errors = result.data;
             //for (key in errors) {
             //    const target = document.getElementById(key);
@@ -366,6 +380,13 @@ function Check_Update_M_REStaff(model, $form) {
             //}
         }
     });
+}
+
+function clear_data() {
+    $('#PE315').empty();
+    $('#PE316').empty();
+    $('#PE317').empty();
+    $('#PE318').empty();
 }
 
 
