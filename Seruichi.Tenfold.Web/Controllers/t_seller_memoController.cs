@@ -18,6 +18,7 @@ namespace Seruichi.Tenfold.Web.Controllers
             t_seller_memoBL bl = new t_seller_memoBL();
             string sellername = bl.get_t_sellerName(SellerCD);
             ViewBag.Title = "管理－売主－" + sellername;
+            ViewBag.LoginID = base.GetOperator();
             return View();
         }
 
@@ -45,6 +46,16 @@ namespace Seruichi.Tenfold.Web.Controllers
             model.LoginName = base.GetOperatorName();
             model.IPAddress = base.GetClientIP();
             bl.Insert_L_Log(model);
+            return OKResult();
+        }
+
+        [HttpPost]
+        public ActionResult Delete_Cmd(t_seller_memoModel model)
+        {
+            t_seller_memoBL bl = new t_seller_memoBL();
+            model.LoginID = base.GetOperator();
+            model.IPAddress = base.GetClientIP();
+            bl.Delete_Cmd(model);
             return OKResult();
         }
     }

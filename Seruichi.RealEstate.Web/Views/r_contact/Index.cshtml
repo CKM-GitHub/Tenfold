@@ -51,14 +51,14 @@
                                                     <label class="form-label">お名前(フリガナ)</label>
                                                     <span class="cap-errormsg-right" id="errorContactKana"></span>
                                                 </div>
-                                                    <input class="form-control cap-fon-form-w60mw250" type="text" value="" maxlength="25" name="ContactKana" id="ContactKana">
-                                                </div>
+                                                <input class="form-control cap-fon-form-w60mw250" type="text" value="" maxlength="25" name="ContactKana" id="ContactKana">
+                                            </div>
                                             <div class="mb-3">
                                                 <div class="d-flex">
                                                     <label class="form-label">メールアドレス</label>
                                                     <span class="cap-errormsg-right" id="errorContactAddress"></span>
                                                 </div>
-                                                <input class="form-control cap-fon-form-w350" type="email" 
+                                                <input class="form-control cap-fon-form-w350" type="email"
                                                        value="" maxlength="100" name="ContactAddress" id="ContactAddress">
                                             </div>
                                             <div class="mb-3">
@@ -106,7 +106,7 @@
                                                 <button class="btn btn-primary w-100 mb-2" type="button" id="btnRegistration">送信</button>
                                                 <p><small class="text-black-50 w-100"><a href="#">操作ガイド</a>を確認しましたか？<br></small></p>
                                             </div>
-</form>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +149,7 @@
                             <form class="bg-white shadow-sm p-4 rounded cap-con-form mx-auto">
 
                                 <div class="mb-3"><label class="form-label">お名前</label><input readonly class="form-control cap-fon-form-w60mw250" type="text" id="modal-name"></div>
-                                <div class="mb-3"><label class="form-label">お名前(フリガナ)</label><input readonly class="form-control cap-fon-form-w60mw250" type="text"  id="modal-kana"></div>
+                                <div class="mb-3"><label class="form-label">お名前(フリガナ)</label><input readonly class="form-control cap-fon-form-w60mw250" type="text" id="modal-kana"></div>
                                 <div class="mb-3"><label class="form-label">メールアドレス</label><input readonly class="form-control cap-fon-form-w350" type="email" id="modal-contactaddress"></div>
                                 <div class="mb-3"><label class="form-label">電話番号</label><input readonly class="form-control cap-fon-form-w200" type="tel" id="modal-contactphone"></div>
                                 <div class="mb-3">
@@ -171,6 +171,9 @@
                         <div class="modal-footer"><button class="btn btn-primary w-100 mb-2" type="button" id="btn-modal-check">送信</button></div>
                     </div>
                 </div>
+            </div>
+
+            <div class="modal fade" id="site-error-modal" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="site-error-modalLabel" aria-hidden="true">
             </div>
         </main>
         @Html.Partial("~/Views/Shared/_r_footer.cshtml")

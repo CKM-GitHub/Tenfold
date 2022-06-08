@@ -9,6 +9,8 @@ namespace Models.Tenfold.t_seller_memo
     public class t_seller_memoModel
     {
         public string SellerCD { get; set; }
+        public string SellerMemoSEQ { get; set; }
+        public string ParentSEQ { get; set; }
         public byte LoginKBN { get; set; }
         public string LoginID { get; set; }
         public string RealECD { get; set; }

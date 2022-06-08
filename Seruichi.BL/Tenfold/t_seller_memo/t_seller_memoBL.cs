@@ -91,5 +91,18 @@ namespace Seruichi.BL.Tenfold.t_seller_memo
             DBAccess db = new DBAccess();
             db.InsertUpdateDeleteData("pr_Tenfold_Insert_L_Log", false, sqlParams);
         }
+
+        public void Delete_Cmd(t_seller_memoModel model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@SellerMemoSEQ", SqlDbType.VarChar){ Value = model.SellerMemoSEQ.ToStringOrNull() },
+                new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.LoginID.ToStringOrNull() },
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress }
+             };
+
+            DBAccess db = new DBAccess();
+            db.InsertUpdateDeleteData("pr_t_seller_memo_DeleteCmd", false, sqlParams);
+        }
     }
 }
