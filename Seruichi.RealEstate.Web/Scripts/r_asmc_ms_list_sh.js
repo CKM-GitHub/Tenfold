@@ -158,10 +158,10 @@ function addEvents() {
             EndRooms: $('#EndRooms').val(),
             Unregistered: $('#UnregisteredMansion').is(':checked') ? 1 : 0,
             Priority: $('#chkPriority').is(':checked') ? 1 : 0,
-            Radio_Rating: rdoPriority
+            Radio_Priority: rdoPriority
         };
 
-        if (model.MansionName == "" && model.CityGPCD == "" && model.CityCD == "" && model.StartYear == "" && model.EndYear == "" && model.Radio_Rating == 0) {
+        if (model.MansionName == "" && model.CityGPCD == "" && model.CityCD == "" && model.StartYear == "" && model.EndYear == "" && model.Unregistered == 0 && model.Priority == 0 && model.Radio_Priority == 0) {
             $('#btnDisplay').showError(common.getMessage('E303'));
             $('#MansionName').focus();
         }
