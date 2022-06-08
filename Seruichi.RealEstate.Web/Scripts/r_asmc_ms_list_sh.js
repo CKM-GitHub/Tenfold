@@ -143,9 +143,8 @@ function addEvents() {
         $('.node-item:checkbox:checked').each(function () {
             CityCD += $(this).val() + ',';
         });
-        $('.form-check-input:radio:checked').each(function () {
-            rdoPriority = $(this).val();
-        });
+
+        rdoPriority = $('input[name=Priority]:checked', '#form1').val();
 
         let model = {
             MansionName: $MansionName,
