@@ -11,9 +11,8 @@ $(function () {
 function setValidation() {
     $('#MansionName')
         .addvalidation_errorElement("#errorMansionName")
-        .addvalidation_maxlengthCheck(25)//E105
-        .addvalidation_doublebyte();
-
+        .addvalidation_singlebyte_doublebyte(); //E105
+        
     $('#StartYear')
         .addvalidation_errorElement("#errorYear")
         .addvalidation_maxlengthCheck(2)//E105
@@ -55,6 +54,7 @@ function setValidation() {
 }
 
 function addEvents() {
+    common.bindValidationEvent('#form1', '');
     $('#StartYear, #EndYear').on('change', function () {
         const $this = $(this), $start = $('#StartYear').val(), $end = $('#EndYear').val()
 
