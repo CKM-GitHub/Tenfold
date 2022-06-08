@@ -92,7 +92,23 @@ namespace Seruichi.BL.Tenfold.t_seller_memo
             db.InsertUpdateDeleteData("pr_Tenfold_Insert_L_Log", false, sqlParams);
         }
 
-        public void Delete_Cmd(t_seller_memoModel model)
+        public void Edit_MemoText(t_seller_memoModel model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@SellerMemoSEQ", SqlDbType.VarChar){ Value = model.SellerMemoSEQ.ToStringOrNull() },
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD.ToStringOrNull() },
+                new SqlParameter("@MemoText", SqlDbType.VarChar){ Value = model.MemoText.ToStringOrNull() },
+                new SqlParameter("@Type", SqlDbType.VarChar){ Value = model.Type.ToStringOrNull() },
+                new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.LoginID.ToStringOrNull() },
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress }
+             };
+
+            DBAccess db = new DBAccess();
+            db.InsertUpdateDeleteData("pr_t_seller_memo_ModifyMemoText", false, sqlParams);
+        }
+
+        public void Delete_MemoText(t_seller_memoModel model)
         {
             var sqlParams = new SqlParameter[]
              {
@@ -102,7 +118,7 @@ namespace Seruichi.BL.Tenfold.t_seller_memo
              };
 
             DBAccess db = new DBAccess();
-            db.InsertUpdateDeleteData("pr_t_seller_memo_DeleteCmd", false, sqlParams);
+            db.InsertUpdateDeleteData("pr_t_seller_memo_DeleteMemoText", false, sqlParams);
         }
     }
 }
