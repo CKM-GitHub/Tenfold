@@ -6,9 +6,10 @@ using System.Web;
 using System.Web.Mvc;
 using Seruichi.Common;
 using Models.Tenfold.t_reale_purchase;
-using Models.Tenfold.t_reale_asmhis;
+using Models.Tenfold.t_reale_account;
 using Seruichi.BL.Tenfold.t_reale_purchase;
 using Seruichi.BL.Tenfold.t_reale_asmhis;
+using Seruichi.BL.Tenfold.t_reale_account;
 using System.Data;
 
 namespace Seruichi.Tenfold.Web.Controllers
@@ -34,7 +35,22 @@ namespace Seruichi.Tenfold.Web.Controllers
             t_reale_purchaseBL bl = new t_reale_purchaseBL();
             var dt = bl.get_t_reale_CompanyCountingInfo(model);
             return OKResult(DataTableToJSON(dt));
-        } 
+        }
+        [HttpPost]
 
+        public ActionResult get_t_reale_account_DisplayData(t_reale_accountModel model)
+        {
+            t_reale_accountBL bl = new t_reale_accountBL();
+            //List<string> chk_lst = new List<string>();
+            //var validationResult = bl.ValidateAll(model, chk_lst);
+            //if (validationResult.Count > 0)
+            //{
+            //    return ErrorResult(validationResult);
+            //}
+
+            var dt = bl.get_t_reale_account_DisplayData(model);
+            var json = DataTableToJSON(dt.Tables[0]) + "Ʈ" + DataTableToJSON(dt.Tables[1]);
+            return OKResult(json);
+        }
     }
 }

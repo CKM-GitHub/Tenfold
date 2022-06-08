@@ -333,6 +333,7 @@ const common = {
     },
 
     checkValidityInput: function checkValidityInput(ctrl) {
+        //debugger
         const $ctrl = $(ctrl);
         const type = $ctrl.attr('type');
         const name = $ctrl.attr('name');

@@ -4,27 +4,31 @@ using System.Data;
 using System.Data.SqlClient;
 using Seruichi.Common;
 using Models.Tenfold.t_reale_purchase;
-using Models.Tenfold.t_reale_asmhis;
+using Models.Tenfold.t_reale_account;
 
 namespace Seruichi.BL.Tenfold.t_reale_account
 {
    public class t_reale_accountBL
     {
-        public Dictionary<string, string> ValidateAll(t_reale_asmhisModel model, List<string> lst_checkBox)
+        public Dictionary<string, string> ValidateAll(t_reale_accountModel model, List<string> lst_checkBox)
         {
             ValidatorAllItems validator = new ValidatorAllItems();
 
             validator.CheckDate("StartDate", model.StartDate);//E108
-            validator.CheckDate("EndDate", model.EndDate);//E108
+            validator.CheckDate("EndDate", model.EndDate);//E108 
+
+            validator.CheckRequired("StartDate", model.StartDate);
+            validator.CheckRequired("EndDate", model.EndDate);
 
             validator.CheckCompareDate("StartDate", model.StartDate, model.EndDate);//E111
             validator.CheckCompareDate("EndDate", model.StartDate, model.EndDate);//E111
-            List<string> AreaMansion = new List<string>();
-            AreaMansion.Add(model.Chk_Area.ToString());
-            AreaMansion.Add(model.Chk_Mansion.ToString());
-            validator.CheckCheckboxLenght("Chk_Area", AreaMansion);//E112
 
-            return validator.GetValidationResult();
+
+
+            validator.CheckRequired("penaltyArea", model.Ispenalty);
+            validator.CheckByteCount("penaltyArea", model.Ispenalty, 500);
+
+            return validator.GetValidationResult(); 
         }
 
         public DataTable get_t_reale_CompanyInfo(t_reale_purchaseModel model)
@@ -52,6 +56,18 @@ namespace Seruichi.BL.Tenfold.t_reale_account
 
             return dt;
         }
+        //get_t_reale_account_DisplayData
+        public DataSet get_t_reale_account_DisplayData(t_reale_accountModel model)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull() },
+            };
 
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDataSet("pr_t_reale_account_DisplayData", sqlParams);
+
+            return dt;
+        }
     }
 }

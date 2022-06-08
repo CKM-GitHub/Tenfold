@@ -28,7 +28,7 @@ namespace Models.Tenfold.t_reale_account
         public byte Chk_Top5 { get; set; }
         public byte Chk_Top5Out { get; set; }
         public byte Chk_NonMemberSeller { get; set; }
-        public bool IsCSV { get; set; }
+        public string Ispenalty { get; set; }
 
     }
 
