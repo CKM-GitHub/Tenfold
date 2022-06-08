@@ -1,4 +1,5 @@
 ﻿using Models.Tenfold.t_admin;
+using Newtonsoft.Json;
 using Seruichi.BL.Tenfold.t_admin;
 using Seruichi.Common;
 using System;
@@ -66,11 +67,60 @@ namespace Seruichi.Tenfold.Web.Controllers
             model.Operator = GetOperator();
             model.IPAddress = GetClientIP();
 
-            if (!bl.Save_M_TenfoldStaff(model, out string errorcd))
+            List<Update_t_adminModel> lst = new List<Update_t_adminModel>();
+            DataTable dt = bl.Get_M_TenfoldStaff_By_LoginID("not_admin");
+            lst = (from DataRow dr in dt.Rows
+                   select new Update_t_adminModel()
+                   {
+                       TenStaffCD = dr["TenStaffCD"].ToString(),
+                       TenStaffPW = dr["TenStaffPW"].ToString(),
+                       TenStaffName = dr["TenStaffName"].ToString(),
+                       InvalidFLG = dr["InvalidFLG"].ToString(),
+                   }).ToList();
+
+            List<Update_t_adminModel> ls_update = Compare_list(lst,model.lst_AdminModel);
+            if (ls_update.Count == 0 && string.IsNullOrEmpty(model.TenStaffCD))
+                return OKResult(new { Return_value = "no"});
+            else
             {
-                return ErrorMessageResult(errorcd);
+                if (ls_update.Count > 0 && !string.IsNullOrEmpty(model.TenStaffCD))
+                {
+                    model.Processing = "5";
+                    model.Remark = "INS=" + model.TenStaffCD + "," + "UPD=" + string.Join(",", ls_update);
+                }
+                else if (ls_update.Count > 0)
+                {
+                    model.Processing = "2";
+                    model.Remark = "UPD=" + string.Join(",", ls_update);
+                }
+                else if (!string.IsNullOrEmpty(model.TenStaffCD))
+                {
+                    model.Processing = "1";
+                    model.Remark = "INS=" + model.TenStaffCD;
+                }
+                if (!bl.Save_M_TenfoldStaff(model, out string errorcd))
+                {
+                    return ErrorMessageResult(errorcd);
+                }
             }
-            return OKResult();
+            return OKResult(new { Return_value = "yes" });
+        }
+
+        public List<Update_t_adminModel> Compare_list(List<Update_t_adminModel> lst_db, List<Update_t_adminModel> lst_form)
+        {
+            string JSONStringDB = string.Empty;
+            string JSONStringUpdate = string.Empty;
+            List<Update_t_adminModel> lst_update = new List<Update_t_adminModel>();
+            for (int i = 0; i < lst_db.Count; i++)
+            {
+                JSONStringDB = JsonConvert.SerializeObject(lst_db[i]);
+                JSONStringUpdate = JsonConvert.SerializeObject(lst_form[i]);               
+                if (JSONStringDB != JSONStringUpdate)
+                {
+                    lst_update.Add(lst_form[i]);
+                }
+            }
+            return lst_update;
         }
     }
 }

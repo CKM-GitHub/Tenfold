@@ -308,6 +308,9 @@ function Bind_Modal_DetailData(result, DeepAssDateTime) {
 $(function () {
     Bind_SubMennuURL();
 
+    $('#btn_t_common_CancleOK').click(function () {
+        window.location.reload();
+    })
 })
 function Bind_SubMennuURL() {
     var listItems = $("#subMenu li");
@@ -324,3 +327,32 @@ function Bind_SubMennuURL() {
    
 }
 //EndSubMenu
+
+
+//変更取消
+function Cancel_Change() {
+    let cancelModal = "";
+    cancelModal = '<div class="modal-dialog modal-lg modal-dialog-centered" role = "document">\
+                    <div class="modal-content">\
+                        <div class="modal-header">\
+                            <h4 class="modal-title">変更取消</h4><button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>\
+                        </div>\
+                        <div class="modal-body">\
+                            <section class="newsletter-subscribe pt-0 p-0">\
+                                <div class="container">\
+                                    <div class="intro"></div>\
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto"  style="text-align: center;">\
+                                        <h1 class="cap-icon-h1 border border-danger border-8"><i class="fa fa-exclamation-circle pt-1 pb-1 ps-3 pe-3 cap-icon-i text-danger"></i></h1>\
+                                    </form>\
+                                </div>\
+                                <h4 class="text-center align-self-center" id="PE317"></h4>\
+                            </section>\
+                        </div>\
+                        <div class="modal-footer">\
+                            <button type="button" class="btn btn-lg btn-primary" data-bs-dismiss="modal" id="btn_t_common_CancleOK">破棄</button><button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>\
+                        </div>\
+                    </div>\
+                </div>'
+
+
+}

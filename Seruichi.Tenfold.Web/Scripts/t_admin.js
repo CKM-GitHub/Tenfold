@@ -124,6 +124,10 @@ function addEvents() {
         model.lst_AdminModel = Update_list_M_Tenfold();       
         Save_M_TenfoldStaff(model, $form)
     });
+
+    $('#btn_t_admin_cancel').click(function () {
+        $('#modal-changecal').model('show');
+    })
 }
 
 function Update_list_M_Tenfold() {
@@ -151,6 +155,9 @@ function Update_list_M_Tenfold() {
 function Save_M_TenfoldStaff(model, $form){
     common.callAjaxWithLoading(_url.save_M_TenfoldStaff, model, this, function (result) {
         if (result && result.isOK) {
+            if (result.data.Return_value == "no") {
+
+            }
             window.location.reload();
         }
         if (result && !result.isOK) {
