@@ -1,17 +1,17 @@
 
-  $.fn.extend({
+$.fn.extend({
     treed: function (o) {
-      
-      var openedClass = 'glyphicon-minus-sign';
-      var closedClass = 'glyphicon-plus-sign';
-      
-      if (typeof o != 'undefined'){
-        if (typeof o.openedClass != 'undefined'){
-        openedClass = o.openedClass;
-        }
-        if (typeof o.closedClass != 'undefined'){
-        closedClass = o.closedClass;
-        }
+
+        var openedClass = 'glyphicon-minus-sign';
+        var closedClass = 'glyphicon-plus-sign';
+
+        if (typeof o != 'undefined') {
+            if (typeof o.openedClass != 'undefined') {
+                openedClass = o.openedClass;
+            }
+            if (typeof o.closedClass != 'undefined') {
+                closedClass = o.closedClass;
+            }
         };
         //initialize each of the top levels
         var tree = $(this);
@@ -30,11 +30,11 @@
             branch.children().children().toggle();
         });
         //fire event from the dynamically added icon
-      tree.find('.branch .indicator').each(function(){
-          $(this).on('click', function () {
-            $(this).closest('li').click();
+        tree.find('.branch .indicator').each(function () {
+            $(this).on('click', function () {
+                $(this).closest('li').click();
+            });
         });
-      });
         //fire event to open branch if the li contains an anchor instead of text
         tree.find('.branch>a').each(function () {
             $(this).on('click', function (e) {
@@ -52,65 +52,76 @@
     }
 });
 
-$('#tree').treed({openedClass:'fa-minus', closedClass:'fa-plus'});
+$('#tree').treed({ openedClass: 'fa-minus', closedClass: 'fa-plus' });
 
 
 //checkbox-indeterminate
-$(document).on('change','input[type="checkbox"]',function(e) {
-  var checked = $(this).prop("checked");
-  var container = $(this).parent();
-  var siblings = container.siblings();
-    
-  container.find('input[type="checkbox"]').prop({
-    indeterminate: false,
-    checked: checked
-  });
+$(document).on('change', 'input[type="checkbox"]', function (e) {
+    var checked = $(this).prop("checked");
+    var container = $(this).parent();
+    var siblings = container.siblings();
+    var city = $('#DisplayCityData').length > 0 ? $('#DisplayCityData').text() : '';
 
-    function checkSiblings(el) {
-      var parent = el.parent().parent();
-     
-       
-      var all = true;
-
-        el.siblings().each(function () {
-
-            parent.children('a').attr("style", "color:" + "#0d6efd");
-      return all = ($(this).children('input[type="checkbox"]').prop("checked") === checked);
-    });
-
-        if (all && checked) {
-           
-      parent.children('input[type="checkbox"]').prop({
+    container.find('input[type="checkbox"]').prop({
         indeterminate: false,
         checked: checked
-      });
+    });
+
+    container.find('input[type="checkbox"]').each(function () {
+        if ($(this).hasClass('city')) {
+            if ($(this).prop('checked')) {
+                if (!city.includes($(this).next('label').text()))
+                    city += city == '' ? $(this).next('label').text() : '/' + $(this).next('label').text();
+            }
+            else
+                city = city.replace($(this).next('label').text(), '');
+            city = city.replace('//', '/');
+
+            if (city.substr(city.length - 1) == '/')
+                city = city.substring(0, city.length - 1);
+
+            if (city.charAt(0) == '/')
+                city = city.substring(1, city.length);
+        }
+    });
+    if ($('#DisplayCityData').length > 0) {
+        $('#DisplayCityData').text(city);
+    }
+
+    function checkSiblings(el) {
+        var parent = el.parent().parent();
+        var all = true;
+
+        el.siblings().each(function () {
+            parent.children('a').attr("style", "color:" + "#0d6efd");
+            return all = ($(this).children('input[type="checkbox"]').prop("checked") === checked);
+        });
+
+        if (all && checked) {
+            parent.children('input[type="checkbox"]').prop({
+                indeterminate: false,
+                checked: checked
+            });
 
             parent.children('a').attr("style", "color:" + "#0d6efd");
-       // checkSiblings(parent);
-        
+            // checkSiblings(parent);
+        }
+        else if (all && !checked) {
+            parent.children('input[type="checkbox"]').prop("checked", checked);
+            parent.children('input[type="checkbox"]').prop("indeterminate", (parent.find('input[type="checkbox"]:checked').length > 0));
+            // checkSiblings(parent);
 
-        } else if (all && !checked) {
-           
-      parent.children('input[type="checkbox"]').prop("checked", checked);
-      parent.children('input[type="checkbox"]').prop("indeterminate", (parent.find('input[type="checkbox"]:checked').length > 0));
-       // checkSiblings(parent);
-        
             parent.children('a').removeAttr("style");
             el.parents("li").parents().children("a").removeAttr("style");
-    }
+        }
         else {
-           
-      el.parents("li").children('input[type="checkbox"]').prop({
-        indeterminate: true,
-        checked: false
-      });
+            el.parents("li").children('input[type="checkbox"]').prop({
+                indeterminate: true,
+                checked: false
+            });
             el.parents("li").parents().children("a").attr("style", "color:" + "#0d6efd");
-       
-          
-        
+        }
     }
 
-  }
-
-  checkSiblings(container);
+    checkSiblings(container);
 });

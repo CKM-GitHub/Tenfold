@@ -43,7 +43,7 @@
                 direction = directions[col_index[0]] || 'asc';
 
             // A factor based on the direction
-            if (index == 0 &&  headers[0].innerHTML == 'No') { 
+            if (index == 0 && (headers[0].innerText == 'NO.' || headers[0].innerText == 'No.')) {
                 multiplier = 1;
                 if (headers[index].hasAttribute('ordercol-direction'))
                     multiplier = headers[index].getAttribute('ordercol-direction') === 'asc' ? 1 : -1;
