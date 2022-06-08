@@ -3,9 +3,9 @@ $(function () {
     setValidation();
     _url.get_t_reale_CompanyInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyInfo';
     _url.get_t_reale_CompanyCountingInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyCountingInfo';
-    _url.get_t_reale_purchase_DisplayData = common.appPath + '/t_reale_asmhis/get_t_reale_asmhis_DisplayData';
+    _url.get_t_reale_purchase_DisplayData = common.appPath + '/t_reale_account/get_t_reale_account_DisplayData'; 
 
-    _url.get_t_reale_purchase_CSVData = common.appPath + '/t_reale_asmhis/get_t_reale_asmhis_DisplayData';
+    _url.get_t_reale_purchase_CSVData = common.appPath + '/t_reale_account/get_t_reale_account_DisplayData';
     _url.Insert_L_Log = common.appPath + '/t_reale_purchase/Insert_L_Log';
     _url.get_Modal_HomeData = common.appPath + '/t_reale_purchase/get_Modal_HomeData';
     _url.get_Modal_ProfileData = common.appPath + '/t_reale_purchase/get_Modal_ProfileData';
@@ -40,13 +40,25 @@ function setValidation() {
 }
 
 function addEvents() {
-    common.bindValidationEvent('#form1', ''); 
+    common.bindValidationEvent('#form1', '');
+    const btn = document.querySelector("#flexSwitchCheckDefault_Penalty")
+    btn.addEventListener("change", function () {
+        if (this.checked) {
+            $('.disabled-account').removeAttr("disabled")
+            $('.cap-errormsg-right').removeClass("d-none")
+        }
+        else {
+            $('.disabled-account').attr("disabled", "true").removeClass("cap-is-invalid")
+            $('.cap-errormsg-right').addClass("d-none")
+        }
 
+    });
+    document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? $('.disabled-account').removeAttr("disabled") : $('.disabled-account').attr("disabled", "true")
     $('#StartDate, #EndDate').on('change', function () {
         const $this = $(this), $start = $('#StartDate').val(), $end = $('#EndDate').val();
-        if (!common.checkValidityInput($this)) {
+        if (!common.checkValidityInput($this)) { 
             return false;
-        }
+        } 
         let model = {
             StartDate: $start,
             EndDate: $end
@@ -59,13 +71,13 @@ function addEvents() {
                 return;
             }
         }
-    }); 
+    });
     $('#subMenu li').children('a').on('click', function () {
         $('#subMenu li').children('a').removeClass("active");
         $(this).addClass('active');
     });
     let model = {
-        IsCSV: false 
+        RealECD: common.getUrlParameter('reale') 
     };
 
     $('#seller').addClass('d-none');
@@ -74,20 +86,19 @@ function addEvents() {
     Bind_Company_Data(this);
     //Bind Company Info Data to the title part of the page
 
-    // get_purchase_Data(model, this, 'page_load');
+    get_purchase_Data(model, this, 'page_load');
 
    // sortTable.getSortingTable("tblPurchaseDetails"); 
      
 }
 
-function get_purchase_Data(model, $form, state) {
-    model.IsCSV = false;
+function get_purchase_Data(model, $form, state) { 
     common.callAjaxWithLoading(_url.get_t_reale_purchase_DisplayData, model, this, function (result) {
         if (result && result.isOK) {
-
-            Bind_DisplayData(result.data);
-            if (state == 'Display')
-                l_logfunction(model.RealECD + ' ' + $('#r_REName').text(), 'display', '');
+            BindPenalty(result.data.split('Ʈ')[0]);
+            Bind_DisplayData(result.data.split('Ʈ')[1]);
+            //if (state == 'Display')
+            //    l_logfunction(model.RealECD + ' ' + $('#r_REName').text(), 'display', '');
         }
 
         if (result && !result.isOK) {
@@ -108,55 +119,34 @@ function isEmptyOrSpaces(str) {
 }
 
 function Bind_DisplayData(result) {
-    let _letter = "", _class = "", _status = "";
+     
     let data = JSON.parse(result);
     let html = "";
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
-            var spantxt = '';
-            if (data[i]["AssessType"] == "エリア") {
-                spantxt += '<label> <span class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white">エ</span> エリア</label>';
-            }
-            else {
-                spantxt += '<label> <span  class="ms-1 ps-1 pe-1 rounded-circle bg-warning txt-dark" > マ</span > マンション</label> ';
-            }
-            if (data[i]["SendCustomer"] == '送客') {
-                spantxt += '<label> <span class="ms-1 ps-1 pe-1 rounded-circle bg-danger text-white">送</span> 送客</label>';
-            }
-            //debugger;
-            //var DeepDatetime = '';
-            //    if (data[i]["DeepDate"])
-            //DeepDatetime = '2020'//data[i]["DeepDate"].replace(" ", "&");
-            var DeepDatetime = data[i]["DeepDate"].replace(" ", "&");
-            var paramSeller = '\'t_seller_assessment ' + data[i]["SellerCD"] + '\',\'' + 'link' + '\',\'' + data[i]["SellerCD"] + '\'';
-            var paramDetail = '\'t_seller_assessment_detail ' + data[i]["AssessReqID"] + '\',\'' + 'link' + '\',\'' + data[i]["AssessReqID"] + '\'';
 
-            html += '<tr>\
-            <td class="text-nowrap">'+ spantxt + '</td>\
-            <td class="text-nowrap">' + data[i]["AssessReqID"] + '</td>\
-             <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["AssessReqID"] + '&' + DeepDatetime + ' data-bs-toggle="modal" data-bs-target="#t_reale" href="#" onclick="Bind_ModalDetails(this.id)"><span>' + data[i]["RoomNumber"] + '</span></a></td>\
-            <td> <a class="text-heading font-semibold text-decoration-underline text-nowrap" id="' + data[i][" SellerCD"] + '"   onclick="l_logfunction(' + paramSeller + ')" > ' + data[i]["SellerName"] + '</a ></td>\
-            <td class="text-nowrap">'+ data[i]["InsertDate"] + '</td>\
-            <td class="text-nowrap">'+ data[i]["EasyDate"] + '</td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id="' + data[i]["AssessReqID"] + '"  onclick="l_logfunction(' + paramDetail + ')">' + data[i]["DeepDate"] + '</a></td>\
-            <td class="text-nowrap">'+ data[i]["PurchaseDate"] + '</td>\
-            <td class="text-nowrap"> '+ data[i]["IntroDate"] + '</td>\
-            <td class="text-nowrap" style="text-align:right;"> '+ data[i]["Rank"] + '</td>\
-            </tr>'
+
+            html += 
+              '<div class="col-12 border-1 m-1">\
+                <strong>'+ data[i]['PenaltyStartDate'] + '～' + data[i]['PenaltyEndDate'] + '</strong >\
+                    <p>'+ data[i]['PenaltyMemo'] +'</p>\
+                    <div class="float-end">\
+                        <p>登録スタッフ：<p>'+ data[i]['TenStaffName'] +'</p>\
+                        </p>\
+                    </div>\
+                                                    </div>'
         }
-
-        $('#total_record').text("検索結果： " + data.length + "件");
-        $('#total_record_up').text("検索結果： " + data.length + "件");
-        $('#no_record').text("");
     }
-    else {
-        $('#total_record').text("検索結果： 0件");
-        $('#total_record_up').text("検索結果： 0件 ");
-        $('#no_record').text("表示可能データがありません");
-    }
-    $('#tblPurchaseDetails tbody').append(html);
+    $('#penaltyList').append(html);
 }
-
+function BindPenalty(result) {
+    let data = JSON.parse(result);
+    $('#flexSwitchCheckDefault').checked = data[0]['TestFlg'];
+    $('#flexSwitchCheckDefault_Penalty').checked = data[0]['PenaltyFlg'];
+    $('#StartDate').val(data[0]['PenaltyStartDate']);
+    $('#EndDate').val(data[0]['PenaltyEndDate']);
+    $('#penaltyArea').val(data[0]['PenaltyMemo']);
+}
 function l_logfunction(remark, Process, id) {
 
     let model = {

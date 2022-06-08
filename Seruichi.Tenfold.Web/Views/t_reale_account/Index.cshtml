@@ -1,4 +1,4 @@
-﻿@model Models.Tenfold.t_reale_asmhis.t_reale_asmhisModel
+﻿@model Models.Tenfold.t_reale_account.t_reale_accountModel
 
 @{
     ViewBag.Title = "Index";
@@ -34,7 +34,7 @@
                                                     <div class="col-auto">
                                                         <div class="form-check form-switch">
                                                             <input class="form-check-input" type="checkbox" role="switch"
-                                                                   id="flexSwitchCheckDefault" />
+                                                                   id="flexSwitchCheckDefault" name="flexSwitchCheckDefault" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -60,37 +60,29 @@
                                                                 <div class="col-auto">
                                                                     <div class="form-check form-switch">
                                                                         <input class="form-check-input" type="checkbox" role="switch"
-                                                                               id="flexSwitchCheckDefault" />
+                                                                               id="flexSwitchCheckDefault_Penalty" name="flexSwitchCheckDefault_Penalty" />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    @*<div id="form1" class="flex-xl-row">*@
-                                                    @*<div class="col-12 col-md-6">
-            <label for="disabledSelect" class="form-label">開始日</label>
-            <span class="cap-errormsg-left" id="errorStartDate"></span>
-            <input class="form-control id=" StartDate" mb-2" name="StartDate" required="" type="date">
-        </div>
-        <div class="col-12 col-md-6">
-            <label for="disabledSelect" class="form-label">終了日</label>
-            <span class="cap-errormsg-right" id="errorEndDate"></span>
-            <input class="form-control mb-2" id="EndDate" name="StartDate" required="" type="date">
-        </div>*@
+                                                    </div> 
+                                                <div class="col-12 col-md-6">
                                                     <label for="StartDate" class="form-label">開始日</label>
                                                     <span class="cap-errormsg-right" id="errorStartDate"></span>
-                                                    <input class="form-control mb-2" id="StartDate" name="StartDate" type="date">
-                                                    <label for="EndDate" class="form-label">終了日</label>
-                                                    <span class="cap-errormsg-right" id="errorEndDate"></span>
-                                                    <input class="form-control mb-2" id="EndDate" name="EndDate" type="date">
+                                                    <input class="form-control mb-2 disabled-account" id="StartDate" name="StartDate" type="date" > 
+                                                </div>
+                                                       <div class="col-12 col-md-6">
+                                                           <label for="disabledSelect" class="form-label">終了日</label>
+                                                           <span class="cap-errormsg-right" id="errorEndDate"></span>
+                                                           <input class="form-control mb-2 disabled-account" id="EndDate" name="EndDate" required="" type="date">
+                                                       </div> 
 
                                                     <div class="col-12">
                                                         <label class="form-label" for="form3Examplev4">メモ</label>
                                                         <span class="cap-errormsg-right" id="errorpenalty"></span>
 
-                                                        <textarea class="form-control custom-control" id="penaltyArea" rows="3"></textarea>
-                                                    </div>
-                                                    @*</div>*@
+                                                        <textarea class="form-control custom-control disabled-account" id="penaltyArea" name="penaltyArea" rows="3"></textarea>
+                                                    </div> 
 
                                                 </div>
                                             </div>
@@ -109,47 +101,8 @@
                                                         <strong class="mb-2">ペナルティ履歴</strong>
                                                     </div>
                                                 </div>
-                                                <div class="row align-items-center p-2 overflow-y-auto overflow-x-hidden" style="max-height: 320px;">
-                                                    <div class="col-12 border-1 m-1 rounded">
-                                                        <strong>YYYY/MM/DD～YYYY/MM/DD</strong>
-                                                        <p>StopReasonText</p>
-                                                        <div class="float-end">
-                                                            <p>登録スタッフ：<p>Admin Staff Name</p>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 border-1 m-1">
-                                                        <strong>YYYY/MM/DD～YYYY/MM/DD</strong>
-                                                        <p>StopReasonText</p>
-                                                        <div class="float-end">
-                                                            <p>登録スタッフ：<p>Admin Staff Name</p>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 border-1 m-1">
-                                                        <strong>YYYY/MM/DD～YYYY/MM/DD</strong>
-                                                        <p>StopReasonText</p>
-                                                        <div class="float-end">
-                                                            <p>登録スタッフ：<p>Admin Staff Name</p>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 border-1 m-1">
-                                                        <strong>YYYY/MM/DD～YYYY/MM/DD</strong>
-                                                        <p>StopReasonText</p>
-                                                        <div class="float-end">
-                                                            <p>登録スタッフ：<p>Admin Staff Name</p>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 border-1 m-1">
-                                                        <strong>YYYY/MM/DD～YYYY/MM/DD</strong>
-                                                        <p>StopReasonText</p>
-                                                        <div class="float-end">
-                                                            <p>登録スタッフ：<p>Admin Staff Name</p>
-                                                            </p>
-                                                        </div>
-                                                    </div>
+                                                <div id="penaltyList" class="row align-items-center p-2 overflow-y-auto overflow-x-hidden" style="max-height: 320px;">
+                                                 
                                                 </div>
                                             </div>
 
