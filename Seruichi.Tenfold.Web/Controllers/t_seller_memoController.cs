@@ -48,5 +48,15 @@ namespace Seruichi.Tenfold.Web.Controllers
             bl.Insert_L_Log(model);
             return OKResult();
         }
+
+        [HttpPost]
+        public ActionResult Delete_Cmd(t_seller_memoModel model)
+        {
+            t_seller_memoBL bl = new t_seller_memoBL();
+            model.LoginID = base.GetOperator();
+            model.IPAddress = base.GetClientIP();
+            bl.Delete_Cmd(model);
+            return OKResult();
+        }
     }
 }
