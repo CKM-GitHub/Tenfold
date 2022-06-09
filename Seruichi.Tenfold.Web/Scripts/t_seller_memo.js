@@ -7,7 +7,7 @@ $(function () {
     _url.Delete_MemoText = common.appPath + '/t_seller_memo/Delete_MemoText';
     addEvents();
     $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
-    $('#t_reale_purchase').addClass('font-bold text-underline');
+    $('#t_seller_memo').addClass('font-bold text-underline');
 });
 
 function addEvents() {
