@@ -15,7 +15,7 @@ function addEvents() {
     $('#submenu_reale').addClass('d-none');
     Bind_Company_Data(this);         //Bind Company Info Data to the title part of the page
 
-    var model = {
+    let model = {
         SellerCD: common.getUrlParameter('SellerCD')
     }
     get_memo_Data(model, this);
@@ -23,21 +23,27 @@ function addEvents() {
     $('#cap-fixed-button').on('click', function () {
         $('textarea#MemoText').val('');
         $('textarea#MemoText').focus();
+        $('#btnEdit_MemoText').off("click");
         $('#btnCancel_Edit').off("click");
         $('#btnCancel_Edit').on('click', function () {
             $('#btnEdit_MemoText').off("click");
             $('#message-com').modal('hide');
         });
         $('#btnEdit_MemoText').on('click', function () {
-            debugger;
-            var model = {
+            let model = {
                 SellerCD: common.getUrlParameter('SellerCD'),
+                ParentChildKBN: 1,
+                ParentSEQ: 0,
                 MemoText: $('textarea#MemoText').val(),
                 Type: 'Add'
             }
             Modify_Memo(model);
         });
         $('#message-com').modal('show');
+    })
+
+    $('#btnDelete_OK').on('click', function () {
+        Modify_Memo(model);
     })
 }
 
@@ -58,6 +64,7 @@ function get_memo_Data(model, $form) {
 }
 
 function Bind_memo_Data(result) {
+    $('#display_area').empty();
     var data = JSON.parse(result);
     var p_html = '', c_html = '';
     var loginID = $('#loginID').text();
@@ -114,14 +121,14 @@ function Bind_memo_Data(result) {
 function Edit_Memo(SellerMemoSEQ) {
     $('textarea#MemoText').val($('#mt_' + SellerMemoSEQ).text());
     $('textarea#MemoText').focus();
+    $('#btnEdit_MemoText').off("click");
     $('#btnCancel_Edit').off("click");
     $('#btnCancel_Edit').on('click', function () {
         $('#btnEdit_MemoText').off("click");
         $('#message-com').modal('hide');
     });
     $('#btnEdit_MemoText').on('click', function () {
-        debugger;
-        var model = {
+        let model = {
             SellerCD: common.getUrlParameter('SellerCD'),
             MemoText: $('textarea#MemoText').val(),
             SellerMemoSEQ: SellerMemoSEQ,
@@ -152,19 +159,19 @@ function Modify_Memo(model) {
 function Reply_Memo(SellerMemoSEQ) {
     $('textarea#MemoText').val('');
     $('textarea#MemoText').focus();
+    $('#btnEdit_MemoText').off("click");
     $('#btnCancel_Edit').off("click");
     $('#btnCancel_Edit').on('click', function () {
         $('#btnEdit_MemoText').off("click");
         $('#message-com').modal('hide');
     });
     $('#btnEdit_MemoText').on('click', function () {
-        debugger;
-        var model = {
+        let model = {
             SellerCD: common.getUrlParameter('SellerCD'),
             ParentChildKBN: '2',
+            ParentSEQ: SellerMemoSEQ,
             MemoText: $('textarea#MemoText').val(),
-            SellerMemoSEQ: SellerMemoSEQ,
-            Type: 'Reply'
+            Type: 'Add'
         }
         Modify_Memo(model);
     });
@@ -172,7 +179,7 @@ function Reply_Memo(SellerMemoSEQ) {
 }
 
 function Delete_Memo(SellerMemoSEQ) {
-    var model = {
+    let model = {
         SellerMemoSEQ: SellerMemoSEQ,
     }
     $('#btnCancel_Delete').off("click");
