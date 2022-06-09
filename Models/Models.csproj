@@ -54,6 +54,7 @@
     <Compile Include="RealEstate\r_asmc_address\r_asmc_addressModel.cs" />
     <Compile Include="RealEstate\r_asmc_ms_list_sh\r_asmc_ms_list_shModel.cs" />
     <Compile Include="RealEstate\r_asmc_ms_reged_list\r_asmc_ms_reged_listModel.cs" />
+    <Compile Include="RealEstate\r_auto_mes\r_auto_mesModel.cs" />
     <Compile Include="RealEstate\r_com_profile\r_com_profileModel.cs" />
     <Compile Include="RealEstate\r_contact\r_contactModel.cs" />
     <Compile Include="RealEstate\r_dashboard\r_dashboardModel.cs" />

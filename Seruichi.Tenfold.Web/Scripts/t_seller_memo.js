@@ -3,7 +3,7 @@ $(function () {
     _url.get_t_seller_Info = common.appPath + '/t_seller_memo/get_t_seller_Info';
     _url.get_t_seller_memo_DisplayData = common.appPath + '/t_seller_memo/get_t_seller_memo_DisplayData';
     _url.Insert_L_Log = common.appPath + '/t_seller_memo/Insert_L_Log';
-    _url.Edit_MemoText = common.appPath + '/t_seller_memo/Edit_MemoText';
+    _url.Modify_MemoText = common.appPath + '/t_seller_memo/Modify_MemoText';
     _url.Delete_MemoText = common.appPath + '/t_seller_memo/Delete_MemoText';
     addEvents();
     $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
@@ -21,19 +21,23 @@ function addEvents() {
     get_memo_Data(model, this);
 
     $('#cap-fixed-button').on('click', function () {
-        $('#btnCancel_Edit').removeAttr('onclick');
+        $('textarea#MemoText').val('');
+        $('textarea#MemoText').focus();
+        $('#btnCancel_Edit').off("click");
         $('#btnCancel_Edit').on('click', function () {
-            $('#btnEdit_MemoText').removeAttr('onclick');
+            $('#btnEdit_MemoText').off("click");
             $('#message-com').modal('hide');
         });
         $('#btnEdit_MemoText').on('click', function () {
+            debugger;
             var model = {
                 SellerCD: common.getUrlParameter('SellerCD'),
                 MemoText: $('textarea#MemoText').val(),
-                Type: 'Insert'
+                Type: 'Add'
             }
-            //Edit(model);
-        })
+            Modify_Memo(model);
+        });
+        $('#message-com').modal('show');
     })
 }
 
@@ -67,11 +71,11 @@ function Bind_memo_Data(result) {
                 <p class="ps-md-5 text-secondary text-start">' + data[i]['UpdateDateTime'] + '</p>\
                 </div>\
                 <div class="clearfix"></div>\
-                <p id="mt_' + data[i]['SellerMemoSEQ'] + '" ondblclick="Edit_Cmd(\'' + data[i]['SellerMemoSEQ'] + '\')">' + data[i]['MemoText'] + '</p>\
+                <p id="mt_' + data[i]['SellerMemoSEQ'] + '" ondblclick="Edit_Memo(\'' + data[i]['SellerMemoSEQ'] + '\')">' + data[i]['MemoText'] + '</p>\
                 <p>\
-                <button type="button" class="float-right btn btn-outline-primary ml-2" onclick="Reply_Cmd(\'' + data[i]['SellerMemoSEQ'] + '\')">\
+                <button type="button" class="float-right btn btn-outline-primary ml-2" onclick="Reply_Memo(\'' + data[i]['SellerMemoSEQ'] + '\')">\
                     <i class="fa fa-reply"></i> コメント </button>\
-                <button type="button" id="btnDelete" class="float-right btn text-white btn-danger" onclick="Delete_Cmd(\'' + data[i]['SellerMemoSEQ'] + '\')">\
+                <button type="button" id="btnDelete" class="float-right btn text-white btn-danger" onclick="Delete_Memo(\'' + data[i]['SellerMemoSEQ'] + '\')">\
                     <i class="fa fa-times"></i> 削除 </button>\
                 </p>\
                 </div>\
@@ -87,9 +91,9 @@ function Bind_memo_Data(result) {
                 <strong>' + data[i]['TenStaffName'] + '</strong>\
                 <p class="ps-md-5 text-secondary text-start">' + data[i]['UpdateDateTime'] + '</p>\
                 </div>\
-                <p id="mt_' + data[i]['SellerMemoSEQ'] + '" ondblclick="Edit_Cmd(\'' + data[i]['SellerMemoSEQ'] + '\')">' + data[i]['MemoText'] + '</p>\
+                <p id="mt_' + data[i]['SellerMemoSEQ'] + '" ondblclick="Edit_Memo(\'' + data[i]['SellerMemoSEQ'] + '\')">' + data[i]['MemoText'] + '</p>\
                 <p>\
-                <button type="button" id="btnDelete" class="float-right btn text-white btn-danger" onclick="Delete_Cmd(\'' + data[i]['SellerMemoSEQ'] + '\')">\
+                <button type="button" id="btnDelete" class="float-right btn text-white btn-danger" onclick="Delete_Memo(\'' + data[i]['SellerMemoSEQ'] + '\')">\
                     <i class="fa fa-times"></i> 削除 </button>\
                 </p>\
                 </div>\
@@ -107,11 +111,12 @@ function Bind_memo_Data(result) {
         $('#btnDelete').addClass('d-none');
 }
 
-function Edit_Cmd(SellerMemoSEQ) {
+function Edit_Memo(SellerMemoSEQ) {
     $('textarea#MemoText').val($('#mt_' + SellerMemoSEQ).text());
     $('textarea#MemoText').focus();
+    $('#btnCancel_Edit').off("click");
     $('#btnCancel_Edit').on('click', function () {
-        $('#btnEdit_MemoText').removeAttr('onclick');
+        $('#btnEdit_MemoText').off("click");
         $('#message-com').modal('hide');
     });
     $('#btnEdit_MemoText').on('click', function () {
@@ -122,14 +127,14 @@ function Edit_Cmd(SellerMemoSEQ) {
             SellerMemoSEQ: SellerMemoSEQ,
             Type: 'Update'
         }
-        //Edit(model);
-    })
+        Modify_Memo(model);
+    });
     $('#message-com').modal('show');
 }
 
-function Edit(model) {
+function Modify_Memo(model) {
     $('#message-com').modal('hide');
-    common.callAjaxWithLoadingSync(_url.Edit_MemoText, model, this, function (result) {
+    common.callAjaxWithLoadingSync(_url.Modify_MemoText, model, this, function (result) {
         if (result && result.isOK) {
             get_memo_Data(model, this);
         }
@@ -144,21 +149,35 @@ function Edit(model) {
     })
 }
 
-function Reply_Cmd(SellerMemoSEQ) {
-    var model = {
-        SellerCD: common.getUrlParameter('SellerCD'),
-        ParentChildKBN: '2',
-        ParentSEQ: SellerMemoSEQ
-    }
+function Reply_Memo(SellerMemoSEQ) {
+    $('textarea#MemoText').val('');
+    $('textarea#MemoText').focus();
+    $('#btnCancel_Edit').off("click");
+    $('#btnCancel_Edit').on('click', function () {
+        $('#btnEdit_MemoText').off("click");
+        $('#message-com').modal('hide');
+    });
+    $('#btnEdit_MemoText').on('click', function () {
+        debugger;
+        var model = {
+            SellerCD: common.getUrlParameter('SellerCD'),
+            ParentChildKBN: '2',
+            MemoText: $('textarea#MemoText').val(),
+            SellerMemoSEQ: SellerMemoSEQ,
+            Type: 'Reply'
+        }
+        Modify_Memo(model);
+    });
     $('#message-com').modal('show');
 }
 
-function Delete_Cmd(SellerMemoSEQ) {
+function Delete_Memo(SellerMemoSEQ) {
     var model = {
         SellerMemoSEQ: SellerMemoSEQ,
     }
+    $('#btnCancel_Delete').off("click");
     $('#btnCancel_Delete').on('click', function () {
-        $('#btnDelete_MemoText').removeAttr('onclick');
+        $('#btnDelete_MemoText').off("click");
     });
     $('#btnDelete_MemoText').on('click', function () {
         Delete(model);
