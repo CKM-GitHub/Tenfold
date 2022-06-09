@@ -182,6 +182,7 @@
     <Content Include="Content\images\map\japan_map_outline.png" />
     <Content Include="Content\modernizr\modernizr-2.8.3.js" />
     <Content Include="Content\scripts\common.js" />
+    <Content Include="Content\scripts\hover.js" />
     <Content Include="Content\scripts\profileimg.js" />
     <Content Include="Content\scripts\rating.js" />
     <Content Include="Content\scripts\sidebar.js" />
@@ -261,6 +262,7 @@
     <Content Include="Views\r_asmc_railway\Index.cshtml" />
     <Content Include="Views\r_staff\Index.cshtml" />
     <Content Include="Views\Shared\_ErrorPopup.cshtml" />
+    <Content Include="Views\r_asmc_set_train_check_tab\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

@@ -1,0 +1,530 @@
+﻿@{
+    ViewBag.Title = "査定条件設定確認";
+    Layout = "~/Views/Shared/_r_menuLayout.cshtml";
+}
+@section styles{
+    @Styles.Render("~/Content/realEstate_css_common")
+}
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary">
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+
+        <main class="py-6 bg-surface-secondary">
+
+            <div class="container-fluid">
+                <div class="card shadow border-0 mb-7">
+
+                    <div class="card-header">
+
+                        <div class="col-md-12 col-12 mb-3 mb-sm-0">
+
+                            <h1 class="h2 mb-0 ls-tight">査定条件設定確認</h1>
+                            <span class="text-muted small">査定条件＞設定＞住所・路線から設定＞路線から設定</span>
+                        </div>
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
+                                  <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header"><h5>駅名</h5></div>
+
+                    <div class="card-body container">
+
+
+                        <div class="table-responsive">
+                            <table class="table table-hover table-nowrap">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" style="width: 200px" class="text-decoration-underline">駅名</th>
+                                        <th scope="col" style="width: 100px" class="text-decoration-underline">公開状況</th>
+                                        <th scope="col" style="width: 150px" class="text-decoration-underline">有効期限状況</th>
+                                        <th scope="col" style="width: auto" class="text-decoration-underline"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <a class="text-heading font-semibold"> StationName</a>
+                                        </td>
+                                        <td> <span class="cap-text-primary">(未公開)</span> </td>
+                                        <td>  <span class="text-warning">有効期限切れ</span>  </td>
+                                        <td></td>
+
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <h5 class="mb-0">買取利回り率設定</h5>
+                    </div>
+                    <div class="card-body overflow-x-auto container">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-nowrap table-bordered">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" style="width: 100px;">買取利回り率</th>
+                                        <th scope="col">駅距離</th>
+
+
+                                        <th scope="col">
+                                            <span class="text-danger">5</span>分<span class="text-danger">以内</span>
+                                        </th>
+                                        <th scope="col">
+                                            <span class="text-danger">10</span>分<span class="text-danger">以内</span>
+                                        </th>
+                                        <th scope="col">
+                                            <span class="text-danger">15</span>分<span class="text-danger">以内</span>
+                                        </th>
+                                        <th scope="col">
+                                            <span class="text-danger">20</span>分<span class="text-danger">以内</span>
+                                        </th>
+                                        <th scope="col">
+                                            <span class="text-danger">20</span>分<span class="text-danger">~</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" rowspan="4">
+                                            <p>築年数</p>
+
+
+                                        </th>
+                                        <th scope="row">
+                                            <span class="text-danger">5</span>年<span class="text-danger">以内</span>
+                                        </th>
+
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <span class="text-danger">10</span>年<span class="text-danger">以内</span>
+                                        </th>
+
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <span class="text-danger">15</span>年<span class="text-danger">以内</span>
+                                        </th>
+
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <span class="text-danger">15</span>年<span class="text-danger">~</span>
+                                        </th>
+
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="text-danger">1</span>%
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <h5 class="mb-0">オプション 家賃設定</h5>
+                    </div>
+                    <div class="card-body overflow-x-auto container">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-nowrap table-bordered">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" style="width: 100px;">1㎡あたりの家賃</th>
+                                        <th scope="col">駅距離</th>
+
+
+                                        <th scope="col">
+                                            <span class="text-danger">5</span>分<span class="text-danger">以内</span>
+                                        </th>
+                                        <th scope="col">
+                                            <span class="text-danger">10</span>分<span class="text-danger">以内</span>
+                                        </th>
+                                        <th scope="col">
+                                            <span class="text-danger">15</span>分<span class="text-danger">以内</span>
+                                        </th>
+                                        <th scope="col">
+                                            <span class="text-danger">20</span>分<span class="text-danger">以内</span>
+                                        </th>
+                                        <th scope="col">
+                                            <span class="text-danger">20</span>分<span class="text-danger">~</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" rowspan="4">
+                                            <p>築年数</p>
+
+
+                                        </th>
+                                        <th scope="row">
+                                            <span class="text-danger">5</span>年<span class="text-danger">以内</span>
+                                        </th>
+
+                                        <td class="text-end">
+                                            <p>上限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                            <p>下限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                        </td>
+                                        <td class="text-end">
+                                            <p>上限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                            <p>下限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                        </td>
+                                        <td class="text-end">
+                                            <p>上限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                            <p>下限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                        </td>
+                                        <td class="text-end">
+                                            <p>上限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                            <p>下限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                        </td>
+                                        <td class="text-end">
+                                            <p>上限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                            <p>下限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <span class="text-danger">10</span>年<span class="text-danger">以内</span>
+                                        </th>
+
+                                        <td class="text-end">
+                                            <p>上限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                            <p>下限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                        </td>
+                                        <td class="text-end">
+                                            <p>上限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                            <p>下限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                        </td>
+                                        <td class="text-end">
+                                            <p>上限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                            <p>下限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                        </td>
+                                        <td class="text-end">
+                                            <p>上限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                            <p>下限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                        </td>
+                                        <td class="text-end">
+                                            <p>上限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                            <p>下限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <span class="text-danger">15</span>年<span class="text-danger">以内</span>
+                                        </th>
+
+                                        <td class="text-end">
+                                            <p>上限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                            <p>下限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                        </td>
+                                        <td class="text-end">
+                                            <p>上限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                            <p>下限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                        </td>
+                                        <td class="text-end">
+                                            <p>上限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                            <p>下限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                        </td>
+                                        <td class="text-end">
+                                            <p>上限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                            <p>下限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                        </td>
+                                        <td class="text-end">
+                                            <p>上限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                            <p>下限<span class="text-danger ps-md-5">999,999,999</span>円</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            <span class="text-danger">15</span>年<span class="text-danger">~</span>
+                                        </th>
+
+                                        <td class="text-end">
+                                            未設定
+                                        </td>
+                                        <td class="text-end">
+                                            未設定
+                                        </td>
+                                        <td class="text-end">
+                                            未設定
+                                        </td>
+                                        <td class="text-end">
+                                            未設定
+                                        </td>
+                                        <td class="text-end">
+                                            未設定
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header d-md-inline-flex">
+                        <h5 class="mb-0">オプション 買取利回り率設定</h5>
+                    </div>
+                    <div class="card-body container">
+
+                        <div class="border table-responsive cap-con-form mx-auto">
+                            <table class="table table-hover table-nowrap">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">条件名</th>
+                                        <th scope="col">条件内容</th>
+                                        <th scope="col">買取利回り率</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>総戸数</td>
+                                        <td>総戸数 <span class="text-danger">10</span>戸 以内</td>
+                                        <td>査定・買取対象外</td>
+                                    </tr>
+                                    <tr>
+                                        <td>所在階</td>
+                                        <td><span class="text-danger">最上階</span></td>
+                                        <td><span class="text-danger">1</span>%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>所在階</td>
+                                        <td><span class="text-danger">1</span>階</td>
+                                        <td>査定・買取対象外</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>専有面積　</td>
+                                        <td><span class="text-danger">30</span>㎡<span class="text-danger">～</span></td>
+                                        <td>査定・買取対象外</td>
+                                    </tr>
+                                    <tr>
+                                        <td>専有面積　</td>
+                                        <td><span class="text-danger">10</span>㎡<span class="text-danger">以内</span></td>
+                                        <td>査定・買取対象外</td>
+                                    </tr>
+                                    <tr>
+                                        <td>専有面積　</td>
+                                        <td><span class="text-danger">バルコニーなし</span></td>
+                                        <td>査定・買取対象外</td>
+                                    </tr>
+                                    <tr>
+                                        <td>主採光</td>
+                                        <td><span class="text-danger">北向き</span></td>
+                                        <td>査定・買取対象外</td>
+                                    </tr>
+                                    <tr>
+                                        <td>部屋数</td>
+                                        <td><span class="text-danger">2</span>部屋</td>
+                                        <td><span class="text-danger">1</span>%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>部屋数</td>
+                                        <td><span class="text-danger">1</span>部屋</td>
+                                        <td>査定・買取対象外</td>
+                                    </tr>
+                                    <tr>
+                                        <td>部屋数</td>
+                                        <td><span class="text-danger">3</span>部屋</td>
+                                        <td><span class="text-danger">2</span>%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>部屋数</td>
+                                        <td><span class="text-danger">4</span>部屋</td>
+                                        <td><span class="text-danger">3</span>%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>バス・トイレ</td>
+                                        <td><span class="text-danger">セパレート</span></td>
+                                        <td><span class="text-danger">-1</span>%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>バス・トイレ</td>
+                                        <td><span class="text-danger">シャワーブース</span></td>
+                                        <td>査定・買取対象外</td>
+                                    </tr>
+                                    <tr>
+                                        <td>土地権利</td>
+                                        <td><span class="text-danger">借地権</span></td>
+                                        <td>査定・買取対象外</td>
+                                    </tr>
+                                    <tr>
+                                        <td>賃貸状況</td>
+                                        <td><span class="text-danger">空室</span></td>
+                                        <td><span class="text-danger">-1</span>%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>賃貸状況</td>
+                                        <td><span class="text-danger">サブリース</span></td>
+                                        <td>査定・買取対象外</td>
+                                    </tr>
+                                    <tr>
+                                        <td>管理状況 </td>
+                                        <td><span class="text-danger">自主管理</span></td>
+                                        <td><span class="text-danger">2</span>%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>売却希望時期</td>
+                                        <td><span class="text-danger">3ヶ月以上</span></td>
+                                        <td>査定・買取対象外</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+
+                    </div>
+
+                </div>
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header d-md-inline-flex">
+                        <h5 class="mb-0">属性項目</h5>
+                    </div>
+                    <div class="card-body overflow-x-auto container">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-nowrap border">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" style="width: 150px" class="">担当者</th>
+                                        <th scope="col" style="width: 100px" class="">公開状況</th>
+                                        <th scope="col" style="width: 100px" class="">有効期限日</th>
+                                        <th scope="col" style="width: 100px" class="">優先度</th>
+                                        <th scope="col" style="width: 100px" class="text-center">優先査定条件</th>
+                                        <th scope="col" style="width: auto" class="">備考</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex flex-row align-items-center">
+
+                                                <div class="ms-3">
+                                                    <h5>StaffName</h5>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td> <span class="cap-text-primary">(未公開)</span> </td>
+                                        <td> 2020/12/15</td>
+
+                                        <td>
+                                            <div class="star-rating text-danger">
+                                                <span class="fa fa-star-o" data-rating="1"></span>
+                                                <span class="fa fa-star-o" data-rating="2"></span>
+                                                <span class="fa fa-star-o" data-rating="3"></span>
+                                                <span class="fa fa-star-o" data-rating="4"></span>
+                                                <span class="fa fa-star-o" data-rating="5"></span>
+                                                <input type="hidden" name="whatever" class="rating-value" value="0">
+                                            </div>
+                                        </td>
+
+                                        <td class="text-center"> ✓</td>
+                                        <td>
+                                            <textarea class="form-control custom-control" readonly rows="10"></textarea>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+
+                <div class="card shadow border-0 mb-7">
+
+                    <div class="card-footer">
+                        <div class="text-right mt-3 float-end">
+                            <button type="button" class="btn btn-lg btn-secondary">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/r_asmc_address")
+}
