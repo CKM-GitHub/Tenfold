@@ -50,12 +50,22 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete_Cmd(t_seller_memoModel model)
+        public ActionResult Edit_MemoText(t_seller_memoModel model)
         {
             t_seller_memoBL bl = new t_seller_memoBL();
             model.LoginID = base.GetOperator();
             model.IPAddress = base.GetClientIP();
-            bl.Delete_Cmd(model);
+            bl.Edit_MemoText(model);
+            return OKResult();
+        }
+
+        [HttpPost]
+        public ActionResult Delete_MemoText(t_seller_memoModel model)
+        {
+            t_seller_memoBL bl = new t_seller_memoBL();
+            model.LoginID = base.GetOperator();
+            model.IPAddress = base.GetClientIP();
+            bl.Delete_MemoText(model);
             return OKResult();
         }
     }

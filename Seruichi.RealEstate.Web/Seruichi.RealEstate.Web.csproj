@@ -148,6 +148,7 @@
     <Compile Include="Controllers\r_issueslistController.cs" />
     <Compile Include="Controllers\r_loginController.cs" />
     <Compile Include="Controllers\r_staffController.cs" />
+    <Compile Include="Controllers\r_temp_mesController.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
     <Compile Include="Filters\BrowsingHistoryAttribute.cs" />
     <Compile Include="Filters\CustomHandleErrorAttribute.cs" />
@@ -217,6 +218,7 @@
     <Content Include="Scripts\r_issueslist.js" />
     <Content Include="Scripts\r_login.js" />
     <Content Include="Scripts\r_staff.js" />
+    <Content Include="Scripts\r_temp_mes.js" />
     <Content Include="Views\Error\BadRequest.cshtml" />
     <Content Include="Views\Error\BusinessError.cshtml" />
     <Content Include="Views\Error\Forbidden.cshtml" />
@@ -262,6 +264,7 @@
     <Content Include="Views\r_asmc_railway\Index.cshtml" />
     <Content Include="Views\r_staff\Index.cshtml" />
     <Content Include="Views\Shared\_ErrorPopup.cshtml" />
+    <Content Include="Views\r_temp_mes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
