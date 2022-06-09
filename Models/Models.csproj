@@ -79,6 +79,7 @@
     <Compile Include="Tenfold\t_mansion\t_mansionModel.cs" />
     <Compile Include="Tenfold\t_mansion_list\t_mansion_listModel.cs" />
     <Compile Include="Tenfold\t_mansion_new\t_mansion_newModel.cs" />
+    <Compile Include="Tenfold\t_reale_account\t_reale_accountModel.cs" />
     <Compile Include="Tenfold\t_reale_asmhis\t_reale_asmhisModel.cs" />
     <Compile Include="Tenfold\t_reale_list\t_reale_listModel.cs" />
     <Compile Include="Tenfold\t_reale_purchase\t_reale_purchaseModel.cs" />

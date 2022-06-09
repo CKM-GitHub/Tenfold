@@ -31,6 +31,7 @@ namespace Models.Tenfold.t_reale_account
         public string Ispenalty { get; set; }
         public byte penaltyFlg { get; set; }
         public byte testFlg { get; set; }
+        public byte Isfake { get; set; }
         public string Memo { get; set; }
         public string TenStaffCD { get; set; }
         public string IPAddress { get; set; }
