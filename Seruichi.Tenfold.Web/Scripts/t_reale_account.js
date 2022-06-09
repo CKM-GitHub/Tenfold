@@ -177,6 +177,8 @@ function discardChanges() {
             
             document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? $('.disabled-account').removeAttr("disabled") : $('.disabled-account').attr("disabled", "true")
             $('.cap-errormsg-right').addClass("d-none")
+            $('.disabled-account').removeClass("cap-is-invalid")
+            //cap-is-invalid
         }
     })
 }
