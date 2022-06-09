@@ -70,7 +70,8 @@ namespace Seruichi.Tenfold.Web
                      "~/Scripts/t_mansion_new.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/t_admin").Include(
-                     "~/Scripts/t_admin.js"));
+                     "~/Scripts/t_admin.js",
+                     "~/Scripts/t_common.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/t_reale_list").Include(
                      "~/Scripts/t_reale_list.js"));

@@ -66,48 +66,54 @@ namespace Seruichi.Tenfold.Web.Controllers
             model.LoginName = GetLoginStaffName();
             model.Operator = GetOperator();
             model.IPAddress = GetClientIP();
+            
+            DataTable dt_admin = bl.Get_M_TenfoldStaff_By_LoginID("admin");
 
-            List<Update_t_adminModel> lst = new List<Update_t_adminModel>();
-            DataTable dt = bl.Get_M_TenfoldStaff_By_LoginID("not_admin");
-            lst = (from DataRow dr in dt.Rows
-                   select new Update_t_adminModel()
-                   {
-                       TenStaffCD = dr["TenStaffCD"].ToString(),
-                       TenStaffPW = dr["TenStaffPW"].ToString(),
-                       TenStaffName = dr["TenStaffName"].ToString(),
-                       InvalidFLG = dr["InvalidFLG"].ToString(),
-                   }).ToList();
-
-            List<Update_t_adminModel> ls_update = Compare_list(lst,model.lst_AdminModel);
-            if (ls_update.Count == 0 && string.IsNullOrEmpty(model.TenStaffCD))
-                return OKResult(new { Return_value = "no"});
-            else
+            List<Update_t_adminModel> ls_update = Compare_list(model);
+            if (ls_update.Count > 0 && !string.IsNullOrEmpty(model.TenStaffCD))
             {
-                if (ls_update.Count > 0 && !string.IsNullOrEmpty(model.TenStaffCD))
-                {
-                    model.Processing = "5";
-                    model.Remark = "INS=" + model.TenStaffCD + "," + "UPD=" + string.Join(",", ls_update);
-                }
-                else if (ls_update.Count > 0)
-                {
-                    model.Processing = "2";
-                    model.Remark = "UPD=" + string.Join(",", ls_update);
-                }
-                else if (!string.IsNullOrEmpty(model.TenStaffCD))
-                {
-                    model.Processing = "1";
-                    model.Remark = "INS=" + model.TenStaffCD;
-                }
-                if (!bl.Save_M_TenfoldStaff(model, out string errorcd))
-                {
-                    return ErrorMessageResult(errorcd);
-                }
+                
+                model.Processing = "5";
+                model.Remark = "INS=" + model.TenStaffCD + "," + "UPD=" + string.Join(",", ls_update.Select(x => x.TenStaffCD).ToArray());
             }
-            return OKResult(new { Return_value = "yes" });
+            else if (ls_update.Count > 0)
+            {
+                model.Processing = "2";
+                model.Remark = "UPD=" + string.Join(",", ls_update.Select(x => x.TenStaffCD).ToArray());
+            }
+            else if (!string.IsNullOrEmpty(model.TenStaffCD))
+            {
+                model.Processing = "1";
+                model.Remark = "INS=" + model.TenStaffCD;
+            }
+            else if(dt_admin.Rows[0]["TenStaffPW"].ToString() != model.AdminPassword)
+            {
+                model.Processing = "2";
+                model.Remark = "";
+            }
+            if (!bl.Save_M_TenfoldStaff(model, out string errorcd))
+            {
+                return ErrorMessageResult(errorcd);
+            }
+            return OKResult();
         }
 
-        public List<Update_t_adminModel> Compare_list(List<Update_t_adminModel> lst_db, List<Update_t_adminModel> lst_form)
+        public List<Update_t_adminModel> Compare_list(t_adminModel model)
         {
+            t_adminBL bl = new t_adminBL();
+            List<Update_t_adminModel> lst_db= new List<Update_t_adminModel>();
+            List<Update_t_adminModel> lst_form = model.lst_AdminModel;
+            DataTable dt = bl.Get_M_TenfoldStaff_By_LoginID("not_admin");
+            lst_db = (from DataRow dr in dt.Rows
+                      select new Update_t_adminModel()
+                      {
+                          TenStaffCD = dr["TenStaffCD"].ToString(),
+                          TenStaffPW = dr["TenStaffPW"].ToString(),
+                          TenStaffName = dr["TenStaffName"].ToString(),
+                          InvalidFLG = dr["InvalidFLG"].ToString(),
+                          DeleteFLG = string.IsNullOrEmpty(dr["DeleteOperator"].ToString()) ? "0": "1"
+                      }).ToList();
+
             string JSONStringDB = string.Empty;
             string JSONStringUpdate = string.Empty;
             List<Update_t_adminModel> lst_update = new List<Update_t_adminModel>();
@@ -122,5 +128,21 @@ namespace Seruichi.Tenfold.Web.Controllers
             }
             return lst_update;
         }
+
+        [HttpPost]
+        public ActionResult Check_Insert_OR_Update_t_admin(t_adminModel model)
+        {
+            List<Update_t_adminModel> List_to_Update = Compare_list(model);
+
+            t_adminBL bl = new t_adminBL();
+            DataTable dt_admin = bl.Get_M_TenfoldStaff_By_LoginID("admin");
+
+            if (List_to_Update.Count > 0 || !string.IsNullOrEmpty(model.TenStaffCD) || (dt_admin.Rows[0]["TenStaffPW"].ToString() != model.AdminPassword))
+            {
+                return OKResult();
+            }
+            return ErrorResult();
+        }
+        
     }
 }
