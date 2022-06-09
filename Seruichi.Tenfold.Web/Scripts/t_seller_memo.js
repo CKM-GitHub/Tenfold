@@ -78,11 +78,11 @@ function Bind_memo_Data(result) {
                 <p class="ps-md-5 text-secondary text-start">' + data[i]['UpdateDateTime'] + '</p>\
                 </div>\
                 <div class="clearfix"></div>\
-                <p id="mt_' + data[i]['SellerMemoSEQ'] + '" ondblclick="Edit_Memo(\'' + data[i]['SellerMemoSEQ'] + '\')">' + data[i]['MemoText'] + '</p>\
+                <p id="mt_' + data[i]['SellerMemoSEQ'] + '" ondblclick="Edit_Memo(\'' + data[i]['SellerMemoSEQ'] + '\',\'' + data[i]['InsertOperator'] + '\')">' + data[i]['MemoText'] + '</p>\
                 <p>\
                 <button type="button" class="float-right btn btn-outline-primary ml-2" onclick="Reply_Memo(\'' + data[i]['SellerMemoSEQ'] + '\')">\
                     <i class="fa fa-reply"></i> コメント </button>\
-                <button type="button" id="btnDelete" class="float-right btn text-white btn-danger" onclick="Delete_Memo(\'' + data[i]['SellerMemoSEQ'] + '\')">\
+                <button type="button" id="btnDelete" class="float-right btn text-white btn-danger delete" onclick="Delete_Memo(\'' + data[i]['SellerMemoSEQ'] + '\')">\
                     <i class="fa fa-times"></i> 削除 </button>\
                 </p>\
                 </div>\
@@ -98,9 +98,9 @@ function Bind_memo_Data(result) {
                 <strong>' + data[i]['TenStaffName'] + '</strong>\
                 <p class="ps-md-5 text-secondary text-start">' + data[i]['UpdateDateTime'] + '</p>\
                 </div>\
-                <p id="mt_' + data[i]['SellerMemoSEQ'] + '" ondblclick="Edit_Memo(\'' + data[i]['SellerMemoSEQ'] + '\')">' + data[i]['MemoText'] + '</p>\
+                <p id="mt_' + data[i]['SellerMemoSEQ'] + '" ondblclick="Edit_Memo(\'' + data[i]['SellerMemoSEQ'] + '\',\'' + data[i]['InsertOperator'] + '\')">' + data[i]['MemoText'] + '</p>\
                 <p>\
-                <button type="button" id="btnDelete" class="float-right btn text-white btn-danger" onclick="Delete_Memo(\'' + data[i]['SellerMemoSEQ'] + '\')">\
+                <button type="button" id="btnDelete" class="float-right btn text-white btn-danger delete" onclick="Delete_Memo(\'' + data[i]['SellerMemoSEQ'] + '\')">\
                     <i class="fa fa-times"></i> 削除 </button>\
                 </p>\
                 </div>\
@@ -114,29 +114,34 @@ function Bind_memo_Data(result) {
             $('#c_' + data[i]['ParentSEQ']).append(c_html);
         }
     }
-    if (loginID !== 'admin')
-        $('#btnDelete').addClass('d-none');
+    if (loginID !== 'admin') {
+        $('.delete').each(function () {
+            $(this).addClass('d-none');
+        })
+    }
 }
 
-function Edit_Memo(SellerMemoSEQ) {
-    $('textarea#MemoText').val($('#mt_' + SellerMemoSEQ).text());
-    $('textarea#MemoText').focus();
-    $('#btnEdit_MemoText').off("click");
-    $('#btnCancel_Edit').off("click");
-    $('#btnCancel_Edit').on('click', function () {
+function Edit_Memo(SellerMemoSEQ, InsertOperator) {
+    if (InsertOperator == $('#loginID').text()) {
+        $('textarea#MemoText').val($('#mt_' + SellerMemoSEQ).text());
+        $('textarea#MemoText').focus();
         $('#btnEdit_MemoText').off("click");
-        $('#message-com').modal('hide');
-    });
-    $('#btnEdit_MemoText').on('click', function () {
-        let model = {
-            SellerCD: common.getUrlParameter('SellerCD'),
-            MemoText: $('textarea#MemoText').val(),
-            SellerMemoSEQ: SellerMemoSEQ,
-            Type: 'Update'
-        }
-        Modify_Memo(model);
-    });
-    $('#message-com').modal('show');
+        $('#btnCancel_Edit').off("click");
+        $('#btnCancel_Edit').on('click', function () {
+            $('#btnEdit_MemoText').off("click");
+            $('#message-com').modal('hide');
+        });
+        $('#btnEdit_MemoText').on('click', function () {
+            let model = {
+                SellerCD: common.getUrlParameter('SellerCD'),
+                MemoText: $('textarea#MemoText').val(),
+                SellerMemoSEQ: SellerMemoSEQ,
+                Type: 'Update'
+            }
+            Modify_Memo(model);
+        });
+        $('#message-com').modal('show');
+    }
 }
 
 function Modify_Memo(model) {
