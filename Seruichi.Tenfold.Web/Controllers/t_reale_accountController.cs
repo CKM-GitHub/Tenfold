@@ -68,6 +68,16 @@ namespace Seruichi.Tenfold.Web.Controllers
             bl.get_t_reale_account_ManipulateData(model); 
             return OKResult();
         }
-        //
+        [HttpPost]
+        public ActionResult Insert_L_Log(t_reale_purchase_l_log_Model model)
+        {
+            t_reale_purchaseBL bl = new t_reale_purchaseBL();
+            model.LoginID = base.GetOperator();
+            model.LoginName = base.GetOperatorName();
+            model.IPAddress = base.GetClientIP();
+            
+            bl.Insert_L_Log(model);
+            return OKResult();
+        }
     }
 }

@@ -72,9 +72,9 @@
                                                     <input class="form-control mb-2 disabled-account" id="StartDate" name="StartDate" type="date" > 
                                                 </div>
                                                        <div class="col-12 col-md-6">
-                                                           <label for="disabledSelect" class="form-label">終了日</label>
+                                                           <label for="EndDate" class="form-label">終了日</label>
                                                            <span class="cap-errormsg-right" id="errorEndDate"></span>
-                                                           <input class="form-control mb-2 disabled-account" id="EndDate" name="EndDate" required="" type="date">
+                                                           <input class="form-control mb-2 disabled-account" id="EndDate" name="EndDate" type="date">
                                                        </div> 
 
                                                     <div class="col-12">
@@ -112,8 +112,11 @@
                                         <div class="card-footer">
                                             <div class="text-right float-end">
 
-                                                <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"
-                                                        data-bs-target="#modal-changesave">
+                                                @*<button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#modal-changesave" id="chagesCheck" onclick="CheckChanges()">
+                                                    変更保存
+                                                </button>*@
+                                                <button type="button" class="btn btn-lg btn-primary"   id="chagesCheck" onclick="CheckChanges()">
                                                     変更保存
                                                 </button>
                                                 <button type="button" class="btn btn-lg btn-default" data-bs-toggle="modal"
@@ -156,8 +159,10 @@
                             </section>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#modal-changeok" id="btn_save">
+                            <button type="button" class="btn btn-lg btn-primary"
+                                    @*data-bs-toggle="modal"
+                                    data-bs-target="#modal-changeok"*@
+                                    id="btn_save">
                                 保存
                             </button><button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
                         </div>
@@ -187,7 +192,7 @@
                             </section>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-lg btn-primary" data-bs-dismiss="modal">破棄</button><button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                            <button type="button" class="btn btn-lg btn-primary" data-bs-dismiss="modal" onclick="discardChanges()">破棄</button><button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
                         </div>
                     </div>
                 </div>
@@ -216,7 +221,7 @@
                             </section>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-lg btn-secondary"   id="close_refresh" data-bs-dismiss="modal">閉じる</button>
+                            <button type="button" class="btn btn-lg btn-secondary"   onclick="SetCache('#close_refresh')"   id="close_refresh" data-bs-dismiss="modal">閉じる</button>
                         </div>
                     </div>
                 </div>
