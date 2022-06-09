@@ -43,66 +43,39 @@
                         <h5 class="mb-0">チャット用メッセージ一覧</h5>
                     </div>
                     <div class="p-5 container">
-                        <div class="row pb-3">
+                        @{int i = 1;}
+                        @foreach (var temp in ViewBag.TempMsg)
+                        {
+                            <div class="row pb-3">
 
-                            <div class="col-md-12">
-                                <p class="pb-3">
-                                    <strong>1. TemplateName</strong>
-                                </p>
-                                <div class="clearfix"></div>
-                                <p class="pb-3">
-                                    Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents
-                                </p>
-                                <p class="float-end">
+                                <div class="col-md-12">
+                                    <p class="pb-3">
+                                        <strong>@temp.SEQ. @temp.MessageTitle</strong>
+                                    </p>
+                                    <div class="clearfix"></div>
+                                    <p class="pb-3">
+                                        @temp.MessageTEXT
+                                    </p>
+                                    <p class="float-end">
 
-                                    <a class="float-right btn text-white btn-primary" data-bs-toggle="modal" data-bs-target="#message-com"> <i class="fa fa-pencil"></i> 編集</a>
-                                    <a class="float-right btn text-white btn-danger" data-bs-toggle="modal"
-                                       data-bs-target="#message-del"><i class="fa fa-times"></i>削除</a>
-                                </p>
+                                        @if(ViewBag.IsSetting == 1)
+                                        { 
+                                        <a class="float-right btn text-white btn-primary" data-bs-toggle="modal" data-bs-target="#message-com"> <i class="fa fa-pencil"></i> 編集</a>
+                                        <a class="float-right btn text-white btn-danger" data-bs-toggle="modal"data-bs-target="#message-del"><i class="fa fa-times"></i>削除</a>
+                                           
+                                        }
+                                        else
+                                        {
+                                        <a class="float-right btn text-white btn-primary" data-bs-toggle="modal"> <i class="fa fa-pencil"></i> 編集</a>
+                                        <a class="float-right btn text-white btn-danger" data-bs-toggle="modal"> <i class="fa fa-times"></i>削除</a>
+                                        }
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <hr class="navbar-divider my-5 opacity-20">
-                        <div class="row pb-3">
-
-                            <div class="col-md-12">
-                                <p class="pb-3">
-                                    <strong>2. TemplateName</strong>
-                                </p>
-                                <div class="clearfix"></div>
-                                <p class="pb-3">
-                                    Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents
-                                </p>
-                                <p class="float-end">
-
-                                    <a class="float-right btn text-white btn-primary" data-bs-toggle="modal" data-bs-target="#message-com" ｖ> <i class="fa fa-pencil"></i> 編集</a>
-                                    <a class="float-right btn text-white btn-danger" data-bs-toggle="modal"
-                                       data-bs-target="#message-del"><i class="fa fa-times"></i>削除</a>
-                                </p>
-                            </div>
-                        </div>
-                        <hr class="navbar-divider my-5 opacity-20">
-                        <div class="row pb-3">
-
-                            <div class="col-md-12">
-                                <p class="pb-3">
-                                    <strong>3. TemplateName</strong>
-                                </p>
-                                <div class="clearfix"></div>
-                                <p class="pb-3">
-                                    Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents Template Contents
-                                </p>
-                                <p class="float-end">
-
-                                    <a class="float-right btn text-white btn-primary" data-bs-toggle="modal" data-bs-target="#message-com"> <i class="fa fa-pencil"></i> 編集</a>
-                                    <a class="float-right btn text-white btn-danger" data-bs-toggle="modal"
-                                       data-bs-target="#message-del"><i class="fa fa-times"></i>削除</a>
-                                </p>
-                            </div>
-                        </div>
-                        <hr class="navbar-divider my-5 opacity-20">
+                            <hr class="navbar-divider my-5 opacity-20">
+                            { i++; }
+                        }
                     </div>
-
-
                 </div>
                 <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-del" tabindex="-1" aria-labelledby="message-delModalLabel"
                      aria-hidden="true">
@@ -146,9 +119,18 @@
                         </div>
                     </div>
                 </div>
+                @if (ViewBag.IsSetting ==1)
+                {
                 <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4" id="cap-fixed-button" data-bs-toggle="modal" data-bs-target="#message-com">
                     <i class="fa fa-plus-circle pe-2"></i>新規チャット用メッセージ入力
                 </button>
+                }
+                else
+                {
+                <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4 d-none" id="cap-fixed-button" data-bs-toggle="modal">
+                    <i class="fa fa-plus-circle pe-2"></i>新規チャット用メッセージ入力
+                </button>
+                }
                 <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-com" tabindex="-1"
                      aria-labelledby="message-com" aria-hidden="true">
                     <div class="modal-dialog modal-xl modal-dialog-centered">
