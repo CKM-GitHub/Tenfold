@@ -115,6 +115,13 @@ namespace Seruichi.RealEstate.Web
                     "~/Scripts/r_staff.js",
                      "~/Content/scripts/sidebar.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/r_temp_mes").Include(
+                    "~/Scripts/r_temp_mes.js"));
+
+           
+            bundles.Add(new ScriptBundle("~/bundles/r_auto_mes").Include(
+                    "~/Scripts/r_auto_mes.js"));
+
         }
     }
 }

@@ -26,8 +26,7 @@
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4" id="cap-fixed-button" data-bs-toggle="modal"
-                    data-bs-target="#message-com">
+            <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4" id="cap-fixed-button">
                 <i class="fa fa-plus-circle pe-2"></i>新規メモ入力
             </button>
             <!-- Modal -->
@@ -43,14 +42,14 @@
                             <div class="border-0  w-100">
                                 <div class="box-footer">
                                     <div class="input-group align-middle">
-                                        <textarea class="form-control custom-control" rows="5"></textarea>
+                                        <textarea id="MemoText" class="form-control custom-control" rows="5" autofocus></textarea>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
-                            <button type="button" class="btn btn-primary">送信</button>
+                            <button type="button" id="btnCancel_Edit" class="btn btn-secondary">戻る</button>
+                            <button type="button" id="btnEdit_MemoText" class="btn btn-primary">送信</button>
                         </div>
                     </div>
                 </div>
@@ -68,8 +67,8 @@
                             重要: 「メモ」を削除すると、メモは完全に削除されます。<br>復元することはできません。
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
-                            <button type="button" id="d_cmd" class="btn btn-primary">確定</button>
+                            <button type="button" id="btnCancel_Delete" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
+                            <button type="button" id="btnDelete_MemoText" class="btn btn-primary">確定</button>
                         </div>
                     </div>
                 </div>
@@ -87,7 +86,7 @@
                             メモを削除しました。「閉じる」ボタンをタップしてください。
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                            <button type="button" id="btnDelete_OK" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
                         </div>
                     </div>
                 </div>

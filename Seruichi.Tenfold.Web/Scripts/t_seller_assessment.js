@@ -383,7 +383,7 @@ function l_logfunction(id) {
                     window.location.href = common.appPath + '/t_reale_purchase/Index?RealECD=' + model.LogId; 
                 }
                 else if (model.LogStatus == "t_seller_assessment_detail") {
-                    //alert("https://www.seruichi.com/t_seller_assessment_detail?AssReqID=" + model.LogId);
+                    alert("https://www.seruichi.com/t_seller_assessment_detail?AssReqID=" + model.LogId);
                 }
             }
             if (result && !result.isOK) {
