@@ -127,7 +127,6 @@ function addEvents() {
         model.lst_AdminModel = Update_list_M_Tenfold();
         
         if (model.TenStaffCD.length > 0 || model.lst_AdminModel.length > 0 || ($('#txt_old_password').val() != $('#txtPassword').val())) {
-            alert($('#txt_old_password').val() + "," + $('#txtPassword').val());
             Check_Insert_OR_Update(model)
         }
     });
