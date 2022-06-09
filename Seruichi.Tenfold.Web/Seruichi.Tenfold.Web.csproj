@@ -223,6 +223,7 @@
     <Content Include="Scripts\t_reale_asmhis.js" />
     <Content Include="Scripts\t_reale_list.js" />
     <Content Include="Scripts\t_reale_purchase.js" />
+    <Content Include="Scripts\t_seller_account.js" />
     <Content Include="Scripts\t_seller_assessment.js" />
     <Content Include="Scripts\t_seller_list.js" />
     <Content Include="Scripts\t_seller_mansion.js" />
