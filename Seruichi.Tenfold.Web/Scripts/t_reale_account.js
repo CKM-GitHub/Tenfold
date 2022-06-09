@@ -121,7 +121,7 @@ var staticCache = {
     Isfake:'1'
 };
 function CheckChanges() {
-    
+
     var currrentState = {
         penaltyFlg: document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? '1' : '0',
         testFlg: document.querySelector("#flexSwitchCheckDefault").checked ? '1' : '0',
@@ -148,31 +148,37 @@ function CheckChanges() {
     }
 }
 function discardChanges() {
-    if (staticCache.testFlg == '1') {
-        $('#flexSwitchCheckDefault').attr("checked", "true");
-        document.querySelector("#flexSwitchCheckDefault").checked = true;
+    
+    common.callAjaxWithLoadingSync(_url.get_t_reale_purchase_DisplayData, staticCache, this, function (result) {
+        if (result && result.isOK) {
 
-    }
-    else {
-        $('#flexSwitchCheckDefault').removeAttr('checked')
-        document.querySelector("#flexSwitchCheckDefault").checked = false;
-    }
-    if (staticCache.penaltyFlg == '1') {
-        $('#flexSwitchCheckDefault_Penalty').attr("checked", "true");
-        document.querySelector("#flexSwitchCheckDefault_Penalty").checked = true;
-    }
-    else {
-        $('#flexSwitchCheckDefault_Penalty').removeAttr('checked')
-        document.querySelector("#flexSwitchCheckDefault_Penalty").checked = false;
+            let data = JSON.parse(result.data.split('Ʈ')[0]);
 
+            if (data[0]['TestFlg'] == '1') {
+                $('#flexSwitchCheckDefault').attr("checked", "true");
+                document.querySelector("#flexSwitchCheckDefault").checked = true;
 
-    }
-    $('#StartDate').val(staticCache.StartDate);
-    $('#EndDate').val(staticCache.EndDate);
-    $('#penaltyArea').val(staticCache.Memo);
-
-    document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? $('.disabled-account').removeAttr("disabled") : $('.disabled-account').attr("disabled", "true")
-
+            }
+            else {
+                $('#flexSwitchCheckDefault').removeAttr('checked')
+                document.querySelector("#flexSwitchCheckDefault").checked = false;
+            }
+            if (data[0]['PenaltyFlg'] == '1') {
+                $('#flexSwitchCheckDefault_Penalty').attr("checked", "true");
+                document.querySelector("#flexSwitchCheckDefault_Penalty").checked = true;
+            }
+            else {
+                $('#flexSwitchCheckDefault_Penalty').removeAttr('checked')
+                document.querySelector("#flexSwitchCheckDefault_Penalty").checked = false;
+            }
+            $('#StartDate').val(data[0]['PenaltyStartDate']);
+            $('#EndDate').val(data[0]['PenaltyEndDate']);
+            $('#penaltyArea').val(data[0]['PenaltyMemo']);
+            
+            document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? $('.disabled-account').removeAttr("disabled") : $('.disabled-account').attr("disabled", "true")
+            $('.cap-errormsg-right').addClass("d-none")
+        }
+    })
 }
 
 function SetCache(id) {
