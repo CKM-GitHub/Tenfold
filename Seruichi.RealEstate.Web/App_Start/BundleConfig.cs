@@ -120,7 +120,6 @@ namespace Seruichi.RealEstate.Web
 
            
             bundles.Add(new ScriptBundle("~/bundles/r_auto_mes").Include(
-                    "~/Content/bootstrap/bootstrap.min.js",
                     "~/Scripts/r_auto_mes.js"));
 
         }
