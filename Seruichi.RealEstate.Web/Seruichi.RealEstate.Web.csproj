@@ -141,6 +141,7 @@
     <Compile Include="Controllers\r_asmc_address.cs" />
     <Compile Include="Controllers\r_asmc_ms_list_shController.cs" />
     <Compile Include="Controllers\r_asmc_ms_reged_listController.cs" />
+    <Compile Include="Controllers\r_auto_mesController.cs" />
     <Compile Include="Controllers\r_com_profileController.cs" />
     <Compile Include="Controllers\r_contactController.cs" />
     <Compile Include="Controllers\r_dashboardController.cs" />
@@ -210,6 +211,7 @@
     <Content Include="Scripts\r_asmc_address.js" />
     <Content Include="Scripts\r_asmc_ms_list_sh.js" />
     <Content Include="Scripts\r_asmc_ms_reged_list.js" />
+    <Content Include="Scripts\r_auto_mes.js" />
     <Content Include="Scripts\r_common_popup.js" />
     <Content Include="Scripts\r_com_profile.js" />
     <Content Include="Scripts\r_contact.js" />
@@ -265,6 +267,7 @@
     <Content Include="Views\r_staff\Index.cshtml" />
     <Content Include="Views\Shared\_ErrorPopup.cshtml" />
     <Content Include="Views\r_temp_mes\Index.cshtml" />
+    <Content Include="Views\r_auto_mes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

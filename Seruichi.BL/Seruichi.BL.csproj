@@ -49,6 +49,7 @@
     <Compile Include="RealEstate\r_asmc_ms_list_sh\r_asmc_ms_list_shBL.cs" />
     <Compile Include="RealEstate\r_asmc_ms_reged_list\r_asmc_ms_reged_listBL.cs" />
     <Compile Include="RealEstate\r_asmc_railway\r_asmc_railwayBL.cs" />
+    <Compile Include="RealEstate\r_auto_mes\r_auto_mesBL.cs" />
     <Compile Include="RealEstate\r_com_profile\r_com_profileBL.cs" />
     <Compile Include="RealEstate\r_contact\r_contactBL.cs" />
     <Compile Include="RealEstate\r_dashboard\r_dashboardBL.cs" />
