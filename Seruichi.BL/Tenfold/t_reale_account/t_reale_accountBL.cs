@@ -25,8 +25,8 @@ namespace Seruichi.BL.Tenfold.t_reale_account
 
 
 
-            validator.CheckRequired("penaltyArea", model.Memo);
-            validator.CheckByteCount("penaltyArea", model.Memo, 500);
+            validator.CheckRequired("#penaltyArea", model.Memo);
+            validator.CheckByteCount("#penaltyArea", model.Memo, 500);
 
             return validator.GetValidationResult(); 
         }
@@ -77,14 +77,17 @@ namespace Seruichi.BL.Tenfold.t_reale_account
                 new SqlParameter("@TFlg", SqlDbType.TinyInt){ Value = model.testFlg.ToByte(0) },
                 new SqlParameter("@StartDate", SqlDbType.Date){ Value = model.StartDate.ToStringOrNull() },
                 new SqlParameter("@EndDate", SqlDbType.Date){ Value = model.EndDate.ToStringOrNull() },
-                new SqlParameter("@Memo", SqlDbType.VarChar){ Value = model.Memo.ToStringOrNull() },
+                new SqlParameter("@Memo", SqlDbType.NVarChar){ Value = model.Memo.ToStringOrNull() },
                 new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull() },
                 new SqlParameter("@TenStaffCD", SqlDbType.VarChar){ Value = model.TenStaffCD.ToStringOrNull() },
-                new SqlParameter("@IP", SqlDbType.VarChar){ Value = model.IPAddress.ToStringOrNull() } 
+                new SqlParameter("@IP", SqlDbType.VarChar){ Value = model.IPAddress.ToStringOrNull() } ,
+                new SqlParameter("@Isfake", SqlDbType.TinyInt){ Value = model.Isfake.ToByte(0) } 
         };
 
             DBAccess db = new DBAccess();
             db.InsertUpdateDeleteData("pr_t_reale_account_InsertUpdateData", false, sqlParams);
         }
+
+
     }
 }
