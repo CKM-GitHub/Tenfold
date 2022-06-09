@@ -52,5 +52,22 @@ namespace Seruichi.Tenfold.Web.Controllers
             var json = DataTableToJSON(dt.Tables[0]) + "Ʈ" + DataTableToJSON(dt.Tables[1]);
             return OKResult(json);
         }
+        [HttpPost]
+
+        public ActionResult get_t_reale_account_ManipulateData(t_reale_accountModel model)
+        {
+            t_reale_accountBL bl = new t_reale_accountBL();
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+           
+            model.TenStaffCD = base.GetOperator();  
+            model.IPAddress = base.GetClientIP();
+            bl.get_t_reale_account_ManipulateData(model); 
+            return OKResult();
+        }
+        //
     }
 }

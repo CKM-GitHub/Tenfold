@@ -5,7 +5,7 @@ $(function () {
     _url.get_t_reale_CompanyCountingInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyCountingInfo';
     _url.get_t_reale_purchase_DisplayData = common.appPath + '/t_reale_account/get_t_reale_account_DisplayData'; 
 
-    _url.get_t_reale_purchase_CSVData = common.appPath + '/t_reale_account/get_t_reale_account_DisplayData';
+    _url.get_t_reale_accountSave = common.appPath + '/t_reale_account/get_t_reale_account_ManipulateData';
     _url.Insert_L_Log = common.appPath + '/t_reale_purchase/Insert_L_Log';
     _url.get_Modal_HomeData = common.appPath + '/t_reale_purchase/get_Modal_HomeData';
     _url.get_Modal_ProfileData = common.appPath + '/t_reale_purchase/get_Modal_ProfileData';
@@ -18,10 +18,7 @@ $(function () {
     $('#t_reale_account').addClass('font-bold text-underline');
 });
 
-function setValidation() {
-    //$('.form-areamansion')
-    //    .addvalidation_errorElement("#CheckBoxError")
-    //    .addvalidation_checkboxlenght(); //E112
+function setValidation() { 
 
     $('#StartDate')
         .addvalidation_errorElement("#errorStartDate")
@@ -53,7 +50,6 @@ function addEvents() {
         }
 
     });
-    document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? $('.disabled-account').removeAttr("disabled") : $('.disabled-account').attr("disabled", "true")
     $('#StartDate, #EndDate').on('change', function () {
         const $this = $(this), $start = $('#StartDate').val(), $end = $('#EndDate').val();
         if (!common.checkValidityInput($this)) { 
@@ -76,6 +72,32 @@ function addEvents() {
         $('#subMenu li').children('a').removeClass("active");
         $(this).addClass('active');
     });
+
+    $('#btn_save').on('click', function () {
+        let model = {
+            penaltyFlg: document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? '1' : '0',
+            testFlg: document.querySelector("#flexSwitchCheckDefault").checked ? '1' : '0',
+            StartDate: $('#StartDate').val(),
+            EndDate: $('#EndDate').val(),
+            Memo: $('#penaltyArea').val(),
+            RealECD: common.getUrlParameter('reale')
+        }
+        $('#modal-changesave').modal('hide');
+        common.callAjaxWithLoadingSync(_url.get_t_reale_accountSave, model, this, function (result) {
+            if (result && result.isOK) {
+                $('#modal-changeok').modal('show');
+            }
+            else {
+                const errors = result.data;
+                for (key in errors) {
+                    const target = document.getElementById(key);
+                    $(target).showError(errors[key]);
+                    this.getInvalidItems().get(0).focus();
+                }
+            }
+        })
+    });
+
     let model = {
         RealECD: common.getUrlParameter('reale') 
     };
@@ -88,12 +110,14 @@ function addEvents() {
 
     get_purchase_Data(model, this, 'page_load');
 
+    document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? $('.disabled-account').removeAttr("disabled") : $('.disabled-account').attr("disabled", "true")
+
    // sortTable.getSortingTable("tblPurchaseDetails"); 
      
 }
 
-function get_purchase_Data(model, $form, state) { 
-    common.callAjaxWithLoading(_url.get_t_reale_purchase_DisplayData, model, this, function (result) {
+function get_purchase_Data(model, $form, state) {
+    common.callAjaxWithLoadingSync(_url.get_t_reale_purchase_DisplayData, model, this, function (result) {
         if (result && result.isOK) {
             BindPenalty(result.data.split('Ʈ')[0]);
             Bind_DisplayData(result.data.split('Ʈ')[1]);
@@ -141,8 +165,12 @@ function Bind_DisplayData(result) {
 }
 function BindPenalty(result) {
     let data = JSON.parse(result);
-    $('#flexSwitchCheckDefault').checked = data[0]['TestFlg'];
-    $('#flexSwitchCheckDefault_Penalty').checked = data[0]['PenaltyFlg'];
+    if (data[0]['TestFlg'] == '1') {
+        $('#flexSwitchCheckDefault').attr("checked", "true");
+    }
+    if (data[0]['PenaltyFlg'] == '1') {
+        $('#flexSwitchCheckDefault_Penalty').attr("checked", "true");
+    } 
     $('#StartDate').val(data[0]['PenaltyStartDate']);
     $('#EndDate').val(data[0]['PenaltyEndDate']);
     $('#penaltyArea').val(data[0]['PenaltyMemo']);

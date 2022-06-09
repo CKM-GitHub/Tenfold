@@ -81,7 +81,7 @@
                                                         <label class="form-label" for="form3Examplev4">メモ</label>
                                                         <span class="cap-errormsg-right" id="errorpenalty"></span>
 
-                                                        <textarea class="form-control custom-control disabled-account" id="penaltyArea" name="penaltyArea" rows="3"></textarea>
+                                                        <textarea class="form-control custom-control disabled-account" add-validation-maxlengthcheck="true" data-digits="500" id="penaltyArea" name="penaltyArea" rows="3"></textarea>
                                                     </div> 
 
                                                 </div>
@@ -157,7 +157,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#modal-changeok">
+                                    data-bs-target="#modal-changeok" id="btn_save">
                                 保存
                             </button><button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
                         </div>
@@ -216,7 +216,7 @@
                             </section>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                            <button type="button" class="btn btn-lg btn-secondary"   id="close_refresh" data-bs-dismiss="modal">閉じる</button>
                         </div>
                     </div>
                 </div>

@@ -10,7 +10,7 @@ namespace Seruichi.BL.Tenfold.t_reale_account
 {
    public class t_reale_accountBL
     {
-        public Dictionary<string, string> ValidateAll(t_reale_accountModel model, List<string> lst_checkBox)
+        public Dictionary<string, string> ValidateAll(t_reale_accountModel model)
         {
             ValidatorAllItems validator = new ValidatorAllItems();
 
@@ -25,8 +25,8 @@ namespace Seruichi.BL.Tenfold.t_reale_account
 
 
 
-            validator.CheckRequired("penaltyArea", model.Ispenalty);
-            validator.CheckByteCount("penaltyArea", model.Ispenalty, 500);
+            validator.CheckRequired("penaltyArea", model.Memo);
+            validator.CheckByteCount("penaltyArea", model.Memo, 500);
 
             return validator.GetValidationResult(); 
         }
@@ -56,7 +56,7 @@ namespace Seruichi.BL.Tenfold.t_reale_account
 
             return dt;
         }
-        //get_t_reale_account_DisplayData
+         
         public DataSet get_t_reale_account_DisplayData(t_reale_accountModel model)
         {
             var sqlParams = new SqlParameter[]
@@ -68,6 +68,23 @@ namespace Seruichi.BL.Tenfold.t_reale_account
             var dt = db.SelectDataSet("pr_t_reale_account_DisplayData", sqlParams);
 
             return dt;
+        }
+        public void get_t_reale_account_ManipulateData(t_reale_accountModel model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@PFlg", SqlDbType.TinyInt){ Value = model.penaltyFlg.ToByte(0) },
+                new SqlParameter("@TFlg", SqlDbType.TinyInt){ Value = model.testFlg.ToByte(0) },
+                new SqlParameter("@StartDate", SqlDbType.Date){ Value = model.StartDate.ToStringOrNull() },
+                new SqlParameter("@EndDate", SqlDbType.Date){ Value = model.EndDate.ToStringOrNull() },
+                new SqlParameter("@Memo", SqlDbType.VarChar){ Value = model.Memo.ToStringOrNull() },
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull() },
+                new SqlParameter("@TenStaffCD", SqlDbType.VarChar){ Value = model.TenStaffCD.ToStringOrNull() },
+                new SqlParameter("@IP", SqlDbType.VarChar){ Value = model.IPAddress.ToStringOrNull() } 
+        };
+
+            DBAccess db = new DBAccess();
+            db.InsertUpdateDeleteData("pr_t_reale_account_InsertUpdateData", false, sqlParams);
         }
     }
 }

@@ -29,6 +29,12 @@ namespace Models.Tenfold.t_reale_account
         public byte Chk_Top5Out { get; set; }
         public byte Chk_NonMemberSeller { get; set; }
         public string Ispenalty { get; set; }
+        public byte penaltyFlg { get; set; }
+        public byte testFlg { get; set; }
+        public string Memo { get; set; }
+        public string TenStaffCD { get; set; }
+        public string IPAddress { get; set; }
+
 
     }
 
