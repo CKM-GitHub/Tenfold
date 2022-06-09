@@ -11,6 +11,7 @@ namespace Models.Tenfold.t_seller_memo
         public string SellerCD { get; set; }
         public string SellerMemoSEQ { get; set; }
         public string ParentSEQ { get; set; }
+        public string ParentChildKBN { get; set; }
         public string MemoText { get; set; }
         public string Type { get; set; }
         public byte LoginKBN { get; set; }
