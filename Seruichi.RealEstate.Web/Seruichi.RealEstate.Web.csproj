@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -124,9 +127,6 @@
     <Reference Include="System.Web.Http.WebHost">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -148,6 +148,7 @@
     <Compile Include="Controllers\r_issueslistController.cs" />
     <Compile Include="Controllers\r_loginController.cs" />
     <Compile Include="Controllers\r_staffController.cs" />
+    <Compile Include="Controllers\r_temp_mesController.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
     <Compile Include="Filters\BrowsingHistoryAttribute.cs" />
     <Compile Include="Filters\CustomHandleErrorAttribute.cs" />
@@ -210,6 +211,7 @@
     <Content Include="Scripts\r_asmc_address.js" />
     <Content Include="Scripts\r_asmc_ms_list_sh.js" />
     <Content Include="Scripts\r_asmc_ms_reged_list.js" />
+    <Content Include="Scripts\r_common_popup.js" />
     <Content Include="Scripts\r_com_profile.js" />
     <Content Include="Scripts\r_contact.js" />
     <Content Include="Scripts\r_dashboard.js" />
@@ -217,6 +219,7 @@
     <Content Include="Scripts\r_issueslist.js" />
     <Content Include="Scripts\r_login.js" />
     <Content Include="Scripts\r_staff.js" />
+    <Content Include="Scripts\r_temp_mes.js" />
     <Content Include="Views\Error\BadRequest.cshtml" />
     <Content Include="Views\Error\BusinessError.cshtml" />
     <Content Include="Views\Error\Forbidden.cshtml" />
@@ -262,6 +265,7 @@
     <Content Include="Views\r_asmc_railway\Index.cshtml" />
     <Content Include="Views\r_staff\Index.cshtml" />
     <Content Include="Views\Shared\_ErrorPopup.cshtml" />
+    <Content Include="Views\r_temp_mes\Index.cshtml" />
     <Content Include="Views\r_asmc_set_train_check_tab\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

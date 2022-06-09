@@ -9,7 +9,8 @@ $(function () {
     $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
     $('#t_mansion_list').addClass('font-bold text-underline');
 
-    _url.checkZipCode = common.appPath + '/t_mansion_new/CheckZipCode';
+    _url.getBuildingAge = common.appPath + commonApiUrl.getBuildingAge;
+    _url.checkZipCode = common.appPath + '/t_mansion/CheckZipCode';
     _url.getCityDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfCity;
     _url.getTownDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfTown;
     _url.getLineDropDownList = common.appPath + commonApiUrl.getDropDownListItemsOfLine;
@@ -31,6 +32,7 @@ $(function () {
 function Bind_Update_Data() {    
     setlineStationDistanceByMansionCD($("#MansionCD").val(), $('#PrefCD').val());
     setMansionWordByMansionCD($('#MansionCD').val());
+    setBuildingAge($("#ConstYYYYMM").val());
 }
 
 function setValidation() {
@@ -129,12 +131,13 @@ function setValidation() {
 
 function addEvents() {
 
-
     $('.container-fluid .card-body').keypress(function (event) {
         if (event.keyCode == 13) {
             event.preventDefault();
         }
     });
+
+    $(function () { $("#form1").submit(function () { return false; }); });
 
     common.bindValidationEvent('#form1', ':not(#ZipCode1,#ZipCode2)');
 
@@ -214,7 +217,7 @@ function addEvents() {
     });
 
     //町域、住所
-    $('#TownCD, #Address').on('change', function () {
+    $('#TownCD, #Address').on('change', function () {       
         displayNearestStationData();
     });
 
@@ -256,6 +259,7 @@ function addEvents() {
         var newValue = parseInt(suffix) + 1;
         $('#Dline_' + newValue).removeClass("bg-secondary");
         $('#Dline_' + newValue).find("*").prop("disabled", false);
+        setLineList('add', $('#PrefCD').val(), '#LineCD_' + newValue);
     });
 
     $('#btnConfirmation').click(function () {
@@ -303,7 +307,7 @@ function addEvents() {
                 //sucess
                 $('#modal_1').modal('hide');
                 $('#modal_2').modal('show');
-                window.location.href = common.appPath + "/t_mansion_list/index";
+                //window.location.href = common.appPath + "/t_mansion_list/index";
             }
             if (result && result.data) {
                 //error
@@ -314,6 +318,9 @@ function addEvents() {
         });
     });
 
+    $('#btnSuccessPopup').click(function () {
+        window.location.href = common.appPath + "/t_mansion_list/index";
+    });
 }
 
 function ErrorLineStationDistance() {
@@ -325,7 +332,7 @@ function ErrorLineStationDistance() {
         .addvalidation_reqired();
     $('#Distance_1')
         .addvalidation_errorElement("#errorDistanceCD1")
-        .addvalidation_reqired();
+        //.addvalidation_reqired();
     $('#LineCD_2')
         .addvalidation_errorElement("#errorLineCD2")
     //.addvalidation_reqired();
@@ -617,6 +624,23 @@ function setMansionWordByMansionCD(MansionCD) {
         });
 }
 
+function setBuildingAge(age) {
+    const $this = $("#ConstYYYYMM");
+    common.callAjax(_url.getBuildingAge, age, function (result) {
+        if (result && result.isOK) {
+            if (result.data) {
+                $('#BuildingAge').text('（築' + result.data + '年）').data('building-age', result.data);
+                if (result.data == 0)
+                    $this.showError(common.getMessage('E208'));
+                else
+                    $this.hideError();
+            }
+            else
+                $('#BuildingAge').text('（築　年）')
+        }
+    })
+}
+
 function removeLineAndStation() {
     $('.js-stationContainer').children().remove();
     for (let i = 0; i < 20; i++) {
@@ -641,8 +665,8 @@ function removeLineAndStation() {
 
 function displayNearestStationData() {
     
-    if ($('#MansionCD').val()) return;
-
+    //if ($('#MansionCD').val()) return;
+    
     const model = {
         PrefName: $('#PrefCD option:selected').text(),
         CityName: $('#CityCD option:selected').text(),
@@ -662,7 +686,7 @@ function displayNearestStationData() {
                     if (result.data) {
                         const dataArray = JSON.parse(result.data);
                         const length = dataArray.length;
-
+                        
                         if (length > 0) {
                             let data = dataArray[0];
                             for (let i = 0; i < length; i++) {
@@ -677,6 +701,8 @@ function displayNearestStationData() {
                                     station.find('.js-distance').attr('id', 'Distance_' + index);
                                     $('.js-stationContainer').append(station);
                                 }
+
+                                setLineList('add', $('#PrefCD').val(), '#LineCD_' + index, data.LineCD);
 
                                 if (data.LineCD) {
                                     $('#LineCD_' + index).val(data.LineCD);
@@ -815,6 +841,7 @@ function setScreenComfirm(data) {
     $('#confirm_StructuralKBN').val($('input[name="StructuralKBN"]:radio:checked').next().text());
 
     $('#confirm_ConstYYYYMM').val($('#ConstYYYYMM').val());
+    $('#confirm_BuildingAge').text($('#BuildingAge').text());
     $('#confirm_RightKBN').val($('input[name="RightKBN"]:radio:checked').next().text());
 
     $('#confirm_Noti').text($('#Noti').text());

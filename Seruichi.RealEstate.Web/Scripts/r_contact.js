@@ -64,6 +64,7 @@ function addEvents() {
 
         Bind_Modal(model);  
     });
+
     $('#btn-modal-check').click(function () {
 
         const fd = new FormData(document.forms.form1);
@@ -78,14 +79,31 @@ function addEvents() {
                 $('#modal-2').modal('show');
             }
             if (result && result.data) {
-                //error
-                common.setValidationErrors(result.data);
-                common.setFocusFirstError($form);
+                if (result.data.ContactAddress) {
+                    Bind_site_error_modal('site-error-modal', result.data);
+                }
+                $('#r_contact_close_site_error_modal').click(function () {
+                    $('#site-error-modal').modal('hide');
+                    //error
+                    common.setValidationErrors(result.data);
+                    common.setFocusFirstError($form);
+                })
             }
         });
     });
     $('#btn-modal-2').on('click', function () {
         window.location.href = common.appPath + '/r_dashboard/Index';
+    });
+
+    $('#btnAllClear').on('click', function () {
+        $('#ContactName').val('');
+        $('#ContactKana').val('');
+        $('#ContactAddress').val('');
+        $('#ContactPhone').val('');
+        $('#ContactTypeCD').val('');
+        $('#ContactAssID').val('');
+        $('#ContactSubject').val('');
+        $('#ContactIssue').val('');
     });
 }
 

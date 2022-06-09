@@ -10,6 +10,7 @@
 
 
 <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
+    <span id="loginID" class="d-none">@ViewBag.LoginID</span>
     <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
         <main class="py-6 bg-surface-secondary">
             <div class="container-fluid">
@@ -19,182 +20,13 @@
                     <div class="card-header d-md-inline-flex">
                         <h5 class="mb-0">メモ</h5>
                     </div>
-                    <div class="p-md-5 container">
-                        <div class="row pb-3">
-                            <div class="col-md-12">
-                                <div class="d-md-flex">
-                                    <strong>StaffName</strong>
-                                    <p class="ps-md-5 text-secondary text-start">2022/03/20 10:20:30</p>
-                                </div>
-                                <div class="clearfix"></div>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
-                                    massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
-                                    quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                                    Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
-                                    imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.
-                                    Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
-                                    porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis,
-                                    feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean
-                                    imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam
-                                    rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet
-                                    adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.
-                                    Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam
-                                    quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet
-                                    nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus
-                                    nunc,
-                                </p>
-                                <p>
-                                    <button class="float-right btn btn-outline-primary ml-2" data-bs-toggle="modal" type="button"
-                                            data-bs-target="#message-com">
-                                        <i class="fa fa-reply"></i> コメント
-                                    </button>
-                                    <button class="float-right btn text-white btn-danger" data-bs-toggle="modal" type="button" disabled
-                                            data-bs-target="#message-del">
-                                        <i class="fa fa-times"></i> 削除
-                                    </button>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="card card-inner bg-gray-50 ms-md-24">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="d-md-flex">
-                                            <strong>StaffName</strong>
-                                            <p class="ps-md-5 text-secondary text-start">2022/03/20 10:20:30</p>
-                                        </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                                            Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                                            mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
-                                            quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,
-                                            rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
-                                            Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend
-                                            tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante,
-                                            dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.
-                                            Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
-                                            ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus,
-                                            sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel,
-                                            luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae
-                                            sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus
-                                            tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed
-                                            consequat, leo eget bibendum sodales, augue velit cursus nunc,
-                                        </p>
-                                        <p>
-                                            <button class="float-right btn text-white btn-danger" data-bs-toggle="modal" type="button"
-                                                    data-bs-target="#message-del">
-                                                <i class="fa fa-times"></i> 削除
-                                            </button>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-md-5 container">
-                        <div class="row pb-3">
-                            <div class="col-md-12">
-                                <div class="d-md-flex">
-                                    <strong>StaffName</strong>
-                                    <p class="ps-md-5 text-secondary text-start">2022/03/20 10:20:30</p>
-                                </div>
-                                <div class="clearfix"></div>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean
-                                    massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec
-                                    quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                                    Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
-                                    imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.
-                                    Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
-                                    porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis,
-                                    feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean
-                                    imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam
-                                    rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet
-                                    adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.
-                                    Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam
-                                    quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet
-                                    nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus
-                                    nunc,
-                                </p>
-                                <p>
-                                    <button class="float-right btn btn-outline-primary ml-2" data-bs-toggle="modal" type="button"
-                                            data-bs-target="#message-com">
-                                        <i class="fa fa-reply"></i> コメント
-                                    </button>
-                                    <button class="float-right btn text-white btn-danger" data-bs-toggle="modal" type="button" disabled
-                                            data-bs-target="#message-del">
-                                        <i class="fa fa-times"></i> 削除
-                                    </button>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="card card-inner bg-gray-50 ms-md-24">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="d-md-flex">
-                                            <strong>StaffName</strong>
-                                            <p class="ps-md-5 text-secondary text-start">2022/03/20 10:20:30</p>
-                                        </div>
-                                        <p>
-                                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                            laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
-                                            beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-                                            odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-                                            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-                                            sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                                            voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit
-                                            laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui
-                                            in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat
-                                            quo voluptas nulla pariatur? At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                                            blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas
-                                        </p>
-                                        <p>
-                                            <button class="float-right btn text-white btn-danger" data-bs-toggle="modal" type="button"
-                                                    data-bs-target="#message-del">
-                                                <i class="fa fa-times"></i> 削除
-                                            </button>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr class="navbar-divider my-5 opacity-20">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="d-md-flex">
-                                            <strong>StaffName</strong>
-                                            <p class="ps-md-5 text-secondary text-start">2022/03/20 10:20:30</p>
-                                        </div>
-                                        <p>
-                                            A wonderful serenity has taken possession of my entire soul, like these sweet mornings of
-                                            spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this
-                                            spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so
-                                            absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should
-                                            be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a
-                                            greater artist than now. When, while the lovely valley teems with vapour around me, and the
-                                            meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few
-                                            stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the
-                                            trickling stream
-                                        </p>
-                                        <p>
-                                            <button class="float-right btn text-white btn-danger" data-bs-toggle="modal" type="button"
-                                                    data-bs-target="#message-del">
-                                                <i class="fa fa-times"></i> 削除
-                                            </button>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
+                    <div id="display_area">
 
+                    </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4" id="cap-fixed-button" data-bs-toggle="modal"
-                    data-bs-target="#message-com">
+            <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4" id="cap-fixed-button" data-bs-toggle="modal" data-bs-target="#message-com">
                 <i class="fa fa-plus-circle pe-2"></i>新規メモ入力
             </button>
             <!-- Modal -->
@@ -210,19 +42,14 @@
                             <div class="border-0  w-100">
                                 <div class="box-footer">
                                     <div class="input-group align-middle">
-                                        <textarea class="form-control custom-control" rows="5"></textarea>
-
+                                        <textarea id="MemoText" class="form-control custom-control" rows="5" autofocus></textarea>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                                    data-bs-target="#menu-modal">
-                                戻る
-                            </button>
-                            <button type="button" class="btn btn-primary">送信</button>
-
+                            <button type="button" id="btnCancel_Edit" class="btn btn-secondary">戻る</button>
+                            <button type="button" id="btnEdit_MemoText" class="btn btn-primary">送信</button>
                         </div>
                     </div>
                 </div>
@@ -240,19 +67,13 @@
                             重要: 「メモ」を削除すると、メモは完全に削除されます。<br>復元することはできません。
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                                    data-bs-target="#menu-modal">
-                                戻る
-                            </button>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#message-delok">
-                                確定
-                            </button>
-
+                            <button type="button" id="btnCancel_Delete" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
+                            <button type="button" id="btnDelete_MemoText" class="btn btn-primary">確定</button>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-delok" tabindex="-1"
                  aria-labelledby="message-delModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">

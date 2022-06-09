@@ -11,9 +11,8 @@ $(function () {
 function setValidation() {
     $('#MansionName')
         .addvalidation_errorElement("#errorMansionName")
-        .addvalidation_maxlengthCheck(25)//E105
-        .addvalidation_doublebyte();
-
+        .addvalidation_singlebyte_doublebyte(); //E105
+        
     $('#StartYear')
         .addvalidation_errorElement("#errorYear")
         .addvalidation_maxlengthCheck(2)//E105
@@ -55,6 +54,7 @@ function setValidation() {
 }
 
 function addEvents() {
+    common.bindValidationEvent('#form1', '');
     $('#StartYear, #EndYear').on('change', function () {
         const $this = $(this), $start = $('#StartYear').val(), $end = $('#EndYear').val()
 
@@ -143,9 +143,8 @@ function addEvents() {
         $('.node-item:checkbox:checked').each(function () {
             CityCD += $(this).val() + ',';
         });
-        $('.form-check-input:radio:checked').each(function () {
-            rdoPriority = $(this).val();
-        });
+
+        rdoPriority = $('input[name=Priority]:checked', '#form1').val();
 
         let model = {
             MansionName: $MansionName,
@@ -159,10 +158,10 @@ function addEvents() {
             EndRooms: $('#EndRooms').val(),
             Unregistered: $('#UnregisteredMansion').is(':checked') ? 1 : 0,
             Priority: $('#chkPriority').is(':checked') ? 1 : 0,
-            Radio_Rating: rdoPriority
+            Radio_Priority: rdoPriority
         };
 
-        if (model.MansionName == "" && model.CityGPCD == "" && model.CityCD == "" && model.StartYear == "" && model.EndYear == "" && model.Radio_Rating == 0) {
+        if (model.MansionName == "" && model.CityGPCD == "" && model.CityCD == "" && model.StartYear == "" && model.EndYear == "" && model.Unregistered == 0 && model.Priority == 0 && model.Radio_Priority == 0) {
             $('#btnDisplay').showError(common.getMessage('E303'));
             $('#MansionName').focus();
         }
@@ -263,9 +262,9 @@ function Bind_Data(data) {
             txt_class = 'text-danger';
 
         if (data[i]["公開状況"] == '(未公開)')
-            validFLG_class = 'text-success';
-        else if (data[i]["公開状況"] == '(公開済)')
             validFLG_class = 'text-danger';
+        else if (data[i]["公開状況"] == '(公開済)')
+            validFLG_class = 'cap-text-primary';
 
         div_Display += '\
             <div class="col" >\
