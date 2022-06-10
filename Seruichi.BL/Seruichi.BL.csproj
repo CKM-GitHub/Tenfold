@@ -79,6 +79,7 @@
     <Compile Include="Tenfold\t_reale_account\t_reale_accountBL.cs" />
     <Compile Include="Tenfold\t_reale_asmhis\t_reale_asmhisBL.cs" />
     <Compile Include="Tenfold\t_reale_list\t_reale_listBL.cs" />
+    <Compile Include="Tenfold\t_reale_memo\t_reale_memoBL.cs" />
     <Compile Include="Tenfold\t_reale_purchase\t_reale_purchaseBL.cs" />
     <Compile Include="Tenfold\t_seller_account\t_seller_accountBL.cs" />
     <Compile Include="Tenfold\t_seller_assessment\t_seller_assessmentBL.cs" />
