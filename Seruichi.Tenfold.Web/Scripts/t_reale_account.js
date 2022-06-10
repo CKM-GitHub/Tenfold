@@ -75,6 +75,8 @@ function addEvents() {
     });
 
     $('#btn_save').on('click', function () {
+     
+
         SetCache(); 
         $('#modal-changesave').modal('hide');
         common.callAjaxWithLoadingSync(_url.get_t_reale_accountSave, staticCache, this, function (result) {
@@ -121,7 +123,12 @@ var staticCache = {
     Isfake:'1'
 };
 function CheckChanges() {
-
+    $form = $('#form1').hideChildErrors();
+    if (!common.checkValidityOnSave('#form1')) {
+        $form.getInvalidItems().get(0).focus();
+        return false;
+    }
+    //debugger
     var currrentState = {
         penaltyFlg: document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? '1' : '0',
         testFlg: document.querySelector("#flexSwitchCheckDefault").checked ? '1' : '0',
