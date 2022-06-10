@@ -13,8 +13,13 @@ namespace Seruichi.Tenfold.Web.Controllers
     public class t_reale_purchaseController : BaseController
     {
         // GET: t_reale_purchase
-        public ActionResult Index()
+        public ActionResult Index(string RealECD)
         {
+            if (string.IsNullOrEmpty(RealECD))
+            {
+                return RedirectToAction("BadRequest", "Error");
+            }
+
             ViewBag.Url = System.Web.HttpContext.Current.Request.UrlReferrer;
             return View();
         }
