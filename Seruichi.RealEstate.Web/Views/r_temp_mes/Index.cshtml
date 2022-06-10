@@ -6,6 +6,14 @@
 }
 @section styles{
     @Styles.Render("~/Content/realEstate_css_common")
+
+    <style type="text/css">
+        a.disabled {
+            pointer-events: none;
+            cursor: default;
+            opacity: 0.7;
+        }
+    </style>
 }
 
 <form id="form1">
@@ -61,14 +69,14 @@
 
                                             @if (ViewBag.IsSetting == 1)
                                             {
-                                                <a class="float-right btn text-white btn-primary" data-bs-toggle="modal" data-bs-target="#message-com" id="@temp.MessageSEQ" onclick="Get_MsgSEQ(this.id)"> <i class="fa fa-pencil"></i>編集</a>
-                                                <a class="float-right btn text-white btn-danger" data-bs-toggle="modal" data-bs-target="#message-del" id="@temp.MessageSEQ" onclick="Get_MsgSEQ(this.id)"><i class="fa fa-times"></i>削除</a>
+                                                <a class="float-right btn text-white btn-primary" data-bs-toggle="modal" data-bs-target="#message-com" id="@temp.MessageSEQ&@temp.MessageTitle&@temp.MessageTEXT" onclick="Get_MsgSEQ(this.id)"> <i class="fa fa-pencil"></i>編集</a>
+                                                <a class="float-right btn text-white btn-danger" data-bs-toggle="modal" data-bs-target="#message-del" id="@temp.MessageSEQ&@temp.MessageTitle&@temp.MessageTEXT" onclick="Get_MsgSEQ(this.id)"><i class="fa fa-times"></i>削除</a>
 
                                             }
                                             else
                                             {
-                                                <a class="float-right btn text-white btn-primary" data-bs-toggle="modal"> <i class="fa fa-pencil"></i> 編集</a>
-                                                <a class="float-right btn text-white btn-danger" data-bs-toggle="modal"> <i class="fa fa-times"></i>削除</a>
+                                                <a class="float-right btn text-white btn-primary disabled" data-bs-toggle="modal" onclick="return false;"> <i class="fa fa-pencil"></i> 編集</a>
+                                                <a class="float-right btn text-white btn-danger disabled" data-bs-toggle="modal"> <i class="fa fa-times"></i>削除</a>
                                             }
                                         </p>
                                     </div>
@@ -169,7 +177,7 @@
                         </div>
                     </div>
 
-                    @*<div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-com-ins" tabindex="-1"
+                    <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-com-ins" tabindex="-1"
                          aria-labelledby="message-com-ins" aria-hidden="true">
                         <div class="modal-dialog modal-xl modal-dialog-centered">
                             <div class="modal-content">
@@ -181,13 +189,13 @@
                                     <div class="py-5">
                                         <div class="box-footer container">
                                             <div>
-                                                <label class="form-label" for="txtMsgTitle">チャット用メッセージ保存名</label><span class="cap-errormsg-right" id="error_txtMsgTitle"></span>
-                                                <input type="text" id="txtMsgTitle" class="form-control form-control-lg mb-3" maxlength="100" />
+                                                <label class="form-label" for="txtMsgTitle_New">チャット用メッセージ保存名</label><span class="cap-errormsg-right" id="error_txtMsgTitle_New"></span>
+                                                <input type="text" id="txtMsgTitle_New" class="form-control form-control-lg mb-3" maxlength="100" />
 
-                                                <label class="form-label" for="txtMsgContent">チャット用メッセージ内容</label><span class="cap-errormsg-right" id="error_txtMsgContent"></span>
+                                                <label class="form-label" for="txtMsgContent_New">チャット用メッセージ内容</label><span class="cap-errormsg-right" id="error_txtMsgContent_New"></span>
                                             </div>
                                             <div class="input-group align-middle">
-                                                <textarea class="form-control custom-control" rows="5" id="txtMsgContent" maxlength="1000"></textarea>
+                                                <textarea class="form-control custom-control" rows="5" id="txtMsgContent_New" maxlength="1000"></textarea>
 
                                             </div>
                                         </div>
@@ -203,7 +211,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>*@
+                    </div>
 </main>
 
             @Html.Partial("~/Views/Shared/_r_footer.cshtml")
