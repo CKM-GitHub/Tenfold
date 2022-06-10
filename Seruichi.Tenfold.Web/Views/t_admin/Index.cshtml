@@ -4,30 +4,31 @@
 }
 @section styles{
 
-        @Styles.Render("~/Content/tenfold_css_common")
-    }
+    @Styles.Render("~/Content/tenfold_css_common")
+}
 
-<form id="form1">
-    <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
-        <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
 
-            <main class="py-6 bg-surface-secondary">
-                <div class="container-fluid">
-                    <!-- Card stats -->
-                    <div class="row g-6 mb-6">
-                        <div class="col-12">
-                            <div class="card shadow border-0">
-                                <div class="card-body ">
-                                    <div class="justify-content-around align-items-center row">
-                                        <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
-                                            <h1 class="ps-2 h2 mb-0 ls-tight">管理者</h1>
-                                            <span class="ps-2 text-muted small align-self-end">管理</span>
-                                        </div>
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                <!-- Card stats -->
+                <div class="row g-6 mb-6">
+                    <div class="col-12">
+                        <div class="card shadow border-0">
+                            <div class="card-body ">
+                                <div class="justify-content-around align-items-center row">
+                                    <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
+                                        <h1 class="ps-2 h2 mb-0 ls-tight">管理者</h1>
+                                        <span class="ps-2 text-muted small align-self-end">管理</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <form id="form1">
                     <div class="row">
                         <div class="col-12 col-md-9">
                             <!-- Card stats -->
@@ -112,7 +113,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            {i++;}
+                                            { i++; }
                                         }
 
 
@@ -207,6 +208,7 @@
                                             <label class="form-label" for="form3Examplev4">パスワード</label>
                                             <span class="cap-errormsg-right" id="error_txtPassword"></span>
                                         </div>
+                                        <input type="password" class="d-none" value="@ViewBag.AdminPW"  id="txt_old_password"/>
                                         <input type="password" class="passkey form-control"
                                                placeholder="パスワード" required="required" value="@ViewBag.AdminPW" maxlength="30" id="txtPassword" name="AdminPassword" />
                                     </div>
@@ -228,21 +230,42 @@
                                 <div class="card-body">
                                     <div class="text-right mt-3 float-end">
                                         <button type="button" class="btn btn-primary" id="btn_save_update">変更保存</button>
-                                        <button type="button" class="btn btn-default">取消</button>
+                                        <button type="button" id="btn_t_admin_cancel" class="btn btn-default">取消</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
-                </div>
-            </main>
-            @Html.Partial("_t_footer")
-        </div>
+                </form>
+            </div>
+
+            <!-- 変更取消 -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                 id="modal-changecal">
+            </div>
+
+            <!-- 変更保存 -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                 id="modal-changesave">
+
+            </div>
+
+            <!-- No Change -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1" id="modal-nochange">
+
+            </div>
+
+            <!-- 登録完了 -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1" id="modal-changeok">
+                
+            </div>
+
+        </main>
+        @Html.Partial("_t_footer")
     </div>
-</form>
+</div>
+
 
 @section Scripts{
-        @Scripts.Render("~/bundles/t_admin")
-    }
+    @Scripts.Render("~/bundles/t_admin")
+}

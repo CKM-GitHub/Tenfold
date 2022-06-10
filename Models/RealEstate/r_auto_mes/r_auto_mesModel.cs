@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace Models.RealEstate.r_auto_mes
 {
-    public class r_auto_mesModel
+    public class r_auto_mesModel:RealEstate_L_Log_Model
     {
+        public string RealECD { get; set; }
+        public string SEQ { get; set; }
+        public int MessageSEQ { get; set; }
+        public string MessageTitle { get; set; }
+        public string MessageTEXT { get; set; }
+        public string PermissionSetting { get; set; }
+        public string Applying { get; set; }
+        public byte ValidFlg { get; set; }
+        public string Mode { get; set; }
     }
 }

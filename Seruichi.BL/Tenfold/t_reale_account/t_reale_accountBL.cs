@@ -14,19 +14,17 @@ namespace Seruichi.BL.Tenfold.t_reale_account
         {
             ValidatorAllItems validator = new ValidatorAllItems();
 
-            validator.CheckDate("StartDate", model.StartDate);//E108
-            validator.CheckDate("EndDate", model.EndDate);//E108 
-
-            validator.CheckRequired("StartDate", model.StartDate);
-            validator.CheckRequired("EndDate", model.EndDate);
-
-            validator.CheckCompareDate("StartDate", model.StartDate, model.EndDate);//E111
-            validator.CheckCompareDate("EndDate", model.StartDate, model.EndDate);//E111
-
-
-
-            validator.CheckRequired("#penaltyArea", model.Memo);
-            validator.CheckByteCount("#penaltyArea", model.Memo, 500);
+            if (model.penaltyFlg.ToByte(0).ToString() == "1")
+            {
+                validator.CheckDate("StartDate", model.StartDate);//E108
+                validator.CheckDate("EndDate", model.EndDate);//E108  
+                validator.CheckRequired("StartDate", model.StartDate);
+                validator.CheckRequired("EndDate", model.EndDate); 
+                validator.CheckCompareDate("StartDate", model.StartDate, model.EndDate);//E111
+                validator.CheckCompareDate("EndDate", model.StartDate, model.EndDate);//E111 
+                validator.CheckRequired("penaltyArea", model.Memo);
+                validator.CheckByteCount("penaltyArea", model.Memo, 500);
+            }
 
             return validator.GetValidationResult(); 
         }

@@ -17,6 +17,9 @@ namespace Seruichi.Tenfold.Web.Controllers
         // GET: t_mansion
         public ActionResult Index(string MansionCD)
         {
+            if (string.IsNullOrEmpty(MansionCD))
+                return BadRequestResult();
+
             t_mansionBL t_bl = new t_mansionBL();
             t_mansionModel model =Assign_Model_Value(t_bl.Get_M_Mansion_Data(MansionCD));
 

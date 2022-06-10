@@ -1,13 +1,13 @@
-﻿@model Models.Tenfold.t_seller_memo.t_seller_memoModel
+﻿@model Models.Tenfold.t_reale_memo.t_reale_memoModel
 
 @{
+    ViewBag.Title = "買取管理（メモ）";
     Layout = "~/Views/Shared/_t_menuLayout.cshtml";
 }
 
 @section styles{
     @Styles.Render("~/Content/tenfold_css_common")
 }
-
 
 <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
     <span id="loginID" class="d-none">@ViewBag.LoginID</span>
@@ -98,5 +98,5 @@
 </div>
 
 @section Scripts{
-    @Scripts.Render("~/bundles/t_seller_memo")
+    @Scripts.Render("~/bundles/t_reale_memo")
 }
