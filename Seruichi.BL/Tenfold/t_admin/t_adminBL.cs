@@ -113,7 +113,9 @@ namespace Seruichi.BL.Tenfold.t_admin
                 new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.Operator.ToStringOrNull() },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress },
                 new SqlParameter("@M_TenfoldStaff", SqlDbType.Structured){ TypeName = "dbo.T_TenfoldStaff", Value = model.lst_AdminModel.ToDataTable() },
-                new SqlParameter("@AdminTenStaffPW", SqlDbType.VarChar){ Value = model.AdminPassword }
+                new SqlParameter("@AdminTenStaffPW", SqlDbType.VarChar){ Value = model.AdminPassword },
+                new SqlParameter("@Remarks", SqlDbType.VarChar){ Value =  model.Remark },
+                new SqlParameter("@ProcessKBN", SqlDbType.TinyInt){ Value =  model.Processing.ToByte() },
              };
 
             try
@@ -139,7 +141,7 @@ namespace Seruichi.BL.Tenfold.t_admin
                 new SqlParameter("@InvalidFLG", SqlDbType.TinyInt){ Value =  model.InvalidFLG.ToStringOrNull() },               
                 new SqlParameter("@LoginName", SqlDbType.VarChar){ Value =  model.LoginName.ToStringOrNull() },
                 new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.Operator.ToStringOrNull() },
-                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress }
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress },
              };
 
             DBAccess db = new DBAccess();
