@@ -30,7 +30,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                         {
                             RealECD = dr["RealECD"].ToString(),
                             SEQ = dr["SEQ"].ToString(),
-                            MessageSEQ = dr["MessageSEQ"].ToString(),
+                            MessageSEQ = Convert.ToInt32(dr["MessageSEQ"]),
                             MessageTitle = dr["MessageTitle"].ToString(),                            
                             MessageTEXT = dr["MessageTEXT"].ToString(),
                             Applying = dr["Applying"].ToString()
