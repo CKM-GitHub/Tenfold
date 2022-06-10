@@ -122,6 +122,9 @@ namespace Seruichi.RealEstate.Web
             bundles.Add(new ScriptBundle("~/bundles/r_auto_mes").Include(
                     "~/Scripts/r_auto_mes.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/r_template").Include(
+                   "~/Scripts/r_template.js"));
+
         }
     }
 }
