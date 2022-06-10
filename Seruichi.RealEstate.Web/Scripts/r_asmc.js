@@ -2,10 +2,19 @@
 $(function () {
     _url.redirect_207address = common.appPath + '/r_asmc/redirect_207address';
     _url.redirect_208railway = common.appPath + '/r_asmc/redirect_208railway';
+    setValidation();
     addEvents();
 });
 
+function setValidation() {
+    $('#SearchBox')
+        .addvalidation_errorElement("#SearchBoxError")
+        .addvalidation_reqired();
+}
+
 function addEvents() {
+    common.bindValidationEvent('#mansion', '');
+
     $('.js-chihou').on('click', function () {
         $this = $(this);
         $('#form5101_region').val($this.data('chihou-name'));
@@ -25,4 +34,13 @@ function addEvents() {
         window.location.href = common.appPath + '/r_asmc_ms_reged_list/Index'; 
     });
 
+    $('#btnlist_sh').on('click', function () {
+        $form = $('#mansion').hideChildErrors();
+        if (!common.checkValidityOnSave('#mansion')) {
+            $form.getInvalidItems().get(0).focus();
+            return false;
+        }
+        var PMansionName = $('#SearchBox').val();
+        window.location.href = common.appPath + '/r_asmc_ms_list_sh/Index?MansionName=' + PMansionName;
+    })
 }

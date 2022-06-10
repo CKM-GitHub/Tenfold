@@ -33,6 +33,9 @@ namespace Seruichi.BL.RealEstate.r_issueslist
         {
             return await Task.Run(() =>
             {
+                AESCryption crypt = new AESCryption();
+                string cryptionKey = StaticCache.GetDataCryptionKey();
+
                 var sqlParams = new SqlParameter[]
                 {
                 new SqlParameter("@chk_New", SqlDbType.TinyInt){ Value = model.chk_New.ToByte(0) },
@@ -45,53 +48,24 @@ namespace Seruichi.BL.RealEstate.r_issueslist
                 new SqlParameter("@Range", SqlDbType.VarChar){ Value = model.Range.ToStringOrNull() },
                 new SqlParameter("@StartDate", SqlDbType.VarChar){ Value = model.StartDate.ToStringOrNull() },
                 new SqlParameter("@EndDate", SqlDbType.VarChar){ Value = model.EndDate.ToStringOrNull() },
-                new SqlParameter("@FreeWord", SqlDbType.VarChar){ Value = model.FreeWord.ToStringOrNull() }
+                new SqlParameter("@FreeWord", SqlDbType.VarChar){ Value = model.FreeWord.ToStringOrNull() },
+                new SqlParameter("@E_FreeWord", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.FreeWord, cryptionKey).ToStringOrNull() }
                };
 
                 DBAccess db = new DBAccess();
                 var dt = db.SelectDatatable("pr_r_issueslist_getDisplayData", sqlParams);
 
-                AESCryption crypt = new AESCryption();
-                string decryptionKey = StaticCache.GetDataCryptionKey();
                 var e = dt.AsEnumerable();
                 foreach(DataRow row in dt.Rows)
                 {
-                    row["売主_カナ"] = crypt.DecryptFromBase64(row.Field<string>("売主_カナ"), decryptionKey);
-                    row["お客様名"] = crypt.DecryptFromBase64(row.Field<string>("お客様名"), decryptionKey);
-                    row["売主_住所３"] = crypt.DecryptFromBase64(row.Field<string>("売主_住所３"), decryptionKey);
-                    row["売主_住所４"] = crypt.DecryptFromBase64(row.Field<string>("売主_住所４"), decryptionKey);
-                    row["売主_住所５"] = crypt.DecryptFromBase64(row.Field<string>("売主_住所５"), decryptionKey);
-                    row["売主_固定電話番号"] = crypt.DecryptFromBase64(row.Field<string>("売主_固定電話番号"), decryptionKey);
-                    row["売主_携帯電話番号"] = crypt.DecryptFromBase64(row.Field<string>("売主_携帯電話番号"), decryptionKey);
+                    row["売主_カナ"] = crypt.DecryptFromBase64(row.Field<string>("売主_カナ"), cryptionKey);
+                    row["お客様名"] = crypt.DecryptFromBase64(row.Field<string>("お客様名"), cryptionKey);
+                    row["売主_住所３"] = crypt.DecryptFromBase64(row.Field<string>("売主_住所３"), cryptionKey);
+                    row["売主_住所４"] = crypt.DecryptFromBase64(row.Field<string>("売主_住所４"), cryptionKey);
+                    row["売主_住所５"] = crypt.DecryptFromBase64(row.Field<string>("売主_住所５"), cryptionKey);
+                    row["売主_固定電話番号"] = crypt.DecryptFromBase64(row.Field<string>("売主_固定電話番号"), cryptionKey);
+                    row["売主_携帯電話番号"] = crypt.DecryptFromBase64(row.Field<string>("売主_携帯電話番号"), cryptionKey);
                 }
-                //Parallel.ForEach(e, item =>
-                //{
-                //    item["売主_カナ"] = crypt.DecryptFromBase64(item.Field<string>("売主_カナ"), decryptionKey);
-                //});
-                //Parallel.ForEach(e, item =>
-                //{
-                //    item["お客様名"] = crypt.DecryptFromBase64(item.Field<string>("お客様名"), decryptionKey);
-                //});
-                //Parallel.ForEach(e, item =>
-                //{
-                //    item["売主_住所３"] = crypt.DecryptFromBase64(item.Field<string>("売主_住所３"), decryptionKey);
-                //});
-                //Parallel.ForEach(e, item =>
-                //{
-                //    item["売主_住所４"] = crypt.DecryptFromBase64(item.Field<string>("売主_住所４"), decryptionKey);
-                //});
-                //Parallel.ForEach(e, item =>
-                //{
-                //    item["売主_住所５"] = crypt.DecryptFromBase64(item.Field<string>("売主_住所５"), decryptionKey);
-                //});
-                //Parallel.ForEach(e, item =>
-                //{
-                //    item["売主_固定電話番号"] = crypt.DecryptFromBase64(item.Field<string>("売主_固定電話番号"), decryptionKey);
-                //});
-                //Parallel.ForEach(e, item =>
-                //{
-                //    item["売主_携帯電話番号"] = crypt.DecryptFromBase64(item.Field<string>("売主_携帯電話番号"), decryptionKey);
-                //});
                 return dt;
             });
         }
@@ -116,6 +90,9 @@ namespace Seruichi.BL.RealEstate.r_issueslist
 
         public DataTable generate_r_issueslist_CSV(r_issueslistModel model)
         {
+            AESCryption crypt = new AESCryption();
+            string cryptionKey = StaticCache.GetDataCryptionKey();
+
             var sqlParams = new SqlParameter[]
             {
                 new SqlParameter("@chk_New", SqlDbType.TinyInt){ Value = model.chk_New.ToByte(0) },
@@ -128,53 +105,24 @@ namespace Seruichi.BL.RealEstate.r_issueslist
                 new SqlParameter("@Range", SqlDbType.VarChar){ Value = model.Range.ToStringOrNull() },
                 new SqlParameter("@StartDate", SqlDbType.VarChar){ Value = model.StartDate.ToStringOrNull() },
                 new SqlParameter("@EndDate", SqlDbType.VarChar){ Value = model.EndDate.ToStringOrNull() },
-                new SqlParameter("@FreeWord", SqlDbType.VarChar){ Value = model.FreeWord.ToStringOrNull() }
+                new SqlParameter("@FreeWord", SqlDbType.VarChar){ Value = model.FreeWord.ToStringOrNull() },
+                new SqlParameter("@E_FreeWord", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.FreeWord, cryptionKey).ToStringOrNull() }
             };
 
             DBAccess db = new DBAccess();
             var dt = db.SelectDatatable("pr_r_issueslist_getCSVData", sqlParams);
 
-            AESCryption crypt = new AESCryption();
-            string decryptionKey = StaticCache.GetDataCryptionKey();
             var e = dt.AsEnumerable();
             foreach (DataRow row in dt.Rows)
             {
-                row["売主カナ"] = crypt.DecryptFromBase64(row.Field<string>("売主カナ"), decryptionKey);
-                row["売主名"] = crypt.DecryptFromBase64(row.Field<string>("売主名"), decryptionKey);
-                row["売主_町域名"] = crypt.DecryptFromBase64(row.Field<string>("売主_町域名"), decryptionKey);
-                row["売主_番地"] = crypt.DecryptFromBase64(row.Field<string>("売主_番地"), decryptionKey);
-                row["売主_建物名部屋番号"] = crypt.DecryptFromBase64(row.Field<string>("売主_建物名部屋番号"), decryptionKey);
-                row["売主_固定電話番号"] = crypt.DecryptFromBase64(row.Field<string>("売主_固定電話番号"), decryptionKey);
-                row["売主_携帯電話番号"] = crypt.DecryptFromBase64(row.Field<string>("売主_携帯電話番号"), decryptionKey);
+                row["売主カナ"] = crypt.DecryptFromBase64(row.Field<string>("売主カナ"), cryptionKey);
+                row["売主名"] = crypt.DecryptFromBase64(row.Field<string>("売主名"), cryptionKey);
+                row["売主_町域名"] = crypt.DecryptFromBase64(row.Field<string>("売主_町域名"), cryptionKey);
+                row["売主_番地"] = crypt.DecryptFromBase64(row.Field<string>("売主_番地"), cryptionKey);
+                row["売主_建物名部屋番号"] = crypt.DecryptFromBase64(row.Field<string>("売主_建物名部屋番号"), cryptionKey);
+                row["売主_固定電話番号"] = crypt.DecryptFromBase64(row.Field<string>("売主_固定電話番号"), cryptionKey);
+                row["売主_携帯電話番号"] = crypt.DecryptFromBase64(row.Field<string>("売主_携帯電話番号"), cryptionKey);
             }
-            //Parallel.ForEach(e, item =>
-            //{
-            //    item["売主カナ"] = crypt.DecryptFromBase64(item.Field<string>("売主カナ"), decryptionKey);
-            //});
-            //Parallel.ForEach(e, item =>
-            //{
-            //    item["売主名"] = crypt.DecryptFromBase64(item.Field<string>("売主名"), decryptionKey);
-            //});
-            //Parallel.ForEach(e, item =>
-            //{
-            //    item["売主_町域名"] = crypt.DecryptFromBase64(item.Field<string>("売主_町域名"), decryptionKey);
-            //});
-            //Parallel.ForEach(e, item =>
-            //{
-            //    item["売主_番地"] = crypt.DecryptFromBase64(item.Field<string>("売主_番地"), decryptionKey);
-            //});
-            //Parallel.ForEach(e, item =>
-            //{
-            //    item["売主_建物名部屋番号"] = crypt.DecryptFromBase64(item.Field<string>("売主_建物名部屋番号"), decryptionKey);
-            //});
-            //Parallel.ForEach(e, item =>
-            //{
-            //    item["売主_固定電話番号"] = crypt.DecryptFromBase64(item.Field<string>("売主_固定電話番号"), decryptionKey);
-            //});
-            //Parallel.ForEach(e, item =>
-            //{
-            //    item["売主_携帯電話番号"] = crypt.DecryptFromBase64(item.Field<string>("売主_携帯電話番号"), decryptionKey);
-            //});
             return dt;
         }
 

@@ -1,64 +1,53 @@
 ﻿const _url = {};
 $(function () {
     _url.DeleteData = common.appPath + '/r_auto_mes/DeleteData';
-    _url.InsertData = common.appPath + '/r_auto_mes/InsertUpdateData';
+    _url.InsertUpdateData = common.appPath + '/r_auto_mes/InsertUpdateData';
     setValidation();
     addEvents();
 });
 
 function setValidation() {
+    $('#TemplateName')
+        .addvalidation_errorElement("#errorTemplateName")
+        .addvalidation_reqired()//E101
+        .addvalidation_singlebyte_doublebyte(); //E105
+        
 
+    $('#TemplateContent')
+        .addvalidation_errorElement("#errorTemplateContent")
+        .addvalidation_reqired()//E101
+        .addvalidation_singlebyte_doublebyte(); //E105
 }
 
 function addEvents() {
     common.bindValidationEvent('#form1', '');
 
-    $('#chk1').on('change', function () {
+    $('#ChkFlg').on('change', function () {
         this.value = this.checked ? 1 : 0;
     }).change();
 
-    //const $this = $(this), $HiddenSEQ = $("#MsgSEQ").val(), $TemplateName = $("#TemplateName").val(),
-    //    $TemplateContent = $("#TemplateContent").val(), $chk = $("#ChkFlg").val()
-    var $mode = "0";
-    const $this = $(this), $HiddenSEQ = $("#MsgSEQ").val()
-
-    $('#btnEdit').on('click', function () {
-        $mode = "2";
-        //var TemplateName = $("#MessageTitle"), TemplateContent = $("#MessageText").val();
-        //debugger;
-       
-        $("#TemplateName").val() = TemplateName;
-        $("#TemplateContent").val() = TemplateContent;
-        
-    });
-
-    $('#btnNew').on('click', function () {
-        $mode = "1";
-    });
-
-    //$('#btnDel').on('click', function () {
-    //    const $this = $(this), $chk = $("#chk1").val()
-
-    //    let model = {
-    //        MessageSEQ =$HiddenSEQ
-    //    };
-
-    //});
-
     $('#btnConfirm').on('click', function () {
-        
+        $form = $('#form1').hideChildErrors();
+        if (!common.checkValidityOnSave('#form1')) {
+            $form.getInvalidItems().get(0).focus();
+            return false;
+        }
+        const $this = $(this), $HiddenSEQ = $("#MsgSEQ").val()
+
         let model = {
             MessageSEQ: $HiddenSEQ,
             ProcessKBN: "Delete",
             Remarks: "MessageSEQ：" + $HiddenSEQ
         };
 
-        common.callAjax(_url.DeleteData, model,
-            function (result) {
-                if (result && !result.isOK) {
-                    $('#message-delok').modal('hide');
-                }
-            });
+        common.callAjaxWithLoading(_url.DeleteData, model, this, function (result) {
+            if (result && result.isOK) {
+                window.location.href = common.appPath + '/r_auto_mes/Index';
+            }
+            else {
+                alert("Processing UnSuccessfull!!");
+            }
+        });
 
     });
 
@@ -67,8 +56,21 @@ function addEvents() {
     });
 
     $('#btnSend').on('click', function () {
+        $form = $('#form1').hideChildErrors();
+        if (!common.checkValidityOnSave('#form1')) {
+            $form.getInvalidItems().get(0).focus();
+            return false;
+        }
+
        const $this = $(this), $HiddenSEQ = $("#MsgSEQ").val(), $TemplateName = $("#TemplateName").val(),
             $TemplateContent = $("#TemplateContent").val(), $chk = $("#ChkFlg").val()
+        var $mode = "0";
+        if ($HiddenSEQ == "") {
+            $mode = "1";
+        }
+        else {
+            $mode = "2";
+        }
 
         let model = {
             MessageSEQ: $HiddenSEQ,
@@ -84,8 +86,19 @@ function addEvents() {
                 $('#message-com').modal('hide');
                 window.location.href = common.appPath + '/r_auto_mes/Index';
             }
-            
+            else {
+                alert("Processing UnSuccessfull!!");
+            }
+
         });
 
     });
+}
+function Get_MsgSEQ(id) {
+    $('#MessageTitle').hideError();
+    $('#MessageText').hideError();
+
+    $('#MsgSEQ').val(id.split('&')[0]);
+    $('#TemplateName').val(id.split('&')[1]);
+    $('#TemplateContent').val(id.split('&')[2]);
 }
