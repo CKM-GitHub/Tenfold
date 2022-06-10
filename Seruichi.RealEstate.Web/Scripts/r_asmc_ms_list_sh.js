@@ -119,6 +119,21 @@ function addEvents() {
 
     $('#UnregisteredMansion').click();
 
+    let model = {
+        MansionName: $("#MansionName").val().trim(),
+        StartYear: Get_FT_Age($("#StartYear").val(), 'F'),
+        EndYear: Get_FT_Age($('#EndYear').val(), 'T'),
+        StartDistance: $('#StartDistance').val(),
+        EndDistance: $('#EndDistance').val(),
+        StartRooms: $('#StartRooms').val(),
+        EndRooms: $('#EndRooms').val(),
+        Unregistered: $('#UnregisteredMansion').is(':checked') ? 1 : 0,
+        Priority: $('#chkPriority').is(':checked') ? 1 : 0,
+        Radio_Priority: 1
+    };
+    $form = $('#form1').hideChildErrors();
+    get_DisplayData(model, $form);
+
     $('#btnDisplay').on('click', function () {
         $form = $('#form1').hideChildErrors();
 
