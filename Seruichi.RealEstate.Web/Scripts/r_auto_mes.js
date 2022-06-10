@@ -7,7 +7,16 @@ $(function () {
 });
 
 function setValidation() {
+    $('#TemplateName')
+        .addvalidation_errorElement("#errorTemplateName")
+        .addvalidation_reqired()//E101
+        .addvalidation_singlebyte_doublebyte(); //E105
+        
 
+    $('#TemplateContent')
+        .addvalidation_errorElement("#errorTemplateContent")
+        .addvalidation_reqired()//E101
+        .addvalidation_singlebyte_doublebyte(); //E105
 }
 
 function addEvents() {
@@ -21,14 +30,13 @@ function addEvents() {
     //    $TemplateContent = $("#TemplateContent").val(), $chk = $("#ChkFlg").val()
     var $mode = "0";
     const $this = $(this), $HiddenSEQ = $("#MsgSEQ").val()
+   
 
     $('#btnEdit').on('click', function () {
+        debugger;
         $mode = "2";
-        //var TemplateName = $("#MessageTitle"), TemplateContent = $("#MessageText").val();
-        //debugger;
-       
-        $("#TemplateName").val() = TemplateName;
-        $("#TemplateContent").val() = TemplateContent;
+        $('#TemplateName').val($('#MessageTitle').text());
+        $("#TemplateContent").val($("#MessageText").text());
         
     });
 
@@ -36,17 +44,8 @@ function addEvents() {
         $mode = "1";
     });
 
-    //$('#btnDel').on('click', function () {
-    //    const $this = $(this), $chk = $("#chk1").val()
-
-    //    let model = {
-    //        MessageSEQ =$HiddenSEQ
-    //    };
-
-    //});
-
     $('#btnConfirm').on('click', function () {
-        
+        debugger;
         let model = {
             MessageSEQ: $HiddenSEQ,
             ProcessKBN: "Delete",
@@ -66,7 +65,20 @@ function addEvents() {
         window.location.href = common.appPath + '/r_auto_mes/Index';
     });
 
+    
+    $('#btnBack').on('click', function () {
+        debugger;
+        $("#TemplateName").hideError();
+        $("#TemplateContent").hideError();
+    });
+
     $('#btnSend').on('click', function () {
+
+        if (!common.checkValidityOnSave('#form1')) {
+            $form.getInvalidItems().get(0).focus();
+            return false;
+        }
+
        const $this = $(this), $HiddenSEQ = $("#MsgSEQ").val(), $TemplateName = $("#TemplateName").val(),
             $TemplateContent = $("#TemplateContent").val(), $chk = $("#ChkFlg").val()
 
@@ -79,13 +91,25 @@ function addEvents() {
             Remarks: "MessageSEQ：" + $HiddenSEQ
         };
 
-        common.callAjaxWithLoading(_url.InsertUpdateData, model, this, function (result) {
-            if (result && result.isOK) {
-                $('#message-com').modal('hide');
-                window.location.href = common.appPath + '/r_auto_mes/Index';
-            }
-            
-        });
+        debugger;
+        if (model.MessageTitle == "" && model.MessageTEXT == "") {
+            document.getElementById("btnSend").disabled = true;
+        }
+        else {
+            common.callAjaxWithLoading(_url.InsertUpdateData, model, this, function (result) {
+                if (result && result.isOK) {
+                    $('#message-com').modal('hide');
+                    window.location.href = common.appPath + '/r_auto_mes/Index';
+                }
+
+            });
+        }
+
+        
 
     });
 }
+//function refreshPage() {
+//    debugger;
+//    window.location.reload();
+//} 
