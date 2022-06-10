@@ -48,11 +48,11 @@
                                 <div class="row pb-3">
                                     <div class="col-md-12">
                                         <p class="pb-3">
-                                            <strong>@temp.SEQ. <span id="MessageTitle">@temp.MessageTitle</span><span class="text-success ps-3">@temp.Applying</span></strong>
+                                            <strong>@temp.SEQ. <span id="MessageTitle" name="MessageTitle">@temp.MessageTitle</span><span class="text-success ps-3">@temp.Applying</span></strong>
                                         </p>
                                         <label hidden id="MsgSEQ">@temp.MessageSEQ</label>
                                         <div class="clearfix"></div>
-                                        <p class="pb-3" id="MessageText">@temp.MessageTEXT </p>
+                                        <p class="pb-3" id="MessageText" name="MessageText">@temp.MessageTEXT </p>
                                         <p class="float-end">
 
                                             @if (ViewBag.IsSetting == 1)

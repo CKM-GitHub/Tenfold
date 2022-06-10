@@ -19,11 +19,17 @@ function addEvents() {
 
     //const $this = $(this), $HiddenSEQ = $("#MsgSEQ").val(), $TemplateName = $("#TemplateName").val(),
     //    $TemplateContent = $("#TemplateContent").val(), $chk = $("#ChkFlg").val()
-    const $mode = "0";
+    var $mode = "0";
     const $this = $(this), $HiddenSEQ = $("#MsgSEQ").val()
 
     $('#btnEdit').on('click', function () {
-         $mode = "2";
+        $mode = "2";
+        //var TemplateName = $("#MessageTitle"), TemplateContent = $("#MessageText").val();
+        //debugger;
+       
+        $("#TemplateName").val() = TemplateName;
+        $("#TemplateContent").val() = TemplateContent;
+        
     });
 
     $('#btnNew').on('click', function () {

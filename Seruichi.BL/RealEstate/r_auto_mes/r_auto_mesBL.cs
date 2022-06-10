@@ -29,7 +29,7 @@ namespace Seruichi.BL.RealEstate.r_auto_mes
             var sqlParams = new SqlParameter[]
              {
                 new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = model.RealECD },
-                new SqlParameter("@MessageSEQ", SqlDbType.Int) { Value = model.MessageSEQ },
+                new SqlParameter("@MessageSEQ", SqlDbType.VarChar) { Value = model.MessageSEQ },
                 new SqlParameter("@Processing", SqlDbType.VarChar) { Value = model.ProcessKBN },
                 new SqlParameter("@Operator", SqlDbType.VarChar) { Value = model.LoginID },
                 new SqlParameter("@LoginName", SqlDbType.VarChar) { Value = model.LoginName },
@@ -60,7 +60,7 @@ namespace Seruichi.BL.RealEstate.r_auto_mes
             var sqlParams = new SqlParameter[]
              {
                 new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = model.RealECD },
-                new SqlParameter("@MessageSEQ", SqlDbType.Int) { Value = model.MessageSEQ },
+                new SqlParameter("@MessageSEQ", SqlDbType.VarChar) { Value = model.MessageSEQ },
                 new SqlParameter("@MessageTitle", SqlDbType.VarChar) { Value = model.MessageTitle },
                 new SqlParameter("@MessageTEXT", SqlDbType.VarChar) { Value = model.MessageTEXT },
                 new SqlParameter("@ValidFlg", SqlDbType.TinyInt) { Value = model.ValidFlg },
@@ -81,7 +81,7 @@ namespace Seruichi.BL.RealEstate.r_auto_mes
             var sqlParams = new SqlParameter[]
              {
                 new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = model.RealECD },
-                new SqlParameter("@MessageSEQ", SqlDbType.Int) { Value = model.MessageSEQ },
+                new SqlParameter("@MessageSEQ", SqlDbType.VarChar) { Value = model.MessageSEQ },
                 new SqlParameter("@MessageTitle", SqlDbType.VarChar) { Value = model.MessageTitle },
                 new SqlParameter("@MessageTEXT", SqlDbType.VarChar) { Value = model.MessageTEXT },
                 new SqlParameter("@ValidFlg", SqlDbType.TinyInt) { Value = model.ValidFlg },
