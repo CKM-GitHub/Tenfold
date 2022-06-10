@@ -101,4 +101,11 @@ function Get_MsgSEQ(id) {
     $('#MsgSEQ').val(id.split('&')[0]);
     $('#TemplateName').val(id.split('&')[1]);
     $('#TemplateContent').val(id.split('&')[2]);
+    var data = id.split('&')[3];
+    if (data == "適用中") {
+        $("#ChkFlg").attr("checked", true);
+    }
+    else {
+        $("#ChkFlg").attr("checked", false);
+    }
 }
