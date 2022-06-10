@@ -89,12 +89,18 @@ $(function () {
     });
     $("form").bind("keypress", function (e) {
         if (e.keyCode == 13) {
-            if (document.activeElement.id == 'btnLogin')
+            if (document.activeElement.type == 'password' || document.activeElement.id == 'btnLogin' || document.activeElement.id == 'btnDisplay' || document.activeElement.id == 'btnProcess')
                 return true;
-            if (document.activeElement.id != 'btnDisplay' && document.activeElement.id != 'btnProcess')
-            return false;
+            else return false;
         }
-    }); 
+    });
+    $('#sidebar-wrapper').bind("keypress", function (e) {
+        if (e.keyCode == 13) {
+            if ( document.activeElement.id == 'btnDisplay' || document.activeElement.id == 'btnProcess')
+                return true;
+            else return false;
+        }
+    });
 })
 const common = {
 
