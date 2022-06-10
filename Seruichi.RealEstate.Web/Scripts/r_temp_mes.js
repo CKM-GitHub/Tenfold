@@ -44,7 +44,7 @@ function addEvents()
     //        }
     //    });
     //});
-
+    common.bindValidationEvent('#form1', '');
     $('#btnUpdate').on('click', function ()
     {
         $form = $('#form1').hideChildErrors();
