@@ -7,15 +7,16 @@ using Models.RealEstate.r_login;
 using Seruichi.BL.RealEstate.r_auto_mes;
 using Models.RealEstate.r_auto_mes;
 using System.Data;
+using System.Threading.Tasks;
+using Seruichi.BL;
 
 namespace Seruichi.RealEstate.Web.Controllers
 {
-    public class r_auto_mesController : Controller
+    public class r_auto_mesController : BaseController
     {
         // GET: r_auto_mes
         public ActionResult Index()
         {
-            
             r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
             if(!SessionAuthenticationHelper.ValidateUser(user))
             {
@@ -40,5 +41,47 @@ namespace Seruichi.RealEstate.Web.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public ActionResult DeleteData(r_auto_mesModel model)
+        {
+            r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
+            model.RealECD = user.RealECD;
+            model.LoginID = base.GetOperator("UserID");
+            model.LoginName = base.GetOperator("UserName");
+            model.IPAddress = base.GetClientIP();
+            r_auto_mesBL bl = new r_auto_mesBL();
+            bl.Delete_REMessage_Data(model);
+            return OKResult();
+        }
+
+        [HttpPost]
+        public ActionResult InsertUpdateData(r_auto_mesModel model)
+        {
+            r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
+            r_auto_mesBL bl = new r_auto_mesBL();
+            model.RealECD = user.RealECD;
+            model.LoginID = base.GetOperator("UserID");
+            model.LoginName = base.GetOperator("UserName");
+            model.IPAddress = base.GetClientIP();
+
+            if (model.ValidFlg == 1)
+            {
+                model.ValidFlg = 1;
+                bl.Update_REMessageValidFlg_Data(model);
+            }
+
+            if (model.Mode == "2")
+            {
+                bl.UpdateData_REMessage_Data(model);
+            }
+            else
+            {
+                bl.Insert_REMessage_Data(model);
+            }
+            
+            return OKResult();
+        }
+
     }
 }
