@@ -15,6 +15,11 @@ namespace Seruichi.Tenfold.Web.Controllers
         // GET: t_reale_memo
         public ActionResult Index(string RealECD)
         {
+            if (string.IsNullOrEmpty(RealECD))
+            {
+                return RedirectToAction("BadRequest", "Error");
+            }
+
             ViewBag.LoginID = base.GetOperator();
             return View();
         }
