@@ -57,14 +57,14 @@
 
                                             @if (ViewBag.IsSetting == 1)
                                             {
-                                                <a class="float-right btn text-white btn-primary" data-bs-toggle="modal" data-bs-target="#message-com" id="btnEdit"> <i class="fa fa-pencil"></i> 編集</a>
+                                                <a class="float-right btn text-white btn-primary" data-bs-toggle="modal" data-bs-target="#message-com" id="@temp.MessageSEQ&@temp.MessageTitle&@temp.MessageTEXT" onclick="Get_MsgSEQ(this.id)"> <i class="fa fa-pencil"></i> 編集</a>
                                                 <a class="float-right btn text-white btn-danger" data-bs-toggle="modal"
-                                                   data-bs-target="#message-del" id="btnDel"><i class="fa fa-times"></i>削除</a>
+                                                   data-bs-target="#message-del" id="@temp.MessageSEQ&@temp.MessageTitle&@temp.MessageTEXT" onclick="Get_MsgSEQ(this.id)"><i class="fa fa-times"></i>削除</a>
                                             }
                                             else
                                             {
-                                                <a class="float-right btn text-white btn-primary" data-bs-toggle="modal" id="btnEdit"> <i class="fa fa-pencil"></i> 編集</a>
-                                                <a class="float-right btn text-white btn-danger" data-bs-toggle="modal" id="btnDel"> <i class="fa fa-times"></i>削除</a>
+                                                <a class="float-right btn text-white btn-primary disabled" data-bs-toggle="modal" id="btnEdit"> <i class="fa fa-pencil"></i> 編集</a>
+                                                <a class="float-right btn text-white btn-danger disabled" data-bs-toggle="modal" id="btnDel"> <i class="fa fa-times"></i>削除</a>
                                             }
 
                                         </p>
@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                                            data-bs-target="#menu-modal" id="btnBack">
+                                            >
                                         戻る
                                     </button>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -118,7 +118,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4" id="btnNew" data-bs-toggle="modal" data-bs-target="#message-com">
+                    <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4" data-bs-toggle="modal" data-bs-target="#message-com">
                         <i class="fa fa-plus-circle pe-2"></i>新規自動応答メッセージ入力
                     </button>
                     <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-com" tabindex="-1"

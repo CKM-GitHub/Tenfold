@@ -67,8 +67,9 @@ namespace Seruichi.RealEstate.Web.Controllers
 
             if (model.ValidFlg == 1)
             {
-                model.ValidFlg = 1;
+                model.ValidFlg = 0;
                 bl.Update_REMessageValidFlg_Data(model);
+                model.ValidFlg = 1;
             }
 
             if (model.Mode == "2")
