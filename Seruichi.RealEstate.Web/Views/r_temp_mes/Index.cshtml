@@ -8,169 +8,208 @@
     @Styles.Render("~/Content/realEstate_css_common")
 }
 
-<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
-    <div class="d-flex flex-column min-h-screen" id="page-content-wrapper">
+<form id="form1">
+    <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
+        <div class="d-flex flex-column min-h-screen" id="page-content-wrapper">
 
-        <main class="py-6 bg-surface-secondary">
+            <main class="py-6 bg-surface-secondary">
 
-            <div class="container-fluid">
-                <div class="card shadow border-0 mb-7">
+                <div class="container-fluid">
+                    <div class="card shadow border-0 mb-7">
 
-                    <div class="card-header">
+                        <div class="card-header">
 
-                        <div class="col-md-12 col-12 mb-3 mb-sm-0">
+                            <div class="col-md-12 col-12 mb-3 mb-sm-0">
 
-                            <h1 class="h2 mb-0 ls-tight">チャット用メッセージ</h1>
-                            <span class="text-muted small">設定</span>
+                                <h1 class="h2 mb-0 ls-tight">チャット用メッセージ</h1>
+                                <span class="text-muted small">設定</span>
+                            </div>
+                            <div class="col-sm-6 col-12 text-sm-end">
+                                <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
+                <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+                            </div>
                         </div>
-                        <div class="col-sm-6 col-12 text-sm-end">
-                            <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
-                            <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+                        <ul class="nav nav-tabs mt-0 overflow-x border-0 ps-5">
+                            <li class="nav-item"> <a href="@Url.Action("Index", "r_com_profile")" class="nav-link font-regular">会社情報</a> </li>
+                            <li class="nav-item"> <a href="@Url.Action("Index", "r_temp_mes")" class="nav-link active">チャット用メッセージ</a> </li>
+                            <li class="nav-item "> <a href="@Url.Action("Index", "r_auto_mes")" class="nav-link font-regular">自動応答メッセージ</a> </li>
+                            <li class="nav-item"> <a href="@Url.Action("Index", "r_template")" class="nav-link font-regular">査定テンプレート一覧</a> </li>
+                        </ul>
+
+                    </div>
+
+
+                    <div class="card shadow border-0 mb-7">
+                        <div class="card-header">
+                            <h5 class="mb-0">チャット用メッセージ一覧</h5>
+                        </div>
+                        <div class="p-5 container">
+                            @{int i = 1;}
+                            @foreach (var temp in ViewBag.TempMsg)
+                            {
+                                <div class="row pb-3">
+
+                                    <div class="col-md-12">
+                                        <p class="pb-3">
+                                            <strong>@temp.SEQ. @temp.MessageTitle</strong>
+                                        </p>
+                                        <div class="clearfix"></div>
+                                        <p class="pb-3">
+                                            @temp.MessageTEXT
+                                        </p>
+                                        <p class="float-end">
+
+                                            @if (ViewBag.IsSetting == 1)
+                                            {
+                                                <a class="float-right btn text-white btn-primary" data-bs-toggle="modal" data-bs-target="#message-com" id="@temp.MessageSEQ" onclick="Get_MsgSEQ(this.id)"> <i class="fa fa-pencil"></i>編集</a>
+                                                <a class="float-right btn text-white btn-danger" data-bs-toggle="modal" data-bs-target="#message-del" id="@temp.MessageSEQ" onclick="Get_MsgSEQ(this.id)"><i class="fa fa-times"></i>削除</a>
+
+                                            }
+                                            else
+                                            {
+                                                <a class="float-right btn text-white btn-primary" data-bs-toggle="modal"> <i class="fa fa-pencil"></i> 編集</a>
+                                                <a class="float-right btn text-white btn-danger" data-bs-toggle="modal"> <i class="fa fa-times"></i>削除</a>
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+                                <hr class="navbar-divider my-5 opacity-20">
+                                { i++; }
+                            }
                         </div>
                     </div>
-                    <ul class="nav nav-tabs mt-0 overflow-x border-0 ps-5">
-                        <li class="nav-item"> <a href="@Url.Action("Index", "r_com_profile")" class="nav-link font-regular">会社情報</a> </li>
-                        <li class="nav-item"> <a href="@Url.Action("Index", "r_temp_mes")" class="nav-link active">チャット用メッセージ</a> </li>
-                        <li class="nav-item "> <a href="@Url.Action("Index", "r_auto_mes")" class="nav-link font-regular">自動応答メッセージ</a> </li>
-                        <li class="nav-item"> <a href="@Url.Action("Index", "r_template")" class="nav-link font-regular">査定テンプレート一覧</a> </li>
-                    </ul>
+                    <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-del" tabindex="-1" aria-labelledby="message-delModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-b" id="message-delModalLabel">メッセージを削除する</h5>
+                                    <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-center text-danger">
+                                    重要: 「メッセージ」を削除すると、メッセージは完全に削除されます。<br>復元することはできません。
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                                            data-bs-target="#menu-modal">
+                                        戻る
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="btnDelete">
 
-                </div>
+                                        確定
+                                    </button>
 
-
-                <div class="card shadow border-0 mb-7">
-                    <div class="card-header">
-                        <h5 class="mb-0">チャット用メッセージ一覧</h5>
-                    </div>
-                    <div class="p-5 container">
-                        @{int i = 1;}
-                        @foreach (var temp in ViewBag.TempMsg)
-                        {
-                            <div class="row pb-3">
-
-                                <div class="col-md-12">
-                                    <p class="pb-3">
-                                        <strong>@temp.SEQ. @temp.MessageTitle</strong>
-                                    </p>
-                                    <div class="clearfix"></div>
-                                    <p class="pb-3">
-                                        @temp.MessageTEXT
-                                    </p>
-                                    <p class="float-end">
-
-                                        @if(ViewBag.IsSetting == 1)
-                                        { 
-                                        <a class="float-right btn text-white btn-primary" data-bs-toggle="modal" data-bs-target="#message-com"> <i class="fa fa-pencil"></i> 編集</a>
-                                        <a class="float-right btn text-white btn-danger" data-bs-toggle="modal"data-bs-target="#message-del"><i class="fa fa-times"></i>削除</a>
-                                           
-                                        }
-                                        else
-                                        {
-                                        <a class="float-right btn text-white btn-primary" data-bs-toggle="modal"> <i class="fa fa-pencil"></i> 編集</a>
-                                        <a class="float-right btn text-white btn-danger" data-bs-toggle="modal"> <i class="fa fa-times"></i>削除</a>
-                                        }
-                                    </p>
                                 </div>
                             </div>
-                            <hr class="navbar-divider my-5 opacity-20">
-                            { i++; }
-                        }
+                        </div>
                     </div>
-                </div>
-                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-del" tabindex="-1" aria-labelledby="message-delModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-b" id="message-delModalLabel">メッセージを削除する</h5>
-                                <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body text-center text-danger">
-                                重要: 「メッセージ」を削除すると、メッセージは完全に削除されます。<br>復元することはできません。
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                                        data-bs-target="#menu-modal">
-                                    戻る
-                                </button>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#message-delok">
-                                    確定
-                                </button>
-
+                    <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-delok" tabindex="-1" aria-labelledby="message-delModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-b" id="message-delModalLabel">メッセージを削除しました</h5>
+                                    <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    メッセージを削除しました。「閉じる」ボタンをタップしてください。
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnDeleteClose">閉じる</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-delok" tabindex="-1" aria-labelledby="message-delModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-b" id="message-delModalLabel">メッセージを削除しました</h5>
-                                <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body text-center">
-                                メッセージを削除しました。「閉じる」ボタンをタップしてください。
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @if (ViewBag.IsSetting ==1)
-                {
-                <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4" id="cap-fixed-button" data-bs-toggle="modal" data-bs-target="#message-com">
-                    <i class="fa fa-plus-circle pe-2"></i>新規チャット用メッセージ入力
-                </button>
-                }
-                else
-                {
-                <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4 d-none" id="cap-fixed-button" data-bs-toggle="modal">
-                    <i class="fa fa-plus-circle pe-2"></i>新規チャット用メッセージ入力
-                </button>
-                }
-                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-com" tabindex="-1"
-                     aria-labelledby="message-com" aria-hidden="true">
-                    <div class="modal-dialog modal-xl modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-b" id="message-com">チャット用メッセージ入力欄</h5>
-                                <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body text-danger">
-                                <div class="py-5">
-                                    <div class="box-footer container">
-                                        <div>
-                                            <label class="form-label" for="form3Examplev4">チャット用メッセージ保存名</label>
-                                            <input type="text" id="form3Examplev4" class="form-control form-control-lg mb-3" />
+                    @if (ViewBag.IsSetting == 1)
+                    {
+                        <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4" id="btnNew" data-bs-toggle="modal">
+                            <i class="fa fa-plus-circle pe-2"></i>新規チャット用メッセージ入力
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4 d-none" id="btnNew" data-bs-toggle="modal">
+                            <i class="fa fa-plus-circle pe-2"></i>新規チャット用メッセージ入力
+                        </button>
+                    }
+                    <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-com" tabindex="-1"
+                         aria-labelledby="message-com" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-b" id="message-com">チャット用メッセージ入力欄</h5>
+                                    <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-danger">
+                                    <div class="py-5">
+                                        <div class="box-footer container">
+                                            <div>
+                                                <input type="text" class="form-control d-none" value="" readonly id="txtMsgSEQ" name="txtMsgSEQ">
+                                                <label class="form-label" for="txtMsgTitle">チャット用メッセージ保存名</label><span class="cap-errormsg-right" id="error_txtMsgTitle"></span>
+                                                <input type="text" id="txtMsgTitle" class="form-control form-control-lg mb-3" maxlength="100" />
 
-                                            <label class="form-label" for="form3Examplev4">チャット用メッセージ内容</label>
-                                        </div>
-                                        <div class="input-group align-middle">
-                                            <textarea class="form-control custom-control" rows="5"></textarea>
+                                                <label class="form-label" for="txtMsgContent">チャット用メッセージ内容</label><span class="cap-errormsg-right" id="error_txtMsgContent"></span>
+                                            </div>
+                                            <div class="input-group align-middle">
+                                                <textarea class="form-control custom-control" rows="5" id="txtMsgContent" maxlength="1000"></textarea>
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                                        data-bs-target="#menu-modal">
-                                    戻る
-                                </button>
-                                <button type="button" class="btn btn-primary">送信</button>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                                            data-bs-target="#menu-modal">
+                                        戻る
+                                    </button>
+                                    <button type="button" class="btn btn-primary" id="btnUpdate">送信</button>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-        </main>
 
-        @Html.Partial("~/Views/Shared/_r_footer.cshtml")
+                    @*<div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-com-ins" tabindex="-1"
+                         aria-labelledby="message-com-ins" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-b" id="message-com">チャット用メッセージ入力欄</h5>
+                                    <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-danger">
+                                    <div class="py-5">
+                                        <div class="box-footer container">
+                                            <div>
+                                                <label class="form-label" for="txtMsgTitle">チャット用メッセージ保存名</label><span class="cap-errormsg-right" id="error_txtMsgTitle"></span>
+                                                <input type="text" id="txtMsgTitle" class="form-control form-control-lg mb-3" maxlength="100" />
+
+                                                <label class="form-label" for="txtMsgContent">チャット用メッセージ内容</label><span class="cap-errormsg-right" id="error_txtMsgContent"></span>
+                                            </div>
+                                            <div class="input-group align-middle">
+                                                <textarea class="form-control custom-control" rows="5" id="txtMsgContent" maxlength="1000"></textarea>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                                            data-bs-target="#menu-modal">
+                                        戻る
+                                    </button>
+                                    <button type="button" class="btn btn-primary" id="btnInsert">送信</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+</main>
+
+            @Html.Partial("~/Views/Shared/_r_footer.cshtml")
+        </div>
     </div>
-</div>
+</form>
 @section Scripts{
     @Scripts.Render("~/bundles/r_temp_mes")
 }
