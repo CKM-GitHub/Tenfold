@@ -31,7 +31,7 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult BadRequest()
+        public ActionResult BadRequest(string code = null)
         {
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
             Response.TrySkipIisCustomErrors = true;
