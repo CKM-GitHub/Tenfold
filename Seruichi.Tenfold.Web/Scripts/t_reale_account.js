@@ -102,7 +102,9 @@ function addEvents() {
 
     $('#seller').addClass('d-none');
     $('#submenu_seller').addClass('d-none');
-
+    //#wrapper {
+    //    padding - left: 0;
+    $('#wrapper').prop('style','padding-left:0px !important')
     Bind_Company_Data(this);
     //Bind Company Info Data to the title part of the page
 

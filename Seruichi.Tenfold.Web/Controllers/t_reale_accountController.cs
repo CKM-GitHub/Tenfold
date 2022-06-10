@@ -17,8 +17,17 @@ namespace Seruichi.Tenfold.Web.Controllers
     public class t_reale_accountController : BaseController
     {
         // GET: t_reale_account
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
+        public ActionResult Index(string reale)
         {
+            //SellerCD = "S000000017";
+            if (String.IsNullOrWhiteSpace(reale))
+            {  
+                return BadRequestResult();
+            }
             return View();
         }
         [HttpPost]

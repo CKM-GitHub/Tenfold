@@ -15,6 +15,11 @@ namespace Seruichi.Tenfold.Web.Controllers
         // GET: t_seller_memo
         public ActionResult Index(string SellerCD)
         {
+            if (string.IsNullOrEmpty(SellerCD))
+            {
+                return RedirectToAction("BadRequest", "Error");
+            }
+
             t_seller_memoBL bl = new t_seller_memoBL();
             string sellername = bl.get_t_sellerName(SellerCD);
             ViewBag.Title = "管理－売主－" + sellername;

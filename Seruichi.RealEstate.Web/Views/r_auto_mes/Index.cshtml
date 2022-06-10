@@ -28,10 +28,10 @@
                         </div>
                     </div>
                     <ul class="nav nav-tabs mt-0 overflow-x border-0 ps-5">
-                        <li class="nav-item"> <a href="#" class="nav-link font-regular">会社情報</a> </li>
-                        <li class="nav-item"> <a href="#" class="nav-link font-regular">チャット用メッセージ</a> </li>
-                        <li class="nav-item "> <a href="#" class="nav-link active">自動応答メッセージ</a> </li>
-                        <li class="nav-item"> <a href="#" class="nav-link font-regular">査定テンプレート一覧</a> </li>
+                        <li class="nav-item"> <a href="@Url.Action("Index", "r_com_profile")" class="nav-link font-regular">会社情報</a> </li>
+                        <li class="nav-item"> <a href="@Url.Action("Index", "r_temp_mes")" class="nav-link font-regular">チャット用メッセージ</a> </li>
+                        <li class="nav-item "> <a href="@Url.Action("Index", "r_auto_mes")" class="nav-link active">自動応答メッセージ</a> </li>
+                        <li class="nav-item"> <a href="@Url.Action("Index", "r_template")" class="nav-link font-regular">査定テンプレート一覧</a> </li>
                     </ul>
 
                 </div>
@@ -42,64 +42,38 @@
                         <h5 class="mb-0">自動応答メッセージ一覧</h5>
                     </div>
                     <div class="p-5 container">
-                        <div class="row pb-3">
+                        @{int i = 1;}
+                        @foreach (var temp in ViewBag.AutoMsg)
+                        {
+                            <div class="row pb-3">
+                                <div class="col-md-12">
+                                    <p class="pb-3">
+                                        <strong>@temp.SEQ. @temp.MessageTitle<span class="text-success ps-3">@temp.Applying</span></strong>
+                                    </p>
+                                    <div class="clearfix"></div>
+                                        <p class="pb-3">@temp.MessageTEXT </p>
+                                    <p class="float-end">
 
-                            <div class="col-md-12">
-                                <p class="pb-3">
-                                    <strong>1. Automatic message save name<span class="text-success ps-3">適用中</span></strong>
-                                </p>
-                                <div class="clearfix"></div>
-                                <p class="pb-3">
-                                    Automatic message contentAutomatic message contentAutomatic message contentAutomatic message contentAutomatic message contentAutomatic message contentAutomatic message contentAutomatic message content
-                                </p>
-                                <p class="float-end">
+                                        @if (ViewBag.IsSetting == 1)
+                                        {
+                                            <a class="float-right btn text-white btn-primary" data-bs-toggle="modal" data-bs-target="#message-com" id="btnEdit"> <i class="fa fa-pencil"></i> 編集</a>
+                                            <a class="float-right btn text-white btn-danger" data-bs-toggle="modal"
+                                               data-bs-target="#message-del" id="btnDel"><i class="fa fa-times"></i>削除</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="float-right btn text-white btn-primary" data-bs-toggle="modal" id="btnEdit"> <i class="fa fa-pencil"></i> 編集</a>
+                                            <a class="float-right btn text-white btn-danger" data-bs-toggle="modal" id="btnDel"> <i class="fa fa-times"></i>削除</a>
+                                        }
 
-                                    <a class="float-right btn text-white btn-primary" data-bs-toggle="modal" data-bs-target="#message-com"> <i class="fa fa-pencil"></i> 編集</a>          <a class="float-right btn text-white btn-danger" data-bs-toggle="modal"
-                                                                                                                                                                                            data-bs-target="#message-del"><i class="fa fa-times"></i>削除</a>
-                                </p>
+                                    </p>
+
+                                </div>
                             </div>
-                        </div>
-                        <hr class="navbar-divider my-5 opacity-20">
-                        <div class="row pb-3">
-
-                            <div class="col-md-12">
-                                <p class="pb-3">
-                                    <strong>2. Automatic message save name<span class="text-success ps-3">適用中</span></strong>
-                                </p>
-                                <div class="clearfix"></div>
-                                <p class="pb-3">
-                                    Automatic message contentAutomatic message contentAutomatic message contentAutomatic message contentAutomatic message contentAutomatic message contentAutomatic message contentAutomatic message content
-                                </p>
-                                <p class="float-end">
-
-                                    <a class="float-right btn text-white btn-primary" data-bs-toggle="modal" data-bs-target="#message-com"> <i class="fa fa-pencil"></i> 編集</a>
-                                    <a class="float-right btn text-white btn-danger" data-bs-toggle="modal"
-                                       data-bs-target="#message-del"><i class="fa fa-times"></i>削除</a>
-                                </p>
-                            </div>
-                        </div>
-                        <hr class="navbar-divider my-5 opacity-20">
-                        <div class="row pb-3">
-
-                            <div class="col-md-12">
-                                <p class="pb-3">
-                                    <strong>3. Automatic message save name</strong>
-                                </p>
-                                <div class="clearfix"></div>
-                                <p class="pb-3">
-                                    Automatic message contentAutomatic message contentAutomatic message contentAutomatic message contentAutomatic message contentAutomatic message contentAutomatic message contentAutomatic message content
-                                </p>
-                                <p class="float-end">
-
-                                    <a class="float-right btn text-white btn-primary" data-bs-toggle="modal" data-bs-target="#message-com"> <i class="fa fa-pencil"></i> 編集</a>
-                                    <a class="float-right btn text-white btn-danger" data-bs-toggle="modal"
-                                       data-bs-target="#message-del"><i class="fa fa-times"></i>削除</a>
-                                </p>
-                            </div>
-                        </div>
+                            <hr class="navbar-divider my-5 opacity-20">
+                            { i++; }
+                         }
                     </div>
-
-
                 </div>
                 <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-del" tabindex="-1" aria-labelledby="message-delModalLabel"
                      aria-hidden="true">
