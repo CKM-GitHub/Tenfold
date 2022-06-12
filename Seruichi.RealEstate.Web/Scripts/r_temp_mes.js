@@ -19,71 +19,47 @@ function setValidation()
         .addvalidation_errorElement("#error_txtMsgContent")
         .addvalidation_reqired()  //E101
         .addvalidation_singlebyte_doublebyte();//E105
-
-
-    $('#txtMsgTitle_New')
-        .addvalidation_errorElement("#error_txtMsgTitle_New")
-        .addvalidation_reqired()  //E101
-        .addvalidation_singlebyte_doublebyte(); //E105
-
-    $('#txtMsgContent_New')
-        .addvalidation_errorElement("#error_txtMsgContent_New")
-        .addvalidation_reqired()  //E101
-        .addvalidation_singlebyte_doublebyte();//E105
-
-
 }
 function addEvents()
 {
     common.bindValidationEvent('#form1', '');
-    $('#btnInsert').on('click', function () {
+   
+   
+    $('#btnUpdate').on('click', function () {
         $form = $('#form1').hideChildErrors();
 
         if (!common.checkValidityOnSave('#form1')) {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
-        //const $this = $(this)
-        //if (!common.checkValidityInput($this)) {
-        //    return false;
-        //}
         let model = {
-            MessageTitle: $('#txtMsgTitle_New').val(),
-            MessageTEXT: $('#txtMsgContent_New').val(),
+            MessageSEQ: $('#txtMsgSEQ').val(),
+            MessageTitle: $('#txtMsgTitle').val(),
+            MessageTEXT: $('#txtMsgContent').val(),
         };
 
-        common.callAjax(_url.insert_M_REMessage, model, function (result) {
+        if ($('#txtMsgSEQ').val()!='')
+        { //for update
+        common.callAjax(_url.update_M_REMessage, model, function (result) {
             if (result && result.isOK) {
                 window.location.reload();
             }
             if (result && !result.isOK) {
-                alert("UnInsertSuccessfull!!")
+                alert("UnUpdate Successfull!!")
             }
         });
-    });
-   
-    $('#btnUpdate').on('click', function ()
-    {
-        $form = $('#form1').hideChildErrors();
-
-        if (!common.checkValidityOnSave('#form1')) {
-            $form.getInvalidItems().get(0).focus();
-            return false;
-        }
-         let model = {
-                MessageSEQ: $('#txtMsgSEQ').val(),
-                MessageTitle: $('#txtMsgTitle').val(),
-                MessageTEXT: $('#txtMsgContent').val(),
-            };
-
-         common.callAjax(_url.update_M_REMessage, model, function (result) {
+       }
+        else
+        {// for Insert
+            common.callAjax(_url.insert_M_REMessage, model, function (result) {
                 if (result && result.isOK) {
                     window.location.reload();
                 }
                 if (result && !result.isOK) {
-                    alert("UnUpdate Successfull!!")
+                    alert("UnInsertSuccessfull!!")
                 }
             });
+        }
     });
 
     $('#btnDelete').on('click', function () {
@@ -107,9 +83,12 @@ function addEvents()
 
     $('#btnNew').on('click', function ()
     {
-        $('#message-com-ins').modal('show');
-        $('#txtMsgTitle_New').hideError();
-        $('#txtMsgContent_New').hideError();
+        $('#message-com').modal('show');
+        $('#txtMsgSEQ').val("");
+        $('#txtMsgTitle').val("");
+        $('#txtMsgContent').val("");
+        $('#txtMsgTitle').hideError();
+        $('#txtMsgContent').hideError();
     });
 }
 

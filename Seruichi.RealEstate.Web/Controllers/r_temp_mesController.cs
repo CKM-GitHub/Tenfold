@@ -44,7 +44,12 @@ namespace Seruichi.RealEstate.Web.Controllers
     {
         model = Getlogdata(model);
         r_temp_mesBL bl = new r_temp_mesBL();
-        if (!bl.Insert_M_REMessage(model, out string errorcd))
+        var validationResult = bl.ValidateAll(model);
+        if (validationResult.Count > 0)
+        {
+            return ErrorResult(validationResult);
+        }
+            if (!bl.Insert_M_REMessage(model, out string errorcd))
         {
             return ErrorMessageResult(errorcd);
         }
@@ -56,6 +61,11 @@ namespace Seruichi.RealEstate.Web.Controllers
     {
             model = Getlogdata(model);
             r_temp_mesBL bl = new r_temp_mesBL();
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
             if (!bl.Update_M_REMessage(model, out string errorcd))
             {
                 return ErrorMessageResult(errorcd);
