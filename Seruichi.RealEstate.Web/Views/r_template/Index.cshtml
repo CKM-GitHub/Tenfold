@@ -1,15 +1,18 @@
-﻿@model Models.RealEstate.r_auto_mes.r_auto_mesModel
+﻿@model Models.RealEstate.r_template.r_templateModel
 
 @{
     ViewBag.Title = "セルイチ管理機能";
     Layout = "~/Views/Shared/_r_menuLayout.cshtml";
+}
+@{ 
+    var permission = ViewBag.permission_setting;
 }
 @section styles{
     @Styles.Render("~/Content/realEstate_css_common")
 }
 <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
     <div class="d-flex flex-column min-h-screen" id="page-content-wrapper">
-
+        <input id="permission_setting" type="hidden" value="@permission"  />
         <main class="py-6 bg-surface-secondary">
             <form id="form1">
                 <div class="container-fluid">
@@ -283,6 +286,7 @@
                 </div>
                 <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-del" tabindex="-1" aria-labelledby="message-delModalLabel"
                      aria-hidden="true">
+                    <input id="hdnVal" value="0" type="hidden" />
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -297,8 +301,10 @@
                                         data-bs-target="#menu-modal">
                                     戻る
                                 </button>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#message-delok">
+                                <button id="btnConfirm" type="button" class="btn btn-primary"
+                                        @*data-bs-toggle="modal"
+                                        data-bs-target="#message-delok"*@
+                                        >
                                     確定
                                 </button>
 

@@ -21,26 +21,38 @@ namespace Seruichi.BL.RealEstate.r_template
             DBAccess db = new DBAccess();
             var dt = db.SelectDataSet("pr_r_template_Select_DisplayData", sqlParams);
             return dt;
-        } 
-
-        public void Insert_REMessage_Data(r_auto_mesModel model)
+        }
+        public void Delete_R_templateDate(r_templateModel model)
         {
+
             var sqlParams = new SqlParameter[]
              {
-                new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = model.RealECD },
-                new SqlParameter("@MessageSEQ", SqlDbType.VarChar) { Value = model.MessageSEQ },
-                new SqlParameter("@MessageTitle", SqlDbType.VarChar) { Value = model.MessageTitle },
-                new SqlParameter("@MessageTEXT", SqlDbType.VarChar) { Value = model.MessageTEXT },
-                new SqlParameter("@ValidFlg", SqlDbType.TinyInt) { Value = model.ValidFlg },
-                new SqlParameter("@Operator", SqlDbType.VarChar) { Value = model.LoginID },
-                new SqlParameter("@LoginName", SqlDbType.VarChar) { Value = model.LoginName },
-                new SqlParameter("@IPAddress", SqlDbType.VarChar) { Value = model.IPAddress },
-                new SqlParameter("@Remarks", SqlDbType.VarChar) { Value = model.Remarks },
-
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD},
+                new SqlParameter("@TemplateNo", SqlDbType.VarChar){ Value = model.TemplateNo },
+                new SqlParameter("@TemplateKBN", SqlDbType.TinyInt){ Value = model.TemplateKBN },
+            
              };
 
             DBAccess db = new DBAccess();
-            db.InsertUpdateDeleteData("pr_r_auto_mes_Insert_REMessage_Data", false, sqlParams);
+            db.InsertUpdateDeleteData("pr_r_template_DeleteData", false, sqlParams);
+        }
+        public void Insert_L_Log( r_templateModel model)
+        {
+
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@LoginKBN", SqlDbType.TinyInt){ Value = model.LoginKBN.ToByte(0)},
+                new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.LoginID.ToStringOrNull() },
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.LoginName.ToStringOrNull() },
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress },
+                new SqlParameter("@Page", SqlDbType.VarChar){ Value = model.Page },
+                new SqlParameter("@Processing", SqlDbType.VarChar){ Value = model.Processing },
+                new SqlParameter("@Remarks", SqlDbType.VarChar){ Value = model.Remarks },
+             };
+
+            DBAccess db = new DBAccess();
+            db.InsertUpdateDeleteData("pr_Tenfold_Insert_L_Log", false, sqlParams);
         }
     }
 }

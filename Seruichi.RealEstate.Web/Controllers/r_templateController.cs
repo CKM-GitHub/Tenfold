@@ -22,24 +22,14 @@ namespace Seruichi.RealEstate.Web.Controllers
             {
                 return RedirectToAction("Index", "r_login");
             }
-            //r_auto_mesBL bl = new r_auto_mesBL();
-            //List<r_auto_mesModel> MesModel = new List<r_auto_mesModel>();
-            //DataTable dt = bl.Get_M_REMessage_By_RealECD(user.RealECD);
-            //MesModel = (from DataRow dr in dt.Rows
-            //            select new r_auto_mesModel()
-            //            {
-            //                RealECD = dr["RealECD"].ToString(),
-            //                SEQ = dr["SEQ"].ToString(),
-            //                MessageSEQ = dr["MessageSEQ"].ToString(),
-            //                MessageTitle = dr["MessageTitle"].ToString(),
-            //                MessageTEXT = dr["MessageTEXT"].ToString(),
-            //                Applying = dr["Applying"].ToString()
-            //            }).ToList();
+            var queryString = GetFromQueryString<r_templateModel>();
+            if (queryString.permission_setting != null && !String.IsNullOrEmpty(queryString.permission_setting))
+                Session["permission_setting"] = queryString.permission_setting;
 
-            //ViewBag.AutoMsg = MesModel;
-            //ViewBag.IsSetting = user.PermissionSetting;
-
-            return View();
+            if (String.IsNullOrEmpty(queryString.permission_setting) || Session["AssReqID"] == null)
+                Session["permission_setting"] = "0";
+            ViewBag.permission_setting = Session["permission_setting"].ToString();
+            return View(); 
         }
         [HttpPost]
         public ActionResult Get_templateData(r_templateModel model)
@@ -56,44 +46,25 @@ namespace Seruichi.RealEstate.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteData(r_auto_mesModel model)
+        public ActionResult DeleteData(r_templateModel model)
         {
             r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
             model.RealECD = user.RealECD;
+            model.LoginKBN = 2;
             model.LoginID = base.GetOperator("UserID");
             model.LoginName = base.GetOperator("UserName");
             model.IPAddress = base.GetClientIP();
-            r_auto_mesBL bl = new r_auto_mesBL();
-            bl.Delete_REMessage_Data(model);
+            model.Page = "r_template";
+            model.Processing = "Delete";
+            model.Remarks = "TemplateNo： " + model.TemplateNo;
+            r_templateBL bl = new r_templateBL();
+            if (Session["permission_setting"].ToString() == "1")
+            {
+                bl.Delete_R_templateDate(model);
+                bl.Insert_L_Log(model);
+            }
             return OKResult();
         }
-
-        [HttpPost]
-        public ActionResult InsertUpdateData(r_auto_mesModel model)
-        {
-            r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
-            r_auto_mesBL bl = new r_auto_mesBL();
-            model.RealECD = user.RealECD;
-            model.LoginID = base.GetOperator("UserID");
-            model.LoginName = base.GetOperator("UserName");
-            model.IPAddress = base.GetClientIP();
-
-            if (model.ValidFlg == 1)
-            {
-                model.ValidFlg = 1;
-                bl.Update_REMessageValidFlg_Data(model);
-            }
-
-            if (model.Mode == "2")
-            {
-                bl.UpdateData_REMessage_Data(model);
-            }
-            else
-            {
-                bl.Insert_REMessage_Data(model);
-            }
-
-            return OKResult();
-        }
+         
     }
 }
