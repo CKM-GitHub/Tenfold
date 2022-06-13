@@ -27,7 +27,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                 Session["permission_setting"] = queryString.permission_setting;
 
             if (String.IsNullOrEmpty(queryString.permission_setting) || Session["AssReqID"] == null)
-                Session["permission_setting"] = "0";
+                Session["permission_setting"] = "1";
             ViewBag.permission_setting = Session["permission_setting"].ToString();
             return View(); 
         }
