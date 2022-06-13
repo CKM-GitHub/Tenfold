@@ -11,6 +11,7 @@ using Models.RealEstate.r_template;
 using System.Data;
 using System.Threading.Tasks;
 using Seruichi.BL;
+using Seruichi.Common;
 namespace Seruichi.RealEstate.Web.Controllers
 {
     public class r_templateController : BaseController
@@ -22,13 +23,13 @@ namespace Seruichi.RealEstate.Web.Controllers
             {
                 return RedirectToAction("Index", "r_login");
             }
-            var queryString = GetFromQueryString<r_templateModel>();
-            if (queryString.permission_setting != null && !String.IsNullOrEmpty(queryString.permission_setting))
-                Session["permission_setting"] = queryString.permission_setting;
+            //var queryString = GetFromQueryString<r_templateModel>();
+            //if (queryString.permission_setting != null && !String.IsNullOrEmpty(queryString.permission_setting))
+            //    Session["permission_setting"] = queryString.permission_setting;
 
-            if (String.IsNullOrEmpty(queryString.permission_setting) || Session["AssReqID"] == null)
-                Session["permission_setting"] = "0";
-            ViewBag.permission_setting = Session["permission_setting"].ToString();
+            //if (String.IsNullOrEmpty(queryString.permission_setting) || Session["AssReqID"] == null)
+            //    Session["permission_setting"] = "1";
+            ViewBag.permission_setting = user.PermissionSetting.ToByte(0);// Session["permission_setting"].ToString();
             return View(); 
         }
         [HttpPost]
@@ -58,7 +59,7 @@ namespace Seruichi.RealEstate.Web.Controllers
             model.Processing = "Delete";
             model.Remarks = "TemplateNo： " + model.TemplateNo;
             r_templateBL bl = new r_templateBL();
-            if (Session["permission_setting"].ToString() == "1")
+            if (user.PermissionSetting.ToByte(0).ToString() == "1")
             {
                 bl.Delete_R_templateDate(model);
                 bl.Insert_L_Log(model);

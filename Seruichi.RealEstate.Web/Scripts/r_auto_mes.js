@@ -111,6 +111,9 @@ function addEvents() {
     //btnNew
     $('#btnNew').on('click', function () {
         $('#message-com').modal('show');
+        $('#MsgSEQ').val("");
+        $('#TemplateName').val("");
+        $('#TemplateContent').val("");
         $('#TemplateName').hideError();
         $('#TemplateContent').hideError();
     });
