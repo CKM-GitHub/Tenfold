@@ -46,7 +46,8 @@ function addEvents() {
 
         common.callAjaxWithLoading(_url.DeleteData, model, this, function (result) {
             if (result && result.isOK) {
-                window.location.href = common.appPath + '/r_auto_mes/Index';
+                //window.location.href = common.appPath + '/r_auto_mes/Index';
+                $('#message-delok').modal('show');
             }
             else {
                 alert("Processing UnSuccessfull!!");
@@ -58,7 +59,7 @@ function addEvents() {
 
     //btnDelClose
     $('#btnCloseUp').on('click', function () {
-        window.location.href = common.appPath + '/r_auto_mes/Index';
+        window.location.reload();
     });
 
     //btnCloseReturn
