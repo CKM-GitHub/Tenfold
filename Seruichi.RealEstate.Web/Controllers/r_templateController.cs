@@ -22,13 +22,13 @@ namespace Seruichi.RealEstate.Web.Controllers
             {
                 return RedirectToAction("Index", "r_login");
             }
-            var queryString = GetFromQueryString<r_templateModel>();
-            if (queryString.permission_setting != null && !String.IsNullOrEmpty(queryString.permission_setting))
-                Session["permission_setting"] = queryString.permission_setting;
+            //var queryString = GetFromQueryString<r_templateModel>();
+            //if (queryString.permission_setting != null && !String.IsNullOrEmpty(queryString.permission_setting))
+            //    Session["permission_setting"] = queryString.permission_setting;
 
-            if (String.IsNullOrEmpty(queryString.permission_setting) || Session["AssReqID"] == null)
-                Session["permission_setting"] = "0";
-            ViewBag.permission_setting = Session["permission_setting"].ToString();
+            //if (String.IsNullOrEmpty(queryString.permission_setting) || Session["AssReqID"] == null)
+            //    Session["permission_setting"] = "1";
+            ViewBag.permission_setting = user.PermissionSetting;// Session["permission_setting"].ToString();
             return View(); 
         }
         [HttpPost]
