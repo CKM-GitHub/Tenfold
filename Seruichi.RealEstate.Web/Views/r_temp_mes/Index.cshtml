@@ -152,10 +152,19 @@
                                             <div class="box-footer container">
                                                 <div>
                                                     <input type="text" class="form-control d-none" value="" readonly id="txtMsgSEQ" name="txtMsgSEQ">
-                                                    <label class="form-label" for="txtMsgTitle">チャット用メッセージ保存名</label><span class="cap-errormsg-right" id="error_txtMsgTitle"></span>
-                                                    <input type="text" id="txtMsgTitle" class="form-control form-control-lg mb-3" maxlength="100" />
-
-                                                    <label class="form-label" for="txtMsgContent">チャット用メッセージ内容</label><span class="cap-errormsg-right" id="error_txtMsgContent"></span>
+                                                    <table>
+                                                        <tr>
+                                                            <td><label class="form-label" for="txtMsgTitle">チャット用メッセージ保存名</label></td>
+                                                            <td><span class="cap-errormsg-right" id="error_txtMsgTitle"></span></td>
+                                                        </tr>
+                                                    </table>
+                                                    <input type="text" id="txtMsgTitle" class="form-control form-control-lg mb-3" maxlength="50" />
+                                                    <table>
+                                                    <tr>
+                                                        <td><label class="form-label" for="txtMsgContent">チャット用メッセージ内容</label></td>
+                                                        <td><span class="cap-errormsg-right" id="error_txtMsgContent"></span></td>
+                                                    </tr>
+                                                    </table>
                                                 </div>
                                                 <div class="input-group align-middle">
                                                     <textarea class="form-control custom-control" rows="5" id="txtMsgContent" maxlength="1000"></textarea>
