@@ -61,6 +61,11 @@ function addEvents() {
         window.location.href = common.appPath + '/r_auto_mes/Index';
     });
 
+    //btnCloseReturn
+    $('#btnReturn').on('click', function () {
+        $('#message-com').modal('hide');
+    });
+
 
     //btnInsertUpdate
     $('#btnSend').on('click', function () {
@@ -106,6 +111,9 @@ function addEvents() {
     //btnNew
     $('#btnNew').on('click', function () {
         $('#message-com').modal('show');
+        $('#MsgSEQ').val("");
+        $('#TemplateName').val("");
+        $('#TemplateContent').val("");
         $('#TemplateName').hideError();
         $('#TemplateContent').hideError();
     });
@@ -121,9 +129,12 @@ function Get_MsgSEQ(id) {
     $('#TemplateContent').val(id.split('&')[2]);
     var data = id.split('&')[3];
     if (data == "適用中") {
-        $("#ChkFlg").attr("checked", true);
+        //$("#ChkFlg").attr("checked", true);
+        //InvalidFLG: $('#txtflg_' + i).is(':checked') ? "1" : "0",
+        document.getElementById("ChkFlg").checked = true;
     }
     else {
-        $("#ChkFlg").attr("checked", false);
+        //$("#ChkFlg").attr("checked", false);
+        document.getElementById("ChkFlg").checked = false;
     }
 }
