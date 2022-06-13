@@ -97,7 +97,7 @@ function addEvents() {
         })
     }); 
     let model = {
-        RealECD: common.getUrlParameter('reale') 
+        RealECD: common.getUrlParameter('RealECD') 
     };
 
     $('#seller').addClass('d-none');
@@ -137,7 +137,7 @@ function CheckChanges() {
         StartDate: $('#StartDate').val(),
         EndDate: $('#EndDate').val(),
         Memo: $('#penaltyArea').val(),
-        RealECD: common.getUrlParameter('reale'),
+        RealECD: common.getUrlParameter('RealECD'),
     }
     $('#chagesCheck').removeAttr('data-bs-target');
     $('#chagesCheck').removeAttr('data-bs-toggle');
@@ -198,7 +198,7 @@ function SetCache(id) {
     staticCache.StartDate = $('#StartDate').val();
     staticCache.EndDate = $('#EndDate').val();
     staticCache.Memo = $('#penaltyArea').val();
-    staticCache.RealECD = common.getUrlParameter('reale');
+    staticCache.RealECD = common.getUrlParameter('RealECD');
    // staticCache.Isfake = '1';
     if (id) {
         get_purchase_Data(staticCache, $('form'), 'IsTable');
@@ -277,7 +277,7 @@ function l_logfunction() {
         IPAddress: null,
         Page: 't_reale_account',
         Processing: 'Update',
-        Remarks: common.getUrlParameter('reale'),
+        Remarks: common.getUrlParameter('RealECD'),
     };
     common.callAjax(_url.Insert_L_Log, model, function (result) {
         if (result && result.isOK) {
