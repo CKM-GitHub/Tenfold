@@ -87,6 +87,7 @@
     <Compile Include="Tenfold\t_seller_list\t_seller_listBL.cs" />
     <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionBL.cs" />
     <Compile Include="Tenfold\t_seller_memo\t_seller_memoBL.cs" />
+    <Compile Include="Tenfold\t_seller_new\t_seller_newBL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

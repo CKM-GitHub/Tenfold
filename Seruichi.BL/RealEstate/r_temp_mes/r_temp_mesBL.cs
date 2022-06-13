@@ -12,6 +12,16 @@ namespace Seruichi.BL.RealEstate.r_temp_mes
 {
     public class r_temp_mesBL
     {
+        public Dictionary<string, string> ValidateAll(r_temp_mesModel model)
+        {
+                ValidatorAllItems validator = new ValidatorAllItems();
+                validator.CheckRequired("MessageTitle", model.MessageTitle);//E101
+                validator.CheckRequired("MessageTEXT",  model.MessageTEXT);//E101
+
+                validator.CheckByteCount("MessageTitle", model.MessageTitle,100);//E105
+                validator.CheckByteCount("MessageTEXT", model.MessageTEXT, 1000);  //E105
+            return validator.GetValidationResult();
+        }
         public DataTable Get_M_REMessage_By_RealECD(string RealECD)
         {
           var sqlParams = new SqlParameter[]
