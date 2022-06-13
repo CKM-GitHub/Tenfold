@@ -1,11 +1,10 @@
 ﻿const _url = {};
 $(function () {
     _url.DisplayData = common.appPath + '/r_template/Get_templateData';
-    _url.DeleteData = common.appPath + '/r_auto_mes/DeleteData';
+    _url.DeleteData = common.appPath + '/r_template/DeleteData';
     _url.InsertData = common.appPath + '/r_auto_mes/InsertUpdateData'; 
     addEvents();
-}); 
-
+});  
 function BindData(result,id) {
     let data = JSON.parse(result);
     let html = "";
@@ -21,6 +20,7 @@ function BindData(result,id) {
                 page += '<label class="form-check-label" for="defaultCheck1"> <span class="ps-1 pe-1 rounded bg-primary text-white">マンション</span> </label>';
             if (label == '')
                 page += '<label class="form-check-label" for="defaultCheck1" style="background-color: white !important;" > <span style="background-color: white !important;" class="ps-1 pe-1 rounded bg-primary text-white">0</span> </label>';
+            var idHidden = '\''+data[i]['TemplateNo']  +'\',\''+ id +'\'';
             html +=
                 '<div class="col">\
                 <div class="row justify-content-center">\
@@ -37,7 +37,7 @@ function BindData(result,id) {
                                     </div>\
                                     <div class="col-md-12 col-lg-3 col-xl-3 border-start">\
                                         <div class="d-flex flex-column">\
-                                            <button class="btn btn-danger mt-1" type="button" data-bs-toggle="modal" data-bs-target="#message-del">\
+                                            <button class="btn btn-danger mt-1 btnTemplate_delete" type="button" onclick="DeleteTemplate('+ idHidden +')" data-bs-toggle="modal"  data-bs-target="#message-del">\
                                                 削除\
                                                                         </button>\
                                         </div>\
@@ -64,68 +64,62 @@ function BindData(result,id) {
         $('.option-template').html('');
         $('.option-template').append(html);
     }
+    if ($('#permission_setting').val() == '1')
+        $('.btnTemplate_delete').removeClass('disabled')
+    else
+        $('.btnTemplate_delete').addClass('disabled')
+
+
 }
-function addEvents() {  
-    let model = { 
-    };
-
-    common.callAjaxWithLoading(_url.DisplayData, model, this, function (result) {
-        if (result && result.isOK) { 
-            BindData(result.data.split('Ʈ')[0],'master-template');
-            BindData(result.data.split('Ʈ')[1],'rate-template');
-            BindData(result.data.split('Ʈ')[2],'rent-template');
-            BindData(result.data.split('Ʈ')[3], 'option-template');
-            //$('#message-com').modal('hide');
-            //window.location.href = common.appPath + '/r_auto_mes/Index';
-        }
-
-    });
-     
+function DeleteTemplate(Tno, id) { 
+    $('#hdnVal').val(Tno + '_' + id); 
+}
+function addEvents() { 
+    CallAjax();
     $('#btnNew').on('click', function () {
         $mode = "1";
     });
      
     $('#btnConfirm').on('click', function () {
-
+       var val= $('#hdnVal').val();
+        var KBN = '0';
+        if (val.split('_')[1] == 'master-template')
+            KBN = '0';
+        else if (val.split('_')[1] == 'rate-template')
+            KBN = '1';
+        else if (val.split('_')[1] == 'rent-template')
+            KBN = '2';
+        else if (val.split('_')[1] == 'option-template')
+            KBN = '3';
         let model = {
-            MessageSEQ: $HiddenSEQ,
-            ProcessKBN: "Delete",
-            Remarks: "MessageSEQ：" + $HiddenSEQ
+            TemplateNo: val.split('_')[0],
+            TemplateKBN: KBN, 
         };
 
         common.callAjax(_url.DeleteData, model,
             function (result) {
-                if (result && !result.isOK) {
-                    $('#message-delok').modal('hide');
-                }
+                if (result && result.isOK) {
+                    $('#message-del').modal('hide');
+                    CallAjax();
+                    $('#message-delok').modal('show');
+                } 
             });
 
     });
 
-    $('#btnCloseUp').on('click', function () {
-        window.location.href = common.appPath + '/r_auto_mes/Index';
-    });
+   
+}
+function CallAjax() {
+    let model = {
+    };
 
-    $('#btnSend').on('click', function () {
-        const $this = $(this), $HiddenSEQ = $("#MsgSEQ").val(), $TemplateName = $("#TemplateName").val(),
-            $TemplateContent = $("#TemplateContent").val(), $chk = $("#ChkFlg").val()
-
-        let model = {
-            MessageSEQ: $HiddenSEQ,
-            MessageTitle: $TemplateName,
-            MessageTEXT: $TemplateContent,
-            ValidFlg: $chk,
-            Mode: $mode,
-            Remarks: "MessageSEQ：" + $HiddenSEQ
-        };
-
-        common.callAjaxWithLoading(_url.InsertUpdateData, model, this, function (result) {
-            if (result && result.isOK) {
-                $('#message-com').modal('hide');
-                window.location.href = common.appPath + '/r_auto_mes/Index';
-            }
-
-        });
+    common.callAjaxWithLoading(_url.DisplayData, model, this, function (result) {
+        if (result && result.isOK) {
+            BindData(result.data.split('Ʈ')[0], 'master-template');
+            BindData(result.data.split('Ʈ')[1], 'rate-template');
+            BindData(result.data.split('Ʈ')[2], 'rent-template');
+            BindData(result.data.split('Ʈ')[3], 'option-template');
+        }
 
     });
 }
