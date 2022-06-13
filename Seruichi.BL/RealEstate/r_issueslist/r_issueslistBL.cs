@@ -124,8 +124,7 @@ namespace Seruichi.BL.RealEstate.r_issueslist
                 new SqlParameter("@Range", SqlDbType.VarChar){ Value = model.Range.ToStringOrNull() },
                 new SqlParameter("@StartDate", SqlDbType.VarChar){ Value = model.StartDate.ToStringOrNull() },
                 new SqlParameter("@EndDate", SqlDbType.VarChar){ Value = model.EndDate.ToStringOrNull() },
-                new SqlParameter("@FreeWord", SqlDbType.VarChar){ Value = model.FreeWord.ToStringOrNull() },
-                new SqlParameter("@E_FreeWord", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.FreeWord, cryptionKey).ToStringOrNull() }
+                new SqlParameter("@FreeWord", SqlDbType.VarChar){ Value = model.FreeWord.ToStringOrNull() }
             };
 
             DBAccess db = new DBAccess();
@@ -141,6 +140,26 @@ namespace Seruichi.BL.RealEstate.r_issueslist
                 row["売主_建物名部屋番号"] = crypt.DecryptFromBase64(row.Field<string>("売主_建物名部屋番号"), cryptionKey);
                 row["売主_固定電話番号"] = crypt.DecryptFromBase64(row.Field<string>("売主_固定電話番号"), cryptionKey);
                 row["売主_携帯電話番号"] = crypt.DecryptFromBase64(row.Field<string>("売主_携帯電話番号"), cryptionKey);
+            }
+
+            if (!string.IsNullOrEmpty(model.FreeWord))
+            {
+                var query = dt.AsEnumerable().Where(dr => dr.Field<string>("物件名").Contains(model.FreeWord) || dr.Field<string>("売主名").Contains(model.FreeWord));
+                if (query.Any())
+                {
+                    int i = 0;
+                    foreach (var row in query)
+                    {
+                        i++;
+                        row["NO"] = i;
+                    }
+                    return query.OrderBy(row => row["査定依頼ID"]).CopyToDataTable();
+                }
+                else
+                {
+                    DataTable newTable = dt.Clone();
+                    return newTable;
+                }
             }
             return dt;
         }
