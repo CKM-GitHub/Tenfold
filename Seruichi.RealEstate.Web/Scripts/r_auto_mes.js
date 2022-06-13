@@ -22,10 +22,14 @@ function setValidation() {
 function addEvents() {
     common.bindValidationEvent('#form1', '');
 
+
+    //checkbox check or not
     $('#ChkFlg').on('change', function () {
         this.value = this.checked ? 1 : 0;
     }).change();
 
+
+    //btnDel
     $('#btnConfirm').on('click', function () {
         $form = $('#form1').hideChildErrors();
         if (!common.checkValidityOnSave('#form1')) {
@@ -51,10 +55,14 @@ function addEvents() {
 
     });
 
+
+    //btnDelClose
     $('#btnCloseUp').on('click', function () {
         window.location.href = common.appPath + '/r_auto_mes/Index';
     });
 
+
+    //btnInsertUpdate
     $('#btnSend').on('click', function () {
         $form = $('#form1').hideChildErrors();
         if (!common.checkValidityOnSave('#form1')) {
@@ -93,10 +101,20 @@ function addEvents() {
         });
 
     });
+
+
+    //btnNew
+    $('#btnNew').on('click', function () {
+        $('#message-com').modal('show');
+        $('#TemplateName').hideError();
+        $('#TemplateContent').hideError();
+    });
 }
 function Get_MsgSEQ(id) {
     $('#MessageTitle').hideError();
     $('#MessageText').hideError();
+    $('#TemplateName').hideError();
+    $('#TemplateContent').hideError();
 
     $('#MsgSEQ').val(id.split('&')[0]);
     $('#TemplateName').val(id.split('&')[1]);

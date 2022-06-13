@@ -24,7 +24,7 @@
                             </div>
                             <div class="col-sm-6 col-12 text-sm-end">
                                 <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
-                      <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+                <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
                             </div>
                         </div>
                         <ul class="nav nav-tabs mt-0 overflow-x border-0 ps-5">
@@ -88,8 +88,7 @@
                                     重要: 「メッセージ」を削除すると、メッセージは完全に削除されます。<br>復元することはできません。
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                                            >
+                                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal">
                                         戻る
                                     </button>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -118,9 +117,21 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4" data-bs-toggle="modal" data-bs-target="#message-com">
+                    @if (ViewBag.IsSetting == 1)
+                    {
+                        <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4" id="btnNew" data-bs-toggle="modal">
+                            <i class="fa fa-plus-circle pe-2"></i>新規チャット用メッセージ入力
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4 d-none" id="btnNew" data-bs-toggle="modal">
+                            <i class="fa fa-plus-circle pe-2"></i>新規チャット用メッセージ入力
+                        </button>
+                    }
+                    @*<button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4" data-bs-toggle="modal" data-bs-target="#message-com">
                         <i class="fa fa-plus-circle pe-2"></i>新規自動応答メッセージ入力
-                    </button>
+                    </button>*@
                     <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-com" tabindex="-1"
                          aria-labelledby="message-com" aria-hidden="true">
                         <div class="modal-dialog modal-xl modal-dialog-centered">
@@ -134,7 +145,7 @@
                                         <div class="box-footer container">
                                             <div>
                                                 <label class="form-label" for="TemplateName">自動応答メッセージ保存名</label><span class="cap-errormsg-right" id="errorTemplateName"></span>
-                                                <input type="text" id="TemplateName" class="form-control form-control-lg mb-3" maxlength="100"  />
+                                                <input type="text" id="TemplateName" class="form-control form-control-lg mb-3" maxlength="100" />
                                                 <label class="form-label" for="ChkFlg">適用</label>
                                                 <div class="col-auto mb-3">
                                                     <div class="form-check form-switch">
@@ -161,7 +172,7 @@
                             </div>
                         </div>
                     </div>
-            </form>
+</form>
         </main>
 
         @Html.Partial("~/Views/Shared/_r_footer.cshtml")
