@@ -91,7 +91,7 @@ function addEvents() {
         $(this).addClass('active');
     });
     let model = {
-        RealECD: common.getUrlParameter('reale'),
+        RealECD: common.getUrlParameter('RealECD'),
         Chk_Area: $("#Chk_Area").val(),
         Chk_Mansion: $("#Chk_Mansion").val(),
         Chk_SendCustomer: $("#Chk_SendCustomer").val(),
@@ -121,7 +121,7 @@ function addEvents() {
         }
         $('#tblPurchaseDetails tbody').empty(); 
         model = {
-            RealECD: common.getUrlParameter('reale'),
+            RealECD: common.getUrlParameter('RealECD'),
             Chk_Area: $("#Chk_Area").val(),
             Chk_Mansion: $("#Chk_Mansion").val(),
             Chk_SendCustomer: $("#Chk_SendCustomer").val(),
@@ -146,7 +146,7 @@ function addEvents() {
         $('#tblPurchaseDetails tbody').empty();
      
         model = {
-            RealECD: common.getUrlParameter('reale'),
+            RealECD: common.getUrlParameter('RealECD'),
             Chk_Area: $("#Chk_Area").val(),
             Chk_Mansion: $("#Chk_Mansion").val(),
             Chk_SendCustomer: $("#Chk_SendCustomer").val(),

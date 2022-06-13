@@ -21,10 +21,10 @@ namespace Seruichi.Tenfold.Web.Controllers
         //{
         //    return View();
         //}
-        public ActionResult Index(string reale)
+        public ActionResult Index(string RealECD)
         {
             //SellerCD = "S000000017";
-            if (String.IsNullOrWhiteSpace(reale))
+            if (String.IsNullOrWhiteSpace(RealECD))
             {  
                 return BadRequestResult();
             }
