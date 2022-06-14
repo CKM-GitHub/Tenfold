@@ -11,6 +11,11 @@ $(function () {
 });
 
 function setValidation() {
+
+    $('#txtApartment')
+        .addvalidation_errorElement("#errorApartment")
+        .addvalidation_reqired()
+        .addvalidation_doublebyte();
     
     $('#StartNum')
         .addvalidation_errorElement("#errorAge")

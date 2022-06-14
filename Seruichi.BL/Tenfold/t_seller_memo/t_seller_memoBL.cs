@@ -92,12 +92,14 @@ namespace Seruichi.BL.Tenfold.t_seller_memo
             db.InsertUpdateDeleteData("pr_Tenfold_Insert_L_Log", false, sqlParams);
         }
 
-        public void Edit_MemoText(t_seller_memoModel model)
+        public void Modify_MemoText(t_seller_memoModel model)
         {
             var sqlParams = new SqlParameter[]
              {
                 new SqlParameter("@SellerMemoSEQ", SqlDbType.VarChar){ Value = model.SellerMemoSEQ.ToStringOrNull() },
                 new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD.ToStringOrNull() },
+                new SqlParameter("@ParentChildKBN", SqlDbType.VarChar){ Value = model.ParentChildKBN.ToStringOrNull() },
+                new SqlParameter("@ParentSEQ", SqlDbType.VarChar){ Value = model.ParentSEQ.ToStringOrNull() },
                 new SqlParameter("@MemoText", SqlDbType.VarChar){ Value = model.MemoText.ToStringOrNull() },
                 new SqlParameter("@Type", SqlDbType.VarChar){ Value = model.Type.ToStringOrNull() },
                 new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.LoginID.ToStringOrNull() },

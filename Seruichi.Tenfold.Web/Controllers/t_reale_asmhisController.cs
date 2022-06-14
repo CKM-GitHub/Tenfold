@@ -15,8 +15,12 @@ namespace Seruichi.Tenfold.Web.Controllers
     public class t_reale_asmhisController : BaseController
     {
         // GET: t_reale_asmhis
-        public ActionResult Index()
+        public ActionResult Index(string RealECD)
         {
+            if (String.IsNullOrWhiteSpace(RealECD))
+            {
+                return BadRequestResult();
+            }
             return View();
         }
         [HttpPost]

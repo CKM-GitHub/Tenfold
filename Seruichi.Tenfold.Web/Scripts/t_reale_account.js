@@ -6,7 +6,7 @@ $(function () {
     _url.get_t_reale_purchase_DisplayData = common.appPath + '/t_reale_account/get_t_reale_account_DisplayData'; 
 
     _url.get_t_reale_accountSave = common.appPath + '/t_reale_account/get_t_reale_account_ManipulateData';
-    _url.Insert_L_Log = common.appPath + '/t_reale_purchase/Insert_L_Log';
+    _url.Insert_L_Log = common.appPath + '/t_reale_account/Insert_L_Log';
     _url.get_Modal_HomeData = common.appPath + '/t_reale_purchase/get_Modal_HomeData';
     _url.get_Modal_ProfileData = common.appPath + '/t_reale_purchase/get_Modal_ProfileData';
     _url.get_Modal_ContactData = common.appPath + '/t_reale_purchase/get_Modal_ContactData';
@@ -38,6 +38,7 @@ function setValidation() {
 
 function addEvents() {
     common.bindValidationEvent('#form1', '');
+
     const btn = document.querySelector("#flexSwitchCheckDefault_Penalty")
     btn.addEventListener("change", function () {
         if (this.checked) {
@@ -74,18 +75,15 @@ function addEvents() {
     });
 
     $('#btn_save').on('click', function () {
-        let model = {
-            penaltyFlg: document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? '1' : '0',
-            testFlg: document.querySelector("#flexSwitchCheckDefault").checked ? '1' : '0',
-            StartDate: $('#StartDate').val(),
-            EndDate: $('#EndDate').val(),
-            Memo: $('#penaltyArea').val(),
-            RealECD: common.getUrlParameter('reale')
-        }
+     
+
+        SetCache(); 
         $('#modal-changesave').modal('hide');
-        common.callAjaxWithLoadingSync(_url.get_t_reale_accountSave, model, this, function (result) {
+        common.callAjaxWithLoadingSync(_url.get_t_reale_accountSave, staticCache, this, function (result) {
             if (result && result.isOK) {
+                l_logfunction();
                 $('#modal-changeok').modal('show');
+                //#modal-changeok
             }
             else {
                 const errors = result.data;
@@ -93,18 +91,20 @@ function addEvents() {
                     const target = document.getElementById(key);
                     $(target).showError(errors[key]);
                     this.getInvalidItems().get(0).focus();
+                    return;
                 }
             }
         })
-    });
-
+    }); 
     let model = {
-        RealECD: common.getUrlParameter('reale') 
+        RealECD: common.getUrlParameter('RealECD') 
     };
 
     $('#seller').addClass('d-none');
     $('#submenu_seller').addClass('d-none');
-
+    //#wrapper {
+    //    padding - left: 0;
+    $('#wrapper').prop('style','padding-left:0px !important')
     Bind_Company_Data(this);
     //Bind Company Info Data to the title part of the page
 
@@ -112,14 +112,105 @@ function addEvents() {
 
     document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? $('.disabled-account').removeAttr("disabled") : $('.disabled-account').attr("disabled", "true")
 
-   // sortTable.getSortingTable("tblPurchaseDetails"); 
+    SetCache();
+}
+ 
+var staticCache = {
+    penaltyFlg:'',
+    testFlg :'',
+    StartDate :'',
+    EndDate :'',
+    Memo :'',
+    RealECD: '',
+    Isfake:'1'
+};
+function CheckChanges() {
+    $form = $('#form1').hideChildErrors();
+    if (!common.checkValidityOnSave('#form1')) {
+        $form.getInvalidItems().get(0).focus();
+        return false;
+    }
+    //debugger
+    var currrentState = {
+        penaltyFlg: document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? '1' : '0',
+        testFlg: document.querySelector("#flexSwitchCheckDefault").checked ? '1' : '0',
+        StartDate: $('#StartDate').val(),
+        EndDate: $('#EndDate').val(),
+        Memo: $('#penaltyArea').val(),
+        RealECD: common.getUrlParameter('RealECD'),
+    }
+    $('#chagesCheck').removeAttr('data-bs-target');
+    $('#chagesCheck').removeAttr('data-bs-toggle');
      
+    if (staticCache.StartDate === currrentState.StartDate && staticCache.EndDate === currrentState.EndDate && staticCache.Memo === currrentState.Memo && staticCache.testFlg === currrentState.testFlg && staticCache.penaltyFlg === currrentState.penaltyFlg) {
+        $('#modal-changesave').modal('hide');
+
+    }
+    else {
+        if (staticCache.StartDate === currrentState.StartDate && staticCache.EndDate === currrentState.EndDate && staticCache.Memo === currrentState.Memo && staticCache.penaltyFlg === currrentState.penaltyFlg) {
+            staticCache.Isfake = '0';
+        }
+        else
+            staticCache.Isfake = '1';
+
+        $('#modal-changesave').modal('show'); 
+    }
+}
+function discardChanges() {
+    
+    common.callAjaxWithLoadingSync(_url.get_t_reale_purchase_DisplayData, staticCache, this, function (result) {
+        if (result && result.isOK) {
+
+            let data = JSON.parse(result.data.split('Ʈ')[0]);
+
+            if (data[0]['TestFlg'] == '1') {
+                $('#flexSwitchCheckDefault').attr("checked", "true");
+                document.querySelector("#flexSwitchCheckDefault").checked = true;
+
+            }
+            else {
+                $('#flexSwitchCheckDefault').removeAttr('checked')
+                document.querySelector("#flexSwitchCheckDefault").checked = false;
+            }
+            if (data[0]['PenaltyFlg'] == '1') {
+                $('#flexSwitchCheckDefault_Penalty').attr("checked", "true");
+                document.querySelector("#flexSwitchCheckDefault_Penalty").checked = true;
+            }
+            else {
+                $('#flexSwitchCheckDefault_Penalty').removeAttr('checked')
+                document.querySelector("#flexSwitchCheckDefault_Penalty").checked = false;
+            }
+            $('#StartDate').val(data[0]['PenaltyStartDate']);
+            $('#EndDate').val(data[0]['PenaltyEndDate']);
+            $('#penaltyArea').val(data[0]['PenaltyMemo']);
+            
+            document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? $('.disabled-account').removeAttr("disabled") : $('.disabled-account').attr("disabled", "true")
+            $('.cap-errormsg-right').addClass("d-none")
+            $('.disabled-account').removeClass("cap-is-invalid")
+            //cap-is-invalid
+        }
+    })
 }
 
+function SetCache(id) {
+    staticCache.penaltyFlg = document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? '1' : '0';
+    staticCache.testFlg = document.querySelector("#flexSwitchCheckDefault").checked ? '1' : '0';
+    staticCache.StartDate = $('#StartDate').val();
+    staticCache.EndDate = $('#EndDate').val();
+    staticCache.Memo = $('#penaltyArea').val();
+    staticCache.RealECD = common.getUrlParameter('RealECD');
+   // staticCache.Isfake = '1';
+    if (id) {
+        get_purchase_Data(staticCache, $('form'), 'IsTable');
+    }
+}
 function get_purchase_Data(model, $form, state) {
     common.callAjaxWithLoadingSync(_url.get_t_reale_purchase_DisplayData, model, this, function (result) {
         if (result && result.isOK) {
-            BindPenalty(result.data.split('Ʈ')[0]);
+            if (state != 'IsTable') {
+                BindPenalty(result.data.split('Ʈ')[0]);
+            }
+            
             Bind_DisplayData(result.data.split('Ʈ')[1]);
             //if (state == 'Display')
             //    l_logfunction(model.RealECD + ' ' + $('#r_REName').text(), 'display', '');
@@ -161,6 +252,7 @@ function Bind_DisplayData(result) {
                                                     </div>'
         }
     }
+    $('#penaltyList').html('');
     $('#penaltyList').append(html);
 }
 function BindPenalty(result) {
@@ -175,26 +267,21 @@ function BindPenalty(result) {
     $('#EndDate').val(data[0]['PenaltyEndDate']);
     $('#penaltyArea').val(data[0]['PenaltyMemo']);
 }
-function l_logfunction(remark, Process, id) {
+function l_logfunction() {
 
     let model = {
         LoginKBN: '3',
         LoginID: null,
-        RealECD: null,
+        RealECD: null  ,
         LoginName: null,
         IPAddress: null,
-        Page: 't_reale_asmhis',
-        Processing: Process,
-        Remarks: remark,
+        Page: 't_reale_account',
+        Processing: 'Update',
+        Remarks: common.getUrlParameter('RealECD'),
     };
     common.callAjax(_url.Insert_L_Log, model, function (result) {
         if (result && result.isOK) {
-            if (remark == 't_seller_assessment ' + id) {
-                window.location.href = window.location.href.replace('t_reale_asmhis', 't_seller_assessment') + "&SellerCD=" + id;
-            }
-            else if (remark == 't_seller_assessment_detail ' + id) {
-                window.location.href = window.location.href.replace('t_reale_asmhis', 't_seller_assessment_detail') + "&AssReqID=" + id;
-            }
+            return;
         }
     });
 }

@@ -15,6 +15,11 @@ namespace Seruichi.Tenfold.Web.Controllers
         // GET: t_seller_memo
         public ActionResult Index(string SellerCD)
         {
+            if (string.IsNullOrEmpty(SellerCD))
+            {
+                return RedirectToAction("BadRequest", "Error");
+            }
+
             t_seller_memoBL bl = new t_seller_memoBL();
             string sellername = bl.get_t_sellerName(SellerCD);
             ViewBag.Title = "管理－売主－" + sellername;
@@ -50,12 +55,12 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit_MemoText(t_seller_memoModel model)
+        public ActionResult Modify_MemoText(t_seller_memoModel model)
         {
             t_seller_memoBL bl = new t_seller_memoBL();
             model.LoginID = base.GetOperator();
             model.IPAddress = base.GetClientIP();
-            bl.Edit_MemoText(model);
+            bl.Modify_MemoText(model);
             return OKResult();
         }
 

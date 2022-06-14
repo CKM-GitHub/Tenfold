@@ -51,6 +51,7 @@
     <Compile Include="RealEstate\r_asmc_set_area_check_tab\r_asmc_set_area_check_tabBL.cs" />
     <Compile Include="RealEstate\r_asmc_set_train_check_tab\r_asmc_set_train_check_tabBL.cs" />
     <Compile Include="RealEstate\r_asmc_railway\r_asmc_railwayBL.cs" />
+    <Compile Include="RealEstate\r_auto_mes\r_auto_mesBL.cs" />
     <Compile Include="RealEstate\r_com_profile\r_com_profileBL.cs" />
     <Compile Include="RealEstate\r_contact\r_contactBL.cs" />
     <Compile Include="RealEstate\r_dashboard\r_dashboardBL.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="RealEstate\r_issueslist\r_issueslistBL.cs" />
     <Compile Include="RealEstate\r_login\r_loginBL.cs" />
     <Compile Include="RealEstate\r_staff\r_staffBL.cs" />
+    <Compile Include="RealEstate\r_template\r_templateBL.cs" />
     <Compile Include="RealEstate\r_temp_mes\r_temp_mesBL.cs" />
     <Compile Include="Seller\a_assess_dBL.cs" />
     <Compile Include="Seller\a_contactBL.cs" />
@@ -77,14 +79,17 @@
     <Compile Include="Tenfold\t_mansion\t_mansionBL.cs" />
     <Compile Include="Tenfold\t_mansion_list\t_mansion_listBL.cs" />
     <Compile Include="Tenfold\t_mansion_new\t_mansion_newBL.cs" />
+    <Compile Include="Tenfold\t_reale_account\t_reale_accountBL.cs" />
     <Compile Include="Tenfold\t_reale_asmhis\t_reale_asmhisBL.cs" />
     <Compile Include="Tenfold\t_reale_list\t_reale_listBL.cs" />
+    <Compile Include="Tenfold\t_reale_memo\t_reale_memoBL.cs" />
     <Compile Include="Tenfold\t_reale_purchase\t_reale_purchaseBL.cs" />
     <Compile Include="Tenfold\t_seller_account\t_seller_accountBL.cs" />
     <Compile Include="Tenfold\t_seller_assessment\t_seller_assessmentBL.cs" />
     <Compile Include="Tenfold\t_seller_list\t_seller_listBL.cs" />
     <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionBL.cs" />
     <Compile Include="Tenfold\t_seller_memo\t_seller_memoBL.cs" />
+    <Compile Include="Tenfold\t_seller_new\t_seller_newBL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
@@ -197,6 +202,8 @@
     <Content Include="Database\StoredProcedure\pr_t_mansion_list_get_m_pref_and_citygpcd_and_citycd.sql" />
     <Content Include="Database\StoredProcedure\pr_t_mansion_list_Select_M_Mansion.sql" />
     <Content Include="Database\StoredProcedure\pr_t_mansion_new_InsertMansionData.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_reale_account_DisplayData.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_reale_account_InsertUpdateData.sql" />
     <Content Include="Database\StoredProcedure\pr_t_reale_asmhis_get_DisplayData.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_List_csv_generate.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_list_Select_DropDownlistofPref.sql" />
