@@ -319,7 +319,8 @@ function addEvents() {
     });
 
     $('#btnSuccessPopup').click(function () {
-        window.location.href = common.appPath + "/t_mansion_list/index";
+        //window.location.href = common.appPath + "/t_mansion_list/index";
+        window.location.reload();
     });
 }
 
