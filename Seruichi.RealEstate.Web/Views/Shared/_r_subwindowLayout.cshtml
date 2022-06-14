@@ -1,0 +1,44 @@
+﻿@{
+    string appPath = System.Web.Hosting.HostingEnvironment.ApplicationVirtualPath;
+    if (appPath == "/")
+    {
+        appPath = "";
+    }
+    string messageJson = Newtonsoft.Json.JsonConvert.SerializeObject(Seruichi.Common.StaticCache.GetClientMessages());
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js"
+            integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>セルイチ管理機能</title>
+
+    @Styles.Render("~/Content/css/application")
+    @RenderSection("styles", required: false)
+</head>
+
+<body>
+    <input type="hidden" id="_RequestVerificationToken" value="@SessionAuthenticationHelper.GetVerificationToken()" />
+    @RenderBody()
+    <script src="~/Content/bootstrap/bootstrap.min.js"></script>
+    @Scripts.Render("~/Content/scripts/application")
+    <script>
+        $(function () {
+            common.appPath = '@appPath';
+            data = JSON.parse('@Html.Raw(messageJson)');
+            for (const key in data)
+            {
+                messageConst[key] = data[key];
+            }
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

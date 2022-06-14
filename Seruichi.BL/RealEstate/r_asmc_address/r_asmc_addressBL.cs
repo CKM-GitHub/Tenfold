@@ -56,7 +56,7 @@ namespace Seruichi.BL.RealEstate.r_asmc_address
             return result;
         }
 
-        public r_asmc_addressDetailModel GetTownsByCitycdCsv(string citycdCsv, string realECD)
+        public r_asmc_addressDetailModel GetTownsByCityCD(string citycdCsv, string realECD)
         {
             r_asmc_addressDetailModel result = new r_asmc_addressDetailModel();
 

@@ -51,6 +51,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ValidationModel.cs" />
     <Compile Include="RealEstate\RealEstate_L_Log_Model.cs" />
+    <Compile Include="RealEstate\r_asmc_railway\r_asmc_railwayModel.cs" />
+    <Compile Include="RealEstate\r_asmc_set_area_check_tab\r_asmc_set_area_check_tabModel.cs" />
+    <Compile Include="RealEstate\r_asmc_set_train_check_tab\r_asmc_set_train_check_tabModel.cs" />
     <Compile Include="RealEstate\r_asmc_address\r_asmc_addressModel.cs" />
     <Compile Include="RealEstate\r_asmc_ms_list_sh\r_asmc_ms_list_shModel.cs" />
     <Compile Include="RealEstate\r_asmc_ms_reged_list\r_asmc_ms_reged_listModel.cs" />

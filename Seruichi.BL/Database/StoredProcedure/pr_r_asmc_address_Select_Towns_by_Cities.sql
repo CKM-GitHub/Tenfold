@@ -24,8 +24,8 @@ BEGIN
         ,ISNULL(RES.Kensu,0)        AS RealEstateCount
         ,ADR.DisplayOrder
 
-        ,ISNULL(MyRES.ValidFLG, 9)  AS ValidFLG
-        ,MyRES.ExpDate
+        ,ISNULL(MyRES.ValidFLG, 0)  AS ValidFLG
+        ,CASE WHEN MyRES.ValidFLG IS NULL THEN MyRES2.ExistsFlg ELSE 0 END AS ExpirationFlag
 
     FROM M_Address   ADR          ---住所マスタ 
     ----------------------------------------------------------------------
@@ -55,8 +55,7 @@ BEGIN
     ----------------------------------------------------------------------
     OUTER APPLY (
                 SELECT 
-                     MAX(t2.ValidFLG)   AS ValidFLG
-                    ,MAX(t2.ExpDate)    AS ExpDate
+                     MIN(t2.ValidFLG) + 1   AS ValidFLG
                 FROM M_RECondAreaSec t1
                 INNER JOIN M_RECondArea t2 ON t1.RealECD = t2.RealECD AND t1.ConditionSEQ = t2.ConditionSEQ 
                 WHERE t1.RealECD = @RealECD
@@ -64,8 +63,20 @@ BEGIN
                 AND   t1.DeleteDateTime IS NULL
                 AND   t2.DeleteDateTime IS NULL
                 AND   t2.ExpDate > GETDATE()
+                AND   t1.DisabledFlg = 0
                 GROUP BY CityCD 
                 ) AS   MyRES
+
+    OUTER APPLY (
+                SELECT TOP 1
+                     1 AS ExistsFlg
+                FROM M_RECondAreaSec t1
+                INNER JOIN M_RECondArea t2 ON t1.RealECD = t2.RealECD AND t1.ConditionSEQ = t2.ConditionSEQ 
+                WHERE t1.RealECD = @RealECD
+                AND   t1.TownCD = ADR.TownCD
+                AND   t1.DeleteDateTime IS NULL
+                AND   t2.DeleteDateTime IS NULL
+                ) AS   MyRES2
 
     WHERE ADR.NoDisplayFLG = 0  --表示対象外は除く
       AND ADR.AddressLevel = 2  --AddressLevel=1 は除く
