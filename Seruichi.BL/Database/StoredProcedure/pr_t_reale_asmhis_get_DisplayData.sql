@@ -4,14 +4,14 @@ BEGIN
 END
 GO
 
-Create procedure [dbo].[pr_t_reale_asmhis_get_DisplayData]
+Create  procedure [dbo].[pr_t_reale_asmhis_get_DisplayData]
 								  
 								   
 							    @SellerCD   varchar(10),
 							    @RealECD	varchar(10),
 							    @Range      varchar(50),--=N'買取依頼日',
-							    @StartDate  date ,--= NULL,
-							    @EndDate    date ,--= NULL,
+							    @StartDate  date = NULL,
+							    @EndDate    date = NULL,
 							    @Chk_Area	 tinyint,--         = 1,
 							    @Chk_Mansion	 tinyint ,--        = 1,
 							    @Chk_SendCustomer	 tinyint ,--        = 1,
@@ -75,11 +75,13 @@ Create procedure [dbo].[pr_t_reale_asmhis_get_DisplayData]
 									)
 
 								 and 
-										 (@Chk_SendCustomer =0 or (@Chk_SendCustomer = 1 and  C.IntroFlg =1)  )
+								  C.IntroFlg = @Chk_SendCustomer
+								-- (@Chk_SendCustomer =0 or (@Chk_SendCustomer = 1 and  C.IntroFlg =1)  )
 								 and    
 										(( (@Chk_Top5 =1 and C.Rank <= 5 ))  or ( (@Chk_Top5Out =1 and C.Rank >5))) 
-								 and  
-								  (( ( @Chk_NonMemberSeller = 0 ) or  (@Chk_NonMemberSeller = 1 and  D.SellerCD is null)    )) 
+								 and    
+								  ((@Chk_NonMemberSeller = 0 and  D.SellerCD is not null) or (@Chk_NonMemberSeller = 1 and  D.SellerCD is null))
+								  --(( ( @Chk_NonMemberSeller = 0 ) or  (@Chk_NonMemberSeller = 1 and  D.SellerCD is null)    )) 
 								 
 								  
 												Order by D.DeepAssDateTime, D.AssReqID 
