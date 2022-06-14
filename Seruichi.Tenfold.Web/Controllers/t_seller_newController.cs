@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Seruichi.Common;
 using Models.Tenfold.t_seller_new;
-using Seruichi.BL.Tenfold.t_seller_new;
+using Seruichi.BL;
 
 namespace Seruichi.Tenfold.Web.Controllers
 {
@@ -15,6 +15,8 @@ namespace Seruichi.Tenfold.Web.Controllers
         // GET: t_seller_new
         public ActionResult Index()
         {
+            CommonBL cmmbl = new CommonBL();
+            ViewBag.PrefDropDownListItems = cmmbl.GetDropDownListItemsOfAllPrefecture();
             return View();
         }
     }
