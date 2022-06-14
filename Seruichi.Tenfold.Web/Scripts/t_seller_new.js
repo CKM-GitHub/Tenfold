@@ -15,15 +15,18 @@ function setValidation() {
         .addvalidation_errorElement("#errorSellerName")
         .addvalidation_reqired()
         .addvalidation_maxlengthCheck(25)
+        .addvalidation_custom("customValidation_convertFullWidth")
         .addvalidation_doublebyte();
     $('#SellerKana')
         .addvalidation_errorElement("#errorSellerKana")
         .addvalidation_reqired()
         .addvalidation_maxlengthCheck(25)
+        .addvalidation_custom("customValidation_convertFullWidth")
         .addvalidation_doublebyte_kana();
     $('#Birthday')
         .addvalidation_errorElement("#errorBirthday")
         .addvalidation_reqired()
+        .addvalidation_datecheck()
         .addvalidation_maxlengthCheck(10)
         .setInputModeNumber();
     $('#Password')
@@ -38,6 +41,7 @@ function setValidation() {
         .addvalidation_reqired()
         .addvalidation_singlebyte()
         .addvalidation_passwordcompare()
+        .addvalidation_minlengthCheck(8)
         .addvalidation_maxlengthCheck(20);
     $('#MemoText')
         .addvalidation_errorElement("#errorMemoText")
@@ -80,9 +84,11 @@ function setValidation() {
         .addvalidation_singlebyte_number();
     $('#Fax')
         .addvalidation_errorElement("#errorFax")
+        .addvalidation_maxlengthCheck(15)
         .addvalidation_singlebyte_number();
     $('#MailAddress')
         .addvalidation_errorElement("#errorMailAddress")
+        .addvalidation_reqired()
         .addvalidation_maxlengthCheck(100);
 }
 
@@ -142,6 +148,17 @@ function customValidation_checkPhone(e) {
     inputValue = inputValue.replace(/-/g, "")
     inputValue = inputValue.replace(/－/g, "")
     $this.val(inputValue);
+
+    return true;
+}
+
+function customValidation_convertFullWidth(e) {
+    const $this = $(e)
+
+    let inputvalue = $this.val();
+    inputvalue = common.replaceSingleToDouble(inputvalue);
+    inputvalue = common.replaceSingleToDoubleKana(inputvalue);
+    $this.val(inputvalue);
 
     return true;
 }
