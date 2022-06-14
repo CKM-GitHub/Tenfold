@@ -49,7 +49,7 @@ namespace Seruichi.BL.RealEstate.r_asmc_railway
             return result;
         }
 
-        public r_asmc_addressDetailModel GetStationsByLinecdCsv(string linecdCsv, string realECD)
+        public r_asmc_addressDetailModel GetStationsByLineCD(string linecdCsv, string realECD)
         {
             r_asmc_addressDetailModel result = new r_asmc_addressDetailModel();
 

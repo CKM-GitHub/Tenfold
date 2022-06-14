@@ -48,6 +48,8 @@
     <Compile Include="CommonBL.cs" />
     <Compile Include="RealEstate\r_asmc_ms_list_sh\r_asmc_ms_list_shBL.cs" />
     <Compile Include="RealEstate\r_asmc_ms_reged_list\r_asmc_ms_reged_listBL.cs" />
+    <Compile Include="RealEstate\r_asmc_set_area_check_tab\r_asmc_set_area_check_tabBL.cs" />
+    <Compile Include="RealEstate\r_asmc_set_train_check_tab\r_asmc_set_train_check_tabBL.cs" />
     <Compile Include="RealEstate\r_asmc_railway\r_asmc_railwayBL.cs" />
     <Compile Include="RealEstate\r_com_profile\r_com_profileBL.cs" />
     <Compile Include="RealEstate\r_contact\r_contactBL.cs" />
@@ -95,6 +97,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Database\Function\fn_GetCondOptValueText.sql" />
+    <Content Include="Database\Function\fn_GetCondOptOptionKBNName.sql" />
     <Content Include="Database\Function\fn_GetBuildingAge.sql" />
     <Content Include="Database\StoredProcedure\pr_a_assess_d_Insert_D_IntroReq_D_AssReqProgress_D_AssessResult.sql" />
     <Content Include="Database\StoredProcedure\pr_a_assess_d_Select_Screen_by_AssReqID.sql" />
@@ -149,6 +153,16 @@
     <Content Include="Database\StoredProcedure\pr_M_Message_Select_by_ID.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfPref.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfStation.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_area_check_tab_Select_M_RECondAreaOpt_by_ConditionSEQ.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_area_check_tab_Select_M_RECondAreaRate_by_ConditionSEQ.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_area_check_tab_Select_M_RECondAreaRent_by_ConditionSEQ.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_area_check_tab_Select_M_RECondAreaSec_by_TownCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_area_check_tab_Select_V_RECondAreaSec.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_train_check_tab_Select_V_RECondLineSta.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_train_check_tab_Select_M_RECondLineOpt_by_ConditionSEQ.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_train_check_tab_Select_M_RECondLineRent_by_ConditionSEQ.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_train_check_tab_Select_M_RECondLineRate_by_ConditionSEQ.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_train_check_tab_Select_M_RECondLineSta_by_StationCD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_railway_Select_Stations_by_Lines.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_railway_Select_Lines_by_RegionCD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_address_Select_Cities_by_RegionCD.sql" />

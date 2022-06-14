@@ -68,10 +68,10 @@
                             var text1 = string.Format("({0}件/{1}社)", item03.MansionCount, item03.RealEstateCount);
                             var text2 = string.Format("({0}件)", item03.MansionCount);
                             var text3 = string.Format("({0}社)", item03.RealEstateCount);
-                            string css_icon = 
-                                item03.ValidFLG == 0 ? "fa fa-info-circle text-danger" : 
-                                item03.ValidFLG == 1 ? "fa fa-info-circle cap-text-primary" :
-                                item03.ValidFLG == 2 ? "fa fa-exclamation-triangle text-warning" :
+                            string css_icon =
+                                item03.ExpirationFlag == 1 ? "fa fa-exclamation-triangle text-warning" :
+                                item03.ValidFLG == 1 ? "fa fa-info-circle text-danger" :
+                                item03.ValidFLG == 2 ? "fa fa-info-circle cap-text-primary" :
                                 "";
 
                             <label class="heckbox-inline p-3 cap-fon-div-w270 text-nowrap text-dark">

@@ -1,4 +1,4 @@
-﻿@model Models.RealEstate.r_asmc_set_train_check_tab.M_RECondLineStaModel
+﻿@model Models.RealEstate.r_asmc_set_area_check_tab.M_RECondAreaSecModel
 
 @{
     ViewBag.Title = "査定条件設定確認";
@@ -24,16 +24,16 @@
                         <div class="col-md-12 col-12 mb-3 mb-sm-0">
 
                             <h1 class="h2 mb-0 ls-tight">査定条件設定確認</h1>
-                            <span class="text-muted small">査定条件＞設定＞住所・路線から設定＞路線から設定</span>
+                            <span class="text-muted small">査定条件＞設定＞住所・路線から設定＞住所から設定</span>
                         </div>
                         <div class="col-sm-6 col-12 text-sm-end">
                             <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
-                                  <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+    <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
                         </div>
                     </div>
                 </div>
                 <div class="card shadow border-0 mb-7">
-                    <div class="card-header"><h5>駅名</h5></div>
+                    <div class="card-header"><h5>地域</h5></div>
 
                     <div class="card-body container">
 
@@ -42,7 +42,7 @@
                             <table class="table table-hover table-nowrap">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th scope="col" style="width: 200px" class="text-decoration-underline">駅名</th>
+                                        <th scope="col" style="width: 200px" class="text-decoration-underline">地域</th>
                                         <th scope="col" style="width: 100px" class="text-decoration-underline">公開状況</th>
                                         <th scope="col" style="width: 150px" class="text-decoration-underline">有効期限状況</th>
                                         <th scope="col" style="width: auto" class="text-decoration-underline"></th>
@@ -51,7 +51,7 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <a class="text-heading font-semibold" id="stationName">@Model.StationName</a>
+                                            <a class="text-heading font-semibold" id="stationName">@Model.TownName</a>
                                         </td>
                                         <td><span class="@css1">@Model.ValidFLGText</span> </td>
                                         <td><span class="@css2">@Model.ExpDateText</span>  </td>
@@ -76,7 +76,7 @@
                                         <th scope="col" style="width: 100px;">買取利回り率</th>
                                         <th scope="col">駅距離</th>
 
-                                        @foreach (var capitions in ViewBag.M_RECondLineRate.ColHeader)
+                                        @foreach (var capitions in ViewBag.M_RECondAreaRate.ColHeader)
                                         {
                                             <th scope="col">
                                                 <span class="text-danger">@capitions[0]</span>
@@ -88,12 +88,12 @@
                                 </thead>
                                 <tbody>
                                     @{
-                                        int rowCountRate = ViewBag.M_RECondLineRate.RowHeader.Count;
+                                        int rowCountRate = ViewBag.M_RECondAreaRate.RowHeader.Count;
                                     }
                                     @for (int i = 0; i < rowCountRate; i++)
                                     {
-                                        var rowCaptions = ViewBag.M_RECondLineRate.RowHeader[i];
-                                        var items = ViewBag.M_RECondLineRate.RowData[i];
+                                        var rowCaptions = ViewBag.M_RECondAreaRate.RowHeader[i];
+                                        var items = ViewBag.M_RECondAreaRate.RowData[i];
 
                                         <tr>
                                             @if (i == 0)
@@ -132,7 +132,7 @@
                                         <th scope="col" style="width: 100px;">1㎡あたりの家賃</th>
                                         <th scope="col">駅距離</th>
 
-                                        @foreach (var capitions in ViewBag.M_RECondLineRent.ColHeader)
+                                        @foreach (var capitions in ViewBag.M_RECondAreaRent.ColHeader)
                                         {
                                             <th scope="col">
                                                 <span class="text-danger">@capitions[0]</span>
@@ -144,12 +144,12 @@
                                 </thead>
                                 <tbody>
                                     @{
-                                        int rowCountRent = ViewBag.M_RECondLineRent.RowHeader.Count;
+                                        int rowCountRent = ViewBag.M_RECondAreaRent.RowHeader.Count;
                                     }
                                     @for (int i = 0; i < rowCountRent; i++)
                                     {
-                                        var rowCaptions = ViewBag.M_RECondLineRent.RowHeader[i];
-                                        var items = ViewBag.M_RECondLineRent.RowData[i];
+                                        var rowCaptions = ViewBag.M_RECondAreaRent.RowHeader[i];
+                                        var items = ViewBag.M_RECondAreaRent.RowData[i];
 
                                         <tr>
                                             @if (i == 0)
@@ -185,7 +185,7 @@
                     <div class="card-body container">
 
                         <div class="border table-responsive cap-con-form mx-auto">
-                            @Html.Partial("_r_asmc_M_RECondLineOpt_list")
+                            @Html.Partial("_r_asmc_M_RECondAreaOpt_list")
                         </div>
                     </div>
 
@@ -269,3 +269,4 @@
         </main>
     </div>
 </div>
+

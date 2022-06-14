@@ -49,11 +49,11 @@
             </div>
         </main>
     </div>
-
     <form id="form1" method="post" novalidate>
-        <input type="hidden" name="selectedList_Cities" id="hdnSelectedList_Cities" />
-        <input type="hidden" name="selectedList_Towns" id="hdnSelectedList_Towns" />
+        <input type="hidden" name="selected_lines" id="hdnSelected_lines" />
+        <input type="hidden" name="selected_stations" id="hdnSelected_stations" />
     </form>
+    @Html.Partial("_ErrorModal")
 </div>
 
 @section Scripts{

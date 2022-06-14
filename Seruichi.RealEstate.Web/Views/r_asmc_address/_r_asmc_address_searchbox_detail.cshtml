@@ -52,11 +52,11 @@
                 }
 
                 string css_icon =
-                    item02.ValidFLG == 0 ? "fa fa-info-circle text-danger" :
-                    item02.ValidFLG == 1 ? "fa fa-info-circle cap-text-primary" :
-                    item02.ValidFLG == 2 ? "fa fa-exclamation-triangle text-warning" :
+                    item02.ExpirationFlag == 1 ? "fa fa-exclamation-triangle text-warning" :
+                    item02.ValidFLG == 1 ? "fa fa-info-circle text-danger" :
+                    item02.ValidFLG == 2 ? "fa fa-info-circle cap-text-primary" :
                     "";
-                string a_href = "";
+                string a_href = "javascript:openCheckTab('" + @item02.TownCD + "');";
 
                 <label class="cap-hover text-dark checkbox-inline p-3 cap-fon-div-w270 text-nowrap">
                     <input type="checkbox" value="@item02.TownCD" class="@css_chkbox" checked>
