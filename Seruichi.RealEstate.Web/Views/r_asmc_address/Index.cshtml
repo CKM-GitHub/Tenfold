@@ -19,7 +19,7 @@
                         </div>
                         <div class="col-sm-6 col-12 text-sm-end">
                             <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
-                            <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+                        <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
                         </div>
                     </div>
                     @Html.Action("Render_tab_menu", new { rc = ViewBag.CurrentRegionCD })
@@ -48,6 +48,7 @@
                 </div>
             </div>
         </main>
+        @Html.Partial("~/Views/Shared/_r_footer.cshtml")
     </div>
     <form id="form1" method="post" novalidate>
         <input type="hidden" name="selected_cities" id="hdnSelected_cities" />

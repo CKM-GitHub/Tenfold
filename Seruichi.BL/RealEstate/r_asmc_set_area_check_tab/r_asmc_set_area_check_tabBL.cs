@@ -64,7 +64,7 @@ namespace Seruichi.BL.RealEstate.r_asmc_set_area_check_tab
                 var queryRow = e.Where(r => r.Field<int>("RowNo") == i);
                 if (!queryRow.Any()) continue;
 
-                string[] rowCaptions = null;
+                string[] rowHeader = null;
                 List<string> rowData = new List<string>();
 
                 foreach (DataRow dr in queryRow)
@@ -83,16 +83,16 @@ namespace Seruichi.BL.RealEstate.r_asmc_set_area_check_tab
                     }
 
                     //RowHeader
-                    if (rowCaptions == null)
+                    if (rowHeader == null)
                     {
-                        rowCaptions = new string[2];
+                        rowHeader = new string[2];
                         if (i == max.RowNo)
                         {
-                            rowCaptions = new string[] { dr["AgeFrom"].ToInt32(0).ToString(), "～" };
+                            rowHeader = new string[] { dr["AgeFrom"].ToInt32(0).ToString(), "～" };
                         }
                         else
                         {
-                            rowCaptions = new string[] { dr["AgeTo"].ToInt32(0).ToString(), "以内" };
+                            rowHeader = new string[] { dr["AgeTo"].ToInt32(0).ToString(), "以内" };
                         }
                     }
 
@@ -100,7 +100,7 @@ namespace Seruichi.BL.RealEstate.r_asmc_set_area_check_tab
                     rowData.Add(dr["Rate"].ToDecimal(0).ToStringOrEmpty());
                 }
 
-                result.RowHeader.Add(rowCaptions);
+                result.RowHeader.Add(rowHeader);
                 result.RowData.Add(rowData);
             }
 
@@ -139,7 +139,7 @@ namespace Seruichi.BL.RealEstate.r_asmc_set_area_check_tab
                 var queryRow = e.Where(r => r.Field<int>("RowNo") == i);
                 if (!queryRow.Any()) continue;
 
-                string[] rowCaptions = null;
+                string[] rowHeader = null;
                 List<string[]> rowData = new List<string[]>();
 
                 foreach (DataRow dr in queryRow)
@@ -158,16 +158,16 @@ namespace Seruichi.BL.RealEstate.r_asmc_set_area_check_tab
                     }
 
                     //RowHeader
-                    if (rowCaptions == null)
+                    if (rowHeader == null)
                     {
-                        rowCaptions = new string[2];
+                        rowHeader = new string[2];
                         if (i == max.RowNo)
                         {
-                            rowCaptions = new string[] { dr["AgeFrom"].ToInt32(0).ToString(), "～" };
+                            rowHeader = new string[] { dr["AgeFrom"].ToInt32(0).ToString(), "～" };
                         }
                         else
                         {
-                            rowCaptions = new string[] { dr["AgeTo"].ToInt32(0).ToString(), "以内" };
+                            rowHeader = new string[] { dr["AgeTo"].ToInt32(0).ToString(), "以内" };
                         }
                     }
 
@@ -181,7 +181,7 @@ namespace Seruichi.BL.RealEstate.r_asmc_set_area_check_tab
                     });
                 }
 
-                result.RowHeader.Add(rowCaptions);
+                result.RowHeader.Add(rowHeader);
                 result.RowData.Add(rowData);
             }
 
