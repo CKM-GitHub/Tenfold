@@ -111,6 +111,12 @@ const common = {
         });
     },
 
+    showErrorPopup: function showErrorPopup(id) {
+        $('#site-error-modal-title').text(id);
+        $('#site-error-modal-message').text(this.getMessage(id));
+        $('#site-error-modal').modal('show');
+    },
+
     querySerialize: function querySerialize(data) {
         const encode = window.encodeURIComponent;
         let key, value, type, i, max;

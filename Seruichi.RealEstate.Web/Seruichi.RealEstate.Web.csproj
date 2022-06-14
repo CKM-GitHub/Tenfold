@@ -137,6 +137,8 @@
     <Compile Include="Controllers\Common\BaseController.cs" />
     <Compile Include="Controllers\Common\CommonApiController.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
+    <Compile Include="Controllers\r_asmc_set_area_check_tab.cs" />
+    <Compile Include="Controllers\r_asmc_set_train_check_tab.cs" />
     <Compile Include="Controllers\r_asmc_railway.cs" />
     <Compile Include="Controllers\r_asmc_address.cs" />
     <Compile Include="Controllers\r_asmc_ms_list_shController.cs" />
@@ -185,6 +187,7 @@
     <Content Include="Content\images\map\japan_map_outline.png" />
     <Content Include="Content\modernizr\modernizr-2.8.3.js" />
     <Content Include="Content\scripts\common.js" />
+    <Content Include="Content\scripts\hover.js" />
     <Content Include="Content\scripts\profileimg.js" />
     <Content Include="Content\scripts\rating.js" />
     <Content Include="Content\scripts\sidebar.js" />
@@ -271,6 +274,12 @@
     <Content Include="Views\r_temp_mes\Index.cshtml" />
     <Content Include="Views\r_auto_mes\Index.cshtml" />
     <Content Include="Views\r_template\Index.cshtml" />
+    <Content Include="Views\Shared\_r_subwindowLayout.cshtml" />
+    <Content Include="Views\Shared\_ErrorModal.cshtml" />
+    <Content Include="Views\r_asmc_set_train_check_tab\Index.cshtml" />
+    <Content Include="Views\r_asmc_set_train_check_tab\_r_asmc_M_RECondLineOpt_list.cshtml" />
+    <Content Include="Views\r_asmc_set_area_check_tab\_r_asmc_M_RECondAreaOpt_list.cshtml" />
+    <Content Include="Views\r_asmc_set_area_check_tab\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

@@ -1,8 +1,8 @@
 ﻿@*r_asmc_address / r_asmc_railway 共通*@
 
 @{
-    string button_label = (ViewBag.PageID == "r_asmc_address" ? "さらに町名を絞り込む" 
-                         : ViewBag.PageID == "r_asmc_railway" ? "さらに駅を絞り込む" 
+    string button_label = (ViewBag.PageID == "r_asmc_address" ? "さらに町名を絞り込む"
+                         : ViewBag.PageID == "r_asmc_railway" ? "さらに駅を絞り込む"
                          : "");
 }
 
@@ -23,12 +23,6 @@
                         <input class="form-check-input" type="checkbox" value="" id="checkbox_settings2" checked>
                         <label class="form-check-label" for="defaultCheck2">
                             設定会社数
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox_settings3">
-                        <label class="form-check-label" for="defaultCheck3">
-                            期限切れ項目のみ表示
                         </label>
                     </div>
                 </div>
@@ -54,3 +48,9 @@
     </ul>
     <div class="mt-auto pb-20"></div>
 </div>
+<div class="toggle-button">
+    <a href="#menu-toggle" class="btn" id="menu-toggle">
+        <span class="fa fa-angle-right glyphicon-chevron-right" aria-hidden="true"></span>
+    </a>
+</div>
+

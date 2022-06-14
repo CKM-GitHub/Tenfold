@@ -14,6 +14,7 @@ function setValidation() {
 
     $('#txtApartment')
         .addvalidation_errorElement("#errorApartment")
+        .addvalidation_reqired()
         .addvalidation_doublebyte();
     
     $('#StartNum')
