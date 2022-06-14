@@ -116,9 +116,14 @@ function addEvents() {
             zipCode2: $zipCode2.val()
         };
 
-        if (!model.zipCode1 && !model.zipCode2) {
-            $($zipCode1, $zipCode2).hideError();
-            return;
+        if (model.zipCode1 == '' || model.zipCode2 == '') {
+            $zipCode1.hideError();
+            $zipCode2.hideError();
+            if (model.zipCode1 == '')
+                $zipCode1.focus();
+            else
+                $zipCode2.focus();
+            return false;
         }
 
         if (model.zipCode1) {
@@ -138,6 +143,21 @@ function addEvents() {
             });
         }
     });
+
+    $('#btnConfirm').on('click', function () {
+        $form = $('#form1').hideChildErrors();
+        if (!common.checkValidityOnSave('#form1')) {
+            $form.getInvalidItems().get(0).focus();
+            return false;
+        }
+
+        const fd = new FormData(document.forms.form1);
+        const model = Object.fromEntries(fd);
+        var prefName = $('#PrefName').text();
+        Bind_ModalData(model, prefName);
+        $('#confirm').modal('show');
+    });
+
 
 }
 
@@ -161,4 +181,21 @@ function customValidation_convertFullWidth(e) {
     $this.val(inputvalue);
 
     return true;
+}
+
+function Bind_ModalData(model, prefName) {
+    $('#m_SellerName').val(model.SellerName);
+    $('#m_SellerKana').val(model.SellerKana);
+    $('#m_Birthday').val(model.Birthday);
+    $('#m_MemoText').val(model.MemoText);
+    $('#m_ZipCode1').val(model.ZipCode1);
+    $('#m_ZipCode2').val(model.ZipCode2);
+    $('#m_PrefName').val(prefName);
+    $('#m_CityName').val(model.CityName);
+    $('#m_TownName').val(model.TownName);
+    $('#m_Address1').val(model.Address1);
+    $('#m_HousePhone').val(model.HousePhone);
+    $('#m_HandyPhone').val(model.HandyPhone);
+    $('#m_Fax').val(model.Fax);
+    $('#m_MailAddress').val(model.MailAddress);
 }

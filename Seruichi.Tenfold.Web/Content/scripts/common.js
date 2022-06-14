@@ -43,6 +43,7 @@ const commonApiUrl = {
     getDropDownListItemsOfTown: "/api/CommonApi/GetDropDownListItemsOfTown",
     getDropDownListItemsOfLine: "/api/CommonApi/GetDropDownListItemsOfLine",
     getDropDownListItemsOfStation: "/api/CommonApi/GetDropDownListItemsOfStation",
+    checkBirthday: "/api/CommonApi/CheckBirthday",
     getNearestStations: "/api/CommonApi/GetNearestStations",
 }
 
@@ -679,9 +680,8 @@ const common = {
     },
 
     birthdayCheck: function birthdayCheck(ctrl) {
-        const $ctrl = $(ctrl);
-
-        let inputValue = $ctrl.val();
+        var $ctrl = $(ctrl);
+        var inputValue = $ctrl.val();
         if (!inputValue) return;
 
         inputValue = common.replaceDoubleToSingle(inputValue);
@@ -689,7 +689,7 @@ const common = {
         inputValue = inputValue.replace(/-/g, '/');
         $ctrl.val(inputValue);
 
-        const regex = new RegExp(regexPattern.singlebyte_number);
+        var regex = new RegExp(regexPattern.singlebyte_number);
         if (!regex.test(inputValue.replace(/\//g, ''))) {
             $ctrl.showError(this.getMessage('E104'));
             return;
