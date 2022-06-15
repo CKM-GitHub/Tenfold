@@ -75,6 +75,8 @@ function addEvents() {
     });
 
     $('#btn_save').on('click', function () {
+     
+
         SetCache(); 
         $('#modal-changesave').modal('hide');
         common.callAjaxWithLoadingSync(_url.get_t_reale_accountSave, staticCache, this, function (result) {
@@ -95,12 +97,14 @@ function addEvents() {
         })
     }); 
     let model = {
-        RealECD: common.getUrlParameter('reale') 
+        RealECD: common.getUrlParameter('RealECD') 
     };
 
     $('#seller').addClass('d-none');
     $('#submenu_seller').addClass('d-none');
-
+    //#wrapper {
+    //    padding - left: 0;
+    $('#wrapper').prop('style','padding-left:0px !important')
     Bind_Company_Data(this);
     //Bind Company Info Data to the title part of the page
 
@@ -121,14 +125,19 @@ var staticCache = {
     Isfake:'1'
 };
 function CheckChanges() {
-
+    $form = $('#form1').hideChildErrors();
+    if (!common.checkValidityOnSave('#form1')) {
+        $form.getInvalidItems().get(0).focus();
+        return false;
+    }
+    //debugger
     var currrentState = {
         penaltyFlg: document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? '1' : '0',
         testFlg: document.querySelector("#flexSwitchCheckDefault").checked ? '1' : '0',
         StartDate: $('#StartDate').val(),
         EndDate: $('#EndDate').val(),
         Memo: $('#penaltyArea').val(),
-        RealECD: common.getUrlParameter('reale'),
+        RealECD: common.getUrlParameter('RealECD'),
     }
     $('#chagesCheck').removeAttr('data-bs-target');
     $('#chagesCheck').removeAttr('data-bs-toggle');
@@ -189,7 +198,7 @@ function SetCache(id) {
     staticCache.StartDate = $('#StartDate').val();
     staticCache.EndDate = $('#EndDate').val();
     staticCache.Memo = $('#penaltyArea').val();
-    staticCache.RealECD = common.getUrlParameter('reale');
+    staticCache.RealECD = common.getUrlParameter('RealECD');
    // staticCache.Isfake = '1';
     if (id) {
         get_purchase_Data(staticCache, $('form'), 'IsTable');
@@ -268,7 +277,7 @@ function l_logfunction() {
         IPAddress: null,
         Page: 't_reale_account',
         Processing: 'Update',
-        Remarks: common.getUrlParameter('reale'),
+        Remarks: common.getUrlParameter('RealECD'),
     };
     common.callAjax(_url.Insert_L_Log, model, function (result) {
         if (result && result.isOK) {

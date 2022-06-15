@@ -2,6 +2,7 @@
 $(function () {
     _url.render_searchbox_detail = common.appPath + '/r_asmc_address/Render_searchbox_detail';
     _url.gotoNextPage = common.appPath + '/r_asmc_address/GotoNextPage';
+    _url.openCheckTab = common.appPath + '/r_asmc_set_area_check_tab/Index';
     addEvents();
 });
 
@@ -51,7 +52,10 @@ function addEvents() {
             citycdCsv += $(this).val() + ",";
         });
 
-        if (!citycdCsv) return;
+        if (!citycdCsv) {
+            common.showErrorPopup('E302');
+            return;
+        }
 
         model = {
             citycdCsv : citycdCsv.slice(0, -1),
@@ -79,11 +83,11 @@ function addEvents() {
         });
 
         if (!citycdCsv) {
-            alert(common.getMessage('E302'));
+            common.showErrorPopup('E302');
             return;
         }
 
-        $('#hdnSelectedList_Cities').val(citycdCsv.slice(0, -1));
+        $('#hdnSelected_cities').val(citycdCsv.slice(0, -1));
         common.callSubmit(document.forms.form1, _url.gotoNextPage);
     });
 
@@ -94,11 +98,18 @@ function addEvents() {
         });
 
         if (!towncdCsv) {
-            alert(common.getMessage('E302'));
+            common.showErrorPopup('E302');
             return;
         }
 
-        $('#hdnSelectedList_Towns').val(towncdCsv.slice(0, -1));
+        $('#hdnSelected_towns').val(towncdCsv.slice(0, -1));
         common.callSubmit(document.forms.form1, _url.gotoNextPage);
     });
+}
+
+function openCheckTab(townCD) {
+    const query = {
+        tc: townCD
+    }
+    let newwin = window.open(_url.openCheckTab + common.querySerialize(query));
 }

@@ -91,7 +91,7 @@ function addEvents() {
         $(this).addClass('active');
     });
     let model = {
-        RealECD: common.getUrlParameter('reale'),
+        RealECD: common.getUrlParameter('RealECD'),
         Chk_Area: $("#Chk_Area").val(),
         Chk_Mansion: $("#Chk_Mansion").val(),
         Chk_SendCustomer: $("#Chk_SendCustomer").val(),
@@ -106,7 +106,7 @@ function addEvents() {
     };
 
     $('#seller').addClass('d-none');
-    //$('#submenu_seller').addClass('d-none');
+    $('#submenu_seller').addClass('d-none');
 
     Bind_Company_Data(this);         //Bind Company Info Data to the title part of the page
 
@@ -121,7 +121,7 @@ function addEvents() {
         }
         $('#tblPurchaseDetails tbody').empty(); 
         model = {
-            RealECD: common.getUrlParameter('reale'),
+            RealECD: common.getUrlParameter('RealECD'),
             Chk_Area: $("#Chk_Area").val(),
             Chk_Mansion: $("#Chk_Mansion").val(),
             Chk_SendCustomer: $("#Chk_SendCustomer").val(),
@@ -146,7 +146,7 @@ function addEvents() {
         $('#tblPurchaseDetails tbody').empty();
      
         model = {
-            RealECD: common.getUrlParameter('reale'),
+            RealECD: common.getUrlParameter('RealECD'),
             Chk_Area: $("#Chk_Area").val(),
             Chk_Mansion: $("#Chk_Mansion").val(),
             Chk_SendCustomer: $("#Chk_SendCustomer").val(),
@@ -229,15 +229,16 @@ function Bind_DisplayData(result) {
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
             var spantxt = '';
+            if (data[i]["SendCustomer"] == '送客') {
+                spantxt += '<label> <span class="ms-1 ps-1 pe-1 rounded-circle bg-danger text-white">送</span> 送客</label>';
+            }
             if (data[i]["AssessType"] == "エリア") {
                 spantxt += '<label> <span class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white">エ</span> エリア</label>';
             }
             else {
                 spantxt += '<label> <span  class="ms-1 ps-1 pe-1 rounded-circle bg-warning txt-dark" > マ</span > マンション</label> '; 
             }
-            if (data[i]["SendCustomer"] == '送客') {
-                spantxt+= '<label> <span class="ms-1 ps-1 pe-1 rounded-circle bg-danger text-white">送</span> 送客</label>';
-            }
+           
             //debugger;
             //var DeepDatetime = '';
         //    if (data[i]["DeepDate"])

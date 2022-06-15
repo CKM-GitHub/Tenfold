@@ -78,7 +78,22 @@ const kanaMap = {
     'ｯ': 'ッ', 'ｬ': 'ャ', 'ｭ': 'ュ', 'ｮ': 'ョ',
     '｡': '。', '､': '、', 'ｰ': 'ー', '｢': '「', '｣': '」', '･': '・'
 };
-
+$(function () {
+    $("form").bind("keypress", function (e) {
+        if (e.keyCode == 13) {
+            if (document.activeElement.type == 'password' || document.activeElement.id == 'btnLogin' || document.activeElement.id == 'btnDisplay' || document.activeElement.id == 'btnProcess')
+                return true;
+            else return false;
+        }
+    });
+    $('#sidebar-wrapper').bind("keypress", function (e) {
+        if (e.keyCode == 13) {
+            if (document.activeElement.id == 'btnDisplay' || document.activeElement.id == 'btnProcess')
+                return true;
+            else return false;
+        }
+    });
+})
 const common = {
 
     appPath: "", //set in Layout.cshtml
@@ -94,6 +109,12 @@ const common = {
                 return msg;
             }
         });
+    },
+
+    showErrorPopup: function showErrorPopup(id) {
+        $('#site-error-modal-title').text(id);
+        $('#site-error-modal-message').text(this.getMessage(id));
+        $('#site-error-modal').modal('show');
     },
 
     querySerialize: function querySerialize(data) {

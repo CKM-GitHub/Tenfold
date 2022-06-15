@@ -15,11 +15,68 @@ namespace Seruichi.Tenfold.Web.Controllers
         // GET: t_reale_memo
         public ActionResult Index(string RealECD)
         {
-            t_reale_memoBL bl = new t_reale_memoBL();
-            //string sellername = bl.get_t_sellerName(RealECD);
-            //ViewBag.Title = "管理－売主－" + sellername;
+            if (string.IsNullOrEmpty(RealECD))
+            {
+                return RedirectToAction("BadRequest", "Error");
+            }
+
             ViewBag.LoginID = base.GetOperator();
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult get_t_reale_CompanyInfo(t_reale_memoModel model)
+        {
+            t_reale_memoBL bl = new t_reale_memoBL();
+            var dt = bl.get_t_reale_CompanyInfo(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult get_t_reale_CompanyCountingInfo(t_reale_memoModel model)
+        {
+            t_reale_memoBL bl = new t_reale_memoBL();
+            var dt = bl.get_t_reale_CompanyCountingInfo(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult get_t_reale_memo_DisplayData(t_reale_memoModel model)
+        {
+            t_reale_memoBL bl = new t_reale_memoBL();
+            var dt = bl.get_t_reale_memo_DisplayData(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult Insert_L_Log(t_reale_memoModel model)
+        {
+            t_reale_memoBL bl = new t_reale_memoBL();
+            model.LoginID = base.GetOperator();
+            model.LoginName = base.GetOperatorName();
+            model.IPAddress = base.GetClientIP();
+            bl.Insert_L_Log(model);
+            return OKResult();
+        }
+
+        [HttpPost]
+        public ActionResult Modify_MemoText(t_reale_memoModel model)
+        {
+            t_reale_memoBL bl = new t_reale_memoBL();
+            model.LoginID = base.GetOperator();
+            model.IPAddress = base.GetClientIP();
+            bl.Modify_MemoText(model);
+            return OKResult();
+        }
+
+        [HttpPost]
+        public ActionResult Delete_MemoText(t_reale_memoModel model)
+        {
+            t_reale_memoBL bl = new t_reale_memoBL();
+            model.LoginID = base.GetOperator();
+            model.IPAddress = base.GetClientIP();
+            bl.Delete_MemoText(model);
+            return OKResult();
         }
     }
 }

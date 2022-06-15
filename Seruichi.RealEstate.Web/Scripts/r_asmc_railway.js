@@ -2,6 +2,7 @@
 $(function () {
     _url.render_searchbox_detail = common.appPath + '/r_asmc_railway/Render_searchbox_detail';
     _url.gotoNextPage = common.appPath + '/r_asmc_railway/GotoNextPage';
+    _url.openCheckTab = common.appPath + '/r_asmc_set_train_check_tab/Index';
     addEvents();
 });
 
@@ -46,15 +47,18 @@ function addEvents() {
 
     $('#btnSearchDetail').on('click', function () {
 
-        let citycdCsv = '';
+        let linecdCsv = '';
         $('.js-search-chk:checked').each(function () {
-            citycdCsv += $(this).val() + ",";
+            linecdCsv += $(this).val() + ",";
         });
 
-        if (!citycdCsv) return;
+        if (!linecdCsv) {
+            common.showErrorPopup('E301');
+            return;
+        }
 
         model = {
-            citycdCsv : citycdCsv.slice(0, -1),
+            linecdCsv : linecdCsv.slice(0, -1),
             settings1 : $('#checkbox_settings1').prop('checked')? 1 : 0,
             settings2 : $('#checkbox_settings2').prop('checked')? 1 : 0
         };
@@ -73,32 +77,39 @@ function addEvents() {
     });
 
     $('#btnRegistration').on('click', function () {
-        let citycdCsv = '';
+        let linecdCsv = '';
         $('.js-search-chk:checked').each(function () {
-            citycdCsv += $(this).val() + ",";
+            linecdCsv += $(this).val() + ",";
         });
 
-        if (!citycdCsv) {
-            alert(common.getMessage('E302'));
+        if (!linecdCsv) {
+            common.showErrorPopup('E301');
             return;
         }
 
-        $('#hdnSelectedList_Cities').val(citycdCsv.slice(0, -1));
+        $('#hdnSelected_lines').val(linecdCsv.slice(0, -1));
         common.callSubmit(document.forms.form1, _url.gotoNextPage);
     });
 
     $('#btnRegistrationDetail').on('click', function () {
-        let towncdCsv = '';
+        let stationcdCsv = '';
         $('.js-search-detail-chk:checked').each(function () {
-            towncdCsv += $(this).val() + ",";
+            stationcdCsv += $(this).val() + ",";
         });
 
-        if (!towncdCsv) {
-            alert(common.getMessage('E302'));
+        if (!stationcdCsv) {
+            common.showErrorPopup('E301');
             return;
         }
 
-        $('#hdnSelectedList_Towns').val(towncdCsv.slice(0, -1));
+        $('#hdnSelected_stations').val(stationcdCsv.slice(0, -1));
         common.callSubmit(document.forms.form1, _url.gotoNextPage);
     });
+}
+
+function openCheckTab(stationCD) {
+    const query = {
+        sc : stationCD
+    }
+    let newwin = window.open(_url.openCheckTab + common.querySerialize(query));
 }

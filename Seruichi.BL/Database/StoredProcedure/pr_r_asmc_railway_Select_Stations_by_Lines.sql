@@ -23,8 +23,8 @@ BEGIN
         ,ISNULL(RES.Kensu,0)        AS RealEstateCount
         ,STN.DisplayOrder
 
-        ,ISNULL(MyRES.ValidFLG, 9)  AS ValidFLG
-        ,MyRES.ExpDate
+        ,ISNULL(MyRES.ValidFLG, 0)  AS ValidFLG
+        ,CASE WHEN MyRES.ValidFLG IS NULL THEN MyRES2.ExistsFlg ELSE 0 END AS ExpirationFlag
 
     FROM M_Pref PRF
     INNER JOIN M_Station STN ON PRF.PrefCD = STN.PrefCD
@@ -60,8 +60,7 @@ BEGIN
     ----------------------------------------------------------------------
     OUTER APPLY (
                 SELECT 
-                     MAX(t2.ValidFLG)   AS ValidFLG
-                    ,MAX(t2.ExpDate)    AS ExpDate
+                     MIN(t2.ValidFLG) + 1   AS ValidFLG
                 FROM M_RECondLineSta t1
                 INNER JOIN M_RECondLine t2 ON t1.RealECD = t2.RealECD AND t1.ConditionSEQ = t2.ConditionSEQ 
                 WHERE t1.RealECD = @RealECD
@@ -69,8 +68,20 @@ BEGIN
                 AND   t1.DeleteDateTime IS NULL
                 AND   t2.DeleteDateTime IS NULL
                 AND   t2.ExpDate > GETDATE()
+                AND   t1.DisabledFlg = 0
                 GROUP BY StationCD 
                 ) AS   MyRES
+
+    OUTER APPLY (
+                SELECT TOP 1
+                     1 AS ExistsFlg
+                FROM M_RECondLineSta t1
+                INNER JOIN M_RECondLine t2 ON t1.RealECD = t2.RealECD AND t1.ConditionSEQ = t2.ConditionSEQ 
+                WHERE t1.RealECD = @RealECD
+                AND   t1.StationCD = STN.StationCD
+                AND   t1.DeleteDateTime IS NULL
+                AND   t2.DeleteDateTime IS NULL
+                ) AS   MyRES2
 
     WHERE STN.NoDisplayFLG = 0  --ï\é¶ëŒè€äOÇÕèúÇ≠
       AND STN.LineCD IN (SELECT value FROM string_split(@LinecdCsv, ','))

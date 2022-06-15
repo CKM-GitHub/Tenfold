@@ -5,12 +5,22 @@ $(function () {
     _url.Insert_L_Log = common.appPath + '/t_seller_memo/Insert_L_Log';
     _url.Modify_MemoText = common.appPath + '/t_seller_memo/Modify_MemoText';
     _url.Delete_MemoText = common.appPath + '/t_seller_memo/Delete_MemoText';
+    setValidation();
     addEvents();
     $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
-    $('#t_reale_purchase').addClass('font-bold text-underline');
+    $('#t_seller_memo').addClass('font-bold text-underline');
 });
 
+function setValidation() {
+    $('#MemoText')
+        .addvalidation_errorElement("#MemoTextError")
+        .addvalidation_reqired()
+        .addvalidation_maxlengthCheck(2000); //E105
+}
+
 function addEvents() {
+    common.bindValidationEvent('#message-com', '');
+
     $('#reale').addClass('d-none');
     $('#submenu_reale').addClass('d-none');
     Bind_Company_Data(this);         //Bind Company Info Data to the title part of the page
@@ -30,6 +40,11 @@ function addEvents() {
             $('#message-com').modal('hide');
         });
         $('#btnEdit_MemoText').on('click', function () {
+            $form = $('#message-com').hideChildErrors();
+            if (!common.checkValidityOnSave('#message-com')) {
+                $form.getInvalidItems().get(0).focus();
+                return false;
+            }
             let model = {
                 SellerCD: common.getUrlParameter('SellerCD'),
                 ParentChildKBN: 1,
@@ -39,6 +54,7 @@ function addEvents() {
             }
             Modify_Memo(model);
         });
+        $form = $('#message-com').hideChildErrors();
         $('#message-com').modal('show');
     })
 
@@ -132,6 +148,11 @@ function Edit_Memo(SellerMemoSEQ, InsertOperator) {
             $('#message-com').modal('hide');
         });
         $('#btnEdit_MemoText').on('click', function () {
+            $form = $('#message-com').hideChildErrors();
+            if (!common.checkValidityOnSave('#message-com')) {
+                $form.getInvalidItems().get(0).focus();
+                return false;
+            }
             let model = {
                 SellerCD: common.getUrlParameter('SellerCD'),
                 MemoText: $('textarea#MemoText').val(),
@@ -140,6 +161,7 @@ function Edit_Memo(SellerMemoSEQ, InsertOperator) {
             }
             Modify_Memo(model);
         });
+        $form = $('#message-com').hideChildErrors();
         $('#message-com').modal('show');
     }
 }
@@ -171,6 +193,11 @@ function Reply_Memo(SellerMemoSEQ) {
         $('#message-com').modal('hide');
     });
     $('#btnEdit_MemoText').on('click', function () {
+        $form = $('#message-com').hideChildErrors();
+        if (!common.checkValidityOnSave('#message-com')) {
+            $form.getInvalidItems().get(0).focus();
+            return false;
+        }
         let model = {
             SellerCD: common.getUrlParameter('SellerCD'),
             ParentChildKBN: '2',
@@ -180,6 +207,7 @@ function Reply_Memo(SellerMemoSEQ) {
         }
         Modify_Memo(model);
     });
+    $form = $('#message-com').hideChildErrors();
     $('#message-com').modal('show');
 }
 

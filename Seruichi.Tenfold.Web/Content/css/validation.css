@@ -11,6 +11,14 @@
     display: none;
 }
 
+.cap-errormsg-left {
+    color: red;
+    font-size: .875em;
+    padding-left: 10px;
+    display: none;
+    flex: auto;
+}
+
 input.cap-is-invalid:not([type="radio"]):not([type="checkbox"]) {
     border-color: #dc3545;
 }

@@ -43,6 +43,7 @@ const commonApiUrl = {
     getDropDownListItemsOfTown: "/api/CommonApi/GetDropDownListItemsOfTown",
     getDropDownListItemsOfLine: "/api/CommonApi/GetDropDownListItemsOfLine",
     getDropDownListItemsOfStation: "/api/CommonApi/GetDropDownListItemsOfStation",
+    checkBirthday: "/api/CommonApi/CheckBirthday",
     getNearestStations: "/api/CommonApi/GetNearestStations",
 }
 
@@ -89,12 +90,18 @@ $(function () {
     });
     $("form").bind("keypress", function (e) {
         if (e.keyCode == 13) {
-            if (document.activeElement.id == 'btnLogin')
+            if (document.activeElement.type == 'password' || document.activeElement.id == 'btnLogin' || document.activeElement.id == 'btnDisplay' || document.activeElement.id == 'btnProcess')
                 return true;
-            if (document.activeElement.id != 'btnDisplay' && document.activeElement.id != 'btnProcess')
-            return false;
+            else return false;
         }
-    }); 
+    });
+    $('#sidebar-wrapper').bind("keypress", function (e) {
+        if (e.keyCode == 13) {
+            if ( document.activeElement.id == 'btnDisplay' || document.activeElement.id == 'btnProcess')
+                return true;
+            else return false;
+        }
+    });
 })
 const common = {
 
@@ -670,6 +677,34 @@ const common = {
             success = false;
         }
         return success;
+    },
+
+    birthdayCheck: function birthdayCheck(ctrl) {
+        var $ctrl = $(ctrl);
+        var inputValue = $ctrl.val();
+        if (!inputValue) return;
+
+        inputValue = common.replaceDoubleToSingle(inputValue);
+        inputValue = inputValue.replace('年', '/').replace('月', '/').replace('日', '');
+        inputValue = inputValue.replace(/-/g, '/');
+        $ctrl.val(inputValue);
+
+        var regex = new RegExp(regexPattern.singlebyte_number);
+        if (!regex.test(inputValue.replace(/\//g, ''))) {
+            $ctrl.showError(this.getMessage('E104'));
+            return;
+        }
+
+        common.callAjax(common.appPath + commonApiUrl.checkBirthday, $ctrl.val(), function (result) {
+            if (result) {
+                if (result.data) $ctrl.val(result.data);
+                if (result.message) {
+                    $ctrl.showError(result.message.MessageText1);
+                } else {
+                    $ctrl.hideError();
+                }
+            }
+        });
     },
 
     getToday: function getToday() {
