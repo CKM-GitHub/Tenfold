@@ -9,15 +9,38 @@ namespace Seruichi.BL.Tenfold.t_seller_account
 {
     public class t_seller_accountBL
     {
-      
-        public DataTable GetM_SellerBy_SellerCD(t_seller_accountModel model)
+        public DataTable get_t_sellerName(string SellerCD)
         {
             var sqlParams = new SqlParameter[]
             {
-                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD }
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = SellerCD },
+                new SqlParameter("@Type", SqlDbType.TinyInt){ Value = 0 }
             };
+
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_t_seller_assessment_Select_M_Seller", sqlParams);
+            var dt = db.SelectDatatable("pr_t_seller_account_Select_M_Seller_By_SellerCD", sqlParams);
+
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+            var e = dt.AsEnumerable();
+            foreach (DataRow row in dt.Rows)
+            {
+                row["SellerName"] = crypt.DecryptFromBase64(row.Field<string>("SellerName"), decryptionKey);
+            }
+            return dt;
+        }
+
+       
+        public DataTable get_t_seller_Info(t_seller_accountModel model)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD.ToStringOrNull() },
+                new SqlParameter("@Type", SqlDbType.TinyInt){ Value = 1 }
+            };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_seller_account_Select_M_Seller_By_SellerCD", sqlParams);
 
             AESCryption crypt = new AESCryption();
             string decryptionKey = StaticCache.GetDataCryptionKey();
@@ -36,6 +59,21 @@ namespace Seruichi.BL.Tenfold.t_seller_account
             return dt;
         }
 
-      
+        public void insert_M_Seller(t_seller_accountModel model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD.ToStringOrNull() },
+                new SqlParameter("@TestFlG", SqlDbType.TinyInt){ Value = model.TestFLG },
+                new SqlParameter("@InvalidFLG", SqlDbType.TinyInt){ Value = model.InvalidFLG },
+                new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.LoginID.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.LoginName.ToStringOrNull() },
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress }
+             };
+            DBAccess db = new DBAccess();
+            db.InsertUpdateDeleteData("pr_t_seller_account_Update_M_Seller", false, sqlParams);
+        }
+
     }
 }
