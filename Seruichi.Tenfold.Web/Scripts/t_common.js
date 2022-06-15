@@ -344,7 +344,24 @@ function Bind_SubMennuURL() {
         var newHref = current_Seller.replace(target, anchor.attr('name'));
         anchor.prop('href', newHref);
     });
-    //subMenu_Seller
+    SellerAssessMentMenu();
+  
+    //menu_seller_assess
+}
+function SellerAssessMentMenu() {
+    // tseller_assess
+    var listItemsSeller = $("#menu_seller_assess li");
+
+    $('#menu_seller_assess li').children('a').removeAttr("href");
+    let current_Seller = window.location.href;
+    listItemsSeller.each(function (idx, li) {
+        var anchor = $(li).children('a');
+        var target = current_Seller;
+        target = target.slice(0, target.lastIndexOf('/'));
+        target = target.substring(target.lastIndexOf('/') + 1);
+        var newHref = current_Seller.replace(target, anchor.attr('name'));
+        anchor.prop('href', newHref);
+    });
 }
 //EndSubMenu  subMenu_Seller
 

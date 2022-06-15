@@ -61,6 +61,7 @@ namespace Seruichi.Tenfold.Web
                      "~/Scripts/t_dashboard.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/t_seller_assessment").Include(
+                  "~/Scripts/t_common.js",
                      "~/Scripts/t_seller_assessment.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/t_mansion_list").Include(
