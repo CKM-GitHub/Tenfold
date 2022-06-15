@@ -83,6 +83,7 @@
     <Compile Include="Tenfold\t_reale_asmhis\t_reale_asmhisBL.cs" />
     <Compile Include="Tenfold\t_reale_list\t_reale_listBL.cs" />
     <Compile Include="Tenfold\t_reale_memo\t_reale_memoBL.cs" />
+    <Compile Include="Tenfold\t_reale_new\t_reale_newBL.cs" />
     <Compile Include="Tenfold\t_reale_purchase\t_reale_purchaseBL.cs" />
     <Compile Include="Tenfold\t_seller_account\t_seller_accountBL.cs" />
     <Compile Include="Tenfold\t_seller_assessment\t_seller_assessmentBL.cs" />
@@ -207,6 +208,8 @@
     <Content Include="Database\StoredProcedure\pr_t_reale_account_DisplayData.sql" />
     <Content Include="Database\StoredProcedure\pr_t_reale_account_InsertUpdateData.sql" />
     <Content Include="Database\StoredProcedure\pr_t_reale_asmhis_get_DisplayData.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_seller_account_Select_M_Seller_By_SellerCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_seller_account_Update_M_Seller.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_List_csv_generate.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_list_Select_DropDownlistofPref.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_List_Select_M_SellerData.sql" />

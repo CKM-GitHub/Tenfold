@@ -15,7 +15,7 @@
             <div class="container-fluid">
                 <!-- Card stats -->
                 @Html.Partial("t_reale_Info")
-               
+
                 <!-- Card stats -->
                 <div class="card shadow border-0 mb-7">
                     <div class="card-header d-md-inline-flex">
@@ -32,7 +32,7 @@
                                     <div class="col-auto">
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" role="switch" name="chkTestFLG" id="chkTestFLG" />
-                                                  
+
                                         </div>
                                     </div>
                                 </div>
@@ -45,7 +45,7 @@
                                     </div>
                                     <div class="col-auto">
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch"  name="chkInvalidFLG" id="chkInvalidFLG" />
+                                            <input class="form-check-input" type="checkbox" role="switch" name="chkInvalidFLG" id="chkInvalidFLG" />
                                         </div>
                                     </div>
                                 </div>
@@ -55,8 +55,96 @@
                     </div>
                     <div class="card-footer">
                         <div class="text-right mt-3 float-end">
-                            <button type="button" class="btn btn-primary" id="btnUpdate">変更保存</button>&nbsp;
-                            <button type="button" class="btn btn-default"  id="btnCancel">取消</button>
+                          
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-changesave" >変更保存</button>&nbsp;
+                            <button type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#modal-changecal">取消</button>
+                                   
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 変更保存 -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                 id="modal-changesave">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">変更保存</h4><button type="button" class="btn-close d-none" data-bs-dismiss="modal"   aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe pt-0 p-0">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post"
+                                          style="text-align: center;">
+                                        <h1 class="cap-icon-h1"><i class="fa fa-exclamation-circle pt-1 pb-1 ps-3 pe-3 cap-icon-i"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center">変更内容を保存しますか？</h4>
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#modal-changeok" id="btnUpdate"> 保存 </button>
+                            <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 変更取消 -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                 id="modal-changecal">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">変更取消</h4><button type="button" class="btn-close d-none" data-bs-dismiss="modal"
+                                                                     aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe pt-0 p-0">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post"
+                                          style="text-align: center;">
+                                        <h1 class="cap-icon-h1 border border-danger border-8"><i class="fa fa-exclamation-circle pt-1 pb-1 ps-3 pe-3 cap-icon-i text-danger"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center">変更内容を破棄してもよろしいですか？</h4>
+
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-lg btn-primary" data-bs-dismiss="modal"  id="btnCancel">破棄</button><button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 登録完了 -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                 id="modal-changeok">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">変更保存</h4><button type="button" class="btn-close d-none" data-bs-dismiss="modal"
+                                                                     aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe pt-0 p-0">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post"
+                                          style="text-align: center;">
+                                        <h1 class="cap-icon-h1"><i class="fa fa-check cap-icon-i"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center">変更内容を保存しました。</h4>
+
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal" id="btnSuccess">閉じる</button>
                         </div>
                     </div>
                 </div>

@@ -64,7 +64,7 @@ Create  procedure [dbo].[pr_t_reale_asmhis_get_DisplayData]
 							     OR (@Range =  N'詳細査定日'	and (@StartDate IS NULL OR CONVERT(DATE, D.DeepAssDateTime) >= @StartDate)  and ( @EndDate IS NULL OR CONVERT(DATE, D.DeepAssDateTime)  <= @EndDate))
 							     OR (@Range	= N'買取依頼日'	and (@StartDate IS NULL OR CONVERT(DATE, D.PurchReqDateTime) >= @StartDate) and	( @EndDate IS NULL OR CONVERT(DATE, D.PurchReqDateTime) <= @EndDate))
 							     OR (@Range	= N'送客日'		and (@StartDate IS NULL OR CONVERT(DATE, D.IntroDateTime) >= @StartDate) and	( @EndDate IS NULL OR CONVERT(DATE, D.IntroDateTime) <= @EndDate))	)
-								and
+							and
 									(
 									 ( @Chk_Area = 1 and @Chk_Mansion  =1 and (C.AssessType1=3 or C.AssessType1=1  ))  or
 									((Case 
@@ -75,13 +75,11 @@ Create  procedure [dbo].[pr_t_reale_asmhis_get_DisplayData]
 									)
 
 								 and 
-								  C.IntroFlg = @Chk_SendCustomer
-								-- (@Chk_SendCustomer =0 or (@Chk_SendCustomer = 1 and  C.IntroFlg =1)  )
+								  ((@Chk_SendCustomer = 1 and C.IntroFlg = @Chk_SendCustomer) or (@Chk_SendCustomer =0 and (C.IntroFlg = 1 or C.IntroFlg=0) )) 
 								 and    
-										(( (@Chk_Top5 =1 and C.Rank <= 5 ))  or ( (@Chk_Top5Out =1 and C.Rank >5))) 
+										((( (@Chk_Top5 =1 and C.Rank <= 5 ))  or ( (@Chk_Top5Out =1 and C.Rank >5))) or (@Chk_Top5 =0 and @Chk_Top5Out =0 and (C.Rank <= 5 or C.Rank > 5) ) ) 
 								 and    
-								  ((@Chk_NonMemberSeller = 0 and  D.SellerCD is not null) or (@Chk_NonMemberSeller = 1 and  D.SellerCD is null))
-								  --(( ( @Chk_NonMemberSeller = 0 ) or  (@Chk_NonMemberSeller = 1 and  D.SellerCD is null)    )) 
+								  ((@Chk_NonMemberSeller = 0 and  (D.SellerCD is not null or D.SellerCD is not null )) or (@Chk_NonMemberSeller = 1 and  D.SellerCD is null))
 								 
 								  
 												Order by D.DeepAssDateTime, D.AssReqID 
