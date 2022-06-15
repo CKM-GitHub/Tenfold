@@ -316,7 +316,10 @@ $(function () {
     });
 })
 function Bind_SubMennuURL() {
+
+    //for t_real
     var listItems = $("#subMenu li");
+    
     $('#subMenu li').children('a').removeAttr("href");
     let current = window.location.href;
     listItems.each(function (idx, li) {
@@ -327,9 +330,23 @@ function Bind_SubMennuURL() {
         var newHref = current.replace(target, anchor.attr('name'));
         anchor.prop('href', newHref);
     });
-   
+
+    //for Tseller
+    var listItemsSeller = $("#subMenu_Seller li");
+
+    $('#subMenu_Seller li').children('a').removeAttr("href");
+    let current = window.location.href;
+    listItemsSeller.each(function (idx, li) {
+        var anchor = $(li).children('a');
+        var target = current;
+        target = target.slice(0, target.lastIndexOf('/'));
+        target = target.substring(target.lastIndexOf('/') + 1);
+        var newHref = current.replace(target, anchor.attr('name'));
+        anchor.prop('href', newHref);
+    });
+    //subMenu_Seller
 }
-//EndSubMenu
+//EndSubMenu  subMenu_Seller
 
 
 //変更取消
