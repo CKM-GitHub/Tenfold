@@ -29,6 +29,8 @@ const messageConst = {
     E206: 'メールアドレスとパスワードの組合せが正しくありません',
     E207: 'この情報での登録はありません',
 
+    E305: '入力された銀行は存在しません。',
+    E306: '入力された支店は存在しません。',
     E315: '変更内容を保存しますか？',
     E316: '変更内容を保存しました',
     E317: '変更内容を取消しますか？',
@@ -563,6 +565,7 @@ const common = {
                     $("#StartDate").focus();
                     return;
                 }
+                
                 //else {                //    $("#StartDate").hideError(this.getMessage('E111'));                //    $("#EndDate").hideError(this.getMessage('E111'));                //    //$("#EndDate").focus();                //    return;                //}
             }
 
