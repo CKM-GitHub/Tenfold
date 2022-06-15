@@ -156,6 +156,7 @@
     <Compile Include="Controllers\t_seller_mansionController.cs" />
     <Compile Include="Controllers\t_seller_memoController.cs" />
     <Compile Include="Controllers\t_seller_newController.cs" />
+    <Compile Include="Controllers\t_seller_profileController.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
     <Compile Include="Filters\BrowsingHistoryAttribute.cs" />
     <Compile Include="Filters\CustomHandleErrorAttribute.cs" />
@@ -234,6 +235,7 @@
     <Content Include="Scripts\t_seller_mansion.js" />
     <Content Include="Scripts\t_seller_memo.js" />
     <Content Include="Scripts\t_seller_new.js" />
+    <Content Include="Scripts\t_seller_profile.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -292,6 +294,7 @@
     <Content Include="Views\t_reale_memo\Index.cshtml" />
     <Content Include="Views\t_seller_new\Index.cshtml" />
     <Content Include="Views\t_reale_new\Index.cshtml" />
+    <Content Include="Views\t_seller_profile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
