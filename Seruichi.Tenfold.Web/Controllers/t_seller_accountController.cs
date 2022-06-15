@@ -14,20 +14,35 @@ namespace Seruichi.Tenfold.Web.Controllers
     public class t_seller_accountController : BaseController
     {
         static string strSellerCD = string.Empty;
+        static string strSellerMansionID = string.Empty;
         // GET: t_seller_account
         public ActionResult Index(String SellerCD)
         {
-            SellerCD = "S000000017";
-            if (!String.IsNullOrWhiteSpace(SellerCD))
-            {
-                ViewBag.Url = System.Web.HttpContext.Current.Request.UrlReferrer;
-                strSellerCD = SellerCD;
-                t_seller_accountBL bl = new t_seller_accountBL();
-                var dt = bl.GetM_SellerBy_SellerCD(strSellerCD);
-                ViewBag.TestFLG = dt.Rows[0]["TestFLG"].ToString() == "1" ? "checked" : "unchecked";
-                ViewBag.InvalidFLG = dt.Rows[0]["InvalidFLG"].ToString() == "1" ? "checked" : "unchecked";
-            }
+            t_seller_accountBL bl = new t_seller_accountBL();
+            var dt = bl.get_t_sellerName(SellerCD);
+            ViewBag.Title = "管理－売主－" + dt.Rows[0]["SellerName"].ToString();
+            ViewBag.LoginID = base.GetOperator();
             return View();
+        }
+
+
+
+        [HttpPost]
+        public ActionResult get_t_seller_Info(t_seller_accountModel model)
+        {
+            t_seller_accountBL bl = new t_seller_accountBL();
+            var dt = bl.get_t_seller_Info(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+        [HttpPost]
+        public ActionResult insert_M_Seller(t_seller_accountModel model)
+        {
+            t_seller_accountBL bl = new t_seller_accountBL();
+            model.LoginID = base.GetOperator();
+            model.IPAddress = base.GetClientIP();
+            model.LoginName = base.GetOperatorName();
+            bl.insert_M_Seller(model);
+            return OKResult();
         }
     }
 }

@@ -109,5 +109,25 @@ namespace Seruichi.Tenfold.Web.Controllers
                 return OKResult(base.ConvertToJson(nearestStations));
             }
         }
+
+        [IgnoreVerificationToken]
+        [HttpPost]
+        public HttpResponseMessage CheckBirthday([FromBody] string birthday)
+        {
+            if (string.IsNullOrEmpty(birthday))
+            {
+                return OKResult();
+            }
+
+            Validator validator = new Validator();
+            if (!validator.CheckBirthday(birthday, out string errorcd, out string formattedDate))
+            {
+                return ErrorMessageResult(errorcd, formattedDate);
+            }
+            else
+            {
+                return OKResult(formattedDate);
+            }
+        }
     }
 }

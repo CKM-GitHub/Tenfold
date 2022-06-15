@@ -1,4 +1,7 @@
 ﻿(function ($) {
+    $.fn.setInputModeNumber = function () {
+        return this.attr('inputmode', 'numeric');
+    };
 
     $.fn.hideChildErrors = function () {
         const $this = this;

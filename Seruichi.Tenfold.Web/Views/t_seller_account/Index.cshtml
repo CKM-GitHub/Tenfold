@@ -1,151 +1,23 @@
-﻿@{
+﻿
+@model Models.Tenfold.t_seller_account.t_seller_accountModel
+
+@{
     Layout = "~/Views/Shared/_t_menuLayout.cshtml";
-    ViewBag.Title = "管理 マンション一覧";
 }
 @section styles{
     @Styles.Render("~/Content/tenfold_css_common")
 }
 
 <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
+    <span id="loginID" class="d-none">@ViewBag.LoginID</span>
     <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
         <main class="py-6 bg-surface-secondary">
             <div class="container-fluid">
                 <!-- Card stats -->
                 @Html.Partial("t_reale_Info")
-                @*<div class="row g-6 mb-6">
-            <div class="col-12">
-                <div class="card shadow border-0">
-                    <div class="card-body ">
-                        <div class="justify-content-around align-items-center row">
-                            <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
-
-                                <div class="border-end"><button type="button" class="btn btn-secondary me-2">戻る</button></div><h1 class="ps-2 h2 mb-0 ls-tight">売主</h1>
-                                <span class="ps-2 text-muted small align-self-end">管理</span>
-                            </div>
-                            <hr class="navbar-divider my-5 opacity-20">
-                            <div class="align-items-center col-sm-6 col-lg-2  p-0 m-0 border-end">
-
-
-                                <div class="p-md-2 p-1" id="info">
-                                    <div class="text-muted"><span class="text-success">有効会員</span></div>
-                                    <div class="text-muted text-nowrap">キャピタル イチロー</div>
-                                    <div class="text-muted">
-                                        <h2>キャピタル 一郎</h2>
-                                    </div>
-                                    <div class="p-md-1 text-muted">
-                                        <span class="fa fa-id-card bg-light p-1 rounded-circle"></span>
-                                        U0000008
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column col-sm-6 col-lg-4  p-0 m-0 border-end" id="info">
-
-                                <div class="p-md-1 text-muted cap-fon-form-w500 ">
-                                    <span class="fa fa-home bg-light p-1 rounded-circle"></span>
-                                    京都府京都市東山区三条通南裏二筋目白川筋西入二丁目北側北木之元町一丁目七番地七号
-                                </div>
-                                <div class="p-md-1 pt-sm-1 text-muted">
-                                    <span class="fa fa-phone bg-light p-1 rounded-circle"></span> 02-6865-5551
-                                </div>
-
-                                <div class="p-md-1 pt-sm-1 text-muted">
-                                    <span class="fa fa-mobile bg-light p-1 ps-2 pe-2 rounded-circle"></span> 080-6865-5551
-                                </div>
-                                <div class="p-md-1 text-muted">
-                                    <span class="fa fa-envelope-o bg-light p-1 rounded-circle"></span>
-                                    AAAA999999@9999.aaaamail.com
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column col-sm-6 col-lg-2 p-0 m-0 border-end" id="info">
-                                <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                    <div class="col"><span class="fa fa-money bg-light p-1 rounded-circle"></span><span class="text-nowrap">今月課金</span></div>
-                                    <div class="col text-end"><span class="dark text-dark text-nowrap">9,999円</span></div>
-                                </div>
-                                <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                    <div class="col">
-                                        <span class="fa fa-calculator bg-light p-1 rounded-circle"></span><span class="text-nowrap">査定数</span>
-                                    </div>
-                                    <div class="col text-end"><span class="dark text-dark text-nowrap">999件</span></div>
-                                </div>
-                                <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                    <div class="col">
-                                        <span class="fa fa-thumbs-o-up bg-light p-1 rounded-circle"></span><span class="text-nowrap">成約数</span>
-                                    </div>
-                                    <div class="col text-end"><span class="dark text-dark text-nowrap">999件</span></div>
-                                </div>
-                                <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                    <div class="col">
-                                        <span class="fa fa-thumbs-o-down bg-light p-1 rounded-circle"></span><span class="text-nowrap">売主辞退数</span>
-                                    </div>
-                                    <div class="col text-end"><span class="dark text-dark text-nowrap">999件</span></div>
-                                </div>
-                                <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                    <div class="col">
-                                        <span class="fa fa-thumbs-o-down bg-light p-1 rounded-circle"></span><span class="text-nowrap">買主辞退数</span>
-                                    </div>
-                                    <div class="col text-end"><span class="dark text-dark text-nowrap">999件</span></div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="d-flex flex-column col-sm-6 col-lg-2 p-0 m-0" id="info">
-                                <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                    <div class="col p-md-0 m-md-0">
-                                        <span class="fa fa-calendar bg-light p-1 rounded-circle"></span>会員登録日</span>
-                                    </div>
-                                    <div class="col p-md-0 m-md-0 text-end"><span class="dark text-dark text-nowrap">2020/12/15</span></div>
-                                </div>
-
-                                <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                    <div class="col p-md-0 m-md-0">
-                                        <span class="fa fa-calendar  bg-light p-1 rounded-circle"></span>詳細査定日</span>
-                                    </div>
-                                    <div class="col p-md-0 m-md-0 text-end"><span class="dark text-dark text-nowrap">2020/12/15</span></div>
-                                </div>
-                                <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                    <div class="col p-md-0 m-md-0">
-                                        <span class="fa fa-calendar  bg-light p-1 rounded-circle"></span>買取依頼日</span>
-                                    </div>
-                                    <div class="col p-md-0 m-md-0 text-end"><span class="dark text-dark text-nowrap">2020/12/15</span></div>
-                                </div>
-                                <div class="p-md-1 text-muted w-100 row text-nowrap">
-                                    <div class="col p-md-0 m-md-0">
-                                        <span class="fa fa-calendar  bg-light p-1 rounded-circle"></span>最終ログイン日</span>
-                                    </div>
-                                    <div class="col p-md-0 m-md-0 text-end"><span class="dark text-dark text-nowrap">2020/12/15</span></div>
-                                </div>
-
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>*@
+               
                 <!-- Card stats -->
                 <div class="card shadow border-0 mb-7">
-                    <div class="card-header pt-2 pb-2 ps-4 pe-4">
-                        <ul class="nav nav-tabs overflow-x border-0">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">査定管理</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">情報管理</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">課⾦履歴</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#">アカウントフラグ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">メモ</a>
-                            </li>
-                        </ul>
-                    </div>
-
                     <div class="card-header d-md-inline-flex">
                         <h5 class="mb-0">アカウントフラグ</h5>
                     </div>
@@ -159,8 +31,8 @@
                                     </div>
                                     <div class="col-auto">
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch"
-                                                   @ViewBag.TestFLG name="txtTestFLG" id="txtTestFLG" />
+                                            <input class="form-check-input" type="checkbox" role="switch" name="chkTestFLG" id="chkTestFLG" />
+                                                  
                                         </div>
                                     </div>
                                 </div>
@@ -173,7 +45,7 @@
                                     </div>
                                     <div class="col-auto">
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch" @ViewBag.InvalidFLG name="txtInvalidFLG" id="txtInvalidFLG" />
+                                            <input class="form-check-input" type="checkbox" role="switch"  name="chkInvalidFLG" id="chkInvalidFLG" />
                                         </div>
                                     </div>
                                 </div>
@@ -183,8 +55,8 @@
                     </div>
                     <div class="card-footer">
                         <div class="text-right mt-3 float-end">
-                            <button type="button" class="btn btn-primary">変更保存</button>&nbsp;
-                            <button type="button" class="btn btn-default">取消</button>
+                            <button type="button" class="btn btn-primary" id="btnUpdate">変更保存</button>&nbsp;
+                            <button type="button" class="btn btn-default"  id="btnCancel">取消</button>
                         </div>
                     </div>
                 </div>
