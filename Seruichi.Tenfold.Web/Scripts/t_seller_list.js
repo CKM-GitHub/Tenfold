@@ -209,8 +209,7 @@ function addEvents() {
     $('#btnSignUp').on('click', function () {
         $form = $('#form1').hideChildErrors();
 
-        //window.location.href = '/t_seller_new/Index';
-        alert("Go to t_seller_new Form")
+        window.location.href = common.appPath + '/t_seller_new/Index';
     });
 
     $('#btnSetting').on('click', function () {
