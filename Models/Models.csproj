@@ -84,6 +84,7 @@
     <Compile Include="Tenfold\t_reale_asmhis\t_reale_asmhisModel.cs" />
     <Compile Include="Tenfold\t_reale_list\t_reale_listModel.cs" />
     <Compile Include="Tenfold\t_reale_memo\t_reale_memoModel.cs" />
+    <Compile Include="Tenfold\t_reale_new\t_reale_newModel.cs" />
     <Compile Include="Tenfold\t_reale_purchase\t_reale_purchaseModel.cs" />
     <Compile Include="Tenfold\t_seller_account\t_seller_accountModel.cs" />
     <Compile Include="Tenfold\t_seller_assessment\t_seller_assessmentModel.cs" />

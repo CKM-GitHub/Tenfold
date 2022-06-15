@@ -153,7 +153,7 @@ function addEvents() {
     });
 
     $('#btnSignUp').on('click', function () {
-        alert("go to r_reale_new")
+        window.location.href = common.appPath + '/t_reale_new/Index';
     });
 
 }

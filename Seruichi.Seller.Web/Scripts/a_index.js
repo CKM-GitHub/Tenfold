@@ -517,7 +517,6 @@ function displayNearestStationData() {
 
 function displayMansionData(mansionCD) {
     $hdnMansionCD = $('#hdnMansionCD');
-
     common.showLoading();
     common.callAjax(_url.getMansinoData, { mansionCD },
         function (result) {
