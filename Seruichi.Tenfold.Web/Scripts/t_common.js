@@ -330,7 +330,7 @@ function Bind_SubMennuURL() {
         var newHref = current.replace(target, anchor.attr('name'));
         anchor.prop('href', newHref);
     });
-    debugger
+    //debugger
     //for Tseller
     var listItemsSeller = $("#subMenu_Seller li");
 
