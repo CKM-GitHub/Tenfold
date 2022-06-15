@@ -23,10 +23,6 @@ function setValidation() {
 function addEvents() {
     common.bindValidationEvent('#message-com', '');
 
-    $('#reale').addClass('d-none');
-    $('#submenu_reale').addClass('d-none');
-    Bind_Company_Data(this);         //Bind Company Info Data to the title part of the page
-
     let model = {
         SellerCD: common.getUrlParameter('SellerCD')
     }

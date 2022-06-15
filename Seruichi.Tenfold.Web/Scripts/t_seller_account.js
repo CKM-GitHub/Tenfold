@@ -8,9 +8,6 @@ $(function () {
 });
 
 function addEvents() {
-    $('#reale').addClass('d-none');
-    $('#submenu_reale').addClass('d-none');
-    Bind_Company_Data(this);
     let model1 = {
         SellerCD: common.getUrlParameter('SellerCD')
     }

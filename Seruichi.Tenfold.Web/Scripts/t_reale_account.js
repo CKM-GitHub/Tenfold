@@ -100,12 +100,9 @@ function addEvents() {
         RealECD: common.getUrlParameter('RealECD') 
     };
 
-    $('#seller').addClass('d-none');
-    $('#submenu_seller').addClass('d-none');
     //#wrapper {
     //    padding - left: 0;
     $('#wrapper').prop('style','padding-left:0px !important')
-    Bind_Company_Data(this);
     //Bind Company Info Data to the title part of the page
 
     get_purchase_Data(model, this, 'page_load');
