@@ -4,6 +4,7 @@
     {
         appPath = "";
     }
+    string staffName = Seruichi.RealEstate.Web.Controllers.BaseController.GetLoginStaffName();
 }
 <!DOCTYPE html>
 <html lang="ja">
@@ -54,6 +55,12 @@
 
                     </a>
                 </div>-->
+                <div class="navbar-nav d-flex">
+                    <div class="nav-item">
+                        <hr class="navbar-divider my-3 opacity-20 d-md-none">
+                        <p id="loginStaffName" class="nav-item nav-link"></p>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -66,6 +73,7 @@
     <script>
         $(function () {
             common.appPath = '@appPath';
+            $('#loginStaffName').html('@staffName');
         });
     </script>
 

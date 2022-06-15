@@ -51,17 +51,17 @@ namespace Seruichi.RealEstate.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Render_searchbox_detail(string citycdCsv, int settings1, int settings2)
+        public ActionResult Render_searchbox_detail(string linecdCsv, int settings1, int settings2)
         {
             r_asmc_addressDetailModel model;
-            if (string.IsNullOrEmpty(citycdCsv))
+            if (string.IsNullOrEmpty(linecdCsv))
             {
                 model = new r_asmc_addressDetailModel();
             }
             else
             {
                 r_asmc_railwayBL bl = new r_asmc_railwayBL();
-                model = bl.GetStationsByLinecdCsv(citycdCsv, base.GetOperator("RealECD"));
+                model = bl.GetStationsByLineCD(linecdCsv, base.GetOperator("RealECD"));
             }
 
             model.Settings1 = settings1;
@@ -72,16 +72,16 @@ namespace Seruichi.RealEstate.Web.Controllers
         [HttpPost]
         public ActionResult GotoNextPage()
         {
-            string selectedListCsv_cities = Request.Form["selectedList_Cities"].ToStringOrEmpty();
-            string selectedListCsv_towns = Request.Form["selectedList_Towns"].ToStringOrEmpty();
+            string selected_lines_csv = Request.Form["selected_lines"].ToStringOrEmpty();
+            string selected_stations_csv = Request.Form["selected_stations"].ToStringOrEmpty();
 
-            if (string.IsNullOrEmpty(selectedListCsv_cities) && string.IsNullOrEmpty(selectedListCsv_towns))
+            if (string.IsNullOrEmpty(selected_lines_csv) && string.IsNullOrEmpty(selected_stations_csv))
             {
                 return RedirectToAction("BadRequest", "Error");
             }
 
-            TempData["selectedList_Cities"] = selectedListCsv_cities;
-            TempData["selectedList_Towns"] = selectedListCsv_towns;
+            TempData["selected_lines"] = selected_lines_csv;
+            TempData["selected_stations"] = selected_stations_csv;
             return RedirectToAction("Index", "r_asmc_set_train");
         }
 

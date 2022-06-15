@@ -14,8 +14,13 @@ namespace Seruichi.RealEstate.Web.Controllers
     public class r_asmc_ms_list_shController : BaseController
     {
         // GET: r_asmc_ms_list_sh
-        public ActionResult Index()
+        public ActionResult Index(string MansionName)
         {
+            if (string.IsNullOrEmpty(MansionName))
+                return RedirectToAction("BadRequest", "Error");
+            else
+                ViewBag.MansionName = MansionName;
+
             r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
             if (!SessionAuthenticationHelper.ValidateUser(user))
             {

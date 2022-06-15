@@ -51,6 +51,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ValidationModel.cs" />
     <Compile Include="RealEstate\RealEstate_L_Log_Model.cs" />
+    <Compile Include="RealEstate\r_asmc_railway\r_asmc_railwayModel.cs" />
+    <Compile Include="RealEstate\r_asmc_set_area_check_tab\r_asmc_set_area_check_tabModel.cs" />
+    <Compile Include="RealEstate\r_asmc_set_train_check_tab\r_asmc_set_train_check_tabModel.cs" />
     <Compile Include="RealEstate\r_asmc_address\r_asmc_addressModel.cs" />
     <Compile Include="RealEstate\r_asmc_ms_list_sh\r_asmc_ms_list_shModel.cs" />
     <Compile Include="RealEstate\r_asmc_ms_reged_list\r_asmc_ms_reged_listModel.cs" />
@@ -61,6 +64,7 @@
     <Compile Include="RealEstate\r_issueslist\r_issueslistModel.cs" />
     <Compile Include="RealEstate\r_login\r_loginModel.cs" />
     <Compile Include="RealEstate\r_staff\r_staffModel.cs" />
+    <Compile Include="RealEstate\r_template\r_templateModel.cs" />
     <Compile Include="RealEstate\r_temp_mes\r_temp_mesModel.cs" />
     <Compile Include="Seller\a_assess_dModel.cs" />
     <Compile Include="Seller\a_mypage_ahisModel.cs" />
@@ -91,6 +95,7 @@
     <Compile Include="Tenfold\t_seller_list\t_seller_listModel.cs" />
     <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionModel.cs" />
     <Compile Include="Tenfold\t_seller_memo\t_seller_memoModel.cs" />
+    <Compile Include="Tenfold\t_seller_new\t_seller_newModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

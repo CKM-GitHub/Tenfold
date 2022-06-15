@@ -4,6 +4,7 @@
     {
         appPath = "";
     }
+    string staffName = Seruichi.Tenfold.Web.Controllers.BaseController.GetLoginStaffName();
 }
 <!DOCTYPE html>
 <html lang="ja">
@@ -34,6 +35,7 @@
     <script>
         $(function () {
             common.appPath = '@appPath';
+            $('#loginStaffName').html('@staffName');
         });
     </script>
 

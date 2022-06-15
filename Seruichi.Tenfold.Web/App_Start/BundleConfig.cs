@@ -106,6 +106,9 @@ namespace Seruichi.Tenfold.Web
                  "~/Scripts/t_reale_account.js",
                  "~/Scripts/t_common.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/t_seller_new").Include(
+                     "~/Scripts/t_seller_new.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/t_reale_new").Include(
                 "~/Scripts/t_reale_new.js",
                 "~/Scripts/t_common.js"));
