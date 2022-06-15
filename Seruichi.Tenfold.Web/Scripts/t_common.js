@@ -344,8 +344,7 @@ function Bind_SubMennuURL() {
         var newHref = current_Seller.replace(target, anchor.attr('name'));
         anchor.prop('href', newHref);
     });
-    SellerAssessMentMenu();
-  
+    SellerAssessMentMenu(); 
     //menu_seller_assess
 }
 function SellerAssessMentMenu() {

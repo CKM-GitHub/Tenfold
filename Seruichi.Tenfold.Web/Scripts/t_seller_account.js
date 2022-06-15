@@ -3,6 +3,8 @@ $(function () {
     _url.get_t_seller_Info = common.appPath + '/t_seller_account/get_t_seller_Info';
     _url.insert_M_Seller = common.appPath + '/t_seller_account/insert_M_Seller';
     addEvents()
+    $('#subMenu_Seller li').children('a').removeClass("active");
+    $('#subMenu_Seller li').children('a').eq(3).addClass('active');
 });
 
 function addEvents() {

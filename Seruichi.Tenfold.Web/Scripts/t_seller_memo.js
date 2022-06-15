@@ -9,6 +9,8 @@ $(function () {
     addEvents();
     $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
     $('#t_seller_memo').addClass('font-bold text-underline');
+    $('#subMenu_Seller li').children('a').removeClass("active");
+    $('#subMenu_Seller li').children('a').eq(4).addClass('active');
 });
 
 function setValidation() {
