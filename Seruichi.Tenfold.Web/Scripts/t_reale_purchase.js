@@ -1,7 +1,5 @@
 ﻿const _url = {};
 $(function () {
-    $('#seller').addClass('d-none');
-    $('#submenu_seller').addClass('d-none');
     setValidation();
     _url.get_t_reale_CompanyInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyInfo';
     _url.get_t_reale_CompanyCountingInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyCountingInfo';
@@ -99,7 +97,6 @@ function addEvents() {
         EndDate: $("#EndDate").val()
     };
     $('#RealECD').val(model.RealECD);
-    Bind_Company_Data(this);         //Bind Company Info Data to the title part of the page
 
     get_purchase_Data(model, this, 'page_load');
 
