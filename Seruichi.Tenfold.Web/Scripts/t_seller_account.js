@@ -43,7 +43,7 @@ function addEvents() {
     });
 
 
-    $('#btnCancel').on('click', function () {
+    $('#btnSuccess,#btnCancel').on('click', function () {
          window.location.reload();
     });
 }

@@ -13,11 +13,15 @@ namespace Seruichi.Tenfold.Web.Controllers
 {
     public class t_seller_accountController : BaseController
     {
-        static string strSellerCD = string.Empty;
-        static string strSellerMansionID = string.Empty;
+       
         // GET: t_seller_account
         public ActionResult Index(String SellerCD)
         {
+            if (string.IsNullOrEmpty(SellerCD))
+            {
+                return RedirectToAction("BadRequest", "Error");
+            }
+
             t_seller_accountBL bl = new t_seller_accountBL();
             var dt = bl.get_t_sellerName(SellerCD);
             ViewBag.Title = "管理－売主－" + dt.Rows[0]["SellerName"].ToString();
