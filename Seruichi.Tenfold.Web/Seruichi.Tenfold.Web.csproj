@@ -147,6 +147,7 @@
     <Compile Include="Controllers\t_reale_asmhisController.cs" />
     <Compile Include="Controllers\t_reale_listController.cs" />
     <Compile Include="Controllers\t_reale_memoController.cs" />
+    <Compile Include="Controllers\t_reale_newController.cs" />
     <Compile Include="Controllers\t_reale_purchaseController.cs" />
     <Compile Include="Controllers\t_seller_accountController.cs" />
     <Compile Include="Controllers\t_seller_assessmentController.cs" />
@@ -225,7 +226,9 @@
     <Content Include="Scripts\t_reale_asmhis.js" />
     <Content Include="Scripts\t_reale_list.js" />
     <Content Include="Scripts\t_reale_memo.js" />
+    <Content Include="Scripts\t_reale_new.js" />
     <Content Include="Scripts\t_reale_purchase.js" />
+    <Content Include="Scripts\t_seller_account.js" />
     <Content Include="Scripts\t_seller_assessment.js" />
     <Content Include="Scripts\t_seller_list.js" />
     <Content Include="Scripts\t_seller_mansion.js" />
@@ -288,6 +291,7 @@
     <Content Include="Views\t_reale_account\Index.cshtml" />
     <Content Include="Views\t_reale_memo\Index.cshtml" />
     <Content Include="Views\t_seller_new\Index.cshtml" />
+    <Content Include="Views\t_reale_new\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
