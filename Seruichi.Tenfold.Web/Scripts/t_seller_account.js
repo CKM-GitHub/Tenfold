@@ -66,8 +66,7 @@ function get_account_Data(model, $form) {
 
 function Bind_Info(result) {
     var data = JSON.parse(result);
-    if (data.length > 0) {
-        debugger;
+    if (data.length > 0) { 
         if (data[0]['InvalidFLG'] == '無効会員')
             $("#chkInvalidFLG").prop("checked", true);
 

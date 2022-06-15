@@ -330,18 +330,18 @@ function Bind_SubMennuURL() {
         var newHref = current.replace(target, anchor.attr('name'));
         anchor.prop('href', newHref);
     });
-
+    debugger
     //for Tseller
     var listItemsSeller = $("#subMenu_Seller li");
 
     $('#subMenu_Seller li').children('a').removeAttr("href");
-    let current = window.location.href;
+    let current_Seller = window.location.href;
     listItemsSeller.each(function (idx, li) {
         var anchor = $(li).children('a');
-        var target = current;
+        var target = current_Seller; 
         target = target.slice(0, target.lastIndexOf('/'));
         target = target.substring(target.lastIndexOf('/') + 1);
-        var newHref = current.replace(target, anchor.attr('name'));
+        var newHref = current_Seller.replace(target, anchor.attr('name'));
         anchor.prop('href', newHref);
     });
     //subMenu_Seller
