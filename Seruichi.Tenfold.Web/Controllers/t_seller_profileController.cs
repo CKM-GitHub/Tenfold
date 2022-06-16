@@ -46,5 +46,40 @@ namespace Seruichi.Tenfold.Web.Controllers
             return OKResult(new { prefCD, cityName, townName });
         }
 
+        [HttpPost]
+        public ActionResult modify_SellerData(t_seller_profileModel model)
+        {
+            t_seller_profileBL bl = new t_seller_profileBL();
+            model.LoginID = base.GetOperator();
+            model.LoginName = base.GetOperatorName();
+            model.IPAddress = base.GetClientIP();
+
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+
+            bl.modify_SellerData(model);
+            return OKResult();
+        }
+
+        [HttpPost]
+        public ActionResult modify_SellerPW(t_seller_profileModel model)
+        {
+            t_seller_profileBL bl = new t_seller_profileBL();
+            model.LoginID = base.GetOperator();
+            model.LoginName = base.GetOperatorName();
+            model.IPAddress = base.GetClientIP();
+
+            var validationResult = bl.ValidatePW(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+
+            bl.modify_SellerPW(model);
+            return OKResult();
+        }
     }
 }
