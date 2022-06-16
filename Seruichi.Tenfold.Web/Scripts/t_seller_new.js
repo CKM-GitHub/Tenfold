@@ -67,7 +67,6 @@ function setValidation() {
         .addvalidation_doublebyte();
     $('#Address1')
         .addvalidation_errorElement("#errorAddress1")
-        .addvalidation_reqired()
         .addvalidation_maxlengthCheck(50)
         .addvalidation_doublebyte();
     $('#HousePhone')
@@ -110,14 +109,9 @@ function addEvents() {
             zipCode2: $zipCode2.val()
         };
 
-        if (model.zipCode1 == '' || model.zipCode2 == '') {
-            $zipCode1.hideError();
-            $zipCode2.hideError();
-            if (model.zipCode1 == '')
-                $zipCode1.focus();
-            else
-                $zipCode2.focus();
-            return false;
+        if (!model.zipCode1 && !model.zipCode2) {
+            $($zipCode1, $zipCode2).hideError();
+            return;
         }
 
         if (model.zipCode1) {
