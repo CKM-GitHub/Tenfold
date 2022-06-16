@@ -105,6 +105,7 @@ function addEvents() {
                 //#modal-changeok
             }
             else {
+                alert('Erros')
                 const errors = result.data;
                 for (key in errors) {
                     const target = document.getElementById(key);
