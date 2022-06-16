@@ -6,15 +6,15 @@ using System.Web;
 using System.Web.Mvc;
 using Seruichi.Common;
 using Models;
-using Models.Tenfold.t_seller_new;
+using Models.Tenfold.t_seller_profile;
 using Seruichi.BL;
-using Seruichi.BL.Tenfold.t_seller_new;
+using Seruichi.BL.Tenfold.t_seller_profile;
 
 namespace Seruichi.Tenfold.Web.Controllers
 {
-    public class t_seller_newController : BaseController
+    public class t_seller_profileController : BaseController
     {
-        // GET: t_seller_new
+        // GET: t_seller_profile
         public ActionResult Index()
         {
             CommonBL cmmbl = new CommonBL();
@@ -24,7 +24,7 @@ namespace Seruichi.Tenfold.Web.Controllers
 
         // Ajax: CheckZipCode
         [HttpPost]
-        public ActionResult CheckZipCode(t_seller_newModel model)
+        public ActionResult CheckZipCode(t_seller_profileModel model)
         {
             Validator validator = new Validator();
             string errorcd = "";
@@ -38,30 +38,12 @@ namespace Seruichi.Tenfold.Web.Controllers
                 return ErrorMessageResult(errorcd);
             }
 
-            t_seller_newBL bl = new t_seller_newBL();
+            t_seller_profileBL bl = new t_seller_profileBL();
             if (!bl.CheckZipCode(model, out errorcd, out string prefCD, out string cityName, out string townName))
             {
                 return ErrorMessageResult(errorcd);
             }
             return OKResult(new { prefCD, cityName, townName });
-        }
-
-        [HttpPost]
-        public ActionResult modify_SellerData(t_seller_newModel model)
-        {
-            t_seller_newBL bl = new t_seller_newBL();
-            model.LoginID = base.GetOperator();
-            model.LoginName = base.GetOperatorName();
-            model.IPAddress = base.GetClientIP();
-
-            var validationResult = bl.ValidateAll(model);
-            if (validationResult.Count > 0)
-            {
-                return ErrorResult(validationResult);
-            }
-
-            bl.modify_SellerData(model);
-            return OKResult();
         }
 
     }

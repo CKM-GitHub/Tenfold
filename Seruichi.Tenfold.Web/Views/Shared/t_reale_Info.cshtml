@@ -8,7 +8,7 @@
 <div class="row g-6 mb-6">
     <div class="col-12">
         <div class="card shadow border-0">
-            <div id="reale" class="card-body">
+            <div id="reale" class="card-body d-none">
                 <div class="justify-content-around align-items-center row">
                     <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
                         <div class="border-end">
@@ -105,7 +105,7 @@
                     </div>
                 </div>
             </div>
-            <div id="seller" class="card-body">
+            <div id="seller" class="card-body d-none">
                 <div class="justify-content-around align-items-center row">
                     <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
                         <div class="border-end">
@@ -211,7 +211,7 @@
 <!-- Card stats -->
 
 <div class="card shadow border-0" style="border-bottom-left-radius: unset;border-bottom-right-radius: unset;">
-    <div id="submenu_reale" class="card-header pt-2 pb-2 ps-4 pe-4">
+    <div id="submenu_reale" class="card-header pt-2 pb-2 ps-4 pe-4 d-none">
         <ul class="nav nav-tabs overflow-x border-0" id="subMenu">
             <li class="nav-item">
                 <a class="nav-link active" name="t_reale_purchase" aria-current="page">買取管理</a>
@@ -229,7 +229,7 @@
                 <a class="nav-link" href="#">請求管理</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">メモ</a>
+                <a class="nav-link" name="t_reale_memo">メモ</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" name="t_reale_account" >アカウントフラグ</a>
@@ -239,22 +239,22 @@
             </li>
         </ul>
     </div>
-    <div id="submenu_seller" class="card-header pt-2 pb-2 ps-4 pe-4">
-        <ul class="nav nav-tabs overflow-x border-0">
+    <div id="submenu_seller" class="card-header pt-2 pb-2 ps-4 pe-4 d-none">
+        <ul class="nav nav-tabs overflow-x border-0" id="subMenu_Seller">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">査定管理</a>
+                <a class="nav-link" aria-current="page" name="t_seller_assessment" href="#">査定管理</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">情報管理</a>
+                <a class="nav-link" name="t_seller_profile" href="#">情報管理</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">課⾦履歴</a>
+                <a class="nav-link" name="t_seller_billing" href="#">課⾦履歴</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">アカウントフラグ</a>
+                <a class="nav-link" name="t_seller_account" href="#">アカウントフラグ</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">メモ</a>
+                <a class="nav-link" name="t_seller_memo">メモ</a>
             </li>
         </ul>
     </div>

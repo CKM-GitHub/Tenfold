@@ -29,6 +29,8 @@ const messageConst = {
     E206: 'メールアドレスとパスワードの組合せが正しくありません',
     E207: 'この情報での登録はありません',
 
+    E305: '入力された銀行は存在しません。',
+    E306: '入力された支店は存在しません。',
     E315: '変更内容を保存しますか？',
     E316: '変更内容を保存しました',
     E317: '変更内容を取消しますか？',
@@ -43,6 +45,7 @@ const commonApiUrl = {
     getDropDownListItemsOfTown: "/api/CommonApi/GetDropDownListItemsOfTown",
     getDropDownListItemsOfLine: "/api/CommonApi/GetDropDownListItemsOfLine",
     getDropDownListItemsOfStation: "/api/CommonApi/GetDropDownListItemsOfStation",
+    checkBirthday: "/api/CommonApi/CheckBirthday",
     getNearestStations: "/api/CommonApi/GetNearestStations",
 }
 
@@ -371,7 +374,7 @@ const common = {
         const isMinlengthCheck = $ctrl.attr("data-validation-minlengthcheck");
         const isSingleByteKana = $ctrl.attr("data-validation-singlebyte-kana");
         const isDoubleByteHira = $ctrl.attr("data-validation-doublebyte-hira");
-
+        const isemailformat = $ctrl.attr("data-validation-email");
 
         let inputValue = "";
         if (type === 'radio') {
@@ -563,7 +566,15 @@ const common = {
                     $("#StartDate").focus();
                     return;
                 }
-                //else {                //    $("#StartDate").hideError(this.getMessage('E111'));                //    $("#EndDate").hideError(this.getMessage('E111'));                //    //$("#EndDate").focus();                //    return;                //}
+                
+                //else {
+                //    $("#StartDate").hideError(this.getMessage('E111'));
+                //    $("#EndDate").hideError(this.getMessage('E111'));
+                //    //$("#EndDate").focus();
+                //    return;
+
+                //}
+
             }
 
             if (isNumCompare) {
@@ -615,6 +626,13 @@ const common = {
                 const regex = new RegExp(regexPattern.doublebyteHira);
                 if (!regex.test(hira_val)) {
                     $ctrl.showError(this.getMessage('E104'));
+                    return;
+                }
+            }
+
+            if (isemailformat) {
+                if (!inputValue.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+                    $ctrl.showError(this.getMessage('E204'));
                     return;
                 }
             }
@@ -680,9 +698,8 @@ const common = {
     },
 
     birthdayCheck: function birthdayCheck(ctrl) {
-        const $ctrl = $(ctrl);
-
-        let inputValue = $ctrl.val();
+        var $ctrl = $(ctrl);
+        var inputValue = $ctrl.val();
         if (!inputValue) return;
 
         inputValue = common.replaceDoubleToSingle(inputValue);
@@ -690,7 +707,7 @@ const common = {
         inputValue = inputValue.replace(/-/g, '/');
         $ctrl.val(inputValue);
 
-        const regex = new RegExp(regexPattern.singlebyte_number);
+        var regex = new RegExp(regexPattern.singlebyte_number);
         if (!regex.test(inputValue.replace(/\//g, ''))) {
             $ctrl.showError(this.getMessage('E104'));
             return;

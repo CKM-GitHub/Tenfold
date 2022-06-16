@@ -9,6 +9,8 @@ $(function () {
     addEvents();
     $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
     $('#t_seller_memo').addClass('font-bold text-underline');
+    $('#subMenu_Seller li').children('a').removeClass("active");
+    $('#subMenu_Seller li').children('a').eq(4).addClass('active');
 });
 
 function setValidation() {
@@ -20,10 +22,6 @@ function setValidation() {
 
 function addEvents() {
     common.bindValidationEvent('#message-com', '');
-
-    $('#reale').addClass('d-none');
-    $('#submenu_reale').addClass('d-none');
-    Bind_Company_Data(this);         //Bind Company Info Data to the title part of the page
 
     let model = {
         SellerCD: common.getUrlParameter('SellerCD')

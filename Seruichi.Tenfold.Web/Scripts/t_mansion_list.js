@@ -14,7 +14,6 @@ function setValidation() {
 
     $('#txtApartment')
         .addvalidation_errorElement("#errorApartment")
-        .addvalidation_reqired()
         .addvalidation_doublebyte();
     
     $('#StartNum')
@@ -32,13 +31,13 @@ function setValidation() {
     $('#StartUnit')
         .addvalidation_errorElement("#errorUnit")
         .addvalidation_onebyte_character()
-        .addvalidation_maxlengthCheck(2);
+        .addvalidation_maxlengthCheck(3);
 
 
     $('#EndUnit')
         .addvalidation_errorElement("#errorUnit")
         .addvalidation_onebyte_character()
-        .addvalidation_maxlengthCheck(2);
+        .addvalidation_maxlengthCheck(3);
 
     $('#btnDisplay')
         .addvalidation_errorElement("#errorbtnDisplay"); //E303

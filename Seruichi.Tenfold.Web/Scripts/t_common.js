@@ -1,5 +1,5 @@
 ﻿//Start script code of t_reale_Info.cshtml -> Row No. 2 ~ 52
-function Bind_Company_Data($form) {
+function Bind_Company_Data() {
     //t_reale Info
     if (!$('#reale').hasClass('d-none')) {
         let model = {
@@ -17,12 +17,6 @@ function Bind_Company_Data($form) {
             }
 
             if (result && !result.isOK) {
-                const errors = result.data;
-                for (key in errors) {
-                    const target = document.getElementById(key);
-                    $(target).showError(errors[key]);
-                    $form.getInvalidItems().get(0).focus();
-                }
             }
         });
     }
@@ -38,12 +32,6 @@ function Bind_Company_Data($form) {
             }
 
             if (result && !result.isOK) {
-                const errors = result.data;
-                for (key in errors) {
-                    const target = document.getElementById(key);
-                    $(target).showError(errors[key]);
-                    $form.getInvalidItems().get(0).focus();
-                }
             }
         });
     }
@@ -307,6 +295,14 @@ function Bind_Modal_DetailData(result, DeepAssDateTime) {
 //Start SubMenu
 $(function () {
     Bind_SubMennuURL();
+    Bind_Company_Data();         //Bind Company Info Data to the title part of the page
+
+    $('ul li a').each(function (idx, a) {
+        if ($(a).prop('href') == window.location.href)
+            $(this).addClass('active');
+        else
+            $(this).removeClass('active');
+    });
 
     $(document).on("click", "#btn_t_common_cancle_reload", function (event) {
         window.location.reload();
@@ -316,20 +312,62 @@ $(function () {
     });
 })
 function Bind_SubMennuURL() {
+    var target;
+    //for t_real
     var listItems = $("#subMenu li");
+
     $('#subMenu li').children('a').removeAttr("href");
     let current = window.location.href;
     listItems.each(function (idx, li) {
-        var anchor = $(li).children('a'); 
-        var target = current;
-        target = target.slice(0, target.lastIndexOf('/')); 
+        var anchor = $(li).children('a');
+        target = current;
+        target = target.slice(0, target.lastIndexOf('/'));
         target = target.substring(target.lastIndexOf('/') + 1);
         var newHref = current.replace(target, anchor.attr('name'));
         anchor.prop('href', newHref);
     });
-   
+    //debugger
+    //for Tseller
+    var listItemsSeller = $("#subMenu_Seller li");
+
+    $('#subMenu_Seller li').children('a').removeAttr("href");
+    let current_Seller = window.location.href;
+    listItemsSeller.each(function (idx, li) {
+        var anchor = $(li).children('a');
+        target = current_Seller;
+        target = target.slice(0, target.lastIndexOf('/'));
+        target = target.substring(target.lastIndexOf('/') + 1);
+        var newHref = current_Seller.replace(target, anchor.attr('name'));
+        anchor.prop('href', newHref);
+    });
+    SellerAssessMentMenu();
+
+    if (target.includes('t_reale')) {
+        $('#reale').removeClass('d-none');
+        $('#submenu_reale').removeClass('d-none');
+    }
+    else if (target.includes('t_seller')) {
+        $('#seller').removeClass('d-none');
+        $('#submenu_seller').removeClass('d-none');
+    }
+    //menu_seller_assess
 }
-//EndSubMenu
+function SellerAssessMentMenu() {
+    // tseller_assess
+    var listItemsSeller = $("#menu_seller_assess li");
+
+    $('#menu_seller_assess li').children('a').removeAttr("href");
+    let current_Seller = window.location.href;
+    listItemsSeller.each(function (idx, li) {
+        var anchor = $(li).children('a');
+        var target = current_Seller;
+        target = target.slice(0, target.lastIndexOf('/'));
+        target = target.substring(target.lastIndexOf('/') + 1);
+        var newHref = current_Seller.replace(target, anchor.attr('name'));
+        anchor.prop('href', newHref);
+    });
+}
+//EndSubMenu  subMenu_Seller
 
 
 //変更取消
@@ -356,7 +394,7 @@ function Cancel_Change(id) {
                         </div>\
                     </div>\
                 </div>'
-    $('#'+id).append(cancelModal);
+    $('#' + id).append(cancelModal);
 }
 
 //変更保存 

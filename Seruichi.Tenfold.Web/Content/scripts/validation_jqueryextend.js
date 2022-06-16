@@ -1,4 +1,7 @@
 ﻿(function ($) {
+    $.fn.setInputModeNumber = function () {
+        return this.attr('inputmode', 'numeric');
+    };
 
     $.fn.hideChildErrors = function () {
         const $this = this;
@@ -245,6 +248,10 @@
 
     $.fn.addvalidation_errorElement = function (errormsgElement) {
         return this.attr('data-errormsg-target', errormsgElement);
+    };
+
+    $.fn.addvalidation_emailCheck = function () {
+        return this.attr('data-validation-email', 'true');
     };
 
     function getFirstErrorMsg(selector) {

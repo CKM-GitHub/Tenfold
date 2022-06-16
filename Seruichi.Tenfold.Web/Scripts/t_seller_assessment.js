@@ -12,6 +12,9 @@ $(function () {
     _url.Get_PopupFor_Detail = common.appPath + '/t_seller_assessment/Get_PopupFor_Detail';
     _url.Get_PopupFor_Seller = common.appPath + '/t_seller_assessment/Get_PopupFor_Seller';
     addEvents();
+   
+    $('#menu_seller_assess li').children('a').removeClass("active");
+    $('#menu_seller_assess li').children('a').eq(0).addClass('active');
 });
 
 function setValidation() {

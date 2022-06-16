@@ -22,10 +22,6 @@ function setValidation() {
 function addEvents() {
     common.bindValidationEvent('#message-com', '');
 
-    $('#seller').addClass('d-none');
-    $('#submenu_seller').addClass('d-none');
-    Bind_Company_Data(this);         //Bind Company Info Data to the title part of the page
-
     let model = {
         RealECD: common.getUrlParameter('RealECD')
     }
