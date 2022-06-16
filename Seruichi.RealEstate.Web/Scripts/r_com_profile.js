@@ -25,6 +25,8 @@
 }
 
 function addEvents(model) {
+    common.bindValidationEvent('#maindiv', '');
+
     if (model.LoginID !== 'admin') {
         $('#adminblock').addClass('d-none');
     }

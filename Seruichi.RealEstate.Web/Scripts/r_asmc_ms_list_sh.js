@@ -10,8 +10,8 @@ $(function () {
 });
 function setValidation() {
     $('#MansionName')
-        .addvalidation_errorElement("#errorMansionName")
-        .addvalidation_singlebyte_doublebyte(); //E105
+        .addvalidation_errorElement("#errorMansionName");
+        //.addvalidation_singlebyte_doublebyte(); //E105
         
     $('#StartYear')
         .addvalidation_errorElement("#errorYear")

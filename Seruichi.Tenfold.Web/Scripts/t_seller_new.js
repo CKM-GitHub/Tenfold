@@ -20,7 +20,6 @@ function setValidation() {
         .addvalidation_errorElement("#errorSellerKana")
         .addvalidation_reqired()
         .addvalidation_maxlengthCheck(25)
-        .addvalidation_custom("customValidation_convertFullWidth")
         .addvalidation_doublebyte_kana();
     $('#Birthday')
         .addvalidation_errorElement("#errorBirthday")
@@ -44,7 +43,7 @@ function setValidation() {
     $('#MemoText')
         .addvalidation_errorElement("#errorMemoText")
         .addvalidation_reqired()
-        .addvalidation_maxlengthCheck(2000);
+        .addvalidation_maxlengthCheck(1000);
     $('#ZipCode1')
         .addvalidation_errorElement("#errorZipCode")
         .addvalidation_maxlengthCheck(3)

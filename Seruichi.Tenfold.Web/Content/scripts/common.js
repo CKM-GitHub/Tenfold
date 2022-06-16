@@ -263,6 +263,7 @@ const common = {
         form.method = "POST";
         form.action = action;
         form.submit();
+        this.showLoading();
     },
 
     removeDropDownListItems: function removeDropDownListItems(selector, placeHolder) {
