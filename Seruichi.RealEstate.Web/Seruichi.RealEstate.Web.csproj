@@ -137,6 +137,7 @@
     <Compile Include="Controllers\Common\BaseController.cs" />
     <Compile Include="Controllers\Common\CommonApiController.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
+    <Compile Include="Controllers\r_asmc_ms_map_add.cs" />
     <Compile Include="Controllers\r_asmc_set_area_check_tab.cs" />
     <Compile Include="Controllers\r_asmc_set_train_check_tab.cs" />
     <Compile Include="Controllers\r_asmc_railway.cs" />
@@ -211,6 +212,7 @@
     <Content Include="Content\fonts\ionicons.eot" />
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
+    <Content Include="Scripts\r_asmc_ms_map_add.js" />
     <Content Include="Scripts\r_asmc_railway.js" />
     <Content Include="Scripts\r_asmc_address.js" />
     <Content Include="Scripts\r_asmc_ms_list_sh.js" />
@@ -280,6 +282,7 @@
     <Content Include="Views\r_asmc_set_train_check_tab\_r_asmc_M_RECondLineOpt_list.cshtml" />
     <Content Include="Views\r_asmc_set_area_check_tab\_r_asmc_M_RECondAreaOpt_list.cshtml" />
     <Content Include="Views\r_asmc_set_area_check_tab\Index.cshtml" />
+    <Content Include="Views\r_asmc_ms_map_add\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

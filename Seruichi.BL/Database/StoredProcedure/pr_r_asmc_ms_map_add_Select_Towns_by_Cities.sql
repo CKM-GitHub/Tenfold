@@ -1,10 +1,10 @@
-IF EXISTS (select * from sys.objects where name = 'pr_r_asmc_address_Select_Towns_by_Cities')
+IF EXISTS (select * from sys.objects where name = 'pr_r_asmc_ms_map_add_Select_Towns_by_Cities')
 BEGIN
-    DROP PROCEDURE [pr_r_asmc_address_Select_Towns_by_Cities]
+    DROP PROCEDURE [pr_r_asmc_ms_map_add_Select_Towns_by_Cities]
 END
 GO
 
-CREATE PROCEDURE [dbo].[pr_r_asmc_address_Select_Towns_by_Cities]
+CREATE PROCEDURE [dbo].[pr_r_asmc_ms_map_add_Select_Towns_by_Cities]
 (
     @CitycdCsv  varchar(max)
     ,@RealECD   varchar(10)
@@ -49,14 +49,14 @@ BEGIN
     --   町域コードでグループ化して事業者件数を取得
     ----------------------------------------------------------------------
     OUTER APPLY (
-                SELECT t1.TownCD, Count(DISTINCT t1.RealECD) AS Kensu
-                FROM M_RECondAreaSec t1
-                INNER JOIN M_RECondArea t2 ON t1.RealECD = t2.RealECD AND t1.ConditionSEQ = t2.ConditionSEQ 
+                SELECT M.TownCD, Count(DISTINCT t1.RealECD) AS Kensu
+                FROM M_RECondMan t1 
+                INNER JOIN M_Mansion M ON M.MansionCD = t1.MansionCD
                 WHERE TownCD = ADR.TownCD
                 AND   t1.DeleteDateTime IS NULL
-                AND   t2.DeleteDateTime IS NULL
-                AND   t2.ExpDate > @SysDate
+                AND   t1.ExpDate > @SysDate
                 AND   t1.DisabledFlg = 0
+                AND   M.NoDisplayFLG = 0
                 GROUP BY TownCD
                 ) AS RES
     ----------------------------------------------------------------------
@@ -64,27 +64,27 @@ BEGIN
     ----------------------------------------------------------------------
     OUTER APPLY (
                 SELECT 
-                     MIN(t2.ValidFLG) + 1   AS ValidFLG
-                FROM M_RECondAreaSec t1
-                INNER JOIN M_RECondArea t2 ON t1.RealECD = t2.RealECD AND t1.ConditionSEQ = t2.ConditionSEQ 
+                     MIN(t1.ValidFLG) + 1   AS ValidFLG
+                FROM M_RECondMan t1
+                INNER JOIN M_Mansion M ON M.MansionCD = t1.MansionCD
                 WHERE t1.RealECD = @RealECD
-                AND   t1.TownCD = ADR.TownCD
+                AND   M.TownCD = ADR.TownCD
                 AND   t1.DeleteDateTime IS NULL
-                AND   t2.DeleteDateTime IS NULL
-                AND   t2.ExpDate > @SysDate
+                AND   t1.ExpDate > @SysDate
                 AND   t1.DisabledFlg = 0
+                AND   M.NoDisplayFLG = 0
                 GROUP BY CityCD 
                 ) AS   MyRES
 
     OUTER APPLY (
                 SELECT TOP 1
                      1 AS ExistsFlg
-                FROM M_RECondAreaSec t1
-                INNER JOIN M_RECondArea t2 ON t1.RealECD = t2.RealECD AND t1.ConditionSEQ = t2.ConditionSEQ 
+                FROM M_RECondMan t1
+                INNER JOIN M_Mansion M ON M.MansionCD = t1.MansionCD
                 WHERE t1.RealECD = @RealECD
-                AND   t1.TownCD = ADR.TownCD
+                AND   M.TownCD = ADR.TownCD
                 AND   t1.DeleteDateTime IS NULL
-                AND   t2.DeleteDateTime IS NULL
+                AND   M.NoDisplayFLG = 0
                 ) AS   MyRES2
 
     WHERE ADR.NoDisplayFLG = 0  --表示対象外は除く

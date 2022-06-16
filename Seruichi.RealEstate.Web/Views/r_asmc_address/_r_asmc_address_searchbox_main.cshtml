@@ -3,7 +3,7 @@
 @model Models.RealEstate.r_asmc_address.r_asmc_addressModel
 
 @{
-    string switch_label = (ViewBag.PageID == "r_asmc_address" ? "行政区画表示"
+    string switch_label = (ViewBag.PageID == "r_asmc_address" || ViewBag.PageID == "r_asmc_ms_map_add" ? "行政区画表示"
                          : ViewBag.PageID == "r_asmc_railway" ? "路線表示"
                          : "");
 }
@@ -24,7 +24,7 @@
                         <span class="form-check form-switch ms-5">
                             <input class="form-check-input" type="checkbox" role="switch" id="@switch_id"
                                    data-toggle="toggle" data-bs-toggle="collapse" data-bs-target="@toggle_jid"
-                                   aria-expanded="false" aria-controls="@toggle_id">
+                                   aria-expanded="false" aria-controls="@toggle_id" autocomplete="off">
                             <label class="form-check-label" for="@switch_id">@switch_label</label>
                         </span>
                     </h5>
@@ -75,7 +75,7 @@
                                 "";
 
                             <label class="heckbox-inline p-3 cap-fon-div-w270 text-nowrap text-dark">
-                                <input type="checkbox" value="@item03.CityCD" class="@css_chkbox">
+                                <input type="checkbox" value="@item03.CityCD" class="@css_chkbox" autocomplete="off">
                                 <span class="ps-1">
                                     @item03.CityName
                                     <span class="ps-1 js-text1">@text1</span>
