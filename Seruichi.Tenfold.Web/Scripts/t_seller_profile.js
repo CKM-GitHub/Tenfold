@@ -1,6 +1,8 @@
 ﻿const _url = {};
 
 $(function () {
+    _url.get_t_seller_Info = common.appPath + '/t_seller_profile/get_t_seller_Info';
+    _url.get_t_seller_profile_DisplayData = common.appPath + '/t_seller_profile/get_t_seller_profile_DisplayData';
     _url.checkZipCode = common.appPath + '/t_seller_profile/CheckZipCode';
     _url.modify_SellerData = common.appPath + '/t_seller_profile/modify_SellerData';
     _url.modify_SellerPW = common.appPath + '/t_seller_profile/modify_SellerPW';
@@ -165,20 +167,32 @@ function addEvents() {
         window.location.reload();
     })
 
+    $('#btnPW').on('click', function () {
+        $pw = $('#pw').hideChildErrors();
+        $('#txtPassword').focus();
+        $('#Change_PW').modal('show');
+    })
+
     $('#btnModifyPW').on('click', function () {
         $pw = $('#pw').hideChildErrors();
         if (!common.checkValidityOnSave('#pw')) {
             $pw.getInvalidItems().get(0).focus();
             return false;
         }
-
+        debugger;
         var model = {
             SellerCD: common.getUrlParameter('SellerCD'),
             SellerName: $('#SellerName').val(),
-            Password: $('#Password').val()
+            Password: $('#txtPassword').val(),
+            ConfirmPassword: $('#txtConfirmPassword').val()
         };
-        Modify_SellerPW(model);
+        Modify_SellerPW(model, $pw);
     });
+
+    var model = {
+        SellerCD: common.getUrlParameter('SellerCD')
+    }
+    get_SellerProfile_Data(model);
 }
 
 function customValidation_checkPhone(e) {
@@ -201,6 +215,45 @@ function customValidation_convertFullWidth(e) {
     $this.val(inputvalue);
 
     return true;
+}
+
+function get_SellerProfile_Data(model) {
+    common.callAjaxWithLoadingSync(_url.get_t_seller_profile_DisplayData, model, this, function (result) {
+        if (result && result.isOK) {
+            Bind_SellerProfile_Data(result.data);
+        }
+        else {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                this.getInvalidItems().get(0).focus();
+            }
+        }
+    })
+}
+
+function Bind_SellerProfile_Data(result) {
+    var data = JSON.parse(result);
+    if (data.length > 0) {
+        $('#SellerName').val(data[0]['SellerName']);
+        $('#SellerKana').val(data[0]['SellerKana']);
+        $('#Birthday').val(data[0]['Birthday']);
+        $('#MemoText').val(data[0]['Remark']);
+        $('#ZipCode1').val(data[0]['ZipCode1']);
+        $('#ZipCode2').val(data[0]['ZipCode2']);
+        $('#PrefCD').val(data[0]['PrefCD']);
+        $('#PrefName').val(data[0]['PrefName']);
+        $('#CityName').val(data[0]['CityName']);
+        $('#TownName').val(data[0]['TownName']);
+        $('#Address1').val(data[0]['Address1']);
+        $('#HousePhone').val(data[0]['HousePhone']);
+        $('#HandyPhone').val(data[0]['HandyPhone']);
+        $('#Fax').val(data[0]['Fax']);
+        $('#MailAddress').val(data[0]['MailAddress']);
+        $('#txtPassword').val(data[0]['Password']);
+        $('#txtConfirmPassword').val(data[0]['Password']);
+    }
 }
 
 function Bind_ModalData(model) {
