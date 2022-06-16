@@ -35,7 +35,25 @@ function setValidation() {
     $('#penaltyArea').addvalidation_errorElement("#errorpenalty").addvalidation_reqired();
 
 }
-
+function Date_Compare() {
+    $start = $('#StartDate').val(), $end = $('#EndDate').val()
+    let model = {
+        StartDate: $start,
+        EndDate: $end
+    };
+    if (model.StartDate && model.EndDate) {
+        if (model.StartDate <= model.EndDate) {
+            $("#StartDate").hideError();
+            $("#EndDate").hideError();
+            return;
+        }
+        else {
+            $("#StartDate").showError(common.getMessage('E111'));
+            $("#EndDate").showError(common.getMessage('E111'));
+            return;
+        }
+    }
+}
 function addEvents() {
     common.bindValidationEvent('#form1', '');
 
