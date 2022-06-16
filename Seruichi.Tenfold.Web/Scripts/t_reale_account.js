@@ -24,7 +24,7 @@ function setValidation() {
         .addvalidation_errorElement("#errorStartDate")
         .addvalidation_datecheck() //E108
         .addvalidation_reqired() // E101 
-        .addvalidation_datecompare(); //E111
+        //.addvalidation_datecompare(); //E111
 
     $('#EndDate')
         .addvalidation_errorElement("#errorEndDate")
@@ -70,22 +70,23 @@ function addEvents() {
         $('.cap-errormsg-right').addClass("d-none")
     });
     $('#StartDate, #EndDate').on('change', function () {
-        const $this = $(this), $start = $('#StartDate').val(), $end = $('#EndDate').val();
-        if (!common.checkValidityInput($this)) { 
-            return false;
-        } 
-        let model = {
-            StartDate: $start,
-            EndDate: $end
-        };
-        if (model.StartDate && model.EndDate) {
-            if (model.StartDate < model.EndDate) {
-                $("#StartDate").hideError();
-                $("#EndDate").hideError();
-                $("#EndDate").focus();
-                return;
-            }
-        }
+        Date_Compare();
+        //const $this = $(this), $start = $('#StartDate').val(), $end = $('#EndDate').val();
+        //if (!common.checkValidityInput($this)) { 
+        //    return false;
+        //} 
+        //let model = {
+        //    StartDate: $start,
+        //    EndDate: $end
+        //};
+        //if (model.StartDate && model.EndDate) {
+        //    if (model.StartDate < model.EndDate) {
+        //        $("#StartDate").hideError();
+        //        $("#EndDate").hideError();
+        //        $("#EndDate").focus();
+        //        return;
+        //    }
+        //}
     });
     $('#subMenu li').children('a').on('click', function () {
         $('#subMenu li').children('a').removeClass("active");
