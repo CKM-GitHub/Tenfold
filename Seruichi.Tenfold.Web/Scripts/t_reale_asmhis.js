@@ -44,12 +44,12 @@ function setValidation() {
     $('#StartDate')
         .addvalidation_errorElement("#errorStartDate")
         .addvalidation_datecheck() //E108
-        //.addvalidation_datecompare(); //E111
+        .addvalidation_datecompare(); //E111
 
     $('#EndDate')
         .addvalidation_errorElement("#errorEndDate")
         .addvalidation_datecheck() //E108
-        //.addvalidation_datecompare(); //E111
+        .addvalidation_datecompare(); //E111
 }
 
 function addEvents() {
@@ -87,14 +87,14 @@ function addEvents() {
         let today = common.getToday();
         $('#StartDate').val(today);
         $('#EndDate').val(today);
-        Date_Compare();
+        //Date_Compare();
     });
     $('#btnThisWeek').on('click', function () {
         let start = common.getDayaweekbeforetoday();
         let end = common.getToday();
         $('#StartDate').val(start);
         $('#EndDate').val(end);
-        Date_Compare();
+        //Date_Compare();
 
     });
     $('#btnThisMonth').on('click', function () {
@@ -102,7 +102,7 @@ function addEvents() {
         let firstDay = common.getFirstDayofMonth();
         $('#StartDate').val(firstDay);
         $('#EndDate').val(today);
-        Date_Compare();
+        //Date_Compare();
 
     });
     $('#btnLastMonth').on('click', function () {
@@ -110,7 +110,7 @@ function addEvents() {
         let lastdaypremonth = common.getLastDayofPreviousMonth();
         $('#StartDate').val(firstdaypremonth);
         $('#EndDate').val(lastdaypremonth);
-        Date_Compare();
+        //Date_Compare();
 
     });
     $('#subMenu li').children('a').on('click', function () {

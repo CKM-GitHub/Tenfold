@@ -24,7 +24,7 @@ function setValidation() {
         .addvalidation_errorElement("#errorStartDate")
         .addvalidation_datecheck() //E108
         .addvalidation_reqired() // E101 
-        //.addvalidation_datecompare(); //E111
+        .addvalidation_datecompare(); //E111
 
     $('#EndDate')
         .addvalidation_errorElement("#errorEndDate")
@@ -61,13 +61,14 @@ function addEvents() {
     btn.addEventListener("change", function () {
         if (this.checked) {
             $('.disabled-account').removeAttr("disabled")
-           /// $('.cap-errormsg-right').removeClass("d-none")
+           $('.cap-errormsg-right').removeClass("d-none")
         }
         else {
             $('.disabled-account').attr("disabled", "true").removeClass("cap-is-invalid")
            // $('.cap-errormsg-right').addClass("d-none")
+            $('.cap-errormsg-right').addClass("d-none")
+
         }
-        $('.cap-errormsg-right').addClass("d-none")
     });
     $('#StartDate, #EndDate').on('change', function () {
        // Date_Compare();
