@@ -11,7 +11,7 @@ using Seruichi.BL.RealEstate.r_asmc_ms_list_sh;
 
 namespace Seruichi.RealEstate.Web.Controllers
 {
-    public class r_asmc_ms_list_shController : BaseController
+    public class r_asmc_ms_list_mapController : BaseController
     {
         // GET: r_asmc_ms_list_sh
         public ActionResult Index(string MansionName)
