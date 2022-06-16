@@ -27,6 +27,7 @@
                                     <div class="row g-0">
                                         <div class="col-lg-5">
                                             <div class="p-5">
+                                                <input type="text" id="SellerCD" name="SellerCD" class="d-none" />
                                                 <div class="mb-4 pb-2">
                                                     <div class="form-outline">
                                                         <div class="d-flex">
@@ -57,7 +58,7 @@
                                                 <hr class="navbar-divider mb-4 my-5 opacity-20">
                                                 <div class="mb-4 pb-2">
                                                     <div class="form-outline">
-                                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Change_PW">パスワード変更</button>
+                                                        <button type="button" id="btnPW" class="btn btn-primary">パスワード変更</button>
                                                     </div>
                                                 </div>
                                                 <hr class="navbar-divider mb-4 my-5 opacity-20">
@@ -317,7 +318,7 @@
                     </div>
                 </div>
 
-                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1" id="Process_OK-3">
+                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1" id="Process_OK">
                     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">

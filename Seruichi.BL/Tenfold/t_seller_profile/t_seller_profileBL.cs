@@ -92,6 +92,62 @@ namespace Seruichi.BL.Tenfold.t_seller_profile
             return validator.GetValidationResult();
         }
 
+        public DataTable get_t_seller_Info(t_seller_profileModel model)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD.ToStringOrNull() },
+                new SqlParameter("@Type", SqlDbType.TinyInt){ Value = 1 }
+            };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_get_SellerInfo", sqlParams);
+
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+            var e = dt.AsEnumerable();
+            foreach (DataRow row in dt.Rows)
+            {
+                row["SellerKana"] = crypt.DecryptFromBase64(row.Field<string>("SellerKana"), decryptionKey);
+                row["SellerName"] = crypt.DecryptFromBase64(row.Field<string>("SellerName"), decryptionKey);
+                row["TownName"] = crypt.DecryptFromBase64(row.Field<string>("TownName"), decryptionKey);
+                row["Address1"] = crypt.DecryptFromBase64(row.Field<string>("Address1"), decryptionKey);
+                row["Address2"] = crypt.DecryptFromBase64(row.Field<string>("Address2"), decryptionKey);
+                row["HousePhone"] = crypt.DecryptFromBase64(row.Field<string>("HousePhone"), decryptionKey);
+                row["HandyPhone"] = crypt.DecryptFromBase64(row.Field<string>("HandyPhone"), decryptionKey);
+                row["MailAddress"] = crypt.DecryptFromBase64(row.Field<string>("MailAddress"), decryptionKey);
+            }
+            return dt;
+        }
+
+        public DataTable get_t_seller_profile_DisplayData(t_seller_profileModel model)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD.ToStringOrNull() },
+            };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_seller_profile_getDisplayData", sqlParams);
+
+            AESCryption crypt = new AESCryption();
+            string cryptionKey = StaticCache.GetDataCryptionKey();
+            foreach(DataRow row in dt.Rows)
+            {
+                row["SellerName"] = crypt.DecryptFromBase64(row.Field<string>("SellerName"), cryptionKey);
+                row["SellerKana"] = crypt.DecryptFromBase64(row.Field<string>("SellerKana"), cryptionKey);
+                row["Birthday"] = crypt.DecryptFromBase64(row.Field<string>("Birthday"), cryptionKey);
+                row["Password"] = crypt.DecryptFromBase64(row.Field<string>("Password"), cryptionKey);
+                row["TownName"] = crypt.DecryptFromBase64(row.Field<string>("TownName"), cryptionKey);
+                row["Address1"] = crypt.DecryptFromBase64(row.Field<string>("Address1"), cryptionKey);
+                row["HandyPhone"] = crypt.DecryptFromBase64(row.Field<string>("HandyPhone"), cryptionKey);
+                row["HousePhone"] = crypt.DecryptFromBase64(row.Field<string>("HousePhone"), cryptionKey);
+                row["Fax"] = crypt.DecryptFromBase64(row.Field<string>("Fax"), cryptionKey);
+                row["MailAddress"] = crypt.DecryptFromBase64(row.Field<string>("MailAddress"), cryptionKey);
+            }
+            return dt;
+        }
+
         public bool CheckZipCode(t_seller_profileModel model, out string errorcd, out string prefCD, out string cityName, out string townName)
         {
             errorcd = "";
