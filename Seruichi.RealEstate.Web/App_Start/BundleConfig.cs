@@ -83,6 +83,11 @@ namespace Seruichi.RealEstate.Web
                     "~/Content/scripts/sidebar.js",
                     "~/Content/scripts/hover.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/r_asmc_ms_map_add").Include(
+                    "~/Scripts/r_asmc_ms_map_add.js",
+                    "~/Content/scripts/sidebar.js",
+                    "~/Content/scripts/hover.js"));
+
             bundles.Add(new StyleBundle("~/Content/r_asmc_ms_reged_list").Include(
                       "~/Content/css/style.css",
                       "~/Content/css/index.css",

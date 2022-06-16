@@ -258,6 +258,7 @@ const common = {
         form.method = "POST";
         form.action = action;
         form.submit();
+        this.showLoading();
     },
 
     showLoading: function showLoading(disableSelector) {

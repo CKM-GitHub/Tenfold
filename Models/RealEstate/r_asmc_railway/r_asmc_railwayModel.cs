@@ -2,11 +2,19 @@
 
 namespace Models.RealEstate.r_asmc_railway
 {
-    public class r_asmc_railway_Region: r_asmc_address_Region
+    public class r_asmc_railwayModel : r_asmc_addressModel
     {
     }
 
-    public class r_asmc_railwayModel : r_asmc_addressModel
+    public class r_asmc_railwayDetailModel : r_asmc_addressDetailModel
+    {
+    }
+
+
+
+
+
+    public class r_asmc_railway_Region: r_asmc_address_Region
     {
     }
 
@@ -23,10 +31,6 @@ namespace Models.RealEstate.r_asmc_railway
     }
 
     public class r_asmc_railway_Station : r_asmc_address_Town
-    {
-    }
-
-    public class r_asmc_railwayDetailModel : r_asmc_addressDetailModel
     {
     }
 
