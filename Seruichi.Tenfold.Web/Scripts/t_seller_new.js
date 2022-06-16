@@ -53,7 +53,7 @@ function setValidation() {
         .addvalidation_errorElement("#errorZipCode")
         .addvalidation_maxlengthCheck(4)
         .addvalidation_singlebyte_number();
-    $('#PrefName')
+    $('#PrefCD')
         .addvalidation_errorElement("#errorPrefName")
         .addvalidation_reqired();
     $('#CityName')
@@ -146,7 +146,7 @@ function addEvents() {
             return false;
         }
 
-        $('#PrefName').val($('#PrefCD').text());
+        $('#PrefName').val($('#PrefCD option:selected').text());
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         Bind_ModalData(model);
