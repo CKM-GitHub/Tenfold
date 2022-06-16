@@ -63,24 +63,24 @@ function addEvents() {
     }).change();
 
     $('#StartDate, #EndDate').on('change', function () {
-        Date_Compare();
+      //  Date_Compare();
 
-        //const $this = $(this), $start = $('#StartDate').val(), $end = $('#EndDate').val();
-        //if (!common.checkValidityInput($this)) {
-        //    return false;
-        //}
-        //let model = {
-        //    StartDate: $start,
-        //    EndDate: $end
-        //};
-        //if (model.StartDate && model.EndDate) {
-        //    if (model.StartDate < model.EndDate) {
-        //        $("#StartDate").hideError();
-        //        $("#EndDate").hideError();
-        //        $("#EndDate").focus();
-        //        return;
-        //    }
-        //}
+        const $this = $(this), $start = $('#StartDate').val(), $end = $('#EndDate').val();
+        if (!common.checkValidityInput($this)) {
+            return false;
+        }
+        let model = {
+            StartDate: $start,
+            EndDate: $end
+        };
+        if (model.StartDate && model.EndDate) {
+            if (model.StartDate < model.EndDate) {
+                $("#StartDate").hideError();
+                $("#EndDate").hideError();
+                $("#EndDate").focus();
+                return;
+            }
+        }
     });
 
     $('#btnToday').on('click', function () {
