@@ -30,13 +30,13 @@ function setValidation() {
 
     $('#StartUnit')
         .addvalidation_errorElement("#errorUnit")
-        .addvalidation_onebyte_character()
+        .addvalidation_singlebyte_number()
         .addvalidation_maxlengthCheck(3);
 
 
     $('#EndUnit')
         .addvalidation_errorElement("#errorUnit")
-        .addvalidation_onebyte_character()
+        .addvalidation_singlebyte_number()
         .addvalidation_maxlengthCheck(3);
 
     $('#btnDisplay')
