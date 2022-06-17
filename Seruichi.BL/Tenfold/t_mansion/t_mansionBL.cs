@@ -89,7 +89,7 @@ namespace Seruichi.BL.Tenfold.t_mansion
             validator.CheckIsNumeric("Rooms", model.Rooms, 3, 0);
             //階建て
             validator.CheckRequiredNumber("Floors", model.Floors, true);
-            validator.CheckIsNumeric("Floors", model.Floors, 3, 0);
+            validator.CheckIsNumeric("Floors", model.Floors, 2, 0);
 
             validator.CheckSelectionRequired("RightKBN", model.RightKBN.ToString());
 

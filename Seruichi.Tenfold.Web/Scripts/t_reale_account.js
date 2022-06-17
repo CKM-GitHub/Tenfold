@@ -24,7 +24,7 @@ function setValidation() {
         .addvalidation_errorElement("#errorStartDate")
         .addvalidation_datecheck() //E108
         .addvalidation_reqired() // E101 
-        .addvalidation_datecompare(); //E111
+        //.addvalidation_datecompare(); //E111
 
     $('#EndDate')
         .addvalidation_errorElement("#errorEndDate")
@@ -35,7 +35,25 @@ function setValidation() {
     $('#penaltyArea').addvalidation_errorElement("#errorpenalty").addvalidation_reqired();
 
 }
-
+function Date_Compare() {
+    $start = $('#StartDate').val(), $end = $('#EndDate').val()
+    let model = {
+        StartDate: $start,
+        EndDate: $end
+    };
+    if (model.StartDate && model.EndDate) {
+        if (model.StartDate <= model.EndDate) {
+            $("#StartDate").hideError();
+            $("#EndDate").hideError();
+            return;
+        }
+        else {
+            $("#StartDate").showError(common.getMessage('E111'));
+            $("#EndDate").showError(common.getMessage('E111'));
+            return;
+        }
+    }
+}
 function addEvents() {
     common.bindValidationEvent('#form1', '');
 
@@ -43,31 +61,56 @@ function addEvents() {
     btn.addEventListener("change", function () {
         if (this.checked) {
             $('.disabled-account').removeAttr("disabled")
-            $('.cap-errormsg-right').removeClass("d-none")
+           $('.cap-errormsg-right').removeClass("d-none")
         }
         else {
             $('.disabled-account').attr("disabled", "true").removeClass("cap-is-invalid")
+           // $('.cap-errormsg-right').addClass("d-none")
             $('.cap-errormsg-right').addClass("d-none")
-        }
 
+        }
     });
     $('#StartDate, #EndDate').on('change', function () {
-        const $this = $(this), $start = $('#StartDate').val(), $end = $('#EndDate').val();
-        if (!common.checkValidityInput($this)) { 
-            return false;
-        } 
-        let model = {
-            StartDate: $start,
-            EndDate: $end
-        };
-        if (model.StartDate && model.EndDate) {
-            if (model.StartDate < model.EndDate) {
-                $("#StartDate").hideError();
-                $("#EndDate").hideError();
-                $("#EndDate").focus();
-                return;
-            }
-        }
+       // Date_Compare();
+        //const $this = $(this), $start = $('#StartDate').val(), $end = $('#EndDate').val();
+        //if (!common.checkValidityInput($this)) { 
+        //    return false;
+        //} 
+        //let model = {
+        //    StartDate: $start,
+        //    EndDate: $end
+        //};
+        //if (model.StartDate && model.EndDate) {
+        //    if (model.StartDate < model.EndDate) {
+        //        $("#StartDate").hideError();
+        //        $("#EndDate").hideError();
+        //        $("#EndDate").focus();
+        //        return;
+        //    }
+        //}
+         Date_Compare();
+
+        //const $this = $(this), $start = $('#StartDate').val(), $end = $('#EndDate').val();
+        //if (!common.checkValidityInput($this)) {
+        //    return false;
+        //}
+        //let model = {
+        //    StartDate: $start,
+        //    EndDate: $end
+        //};
+        //if (model.StartDate && model.EndDate) {
+        //    if (model.StartDate < model.EndDate) {
+        //        $("#StartDate").hideError();
+        //        $("#EndDate").hideError();
+        //        //$("#EndDate").focus();
+        //        return;
+        //    }
+        //    else {
+        //        $("#StartDate").showError(common.getMessage('E111'));
+        //        $("#EndDate").showError(common.getMessage('E111'));
+        //        return;
+        //    }
+        //}
     });
     $('#subMenu li').children('a').on('click', function () {
         $('#subMenu li').children('a').removeClass("active");
@@ -86,6 +129,7 @@ function addEvents() {
                 //#modal-changeok
             }
             else {
+                alert('Erros')
                 const errors = result.data;
                 for (key in errors) {
                     const target = document.getElementById(key);
@@ -100,12 +144,9 @@ function addEvents() {
         RealECD: common.getUrlParameter('RealECD') 
     };
 
-    $('#seller').addClass('d-none');
-    $('#submenu_seller').addClass('d-none');
     //#wrapper {
     //    padding - left: 0;
     $('#wrapper').prop('style','padding-left:0px !important')
-    Bind_Company_Data(this);
     //Bind Company Info Data to the title part of the page
 
     get_purchase_Data(model, this, 'page_load');

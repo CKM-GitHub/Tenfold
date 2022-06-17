@@ -38,26 +38,33 @@ BEGIN
     --   最寄駅コードで駅マスタを結合し、路線CDを取得
     --   取得した路線コードでグループ化して登録マンション数を取得
     ----------------------------------------------------------------------
-    LEFT JOIN (
-                    SELECT S2.LineCD 
-                        ,Count(DISTINCT S1.MansionCD) AS Kensu
-                    FROM M_MansionStation S1 
-                    INNER JOIN M_Station S2 ON S1.StationCD = S2.StationCD   
-                    GROUP BY S2.LineCD
-        ) MAN 
-        ON LIN.LineCD = MAN.LineCD
+    OUTER APPLY (
+                    SELECT t2.LineCD
+                        , Count(DISTINCT t1.MansionCD) AS Kensu
+                    FROM M_MansionStation t1 
+                    INNER JOIN M_Station t2 ON t1.StationCD = t2.StationCD
+                    INNER JOIN M_Mansion M ON M.MansionCD = t1.MansionCD
+                    WHERE t2.LineCD = LIN.LineCD
+                    AND   M.NoDisplayFLG = 0
+                    GROUP BY t2.LineCD                    
+                ) AS MAN 
     ----------------------------------------------------------------------
     -- 登録会社数の参照
     --   路線駅査定条件駅マスタ  
     --   路線コードでグループ化して事業者件数を取得
     ----------------------------------------------------------------------
-    LEFT JOIN (
-                    SELECT LineCD
-                        ,Count(DISTINCT RealECD) AS Kensu
-                    FROM M_RECondLineSta
-                    GROUP By LineCD
-        ) RES
-        ON LIN.LineCD = RES.LineCD
+    OUTER APPLY (
+                    SELECT t1.LineCD
+                        , Count(DISTINCT t1.RealECD) AS Kensu
+                    FROM M_RECondLineSta t1
+                    INNER JOIN M_RECondLine t2 ON t1.RealECD = t2.RealECD AND t1.ConditionSEQ = t2.ConditionSEQ 
+                    WHERE t1.LineCD = LIN.LineCD
+                    AND   t1.DeleteDateTime IS NULL
+                    AND   t2.DeleteDateTime IS NULL
+                    AND   t2.ExpDate > @SysDate
+                    AND   t1.DisabledFlg = 0
+                    GROUP BY LineCD
+                ) RES
 
     ----------------------------------------------------------------------
     -- 自社情報
@@ -76,7 +83,7 @@ BEGIN
                     GROUP BY LineCD
                 ) AS   MyRES
 
-    --有効データが期限切れ
+    --期限切れの有効データ
     OUTER APPLY (
                     SELECT TOP 1
                         1 AS ExpExistsFlg 

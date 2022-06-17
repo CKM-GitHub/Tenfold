@@ -39,7 +39,8 @@ BEGIN
                     SELECT CityCD, Count(MansionCD) AS Kensu
                     FROM M_Mansion 
                     WHERE CityCD = ADR.CityCD
-                    GROUP　BY CityCD                    
+                    AND   NoDisplayFLG = 0
+                    GROUP BY CityCD                    
                 ) AS MAN 
     ----------------------------------------------------------------------
     -- 登録会社数の参照
@@ -47,9 +48,14 @@ BEGIN
     --   市区町村コードでグループ化して事業者件数を取得
     ----------------------------------------------------------------------
     OUTER APPLY (
-                    SELECT CityCD ,Count(RealECD) AS Kensu
-                    FROM M_RECondAreaSec  
+                    SELECT t1.CityCD ,Count(DISTINCT t1.RealECD) AS Kensu
+                    FROM M_RECondAreaSec t1 
+                    INNER JOIN M_RECondArea t2 ON t1.RealECD = t2.RealECD AND t1.ConditionSEQ = t2.ConditionSEQ 
                     WHERE CityCD = ADR.CityCD
+                    AND   t1.DeleteDateTime IS NULL
+                    AND   t2.DeleteDateTime IS NULL
+                    AND   t2.ExpDate > @SysDate
+                    AND   t1.DisabledFlg = 0
                     GROUP BY CityCD 
                 ) AS   RES
     ----------------------------------------------------------------------
@@ -69,7 +75,7 @@ BEGIN
                     GROUP BY CityCD 
                 ) AS   MyRES
 
-    --有効データが期限切れ
+    --期限切れの有効データ
     OUTER APPLY (
                     SELECT TOP 1
                         1 AS ExpExistsFlg 

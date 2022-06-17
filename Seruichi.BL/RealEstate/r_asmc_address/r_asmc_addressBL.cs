@@ -1,11 +1,8 @@
-﻿using System;
+﻿using Models.RealEstate.r_asmc_address;
+using Seruichi.Common;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using Seruichi.Common;
-using Models.RealEstate.r_asmc_address;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Models;
 using System.Linq;
 
 namespace Seruichi.BL.RealEstate.r_asmc_address

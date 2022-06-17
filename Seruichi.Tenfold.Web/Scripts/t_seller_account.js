@@ -3,12 +3,11 @@ $(function () {
     _url.get_t_seller_Info = common.appPath + '/t_seller_account/get_t_seller_Info';
     _url.insert_M_Seller = common.appPath + '/t_seller_account/insert_M_Seller';
     addEvents()
+    $('#subMenu_Seller li').children('a').removeClass("active");
+    $('#subMenu_Seller li').children('a').eq(3).addClass('active');
 });
 
 function addEvents() {
-    $('#reale').addClass('d-none');
-    $('#submenu_reale').addClass('d-none');
-    Bind_Company_Data(this);
     let model1 = {
         SellerCD: common.getUrlParameter('SellerCD')
     }
@@ -43,7 +42,7 @@ function addEvents() {
     });
 
 
-    $('#btnCancel').on('click', function () {
+    $('#btnSuccess,#btnCancel').on('click', function () {
          window.location.reload();
     });
 }
@@ -66,8 +65,7 @@ function get_account_Data(model, $form) {
 
 function Bind_Info(result) {
     var data = JSON.parse(result);
-    if (data.length > 0) {
-        debugger;
+    if (data.length > 0) { 
         if (data[0]['InvalidFLG'] == '無効会員')
             $("#chkInvalidFLG").prop("checked", true);
 

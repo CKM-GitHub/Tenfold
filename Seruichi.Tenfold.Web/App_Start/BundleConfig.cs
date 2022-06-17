@@ -61,6 +61,7 @@ namespace Seruichi.Tenfold.Web
                      "~/Scripts/t_dashboard.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/t_seller_assessment").Include(
+                  "~/Scripts/t_common.js",
                      "~/Scripts/t_seller_assessment.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/t_mansion_list").Include(
@@ -112,6 +113,10 @@ namespace Seruichi.Tenfold.Web
             bundles.Add(new ScriptBundle("~/bundles/t_reale_new").Include(
                 "~/Scripts/t_reale_new.js",
                 "~/Scripts/t_common.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/t_seller_profile").Include(
+                     "~/Scripts/t_seller_profile.js",
+                     "~/Scripts/t_common.js"));
         }
     }
 }

@@ -263,6 +263,7 @@ const common = {
         form.method = "POST";
         form.action = action;
         form.submit();
+        this.showLoading();
     },
 
     removeDropDownListItems: function removeDropDownListItems(selector, placeHolder) {
@@ -373,7 +374,7 @@ const common = {
         const isMinlengthCheck = $ctrl.attr("data-validation-minlengthcheck");
         const isSingleByteKana = $ctrl.attr("data-validation-singlebyte-kana");
         const isDoubleByteHira = $ctrl.attr("data-validation-doublebyte-hira");
-
+        const isemailformat = $ctrl.attr("data-validation-email");
 
         let inputValue = "";
         if (type === 'radio') {
@@ -566,7 +567,14 @@ const common = {
                     return;
                 }
                 
-                //else {                //    $("#StartDate").hideError(this.getMessage('E111'));                //    $("#EndDate").hideError(this.getMessage('E111'));                //    //$("#EndDate").focus();                //    return;                //}
+                //else {
+                //    $("#StartDate").hideError(this.getMessage('E111'));
+                //    $("#EndDate").hideError(this.getMessage('E111'));
+                //    //$("#EndDate").focus();
+                //    return;
+
+                //}
+
             }
 
             if (isNumCompare) {
@@ -618,6 +626,13 @@ const common = {
                 const regex = new RegExp(regexPattern.doublebyteHira);
                 if (!regex.test(hira_val)) {
                     $ctrl.showError(this.getMessage('E104'));
+                    return;
+                }
+            }
+
+            if (isemailformat) {
+                if (!inputValue.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+                    $ctrl.showError(this.getMessage('E204'));
                     return;
                 }
             }
