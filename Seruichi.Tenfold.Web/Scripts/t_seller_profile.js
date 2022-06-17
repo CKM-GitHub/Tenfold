@@ -46,7 +46,7 @@ function setValidation() {
     $('#MemoText')
         .addvalidation_errorElement("#errorMemoText")
         .addvalidation_reqired()
-        .addvalidation_maxlengthCheck(1000);
+        .addvalidation_singlebyte_doublebyte();
     $('#ZipCode1')
         .addvalidation_errorElement("#errorZipCode")
         .addvalidation_maxlengthCheck(3)
