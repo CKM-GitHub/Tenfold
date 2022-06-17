@@ -12,7 +12,6 @@
         .addvalidation_errorElement("#errorPassword")
         .addvalidation_reqired()
         .addvalidation_singlebyte()
-        .addvalidation_passwordcompare()
         .addvalidation_minlengthCheck(8)
         .addvalidation_maxlengthCheck(20);
 
@@ -25,6 +24,8 @@
 }
 
 function addEvents(model) {
+    common.bindValidationEvent('#maindiv', '');
+
     if (model.LoginID !== 'admin') {
         $('#adminblock').addClass('d-none');
     }

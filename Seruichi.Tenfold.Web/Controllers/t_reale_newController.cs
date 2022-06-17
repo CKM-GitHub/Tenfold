@@ -19,6 +19,7 @@ namespace Seruichi.Tenfold.Web.Controllers
             CommonBL bl = new CommonBL();
             ViewBag.PrefDropDownListItems = bl.GetDropDownListItemsOfPrefecture();
             ViewBag.MultPurposeDropDownListItems = bl.GetDropDownListItemsOfMultPurpose(110);
+            ViewBag.CourseDropDownListItems = bl.GetDropDownListItemsOfCourse();
             return View();
         }
 
@@ -89,7 +90,47 @@ namespace Seruichi.Tenfold.Web.Controllers
             var dt = bl.GetBankBranchListByBranchWord(searchWord.Trim(), bankCD);
             return OKResult(DataTableToJSON(dt));
         }
-        
+
+        [HttpPost]
+        public ActionResult CheckAll(t_reale_newModel model)
+        {
+            if (model == null)
+            {
+                return BadRequestResult();
+            }
+
+            t_reale_newBL bl = new t_reale_newBL();
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+            return OKResult();
+        }
+        [HttpPost]
+        public ActionResult Save_t_reale_new(t_reale_newModel model)
+        {
+            if (model == null)
+            {
+                return BadRequestResult();
+            }
+            model.Operator = base.GetOperator();
+            model.IPAddress = base.GetClientIP();
+            model.LoginName = base.GetOperatorName();
+
+            t_reale_newBL bl = new t_reale_newBL();
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+            if (!bl.Save_t_reale_new(model, out string errorcd))
+            {
+                return ErrorMessageResult(errorcd);
+            }
+
+            return OKResult();
+        }
 
     }
 }
