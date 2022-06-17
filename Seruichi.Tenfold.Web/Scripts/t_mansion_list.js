@@ -18,13 +18,13 @@ function setValidation() {
     
     $('#StartNum')
         .addvalidation_errorElement("#errorAge")
-        .addvalidation_onebyte_character()
+        .addvalidation_singlebyte_number()
         .addvalidation_maxlengthCheck(2)
         .addvalidation_numcompare();
 
     $('#EndNum')
         .addvalidation_errorElement("#errorAge")
-        .addvalidation_onebyte_character()
+        .addvalidation_singlebyte_number()
         .addvalidation_maxlengthCheck(2)
         .addvalidation_numcompare();
 
