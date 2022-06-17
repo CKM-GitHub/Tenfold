@@ -58,6 +58,7 @@ const regexPattern = {
     numeric: "^[0-9.]+$",
     dateformat: /^\d{4}-\d{2}-\d{2}$/,
     doublebyteKana: /^([ァ-ンａ-ｚＡ-Ｚ０-９]+)$/,
+    doublebyteNamaeKana: "^[ァ-ヶー　]+$",
     singlebyteKana: /^([ｧ-ﾝﾞﾟa-zA-Z0-9]+)$/,
     doublebyteHira: /^([ぁ-んａ-ｚＡ-Ｚ０-９]+)$/
 }
@@ -358,6 +359,7 @@ const common = {
         const isSingleDoubleByte = $ctrl.attr("data-validation-singlebyte-doublebyte");
         const isDoubleByte = $ctrl.attr("data-validation-doublebyte");
         const isDoubleByteKana = $ctrl.attr("data-validation-doublebyte-kana");
+        const isDoubleByteNamaeKana = $ctrl.attr("data-validation-doublebyte-namae-kana");
         const isSingleByte = $ctrl.attr("data-validation-singlebyte");
         const isSingleByteNumber = $ctrl.attr("data-validation-singlebyte-number");
         const isSingleByteNumberAlpha = $ctrl.attr("data-validation-singlebyte-numberalpha");
@@ -391,7 +393,7 @@ const common = {
             $ctrl.val(inputValue);
         }
 
-        if (isDoubleByte || isDoubleByteKana || isDoubleByteHira) {
+        if (isDoubleByte || isDoubleByteKana || isDoubleByteHira || isDoubleByteNamaeKana) {
             inputValue = this.replaceSingleToDouble(inputValue);
             inputValue = this.replaceSingleToDoubleKana(inputValue);
             $ctrl.val(inputValue);
@@ -400,7 +402,7 @@ const common = {
         //validation
         if (!isRequired
             && !isSingleDoubleByte
-            && !isDoubleByte && !isDoubleByteKana
+            && !isDoubleByte && !isDoubleByteKana && !isDoubleByteNamaeKana
             && !isSingleByte && !isSingleByteNumber && !isSingleByteNumberAlpha
             && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter && !ischeckboxLenght && !isMinlengthCheck
             && isPasswordcompare
@@ -453,6 +455,14 @@ const common = {
                 const tem_val = common.replaceAlphabetandnumberSingleToDouble(inputValue);                
                 const regex = new RegExp(regexPattern.doublebyteKana);
                 if (!regex.test(tem_val)) {                   
+                    $ctrl.showError(this.getMessage('E104'));
+                    return;
+                }
+            }
+
+            if (isDoubleByteNamaeKana) {
+                const regex = new RegExp(regexPattern.doublebyteNamaeKana);
+                if (!regex.test(inputValue)) {
                     $ctrl.showError(this.getMessage('E104'));
                     return;
                 }

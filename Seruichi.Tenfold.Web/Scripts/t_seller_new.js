@@ -20,7 +20,7 @@ function setValidation() {
         .addvalidation_errorElement("#errorSellerKana")
         .addvalidation_reqired()
         .addvalidation_maxlengthCheck(25)
-        .addvalidation_doublebyte_kana();
+        .addvalidation_doublebyte_namae_kana();
     $('#Birthday')
         .addvalidation_errorElement("#errorBirthday")
         .addvalidation_reqired()
