@@ -12,7 +12,6 @@
         .addvalidation_errorElement("#errorPassword")
         .addvalidation_reqired()
         .addvalidation_singlebyte()
-        .addvalidation_passwordcompare()
         .addvalidation_minlengthCheck(8)
         .addvalidation_maxlengthCheck(20);
 

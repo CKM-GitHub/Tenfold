@@ -15,11 +15,32 @@ namespace Seruichi.Tenfold.Web.Controllers
     public class t_seller_profileController : BaseController
     {
         // GET: t_seller_profile
-        public ActionResult Index()
+        public ActionResult Index(string SellerCD)
         {
+            if (string.IsNullOrEmpty(SellerCD))
+            {
+                return RedirectToAction("BadRequest", "Error");
+            }
+
             CommonBL cmmbl = new CommonBL();
             ViewBag.PrefDropDownListItems = cmmbl.GetDropDownListItemsOfAllPrefecture();
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult get_t_seller_Info(t_seller_profileModel model)
+        {
+            t_seller_profileBL bl = new t_seller_profileBL();
+            var dt = bl.get_t_seller_Info(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult get_t_seller_profile_DisplayData(t_seller_profileModel model)
+        {
+            t_seller_profileBL bl = new t_seller_profileBL();
+            var dt = bl.get_t_seller_profile_DisplayData(model);
+            return OKResult(DataTableToJSON(dt));
         }
 
         // Ajax: CheckZipCode
@@ -46,5 +67,40 @@ namespace Seruichi.Tenfold.Web.Controllers
             return OKResult(new { prefCD, cityName, townName });
         }
 
+        [HttpPost]
+        public ActionResult modify_SellerData(t_seller_profileModel model)
+        {
+            t_seller_profileBL bl = new t_seller_profileBL();
+            model.LoginID = base.GetOperator();
+            model.LoginName = base.GetOperatorName();
+            model.IPAddress = base.GetClientIP();
+
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+
+            bl.modify_SellerData(model);
+            return OKResult();
+        }
+
+        [HttpPost]
+        public ActionResult modify_SellerPW(t_seller_profileModel model)
+        {
+            t_seller_profileBL bl = new t_seller_profileBL();
+            model.LoginID = base.GetOperator();
+            model.LoginName = base.GetOperatorName();
+            model.IPAddress = base.GetClientIP();
+
+            var validationResult = bl.ValidatePW(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+
+            bl.modify_SellerPW(model);
+            return OKResult();
+        }
     }
 }

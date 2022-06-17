@@ -4,6 +4,9 @@ $(function () {
     _url.getBankListByBankWord = common.appPath + '/t_reale_new/GetBankListByBankWord';
     _url.getBankBranchListByBankCD = common.appPath + '/t_reale_new/GetBankBranchListByBankCD';
     _url.getBankBranchListByBranchWord = common.appPath + '/t_reale_new/GetBankBranchListByBranchWord';
+    _url.checkZipCode = common.appPath + '/t_reale_new/CheckZipCode';
+    _url.checkAll = common.appPath + '/t_reale_new/CheckAll';
+    _url.save_t_reale_new = common.appPath + '/t_reale_new/Save_t_reale_new'
     setValidation();
     addEvents();
 
@@ -16,14 +19,14 @@ function setValidation() {
     $('#REName')
         .addvalidation_errorElement("#errorREName")
         .addvalidation_reqired()
-        .addvalidation_singlebyte_doublebyte()
-        .addvalidation_doublebyte();
+        .addvalidation_doublebyte()
+        .addvalidation_singlebyte_doublebyte();
 
     $('#REKana')
         .addvalidation_errorElement("#errorREKana")
         .addvalidation_reqired()
         .addvalidation_singlebyte_doublebyte()
-        .addvalidation_doublebyte()
+        //.addvalidation_doublebyte()
         .addvalidation_doublebyte_kana();
 
     $('#President')
@@ -47,34 +50,34 @@ function setValidation() {
     $('#CityName')
         .addvalidation_errorElement("#errorCityName")
         .addvalidation_reqired()
-        .addvalidation_maxlengthCheck(50);
+        .addvalidation_singlebyte_doublebyte();
 
     $('#TownName')
         .addvalidation_errorElement("#errorTownName")
         .addvalidation_reqired()
-        .addvalidation_maxlengthCheck(50);
+        .addvalidation_singlebyte_doublebyte();
 
     $('#Address1')
         .addvalidation_errorElement("#errorAddress1")
         .addvalidation_reqired()
-        .addvalidation_maxlengthCheck(50);
+        .addvalidation_singlebyte_doublebyte();
 
     $('#BusinessHours')
         .addvalidation_errorElement("#errorBusinessHours")
-        .addvalidation_maxlengthCheck(50)
+        .addvalidation_singlebyte_doublebyte();
 
     $('#CompanyHoliday')
         .addvalidation_errorElement("#errorCompanyHoliday")
-        .addvalidation_maxlengthCheck(50)
+        .addvalidation_singlebyte_doublebyte();
 
     $('#PICName')
         .addvalidation_errorElement("#errorPICName")
-        .addvalidation_maxlengthCheck(50)
+        .addvalidation_singlebyte_doublebyte()
         .addvalidation_doublebyte();
+
     $('#PICKana')
         .addvalidation_errorElement("#errorPICKana")
-        .addvalidation_maxlengthCheck(50)
-        .addvalidation_doublebyte()
+        .addvalidation_singlebyte_doublebyte()
         .addvalidation_doublebyte_kana();
 
     $('#HousePhone')
@@ -91,7 +94,7 @@ function setValidation() {
     $('#MailAddress')
         .addvalidation_errorElement("#errorMailAddress")
         .addvalidation_reqired()
-        .addvalidation_maxlengthCheck(15)
+        .addvalidation_maxlengthCheck(100)
         .addvalidation_singlebyte()
         .addvalidation_custom("customValidation_checkContactAddress");
 
@@ -117,13 +120,7 @@ function setValidation() {
         .addvalidation_errorElement("#errorSourceAccountName")
         .addvalidation_reqired()
         .addvalidation_singlebyte_kana()
-        .addvalidation_maxlengthCheck(50);
-
-    $('#SourceAccountName')
-        .addvalidation_errorElement("#errorSourceAccountName")
-        .addvalidation_reqired()
-        .addvalidation_singlebyte_kana()
-        .addvalidation_maxlengthCheck(50);
+        .addvalidation_maxlengthCheck(50);    
 
     $('#LicenceNo2')
         .addvalidation_errorElement("#errorLicenceNo2")
@@ -135,12 +132,55 @@ function setValidation() {
         .addvalidation_singlebyte_number()
         .addvalidation_maxlengthCheck(10);
 
+    $('#CourseCD')
+        .addvalidation_errorElement("#errorCourseCD")
+        .addvalidation_reqired();
+
+    $('#JoinedDate')
+        .addvalidation_errorElement("#errorJoinedDate")
+        .addvalidation_datecheck();
+
+    $('#InitialFee')
+        .addvalidation_errorElement("#errorInitialFee")
+        .addvalidation_reqired()
+        .addvalidation_money(9);
+
+    $('#Remark')
+        .addvalidation_errorElement("#errorRemark")
+        .addvalidation_singlebyte_doublebyte();
+
+    $('#txtPassword')
+        .addvalidation_errorElement("#errortxtPassword")
+        .addvalidation_reqired()
+        .addvalidation_singlebyte()
+        .addvalidation_minlengthCheck(8)
+        .addvalidation_maxlengthCheck(20);
+
+    $('#txtConfirmPassword')
+        .addvalidation_errorElement("#errortxtConfirmPassword")
+        .addvalidation_reqired()
+        .addvalidation_passwordcompare();
     
 }
 
 function addEvents() {
+
+    $('.container-fluid .card-body').keypress(function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+        }
+    });
+
+    $(function () { $("#form1").submit(function () { return false; }); });
+
+    common.bindValidationEvent('#form1', ':not(#ZipCode1,#ZipCode2)');
+
     //郵便番号
     $('#ZipCode1,#ZipCode2').on('change', function () {
+
+        $('#CityName').val("");
+        $('#TownName').val("");
+
         const $this = $(this), $zipCode1 = $('#ZipCode1'), $zipCode2 = $('#ZipCode2')
 
         if (!common.checkValidityInput($this)) {
@@ -170,10 +210,10 @@ function addEvents() {
                         
                     }
                     if (data.CityCD) {
-                        $('#CityCD').val(data.CityCD)
+                        $('#CityName').val(data.CityCD)
                     }
                     if (data.TownCD) {
-                        $('#TownCD').val(data.TownCD)
+                        $('#TownName').val(data.TownCD)
                     }
                 }
                 if (result && !result.isOK) {
@@ -185,9 +225,9 @@ function addEvents() {
 
     $('#PrefCD').on('change', function () {
         $zipCode1 = $('#ZipCode1').val(), $zipCode2 = $('#ZipCode2').val()
-        if (!$zipCode1 && !$zipCode2) {
-            $('#CityCD').val("");
-            $('#TownCD').val("");
+        if ($zipCode1 && $zipCode2) {
+            $('#CityName').val("");
+            $('#TownName').val("");
         }
     });
 
@@ -199,7 +239,7 @@ function addEvents() {
             displayBankList($SourceBankCD.text());
         }
         else if ($SourceBankCD.get().length === 0) {
-            $(this).showError(common.getMessage("E305"));
+            $(this).showError(common.getMessage('E305'));
         }
     }).on('typeahead:selected', function (evt, data) {
          displayBankList(data.Value);
@@ -209,12 +249,64 @@ function addEvents() {
         $(this).hideError();
         const $SourceBankBranchCD = $('.tt-branchcd');
         if ($SourceBankBranchCD.get().length === 0) {
-            $(this).showError(common.getMessage("E306"));
+            $('#SourceBranchName').showError(common.getMessage('E306'));
         }
     }).on('typeahead:selected', function (evt, data) {
         $('#SourceBranchCD').val(data.Value)
     });
-   
+
+    $('#btnConfirmation').on('click', function () {
+        $form = $('#form1').hideChildErrors();
+        if (!common.checkValidityOnSave('#form1')) {
+            common.setFocusFirstError($form);
+            return false;
+        }
+        const fd = new FormData(document.forms.form1);
+        const model = Object.fromEntries(fd);
+        model.PrefName = $('#PrefCD option:selected').text();
+        model.SourceAccountTypeName = $('#SourceAccountType option:selected').text();
+        model.CourseName = $('#CourseCD option:selected').text();
+        model.LicenceNo1Name = $('#LicenceNo1 option:selected').text();
+        common.callAjaxWithLoading(_url.checkAll, model, this, function (result) {
+            if (result && result.isOK) {
+                saveData = model;
+                setScreenComfirm(saveData);
+                $('#modal_1').modal('show');
+            }
+            if (result && result.data) {
+                common.setValidationErrors(result.data);
+                common.setFocusFirstError($form);
+            }
+        });
+    })
+
+    $('#btnRegistration').on('click', function () {
+        common.callAjaxWithLoading(_url.save_t_reale_new, saveData, this, function (result) {
+            if (result && result.isOK) {
+                //sucess
+                $('#modal_1').modal('hide');
+                $('#modal_2').modal('show');
+            }
+            if (result && result.data) {
+                //error
+                $('#modal_1').modal('hide');
+                common.setValidationErrors(result.data);
+                common.setFocusFirstError($form);
+            }
+        });
+    });
+
+    $('#btnCancel').click(function () {
+        $('#changecal').modal('show');
+    });
+
+    $('#btnSuccessPopup').click(function () {
+        //window.location.href = common.appPath + "/t_mansion_list/index";
+        window.location.reload();
+    });
+    $('#btn_reload').click(function () {
+        window.location.reload();
+    });
 }
 
 function customValidation_checkContactAddress(e) {
@@ -343,4 +435,16 @@ function displayBankList(bankCD) {
     //        common.hideLoading(null, 0);
     //   }
     //);
+}
+
+function setScreenComfirm(data) {
+    for (key in data) {
+        const target = document.getElementById('confirm_' + key);
+        if (target) $(target).val(data[key]);
+    }
+    $('#confirm_PrefCD').val(data.PrefName);
+    $('#confirm_SourceAccountType').val(data.SourceAccountTypeName);
+    $('#confirm_CourseCD').val(data.CourseName);
+
+    $('#confirm_LicenceNo1').val(data.CourseName);
 }

@@ -95,6 +95,16 @@
             .removeAttr('data-validation-doublebyte-kana');
     };
 
+    $.fn.addvalidation_doublebyte_namae_kana = function () {
+        return this
+            .attr('data-validation-doublebyte-namae-kana', 'true')
+            .attr('inputmode', 'kana');
+    };
+    $.fn.removeValidation_doublebyte_kana = function () {
+        return this
+            .removeAttr('data-validation-doublebyte-namae-kana');
+    };
+
     $.fn.addvalidation_doublebyte_hira = function () {
         return this
             .attr('data-validation-doublebyte-hira', 'true')

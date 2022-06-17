@@ -20,7 +20,7 @@ function setValidation() {
         .addvalidation_errorElement("#errorSellerKana")
         .addvalidation_reqired()
         .addvalidation_maxlengthCheck(25)
-        .addvalidation_doublebyte_kana();
+        .addvalidation_doublebyte_namae_kana();
     $('#Birthday')
         .addvalidation_errorElement("#errorBirthday")
         .addvalidation_reqired()
@@ -43,7 +43,7 @@ function setValidation() {
     $('#MemoText')
         .addvalidation_errorElement("#errorMemoText")
         .addvalidation_reqired()
-        .addvalidation_maxlengthCheck(1000);
+        .addvalidation_singlebyte_doublebyte();
     $('#ZipCode1')
         .addvalidation_errorElement("#errorZipCode")
         .addvalidation_maxlengthCheck(3)
@@ -67,7 +67,6 @@ function setValidation() {
         .addvalidation_doublebyte();
     $('#Address1')
         .addvalidation_errorElement("#errorAddress1")
-        .addvalidation_reqired()
         .addvalidation_maxlengthCheck(50)
         .addvalidation_doublebyte();
     $('#HousePhone')
@@ -110,14 +109,9 @@ function addEvents() {
             zipCode2: $zipCode2.val()
         };
 
-        if (model.zipCode1 == '' || model.zipCode2 == '') {
-            $zipCode1.hideError();
-            $zipCode2.hideError();
-            if (model.zipCode1 == '')
-                $zipCode1.focus();
-            else
-                $zipCode2.focus();
-            return false;
+        if (!model.zipCode1 && !model.zipCode2) {
+            $($zipCode1, $zipCode2).hideError();
+            return;
         }
 
         if (model.zipCode1) {
