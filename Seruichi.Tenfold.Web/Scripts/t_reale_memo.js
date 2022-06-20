@@ -16,7 +16,7 @@ function setValidation() {
     $('#MemoText')
         .addvalidation_errorElement("#MemoTextError")
         .addvalidation_reqired()
-        .addvalidation_maxlengthCheck(2000); //E105
+        .addvalidation_singlebyte_doublebyte();
 }
 
 function addEvents() {

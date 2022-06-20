@@ -23,7 +23,7 @@ function setValidation() {
         .addvalidation_errorElement("#errorSellerKana")
         .addvalidation_reqired()
         .addvalidation_maxlengthCheck(25)
-        .addvalidation_doublebyte_kana();
+        .addvalidation_doublebyte_namae_kana();
     $('#Birthday')
         .addvalidation_errorElement("#errorBirthday")
         .addvalidation_reqired()
@@ -46,7 +46,7 @@ function setValidation() {
     $('#MemoText')
         .addvalidation_errorElement("#errorMemoText")
         .addvalidation_reqired()
-        .addvalidation_maxlengthCheck(1000);
+        .addvalidation_singlebyte_doublebyte();
     $('#ZipCode1')
         .addvalidation_errorElement("#errorZipCode")
         .addvalidation_maxlengthCheck(3)
@@ -153,7 +153,7 @@ function addEvents() {
     $('#btnProcess').on('click', function () {
         $form = $('#form1').hideChildErrors();
         $('#SellerCD').val(common.getUrlParameter('SellerCD'));
-        $('#PrefName').val($('#PrefCD').text());
+        $('#PrefName').val($('#PrefCD option:selected').text());
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         Modify_SellerData(model, $form);

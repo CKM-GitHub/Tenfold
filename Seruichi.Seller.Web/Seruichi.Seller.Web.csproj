@@ -294,6 +294,7 @@
     <Content Include="Views\a_assess_d\Index.cshtml" />
     <Content Include="Views\Shared\_VerificationToken.cshtml" />
     <Content Include="Views\a_mypage_taikai\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

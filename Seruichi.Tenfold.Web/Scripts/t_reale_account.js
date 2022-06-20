@@ -61,14 +61,17 @@ function addEvents() {
     btn.addEventListener("change", function () {
         if (this.checked) {
             $('.disabled-account').removeAttr("disabled")
-           $('.cap-errormsg-right').removeClass("d-none")
+           //$('.cap-errormsg-right').removeClass("d-none")
         }
         else {
             $('.disabled-account').attr("disabled", "true").removeClass("cap-is-invalid")
+            //$('.cap-errormsg-right').addClass("d-none")
            // $('.cap-errormsg-right').addClass("d-none")
-            $('.cap-errormsg-right').addClass("d-none")
-
+            $("#StartDate").hideError();
+            $("#EndDate").hideError();
+            $("penaltyArea").hideError();
         }
+  
     });
     $('#StartDate, #EndDate').on('change', function () {
        // Date_Compare();
