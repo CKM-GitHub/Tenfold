@@ -246,7 +246,7 @@ namespace Seruichi.BL.Tenfold.t_reale_new
                 new SqlParameter("@PICName", SqlDbType.VarChar){ Value = model.PICName.ToStringOrNull() },
                 new SqlParameter("@PICKana", SqlDbType.VarChar){ Value = model.PICKana.ToStringOrNull() },
                 new SqlParameter("@LicenceNo1", SqlDbType.VarChar){ Value = model.LicenceNo1Name.ToStringOrNull() },
-                new SqlParameter("@LicenceNo2", SqlDbType.Int){ Value = model.LicenceNo2.ToInt32() },
+                new SqlParameter("@LicenceNo2", SqlDbType.Int){ Value = model.LicenceNo2.ToInt32(0) },
                 new SqlParameter("@LicenceNo3", SqlDbType.VarChar){ Value = model.LicenceNo3.ToStringOrNull() },
                 new SqlParameter("@CompanyHoliday", SqlDbType.VarChar){ Value = model.CompanyHoliday.ToStringOrNull() },
                 new SqlParameter("@BusinessHours", SqlDbType.VarChar){ Value = model.BusinessHours.ToStringOrNull() },
@@ -257,14 +257,11 @@ namespace Seruichi.BL.Tenfold.t_reale_new
                 new SqlParameter("@SourceAccountName", SqlDbType.VarChar){ Value = model.SourceAccountName.ToStringOrNull() },
                 new SqlParameter("@Remark", SqlDbType.VarChar){ Value = model.Remark.ToStringOrNull() },
                 new SqlParameter("@JoinedDate", SqlDbType.VarChar){ Value = model.JoinedDate.ToStringOrNull() },
-                new SqlParameter("@InitialFee", SqlDbType.Decimal){ Value = model.InitialFee.ToDecimal() },
+                new SqlParameter("@InitialFee", SqlDbType.Money){ Value = model.InitialFee.ToDecimal(0) },
                 new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.Operator.ToStringOrNull() },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress.ToStringOrNull() },
                 new SqlParameter("@LoginName", SqlDbType.VarChar){ Value =  model.LoginName.ToStringOrNull()},
-
                 new SqlParameter("@Password", SqlDbType.VarChar){ Value = model.Password.ToStringOrNull() },
-                new SqlParameter("@REPassword", SqlDbType.VarChar){ Value = model.REPassword.ToStringOrNull() },
-
                 new SqlParameter("@CourseCD", SqlDbType.VarChar){ Value = model.CourseCD.ToStringOrNull() }
             };
 

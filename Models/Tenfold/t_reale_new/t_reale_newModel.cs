@@ -40,7 +40,7 @@ namespace Models.Tenfold.t_reale_new
         public string SourceAccountName { get; set; }
         public string Remark { get; set; }
         public string JoinedDate { get; set; }
-        public decimal InitialFee { get; set; }
+        public string InitialFee { get; set; }
         public string REPassword { get; set; }
         public string CourseCD { get; set; }
         public string CourseName { get; set; }
