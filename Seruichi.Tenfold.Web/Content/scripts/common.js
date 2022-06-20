@@ -85,12 +85,19 @@ const kanaMap = {
     '｡': '。', '､': '、', 'ｰ': 'ー', '｢': '「', '｣': '」', '･': '・'
 };
 $(function () {
-    $('#menu-toggle').on('click', function () {
-        if ($('#wrapper').hasClass('toggled'))
-            $('#wrapper').removeClass("toggled");
-        else
-            $('#wrapper').attr("class", "toggled");
+    //$('#menu-toggle').on('click', function () {
+    //    if ($('#wrapper').hasClass('toggled'))
+    //        $('#wrapper').removeClass("toggled");
+    //    else
+    //        $('#wrapper').attr("class", "toggled");
+    //});
+
+    //code from sidebar.js
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
     });
+
     $("form").bind("keypress", function (e) {
         if (e.keyCode == 13) {
             if (document.activeElement.type == 'password' || document.activeElement.id == 'btnLogin' || document.activeElement.id == 'btnDisplay' || document.activeElement.id == 'btnProcess')
