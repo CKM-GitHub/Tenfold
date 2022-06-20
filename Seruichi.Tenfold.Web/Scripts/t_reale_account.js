@@ -54,6 +54,9 @@ function Date_Compare() {
         }
     }
 }
+function SetEmpty() {
+    
+}
 function addEvents() {
     common.bindValidationEvent('#form1', '');
 
@@ -67,10 +70,19 @@ function addEvents() {
             $('.disabled-account').attr("disabled", "true").removeClass("cap-is-invalid")
             //$('.cap-errormsg-right').addClass("d-none")
            // $('.cap-errormsg-right').addClass("d-none")
+            $('#StartDate').val(null);
+            $('#EndDate').val(null);
+            $('#penaltyArea').val('');
+            staticCache.StartDate = $('#StartDate').val();
+            staticCache.EndDate = $('#EndDate').val();
+            staticCache.Memo = $('#penaltyArea').val();
             $("#StartDate").hideError();
             $("#EndDate").hideError();
-            $("penaltyArea").hideError();
+            $("#penaltyArea").hideError();
+            
+         
         }
+      
   
     });
     $('#StartDate, #EndDate').on('change', function () {
@@ -132,7 +144,7 @@ function addEvents() {
                 //#modal-changeok
             }
             else {
-                alert('Erros')
+                alert('Errors')
                 const errors = result.data;
                 for (key in errors) {
                     const target = document.getElementById(key);
@@ -206,31 +218,32 @@ function discardChanges() {
         if (result && result.isOK) {
 
             let data = JSON.parse(result.data.split('Ʈ')[0]);
+            if (data.length) {
+                if (data[0]['TestFlg'] == '1') {
+                    $('#flexSwitchCheckDefault').attr("checked", "true");
+                    document.querySelector("#flexSwitchCheckDefault").checked = true;
 
-            if (data[0]['TestFlg'] == '1') {
-                $('#flexSwitchCheckDefault').attr("checked", "true");
-                document.querySelector("#flexSwitchCheckDefault").checked = true;
-
+                }
+                else {
+                    $('#flexSwitchCheckDefault').removeAttr('checked')
+                    document.querySelector("#flexSwitchCheckDefault").checked = false;
+                }
+                if (data[0]['PenaltyFlg'] == '1') {
+                    $('#flexSwitchCheckDefault_Penalty').attr("checked", "true");
+                    document.querySelector("#flexSwitchCheckDefault_Penalty").checked = true;
+                }
+                else {
+                    $('#flexSwitchCheckDefault_Penalty').removeAttr('checked')
+                    document.querySelector("#flexSwitchCheckDefault_Penalty").checked = false;
+                }
+                $('#StartDate').val(data[0]['PenaltyStartDate']);
+                $('#EndDate').val(data[0]['PenaltyEndDate']);
+                $('#penaltyArea').val(data[0]['PenaltyMemo']);
             }
-            else {
-                $('#flexSwitchCheckDefault').removeAttr('checked')
-                document.querySelector("#flexSwitchCheckDefault").checked = false;
-            }
-            if (data[0]['PenaltyFlg'] == '1') {
-                $('#flexSwitchCheckDefault_Penalty').attr("checked", "true");
-                document.querySelector("#flexSwitchCheckDefault_Penalty").checked = true;
-            }
-            else {
-                $('#flexSwitchCheckDefault_Penalty').removeAttr('checked')
-                document.querySelector("#flexSwitchCheckDefault_Penalty").checked = false;
-            }
-            $('#StartDate').val(data[0]['PenaltyStartDate']);
-            $('#EndDate').val(data[0]['PenaltyEndDate']);
-            $('#penaltyArea').val(data[0]['PenaltyMemo']);
+                document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? $('.disabled-account').removeAttr("disabled") : $('.disabled-account').attr("disabled", "true")
+                $('.cap-errormsg-right').addClass("d-none")
+                $('.disabled-account').removeClass("cap-is-invalid")
             
-            document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? $('.disabled-account').removeAttr("disabled") : $('.disabled-account').attr("disabled", "true")
-            $('.cap-errormsg-right').addClass("d-none")
-            $('.disabled-account').removeClass("cap-is-invalid")
             //cap-is-invalid
         }
     })
@@ -252,6 +265,7 @@ function get_purchase_Data(model, $form, state) {
     common.callAjaxWithLoadingSync(_url.get_t_reale_purchase_DisplayData, model, this, function (result) {
         if (result && result.isOK) {
             if (state != 'IsTable') {
+               
                 BindPenalty(result.data.split('Ʈ')[0]);
             }
             
@@ -280,36 +294,40 @@ function isEmptyOrSpaces(str) {
 function Bind_DisplayData(result) {
      
     let data = JSON.parse(result);
-    let html = "";
-    if (data.length > 0) {
-        for (var i = 0; i < data.length; i++) {
+    if (data.length) {
+        let html = "";
+        if (data.length > 0) {
+            for (var i = 0; i < data.length; i++) {
 
 
-            html += 
-              '<div class="col-12 border-1 m-1">\
+                html +=
+                    '<div class="col-12 border-1 m-1">\
                 <strong>'+ data[i]['PenaltyStartDate'] + '～' + data[i]['PenaltyEndDate'] + '</strong >\
-                    <p>'+ data[i]['PenaltyMemo'] +'</p>\
+                    <p>'+ data[i]['PenaltyMemo'] + '</p>\
                     <div class="float-end">\
-                        <p>登録スタッフ：<p>'+ data[i]['TenStaffName'] +'</p>\
+                        <p>登録スタッフ：<p>'+ data[i]['TenStaffName'] + '</p>\
                         </p>\
                     </div>\
                                                     </div>'
+            }
         }
+        $('#penaltyList').html('');
+        $('#penaltyList').append(html);
     }
-    $('#penaltyList').html('');
-    $('#penaltyList').append(html);
 }
 function BindPenalty(result) {
-    let data = JSON.parse(result);
-    if (data[0]['TestFlg'] == '1') {
-        $('#flexSwitchCheckDefault').attr("checked", "true");
+    let data = JSON.parse(result); 
+    if (data.length) {
+        if (data[0]['TestFlg'] == '1') {
+            $('#flexSwitchCheckDefault').attr("checked", "true");
+        }
+        if (data[0]['PenaltyFlg'] == '1') {
+            $('#flexSwitchCheckDefault_Penalty').attr("checked", "true");
+        }
+        $('#StartDate').val(data[0]['PenaltyStartDate']);
+        $('#EndDate').val(data[0]['PenaltyEndDate']);
+        $('#penaltyArea').val(data[0]['PenaltyMemo']);
     }
-    if (data[0]['PenaltyFlg'] == '1') {
-        $('#flexSwitchCheckDefault_Penalty').attr("checked", "true");
-    } 
-    $('#StartDate').val(data[0]['PenaltyStartDate']);
-    $('#EndDate').val(data[0]['PenaltyEndDate']);
-    $('#penaltyArea').val(data[0]['PenaltyMemo']);
 }
 function l_logfunction() {
 
