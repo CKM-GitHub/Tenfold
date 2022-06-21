@@ -66,6 +66,7 @@
     <Compile Include="RealEstate\r_issueslist\r_issueslistModel.cs" />
     <Compile Include="RealEstate\r_login\r_loginModel.cs" />
     <Compile Include="RealEstate\r_staff\r_staffModel.cs" />
+    <Compile Include="RealEstate\r_statics\r_staticsModel.cs" />
     <Compile Include="RealEstate\r_template\r_templateModel.cs" />
     <Compile Include="RealEstate\r_temp_mes\r_temp_mesModel.cs" />
     <Compile Include="Seller\a_assess_dModel.cs" />
