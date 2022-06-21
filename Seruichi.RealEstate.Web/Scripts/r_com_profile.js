@@ -1,12 +1,11 @@
 ﻿function setValidation() {
     $('#txtBusinessHours')
         .addvalidation_errorElement("#errorBusinessHours")
-        .addvalidation_maxlengthCheck(25)//E105
-        .addvalidation_doublebyte();
+        .addvalidation_singlebyte_doublebyte();
 
     $('#txtCompanyHoliday')
         .addvalidation_errorElement("#errorCompanyHoliday")
-        .addvalidation_maxlengthCheck(50);
+        .addvalidation_singlebyte_doublebyte();
 
     $('#txtPassword')
         .addvalidation_errorElement("#errorPassword")
@@ -20,6 +19,7 @@
         .addvalidation_reqired()
         .addvalidation_singlebyte()
         .addvalidation_passwordcompare()
+        .addvalidation_minlengthCheck(8)
         .addvalidation_maxlengthCheck(20);
 }
 

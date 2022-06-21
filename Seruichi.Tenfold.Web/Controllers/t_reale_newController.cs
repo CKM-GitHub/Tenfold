@@ -117,7 +117,7 @@ namespace Seruichi.Tenfold.Web.Controllers
             model.Operator = base.GetOperator();
             model.IPAddress = base.GetClientIP();
             model.LoginName = base.GetOperatorName();
-
+           
             t_reale_newBL bl = new t_reale_newBL();
             var validationResult = bl.ValidateAll(model);
             if (validationResult.Count > 0)

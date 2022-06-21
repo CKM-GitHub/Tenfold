@@ -153,7 +153,7 @@ function addEvents() {
     $('#btnProcess').on('click', function () {
         $form = $('#form1').hideChildErrors();
         $('#SellerCD').val(common.getUrlParameter('SellerCD'));
-        $('#PrefName').val($('#PrefCD').text());
+        $('#PrefName').val($('#PrefCD option:selected').text());
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         Modify_SellerData(model, $form);

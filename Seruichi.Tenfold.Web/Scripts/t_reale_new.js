@@ -100,11 +100,11 @@ function setValidation() {
 
     $('#SourceBankName')
         .addvalidation_errorElement("#errorSourceBankName")
-        .addvalidation_reqired();
+       // .addvalidation_reqired();
 
     $('#SourceBranchName')
         .addvalidation_errorElement("#errorSourceBranchName")
-        .addvalidation_reqired();
+       // .addvalidation_reqired();
 
     $('#SourceAccountType')
         .addvalidation_errorElement("#errorSourceAccountType")
@@ -232,24 +232,33 @@ function addEvents() {
     });
 
     
-    $('#SourceBankName').on('change', function () {       
+    $('#SourceBankName').on('blur', function () {
+        const $this = $(this);
         $(this).hideError();
         const $SourceBankCD = $('.tt-bankcd');
-        if ($SourceBankCD.get().length === 1) {
+        if ($('#SourceBankName').val() === "") {
+            $this.showError(common.getMessage('E101'));
+        }
+        else if ($SourceBankCD.get().length === 1) {
             displayBankList($SourceBankCD.text());
         }
         else if ($SourceBankCD.get().length === 0) {
-            $(this).showError(common.getMessage('E305'));
+            const message = common.getMessage('E305');
+            $this.showError(common.getMessage('E306'));
         }
     }).on('typeahead:selected', function (evt, data) {
-         displayBankList(data.Value);
+        displayBankList(data.Value);
     });
 
-    $('#SourceBranchName').on('change', function () {
-        $(this).hideError();
+    $('#SourceBranchName').on('blur', function () {
+        const $this = $(this);
+        $this.hideError();
         const $SourceBankBranchCD = $('.tt-branchcd');
-        if ($SourceBankBranchCD.get().length === 0) {
-            $('#SourceBranchName').showError(common.getMessage('E306'));
+        if ($('#SourceBranchName').val() === "") {
+            $this.showError(common.getMessage('E101'));
+        }
+        else if ($SourceBankBranchCD.get().length === 0) {
+            $this.showError(common.getMessage('E306'));
         }
     }).on('typeahead:selected', function (evt, data) {
         $('#SourceBranchCD').val(data.Value)
@@ -446,5 +455,5 @@ function setScreenComfirm(data) {
     $('#confirm_SourceAccountType').val(data.SourceAccountTypeName);
     $('#confirm_CourseCD').val(data.CourseName);
 
-    $('#confirm_LicenceNo1').val(data.CourseName);
+    $('#confirm_LicenceNo1').val(data.LicenceNo1Name);
 }
