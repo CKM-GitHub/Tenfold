@@ -153,6 +153,7 @@
     <Compile Include="Controllers\r_issueslistController.cs" />
     <Compile Include="Controllers\r_loginController.cs" />
     <Compile Include="Controllers\r_staffController.cs" />
+    <Compile Include="Controllers\r_staticsController.cs" />
     <Compile Include="Controllers\r_templateController.cs" />
     <Compile Include="Controllers\r_temp_mesController.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
@@ -284,6 +285,7 @@
     <Content Include="Views\r_asmc_set_area_check_tab\_r_asmc_M_RECondAreaOpt_list.cshtml" />
     <Content Include="Views\r_asmc_set_area_check_tab\Index.cshtml" />
     <Content Include="Views\r_asmc_ms_map_add\Index.cshtml" />
+    <Content Include="Views\r_statics\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
