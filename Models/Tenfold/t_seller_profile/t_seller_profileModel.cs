@@ -8,6 +8,7 @@ namespace Models.Tenfold.t_seller_profile
 {
     public class t_seller_profileModel
     {
+        public string SellerCD { get; set; }
         public string SellerName { get; set; }
         public string SellerKana { get; set; }
         public string Birthday { get; set; }

@@ -18,25 +18,25 @@ function setValidation() {
     
     $('#StartNum')
         .addvalidation_errorElement("#errorAge")
-        .addvalidation_onebyte_character()
+        .addvalidation_singlebyte_number()
         .addvalidation_maxlengthCheck(2)
         .addvalidation_numcompare();
 
     $('#EndNum')
         .addvalidation_errorElement("#errorAge")
-        .addvalidation_onebyte_character()
+        .addvalidation_singlebyte_number()
         .addvalidation_maxlengthCheck(2)
         .addvalidation_numcompare();
 
     $('#StartUnit')
         .addvalidation_errorElement("#errorUnit")
-        .addvalidation_onebyte_character()
+        .addvalidation_singlebyte_number()
         .addvalidation_maxlengthCheck(3);
 
 
     $('#EndUnit')
         .addvalidation_errorElement("#errorUnit")
-        .addvalidation_onebyte_character()
+        .addvalidation_singlebyte_number()
         .addvalidation_maxlengthCheck(3);
 
     $('#btnDisplay')

@@ -62,6 +62,7 @@
     <Compile Include="RealEstate\r_issueslist\r_issueslistBL.cs" />
     <Compile Include="RealEstate\r_login\r_loginBL.cs" />
     <Compile Include="RealEstate\r_staff\r_staffBL.cs" />
+    <Compile Include="RealEstate\r_statics\r_staticsBL.cs" />
     <Compile Include="RealEstate\r_template\r_templateBL.cs" />
     <Compile Include="RealEstate\r_temp_mes\r_temp_mesBL.cs" />
     <Compile Include="Seller\a_assess_dBL.cs" />
