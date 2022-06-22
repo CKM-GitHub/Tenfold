@@ -16,6 +16,7 @@ namespace Models.RealEstate.r_asmc_set_area_check_tab
         public string REStaffName { get; set; }
         public string ExpDate { get; set; }
         public int Priority { get; set; }
+        public byte PrecedenceFlg { get; set; }
         public string Remark { get; set; }
     }
 

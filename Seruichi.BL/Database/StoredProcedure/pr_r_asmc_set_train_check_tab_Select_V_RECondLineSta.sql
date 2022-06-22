@@ -17,6 +17,7 @@ BEGIN
          REStaffName
         ,FORMAT(ExpDate, 'yyyy/MM/dd') AS ExpDate
         ,Priority
+        ,PrecedenceFlg
         ,Remark
 
     FROM V_RECondLineSta

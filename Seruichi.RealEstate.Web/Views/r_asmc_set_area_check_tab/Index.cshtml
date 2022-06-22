@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "査定条件設定確認";
-    Layout = "~/Views/Shared/_r_subwindowLayout.cshtml";
+    Layout = "~/Views/Shared/_r_withoutHeaderAndFooterLayout.cshtml";
 
     var css1 = Model.ValidFLG == 1 ? "cap-text-primary" : "text-danger";
     var css2 = Model.ExpDateFLG == 1 ? "text-warning" : ""; ;
@@ -13,31 +13,25 @@
 
 <div class="d-flex flex-column min-vh-100 bg-surface-secondary">
     <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
-
         <main class="py-6 bg-surface-secondary">
-
             <div class="container-fluid">
                 <div class="card shadow border-0 mb-7">
-
                     <div class="card-header">
-
                         <div class="col-md-12 col-12 mb-3 mb-sm-0">
-
                             <h1 class="h2 mb-0 ls-tight">査定条件設定確認</h1>
                             <span class="text-muted small">査定条件＞設定＞住所・路線から設定＞住所から設定</span>
                         </div>
                         <div class="col-sm-6 col-12 text-sm-end">
                             <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
-    <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+                            <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
                         </div>
                     </div>
                 </div>
                 <div class="card shadow border-0 mb-7">
-                    <div class="card-header"><h5>地域</h5></div>
-
+                    <div class="card-header">
+                        <h5>地域</h5>
+                    </div>
                     <div class="card-body container">
-
-
                         <div class="table-responsive">
                             <table class="table table-hover table-nowrap">
                                 <thead class="thead-light">
@@ -62,8 +56,6 @@
                         </div>
                     </div>
                 </div>
-
-
                 <div class="card shadow border-0 mb-7">
                     <div class="card-header">
                         <h5 class="mb-0">買取利回り率設定</h5>
@@ -117,9 +109,7 @@
                             </table>
                         </div>
                     </div>
-
                 </div>
-
                 <div class="card shadow border-0 mb-7">
                     <div class="card-header">
                         <h5 class="mb-0">オプション 家賃設定</h5>
@@ -173,11 +163,8 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
-
-
                 <div class="card shadow border-0 mb-7">
                     <div class="card-header d-md-inline-flex">
                         <h5 class="mb-0">オプション 買取利回り率設定</h5>
@@ -219,7 +206,6 @@
                                         </td>
                                         <td> <span class="@css1">@Model.ValidFLGText</span> </td>
                                         <td> @Model.ExpDate</td>
-
                                         <td>
                                             <div class="star-rating text-danger">
                                                 @for (int i = 1; i <= 5; i++)
@@ -236,27 +222,24 @@
                                                 <input type="hidden" name="whatever" class="rating-value" value="@Model.Priority">
                                             </div>
                                         </td>
-
-                                        <td class="text-center"> ✓</td>
+                                        @if (Model.PrecedenceFlg == 1)
+                                        {
+                                            <td class="text-center"> ✓</td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-center"></td>
+                                        }
                                         <td>
                                             <textarea class="form-control custom-control" readonly rows="10">@Model.Remark</textarea>
                                         </td>
                                     </tr>
-
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
-
-
-
                 </div>
-
-
-
                 <div class="card shadow border-0 mb-7">
-
                     <div class="card-footer">
                         <div class="text-right mt-3 float-end">
                             <button type="button" class="btn btn-lg btn-secondary" onclick="window.close();">閉じる</button>

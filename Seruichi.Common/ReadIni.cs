@@ -69,5 +69,21 @@ namespace Seruichi.Common
 
             return encryptedDataCryptionKey;
         }
+
+        public string GetMapsKey()
+        {
+            string mapsKeyPath = GetValue("PATH", "MAPS_KEY").ToStringOrEmpty();
+            string key = "";
+
+            if (!string.IsNullOrEmpty(mapsKeyPath) && File.Exists(mapsKeyPath))
+            {
+                using (StreamReader sr = new StreamReader(mapsKeyPath, encoding))
+                {
+                    key = sr.ReadToEnd();
+                }
+            }
+
+            return key;
+        }
     }
 }

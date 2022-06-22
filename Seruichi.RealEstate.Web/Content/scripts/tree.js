@@ -56,7 +56,7 @@ $('#tree').treed({ openedClass: 'fa-minus', closedClass: 'fa-plus' });
 
 
 //checkbox-indeterminate
-$(document).on('change', 'input[type="checkbox"]', function (e) {
+$(document).on('change', '#tree input[type="checkbox"]', function (e) {
     var checked = $(this).prop("checked");
     var container = $(this).parent();
     var siblings = container.siblings();
@@ -124,4 +124,59 @@ $(document).on('change', 'input[type="checkbox"]', function (e) {
     }
 
     checkSiblings(container);
+});
+
+
+//--------------------------------------------------
+//Tree view over 3 levels
+$('#tree_multilevel').treed({ openedClass: 'fa-minus', closedClass: 'fa-plus' });
+
+$(document).on('change', '#tree_multilevel input[type="checkbox"]', function (e) {
+    var checked = $(this).prop("checked");
+    var container = $(this).parent();
+
+    container.find('input[type="checkbox"]').prop({
+        indeterminate: false,
+        checked: checked
+    });
+
+    function checkSiblings(el) {
+        var parent = el.parent().parent(); //li
+        var all = (el.children('input[type="checkbox"]').prop("indeterminate") === false);
+        var isTop = false;
+
+        el.siblings().each(function () {
+            const $checkbox = $(this).children('input[type="checkbox"]');
+            return all = ($checkbox.prop("checked") === checked && $checkbox.prop("indeterminate") === false);
+        });
+
+        if (all && checked) {
+            parent.children('input[type="checkbox"]').prop({
+                indeterminate: false,
+                checked: checked
+            });
+
+            isTop = parent.children('a').attr("style", "color:" + "#0d6efd").length > 0;
+        }
+        else if (all && !checked) {
+            parent.children('input[type="checkbox"]').prop("checked", checked);
+            parent.children('input[type="checkbox"]').prop("indeterminate", (parent.find('input[type="checkbox"]:checked').length > 0));
+
+            isTop = parent.children('a').removeAttr("style").length > 0;
+        }
+        else {
+            el.parents("li").children('input[type="checkbox"]').prop({
+                indeterminate: true,
+                checked: false
+            });
+
+            isTop = parent.children('a').attr("style", "color:" + "#0d6efd").length > 0;
+        }
+
+        return isTop;
+    }
+
+    while (checkSiblings(container) === false) {
+        container = container.parent().parent();
+    };
 });
