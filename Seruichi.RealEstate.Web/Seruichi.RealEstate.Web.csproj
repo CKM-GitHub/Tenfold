@@ -153,7 +153,7 @@
     <Compile Include="Controllers\r_issueslistController.cs" />
     <Compile Include="Controllers\r_loginController.cs" />
     <Compile Include="Controllers\r_staffController.cs" />
-    <Compile Include="Controllers\r_staticsController.cs" />
+    <Compile Include="Controllers\r_statisticController.cs" />
     <Compile Include="Controllers\r_templateController.cs" />
     <Compile Include="Controllers\r_temp_mesController.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
@@ -214,6 +214,7 @@
     <Content Include="Content\fonts\ionicons.eot" />
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
+    <Content Include="Scripts\r_asmc_ms_list_map.js" />
     <Content Include="Scripts\r_asmc_ms_map_add.js" />
     <Content Include="Scripts\r_asmc_railway.js" />
     <Content Include="Scripts\r_asmc_address.js" />
@@ -228,6 +229,7 @@
     <Content Include="Scripts\r_issueslist.js" />
     <Content Include="Scripts\r_login.js" />
     <Content Include="Scripts\r_staff.js" />
+    <Content Include="Scripts\r_statistic.js" />
     <Content Include="Scripts\r_template.js" />
     <Content Include="Scripts\r_temp_mes.js" />
     <Content Include="Views\Error\BadRequest.cshtml" />
@@ -278,14 +280,16 @@
     <Content Include="Views\r_temp_mes\Index.cshtml" />
     <Content Include="Views\r_auto_mes\Index.cshtml" />
     <Content Include="Views\r_template\Index.cshtml" />
-    <Content Include="Views\Shared\_r_subwindowLayout.cshtml" />
+    <Content Include="Views\Shared\_r_withoutHeaderAndFooterLayout.cshtml" />
     <Content Include="Views\Shared\_ErrorModal.cshtml" />
     <Content Include="Views\r_asmc_set_train_check_tab\Index.cshtml" />
     <Content Include="Views\r_asmc_set_train_check_tab\_r_asmc_M_RECondLineOpt_list.cshtml" />
     <Content Include="Views\r_asmc_set_area_check_tab\_r_asmc_M_RECondAreaOpt_list.cshtml" />
     <Content Include="Views\r_asmc_set_area_check_tab\Index.cshtml" />
     <Content Include="Views\r_asmc_ms_map_add\Index.cshtml" />
-    <Content Include="Views\r_statics\Index.cshtml" />
+    <Content Include="Views\r_asmc_ms_list_map\Index.cshtml" />
+    <Content Include="Views\r_asmc_ms_list_map\r_asmc_ms_list_map_left_sideNavigation.cshtml" />
+    <Content Include="Views\r_statistic\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

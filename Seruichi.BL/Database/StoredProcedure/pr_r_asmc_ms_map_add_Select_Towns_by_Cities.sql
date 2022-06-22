@@ -36,7 +36,7 @@ BEGIN
     -- 　マンションマスタ
     --   町域コードでグループ化して登録マンション数を取得
     ----------------------------------------------------------------------
-    OUTER APPLY (
+    CROSS APPLY (
                 SELECT TownCD, Count(MansionCD) AS Kensu
                 FROM M_Mansion  
                 WHERE TownCD = ADR.TownCD

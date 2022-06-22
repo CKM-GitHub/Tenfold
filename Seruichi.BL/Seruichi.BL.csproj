@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="CommonBL.cs" />
     <Compile Include="RealEstate\r_asmc\r_asmcBL.cs" />
+    <Compile Include="RealEstate\r_asmc_ms_list_map\r_asmc_ms_list_mapBL.cs" />
     <Compile Include="RealEstate\r_asmc_ms_map_add\r_asmc_ms_map_addBL.cs" />
     <Compile Include="RealEstate\r_asmc_ms_list_sh\r_asmc_ms_list_shBL.cs" />
     <Compile Include="RealEstate\r_asmc_ms_reged_list\r_asmc_ms_reged_listBL.cs" />
@@ -61,7 +62,7 @@
     <Compile Include="RealEstate\r_issueslist\r_issueslistBL.cs" />
     <Compile Include="RealEstate\r_login\r_loginBL.cs" />
     <Compile Include="RealEstate\r_staff\r_staffBL.cs" />
-    <Compile Include="RealEstate\r_statics\r_staticsBL.cs" />
+    <Compile Include="RealEstate\r_statistic\r_statisticBL.cs" />
     <Compile Include="RealEstate\r_template\r_templateBL.cs" />
     <Compile Include="RealEstate\r_temp_mes\r_temp_mesBL.cs" />
     <Compile Include="Seller\a_assess_dBL.cs" />
@@ -107,6 +108,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Database\Function\fn_GetMaxBuiltYearMonth.sql" />
+    <Content Include="Database\Function\fn_GetMinBuiltYearMonth.sql" />
     <Content Include="Database\Function\fn_GetCondOptValueText.sql" />
     <Content Include="Database\Function\fn_GetCondOptOptionKBNName.sql" />
     <Content Include="Database\Function\fn_GetBuildingAge.sql" />
@@ -163,6 +166,12 @@
     <Content Include="Database\StoredProcedure\pr_M_Message_Select_by_ID.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfPref.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfStation.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_ms_list_map_Select_MansionData.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_ms_reged_list_get_m_pref.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_ms_reged_list_get_m_pref_and_citygpcd.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_ms_list_map_Select_Pref_CityGP_City_Town.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_ms_reged_list_get_m_pref_and_citygpcd_and_citycd.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_ms_reged_list_Select_M_RECondMan.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_Select_M_Region_for_Map.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_ms_map_add_Select_Cities_by_RegionCD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_ms_map_add_Select_Towns_by_Cities.sql" />
@@ -197,6 +206,10 @@
     <Content Include="Database\StoredProcedure\pr_r_login_select_REStaffName_by_REStaffCD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_template_DeleteData.sql" />
     <Content Include="Database\StoredProcedure\pr_r_template_Select_DisplayData.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_temp_mes_Delete_M_REMessage.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_temp_mes_Insert_M_REMessage.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_temp_mes_Select_M_REMessage_By_RealECD.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_temp_mes_Update_M_REMessage.sql" />
     <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForContract.sql" />
     <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForCustomerInfo.sql" />
     <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForDecline.sql" />

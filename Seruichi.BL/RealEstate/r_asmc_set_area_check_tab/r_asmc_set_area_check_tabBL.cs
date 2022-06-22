@@ -221,6 +221,7 @@ namespace Seruichi.BL.RealEstate.r_asmc_set_area_check_tab
                 model.REStaffName = dr["REStaffName"].ToStringOrEmpty();
                 model.ExpDate = dr["ExpDate"].ToStringOrEmpty();
                 model.Priority = dr["Priority"].ToInt32(0);
+                model.PrecedenceFlg = dr["PrecedenceFlg"].ToByte(0);
                 model.Remark = dr["Remark"].ToStringOrEmpty();
             }
 
