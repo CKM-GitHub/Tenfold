@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "査定条件[マンション・地図]";
+    Layout = "~/Views/Shared/_r_menuLayout.cshtml";
+    var MapScriptSrc = "https://maps.googleapis.com/maps/api/js?key=" + Seruichi.Common.StaticCache.MapsKey;
+}
+@section styles{
+    @Styles.Render("~/Content/r_asmc_ms_list_map")
+}
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18" id="wrapper">
+
+    @Html.Partial("r_asmc_ms_list_map_left_sideNavigation")
+
+    <div class="toggle-button">
+        <a href="#menu-toggle" class="btn" id="menu-toggle">
+            <span class="fa fa-angle-right glyphicon-chevron-right" aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <div class="col-md-12 col-12 mb-3 mb-sm-0">
+                            <h1 class="h2 mb-0 ls-tight">地図から設定</h1>
+                            <span class="text-muted small">査定条件＞設定＞マンション指定から設定＞地図から設定>都道府県選択</span>
+                            <span style="color: red;" class="ps-md-5 text-sm" id="no_record"></span>
+                        </div>
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
+                <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+                        </div>
+                    </div>
+                </div>
+                <div id="googleMap" style="height:700px;width:100%;"></div>
+                <script defer src="@MapScriptSrc"></script>
+                <input type="hidden" id="hdnCityCDList" value="@ViewBag.CityCDList" />
+                <input type="hidden" id="hdnTownCDList" value="@ViewBag.TownCDList" />
+            </div>
+        </main>
+        @Html.Partial("~/Views/Shared/_r_footer.cshtml")
+    </div>
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/r_asmc_ms_list_map")
+}

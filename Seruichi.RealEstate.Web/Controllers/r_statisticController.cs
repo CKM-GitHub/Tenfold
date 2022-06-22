@@ -4,15 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Models.RealEstate.r_statics;
+using Models.RealEstate.r_statistic;
 using Seruichi.BL;
-using Seruichi.BL.RealEstate.r_statics;
+using Seruichi.BL.RealEstate.r_statistic;
 
 namespace Seruichi.RealEstate.Web.Controllers
 {
-    public class r_staticsController : BaseController
+    public class r_statisticController : BaseController
     {
-        // GET: r_statics
+        // GET: r_statistic
         public ActionResult Index()
         {
             return View();
