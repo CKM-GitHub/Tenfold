@@ -25,8 +25,18 @@ namespace Seruichi.Tenfold.Web.Controllers
                 strSellerCD = SellerCD;
                 t_seller_assessmentBL bl = new t_seller_assessmentBL();
                 t_seller_assessment_header_Model model = bl.GetM_SellerBy_SellerCD(strSellerCD);
-                ViewBag.SellerModel = model;
-                
+                if (model != null)
+                {
+                    ViewBag.SellerModel = model;
+                }
+                else
+                {
+                    return BadRequestResult();
+                }
+            }
+            else
+            {
+                return BadRequestResult();
             }
             return View();
         }
