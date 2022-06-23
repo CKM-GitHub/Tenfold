@@ -117,6 +117,10 @@ namespace Seruichi.Tenfold.Web
             bundles.Add(new ScriptBundle("~/bundles/t_seller_profile").Include(
                      "~/Scripts/t_seller_profile.js",
                      "~/Scripts/t_common.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/t_reale_profile").Include(
+               "~/Scripts/t_reale_profile.js",
+               "~/Scripts/t_common.js"));
         }
     }
 }

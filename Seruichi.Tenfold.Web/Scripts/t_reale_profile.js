@@ -1,19 +1,23 @@
 ﻿const _url = {};
-
 $(function () {
+    _url.get_t_reale_CompanyInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyInfo';
+    _url.get_t_reale_CompanyCountingInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyCountingInfo';
+
     _url.getBankListByBankWord = common.appPath + '/t_reale_new/GetBankListByBankWord';
-    _url.getBankBranchListByBankCD = common.appPath + '/t_reale_new/GetBankBranchListByBankCD';
     _url.getBankBranchListByBranchWord = common.appPath + '/t_reale_new/GetBankBranchListByBranchWord';
     _url.checkZipCode = common.appPath + '/t_reale_new/CheckZipCode';
-    _url.checkAll = common.appPath + '/t_reale_new/CheckAll';
-    _url.save_t_reale_new = common.appPath + '/t_reale_new/Save_t_reale_new'
-    setValidation();
-    addEvents();
+
+    _url.checkAll = common.appPath + '/t_reale_profile/CheckAll';
+
+    _url.update_t_reale_profile = common.appPath + '/t_reale_profile/Update_t_reale_profile';
 
     $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
     $('#t_reale_list').addClass('font-bold text-underline');
 
     $('#REName').focus();
+
+    setValidation();
+    addEvents();
 
     createBloodhound();
     setTypeahead('#SourceBankName', 'tt-bankcd', bloodhoundSuggestions);
@@ -104,11 +108,11 @@ function setValidation() {
 
     $('#SourceBankName')
         .addvalidation_errorElement("#errorSourceBankName")
-       // .addvalidation_reqired();
+    // .addvalidation_reqired();
 
     $('#SourceBranchName')
         .addvalidation_errorElement("#errorSourceBranchName")
-       // .addvalidation_reqired();
+    // .addvalidation_reqired();
 
     $('#SourceAccountType')
         .addvalidation_errorElement("#errorSourceAccountType")
@@ -124,7 +128,7 @@ function setValidation() {
         .addvalidation_errorElement("#errorSourceAccountName")
         .addvalidation_reqired()
         .addvalidation_singlebyte_kana()
-        .addvalidation_maxlengthCheck(50);    
+        .addvalidation_maxlengthCheck(50);
 
     $('#LicenceNo2')
         .addvalidation_errorElement("#errorLicenceNo2")
@@ -138,6 +142,10 @@ function setValidation() {
 
     $('#CourseCD')
         .addvalidation_errorElement("#errorCourseCD")
+        .addvalidation_reqired();
+
+    $('#NextCourseCD')
+        .addvalidation_errorElement("#errorNextCourseCD")
         .addvalidation_reqired();
 
     $('#JoinedDate')
@@ -164,7 +172,7 @@ function setValidation() {
         .addvalidation_errorElement("#errortxtConfirmPassword")
         .addvalidation_reqired()
         .addvalidation_passwordcompare();
-    
+
 }
 
 function addEvents() {
@@ -211,7 +219,7 @@ function addEvents() {
 
                     if (data.PrefCD) {
                         $('#PrefCD').val(data.PrefCD).hideError();
-                        
+
                     }
                     if (data.CityCD) {
                         $('#CityName').val(data.CityCD)
@@ -235,7 +243,6 @@ function addEvents() {
         }
     });
 
-    
     $('#SourceBankName').on('blur', function () {
         const $this = $(this);
         $(this).hideError();
@@ -253,6 +260,7 @@ function addEvents() {
     }).on('typeahead:selected', function (evt, data) {
         displayBankList(data.Value);
     });
+
     $('#SourceBankName').on('change', function () {
         const $SourceBankCD = $('.tt-bankcd');
         if ($SourceBankCD.get().length === 1) {
@@ -292,6 +300,8 @@ function addEvents() {
         model.SourceAccountTypeName = $('#SourceAccountType option:selected').text();
         model.CourseName = $('#CourseCD option:selected').text();
         model.LicenceNo1Name = $('#LicenceNo1 option:selected').text();
+        model.NextCourseName = $('#NextCourseCD option:selected').text();
+        model.Status = "update";
         common.callAjaxWithLoading(_url.checkAll, model, this, function (result) {
             if (result && result.isOK) {
                 saveData = model;
@@ -306,7 +316,7 @@ function addEvents() {
     })
 
     $('#btnRegistration').on('click', function () {
-        common.callAjaxWithLoading(_url.save_t_reale_new, saveData, this, function (result) {
+        common.callAjaxWithLoading(_url.update_t_reale_profile, saveData, this, function (result) {
             if (result && result.isOK) {
                 //sucess
                 $('#modal_1').modal('hide');
@@ -418,7 +428,7 @@ function createBloodhound_branch() {
     });
 }
 
-function setTypeahead(selector,className,suggestions) {
+function setTypeahead(selector, className, suggestions) {
     $(selector).typeahead('destroy').typeahead(
         {
             hint: false,
@@ -431,7 +441,7 @@ function setTypeahead(selector,className,suggestions) {
             source: suggestions,
             templates: {
                 suggestion: function (data) {
-                    return '<div>' + data.DisplayText + '<span class=' + className+' style="display:none;">' + data.Value + '</span></div>';
+                    return '<div>' + data.DisplayText + '<span class=' + className + ' style="display:none;">' + data.Value + '</span></div>';
                 }
             },
             limit: 3000,
@@ -444,22 +454,18 @@ function displayBankList(bankCD) {
     createBloodhound_branch();
     setTypeahead('#SourceBranchName', 'tt-branchcd', bloodhoundSuggestions_branch);
     common.hideLoading(null, 0);
+}
 
-    //common.callAjax(_url.getBankBranchListByBankCD, { bankCD },
-    //    function (result) {
-    //        if (result && result.isOK) {
-    //            const dataArray = JSON.parse(result.data);
-    //            const length = dataArray.length;
-    //            if (length > 0) {
-    //                setTypeahead('#SourceBranchName', 'tt-branch', bloodhoundSuggestions_branch);
-    //               common.hideLoading();
-    //            }
-    //        }
-    //    },
-    //    function () {
-    //        common.hideLoading(null, 0);
-    //   }
-    //);
+function setScreenComfirm(data) {
+    for (key in data) {
+        const target = document.getElementById('confirm_' + key);
+        if (target) $(target).val(data[key]);
+    }
+    $('#confirm_PrefCD').val(data.PrefName);
+    $('#confirm_SourceAccountType').val(data.SourceAccountTypeName);
+    $('#confirm_CourseCD').val(data.CourseName);
+    $('#confirm_NextCourseCD').val(data.NextCourseName);
+    $('#confirm_LicenceNo1').val(data.LicenceNo1Name);
 }
 
 function setScreenComfirm(data) {
@@ -472,4 +478,6 @@ function setScreenComfirm(data) {
     $('#confirm_CourseCD').val(data.CourseName);
 
     $('#confirm_LicenceNo1').val(data.LicenceNo1Name);
+
+    $('#confirm_NextCourseCD').val(data.NextCourseName);
 }
