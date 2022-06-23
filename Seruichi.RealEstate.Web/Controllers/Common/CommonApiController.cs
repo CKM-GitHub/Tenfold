@@ -2,7 +2,9 @@
 using Newtonsoft.Json.Linq;
 using Seruichi.BL;
 using Seruichi.Common;
+using System.Linq;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace Seruichi.RealEstate.Web.Controllers
@@ -87,5 +89,7 @@ namespace Seruichi.RealEstate.Web.Controllers
             CommonBL bl = new CommonBL();
             return OKResult(bl.GetBuildingAge(constYYYYMM).ToStringOrEmpty());
         }
+
+
     }
 }

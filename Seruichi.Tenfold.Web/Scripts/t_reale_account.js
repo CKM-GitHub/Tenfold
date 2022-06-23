@@ -3,7 +3,7 @@ $(function () {
     setValidation();
     _url.get_t_reale_CompanyInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyInfo';
     _url.get_t_reale_CompanyCountingInfo = common.appPath + '/t_reale_purchase/get_t_reale_CompanyCountingInfo';
-    _url.get_t_reale_purchase_DisplayData = common.appPath + '/t_reale_account/get_t_reale_account_DisplayData'; 
+    _url.get_t_reale_purchase_DisplayData = common.appPath + '/t_reale_account/get_t_reale_account_DisplayData';
 
     _url.get_t_reale_accountSave = common.appPath + '/t_reale_account/get_t_reale_account_ManipulateData';
     _url.Insert_L_Log = common.appPath + '/t_reale_account/Insert_L_Log';
@@ -18,13 +18,13 @@ $(function () {
     $('#t_reale_account').addClass('font-bold text-underline');
 });
 
-function setValidation() { 
+function setValidation() {
 
     $('#StartDate')
         .addvalidation_errorElement("#errorStartDate")
         .addvalidation_datecheck() //E108
         .addvalidation_reqired() // E101 
-        //.addvalidation_datecompare(); //E111
+    //.addvalidation_datecompare(); //E111
 
     $('#EndDate')
         .addvalidation_errorElement("#errorEndDate")
@@ -55,7 +55,7 @@ function Date_Compare() {
     }
 }
 function SetEmpty() {
-    
+
 }
 function addEvents() {
     common.bindValidationEvent('#form1', '');
@@ -64,29 +64,29 @@ function addEvents() {
     btn.addEventListener("change", function () {
         if (this.checked) {
             $('.disabled-account').removeAttr("disabled")
-           //$('.cap-errormsg-right').removeClass("d-none")
+            //$('.cap-errormsg-right').removeClass("d-none")
         }
         else {
             $('.disabled-account').attr("disabled", "true").removeClass("cap-is-invalid")
             //$('.cap-errormsg-right').addClass("d-none")
-           // $('.cap-errormsg-right').addClass("d-none")
+            // $('.cap-errormsg-right').addClass("d-none")
             $('#StartDate').val(null);
             $('#EndDate').val(null);
-            $('#penaltyArea').val('');
+            $('#penaltyArea').val(null);
             staticCache.StartDate = $('#StartDate').val();
             staticCache.EndDate = $('#EndDate').val();
             staticCache.Memo = $('#penaltyArea').val();
             $("#StartDate").hideError();
             $("#EndDate").hideError();
             $("#penaltyArea").hideError();
-            
-         
+
+
         }
-      
-  
+
+
     });
     $('#StartDate, #EndDate').on('change', function () {
-       // Date_Compare();
+        // Date_Compare();
         //const $this = $(this), $start = $('#StartDate').val(), $end = $('#EndDate').val();
         //if (!common.checkValidityInput($this)) { 
         //    return false;
@@ -103,7 +103,7 @@ function addEvents() {
         //        return;
         //    }
         //}
-         Date_Compare();
+        Date_Compare();
 
         //const $this = $(this), $start = $('#StartDate').val(), $end = $('#EndDate').val();
         //if (!common.checkValidityInput($this)) {
@@ -133,9 +133,9 @@ function addEvents() {
     });
 
     $('#btn_save').on('click', function () {
-     
 
-        SetCache(); 
+
+        SetCache();
         $('#modal-changesave').modal('hide');
         common.callAjaxWithLoadingSync(_url.get_t_reale_accountSave, staticCache, this, function (result) {
             if (result && result.isOK) {
@@ -154,14 +154,14 @@ function addEvents() {
                 }
             }
         })
-    }); 
+    });
     let model = {
-        RealECD: common.getUrlParameter('RealECD') 
+        RealECD: common.getUrlParameter('RealECD')
     };
 
     //#wrapper {
     //    padding - left: 0;
-    $('#wrapper').prop('style','padding-left:0px !important')
+    $('#wrapper').prop('style', 'padding-left:0px !important')
     //Bind Company Info Data to the title part of the page
 
     get_purchase_Data(model, this, 'page_load');
@@ -170,15 +170,15 @@ function addEvents() {
 
     SetCache();
 }
- 
+
 var staticCache = {
-    penaltyFlg:'',
-    testFlg :'',
-    StartDate :'',
-    EndDate :'',
-    Memo :'',
+    penaltyFlg: '',
+    testFlg: '',
+    StartDate: '',
+    EndDate: '',
+    Memo: '',
     RealECD: '',
-    Isfake:'1'
+    Isfake: '1'
 };
 function CheckChanges() {
     $form = $('#form1').hideChildErrors();
@@ -197,7 +197,7 @@ function CheckChanges() {
     }
     $('#chagesCheck').removeAttr('data-bs-target');
     $('#chagesCheck').removeAttr('data-bs-toggle');
-     
+
     if (staticCache.StartDate === currrentState.StartDate && staticCache.EndDate === currrentState.EndDate && staticCache.Memo === currrentState.Memo && staticCache.testFlg === currrentState.testFlg && staticCache.penaltyFlg === currrentState.penaltyFlg) {
         $('#modal-changesave').modal('hide');
 
@@ -209,14 +209,18 @@ function CheckChanges() {
         else
             staticCache.Isfake = '1';
 
-        $('#modal-changesave').modal('show'); 
+        $('#modal-changesave').modal('show');
     }
 }
 function discardChanges() {
-    
+
     common.callAjaxWithLoadingSync(_url.get_t_reale_purchase_DisplayData, staticCache, this, function (result) {
         if (result && result.isOK) {
-
+            //alert('hi')
+            $("#StartDate").hideError();
+            $("#EndDate").hideError();
+            $("#penaltyArea").hideError();
+            $('.cap-errormsg-right').removeClass("d-none")
             let data = JSON.parse(result.data.split('Ʈ')[0]);
             if (data.length) {
                 if (data[0]['TestFlg'] == '1') {
@@ -239,11 +243,13 @@ function discardChanges() {
                 $('#StartDate').val(data[0]['PenaltyStartDate']);
                 $('#EndDate').val(data[0]['PenaltyEndDate']);
                 $('#penaltyArea').val(data[0]['PenaltyMemo']);
-            }
                 document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? $('.disabled-account').removeAttr("disabled") : $('.disabled-account').attr("disabled", "true")
-                $('.cap-errormsg-right').addClass("d-none")
-                $('.disabled-account').removeClass("cap-is-invalid")
-            
+
+                //$('.cap-errormsg-right').addClass("d-none")
+                //$('.disabled-account').removeClass("cap-is-invalid")
+            }
+
+
             //cap-is-invalid
         }
     })
@@ -256,7 +262,7 @@ function SetCache(id) {
     staticCache.EndDate = $('#EndDate').val();
     staticCache.Memo = $('#penaltyArea').val();
     staticCache.RealECD = common.getUrlParameter('RealECD');
-   // staticCache.Isfake = '1';
+    // staticCache.Isfake = '1';
     if (id) {
         get_purchase_Data(staticCache, $('form'), 'IsTable');
     }
@@ -265,10 +271,10 @@ function get_purchase_Data(model, $form, state) {
     common.callAjaxWithLoadingSync(_url.get_t_reale_purchase_DisplayData, model, this, function (result) {
         if (result && result.isOK) {
             if (state != 'IsTable') {
-               
+
                 BindPenalty(result.data.split('Ʈ')[0]);
             }
-            
+
             Bind_DisplayData(result.data.split('Ʈ')[1]);
             //if (state == 'Display')
             //    l_logfunction(model.RealECD + ' ' + $('#r_REName').text(), 'display', '');
@@ -292,7 +298,7 @@ function isEmptyOrSpaces(str) {
 }
 
 function Bind_DisplayData(result) {
-     
+
     let data = JSON.parse(result);
     if (data.length) {
         let html = "";
@@ -316,7 +322,7 @@ function Bind_DisplayData(result) {
     }
 }
 function BindPenalty(result) {
-    let data = JSON.parse(result); 
+    let data = JSON.parse(result);
     if (data.length) {
         if (data[0]['TestFlg'] == '1') {
             $('#flexSwitchCheckDefault').attr("checked", "true");
@@ -334,7 +340,7 @@ function l_logfunction() {
     let model = {
         LoginKBN: '3',
         LoginID: null,
-        RealECD: null  ,
+        RealECD: null,
         LoginName: null,
         IPAddress: null,
         Page: 't_reale_account',
