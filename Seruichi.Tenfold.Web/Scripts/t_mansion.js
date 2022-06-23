@@ -21,6 +21,9 @@ $(function () {
     _url.checkAll = common.appPath + '/t_mansion/CheckAll';
     _url.updateMansionData = common.appPath + '/t_mansion/UpdateMansionData';
 
+    $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
+    $('#t_mansion_list').addClass('font-bold text-underline');
+    $('#MansionName').focus();
 
     setValidation();
 
@@ -29,7 +32,8 @@ $(function () {
     Bind_Update_Data();
 });
 
-function Bind_Update_Data() {    
+function Bind_Update_Data() {
+    setLineList('add', $('#PrefCD').val());
     setlineStationDistanceByMansionCD($("#MansionCD").val(), $('#PrefCD').val());
     setMansionWordByMansionCD($('#MansionCD').val());
     setBuildingAge($("#ConstYYYYMM").val());
@@ -253,13 +257,12 @@ function addEvents() {
     });
 
     $('.js-distance').on('click', function () {
-
         const id = $(this).attr('id');
         const suffix = id.slice(-2).replace('_', '');
         var newValue = parseInt(suffix) + 1;
         $('#Dline_' + newValue).removeClass("bg-secondary");
         $('#Dline_' + newValue).find("*").prop("disabled", false);
-        setLineList('add', $('#PrefCD').val(), '#LineCD_' + newValue);
+        //setLineList('add', $('#PrefCD').val(), '#LineCD_' + newValue);
     });
 
     $('#btnConfirmation').click(function () {
@@ -582,6 +585,7 @@ function setlineStationDistanceByMansionCD(MansionCD, PrefCD) {
                     const j = i + 1;
 
                     setLineList('add', PrefCD, '#LineCD_' + j, data.LineCD);
+                   // $('#LineCD_' + j).val(data.LineCD);
                     
                     if (data.LineCD) {
                         setStationList('add', data.LineCD, '#StationCD_' + j, data.StationCD);
@@ -595,7 +599,8 @@ function setlineStationDistanceByMansionCD(MansionCD, PrefCD) {
                 const l = dataArray.length + 1;
                 $('#Dline_' + l ).removeClass("bg-secondary");
                 $('#Dline_' + l).find("*").prop("disabled", false);
-                setLineList('add', PrefCD, '#LineCD_' + l);
+
+               // setLineList('add', PrefCD, '#LineCD_' + l);
             }
         });
 }
