@@ -148,7 +148,7 @@ function addEvents() {
                         ("0" + m.getHours()).slice(-2) + "" +
                         ("0" + m.getMinutes()).slice(-2) + "" +
                         ("0" + m.getSeconds()).slice(-2);
-                    downloadLink.download = "案件一覧_" + dateString + ".csv";
+                    downloadLink.download = "不動産会社査定状況リスト_" + dateString + ".csv";
 
                     document.body.appendChild(downloadLink);
                     downloadLink.click();

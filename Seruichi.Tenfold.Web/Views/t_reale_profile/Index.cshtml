@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = "~/Views/Shared/_t_menuLayout.cshtml";
     ViewBag.Title = "セルイチ管理機能";
 }
@@ -8,30 +7,20 @@
     @Styles.Render("~/Content/tenfold_css_common")
 }
 <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
-    <div class="d-flex flex-column min-h-screen" id="page-content-wrapper">
+
+
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
 
         <main class="py-6 bg-surface-secondary">
-
             <div class="container-fluid">
-                <div class="card shadow border-0 mb-7">
-                    <div class="card-header">
+                <!-- Card stats -->
+                @Html.Partial("t_reale_Info")
 
-                        <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
-                            <h1 class="ps-2 h2 mb-0 ls-tight">不動産会社</h1>
-                            <span class="ps-2 text-muted small align-self-end">管理</span>
-                        </div>
-                        <div class="col-sm-6 col-12 text-sm-end">
-                            <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
-                              <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
-                        </div>
-                    </div>
-
-                </div>
-
+                <!-- Card stats -->
                 <form id="form1">
-                    <div class="card shadow border-0 mb-7">
+                    <div class="card shadow border-0 mb-7" style="border-radius: unset;">
                         <div class="card-header">
-                            <h5 class="mb-0">新規登録</h5>
+                            <h5 class="mb-0">情報管理</h5>
                         </div>
                         <div class="p-md-5">
                             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -41,12 +30,13 @@
                                             <div class="p-5">
                                                 <div class="mb-4 pb-2">
                                                     <h5 class="pb-2">会社情報</h5>
+                                                    <input type="text" id="RealECD" name="RealECD" value="@ViewBag.ProfileModel.RealECD" class="d-none" />
                                                     <div class="form-outline">
                                                         <div class="d-flex" style="margin-top:3px;">
                                                             <label class="form-label" for="REName">社名</label>
                                                             <span class="cap-errormsg-right" id="errorREName"></span>
                                                         </div>
-                                                        <input type="text" id="REName" name="REName" maxlength="100" class="form-control form-control-lg" />
+                                                        <input type="text" id="REName" name="REName" maxlength="100" value="@ViewBag.ProfileModel.REName" class="form-control form-control-lg" />
                                                     </div>
                                                 </div>
                                                 <div class="mb-4 pb-2">
@@ -55,7 +45,7 @@
                                                             <label class="form-label" for="REKana">社名(フリガナ)</label>
                                                             <span class="cap-errormsg-right" id="errorREKana"></span>
                                                         </div>
-                                                        <input type="text" id="REKana" name="REKana" maxlength="100" class="form-control form-control-lg" />
+                                                        <input type="text" id="REKana" name="REKana" maxlength="100" value="@ViewBag.ProfileModel.REKana" class="form-control form-control-lg" />
                                                     </div>
                                                 </div>
                                                 <div class="mb-4 pb-2">
@@ -64,7 +54,7 @@
                                                             <label class="form-label" for="President">代表者名</label>
                                                             <span class="cap-errormsg-right" id="errorPresident"></span>
                                                         </div>
-                                                        <input type="text" id="President" name="President" maxlength="50" class="form-control form-control-lg" />
+                                                        <input type="text" id="President" name="President" maxlength="50" value="@ViewBag.ProfileModel.President" class="form-control form-control-lg" />
                                                     </div>
                                                 </div>
 
@@ -84,19 +74,21 @@
                                                                 </div>
                                                                 <div class="col-4 col-md-4 pe-0 ms-0 me-0 align-self-centeralign-self-center">
                                                                     <input class="form-control text-center w-100" type="text"
-                                                                           maxlength="3" name="ZipCode1" id="ZipCode1">
+                                                                           maxlength="3" name="ZipCode1" id="ZipCode1" value="@ViewBag.ProfileModel.ZipCode1">
                                                                 </div>
                                                                 <div class="col-1 ps-0 pe-0 ms-0 me-0 text-center align-self-center">
                                                                     <span class="align-self-center text-dark">―</span>
                                                                 </div>
                                                                 <div class="col-4 ps-0 pe-0 ms-0 me-0 align-self-center">
                                                                     <input class="form-control text-center w-100" type="text"
-                                                                           maxlength="4" name="ZipCode2" id="ZipCode2">
+                                                                           maxlength="4" name="ZipCode2" id="ZipCode2" value="@ViewBag.ProfileModel.ZipCode2">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
+
 
                                                 <div class="mb-4 pb-2">
                                                     <div class="form-outline form-white">
@@ -106,10 +98,17 @@
                                                         </div>
                                                         <div class="dropdown">
                                                             <select class="form-select" name="PrefCD" id="PrefCD">
-                                                                <option selected value="">都道府県</option>
+                                                                <option value="">都道府県</option>
                                                                 @foreach (Models.DropDownListItem item in ViewBag.PrefDropDownListItems)
                                                                 {
-                                                                    <option class="js-selectable" value="@item.Value">@item.DisplayText</option>
+                                                                    if (ViewBag.ProfileModel.PrefCD == item.Value)
+                                                                    {
+                                                                        <option selected class="js-selectable" value="@item.Value">@item.DisplayText</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option class="js-selectable" value="@item.Value">@item.DisplayText</option>
+                                                                    }
                                                                 }
                                                             </select>
                                                         </div>
@@ -122,7 +121,7 @@
                                                             <label class="form-label" for="CityName">市区町村</label>
                                                             <span class="cap-errormsg-right" id="errorCityName"></span>
                                                         </div>
-                                                        <input type="text" id="CityName" name="CityName" maxlength="50" class="form-control form-control-lg" />
+                                                        <input type="text" id="CityName" name="CityName" maxlength="50" value="@ViewBag.ProfileModel.CityName" class="form-control form-control-lg" />
                                                     </div>
                                                 </div>
 
@@ -132,7 +131,7 @@
                                                             <label class="form-label" for="TownName">住所</label>
                                                             <span class="cap-errormsg-right" id="errorTownName"></span>
                                                         </div>
-                                                        <input type="text" id="TownName" name="TownName" maxlength="50" class="form-control form-control-lg" />
+                                                        <input type="text" id="TownName" name="TownName" maxlength="50" value="@ViewBag.ProfileModel.TownName" class="form-control form-control-lg" />
                                                     </div>
                                                 </div>
 
@@ -142,7 +141,7 @@
                                                             <label class="form-label" for="Address1">建物名</label>
                                                             <span class="cap-errormsg-right" id="errorAddress1"></span>
                                                         </div>
-                                                        <input type="text" id="Address1" name="Address1" maxlength="50" class="form-control form-control-lg" />
+                                                        <input type="text" id="Address1" name="Address1" maxlength="50" value="@ViewBag.ProfileModel.Address1" class="form-control form-control-lg" />
                                                     </div>
                                                 </div>
                                                 <hr class="navbar-divider mb-4 my-5 opacity-20">
@@ -153,7 +152,7 @@
                                                             <label class="form-label" for="BusinessHours">営業時間</label>
                                                             <span class="cap-errormsg-right" id="errorBusinessHours"></span>
                                                         </div>
-                                                        <input type="text" id="BusinessHours" name="BusinessHours" maxlength="50" class="form-control form-control-lg" />
+                                                        <input type="text" id="BusinessHours" name="BusinessHours" maxlength="50" value="@ViewBag.ProfileModel.BusinessHours" class="form-control form-control-lg" />
                                                     </div>
                                                 </div>
 
@@ -163,7 +162,7 @@
                                                             <label class="form-label" for="CompanyHoliday">定休日</label>
                                                             <span class="cap-errormsg-right" id="errorCompanyHoliday"></span>
                                                         </div>
-                                                        <input type="text" id="CompanyHoliday" name="CompanyHoliday" maxlength="50" class="form-control form-control-lg" />
+                                                        <input type="text" id="CompanyHoliday" name="CompanyHoliday" maxlength="50" value="@ViewBag.ProfileModel.CompanyHoliday" class="form-control form-control-lg" />
                                                     </div>
                                                 </div>
 
@@ -179,7 +178,7 @@
                                                             <label class="form-label" for="PICName">お名前</label>
                                                             <span class="cap-errormsg-right" id="errorPICName"></span>
                                                         </div>
-                                                        <input type="text" id="PICName" name="PICName" maxlength="50" class="form-control form-control-lg" />
+                                                        <input type="text" id="PICName" name="PICName" maxlength="50" value="@ViewBag.ProfileModel.PICName" class="form-control form-control-lg" />
                                                     </div>
                                                 </div>
                                                 <div class="mb-4 pb-2">
@@ -188,7 +187,7 @@
                                                             <label class="form-label" for="PICKana">お名前(フリガナ)</label>
                                                             <span class="cap-errormsg-right" id="errorPICKana"></span>
                                                         </div>
-                                                        <input type="text" id="PICKana" name="PICKana" maxlength="50" class="form-control form-control-lg" />
+                                                        <input type="text" id="PICKana" name="PICKana" maxlength="50" value="@ViewBag.ProfileModel.PICKana" class="form-control form-control-lg" />
                                                     </div>
                                                 </div>
                                                 <hr class="navbar-divider mb-4 my-5 opacity-20">
@@ -199,7 +198,7 @@
                                                             <label class="form-label" for="HousePhone">電話番号</label>
                                                             <span class="cap-errormsg-right" id="errorHousePhone"></span>
                                                         </div>
-                                                        <input type="text" id="HousePhone" name="HousePhone" maxlength="15" class="form-control form-control-lg" />
+                                                        <input type="text" id="HousePhone" name="HousePhone" maxlength="15" value="@ViewBag.ProfileModel.HousePhone" class="form-control form-control-lg" />
                                                     </div>
                                                 </div>
 
@@ -209,7 +208,7 @@
                                                             <label class="form-label" for="Fax">FAX番号</label>
                                                             <span class="cap-errormsg-right" id="errorFax"></span>
                                                         </div>
-                                                        <input type="text" id="Fax" name="Fax" maxlength="15" class="form-control form-control-lg" />
+                                                        <input type="text" id="Fax" name="Fax" maxlength="15" value="@ViewBag.ProfileModel.Fax" class="form-control form-control-lg" />
                                                     </div>
                                                 </div>
                                                 <div class="mb-4">
@@ -218,7 +217,7 @@
                                                             <label class="form-label" for="MailAddress">メールアドレス</label>
                                                             <span class="cap-errormsg-right" id="errorMailAddress"></span>
                                                         </div>
-                                                        <input type="text" id="MailAddress" name="MailAddress" maxlength="100" class="form-control form-control-lg" />
+                                                        <input type="text" id="MailAddress" name="MailAddress" maxlength="100" value="@ViewBag.ProfileModel.MailAddress" class="form-control form-control-lg" />
                                                     </div>
                                                 </div>
 
@@ -226,21 +225,21 @@
                                                 <div class="mb-4row">
                                                     <h5 class="pb-2">口座情報</h5>
                                                     <div class="form-outline form-white">
-                                                        <input class="d-none" type="text" name="SourceBankCD" id="SourceBankCD" value="">
+                                                        <input class="d-none" type="text" name="SourceBankCD" id="SourceBankCD" value="@ViewBag.ProfileModel.SourceBankCD">
                                                         <div class="d-flex" style="margin-top:3px;">
                                                             <label for="SourceBankName" class="form-label">銀行名</label>
                                                             <span class="cap-errormsg-right" id="errorSourceBankName"></span>
                                                         </div>
-                                                        <input class="form-control form-control-lg" id="SourceBankName" name="SourceBankName" placeholder="銀行名入力">
+                                                        <input class="form-control form-control-lg" id="SourceBankName" name="SourceBankName" value="@ViewBag.ProfileModel.SourceBankName" placeholder="銀行名入力">
                                                     </div>
                                                     <div class="col-12 pb-3 ">
                                                         <div class="form-outline form-white">
-                                                            <input class="d-none" type="text" name="SourceBranchCD" id="SourceBranchCD" value="">
+                                                            <input class="d-none" type="text" name="SourceBranchCD" id="SourceBranchCD" value="@ViewBag.ProfileModel.SourceBranchCD">
                                                             <div class="d-flex" style="margin-top:3px;">
                                                                 <label for="" class="form-label">支店名</label>
                                                                 <span class="cap-errormsg-right" id="errorSourceBranchName"></span>
                                                             </div>
-                                                            <input class="form-control form-control-lg" id="SourceBranchName" name="SourceBranchName" placeholder="支店名入力">
+                                                            <input class="form-control form-control-lg" id="SourceBranchName" name="SourceBranchName" value="@ViewBag.ProfileModel.SourceBranchName" placeholder="支店名入力">
                                                         </div>
                                                     </div>
 
@@ -254,9 +253,17 @@
                                                             </div>
                                                             <div class="dropdown">
                                                                 <select class="form-select" name="SourceAccountType" id="SourceAccountType">
-                                                                    <option class="js-selectable" selected value=""></option>
-                                                                    <option class="js-selectable" value="1">普通預金</option>
-                                                                    <option class="js-selectable" value="2">当座預金</option>
+                                                                    <option class="js-selectable" value=""></option>
+                                                                    @if (ViewBag.ProfileModel.SourceAccountType == 1)
+                                                                    {
+                                                                        <option class="js-selectable" value="1" selected>普通預金</option>
+                                                                        <option class="js-selectable" value="2">当座預金</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option class="js-selectable" value="1">普通預金</option>
+                                                                        <option class="js-selectable" value="2" selected>当座預金</option>
+                                                                    }
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -266,8 +273,9 @@
                                                             <label class="form-label" for="SourceAccount">口座番号</label>
                                                             <span class="cap-errormsg-right" id="errorSourceAccount"></span>
                                                         </div>
-                                                        <input type="text" id="SourceAccount" name="SourceAccount" maxlength="8" class="form-control form-control-lg" autocomplete="off" />
+                                                        <input type="text" id="SourceAccount" name="SourceAccount" maxlength="8" value="@ViewBag.ProfileModel.SourceAccount" class="form-control form-control-lg" autocomplete="off" />
                                                     </div>
+
                                                 </div>
                                                 <div class="mb-4">
                                                     <div class="form-outline form-white pb-3 ">
@@ -275,7 +283,7 @@
                                                             <label class="form-label" for="SourceAccountName">名義人</label>
                                                             <span class="cap-errormsg-right" id="errorSourceAccountName"></span>
                                                         </div>
-                                                        <input type="text" id="SourceAccountName" name="SourceAccountName" maxlength="50" class="form-control form-control-lg" />
+                                                        <input type="text" id="SourceAccountName" name="SourceAccountName" maxlength="50" value="@ViewBag.ProfileModel.SourceAccountName" class="form-control form-control-lg" />
                                                     </div>
                                                 </div>
                                                 <hr class="navbar-divider mb-4 my-5 opacity-20">
@@ -287,13 +295,20 @@
                                                 <div class="row">
                                                     <div class="form-outline">
                                                         <h5 class="pb-2">免許</h5>
-                                                        <label class="form-label" for="LicenceNo1">免許発行主体</label>
+                                                        <label class="form-label" for="form3Examplea2">免許発行主体</label>
                                                         <div class="col-12 form-outline form-white mb-4 pb-2">
                                                             <select class="form-select cap-fon-form-w250 form-control-lg" name="LicenceNo1" id="LicenceNo1">
-                                                                <option selected value="">免許発行主体</option>
+                                                                <option value="">免許発行主体</option>
                                                                 @foreach (Models.DropDownListItem item in ViewBag.MultPurposeDropDownListItems)
                                                                 {
-                                                                    <option class="js-selectable" value="@item.Value">@item.DisplayText</option>
+                                                                    if (ViewBag.ProfileModel.LicenceNo1 == item.DisplayText)
+                                                                    {
+                                                                        <option class="js-selectable" selected value="@item.Value">@item.DisplayText</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option class="js-selectable" value="@item.Value">@item.DisplayText</option>
+                                                                    }
                                                                 }
                                                             </select>
                                                         </div>
@@ -302,7 +317,7 @@
                                                                 <label class="form-label" for="LicenceNo2">更新回数</label>
                                                                 <span class="cap-errormsg-right" id="errorLicenceNo2"></span>
                                                             </div>
-                                                            <input type="text" id="LicenceNo2" name="LicenceNo2" maxlength="2" class="form-control form-control-lg text-center cap-fon-form-w150" autocomplete="off" />
+                                                            <input type="text" id="LicenceNo2" name="LicenceNo2" maxlength="2" value="@ViewBag.ProfileModel.LicenceNo2" class="form-control form-control-lg text-center cap-fon-form-w150" autocomplete="off" />
                                                         </div>
                                                         <div class="col-12 mb-4 pb-2">
                                                             <div class="d-flex" style="margin-top:3px;">
@@ -312,7 +327,7 @@
                                                             <div class="w-100">
                                                                 <div class=" d-inline-flex cap-fon-form-w200">
                                                                     <span class="align-self-center pe-1">第</span>
-                                                                    <input type="text" id="LicenceNo3" name="LicenceNo3" maxlength="10" class="form-control form-control-lg text-center" autocomplete="off" value="" />
+                                                                    <input type="text" id="LicenceNo3" name="LicenceNo3" value="@ViewBag.ProfileModel.LicenceNo3" maxlength="10" class="form-control form-control-lg text-center" autocomplete="off" value="" />
                                                                     <span class="align-self-center ps-1">号</span>
                                                                 </div>
                                                             </div>
@@ -331,7 +346,36 @@
                                                                 <option selected="" value="">パターン選択</option>
                                                                 @foreach (Models.DropDownListItem item in ViewBag.CourseDropDownListItems)
                                                                 {
-                                                                    <option class="js-selectable" value="@item.Value">@item.DisplayText</option>
+                                                                    if (ViewBag.ProfileModel.CourseCD == item.Value)
+                                                                    {
+                                                                        <option class="js-selectable" selected value="@item.Value">@item.DisplayText</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option class="js-selectable" value="@item.Value">@item.DisplayText</option>
+                                                                    }
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-4 pb-2">
+                                                        <div class="form-outline form-white">
+                                                            <div class="d-flex" style="margin-top:3px;">
+                                                                <label class="form-label" for="NextCourseCD">翌月適用パターン</label>
+                                                                <span class="cap-errormsg-right" id="errorNextCourseCD"></span>
+                                                            </div>
+                                                            <select class="form-select cap-fon-form-w350 form-control-lg" name="NextCourseCD" id="NextCourseCD">
+                                                                <option selected="" value="">パターン選択</option>
+                                                                @foreach (Models.DropDownListItem item in ViewBag.CourseDropDownListItems)
+                                                                {
+                                                                    if (ViewBag.ProfileModel.NextCourseCD == item.Value)
+                                                                    {
+                                                                        <option class="js-selectable" selected value="@item.Value">@item.DisplayText</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option class="js-selectable" value="@item.Value">@item.DisplayText</option>
+                                                                    }
                                                                 }
                                                             </select>
                                                         </div>
@@ -345,7 +389,14 @@
                                                                 <label class="form-label" for="JoinedDate">サービス参加日</label>
                                                                 <span class="cap-errormsg-right" id="errorJoinedDate"></span>
                                                             </div>
-                                                            <input type="date" id="JoinedDate" name="JoinedDate" max="2999-12-31" class="form-control form-control-lg text-center" />
+                                                            @if (ViewBag.ProfileModel.InvoiceDate == "")
+                                                            {
+                                                                <input type="date" id="JoinedDate" name="JoinedDate" max="2999-12-31" value="@string.Format("{0:yyyy-MM-dd}", ViewBag.ProfileModel.JoinedDate)" class="form-control form-control-lg text-center"  readonly />
+                                                            }
+                                                            else
+                                                            {
+                                                               <input type="date" id="JoinedDate" name="JoinedDate" max="2999-12-31" value="@string.Format("{0:yyyy-MM-dd}", ViewBag.ProfileModel.JoinedDate)" class="form-control form-control-lg text-center" />
+                                                            }
                                                         </div>
                                                     </div>
                                                     <div class="mb-4 pb-2">
@@ -356,7 +407,14 @@
                                                             </div>
                                                             <div class="w-100">
                                                                 <div class=" d-inline-flex cap-fon-form-w200">
-                                                                    <input type="text" id="InitialFee" name="InitialFee" class="form-control form-control-lg text-end" autocomplete="off" />
+                                                                    @if (ViewBag.ProfileModel.InvoiceDate == "")
+                                                                    {
+                                                                        <input type="text" id="InitialFee" name="InitialFee" class="form-control form-control-lg text-end" value="@ViewBag.ProfileModel.InitialFee" autocomplete="off" readonly />
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <input type="text" id="InitialFee" name="InitialFee" class="form-control form-control-lg text-end" value="@ViewBag.ProfileModel.InitialFee" autocomplete="off" />
+                                                                    }
                                                                     <span class="align-self-center ps-1">円</span>
                                                                 </div>
                                                             </div>
@@ -368,7 +426,7 @@
                                                             <h5 class="pb-2">メモ</h5>
                                                             <span class="cap-errormsg-right" id="errorRemark"></span>
                                                         </div>
-                                                        <textarea class="form-control custom-control" id="Remark" maxlength="1000" name="Remark" rows="5"></textarea>
+                                                        <textarea class="form-control custom-control" id="Remark" maxlength="1000" name="Remark" rows="5">@ViewBag.ProfileModel.Remark</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -383,7 +441,7 @@
                                                                 <label class="form-label" for="txtPassword">パスワード</label>
                                                                 <span class="cap-errormsg-right" id="errortxtPassword"></span>
                                                             </div>
-                                                            <input type="password" class="passkey form-control" placeholder="パスワード" required="required" maxlength="20" id="txtPassword" name="Password" />
+                                                            <input type="password" class="passkey form-control" placeholder="パスワード" required="required" maxlength="20" id="txtPassword" value="@ViewBag.ProfileModel.Password" name="Password" />
                                                         </div>
 
                                                         <div class="mb-4 pb-2">
@@ -392,7 +450,7 @@
                                                                     <label class="form-label" for="txtConfirmPassword">パスワード再確認</label>
                                                                     <span class="cap-errormsg-right" id="errortxtConfirmPassword"></span>
                                                                 </div>
-                                                                <input type="password" class="passkey form-control" placeholder="パスワード" required="required" id="txtConfirmPassword" name="REPassword">
+                                                                <input type="password" class="passkey form-control" placeholder="パスワード" required="required" id="txtConfirmPassword" name="REPassword" value="@ViewBag.ProfileModel.Password">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -401,6 +459,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                         <div class="card-footer">
@@ -408,7 +467,7 @@
                                 <button type="button" class="btn btn-primary" id="btnConfirmation">
                                     確認
                                 </button>
-                                &nbsp;    
+                                &nbsp;
                                 <button type="button" class="btn btn-lg btn-default" id="btnCancel">
                                     取消
                                 </button>
@@ -416,6 +475,7 @@
                         </div>
                     </div>
                 </form>
+
                 <!-- Modal -->
                 <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="modal_1" tabindex="-1"
                      role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -464,7 +524,7 @@
                                                                 <span class="align-self-center pe-2 text-dark">〒</span>
                                                                 <input readonly class="form-control text-center w-50" id="confirm_ZipCode1" type="text">
                                                                 <span class="align-self-center pe-2 ps-2 text-dark">-</span>
-                                                                <input readonly  class="form-control w-50 text-center" id="confirm_ZipCode2" type="text">
+                                                                <input readonly class="form-control w-50 text-center" id="confirm_ZipCode2" type="text">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -607,13 +667,19 @@
                                                     </div>
                                                     <hr class="navbar-divider mb-4 my-5 opacity-20 pt-0 pb-0 mt-0 mb-0">
                                                     <div class="mb-4 pb-2">
+                                                        <h5 class="pb-2">契約パターン</h5>
                                                         <div class="form-outline form-white">
-                                                            <h5 class="pb-2">契約パターン</h5>
+                                                            <h5 class="pb-2">適用中パターン</h5>
                                                             <input readonly type="text" id="confirm_CourseCD" class="form-control form-control-lg text-center" autocomplete="off" value="" />
                                                         </div>
                                                     </div>
+                                                    <div class="mb-4 pb-2">
+                                                        <div class="form-outline form-white">
+                                                            <label class="form-label">翌月適用パターン</label>
+                                                            <input readonly="" type="text" id="confirm_NextCourseCD" class="form-control form-control-lg text-center" autocomplete="off" value="">
+                                                        </div>
+                                                    </div>
                                                     <hr class="navbar-divider mb-4 my-5 opacity-20 pt-0 pb-0 mt-0 mb-0">
-
                                                     <div class="mb-4 pb-2">
                                                         <div class="form-outline cap-fon-form-w200">
                                                             <h5 class="pb-2">初期設定</h5>
@@ -664,7 +730,7 @@
                     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">新規登録完了</h4><button type="button" class="btn-close d-none"
+                                <h4 class="modal-title">変更保存完了</h4><button type="button" class="btn-close d-none"
                                                                            data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -676,11 +742,11 @@
                                             <h1 class="cap-icon-h1"><i class="fa fa-check cap-icon-i"></i></h1>
                                         </form>
                                     </div>
-                                    <h4 class="text-center align-self-center pt-2">登録内容を保存しました。</h4>
+                                    <h4 class="text-center align-self-center pt-2">変更された内容を保存しました。</h4>
                                 </section>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  id="btnSuccessPopup">閉じる</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnSuccessPopup">閉じる</button>
                             </div>
                         </div>
                     </div>
@@ -720,5 +786,5 @@
     </div>
 </div>
 @section Scripts{
-    @Scripts.Render("~/bundles/t_reale_new")
+    @Scripts.Render("~/bundles/t_reale_profile")
 }

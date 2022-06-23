@@ -7,7 +7,7 @@ using Models.Tenfold.t_seller_assessment;
 
 namespace Seruichi.BL.Tenfold.t_seller_assessment
 {
-    public class t_seller_assessmentBL
+    public class t_seller_assessmentBL 
     {
         public Dictionary<string, string> ValidateAll(t_seller_assessmentModel model, List<string> lst_checkBox)
         {
@@ -56,9 +56,16 @@ namespace Seruichi.BL.Tenfold.t_seller_assessment
                 dt.Rows[i]["MailAddress"] = !string.IsNullOrEmpty(MailAddress) ? crypt.DecryptFromBase64(MailAddress, decryptionKey) : MailAddress;
                 
             }
-            t_seller_assessment_header_Model model = DataTableExtentions.ToEntity<t_seller_assessment_header_Model>(dt.Rows[0]);
-
-            return model;
+            if (dt.Rows.Count > 0)
+            {
+                t_seller_assessment_header_Model model = DataTableExtentions.ToEntity<t_seller_assessment_header_Model>(dt.Rows[0]);
+                return model;
+            }
+            else
+            {
+                return null;
+            }
+           
         }
 
         public DataTable GetM_SellerMansionList(t_seller_assessmentModel model,string SellerCD)

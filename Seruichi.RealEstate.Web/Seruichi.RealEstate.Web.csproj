@@ -153,7 +153,7 @@
     <Compile Include="Controllers\r_issueslistController.cs" />
     <Compile Include="Controllers\r_loginController.cs" />
     <Compile Include="Controllers\r_staffController.cs" />
-    <Compile Include="Controllers\r_staticsController.cs" />
+    <Compile Include="Controllers\r_statisticController.cs" />
     <Compile Include="Controllers\r_templateController.cs" />
     <Compile Include="Controllers\r_temp_mesController.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
@@ -170,12 +170,15 @@
   <ItemGroup>
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\bootstrap\bootstrap.min.js" />
+    <Content Include="Content\css\chat.css" />
     <Content Include="Content\css\Clients-UI.css" />
     <Content Include="Content\css\Contact-Form-Clean.css" />
     <Content Include="Content\css\errorpage.css" />
+    <Content Include="Content\css\fileup.min.css" />
     <Content Include="Content\css\fileuploads.css" />
     <Content Include="Content\css\index.css" />
     <Content Include="Content\css\japanmap.css" />
+    <Content Include="Content\css\jquery.dataTables.min.css" />
     <Content Include="Content\css\loading.css" />
     <Content Include="Content\css\Login-Form-Clean.css" />
     <Content Include="Content\css\profileimg.css" />
@@ -229,6 +232,7 @@
     <Content Include="Scripts\r_issueslist.js" />
     <Content Include="Scripts\r_login.js" />
     <Content Include="Scripts\r_staff.js" />
+    <Content Include="Scripts\r_statistic.js" />
     <Content Include="Scripts\r_template.js" />
     <Content Include="Scripts\r_temp_mes.js" />
     <Content Include="Views\Error\BadRequest.cshtml" />
@@ -286,9 +290,9 @@
     <Content Include="Views\r_asmc_set_area_check_tab\_r_asmc_M_RECondAreaOpt_list.cshtml" />
     <Content Include="Views\r_asmc_set_area_check_tab\Index.cshtml" />
     <Content Include="Views\r_asmc_ms_map_add\Index.cshtml" />
-    <Content Include="Views\r_statics\Index.cshtml" />
     <Content Include="Views\r_asmc_ms_list_map\Index.cshtml" />
     <Content Include="Views\r_asmc_ms_list_map\r_asmc_ms_list_map_left_sideNavigation.cshtml" />
+    <Content Include="Views\r_statistic\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
