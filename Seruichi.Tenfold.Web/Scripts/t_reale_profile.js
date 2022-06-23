@@ -35,7 +35,7 @@ function setValidation() {
         .addvalidation_reqired()
         .addvalidation_singlebyte_doublebyte()
         //.addvalidation_doublebyte()
-        .addvalidation_doublebyte_kana();
+        .addvalidation_doublebyte_namae_kana();
 
     $('#President')
         .addvalidation_errorElement("#errorPresident")
@@ -86,7 +86,7 @@ function setValidation() {
     $('#PICKana')
         .addvalidation_errorElement("#errorPICKana")
         .addvalidation_singlebyte_doublebyte()
-        .addvalidation_doublebyte_kana();
+        .addvalidation_doublebyte_namae_kana();
 
     $('#HousePhone')
         .addvalidation_errorElement("#errorHousePhone")
