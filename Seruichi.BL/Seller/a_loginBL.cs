@@ -33,6 +33,10 @@ namespace Seruichi.BL
                 {
                     validator.AddValidationResult("Password", "E206"); //メールアドレスとパスワードの組合せが正しくありません
                 }
+                if (!CheckInvalidMailAddress(user.UserID))
+                {
+                    validator.AddValidationResult("Password", "E212"); //無効なメールアドレスです。ログインできません。
+                }
             }
             else
             {
@@ -70,6 +74,26 @@ namespace Seruichi.BL
             }
 
             return user;
+        }
+
+        private bool CheckInvalidMailAddress(string sellerCD)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = sellerCD.ToStringOrNull() },
+            };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_a_login_Select_M_Seller_CheckInvalid", sqlParams);
+            if (dt.Rows.Count > 0)
+            {
+                var dr = dt.Rows[0];
+                if (dr["InvalidFLG"].ToByte(0) == 1 || !string.IsNullOrEmpty(dr["LeaveDateTime"].ToStringOrEmpty()))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public bool InsertLoginLog(LoginUser user, string ipaddress)

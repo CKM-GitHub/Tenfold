@@ -66,14 +66,14 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col" style="width: 100px;">買取利回り率</th>
-                                        <th scope="col">駅距離</th>
+                                        <th scope="col" style="width: 100px;">駅距離(以内)</th>
 
                                         @foreach (var capitions in ViewBag.M_RECondAreaRate.ColHeader)
                                         {
-                                            <th scope="col">
+                                            <th scope="col" style="width: 100px;">
                                                 <span class="text-danger">@capitions[0]</span>
                                                 <span>分</span>
-                                                <span class="text-danger">@capitions[1]</span>
+                                                @*<span class="text-danger">@capitions[1]</span>*@
                                             </th>
                                         }
                                     </tr>
@@ -91,11 +91,11 @@
                                             @if (i == 0)
                                             {
                                                 <th scope="row" rowspan=@rowCountRate>
-                                                    <p>築年数</p>
+                                                    <p>築年数(以内)</p>
                                                 </th>
                                             }
                                             <th scope="row">
-                                                <span class="text-danger">@rowCaptions[0]</span>年<span class="text-danger">@rowCaptions[1]</span>
+                                                <span class="text-danger">@rowCaptions[0]</span>年@*<span class="text-danger">@rowCaptions[1]</span>*@
                                             </th>
                                             @foreach (var item in items)
                                             {
@@ -120,14 +120,14 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col" style="width: 100px;">1㎡あたりの家賃</th>
-                                        <th scope="col">駅距離</th>
+                                        <th scope="col" style="width: 100px;">駅距離(以内)</th>
 
                                         @foreach (var capitions in ViewBag.M_RECondAreaRent.ColHeader)
                                         {
-                                            <th scope="col">
+                                            <th scope="col" style="width: 100px;">
                                                 <span class="text-danger">@capitions[0]</span>
                                                 <span>分</span>
-                                                <span class="text-danger">@capitions[1]</span>
+                                                @*<span class="text-danger">@capitions[1]</span>*@
                                             </th>
                                         }
                                     </tr>
@@ -145,11 +145,11 @@
                                             @if (i == 0)
                                             {
                                                 <th scope="row" rowspan=@rowCountRent>
-                                                    <p>築年数</p>
+                                                    <p>築年数(以内)</p>
                                                 </th>
                                             }
                                             <th scope="row">
-                                                <span class="text-danger">@rowCaptions[0]</span>年<span class="text-danger">@rowCaptions[1]</span>
+                                                <span class="text-danger">@rowCaptions[0]</span>年@*<span class="text-danger">@rowCaptions[1]</span>*@
                                             </th>
                                             @foreach (var item in items)
                                             {
