@@ -76,7 +76,7 @@
     <script>
         $(function () {
             common.appPath = '@appPath';
-            data = JSON.parse('@Html.Raw(messageJson)');
+            const data = JSON.parse('@Html.Raw(messageJson)');
             for (const key in data)
             {
                 messageConst[key] = data[key];

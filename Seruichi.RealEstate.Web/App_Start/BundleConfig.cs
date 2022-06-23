@@ -88,6 +88,18 @@ namespace Seruichi.RealEstate.Web
                     "~/Content/scripts/sidebar.js",
                     "~/Content/scripts/hover.js"));
 
+            bundles.Add(new StyleBundle("~/Content/r_asmc_ms_list_map").Include(
+                      "~/Content/css/style.css",
+                      "~/Content/css/index.css",
+                       "~/Content/css/tree.css"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/r_asmc_ms_list_map").Include(
+                    "~/Scripts/r_asmc_ms_list_map.js",
+                     "~/Content/scripts/tree.js",
+                     "~/Content/scripts/rating.js",
+                    "~/Content/scripts/sidebar.js"));
+
             bundles.Add(new StyleBundle("~/Content/r_asmc_ms_reged_list").Include(
                       "~/Content/css/style.css",
                       "~/Content/css/index.css",
@@ -132,6 +144,11 @@ namespace Seruichi.RealEstate.Web
             bundles.Add(new ScriptBundle("~/bundles/r_template").Include(
                    "~/Scripts/r_template.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/r_statistic").Include(
+                   "~/Scripts/r_statistic.js",
+                   "~/Content/bootstrap/bootstrap.min.js",
+                   "~/Content/scripts/sidebar.js"));
+            
         }
     }
 }

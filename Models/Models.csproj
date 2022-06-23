@@ -52,6 +52,7 @@
     <Compile Include="Common\ValidationModel.cs" />
     <Compile Include="RealEstate\RealEstate_L_Log_Model.cs" />
     <Compile Include="RealEstate\r_asmc\r_asmc_Region.cs" />
+    <Compile Include="RealEstate\r_asmc_ms_list_map\r_asmc_ms_list_mapModel.cs" />
     <Compile Include="RealEstate\r_asmc_ms_map_add\r_asmc_ms_map_addModel.cs" />
     <Compile Include="RealEstate\r_asmc_railway\r_asmc_railwayModel.cs" />
     <Compile Include="RealEstate\r_asmc_set_area_check_tab\r_asmc_set_area_check_tabModel.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="RealEstate\r_issueslist\r_issueslistModel.cs" />
     <Compile Include="RealEstate\r_login\r_loginModel.cs" />
     <Compile Include="RealEstate\r_staff\r_staffModel.cs" />
+    <Compile Include="RealEstate\r_statistic\r_statisticModel.cs" />
     <Compile Include="RealEstate\r_template\r_templateModel.cs" />
     <Compile Include="RealEstate\r_temp_mes\r_temp_mesModel.cs" />
     <Compile Include="Seller\a_assess_dModel.cs" />

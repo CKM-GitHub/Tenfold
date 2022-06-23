@@ -46,7 +46,7 @@ namespace Seruichi.BL.Tenfold.t_seller_profile
             validator.CheckIsHalfWidth("Fax", model.Fax, 15, RegexFormat.Number);
             //メールアドレス
             validator.CheckSellerMailAddress("MailAddress", model.MailAddress);
-            if (!new a_loginBL().CheckDuplicateMailAddresses(model.MailAddress))
+            if (!CheckDuplicateMailAddresses(model.SellerCD, model.MailAddress))
             {
                 validator.AddValidationResult("MailAddress", "E203"); //既に登録済みのメールアドレスです
             }
@@ -64,6 +64,27 @@ namespace Seruichi.BL.Tenfold.t_seller_profile
             }
 
             return validator.GetValidationResult();
+        }
+
+        public bool CheckDuplicateMailAddresses(string sellerCD, string mailAddress)
+        {
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_a_login_Select_M_Seller_All");
+            if (dt.Rows.Count == 0)
+            {
+                return true;
+            }
+
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+
+            foreach(DataRow row in dt.Rows)
+            {
+                if (crypt.DecryptFromBase64(row.Field<string>("MailAddress"), decryptionKey) == mailAddress && row["SellerCD"].ToString() != sellerCD)
+                    return false;
+            }
+
+            return true;
         }
 
         public Dictionary<string, string> ValidatePW(t_seller_profileModel model)
@@ -215,11 +236,12 @@ namespace Seruichi.BL.Tenfold.t_seller_profile
         {
             AESCryption crypt = new AESCryption();
             string cryptionKey = StaticCache.GetDataCryptionKey();
+            string hashedPassword = new PasswordHash().GeneratePasswordHash(model.MailAddress, model.Password);
             var sqlParams = new SqlParameter[]
             {
                 new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD.ToStringOrNull() },
                 new SqlParameter("@SellerName", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.SellerName, cryptionKey).ToStringOrNull() },
-                new SqlParameter("@Password", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.Password, cryptionKey).ToStringOrNull() },
+                new SqlParameter("@Password", SqlDbType.VarChar){ Value = hashedPassword.ToStringOrNull() },
                 new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.LoginID.ToStringOrNull() },
                 new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.LoginName.ToStringOrNull() },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress }

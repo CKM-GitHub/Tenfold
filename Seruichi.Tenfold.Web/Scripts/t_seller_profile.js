@@ -179,10 +179,10 @@ function addEvents() {
             $pw.getInvalidItems().get(0).focus();
             return false;
         }
-        debugger;
         var model = {
             SellerCD: common.getUrlParameter('SellerCD'),
             SellerName: $('#SellerName').val(),
+            MailAddress: $('#MailAddress').val(),
             Password: $('#txtPassword').val(),
             ConfirmPassword: $('#txtConfirmPassword').val()
         };
