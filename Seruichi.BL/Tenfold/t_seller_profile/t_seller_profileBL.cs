@@ -236,11 +236,12 @@ namespace Seruichi.BL.Tenfold.t_seller_profile
         {
             AESCryption crypt = new AESCryption();
             string cryptionKey = StaticCache.GetDataCryptionKey();
+            string hashedPassword = new PasswordHash().GeneratePasswordHash(model.MailAddress, model.Password);
             var sqlParams = new SqlParameter[]
             {
                 new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD.ToStringOrNull() },
                 new SqlParameter("@SellerName", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.SellerName, cryptionKey).ToStringOrNull() },
-                new SqlParameter("@Password", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.Password, cryptionKey).ToStringOrNull() },
+                new SqlParameter("@Password", SqlDbType.VarChar){ Value = hashedPassword.ToStringOrNull() },
                 new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.LoginID.ToStringOrNull() },
                 new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.LoginName.ToStringOrNull() },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress }

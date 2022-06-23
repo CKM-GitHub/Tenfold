@@ -170,12 +170,15 @@
   <ItemGroup>
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\bootstrap\bootstrap.min.js" />
+    <Content Include="Content\css\chat.css" />
     <Content Include="Content\css\Clients-UI.css" />
     <Content Include="Content\css\Contact-Form-Clean.css" />
     <Content Include="Content\css\errorpage.css" />
+    <Content Include="Content\css\fileup.min.css" />
     <Content Include="Content\css\fileuploads.css" />
     <Content Include="Content\css\index.css" />
     <Content Include="Content\css\japanmap.css" />
+    <Content Include="Content\css\jquery.dataTables.min.css" />
     <Content Include="Content\css\loading.css" />
     <Content Include="Content\css\Login-Form-Clean.css" />
     <Content Include="Content\css\profileimg.css" />

@@ -6,6 +6,9 @@ $(function () {
     _url.generate_CSV = common.appPath + '/t_reale_list/Generate_CSV';
     _url.InsertL_Log = common.appPath + '/t_reale_list/InsertM_Mansion_L_Log';
     addEvents();
+    $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
+    $('#t_reale_list').addClass('font-bold text-underline');
+    
 });
 
 function setValidation() {
@@ -233,7 +236,9 @@ function l_logfunction(id) {
             if (result && result.isOK) {
                 //window.location.href = common.appPath + '/t_reale_profile/Index?RealeCD=' + model.RealeCD;
                 //window.location.href = '/t_seller_assessment/Index';
-                alert("https://www.seruichi.com/t_reale_profile?RealeCD=" + model.RealECD);
+               // alert("https://www.seruichi.com/t_reale_profile?RealeCD=" + model.RealECD);
+
+                window.location.href = common.appPath + '/t_reale_profile/Index?RealECD=' + model.RealECD;
             }
             if (result && !result.isOK) {
 
