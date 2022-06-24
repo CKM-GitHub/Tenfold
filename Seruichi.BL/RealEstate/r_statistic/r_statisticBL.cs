@@ -12,14 +12,13 @@ namespace Seruichi.BL.RealEstate.r_statistic
 {
     public class r_statisticBL
     {
+        ValidatorAllItems validator = new ValidatorAllItems();
         public Dictionary<string, string> ValidateAll(r_statisticModel model, List<string> lst_checkBox)
         {
-            ValidatorAllItems validator = new ValidatorAllItems();
             validator.CheckDate("StartDate", model.StartDate);//E108
             validator.CheckDate("EndDate", model.EndDate);//E108
 
             validator.CheckCompareDate("StartDate", model.StartDate, model.EndDate);//E111
-            validator.CheckCompareDate("EndDate", model.StartDate, model.EndDate);//E111
 
             CheckDateDifference("StartDate", model.StartDate, model.EndDate, model.ryudo);
 
@@ -32,7 +31,23 @@ namespace Seruichi.BL.RealEstate.r_statistic
         {
             DateTime fdate = (DateTime)fromdate.ToDateTime();
             DateTime tdate = (DateTime)todate.ToDateTime();
-
+            if(ryudo == 1)
+            {
+                TimeSpan ts = tdate - fdate;
+                if(ts.Days > 30)
+                    validator.AddValidationResult(elementId, "E116");
+            }
+            else if(ryudo == 2)
+            {
+                TimeSpan ts = tdate - fdate;
+                if (ts.Days / 7 > 30)
+                    validator.AddValidationResult(elementId, "E117");
+            }
+            else if (ryudo == 3)
+            {
+                if (((tdate.Year - fdate.Year) * 12) + tdate.Month - fdate.Month > 24)
+                    validator.AddValidationResult(elementId, "E118");
+            }
         }
 
 

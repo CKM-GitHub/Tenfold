@@ -19,7 +19,7 @@ namespace Seruichi.RealEstate.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> get_issueslist_Data(r_statisticModel model)
+        public async Task<ActionResult> get_r_statistic_displayData(r_statisticModel model)
         {
             r_statisticBL bl = new r_statisticBL();
             List<string> chk_lst = new List<string>();
