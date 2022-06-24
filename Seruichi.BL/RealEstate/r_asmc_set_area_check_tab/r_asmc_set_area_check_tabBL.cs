@@ -72,28 +72,30 @@ namespace Seruichi.BL.RealEstate.r_asmc_set_area_check_tab
                     //ColHeader
                     if (i == max.RowNo)
                     {
-                        if (dr["ColNo"].ToInt32(0) == max.ColNo)
-                        {
-                            result.ColHeader.Add(new string[] { dr["DistanceFrom"].ToInt32(0).ToString(), "～" });
-                        }
-                        else
-                        {
-                            result.ColHeader.Add(new string[] { dr["DistanceTo"].ToInt32(0).ToString(), "以内" });
-                        }
+                        //if (dr["ColNo"].ToInt32(0) == max.ColNo)
+                        //{
+                        //    result.ColHeader.Add(new string[] { dr["DistanceFrom"].ToInt32(0).ToString(), "～" });
+                        //}
+                        //else
+                        //{
+                        //    result.ColHeader.Add(new string[] { dr["DistanceTo"].ToInt32(0).ToString(), "以内" });
+                        //}
+                        result.ColHeader.Add(new string[] { dr["DistanceTo"].ToInt32(0).ToString(), "" });
                     }
 
                     //RowHeader
                     if (rowHeader == null)
                     {
                         rowHeader = new string[2];
-                        if (i == max.RowNo)
-                        {
-                            rowHeader = new string[] { dr["AgeFrom"].ToInt32(0).ToString(), "～" };
-                        }
-                        else
-                        {
-                            rowHeader = new string[] { dr["AgeTo"].ToInt32(0).ToString(), "以内" };
-                        }
+                        //if (i == max.RowNo)
+                        //{
+                        //    rowHeader = new string[] { dr["AgeFrom"].ToInt32(0).ToString(), "～" };
+                        //}
+                        //else
+                        //{
+                        //    rowHeader = new string[] { dr["AgeTo"].ToInt32(0).ToString(), "以内" };
+                        //}
+                        rowHeader = new string[] { dr["AgeTo"].ToInt32(0).ToString(), "" };
                     }
 
                     //Rate
@@ -147,28 +149,30 @@ namespace Seruichi.BL.RealEstate.r_asmc_set_area_check_tab
                     //ColHeader
                     if (i == max.RowNo)
                     {
-                        if (dr["ColNo"].ToInt32(0) == max.ColNo)
-                        {
-                            result.ColHeader.Add(new string[] { dr["DistanceFrom"].ToInt32(0).ToString(), "～" });
-                        }
-                        else
-                        {
-                            result.ColHeader.Add(new string[] { dr["DistanceTo"].ToInt32(0).ToString(), "以内" });
-                        }
+                        //if (dr["ColNo"].ToInt32(0) == max.ColNo)
+                        //{
+                        //    result.ColHeader.Add(new string[] { dr["DistanceFrom"].ToInt32(0).ToString(), "～" });
+                        //}
+                        //else
+                        //{
+                        //    result.ColHeader.Add(new string[] { dr["DistanceTo"].ToInt32(0).ToString(), "以内" });
+                        //}
+                        result.ColHeader.Add(new string[] { dr["DistanceTo"].ToInt32(0).ToString(), "" });
                     }
 
                     //RowHeader
                     if (rowHeader == null)
                     {
                         rowHeader = new string[2];
-                        if (i == max.RowNo)
-                        {
-                            rowHeader = new string[] { dr["AgeFrom"].ToInt32(0).ToString(), "～" };
-                        }
-                        else
-                        {
-                            rowHeader = new string[] { dr["AgeTo"].ToInt32(0).ToString(), "以内" };
-                        }
+                        //if (i == max.RowNo)
+                        //{
+                        //    rowHeader = new string[] { dr["AgeFrom"].ToInt32(0).ToString(), "～" };
+                        //}
+                        //else
+                        //{
+                        //    rowHeader = new string[] { dr["AgeTo"].ToInt32(0).ToString(), "以内" };
+                        //}
+                        rowHeader = new string[] { dr["AgeTo"].ToInt32(0).ToString(), "" };
                     }
 
                     //Rate

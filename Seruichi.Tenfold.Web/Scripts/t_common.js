@@ -294,9 +294,10 @@ function Bind_Modal_DetailData(result, DeepAssDateTime) {
 
 //Start SubMenu
 $(function () {
+    BindReturnURL();
     Bind_SubMennuURL();
     Bind_Company_Data();         //Bind Company Info Data to the title part of the page
-
+    
     $('ul li a').each(function (idx, a) {
         if ($(a).prop('href') == window.location.href)
             $(this).addClass('active');
@@ -311,6 +312,23 @@ $(function () {
         window.location.reload();
     });
 })
+function BindReturnURL()
+{
+    $('.page-reale-url').click(function (e) {
+
+        if ($('#_PREVIOUS_REALURL').val() != '') {
+            if (document.referrer.trim().length != 0)
+            this.href = $('#_PREVIOUS_REALURL').val();
+        }
+    });
+    $('.page-sellerasm-url').click(function (e) {
+
+        if ($('#_PREVIOUS_SELLERURL').val() != '') {
+            if (document.referrer.trim().length != 0)
+            this.href = $('#_PREVIOUS_SELLERURL').val();
+        }
+    });
+}
 function Bind_SubMennuURL() {
     var target;
     //for t_real
