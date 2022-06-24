@@ -1,9 +1,12 @@
 ﻿const _url = {};
 $(function () {
+    _url.checkAll = common.appPath + '/r_contact/CheckAll';
     _url.registerContact = common.appPath + '/r_contact/RegisterContact';
+
 
     setValidation();
     addEvents();
+    $('#ContactName').focus();
 });
 function setValidation() {
     $('#ContactName')
@@ -62,7 +65,19 @@ function addEvents() {
         const model = Object.fromEntries(fd);
         model.ContactType = $('#ContactTypeCD option:selected').text();
 
-        Bind_Modal(model);  
+        common.callAjaxWithLoading(_url.checkAll, model, this, function (result) {
+            if (result && result.isOK) {
+                //sucess
+                Bind_Modal(model);
+            }
+            if (result && result.data) {
+                //error
+                common.setValidationErrors(result.data);
+                common.setFocusFirstError($form);
+            }
+        });
+
+        
     });
 
     $('#btn-modal-check').click(function () {
