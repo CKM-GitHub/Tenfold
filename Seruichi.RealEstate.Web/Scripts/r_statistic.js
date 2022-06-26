@@ -1,4 +1,4 @@
-﻿_url = '';
+﻿const _url = {};
 
 $(function () {
     _url.get_r_statistic_displayData = common.appPath + '/r_statistic/get_r_statistic_displayData';
@@ -228,6 +228,11 @@ function addEvents() {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
+        if (!check_DateDifference()) {
+            $form.getInvalidItems().get(0).focus();
+            return false;
+        }
+
         $('#canvas').empty();
         var model = {
             dac_route: $('#dac_route').val(),
@@ -241,14 +246,57 @@ function addEvents() {
             sd_route: $('#sd_route').val(),
             sd_apartment: $('#sd_apartment').val(),
             ryudo: $('input[name=ryudo]:checked', '#form1').val(),
-            StartDate: $('#StartDate').val(),
-            EndDate: $('#EndDate').val(),
+            StartDate: $('#sdate').text(),
+            EndDate: $('#edate').text(),
         }
         get_r_statistic_Data(model, $form);
     });
 }
 
+function check_DateDifference() {
+    var sdate = '';
+    var edate = '';
+    if ($('input[name=ryudo]:checked', '#form1').val() == 1) {
+        sdate = new Date($('#StartDate').val());
+        edate = new Date($('#EndDate').val());
+        if (Math.ceil(Math.abs(edate - sdate) / (1000 * 60 * 60 * 24)) > 30) {
+            $('#EndDate').showError(common.getMessage('E116'));
+            return false;
+        }
+        else {
+            $('#sdate').text($('#StartDate').val());
+            $('#edate').text($('#EndDate').val());
+        }
+    }
+    else if ($('input[name=ryudo]:checked', '#form1').val() == 2) {
+        sdate = new Date($('#StartDate').val());
+        edate = new Date($('#EndDate').val());
+        if (Math.abs(Math.round(((edate - sdate) / 1000) / (60 * 60 * 24 * 7))) > 30) {
+            $('#EndDate').showError(common.getMessage('E117'));
+            return false;
+        }
+        else {
+            $('#sdate').text($('#StartDate').val());
+            $('#edate').text($('#EndDate').val());
+        }
+    }
+    else if ($('input[name=ryudo]:checked', '#form1').val() == 3) {
+        sdate = new Date($('#StartDate').val() + '-01');
+        edate = new Date($('#EndDate').val() + '-' + new Date(parseInt($('#EndDate').val().slice(0, 4)), parseInt($('#EndDate').val().slice(5, 7)), 0).getDate());
+        if ((((edate.getFullYear() - sdate.getFullYear()) * 12) + edate.getMonth() - sdate.getMonth()) > 24) {
+            $('#EndDate').showError(common.getMessage('E117'));
+            return false;
+        }
+        else {
+            $('#sdate').text($('#StartDate').val());
+            $('#edate').text($('#EndDate').val() + '-' + new Date(parseInt($('#EndDate').val().slice(0, 4)), parseInt($('#EndDate').val().slice(5, 7)), 0).getDate());
+        }
+    }
+    return true;
+}
+
 function get_r_statistic_Data(model, $form) {
+    debugger;
     common.callAjaxWithLoading(_url.get_r_statistic_displayData, model, this, function (result) {
         if (result && result.isOK) {
             bind_r_statistic_Data(result.data);

@@ -34,7 +34,7 @@ namespace Seruichi.BL.RealEstate.r_statistic
             if(ryudo == 1)
             {
                 TimeSpan ts = tdate - fdate;
-                if(ts.Days > 30)
+                if(ts.TotalDays > 30)
                     validator.AddValidationResult(elementId, "E116");
             }
             else if(ryudo == 2)
