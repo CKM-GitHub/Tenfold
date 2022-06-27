@@ -72,7 +72,8 @@ namespace Seruichi.BL.RealEstate.r_statistic
                     new SqlParameter("@sd_apartment", SqlDbType.TinyInt){ Value = model.sd_apartment.ToByte(0) },
                     new SqlParameter("@ryudo", SqlDbType.TinyInt){ Value = model.ryudo.ToByte(0) },
                     new SqlParameter("@StartDate", SqlDbType.VarChar){ Value = model.StartDate.ToStringOrNull() },
-                    new SqlParameter("@EndDate", SqlDbType.VarChar){ Value = model.EndDate.ToStringOrNull() }
+                    new SqlParameter("@EndDate", SqlDbType.VarChar){ Value = model.EndDate.ToStringOrNull() },
+                    new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToString() }
                 };
 
                 DBAccess db = new DBAccess();

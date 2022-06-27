@@ -43,18 +43,6 @@ function bind() {
     randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
     randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
     ];
-    var line6 = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    ];
-    var line7 = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    ];
-    var line8 = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    ];
 
     var MONTHS = ["2022年1月26日", "2022年1月27日", "2022年1月28日", "2022年1月29日", "2022年1月30日", "2022年1月31日", "2022年2月1日",
         "2022年2月2日", "2022年2月3日", "2022年2月4日", "2022年2月5日", "2022年2月6日"
@@ -296,7 +284,6 @@ function check_DateDifference() {
 }
 
 function get_r_statistic_Data(model, $form) {
-    debugger;
     common.callAjaxWithLoading(_url.get_r_statistic_displayData, model, this, function (result) {
         if (result && result.isOK) {
             bind_r_statistic_Data(result.data);
