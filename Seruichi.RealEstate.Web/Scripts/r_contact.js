@@ -46,7 +46,7 @@ function addEvents() {
     common.bindValidationEvent('#form1', ':not(#ContactPhone)');
 
     $('#ContactPhone').on('blur', function (e) {
-       // customValidation_checkPhone(this);
+        customValidation_checkPhone(this);
         return common.checkValidityInput(this);
     });
 
@@ -129,6 +129,17 @@ function customValidation_checkContactAddress(e) {
         $this.showError(common.getMessage('E202'));
         return false;
     }
+
+    return true;
+}
+
+function customValidation_checkPhone(e) {
+    const $this = $(e)
+
+    let inputValue = $this.val();
+    inputValue = inputValue.replace(/-/g, "")
+    inputValue = inputValue.replace(/－/g, "")
+    $this.val(inputValue);
 
     return true;
 }
