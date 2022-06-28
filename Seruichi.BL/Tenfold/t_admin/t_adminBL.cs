@@ -47,7 +47,7 @@ namespace Seruichi.BL.Tenfold.t_admin
                 validator.CheckRequired("TenStaffName", model.TenStaffName);//E101
 
                 validator.CheckMaxLenght("TenStaffCD", model.TenStaffCD, 10);  //E105
-                validator.CheckMaxLenght("TenStaffPW", model.TenStaffPW, 10);  //E105
+                validator.CheckMaxLenght("TenStaffPW", model.TenStaffPW, 30);  //E105
                 validator.CheckMaxLenght("TenStaffName", model.TenStaffName, 15);  //E105
 
                 validator.CheckIsOnlyOneCharacter("TenStaffCD", model.TenStaffCD);  //E104
@@ -59,7 +59,7 @@ namespace Seruichi.BL.Tenfold.t_admin
             foreach (var item in model.lst_AdminModel)
             {
                 validator.CheckRequired("txtpw_" + i, item.TenStaffPW);
-                validator.CheckMaxLenght("txtpw_"+i, item.TenStaffPW, 10); 
+                validator.CheckMaxLenght("txtpw_"+i, item.TenStaffPW, 30); 
                 validator.CheckIsOnlyOneCharacter("txtpw_" + i, item.TenStaffPW);
 
                 validator.CheckRequired("txtname_" + i, item.TenStaffName);

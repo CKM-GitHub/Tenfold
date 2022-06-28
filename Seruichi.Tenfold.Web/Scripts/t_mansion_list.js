@@ -8,12 +8,17 @@ $(function () {
     _url.generate_CSV3 = common.appPath + '/t_mansion_list/Generate_CSV3';
     _url.InsertL_Log = common.appPath + '/t_mansion_list/InsertM_Mansion_L_Log';
     addEvents();
+    $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
+    $('#t_mansion_list').addClass('font-bold text-underline');
+    $('#txtApartment').focus();
+    
 });
 
 function setValidation() {
 
     $('#txtApartment')
         .addvalidation_errorElement("#errorApartment")
+        .addvalidation_singlebyte_doublebyte()
         .addvalidation_doublebyte();
     
     $('#StartNum')

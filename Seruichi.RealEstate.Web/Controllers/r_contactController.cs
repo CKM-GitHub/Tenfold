@@ -25,6 +25,24 @@ namespace Seruichi.RealEstate.Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult CheckAll(r_contactModel model)
+        {
+            if (model == null)
+            {
+                return BadRequestResult();
+            }
+
+            r_contactBL bl = new r_contactBL();
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+
+            return OKResult();
+        }
+
         // Ajax: RegisterContact
         [HttpPost]
         public ActionResult RegisterContact(r_contactModel model)

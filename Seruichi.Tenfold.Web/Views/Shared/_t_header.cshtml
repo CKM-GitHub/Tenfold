@@ -1,4 +1,48 @@
 ﻿<input type="hidden" id="_RequestVerificationToken" value="@SessionAuthenticationHelper.GetVerificationToken()" />
+
+@{ 
+    var pgSeller = new string[] { "/t_seller_mansion/index", "/t_seller_list/index", "/t_reale_purchase/index", "/t_reale_asmhis/index" };
+    var pgReal = new string[] { "/t_seller_mansion/index", "/t_seller_assessment/index" };
+    var sellerPre = "";
+    var realPre = "";
+     
+
+    var _pURL = "";
+    var _cURL = "";
+    if (HttpContext.Current.Session["PREVIOUS_URL"] != null)
+    {
+        _pURL = HttpContext.Current.Session["PREVIOUS_URL"].ToString();
+        if (_pURL.Contains("?"))
+        {
+            _pURL = _pURL.Split('?')[0];
+        }
+    }
+    if (HttpContext.Current.Session["CURRENT_URL"] != null)
+    {
+        _cURL = HttpContext.Current.Session["CURRENT_URL"].ToString();
+        if (_cURL.Contains("?"))
+        {
+            _cURL = _cURL.Split('?')[0];
+        }
+    }  
+    
+    if (pgSeller.Contains(_pURL) && _cURL.Contains("/t_seller_assessment/index"))
+    {
+        HttpContext.Current.Session["RETURN_SELLERURL"] = HttpContext.Current.Session["PREVIOUS_URL"].ToString();
+    }
+    else if (pgReal.Contains(_pURL) && _cURL.Contains("/t_reale_purchase/index"))
+    {
+        HttpContext.Current.Session["RETURN_REALURL"] = HttpContext.Current.Session["PREVIOUS_URL"].ToString();
+    }
+
+    sellerPre = HttpContext.Current.Session["RETURN_SELLERURL"]== null ? "" : HttpContext.Current.Session["RETURN_SELLERURL"].ToString();
+    realPre = HttpContext.Current.Session["RETURN_REALURL"] == null ? "" : HttpContext.Current.Session["RETURN_REALURL"].ToString();
+
+}
+<input type="hidden" id="_PREVIOUS_SELLERURL" value="@sellerPre" />
+<input type="hidden" id="_PREVIOUS_REALURL" value="@realPre" />
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-white px-0 py-3 border-bottom  fixed-top">
     <div class="container-fluid">
         <!-- Logo -->
@@ -36,11 +80,11 @@
                     <a class="nav-item nav-link" href="@Url.Action("Logout", "t_login")">ログアウト</a>
                 </div>
                 <!-- Action
-    <div class="d-flex align-items-lg-center mt-3 mt-lg-0">
-        <a href="#" class="btn btn-sm btn-primary w-full w-lg-auto">
+                <div class="d-flex align-items-lg-center mt-3 mt-lg-0">
+                    <a href="#" class="btn btn-sm btn-primary w-full w-lg-auto">
 
-        </a>
-    </div>-->
+                    </a>
+                </div>-->
             </div>
             <div class="navbar-nav d-flex">
                 <div class="nav-item">

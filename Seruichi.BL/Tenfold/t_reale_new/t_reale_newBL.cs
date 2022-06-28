@@ -207,6 +207,9 @@ namespace Seruichi.BL.Tenfold.t_reale_new
             validator.CheckRequired("txtConfirmPassword", model.REPassword);
             validator.CheckComparePassword("txtConfirmPassword", model.Password, model.REPassword);
 
+            if(model.Status == "update")
+                validator.CheckSelectionRequired("NextCourseCD", model.NextCourseCD.ToString());
+
             ////M_Pref
             string errorcd = "";
             if (!string.IsNullOrEmpty(model.ZipCode1) || !string.IsNullOrEmpty(model.ZipCode2))
@@ -276,5 +279,72 @@ namespace Seruichi.BL.Tenfold.t_reale_new
                 return false;
             }
         }
+
+        public DataTable Get_t_Reale_Profile_Data(string RealECD)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = RealECD.ToStringOrNull() }
+            };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_reale_profile_Select_data_by_realecd", sqlParams);
+            return dt;
+        }
+        public bool Update_t_reale_profile(t_reale_newModel model, out string msgid)
+        {
+            msgid = "";
+
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull() },
+                new SqlParameter("@REName", SqlDbType.VarChar){ Value = model.REName.ToStringOrNull() },
+                new SqlParameter("@REKana", SqlDbType.VarChar){ Value = model.REKana.ToStringOrNull() },
+                new SqlParameter("@ZipCode1", SqlDbType.VarChar){ Value = model.ZipCode1.ToStringOrNull() },
+                new SqlParameter("@ZipCode2", SqlDbType.VarChar){ Value = model.ZipCode2.ToStringOrNull() },
+                new SqlParameter("@PrefCD", SqlDbType.VarChar){ Value = model.PrefCD.ToStringOrNull() },
+                new SqlParameter("@PrefName", SqlDbType.VarChar){ Value = model.PrefName.ToStringOrNull() },
+                new SqlParameter("@CityName", SqlDbType.VarChar){ Value = model.CityName.ToStringOrNull() },
+                new SqlParameter("@TownName", SqlDbType.VarChar){ Value = model.TownName.ToStringOrNull() },
+                new SqlParameter("@Address1", SqlDbType.VarChar){ Value = model.Address1.ToStringOrNull() },
+                new SqlParameter("@HousePhone", SqlDbType.VarChar){ Value = model.HousePhone.ToStringOrNull() },
+                new SqlParameter("@Fax", SqlDbType.VarChar){ Value = model.Fax.ToStringOrNull() },
+                new SqlParameter("@MailAddress", SqlDbType.VarChar){ Value = model.MailAddress.ToStringOrNull() },
+                new SqlParameter("@President", SqlDbType.VarChar){ Value = model.President.ToStringOrNull() },
+                new SqlParameter("@PICName", SqlDbType.VarChar){ Value = model.PICName.ToStringOrNull() },
+                new SqlParameter("@PICKana", SqlDbType.VarChar){ Value = model.PICKana.ToStringOrNull() },
+                new SqlParameter("@LicenceNo1", SqlDbType.VarChar){ Value = model.LicenceNo1Name.ToStringOrNull() },
+                new SqlParameter("@LicenceNo2", SqlDbType.Int){ Value = model.LicenceNo2.ToInt32(0) },
+                new SqlParameter("@LicenceNo3", SqlDbType.VarChar){ Value = model.LicenceNo3.ToStringOrNull() },
+                new SqlParameter("@CompanyHoliday", SqlDbType.VarChar){ Value = model.CompanyHoliday.ToStringOrNull() },
+                new SqlParameter("@BusinessHours", SqlDbType.VarChar){ Value = model.BusinessHours.ToStringOrNull() },
+                new SqlParameter("@SourceBankCD", SqlDbType.VarChar){ Value = model.SourceBankCD.ToStringOrNull() },
+                new SqlParameter("@SourceBranchCD", SqlDbType.VarChar){ Value = model.SourceBranchCD.ToStringOrNull() },
+                new SqlParameter("@SourceAccountType", SqlDbType.TinyInt){ Value = model.SourceAccountType.ToByte(0) },
+                new SqlParameter("@SourceAccount", SqlDbType.VarChar){ Value = model.SourceAccount.ToStringOrNull() },
+                new SqlParameter("@SourceAccountName", SqlDbType.VarChar){ Value = model.SourceAccountName.ToStringOrNull() },
+                new SqlParameter("@Remark", SqlDbType.VarChar){ Value = model.Remark.ToStringOrNull() },
+                new SqlParameter("@JoinedDate", SqlDbType.VarChar){ Value = model.JoinedDate.ToStringOrNull() },
+                new SqlParameter("@InitialFee", SqlDbType.Money){ Value = model.InitialFee.ToDecimal(0) },
+                new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.Operator.ToStringOrNull() },
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value =  model.LoginName.ToStringOrNull()},
+                new SqlParameter("@Password", SqlDbType.VarChar){ Value = model.Password.ToStringOrNull() },
+                new SqlParameter("@CourseCD", SqlDbType.VarChar){ Value = model.CourseCD.ToStringOrNull() },
+                new SqlParameter("@NextCourseCD", SqlDbType.VarChar){ Value = model.NextCourseCD.ToStringOrNull() }
+            };
+
+            try
+            {
+                DBAccess db = new DBAccess();
+                return db.InsertUpdateDeleteData("pr_t_reale_profile_Update", false, sqlParams);
+            }
+            catch (ExclusionException)
+            {
+                //msgid = "S004"; //他端末エラー
+                return false;
+            }
+        }
+        
     }
 }

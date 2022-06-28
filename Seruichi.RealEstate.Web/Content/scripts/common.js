@@ -52,6 +52,7 @@ const regexPattern = {
     singlebyte_numberAlpha: "^[0-9a-zA-Z]+$",
     moeney: "^[0-9,]+$",
     numeric: "^[0-9.]+$",
+    monthformat: /^\d{4}-\d{2}$/,
     dateformat: /^\d{4}-\d{2}-\d{2}$/,
     doublebyteKana: "^[ァ-ヶー　]+$",
     singlebyte_number_minus:"^[0-9-]+$",
@@ -563,14 +564,22 @@ const common = {
 
 
             if (isDate) {
-                if (!inputValue.match(regexPattern.dateformat)) {
-                    $ctrl.showError(this.getMessage('E108'));
-                    return;
+                if ($ctrl.attr('type') == 'date') {
+                    if (!inputValue.match(regexPattern.dateformat)) {
+                        $ctrl.showError(this.getMessage('E108'));
+                        return;
+                    }
+                }
+                else {
+                    if (!inputValue.match(regexPattern.monthformat)) {
+                        $ctrl.showError(this.getMessage('E108'));
+                        return;
+                    }
                 }
             }
 
             if (isDateCompare) {
-                if (!common.compareDate($("#StartDate").val(), $("#EndDate").val())) {
+                if (!common.compareDate($ctrl.attr('type'), $("#StartDate").val(), $("#EndDate").val())) {
                     $("#StartDate").showError(this.getMessage('E111'));
                     $("#EndDate").showError(this.getMessage('E111'));
                     $("#StartDate").focus();
@@ -622,7 +631,11 @@ const common = {
         return true;
     },
 
-    compareDate: function compareTwoDate(d1, d2) {
+    compareDate: function compareTwoDate(type, d1, d2) {
+        if (type == 'month') {
+            d1 = d1 + '-01';
+            d2 = d2 + '-' + new Date(parseInt(d2.slice(0, 4)), parseInt(d2.slice(5, 7)), 0).getDate();
+        }
         const date1 = new Date(d1);
         const date2 = new Date(d2);
         let success = true;

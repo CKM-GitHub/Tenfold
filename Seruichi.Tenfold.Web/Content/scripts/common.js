@@ -354,6 +354,20 @@ const common = {
          });        
         return rval;
     },
+    getFullWithOneCharactertwoByteCount: function mbStrWidth(input) {
+        let len = 0;
+        for (let i = 0; i < input.length; i++) {
+            let code = input.charCodeAt(i);
+            if ((code >= 0x0020 && code <= 0x1FFF) || (code >= 0xFF61 && code <= 0xFF9F)) {
+                len += 1;
+            } else if ((code >= 0x2000 && code <= 0xFF60) || (code >= 0xFFA0)) {
+                len += 2;
+            } else {
+                len += 0;
+            }
+        }
+        return len;
+    },
 
     checkValidityInput: function checkValidityInput(ctrl) {
         //debugger
@@ -438,11 +452,12 @@ const common = {
             }
         }
 
-        if (inputValue) {
+        if (inputValue) {            
             if (isSingleDoubleByte) {
                 const maxLength = $ctrl.attr('maxlength');
                 if (maxLength) {
-                    const byteLength = this.getStringByteCount(inputValue);
+                    /*const byteLength = this.getStringByteCount(inputValue);*/
+                    const byteLength = this.getFullWithOneCharactertwoByteCount(inputValue);
                     if (byteLength > parseInt(maxLength)) {
                         $ctrl.showError(this.getMessage('E105'));
                         return;

@@ -143,6 +143,21 @@ namespace Seruichi.Tenfold.Web.Controllers
             }
             return ErrorResult();
         }
-        
+
+        [HttpPost]
+        public ActionResult CheckAll(t_adminModel model)
+        {
+            if (model == null)
+            {
+                return BadRequestResult();
+            }
+            t_adminBL bl = new t_adminBL();
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+            return OKResult();
+        }
     }
 }

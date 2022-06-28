@@ -59,6 +59,7 @@
     <Compile Include="RealEstate\r_contact\r_contactBL.cs" />
     <Compile Include="RealEstate\r_dashboard\r_dashboardBL.cs" />
     <Compile Include="RealEstate\r_asmc_address\r_asmc_addressBL.cs" />
+    <Compile Include="RealEstate\r_invoice\r_invoiceBL.cs" />
     <Compile Include="RealEstate\r_issueslist\r_issueslistBL.cs" />
     <Compile Include="RealEstate\r_login\r_loginBL.cs" />
     <Compile Include="RealEstate\r_staff\r_staffBL.cs" />
@@ -123,6 +124,7 @@
     <Content Include="Database\StoredProcedure\pr_a_index_Select_Prefectures_by_ZipCode.sql" />
     <Content Include="Database\StoredProcedure\pr_a_index_Select_Towns_by_ZipCode.sql" />
     <Content Include="Database\StoredProcedure\pr_a_login_Insert_D_Certification.sql" />
+    <Content Include="Database\StoredProcedure\pr_a_login_Select_M_Seller_CheckInvalid.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_ahis_Insert_L_Log.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_ahis_Select_D_AssReqProgress.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_taikai_Update_M_Seller_Data.sql" />

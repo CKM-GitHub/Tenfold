@@ -116,12 +116,13 @@ namespace Seruichi.BL.Tenfold.t_seller_new
         {
             AESCryption crypt = new AESCryption();
             string cryptionKey = StaticCache.GetDataCryptionKey();
+            string hashedPassword = new PasswordHash().GeneratePasswordHash(model.MailAddress, model.Password);
             var sqlParams = new SqlParameter[]
             {
                 new SqlParameter("@SellerName", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.SellerName, cryptionKey).ToStringOrNull() },
                 new SqlParameter("@SellerKana", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.SellerKana, cryptionKey).ToStringOrNull() },
                 new SqlParameter("@Birthday", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.Birthday, cryptionKey).ToStringOrNull() },
-                new SqlParameter("@Password", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.Password, cryptionKey).ToStringOrNull() },
+                new SqlParameter("@Password", SqlDbType.VarChar){ Value = hashedPassword.ToStringOrNull() },
                 new SqlParameter("@MemoText", SqlDbType.VarChar){ Value = model.MemoText.ToStringOrNull() },
                 new SqlParameter("@ZipCode1", SqlDbType.VarChar){ Value = model.ZipCode1.ToStringOrNull() },
                 new SqlParameter("@ZipCode2", SqlDbType.VarChar){ Value = model.ZipCode2.ToStringOrNull() },

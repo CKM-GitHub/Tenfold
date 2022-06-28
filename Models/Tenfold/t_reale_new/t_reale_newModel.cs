@@ -45,8 +45,11 @@ namespace Models.Tenfold.t_reale_new
         public string CourseCD { get; set; }
         public string CourseName { get; set; }
         public string NextCourseCD { get; set; }
-
+        public string NextCourseName { get; set; }
+        public string InvoiceDate { get; set; }
         public string LoginName { get; set; }
+        public string Status { get; set; }
+        public string RealECD { get; set; }
 
     }
 }

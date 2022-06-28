@@ -2,6 +2,7 @@
 $(function () {
     _url.checkTenStaffCD = common.appPath + '/t_admin/CheckTenStaffCD';
     _url.save_M_TenfoldStaff = common.appPath + '/t_admin/Save_M_TenfoldStaff';
+    _url.checkAll = common.appPath + '/t_admin/CheckAll';
     _url.Check_Insert_OR_Update_TAdmin = common.appPath + '/t_admin/Check_Insert_OR_Update_t_admin';
 
     setValidation();
@@ -59,7 +60,7 @@ function addEvents() {
             $('#TenStaffPW')
                 .addvalidation_errorElement("#errorTenStaffPW")
                 .addvalidation_reqired()
-                .addvalidation_maxlengthCheck(10)
+                .addvalidation_maxlengthCheck(30)
                 .addvalidation_singlebyte();
 
             $('#TenStaffName')
@@ -127,7 +128,15 @@ function addEvents() {
         model.lst_AdminModel = Update_list_M_Tenfold();
         
         if (model.TenStaffCD.length > 0 || model.lst_AdminModel.length > 0 || ($('#txt_old_password').val() != $('#txtPassword').val())) {
-            Check_Insert_OR_Update(model)
+            common.callAjaxWithLoading(_url.checkAll, model, this, function (result) {
+                if (result && result.isOK) {
+                    Check_Insert_OR_Update(model)
+                }
+                if (result && result.data) {
+                    common.setValidationErrors(result.data);
+                    common.setFocusFirstError($form);
+                }
+            });
         }
     });
 
@@ -197,6 +206,7 @@ function Check_Insert_OR_Update(model) {
             $('#PE315').text(common.getMessage("E315"));
         }
         if (result && !result.isOK) {
+
             Change_and_Update_Data_Not_Exist("modal-nochange");
             $('#modal-nochange').modal('show');
             $('#PE318').text(common.getMessage("E318"));
