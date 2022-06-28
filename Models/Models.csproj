@@ -83,6 +83,7 @@
     <Compile Include="Seller\a_registerModel.cs" />
     <Compile Include="Seller\a_indexModel.cs" />
     <Compile Include="Tenfold\Login\t_loginModel.cs" />
+    <Compile Include="Tenfold\tenfold_daily_process\tenfold_daily_processModel.cs" />
     <Compile Include="Tenfold\t_admin\t_adminModel.cs" />
     <Compile Include="Tenfold\t_dashboard\t_dashboardModel.cs" />
     <Compile Include="Tenfold\t_mansion\t_mansionModel.cs" />
