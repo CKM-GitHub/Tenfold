@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Seruichi.BL;
 using System.Threading.Tasks;
 namespace tenfold_daily_process
 {
