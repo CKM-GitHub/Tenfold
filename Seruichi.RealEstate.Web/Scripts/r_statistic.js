@@ -4,125 +4,7 @@ $(function () {
     _url.get_r_statistic_displayData = common.appPath + '/r_statistic/get_r_statistic_displayData';
     setValidation();
     addEvents();
-    bind();
 });
-
-function bind() {
-    window.chartColors = {
-        red: 'rgb(255, 99, 132)',
-        orange: 'rgb(255, 159, 64)',
-        yellow: 'rgb(255, 205, 86)',
-        green: 'rgb(75, 192, 192)',
-        blue: 'rgb(54, 162, 235)',
-        purple: 'rgb(153, 102, 255)',
-        grey: 'rgb(231,233,237)',
-        drak: 'rgb(0,0,0)'
-    };
-
-    var randomScalingFactor = function () {
-        return (Math.random() > 0.5 ? 1.0 : 1.0) * Math.round(Math.random() * 100);
-    };
-
-    var line1 = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    ];
-    var line2 = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    ];
-    var line3 = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    ];
-    var line4 = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    ];
-    var line5 = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    ];
-
-    var MONTHS = ["2022年1月26日", "2022年1月27日", "2022年1月28日", "2022年1月29日", "2022年1月30日", "2022年1月31日", "2022年2月1日",
-        "2022年2月2日", "2022年2月3日", "2022年2月4日", "2022年2月5日", "2022年2月6日"
-    ];
-    var config = {
-        type: 'line',
-        data: {
-            labels: MONTHS,
-            datasets: [{
-                label: "詳細査定数",
-                backgroundColor: window.chartColors.red,
-                borderColor: window.chartColors.red,
-                data: line1,
-                fill: false,
-                lineTension: 0,
-            }, {
-                label: "TOP5選出数",
-                fill: false,
-                lineTension: 0,
-                backgroundColor: window.chartColors.blue,
-                borderColor: window.chartColors.blue,
-                data: line2,
-            }, {
-                label: "成約数",
-                fill: false,
-                lineTension: 0,
-                backgroundColor: window.chartColors.orange,
-                borderColor: window.chartColors.orange,
-                data: line3,
-            }, {
-                label: "売主辞退数",
-                fill: false,
-                lineTension: 0,
-                backgroundColor: window.chartColors.purple,
-                borderColor: window.chartColors.purple,
-                data: line5,
-            }, {
-                label: "買主辞退数",
-                fill: false,
-                lineTension: 0,
-                backgroundColor: window.chartColors.green,
-                borderColor: window.chartColors.green,
-                data: line4,
-            }]
-        },
-        options: {
-            responsive: true,
-            title: {
-                display: true,
-                text: '分析レポート'
-            },
-            tooltips: {
-                mode: 'index',
-                intersect: false,
-            },
-            hover: {
-                mode: 'nearest',
-                intersect: true
-            },
-            scales: {
-                xAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: '指定された範囲'
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                    },
-                }]
-            }
-        }
-    };
-
-    var ctx = document.getElementById("canvas").getContext("2d");
-    var myLine = new Chart(ctx, config);
-}
 
 function setValidation() {
     $('.chk')
@@ -221,7 +103,8 @@ function addEvents() {
             return false;
         }
 
-        $('#canvas').empty();
+        $('#canvas').remove();
+        $('.cap-repotcanvas').append('<canvas id="canvas"><canvas>')
         var model = {
             dac_route: $('#dac_route').val(),
             dac_apartment: $('#dac_apartment').val(),
@@ -276,7 +159,7 @@ function check_DateDifference() {
             return false;
         }
         else {
-            $('#sdate').text($('#StartDate').val());
+            $('#sdate').text($('#StartDate').val() + '-01');
             $('#edate').text($('#EndDate').val() + '-' + new Date(parseInt($('#EndDate').val().slice(0, 4)), parseInt($('#EndDate').val().slice(5, 7)), 0).getDate());
         }
     }
@@ -300,5 +183,108 @@ function get_r_statistic_Data(model, $form) {
 }
 
 function bind_r_statistic_Data(result) {
+    var line1 = '', line2 = '', line3 = '', line4 = '', line5 = '', DisplayDate = '';
+    var data = JSON.parse(result);
+    if (data.length > 0) {
+        for (var i = 0; i < data.length; i++) {
+            if (data[i]["NO"] == '1')
+                line1 = data[i]["IDList"].split(',');
+            else if (data[i]["NO"] == '2')
+                line2 = data[i]["IDList"].split(',');
+            else if (data[i]["NO"] == '3')
+                line3 = data[i]["IDList"].split(',');
+            else if (data[i]["NO"] == '4')
+                line4 = data[i]["IDList"].split(',');
+            else if (data[i]["NO"] == '5')
+                line5 = data[i]["IDList"].split(',');
+        }
+        DisplayDate = data[0]["DisplayDate"].split(',');
 
+        window.chartColors = {
+            red: 'rgb(255, 99, 132)',
+            orange: 'rgb(255, 159, 64)',
+            yellow: 'rgb(255, 205, 86)',
+            green: 'rgb(75, 192, 192)',
+            blue: 'rgb(54, 162, 235)',
+            purple: 'rgb(153, 102, 255)',
+            grey: 'rgb(231,233,237)',
+            drak: 'rgb(0,0,0)'
+        };
+
+        var config = {
+            type: 'line',
+            data: {
+                labels: DisplayDate,
+                datasets: [{
+                    label: "詳細査定数",
+                    backgroundColor: window.chartColors.red,
+                    borderColor: window.chartColors.red,
+                    data: line1,
+                    fill: false,
+                    lineTension: 0,
+                }, {
+                    label: "TOP5選出数",
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: window.chartColors.blue,
+                    borderColor: window.chartColors.blue,
+                    data: line2,
+                }, {
+                    label: "成約数",
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: window.chartColors.orange,
+                    borderColor: window.chartColors.orange,
+                    data: line3,
+                }, {
+                    label: "売主辞退数",
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: window.chartColors.purple,
+                    borderColor: window.chartColors.purple,
+                    data: line5,
+                }, {
+                    label: "買主辞退数",
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: window.chartColors.green,
+                    borderColor: window.chartColors.green,
+                    data: line4,
+                }]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: '分析レポート'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: '指定された範囲'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                        },
+                    }]
+                }
+            }
+        };
+
+        var ctx = document.getElementById("canvas").getContext("2d");
+        var myLine = new Chart(ctx, config);
+    }
 }
