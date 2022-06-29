@@ -103,6 +103,7 @@ namespace Seruichi.BL.Tenfold.t_seller_memo
                 new SqlParameter("@MemoText", SqlDbType.VarChar){ Value = model.MemoText.ToStringOrNull() },
                 new SqlParameter("@Type", SqlDbType.VarChar){ Value = model.Type.ToStringOrNull() },
                 new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.LoginID.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.LoginName.ToStringOrNull() },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress }
              };
 
@@ -116,6 +117,7 @@ namespace Seruichi.BL.Tenfold.t_seller_memo
              {
                 new SqlParameter("@SellerMemoSEQ", SqlDbType.VarChar){ Value = model.SellerMemoSEQ.ToStringOrNull() },
                 new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.LoginID.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.LoginName.ToStringOrNull() },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress }
              };
 

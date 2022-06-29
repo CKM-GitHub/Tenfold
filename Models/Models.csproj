@@ -64,6 +64,7 @@
     <Compile Include="RealEstate\r_com_profile\r_com_profileModel.cs" />
     <Compile Include="RealEstate\r_contact\r_contactModel.cs" />
     <Compile Include="RealEstate\r_dashboard\r_dashboardModel.cs" />
+    <Compile Include="RealEstate\r_invoice\r_invoiceModel.cs" />
     <Compile Include="RealEstate\r_issueslist\r_issueslistModel.cs" />
     <Compile Include="RealEstate\r_login\r_loginModel.cs" />
     <Compile Include="RealEstate\r_staff\r_staffModel.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Seller\a_registerModel.cs" />
     <Compile Include="Seller\a_indexModel.cs" />
     <Compile Include="Tenfold\Login\t_loginModel.cs" />
+    <Compile Include="Tenfold\tenfold_daily_process\tenfold_daily_processModel.cs" />
     <Compile Include="Tenfold\t_admin\t_adminModel.cs" />
     <Compile Include="Tenfold\t_dashboard\t_dashboardModel.cs" />
     <Compile Include="Tenfold\t_mansion\t_mansionModel.cs" />
