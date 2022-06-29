@@ -79,6 +79,7 @@
     <Compile Include="Seller\a_indexBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tenfold\Login\t_loginBL.cs" />
+    <Compile Include="Tenfold\tenfold_billing_process\tenfold_billing_processBL.cs" />
     <Compile Include="Tenfold\tenfold_daily_process\tenfold_daily_processBL.cs" />
     <Compile Include="Tenfold\t_admin\t_adminBL.cs" />
     <Compile Include="Tenfold\t_dashboard\t_dashboardBL.cs" />
