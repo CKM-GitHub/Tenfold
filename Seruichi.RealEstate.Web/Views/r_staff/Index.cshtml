@@ -1,7 +1,7 @@
 ﻿@model Models.RealEstate.r_staff.r_staffModel
 
 @{
-    ViewBag.Title = "案件一覧";
+    ViewBag.Title = "r_staff";
     Layout = "~/Views/Shared/_r_menuLayout.cshtml";
 }
 @section styles{
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <ul class="nav nav-tabs mt-0 overflow-x border-0 ps-5">
-                        <li class="nav-item"> <a href="#" class="nav-link active">担当者設定</a></li>
+                        <li class="nav-item"> <a href="@Url.Action("Index", "r_staff")" class="nav-link active">担当者設定</a></li>
                         <li class="nav-item"> <a href="@Url.Action("Index", "r_sendcus_max")" class="nav-link font-regular">送客数上限</a></li>
                         <li class="nav-item"> <a href="@Url.Action("Index", "r_plan")" class="nav-link font-regular">プラン変更</a></li>
                         <li class="nav-item"> <a href="@Url.Action("Index", "r_invoice")" class="nav-link font-regular">請求書</a></li>
@@ -335,7 +335,7 @@
                                                                         <div class="form-group">
                                                                             <label for="Street" class="me-md-3">権限設定</label>
                                                                             <div class="form-check form-check-inline">
-                                                                                <input class="form-check-input" type="checkbox" id="New_chkChat" checked
+                                                                                <input class="form-check-input" type="checkbox" id="New_chkChat" 
                                                                                        value="option1">
                                                                                 <label class="form-check-label" for="kennken1">チャット</label>
                                                                             </div>

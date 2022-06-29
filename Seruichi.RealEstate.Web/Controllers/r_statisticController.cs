@@ -40,6 +40,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return ErrorResult(validationResult);
             }
 
+            model.RealECD = base.GetOperator("RealECD");
             var dt = await bl.get_r_statistic_displayData(model);
             return OKResult(DataTableToJSON(dt));
         }
