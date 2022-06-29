@@ -69,7 +69,7 @@
                                                 @if (ViewBag.IsSetting == 1)
                                                 {
                                                     <a class="float-right btn text-white btn-primary" data-bs-toggle="modal" data-bs-target="#message-com" id="@temp.MessageSEQ&@temp.MessageTitle&@temp.MessageTEXT" onclick="Get_MsgSEQ(this.id)"> <i class="fa fa-pencil"></i>編集</a>
-                                                    <a class="float-right btn text-white btn-danger" data-bs-toggle="modal" data-bs-target="#message-del" id="@temp.MessageSEQ&@temp.MessageTitle&@temp.MessageTEXT" onclick="Get_MsgSEQ(this.id)"><i class="fa fa-times"></i>削除</a>
+                                                    <a class="float-right btn text-white btn-danger" data-bs-toggle="modal"  data-bs-target="#message-del" id="@temp.MessageSEQ&@temp.MessageTitle&@temp.MessageTEXT" onclick="Get_MsgSEQ(this.id)"><i class="fa fa-times"></i>削除</a>
 
                                                 }
                                                 else
@@ -97,11 +97,11 @@
                                         重要: 「メッセージ」を削除すると、メッセージは完全に削除されます。<br>復元することはできません。
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                                                data-bs-target="#menu-modal">
+                                        <button type="button" class="btn btn-secondary" 
+                                                data-bs-dismiss="modal">
                                             戻る
                                         </button>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="btnDelete">
+                                        <button type="button" class="btn btn-primary" id="btnDelete">
 
                                             確定
                                         </button>
@@ -129,13 +129,13 @@
                         </div>
                         @if (ViewBag.IsSetting == 1)
                         {
-                            <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4" id="btnNew" data-bs-toggle="modal">
+                            <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4" id="btnNew">
                                 <i class="fa fa-plus-circle pe-2"></i>新規チャット用メッセージ入力
                             </button>
                         }
                         else
                         {
-                            <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4 d-none" id="btnNew" data-bs-toggle="modal">
+                            <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4 d-none" id="btnNew">
                                 <i class="fa fa-plus-circle pe-2"></i>新規チャット用メッセージ入力
                             </button>
                         }
@@ -174,8 +174,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" id="btnUpdateClose"
-                                                data-bs-target="#menu-modal">
+                                        <button type="button" class="btn btn-secondary"  id="btnUpdateClose"
+                                                 data-bs-dismiss="modal">
                                             戻る
                                         </button>
                                         <button type="button" class="btn btn-primary" id="btnUpdate">送信</button>
