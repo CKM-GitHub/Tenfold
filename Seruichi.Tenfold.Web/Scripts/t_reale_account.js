@@ -78,9 +78,7 @@ function addEvents() {
             staticCache.Memo = $('#penaltyArea').val();
             $("#StartDate").hideError();
             $("#EndDate").hideError();
-            $("#penaltyArea").hideError();
-
-
+            $("#penaltyArea").hideError(); 
         }
 
 
