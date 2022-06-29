@@ -19,7 +19,7 @@ $(function () {
 });
 
 function setValidation() {
-
+    $('#seqPenalty').val('-1');
     $('#StartDate')
         .addvalidation_errorElement("#errorStartDate")
         .addvalidation_datecheck() //E108
@@ -139,12 +139,13 @@ function addEvents() {
         $('#modal-changesave').modal('hide');
         common.callAjaxWithLoadingSync(_url.get_t_reale_accountSave, staticCache, this, function (result) {
             if (result && result.isOK) {
+                SetDefault();
                 l_logfunction();
                 $('#modal-changeok').modal('show');
                 //#modal-changeok
             }
             else {
-                alert('Errors')
+                //alert('Errors')
                 const errors = result.data;
                 for (key in errors) {
                     const target = document.getElementById(key);
@@ -155,19 +156,29 @@ function addEvents() {
             }
         })
     });
+  
+     
+    $('#wrapper').prop('style', 'padding-left:0px !important')
+    SetDefault();
+    //let model = {
+    //    RealECD: common.getUrlParameter('RealECD')
+    //};
+    //get_purchase_Data(model, this, 'page_load');
+
+    //document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? $('.disabled-account').removeAttr("disabled") : $('.disabled-account').attr("disabled", "true")
+
+    //SetCache();
+}
+
+function SetDefault() {
+    clearBack();
+    $('#seqPenalty').val('-1');
     let model = {
         RealECD: common.getUrlParameter('RealECD')
     };
-
-    //#wrapper {
-    //    padding - left: 0;
-    $('#wrapper').prop('style', 'padding-left:0px !important')
-    //Bind Company Info Data to the title part of the page
-
     get_purchase_Data(model, this, 'page_load');
-
+    document.querySelector("#flexSwitchCheckDefault_Penalty").checked = false;
     document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? $('.disabled-account').removeAttr("disabled") : $('.disabled-account').attr("disabled", "true")
-
     SetCache();
 }
 
@@ -178,7 +189,8 @@ var staticCache = {
     EndDate: '',
     Memo: '',
     RealECD: '',
-    Isfake: '1'
+    Isfake: '1',
+    SEQPenalty:'-1'
 };
 function CheckChanges() {
     $form = $('#form1').hideChildErrors();
@@ -213,46 +225,52 @@ function CheckChanges() {
     }
 }
 function discardChanges() {
+   
+    SetDefault();
+    //let model = {
+    //    RealECD: common.getUrlParameter('RealECD')
+    //};
+    //get_purchase_Data(model, this, 'page_load');
+    ////$('#flexSwitchCheckDefault_Penalty').attr("checked", "false");
+    //document.querySelector("#flexSwitchCheckDefault_Penalty").checked = false;
+    //document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? $('.disabled-account').removeAttr("disabled") : $('.disabled-account').attr("disabled", "true")
+    //SetCache();
+    //common.callAjaxWithLoadingSync(_url.get_t_reale_purchase_DisplayData, staticCache, this, function (result) {
+    //    if (result && result.isOK) {
+    //        //alert('hi')
+    //        $("#StartDate").hideError();
+    //        $("#EndDate").hideError();
+    //        $("#penaltyArea").hideError();
+    //        $('.cap-errormsg-right').removeClass("d-none")
+    //        let data = JSON.parse(result.data.split('Ʈ')[0]);
+    //        if (data.length) {
+                //if (data[0]['TestFlg'] == '1') {
+                //    $('#flexSwitchCheckDefault').attr("checked", "true");
+                //    document.querySelector("#flexSwitchCheckDefault").checked = true;
 
-    common.callAjaxWithLoadingSync(_url.get_t_reale_purchase_DisplayData, staticCache, this, function (result) {
-        if (result && result.isOK) {
-            //alert('hi')
-            $("#StartDate").hideError();
-            $("#EndDate").hideError();
-            $("#penaltyArea").hideError();
-            $('.cap-errormsg-right').removeClass("d-none")
-            let data = JSON.parse(result.data.split('Ʈ')[0]);
-            if (data.length) {
-                if (data[0]['TestFlg'] == '1') {
-                    $('#flexSwitchCheckDefault').attr("checked", "true");
-                    document.querySelector("#flexSwitchCheckDefault").checked = true;
+                //}
+                //else {
+                //    $('#flexSwitchCheckDefault').removeAttr('checked')
+                //    document.querySelector("#flexSwitchCheckDefault").checked = false;
+                //}
+                //if (data[0]['PenaltyFlg'] == '1') {
+                //    $('#flexSwitchCheckDefault_Penalty').attr("checked", "true");
+                //    document.querySelector("#flexSwitchCheckDefault_Penalty").checked = true;
+                //}
+                //else {
+                //    $('#flexSwitchCheckDefault_Penalty').removeAttr('checked')
+                //    document.querySelector("#flexSwitchCheckDefault_Penalty").checked = false;
+                //}
+                //$('#StartDate').val(data[0]['PenaltyStartDate']);
+                //$('#EndDate').val(data[0]['PenaltyEndDate']);
+                //$('#penaltyArea').val(data[0]['PenaltyMemo']);
+                //document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? $('.disabled-account').removeAttr("disabled") : $('.disabled-account').attr("disabled", "true")
 
-                }
-                else {
-                    $('#flexSwitchCheckDefault').removeAttr('checked')
-                    document.querySelector("#flexSwitchCheckDefault").checked = false;
-                }
-                if (data[0]['PenaltyFlg'] == '1') {
-                    $('#flexSwitchCheckDefault_Penalty').attr("checked", "true");
-                    document.querySelector("#flexSwitchCheckDefault_Penalty").checked = true;
-                }
-                else {
-                    $('#flexSwitchCheckDefault_Penalty').removeAttr('checked')
-                    document.querySelector("#flexSwitchCheckDefault_Penalty").checked = false;
-                }
-                $('#StartDate').val(data[0]['PenaltyStartDate']);
-                $('#EndDate').val(data[0]['PenaltyEndDate']);
-                $('#penaltyArea').val(data[0]['PenaltyMemo']);
-                document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? $('.disabled-account').removeAttr("disabled") : $('.disabled-account').attr("disabled", "true")
-
-                //$('.cap-errormsg-right').addClass("d-none")
-                //$('.disabled-account').removeClass("cap-is-invalid")
-            }
-
-
-            //cap-is-invalid
-        }
-    })
+             
+        //    }
+             
+        //}
+    //})
 }
 
 function SetCache(id) {
@@ -262,7 +280,9 @@ function SetCache(id) {
     staticCache.EndDate = $('#EndDate').val();
     staticCache.Memo = $('#penaltyArea').val();
     staticCache.RealECD = common.getUrlParameter('RealECD');
+    staticCache.SEQPenalty = $('#seqPenalty').val();
     // staticCache.Isfake = '1';
+    //debugger
     if (id) {
         get_purchase_Data(staticCache, $('form'), 'IsTable');
     }
@@ -304,14 +324,26 @@ function Bind_DisplayData(result) {
         let html = "";
         if (data.length > 0) {
             for (var i = 0; i < data.length; i++) {
+                var seq = data[i]['PenaltySEQ'];
+                var psed = ' id=\'psed_' + i + '_' +seq+'\'';
+                var ped = ' id=\'ped_' + i + '_' + seq + '\'';
 
+                var pmd = ' id=\'pmd_' + i + '_' + seq + '\'';
+                var psn = ' id=\'psn_' + i + '_' + seq + '\'';
+                var pbtn = ' id=\'pbtn_' + i + '_' + seq + '\' ';
+                var disable = 'disabled';
+                if (data[i]['ButtonEnable'] == '1')
+                    disable = ' ';
+               // var onclick = 
+                //<button type="button" class="btn btn-sm btn-primary position-absolute end-1 m-1" ' + pbtn + ' > 編集</button >\
 
                 html +=
-                    '<div class="col-12 border-1 m-1">\
-                <strong>'+ data[i]['PenaltyStartDate'] + '～' + data[i]['PenaltyEndDate'] + '</strong >\
-                    <p>'+ data[i]['PenaltyMemo'] + '</p>\
+                    '<div class="col-12 border-1 m-1 t-reale-list rounded position-relative">\
+                    <button type="button" class="btn btn-sm btn-primary position-absolute end-1 m-1" ' + pbtn + ' onclick=rightPanel(this) ' + disable +' > 編集</button >\
+               <strong '+ psed + '>' + data[i]['PenaltyStartDate'] + '～' + data[i]['PenaltyEndDate'] + '</strong>\
+                    <p'+ pmd + ' style="padding-top:15px">'+ data[i]['PenaltyMemo'] + '</p>\
                     <div class="float-end">\
-                        <p>登録スタッフ：<p>'+ data[i]['TenStaffName'] + '</p>\
+                        <p>登録スタッフ：<p'+ psn + '>'+ data[i]['TenStaffName'] + '</p>\
                         </p>\
                     </div>\
                                                     </div>'
@@ -321,18 +353,56 @@ function Bind_DisplayData(result) {
         $('#penaltyList').append(html);
     }
 }
+function clearBack() {
+    $('.t-reale-list').removeClass('t-reale-back-might');
+}
+function rightPanel(e) {
+    clearBack();
+    $('#' + e.id).parent().addClass('t-reale-back-might'); 
+    document.querySelector("#flexSwitchCheckDefault_Penalty").checked = true;
+    document.querySelector("#flexSwitchCheckDefault_Penalty").checked ? $('.disabled-account').removeAttr("disabled") : $('.disabled-account').attr("disabled", "true")
+    var id = e.id.split('_')[1] + '_' + e.id.split('_')[2];
+    //psed
+    $('#seqPenalty').val(e.id.split('_')[2]);
+    $('#StartDate').val($('#psed_' + id).text().split('～')[0]);
+    $('#EndDate').val($('#psed_' + id).text().split('～')[1]);
+    $('#penaltyArea').val($('#pmd_' + id).text());
+    SetCache();
+}
 function BindPenalty(result) {
     let data = JSON.parse(result);
     if (data.length) {
         if (data[0]['TestFlg'] == '1') {
             $('#flexSwitchCheckDefault').attr("checked", "true");
+            document.querySelector("#flexSwitchCheckDefault").checked = true;
         }
+        else {
+            $('#flexSwitchCheckDefault').attr("checked", "false");
+            document.querySelector("#flexSwitchCheckDefault").checked = false; 
+        }
+
+        //debugger
         if (data[0]['PenaltyFlg'] == '1') {
-            $('#flexSwitchCheckDefault_Penalty').attr("checked", "true");
+           // $('#flexSwitchCheckDefault_Penalty').attr("checked", "true");
+            //ペナルティのため制限中
+            $('#penltyZero').addClass("d-none");
+            $('#penltyOne').removeClass("d-none");
+
         }
-        $('#StartDate').val(data[0]['PenaltyStartDate']);
-        $('#EndDate').val(data[0]['PenaltyEndDate']);
-        $('#penaltyArea').val(data[0]['PenaltyMemo']);
+        else {
+            $('#penltyZero').removeClass("d-none");
+            $('#penltyOne').addClass("d-none");
+        }
+      
+        //penltyReason
+        $('#penltyReason').text(data[0]['PenaltyMemo']);
+        $('#StartDate').val(null);
+        $('#EndDate').val(null);
+        $('#penaltyArea').val('');
+        var peri = data[0]['PenaltyStartDate'] + '～' + data[0]['PenaltyEndDate'];
+        if (peri.includes('null'))
+            peri = '';
+        $('#penaltyPeriod').text( peri); 
     }
 }
 function l_logfunction() {
