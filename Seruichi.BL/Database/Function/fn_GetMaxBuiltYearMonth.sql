@@ -10,8 +10,8 @@ CREATE FUNCTION [dbo].[fn_GetMaxBuiltYearMonth](
 RETURNS int
 BEGIN
 
-    DECLARE @Today datetime = GETDATE()
-    DECLARE @ResultDate datetime
+    DECLARE @Today date = GETDATE()
+    DECLARE @ResultDate date
 
     SET @ResultDate = DATEADD(year,  (@BuildingAge - 1) * -1, @Today)
 
