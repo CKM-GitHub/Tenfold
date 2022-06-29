@@ -22,6 +22,23 @@ namespace Seruichi.Tenfold.Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult CheckAll(t_seller_newModel model)
+        {
+            if (model == null)
+            {
+                return BadRequestResult();
+            }
+
+            t_seller_newBL bl = new t_seller_newBL();
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+            return OKResult();
+        }
+
         // Ajax: CheckZipCode
         [HttpPost]
         public ActionResult CheckZipCode(t_seller_newModel model)
@@ -44,6 +61,16 @@ namespace Seruichi.Tenfold.Web.Controllers
                 return ErrorMessageResult(errorcd);
             }
             return OKResult(new { prefCD, cityName, townName });
+        }
+
+        [HttpPost]
+        public ActionResult checkMailAddress(t_seller_newModel model)
+        {
+            t_seller_newBL bl = new t_seller_newBL();
+            if (!bl.checkMailAddress(model))
+                return ErrorMessageResult("E203");
+
+            return OKResult();
         }
 
         [HttpPost]
