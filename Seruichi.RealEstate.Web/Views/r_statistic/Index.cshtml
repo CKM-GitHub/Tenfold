@@ -10,129 +10,133 @@
 }
 
 <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18" id="wrapper">
-    <div id="sidebar-wrapper">
-        <ul class="navbar-nav mb-md-4 p-3 mt-5 p-md-0">
-            <li>
-                <div class="text-center px-xl-3 pt-3">
-                    <div class="mb-3 text-start">
+    <form id="form1">
+        <div id="sidebar-wrapper">
+            <ul class="navbar-nav mb-md-4 p-3 mt-5 p-md-0">
+                <li>
+                    <div class="text-center px-xl-3 pt-3">
                         <div class="mb-3 text-start">
-                            <span class="cap-errormsg-right" id="CheckBoxError" name="CheckBoxError"></span>
-                            <label for="disabledSelect" class="form-label ">表示項目</label>
-                            <div class="form-label">
-                                <label class="form-label" for="dac">詳細査定数</label>
-                                <div class="d-md-flex">
-                                    <div class="form-check me-md-2">
-                                        <input class="form-check-input" type="checkbox" id="dac_route" name="dac_route" value="" checked>
-                                        <label class="form-check-label" for="dac_route">エリア・路線</label>
-                                    </div>
-                                    <div class="form-check me-md-2">
-                                        <input class="form-check-input" type="checkbox" id="dac_apartment" name="dac_apartment" value="" checked>
-                                        <label class="form-check-label" for="dac_apartment">マンション</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-label">
-                                <label class="form-label" for="top5">TOP5選出数</label>
-                                <div class="d-md-flex">
-                                    <div class="form-check me-md-2">
-                                        <input class="form-check-input" type="checkbox" id="top5_route" name="top5_route" value="" checked>
-                                        <label class="form-check-label" for="top5_route">エリア・路線</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="top5_apartment" name="top5_apartment" value="" checked>
-                                        <label class="form-check-label" for="top5_apartment">マンション</label>
+                            <div class="mb-3 text-start">
+                                <label for="disabledSelect" class="form-label ">表示項目</label>
+                                <span class="cap-errormsg-right" id="CheckBoxError" name="CheckBoxError"></span>
+                                <div class="form-label">
+                                    <label class="form-label" for="dac">詳細査定数</label>
+                                    <div class="d-md-flex">
+                                        <div class="form-check me-md-2">
+                                            <input class="chk form-check-input" type="checkbox" id="dac_route" name="dac_route" value="" checked>
+                                            <label class="form-check-label" for="dac_route">エリア・路線</label>
+                                        </div>
+                                        <div class="form-check me-md-2">
+                                            <input class="chk form-check-input" type="checkbox" id="dac_apartment" name="dac_apartment" value="" checked>
+                                            <label class="form-check-label" for="dac_apartment">マンション</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-label">
-                                <label class="form-label" for="contracts">成約数</label>
-                                <div class="d-md-flex">
-                                    <div class="form-check me-md-2">
-                                        <input class="form-check-input" type="checkbox" id="contracts_route" name="contracts_route" value="" checked>
-                                        <label class="form-check-label" for="contracts_route">エリア・路線</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="contracts_apartment" name="contracts_apartment" value="" checked>
-                                        <label class="form-check-label" for="contracts_apartment">マンション</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-label">
-                                <label class="form-label" for="bd">買主辞退数</label>
-                                <div class="d-md-flex">
-                                    <div class="form-check me-md-2">
-                                        <input class="form-check-input" type="checkbox" id="bd_route" name="bd_route" value="" checked>
-                                        <label class="form-check-label" for="bd_route">エリア・路線</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="bd_apartment" name="bd_apartment" value="" checked>
-                                        <label class="form-check-label" for="bd_apartment">マンション</label>
+                                <div class="form-label">
+                                    <label class="form-label" for="top5">TOP5選出数</label>
+                                    <div class="d-md-flex">
+                                        <div class="form-check me-md-2">
+                                            <input class="chk form-check-input" type="checkbox" id="top5_route" name="top5_route" value="" checked>
+                                            <label class="form-check-label" for="top5_route">エリア・路線</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="chk form-check-input" type="checkbox" id="top5_apartment" name="top5_apartment" value="" checked>
+                                            <label class="form-check-label" for="top5_apartment">マンション</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-label">
-                                <label class="form-label" for="sd">売主辞退数</label>
-                                <div class="d-md-flex">
-                                    <div class="form-check me-md-2">
-                                        <input class="form-check-input" type="checkbox" id="sd_route" name="sd_route" value="" checked>
-                                        <label class="form-check-label" for="sd_route">エリア・路線</label>
+                                <div class="form-label">
+                                    <label class="form-label" for="contracts">成約数</label>
+                                    <div class="d-md-flex">
+                                        <div class="form-check me-md-2">
+                                            <input class="chk form-check-input" type="checkbox" id="contracts_route" name="contracts_route" value="" checked>
+                                            <label class="form-check-label" for="contracts_route">エリア・路線</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="chk form-check-input" type="checkbox" id="contracts_apartment" name="contracts_apartment" value="" checked>
+                                            <label class="form-check-label" for="contracts_apartment">マンション</label>
+                                        </div>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="sd_apartment" name="sd_apartment" value="" checked>
-                                        <label class="form-check-label" for="sd_apartment">マンション</label>
+                                </div>
+                                <div class="form-label">
+                                    <label class="form-label" for="bd">買主辞退数</label>
+                                    <div class="d-md-flex">
+                                        <div class="form-check me-md-2">
+                                            <input class="chk form-check-input" type="checkbox" id="bd_route" name="bd_route" value="" checked>
+                                            <label class="form-check-label" for="bd_route">エリア・路線</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="chk form-check-input" type="checkbox" id="bd_apartment" name="bd_apartment" value="" checked>
+                                            <label class="form-check-label" for="bd_apartment">マンション</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-label">
+                                    <label class="form-label" for="sd">売主辞退数</label>
+                                    <div class="d-md-flex">
+                                        <div class="form-check me-md-2">
+                                            <input class="chk form-check-input" type="checkbox" id="sd_route" name="sd_route" value="" checked>
+                                            <label class="form-check-label" for="sd_route">エリア・路線</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="chk form-check-input" type="checkbox" id="sd_apartment" name="sd_apartment" value="" checked>
+                                            <label class="form-check-label" for="sd_apartment">マンション</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </li>
-            <li>
-                <div class="text-center px-xl-3">
-                    <div class="mb-3 text-start">
-                        <label for="ryudo" class="form-label d-flex">表示粒度</label>
-                        <div class="d-inline-flex">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="ryudo" id="day" checked>
-                                <label class="form-check-label" for="day">日</label>
-                            </div>
-                            <div class="form-check ms-5">
-                                <input class="form-check-input" type="radio" name="ryudo" id="week">
-                                <label class="form-check-label" for="week">週</label>
-                            </div>
-                            <div class="form-check ms-5">
-                                <input class="form-check-input" type="radio" name="ryudo" id="month">
-                                <label class="form-check-label" for="month">月</label>
+                </li>
+                <li>
+                    <div class="text-center px-xl-3">
+                        <div class="mb-3 text-start">
+                            <label for="ryudo" class="form-label d-flex">表示粒度</label>
+                            <div class="d-inline-flex">
+                                <div class="form-check">
+                                    <input class="rdo form-check-input" type="radio" name="ryudo" id="day" value="1" checked>
+                                    <label class="form-check-label" for="day">日</label>
+                                </div>
+                                <div class="form-check ms-5">
+                                    <input class="rdo form-check-input" type="radio" name="ryudo" id="week" value="2">
+                                    <label class="form-check-label" for="week">週</label>
+                                </div>
+                                <div class="form-check ms-5">
+                                    <input class="rdo form-check-input" type="radio" name="ryudo" id="month" value="3">
+                                    <label class="form-check-label" for="month">月</label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </li>
-            <li>
-                <div class="text-center px-xl-3">
-                    <div class="mb-3 text-start">
-                        <label for="Date" class="form-label d-flex">範囲指定</label>
-                        <label for="StartDate" class="form-label">開始日</label>
-                        <span class="cap-errormsg-right" id="errorStartDate"></span>
-                        <input class="form-control mb-2" required="" value="2022-01-26" id="StartDate" name="StartDate" type="date">
-                        <label for="EndDate" class="form-label">終了日</label>
-                        <span class="cap-errormsg-right" id="errorEndDate"></span>
-                        <input class="form-control mb-2" required="" value="2022-02-06" id="EndDate" name="EndDate" type="date">
-                        <div class="row mb-3">
-                            <div class="col-6"><button type="button" id="btnThisMonth" name="btnThisMonth" class="btn btn-primary w-100">今月</button></div>
-                            <div class="col-6"><button type="button" id="btnLastMonth" name="btnLastMonth" class="btn btn-primary w-100">先月</button></div>
+                </li>
+                <li>
+                    <div class="text-center px-xl-3">
+                        <div class="mb-3 text-start">
+                            <label for="Date" class="form-label d-flex">範囲指定</label>
+                            <label for="StartDate" class="form-label">開始日</label>
+                            <span class="cap-errormsg-right" id="errorStartDate"></span>
+                            <input class="form-control mb-2" required="" value="2022-03-01" id="StartDate" name="StartDate" type="date">
+                            <span id="sdate" class="d-none"></span>
+                            <label for="EndDate" class="form-label">終了日</label>
+                            <span class="cap-errormsg-right" id="errorEndDate"></span>
+                            <input class="form-control mb-2" required="" value="2022-03-31" id="EndDate" name="EndDate" type="date">
+                            <span id="edate" class="d-none"></span>
+                            <div class="row mb-3">
+                                <div class="col-6"><button type="button" id="btnThisMonth" name="btnThisMonth" class="btn btn-primary w-100">今月</button></div>
+                                <div class="col-6"><button type="button" id="btnLastMonth" name="btnLastMonth" class="btn btn-primary w-100">先月</button></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </li>
-            <li>
-                <div class="form-group ps-3 pe-3">
-                    <button type="button" id="btnDisplay" class="btn btn-primary w-100 w-100 mb-3">表示</button>
-                </div>
-            </li>
-        </ul>
-        <div class="mt-auto pb-20"></div>
-    </div>
+                </li>
+                <li>
+                    <div class="form-group ps-3 pe-3">
+                        <button type="button" id="btnDisplay" class="btn btn-primary w-100 w-100 mb-3">表示</button>
+                    </div>
+                </li>
+            </ul>
+            <div class="mt-auto pb-20"></div>
+        </div>
+    </form>
     <div class="toggle-button">
         <a href="#menu-toggle" class="btn" id="menu-toggle">
             <span class="fa fa-angle-right glyphicon-chevron-right" aria-hidden="true"></span>
@@ -159,7 +163,7 @@
                         <li class="nav-item"> <a href="@Url.Action("Index", "r_pricedown")" class="nav-link font-regular">倍率</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="card shadow border-0 mb-7">
                     <div class="card-header d-md-inline-flex">
                         <h5 class="mb-0">集計結果</h5><span class="ps-md-5 text-muted text-sm">集計時間 YYYY/MM/DD hh:mm:ss</span>
@@ -180,136 +184,9 @@
         @Html.Partial("~/Views/Shared/_r_footer.cshtml")
     </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-<script>
-    window.chartColors = {
-      red: 'rgb(255, 99, 132)',
-      orange: 'rgb(255, 159, 64)',
-      yellow: 'rgb(255, 205, 86)',
-      green: 'rgb(75, 192, 192)',
-      blue: 'rgb(54, 162, 235)',
-      purple: 'rgb(153, 102, 255)',
-      grey: 'rgb(231,233,237)',
-      drak: 'rgb(0,0,0)'
-    };
-
-    var randomScalingFactor = function () {
-      return (Math.random() > 0.5 ? 1.0 : 1.0) * Math.round(Math.random() * 100);
-    };
-
-    var line1 = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-      randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-      randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    ];
-    var line2 = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-      randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-      randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    ];
-    var line3 = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-      randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-      randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    ];
-    var line4 = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-      randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-      randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    ];
-    var line5 = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-      randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-      randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    ];
-    var line6 = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-      randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-      randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    ];
-    var line7 = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-      randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-      randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    ];
-    var line8 = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-      randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-      randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),
-    ];
-
-    var MONTHS = ["2022年1月26日", "2022年1月27日", "2022年1月28日", "2022年1月29日", "2022年1月30日", "2022年1月31日", "2022年2月1日",
-      "2022年2月2日", "2022年2月3日", "2022年2月4日", "2022年2月5日", "2022年2月6日"
-    ];
-    var config = {
-      type: 'line',
-      data: {
-        labels: MONTHS,
-        datasets: [{
-          label: "詳細査定数",
-          backgroundColor: window.chartColors.red,
-          borderColor: window.chartColors.red,
-          data: line1,
-          fill: false,
-          lineTension: 0,
-        }, {
-          label: "TOP5選出数",
-          fill: false,
-          lineTension: 0,
-          backgroundColor: window.chartColors.blue,
-          borderColor: window.chartColors.blue,
-          data: line2,
-        }, {
-          label: "成約数",
-          fill: false,
-          lineTension: 0,
-          backgroundColor: window.chartColors.orange,
-          borderColor: window.chartColors.orange,
-          data: line3,
-        }, {
-          label: "売主辞退数",
-          fill: false,
-          lineTension: 0,
-          backgroundColor: window.chartColors.purple,
-          borderColor: window.chartColors.purple,
-          data: line5,
-        }, {
-          label: "買主辞退数",
-          fill: false,
-          lineTension: 0,
-          backgroundColor: window.chartColors.green,
-          borderColor: window.chartColors.green,
-          data: line4,
-        }]
-      },
-      options: {
-        responsive: true,
-        title: {
-          display: true,
-          text: '分析レポート'
-        },
-        tooltips: {
-          mode: 'index',
-          intersect: false,
-        },
-        hover: {
-          mode: 'nearest',
-          intersect: true
-        },
-        scales: {
-          xAxes: [{
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: '指定された範囲'
-            }
-          }],
-          yAxes: [{
-            display: true,
-            scaleLabel: {
-              display: true,
-            },
-          }]
-        }
-      }
-    };
-
-    var ctx = document.getElementById("canvas").getContext("2d");
-    var myLine = new Chart(ctx, config);
-</script>
 
 @section Scripts{
     @Scripts.Render("~/bundles/r_statistic")
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 }

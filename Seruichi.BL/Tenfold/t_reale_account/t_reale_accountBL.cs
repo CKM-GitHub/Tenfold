@@ -79,11 +79,12 @@ namespace Seruichi.BL.Tenfold.t_reale_account
                 new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull() },
                 new SqlParameter("@TenStaffCD", SqlDbType.VarChar){ Value = model.TenStaffCD.ToStringOrNull() },
                 new SqlParameter("@IP", SqlDbType.VarChar){ Value = model.IPAddress.ToStringOrNull() } ,
-                new SqlParameter("@Isfake", SqlDbType.TinyInt){ Value = model.Isfake.ToByte(0) } 
+                new SqlParameter("@Isfake", SqlDbType.TinyInt){ Value = model.Isfake.ToByte(0) } ,
+                new SqlParameter("@SEQPenalty", SqlDbType.Int){ Value = model.SEQPenalty }
         };
 
             DBAccess db = new DBAccess();
-            db.InsertUpdateDeleteData("pr_t_reale_account_InsertUpdateData", false, sqlParams);
+            db.InsertUpdateDeleteData("pr_t_reale_account_InsertUpdateData_new", false, sqlParams);
         }
 
 

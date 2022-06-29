@@ -1,9 +1,12 @@
 ﻿const _url = {};
 $(function () {
+    _url.checkAll = common.appPath + '/r_contact/CheckAll';
     _url.registerContact = common.appPath + '/r_contact/RegisterContact';
+
 
     setValidation();
     addEvents();
+    $('#ContactName').focus();
 });
 function setValidation() {
     $('#ContactName')
@@ -43,7 +46,7 @@ function addEvents() {
     common.bindValidationEvent('#form1', ':not(#ContactPhone)');
 
     $('#ContactPhone').on('blur', function (e) {
-       // customValidation_checkPhone(this);
+        customValidation_checkPhone(this);
         return common.checkValidityInput(this);
     });
 
@@ -62,7 +65,19 @@ function addEvents() {
         const model = Object.fromEntries(fd);
         model.ContactType = $('#ContactTypeCD option:selected').text();
 
-        Bind_Modal(model);  
+        common.callAjaxWithLoading(_url.checkAll, model, this, function (result) {
+            if (result && result.isOK) {
+                //sucess
+                Bind_Modal(model);
+            }
+            if (result && result.data) {
+                //error
+                common.setValidationErrors(result.data);
+                common.setFocusFirstError($form);
+            }
+        });
+
+        
     });
 
     $('#btn-modal-check').click(function () {
@@ -114,6 +129,17 @@ function customValidation_checkContactAddress(e) {
         $this.showError(common.getMessage('E202'));
         return false;
     }
+
+    return true;
+}
+
+function customValidation_checkPhone(e) {
+    const $this = $(e)
+
+    let inputValue = $this.val();
+    inputValue = inputValue.replace(/-/g, "")
+    inputValue = inputValue.replace(/－/g, "")
+    $this.val(inputValue);
 
     return true;
 }

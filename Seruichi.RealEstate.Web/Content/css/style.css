@@ -48,6 +48,10 @@
 .cap-fon-div-w270 {
 	width: 270px;
 }
+
+.cap-fon-div-w150 {
+	width: 150px;
+}
 .cap-icon-h1 {
 	border-radius: 100px;
 	border: 15px solid var(--bs-green);
@@ -390,3 +394,8 @@ color: #0b5ed7!important;
  color: black!important;
 }
 
+#cap-fixed-button {
+	position: fixed;
+	bottom: 15vh;
+	right: 5vw;
+	}

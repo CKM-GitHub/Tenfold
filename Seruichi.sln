@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seruichi.RealEstate.Web", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptionConvert", "ConvertData\CryptionConvert.csproj", "{12B68F60-B350-4825-B632-D8B99284FD46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tenfold_daily_process", "tenfold_daily_process\tenfold_daily_process.csproj", "{E0B12B12-13F7-4AF5-9F41-3DB9BBBB0B69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{12B68F60-B350-4825-B632-D8B99284FD46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12B68F60-B350-4825-B632-D8B99284FD46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12B68F60-B350-4825-B632-D8B99284FD46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0B12B12-13F7-4AF5-9F41-3DB9BBBB0B69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0B12B12-13F7-4AF5-9F41-3DB9BBBB0B69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0B12B12-13F7-4AF5-9F41-3DB9BBBB0B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0B12B12-13F7-4AF5-9F41-3DB9BBBB0B69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

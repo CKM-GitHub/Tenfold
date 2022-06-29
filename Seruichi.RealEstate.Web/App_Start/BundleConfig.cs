@@ -146,9 +146,12 @@ namespace Seruichi.RealEstate.Web
 
             bundles.Add(new ScriptBundle("~/bundles/r_statistic").Include(
                    "~/Scripts/r_statistic.js",
-                   "~/Content/bootstrap/bootstrap.min.js",
                    "~/Content/scripts/sidebar.js"));
-            
+
+            bundles.Add(new ScriptBundle("~/bundles/r_invoice").Include(
+                   "~/Scripts/r_invoice.js",
+                   "~/Content/scripts/sidebar.js"));
+
         }
     }
 }

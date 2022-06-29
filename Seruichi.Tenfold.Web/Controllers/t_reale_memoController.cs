@@ -64,6 +64,7 @@ namespace Seruichi.Tenfold.Web.Controllers
         {
             t_reale_memoBL bl = new t_reale_memoBL();
             model.LoginID = base.GetOperator();
+            model.LoginName = base.GetOperatorName();
             model.IPAddress = base.GetClientIP();
             bl.Modify_MemoText(model);
             return OKResult();
@@ -74,6 +75,7 @@ namespace Seruichi.Tenfold.Web.Controllers
         {
             t_reale_memoBL bl = new t_reale_memoBL();
             model.LoginID = base.GetOperator();
+            model.LoginName = base.GetOperatorName();
             model.IPAddress = base.GetClientIP();
             bl.Delete_MemoText(model);
             return OKResult();

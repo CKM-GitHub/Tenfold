@@ -59,6 +59,7 @@
     <Compile Include="RealEstate\r_contact\r_contactBL.cs" />
     <Compile Include="RealEstate\r_dashboard\r_dashboardBL.cs" />
     <Compile Include="RealEstate\r_asmc_address\r_asmc_addressBL.cs" />
+    <Compile Include="RealEstate\r_invoice\r_invoiceBL.cs" />
     <Compile Include="RealEstate\r_issueslist\r_issueslistBL.cs" />
     <Compile Include="RealEstate\r_login\r_loginBL.cs" />
     <Compile Include="RealEstate\r_staff\r_staffBL.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Seller\a_indexBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tenfold\Login\t_loginBL.cs" />
+    <Compile Include="Tenfold\tenfold_daily_process\tenfold_daily_processBL.cs" />
     <Compile Include="Tenfold\t_admin\t_adminBL.cs" />
     <Compile Include="Tenfold\t_dashboard\t_dashboardBL.cs" />
     <Compile Include="Tenfold\t_mansion\t_mansionBL.cs" />
@@ -228,6 +230,7 @@
     <Content Include="Database\StoredProcedure\pr_t_mansion_new_InsertMansionData.sql" />
     <Content Include="Database\StoredProcedure\pr_t_reale_account_DisplayData.sql" />
     <Content Include="Database\StoredProcedure\pr_t_reale_account_InsertUpdateData.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_reale_account_InsertUpdateData_new.sql" />
     <Content Include="Database\StoredProcedure\pr_t_reale_asmhis_get_DisplayData.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_account_Select_M_Seller_By_SellerCD.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_account_Update_M_Seller.sql" />

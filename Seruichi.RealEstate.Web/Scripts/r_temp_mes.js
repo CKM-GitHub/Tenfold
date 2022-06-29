@@ -81,7 +81,7 @@ function addEvents()
         window.location.reload();
     });
 
-    $('#btnNew').on('click', function ()
+    $('#cap-fixed-button').on('click', function ()
     {
         $('#message-com').modal('show');
         $('#txtMsgSEQ').val("");
