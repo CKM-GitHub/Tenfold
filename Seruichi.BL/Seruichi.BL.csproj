@@ -231,6 +231,7 @@
     <Content Include="Database\StoredProcedure\pr_t_mansion_new_InsertMansionData.sql" />
     <Content Include="Database\StoredProcedure\pr_t_reale_account_DisplayData.sql" />
     <Content Include="Database\StoredProcedure\pr_t_reale_account_InsertUpdateData.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_reale_account_InsertUpdateData_new.sql" />
     <Content Include="Database\StoredProcedure\pr_t_reale_asmhis_get_DisplayData.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_account_Select_M_Seller_By_SellerCD.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_account_Update_M_Seller.sql" />

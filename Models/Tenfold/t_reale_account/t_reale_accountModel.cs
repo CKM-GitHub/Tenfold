@@ -35,7 +35,7 @@ namespace Models.Tenfold.t_reale_account
         public string Memo { get; set; }
         public string TenStaffCD { get; set; }
         public string IPAddress { get; set; }
-
+        public string SEQPenalty { get; set; }
 
     }
 

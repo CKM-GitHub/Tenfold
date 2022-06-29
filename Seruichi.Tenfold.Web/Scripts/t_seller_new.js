@@ -1,7 +1,9 @@
 ﻿const _url = {};
 
 $(function () {
+    _url.checkAll = common.appPath + '/t_seller_profile/CheckAll';
     _url.checkZipCode = common.appPath + '/t_seller_new/CheckZipCode';
+    _url.checkMailAddress = common.appPath + '/t_seller_new/checkMailAddress';
     _url.modify_SellerData = common.appPath + '/t_seller_new/modify_SellerData';
 
     setValidation();
@@ -132,6 +134,30 @@ function addEvents() {
         }
     });
 
+    $('#MailAddress').on('blur', function () {
+        const $this = $(this);
+
+        if (!common.checkValidityInput($this)) {
+            return false;
+        }
+        let model = {
+            MailAddress: $('#MailAddress').val()
+        };
+        if (!model.MailAddress) {
+            $('#MailAddress').hideError();
+            return;
+        }
+        common.callAjax(_url.checkMailAddress, model, function (result) {
+            if (result && result.isOK) {
+                $('#MailAddress').hideError();
+            }
+            if (result && !result.isOK) {
+                const message = result.message;
+                $this.showError(message.MessageText1);
+            }
+        });
+    });
+
     $('#btnConfirm').on('click', function () {
         $form = $('#form1').hideChildErrors();
         if (!common.checkValidityOnSave('#form1')) {
@@ -142,8 +168,16 @@ function addEvents() {
         $('#PrefName').val($('#PrefCD option:selected').text());
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
-        Bind_ModalData(model);
-        $('#confirm').modal('show');
+        common.callAjaxWithLoading(_url.checkAll, model, this, function (result) {
+            if (result && result.isOK) {
+                Bind_ModalData(model);
+                $('#confirm').modal('show');
+            }
+            if (result && result.data) {
+                common.setValidationErrors(result.data);
+                common.setFocusFirstError($form);
+            }
+        });
     });
 
     $('#btnProcess').on('click', function () {

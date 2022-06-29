@@ -15,7 +15,7 @@ BEGIN
 
     SELECT TOP 1
          REStaffName
-        ,FORMAT(ExpDate, 'yyyy/MM/dd') AS ExpDate
+        ,ISNULL(FORMAT(ExpDate, 'yyyy/MM/dd'),'') AS ExpDate
         ,Priority
         ,PrecedenceFlg
         ,Remark

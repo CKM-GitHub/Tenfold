@@ -12,7 +12,7 @@ CREATE PROCEDURE [dbo].[pr_r_asmc_railway_Select_Lines_by_RegionCD]
 AS
 BEGIN
 
-    DECLARE @SysDate datetime = GETDATE()
+    DECLARE @SysDate date = GETDATE()
 
     SELECT DISTINCT 
         PRF.PrefCD
@@ -61,7 +61,7 @@ BEGIN
                     WHERE t1.LineCD = LIN.LineCD
                     AND   t1.DeleteDateTime IS NULL
                     AND   t2.DeleteDateTime IS NULL
-                    AND   t2.ExpDate > @SysDate
+                    AND  (t2.ExpDate IS NULL OR t2.ExpDate >= @SysDate)
                     AND   t1.DisabledFlg = 0
                     GROUP BY LineCD
                 ) RES
@@ -78,7 +78,7 @@ BEGIN
                     AND   t1.LineCD = LIN.LineCD
                     AND   t1.DeleteDateTime IS NULL
                     AND   t2.DeleteDateTime IS NULL
-                    AND   t2.ExpDate > @SysDate
+                    AND  (t2.ExpDate IS NULL OR t2.ExpDate >= @SysDate)
                     AND   t1.DisabledFlg = 0
                     GROUP BY LineCD
                 ) AS   MyRES
@@ -93,7 +93,7 @@ BEGIN
                     AND   t1.LineCD = LIN.LineCD
                     AND   t1.DeleteDateTime IS NULL
                     AND   t2.DeleteDateTime IS NULL
-                    AND   t2.ExpDate <= @SysDate
+                    AND   t2.ExpDate < @SysDate
                     AND   t1.DisabledFlg = 0
                 ) AS   MyRES2
 

@@ -10,8 +10,8 @@ CREATE FUNCTION [dbo].[fn_GetMinBuiltYearMonth](
 RETURNS int
 BEGIN
 
-    DECLARE @Today datetime = GETDATE()
-    DECLARE @ResultDate datetime
+    DECLARE @Today date = GETDATE()
+    DECLARE @ResultDate date
 
     SET @ResultDate = DATEADD(month, 1, DATEADD(year,  @BuildingAge * -1, @Today))
 

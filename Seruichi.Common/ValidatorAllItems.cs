@@ -10,6 +10,11 @@ namespace Seruichi.Common
 
         public bool IsValid { get { return result.Count == 0; } }
 
+        public bool IsContains(string key)
+        {
+            return result.ContainsKey(key);
+        }
+
         public Dictionary<string, string> GetValidationResult()
         {
             return result;

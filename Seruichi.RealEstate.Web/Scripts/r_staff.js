@@ -7,6 +7,7 @@ $(function () {
     _url.check_Update_M_REStaff = common.appPath + '/r_staff/Check_Update_M_REStaff';
     setValidation();
     addEvents();
+    $("#newStaffCD").focus();
 });
 
 function setValidation() {

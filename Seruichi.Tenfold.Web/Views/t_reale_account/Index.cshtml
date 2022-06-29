@@ -41,13 +41,47 @@
                                             </div>
 
                                         </div>
+                                        <div class="list-group shadow mb-5">
+                                            <div class="list-group-item">
+                                                <div class="row align-items-center">
+                                                    <div class="col">
+                                                        <strong class="mb-2">アカウント状態</strong>
+                                                    </div>
+                                                </div>
+                                                <div class="row align-items-center p-2">
+                                                    <div class="col-12 pb-3">
+
+                                                        <div class="list-group-item">
+                                                            <div class="row align-items-center">
+                                                                <div class="col-12">
+                                                                    <h5 class="text-danger" id="penltyOne">ペナルティのため制限中</h5>
+                                                                    <h5 class="text-success d-none" id="penltyZero">正常</h5>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <strong id="penaltyPeriod"> </strong>
+                                                                </div>
+                                                                <div class="col-12" id="penltyReason">
+                                                                     
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
                                         <div class="list-group shadow">
                                             <div class="list-group-item">
+                                                <input type="hidden" value="-1" id="seqPenalty" />
                                                 <div class="row align-items-center">
                                                     <div class="col">
                                                         <strong class="mb-2">ペナルティ設定</strong>
                                                     </div>
                                                 </div>
+
                                                 <div class="row align-items-center p-2">
                                                     <div class="col-12 pb-3">
 
@@ -65,24 +99,24 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div> 
-                                                <div class="col-12 col-md-6">
-                                                    <label for="StartDate" class="form-label">開始日</label>
-                                                    <span class="cap-errormsg-right" id="errorStartDate"></span>
-                                                    <input class="form-control mb-2 disabled-account" id="StartDate" name="StartDate" type="date" max="2999-12-31" > 
-                                                </div>
-                                                       <div class="col-12 col-md-6">
-                                                           <label for="EndDate" class="form-label">終了日</label>
-                                                           <span class="cap-errormsg-right" id="errorEndDate"></span>
-                                                           <input class="form-control mb-2 disabled-account" id="EndDate" name="EndDate" type="date" max="2999-12-31">
-                                                       </div> 
+                                                    </div>
+                                                    <div class="col-12 col-md-6">
+                                                        <label for="StartDate" class="form-label">開始日</label>
+                                                        <span class="cap-errormsg-right" id="errorStartDate"></span>
+                                                        <input class="form-control mb-2 disabled-account" id="StartDate" name="StartDate" type="date" max="2999-12-31">
+                                                    </div>
+                                                    <div class="col-12 col-md-6">
+                                                        <label for="EndDate" class="form-label">終了日</label>
+                                                        <span class="cap-errormsg-right" id="errorEndDate"></span>
+                                                        <input class="form-control mb-2 disabled-account" id="EndDate" name="EndDate" type="date" max="2999-12-31">
+                                                    </div>
 
                                                     <div class="col-12">
                                                         <label class="form-label" for="form3Examplev4">メモ</label>
                                                         <span class="cap-errormsg-right" id="errorpenalty"></span>
 
                                                         <textarea class="form-control custom-control disabled-account" add-validation-maxlengthcheck="true" data-digits="500" id="penaltyArea" name="penaltyArea" rows="3"></textarea>
-                                                    </div> 
+                                                    </div>
 
                                                 </div>
                                             </div>
@@ -90,44 +124,44 @@
                                         </div>
                                     </div>
 
-                                </div>
-                                <div class="col-12 col-md-5">
-                                    <div class="pt-md-5 ps-md-5 pe-md-5">
+                                        </div>
+                                        <div class="col-12 col-md-5">
+                                            <div class="pt-md-5 ps-md-5 pe-md-5">
 
-                                        <div class="list-group mb-5 shadow">
-                                            <div class="list-group-item">
-                                                <div class="row align-items-center">
-                                                    <div class="col">
-                                                        <strong class="mb-2">ペナルティ履歴</strong>
+                                                <div class="list-group mb-5 shadow">
+                                                    <div class="list-group-item">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <strong class="mb-2">ペナルティ履歴</strong>
+                                                            </div>
+                                                        </div>
+                                                        <div id="penaltyList" class="row align-items-center p-2 overflow-y-auto overflow-x-hidden" style="max-height: 320px;">
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="card shadow m-5">
+                                                <div class="card-footer">
+                                                    <div class="text-right float-end">
+
+                                                        @*<button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#modal-changesave" id="chagesCheck" onclick="CheckChanges()">
+                            変更保存
+                        </button>*@
+                                                        <button type="button" class="btn btn-lg btn-primary" id="chagesCheck" onclick="CheckChanges()">
+                                                            変更保存
+                                                        </button>
+                                                        <button type="button" class="btn btn-lg btn-default" data-bs-toggle="modal"
+                                                                data-bs-target="#modal-changecal">
+                                                            取消
+                                                        </button>
                                                     </div>
                                                 </div>
-                                                <div id="penaltyList" class="row align-items-center p-2 overflow-y-auto overflow-x-hidden" style="max-height: 320px;">
-                                                 
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="card shadow m-5">
-                                        <div class="card-footer">
-                                            <div class="text-right float-end">
-
-                                                @*<button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"
-                                                        data-bs-target="#modal-changesave" id="chagesCheck" onclick="CheckChanges()">
-                                                    変更保存
-                                                </button>*@
-                                                <button type="button" class="btn btn-lg btn-primary"   id="chagesCheck" onclick="CheckChanges()">
-                                                    変更保存
-                                                </button>
-                                                <button type="button" class="btn btn-lg btn-default" data-bs-toggle="modal"
-                                                        data-bs-target="#modal-changecal">
-                                                    取消
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
                         </div>
 
                     </form>
