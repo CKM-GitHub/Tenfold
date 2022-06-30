@@ -41,7 +41,7 @@ namespace Seruichi.RealEstate.Web.Controllers
             //model.LoginID = base.GetOperator("UserID");
             //model.LoginName = base.GetOperator("UserName");
             //model.IPAddress = base.GetClientIP(); 
-            var ds = bl.Get_templateData();
+            var ds = bl.Get_templateData(user.RealECD);
             var json = DataTableToJSON(ds.Tables[0]) + "Ʈ" + DataTableToJSON(ds.Tables[1]) + "Ʈ" + DataTableToJSON(ds.Tables[2])+ "Ʈ" + DataTableToJSON(ds.Tables[3]);
             return OKResult(json);
         }
