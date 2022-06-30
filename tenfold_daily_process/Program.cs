@@ -13,23 +13,22 @@ namespace tenfold_daily_process
     class Program
     {
         static tenfold_daily_processBL tbl = new tenfold_daily_processBL();
-        static System.Net.IPHostEntry client = new System.Net.IPHostEntry();
 
         static void Main(string[] args)
         {
             Console.Title = "Tenfold_Dialy_Process";
-            NetworkInterface[] networks = NetworkInterface.GetAllNetworkInterfaces();
             string IPaddress = "";
-            foreach (NetworkInterface network in networks)
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
             {
-                foreach (IPAddress entry in network.GetIPProperties().DhcpServerAddresses)
+                if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                 {
-                    IPaddress = entry.ToString();
+                    IPaddress = ip.ToString();
                 }
             }
             StaticCache.SetIniInfo();
             tbl.tenfold_daily_process_Insert_Update(IPaddress, 1);
-            var dtMonth = tbl.tenfold_daily_process_Select_M_Monthly();
+             var dtMonth = tbl.tenfold_daily_process_Select_M_Monthly();
 
             string masterMonth = "";
             if (dtMonth.Rows.Count > 0)
