@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using Seruichi.Common;
 using Models;
 using Models.Tenfold.t_seller_new;
+using System.Linq;
 
 namespace Seruichi.BL.Tenfold.t_seller_new
 {
@@ -112,6 +113,27 @@ namespace Seruichi.BL.Tenfold.t_seller_new
             return true;
         }
 
+        public bool checkMailAddress(t_seller_newModel model)
+        {
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_a_login_Select_M_Seller_All");
+            if (dt.Rows.Count == 0)
+            {
+                return true;
+            }
+
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+
+            if (dt.AsEnumerable().AsParallel()
+                .Any(r => crypt.DecryptFromBase64(r.Field<string>("MailAddress"), decryptionKey) == model.MailAddress))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public void modify_SellerData(t_seller_newModel model)
         {
             AESCryption crypt = new AESCryption();
@@ -119,7 +141,8 @@ namespace Seruichi.BL.Tenfold.t_seller_new
             string hashedPassword = new PasswordHash().GeneratePasswordHash(model.MailAddress, model.Password);
             var sqlParams = new SqlParameter[]
             {
-                new SqlParameter("@SellerName", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.SellerName, cryptionKey).ToStringOrNull() },
+                new SqlParameter("@SellerName", SqlDbType.VarChar){ Value = model.SellerName.ToStringOrNull() },
+                new SqlParameter("@SellerName_E", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.SellerName, cryptionKey).ToStringOrNull() },
                 new SqlParameter("@SellerKana", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.SellerKana, cryptionKey).ToStringOrNull() },
                 new SqlParameter("@Birthday", SqlDbType.VarChar){ Value = crypt.EncryptToBase64(model.Birthday, cryptionKey).ToStringOrNull() },
                 new SqlParameter("@Password", SqlDbType.VarChar){ Value = hashedPassword.ToStringOrNull() },

@@ -79,6 +79,7 @@
     <Compile Include="Seller\a_indexBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tenfold\Login\t_loginBL.cs" />
+    <Compile Include="Tenfold\tenfold_billing_process\tenfold_billing_processBL.cs" />
     <Compile Include="Tenfold\tenfold_daily_process\tenfold_daily_processBL.cs" />
     <Compile Include="Tenfold\t_admin\t_adminBL.cs" />
     <Compile Include="Tenfold\t_dashboard\t_dashboardBL.cs" />
@@ -230,6 +231,7 @@
     <Content Include="Database\StoredProcedure\pr_t_mansion_new_InsertMansionData.sql" />
     <Content Include="Database\StoredProcedure\pr_t_reale_account_DisplayData.sql" />
     <Content Include="Database\StoredProcedure\pr_t_reale_account_InsertUpdateData.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_reale_account_InsertUpdateData_new.sql" />
     <Content Include="Database\StoredProcedure\pr_t_reale_asmhis_get_DisplayData.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_account_Select_M_Seller_By_SellerCD.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_account_Update_M_Seller.sql" />

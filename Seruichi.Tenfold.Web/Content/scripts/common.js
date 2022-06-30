@@ -632,7 +632,7 @@ const common = {
                 if (minLength) {
                     const byteLength = inputValue.length;
                     if (byteLength < parseInt(minLength)) {
-                        $ctrl.showError(this.getMessage('E105'));
+                        $ctrl.showError(this.getMessage('E110'));
                         return;
                     }
                 }

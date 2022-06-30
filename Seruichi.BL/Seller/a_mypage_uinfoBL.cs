@@ -288,30 +288,30 @@ namespace Seruichi.BL
             elementId = "formChangePassword_Password";
             validator.CheckRequired(elementId, model.Password);
             validator.CheckIsHalfWidth(elementId, model.Password, 20);
+            if (!validator.IsContains("formChangePassword_Password"))
+            {
+                if (!CheckPasswordMatch(model.SellerCD, model.MailAddress, model.Password))
+                {
+                    validator.AddValidationResult("formChangePassword_Password", "E207");
+                }
+            }
             //新しいパスワード
             elementId = "formChangePassword_NewPassword";
             validator.CheckRequired(elementId, model.NewPassword);
             validator.CheckIsHalfWidth(elementId, model.NewPassword, 20);
+            if (!validator.IsContains("formChangePassword_NewPassword"))
+            {
+                if (model.NewPassword.Length < 8)
+                {
+                    validator.AddValidationResult("formChangePassword_NewPassword", "E110");
+                }
+            }
             //新しいパスワード（確認）
             elementId = "formChangePassword_ConfirmNewPassword";
             validator.CheckRequired(elementId, model.ConfirmNewPassword);
             if (!string.IsNullOrEmpty(model.ConfirmNewPassword) && model.NewPassword != model.ConfirmNewPassword)
             {
                 validator.AddValidationResult(elementId, "E109");
-            }
-
-            if (validator.IsValid)
-            {
-                //現在のパスワード
-                if (!CheckPasswordMatch(model.SellerCD, model.MailAddress, model.Password))
-                {
-                    validator.AddValidationResult("formChangePassword_Password", "E207");
-                }
-                //新しいパスワード
-                if (model.NewPassword.Length < 8 || model.NewPassword.Length > 20)
-                {
-                    validator.AddValidationResult("formChangePassword_NewPassword", "E105");
-                }
             }
 
             return validator.GetValidationResult();
