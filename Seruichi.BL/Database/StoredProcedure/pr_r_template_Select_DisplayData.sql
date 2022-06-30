@@ -5,6 +5,7 @@ END
 GO
 
 Create procedure [dbo].[pr_r_template_Select_DisplayData] 
+					 @RealECD as varchar(10)
 					 as 
 					 Begin
 					 					
@@ -19,7 +20,7 @@ Create procedure [dbo].[pr_r_template_Select_DisplayData]
 					,TemplateName																											
 					, (	select convert(varchar, ISNULL(UpdateDateTime,InsertDateTime), 111) )    As LstEdtDt																										
 					  FROM   M_Template																											
-					WHERE   TemplateKBN = 0 --or TemplateKBN = 1 or TemplateKBN = 2 or TemplateKBN = 3   																
+					WHERE   TemplateKBN = 0 and  RealECD = @RealECD --or TemplateKBN = 1 or TemplateKBN = 2 or TemplateKBN = 3   																
 					 
 					Order By　TemplateNo			
 									
@@ -34,7 +35,7 @@ Create procedure [dbo].[pr_r_template_Select_DisplayData]
 					,TemplateName																											
 						, (	select convert(varchar, ISNULL(UpdateDateTime,InsertDateTime), 111) )    As LstEdtDt																											
 					  FROM   M_Template																											
-					WHERE   TemplateKBN = 1 --or TemplateKBN = 1 or TemplateKBN = 2 or TemplateKBN = 3   																
+					WHERE   TemplateKBN = 1 and  RealECD = @RealECD --or TemplateKBN = 1 or TemplateKBN = 2 or TemplateKBN = 3   																
 					 
 					Order By　TemplateNo						
 					SELECT																											
@@ -48,7 +49,7 @@ Create procedure [dbo].[pr_r_template_Select_DisplayData]
 					,TemplateName																											
 					, (	select convert(varchar, ISNULL(UpdateDateTime,InsertDateTime), 111) )    As LstEdtDt																												
 					  FROM   M_Template																											
-					WHERE   TemplateKBN = 2 --or TemplateKBN = 1 or TemplateKBN = 2 or TemplateKBN = 3   																
+					WHERE   TemplateKBN = 2 and  RealECD = @RealECD--or TemplateKBN = 1 or TemplateKBN = 2 or TemplateKBN = 3   																
 					 
 					Order By　TemplateNo						
 					SELECT	 																							
@@ -62,7 +63,7 @@ Create procedure [dbo].[pr_r_template_Select_DisplayData]
 					,TemplateName																											
 						, (	select convert(varchar, ISNULL(UpdateDateTime,InsertDateTime), 111) )    As LstEdtDt																											
 					  FROM   M_Template																											
-					WHERE   TemplateKBN = 3 --or TemplateKBN = 1 or TemplateKBN = 2 or TemplateKBN = 3   																
+					WHERE   TemplateKBN = 3 and  RealECD = @RealECD--or TemplateKBN = 1 or TemplateKBN = 2 or TemplateKBN = 3   																
 					 
 					Order By　TemplateNo		
 					End
