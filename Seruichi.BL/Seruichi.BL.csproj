@@ -214,6 +214,13 @@
     <Content Include="Database\StoredProcedure\pr_r_temp_mes_Insert_M_REMessage.sql" />
     <Content Include="Database\StoredProcedure\pr_r_temp_mes_Select_M_REMessage_By_RealECD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_temp_mes_Update_M_REMessage.sql" />
+    <Content Include="Database\StoredProcedure\pr_tenfold_daily_process_Insert_M_REMoAreaPlan.sql" />
+    <Content Include="Database\StoredProcedure\pr_tenfold_daily_process_Insert_M_REMoAreaPlanSec.sql" />
+    <Content Include="Database\StoredProcedure\pr_tenfold_daily_process_Insert_M_REMoIntroAmount.sql" />
+    <Content Include="Database\StoredProcedure\pr_tenfold_daily_process_Insert_M_REMoManPlan.sql" />
+    <Content Include="Database\StoredProcedure\pr_tenfold_daily_process_Insert_M_REMonthlyCourse.sql" />
+    <Content Include="Database\StoredProcedure\pr_tenfold_daily_process_Insert_Update.sql" />
+    <Content Include="Database\StoredProcedure\pr_tenfold_daily_process_Update_M_RealEstate.sql" />
     <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForContract.sql" />
     <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForCustomerInfo.sql" />
     <Content Include="Database\StoredProcedure\pr_t_dashboard_Select_AssReqProgressForDecline.sql" />
