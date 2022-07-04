@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7A66D09C-F954-4B47-91B0-234C3347595B}</ProjectGuid>
+    <ProjectGuid>{9C5C1F4C-3751-440B-969C-5AE505C54F22}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>tenfold_daily_process</RootNamespace>
-    <AssemblyName>tenfold_daily_process</AssemblyName>
+    <RootNamespace>tenfold_billing_process</RootNamespace>
+    <AssemblyName>tenfold_billing_process</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,18 +33,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Seruichi.BL">
-      <HintPath>..\Seruichi.BL\bin\Debug\Seruichi.BL.dll</HintPath>
-    </Reference>
-    <Reference Include="Seruichi.Common">
-      <HintPath>..\Seruichi.Common\bin\Debug\Seruichi.Common.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -54,6 +48,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{dc43a405-2700-495f-8e91-7e1dd6804cf7}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Seruichi.BL\Seruichi.BL.csproj">
+      <Project>{99062fac-2619-4bdb-a75f-6b90f7742f7a}</Project>
+      <Name>Seruichi.BL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

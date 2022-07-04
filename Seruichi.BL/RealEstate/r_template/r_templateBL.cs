@@ -13,10 +13,11 @@ namespace Seruichi.BL.RealEstate.r_template
 {
   public  class r_templateBL
     {
-        public DataSet Get_templateData()
+        public DataSet Get_templateData(string rcd)
         {
             var sqlParams = new SqlParameter[]
-            { 
+            {     
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = rcd},
             };
             DBAccess db = new DBAccess();
             var dt = db.SelectDataSet("pr_r_template_Select_DisplayData", sqlParams);

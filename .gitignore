@@ -262,3 +262,4 @@ __pycache__/
 *.pyc
 /Seruichi.Seller.Web/a_mypage_uinfo (1).html
 /Seruichi.Seller.Web/a_contact.html
+/Seruichi.BL/Database/StoredProcedure/【開発中】pr_CryptionConvert_.sql

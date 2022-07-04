@@ -12,7 +12,7 @@ CREATE PROCEDURE [dbo].[pr_r_asmc_ms_map_add_Select_Towns_by_Cities]
 AS
 BEGIN
 
-    DECLARE @SysDate datetime = GETDATE()
+    DECLARE @SysDate date = GETDATE()
 
     SELECT DISTINCT
          ADR.PrefCD
@@ -54,7 +54,7 @@ BEGIN
                 INNER JOIN M_Mansion M ON M.MansionCD = t1.MansionCD
                 WHERE TownCD = ADR.TownCD
                 AND   t1.DeleteDateTime IS NULL
-                AND   t1.ExpDate > @SysDate
+                AND  (t1.ExpDate IS NULL OR t1.ExpDate >= @SysDate)
                 AND   t1.DisabledFlg = 0
                 AND   M.NoDisplayFLG = 0
                 GROUP BY TownCD
@@ -70,7 +70,7 @@ BEGIN
                 WHERE t1.RealECD = @RealECD
                 AND   M.TownCD = ADR.TownCD
                 AND   t1.DeleteDateTime IS NULL
-                AND   t1.ExpDate > @SysDate
+                AND  (t1.ExpDate IS NULL OR t1.ExpDate >= @SysDate)
                 AND   t1.DisabledFlg = 0
                 AND   M.NoDisplayFLG = 0
                 GROUP BY CityCD 

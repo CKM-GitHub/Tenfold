@@ -13,11 +13,11 @@ BEGIN
 
     DECLARE @ReturnValue int, @diffMonth int
     DECLARE @StartDate varchar(10) = FORMAT(@StartYearMonth, '0000/00') + '/01'
-    DECLARE @EndDate datetime = GETDATE()
+    DECLARE @EndDate date = GETDATE()
 
     IF @StartDate > @EndDate RETURN 0;
 
-    SET @diffMonth = CASE WHEN ISDATE(@StartDate) = 1 AND ISDATE(@EndDate) = 1
+    SET @diffMonth = CASE WHEN ISDATE(@StartDate) = 1
         THEN DATEDIFF(m, @StartDate, @EndDate) ELSE 0 END
 
     --SET @ReturnValue = CASE WHEN @diffMonth % 12 > 0 THEN @diffMonth / 12 + 1 ELSE @diffMonth / 12 END

@@ -12,7 +12,7 @@ CREATE PROCEDURE [dbo].[pr_r_asmc_address_Select_Cities_by_RegionCD]
 AS
 BEGIN
 
-    DECLARE @SysDate datetime = GETDATE()
+    DECLARE @SysDate date = GETDATE()
 
     SELECT DISTINCT 
          ADR.PrefCD
@@ -54,7 +54,7 @@ BEGIN
                     WHERE CityCD = ADR.CityCD
                     AND   t1.DeleteDateTime IS NULL
                     AND   t2.DeleteDateTime IS NULL
-                    AND   t2.ExpDate > @SysDate
+                    AND  (t2.ExpDate IS NULL OR t2.ExpDate >= @SysDate)
                     AND   t1.DisabledFlg = 0
                     GROUP BY CityCD 
                 ) AS   RES
@@ -70,7 +70,7 @@ BEGIN
                     AND   t1.CityCD = ADR.CityCD
                     AND   t1.DeleteDateTime IS NULL
                     AND   t2.DeleteDateTime IS NULL
-                    AND   t2.ExpDate > @SysDate
+                    AND  (t2.ExpDate IS NULL OR t2.ExpDate >= @SysDate)
                     AND   t1.DisabledFlg = 0
                     GROUP BY CityCD 
                 ) AS   MyRES
@@ -85,7 +85,7 @@ BEGIN
                     AND   t1.CityCD = ADR.CityCD
                     AND   t1.DeleteDateTime IS NULL
                     AND   t2.DeleteDateTime IS NULL
-                    AND   t2.ExpDate <= @SysDate
+                    AND   t2.ExpDate < @SysDate
                     AND   t1.DisabledFlg = 0
                 ) AS   MyRES2
 

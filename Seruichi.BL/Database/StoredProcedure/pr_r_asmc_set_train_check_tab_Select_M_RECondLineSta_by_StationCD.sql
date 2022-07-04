@@ -12,7 +12,7 @@ CREATE PROCEDURE [dbo].[pr_r_asmc_set_train_check_tab_Select_M_RECondLineSta_by_
 AS
 BEGIN
 
-    DECLARE @SysDate datetime = GETDATE()
+    DECLARE @SysDate date = GETDATE()
 
     SELECT TOP 1 
          t1.RealECD
@@ -22,7 +22,7 @@ BEGIN
         ,t2.ValidFLG
         ,CASE t2.ValidFLG WHEN 1 THEN '(公開済)' ELSE '(未公開)' END AS ValidFLGText
         ,CASE WHEN t2.ExpDate < @SysDate THEN 1 ELSE 0 END AS ExpDateFLG
-        ,CASE WHEN t2.ExpDate < @SysDate THEN '有効期限切れ' ELSE FORMAT(t2.ExpDate, 'yyyy年MM月dd日迄') END AS ExpDateText
+        ,CASE WHEN t2.ExpDate < @SysDate THEN '有効期限切れ' ELSE ISNULL(FORMAT(t2.ExpDate, 'yyyy年MM月dd日迄'),'') END AS ExpDateText
 
     FROM M_RECondLineSta t1
     INNER JOIN M_RECondLine t2 ON t1.RealECD = t2.RealECD AND t1.ConditionSEQ = t2.ConditionSEQ

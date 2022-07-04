@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("tenfold_daily_process")]
+[assembly: AssemblyTitle("tenfold_billing_process")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("tenfold_daily_process")]
+[assembly: AssemblyProduct("tenfold_billing_process")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7a66d09c-f954-4b47-91b0-234c3347595b")]
+[assembly: Guid("9c5c1f4c-3751-440b-969c-5ae505c54f22")]
 
 // Version information for an assembly consists of the following four values:
 //
