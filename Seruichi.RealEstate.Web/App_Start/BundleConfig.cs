@@ -150,7 +150,8 @@ namespace Seruichi.RealEstate.Web
 
             bundles.Add(new ScriptBundle("~/bundles/r_invoice").Include(
                    "~/Scripts/r_invoice.js",
-                   "~/Content/scripts/sidebar.js"));
+                   "~/Content/scripts/sidebar.js",
+                   "~/Content/scripts/table_header_sort.js"));
 
         }
     }

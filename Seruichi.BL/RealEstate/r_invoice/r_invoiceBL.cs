@@ -15,6 +15,12 @@ namespace Seruichi.BL.RealEstate.r_invoice
         public Dictionary<string, string> ValidateAll(r_invoiceModel model)
         {
             ValidatorAllItems validator = new ValidatorAllItems();
+
+            validator.CheckYM("StartMonth", model.StartDate);//E125
+            validator.CheckYM("EndMonth", model.EndDate);//E125
+
+            validator.CheckCompareYM("StartMonth", model.StartDate, model.EndDate);//E126
+            validator.CheckCompareYM("EndMonth", model.StartDate, model.EndDate);//E126
             return validator.GetValidationResult();
         }
         public DataTable Get_D_Billing_List(r_invoiceModel model)
@@ -23,8 +29,8 @@ namespace Seruichi.BL.RealEstate.r_invoice
              {
                 new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = model.RealECD },
                 new SqlParameter("@Range", SqlDbType.VarChar){Value = model.Range.ToStringOrNull() },
-                new SqlParameter("@StartDate", SqlDbType.VarChar){Value = model.StartDate.ToStringOrNull() },
-                new SqlParameter("@EndDate", SqlDbType.VarChar){Value = model.EndDate.ToStringOrNull() },
+                new SqlParameter("@StartDate", SqlDbType.DateTime){Value = model.StartDate.ToStringOrNull() },
+                new SqlParameter("@EndDate", SqlDbType.DateTime){Value = model.EndDate.ToStringOrNull() },
 
              };
 
