@@ -29,8 +29,9 @@ namespace Seruichi.BL.RealEstate.r_invoice
              {
                 new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = model.RealECD },
                 new SqlParameter("@Range", SqlDbType.VarChar){Value = model.Range.ToStringOrNull() },
-                new SqlParameter("@StartDate", SqlDbType.DateTime){Value = model.StartDate.ToStringOrNull() },
-                new SqlParameter("@EndDate", SqlDbType.DateTime){Value = model.EndDate.ToStringOrNull() },
+                new SqlParameter("@StartDate", SqlDbType.VarChar){Value = model.StartDate.ToStringOrNull() },
+                new SqlParameter("@EndDate", SqlDbType.VarChar){Value = model.EndDate.ToStringOrNull() },
+                new SqlParameter("@Option", SqlDbType.TinyInt){Value = model.Option.ToStringOrNull() },
 
              };
 

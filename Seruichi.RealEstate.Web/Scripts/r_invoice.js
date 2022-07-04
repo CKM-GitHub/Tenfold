@@ -53,6 +53,7 @@ function addEvents() {
         Range: $Range,
         StartDate: $StartDate,
         EndDate: $EndDate,
+        Option: 1,
     };
     get_D_Billing_List(model, this);
     sortTable.getSortingTable("billingtable");
@@ -73,6 +74,7 @@ function addEvents() {
             Range: $Range,
             StartDate: $StartDate,
             EndDate: $EndDate,
+            Option: 0,
         };
         get_D_Billing_List(model, $form);
     });
@@ -100,52 +102,52 @@ function Bind_tbody(result) {
     let data = JSON.parse(result);
     let html = "";
     for (var i = 0; i < data.length; i++) {
-        //html += '<tr>\
-        //        <td class="text-end d-none">' + (i+1) + '</td>\
-        //        <td>' + data[i]["InvoiceYYYYMM"] + '</td>\
-        //        <td>' + data[i]["InsertDateTime"] +'</td>\
-        //        <td>' + data[i]["TransferDate"] +'</td>\
-        //        <td class="text-end">' + data[i]["AreaPlanFee"] +'</td>\
-        //        <td class="text-end">' + data[i]["ManPlanFee"] +'</td>\
-        //        <td class="text-end">' + data[i]["SendTimes"] +'</td>\
-        //        <td class="text-end">' + data[i]["TransferFee"] +'</td>\
-        //        <td class="text-end">' + data[i]["OtherFee"] +'</td>\
-        //        <td class="text-end">' + data[i]["BaseAmount"] +'</td>\
-        //        <td class="text-end">' + data[i]["TaxAmount"] +'</td>\
-        //        <td class="text-end">' + data[i]["BillingAmount"] +'</td>\
-        //        <td class="text-center"> <button type="button" class="btn btn-primary btn">出力</button> </td>\
-        //    </tr>'
+        html += '<tr>\
+                <td class="text-end d-none">' + (i+1) + '</td>\
+                <td>' + data[i]["InvoiceYYYYMM"] + '</td>\
+                <td>' + data[i]["InsertDateTime"] +'</td>\
+                <td>' + data[i]["TransferDate"] +'</td>\
+                <td class="text-end">' + data[i]["AreaPlanFee"] +'</td>\
+                <td class="text-end">' + data[i]["ManPlanFee"] +'</td>\
+                <td class="text-end">' + data[i]["SendTimes"] +'</td>\
+                <td class="text-end">' + data[i]["TransferFee"] +'</td>\
+                <td class="text-end">' + data[i]["OtherFee"] +'</td>\
+                <td class="text-end">' + data[i]["BaseAmount"] +'</td>\
+                <td class="text-end">' + data[i]["TaxAmount"] +'</td>\
+                <td class="text-end">' + data[i]["BillingAmount"] +'</td>\
+                <td class="text-center"> <button type="button" class="btn btn-primary btn">出力</button> </td>\
+            </tr>'
     }
-    html +='<tr>\
-         <td class="text-end d-none"> 1 </td>\
-        <td> 2020/12 </td>\
-        <td> 2020/12/25</td>\
-        <td> 2020/12/25</td>\
-        <td class="text-end"> 9,999,999,999</td>\
-        <td class="text-end"> 9,999,999,999</td>\
-        <td class="text-end"> 99</td>\
-        <td class="text-end"> 9,999,999,999</td>\
-        <td class="text-end"> 9,999,999,999</td>\
-        <td class="text-end"> 9,999,999,999</td>\
-        <td class="text-end"> 9,999,999,999</td>\
-        <td class="text-end"> 9,999,999,999</td>\
-        <td class="text-center"> <button type="button" class="btn btn-primary btn">出力</button> </td>\
-    </tr>\
-        <tr>\
-        <td class="text-end d-none"> 2 </td>\
-        <td> 2020/13 </td>\
-            <td> 2020/12/30</td>\
-            <td> 2020/12/30</td>\
-            <td class="text-end"> 0</td>\
-            <td class="text-end"> 0</td>\
-            <td class="text-end"> 0</td>\
-            <td class="text-end"> 0</td>\
-            <td class="text-end"> 0</td>\
-            <td class="text-end"> 0</td>\
-            <td class="text-end"> 0</td>\
-            <td class="text-end"> 0</td>\
-            <td class="text-center"> <button type="button" class="btn btn-primary">出力</button> </td>\
-                                        </tr>'
+    //html +='<tr>\
+    //     <td class="text-end d-none"> 1 </td>\
+    //    <td> 2020/12 </td>\
+    //    <td> 2020/12/25</td>\
+    //    <td> 2020/12/25</td>\
+    //    <td class="text-end"> 9,999,999,999</td>\
+    //    <td class="text-end"> 9,999,999,999</td>\
+    //    <td class="text-end"> 99</td>\
+    //    <td class="text-end"> 9,999,999,999</td>\
+    //    <td class="text-end"> 9,999,999,999</td>\
+    //    <td class="text-end"> 9,999,999,999</td>\
+    //    <td class="text-end"> 9,999,999,999</td>\
+    //    <td class="text-end"> 9,999,999,999</td>\
+    //    <td class="text-center"> <button type="button" class="btn btn-primary btn">出力</button> </td>\
+    //</tr>\
+    //    <tr>\
+    //    <td class="text-end d-none"> 2 </td>\
+    //    <td> 2020/13 </td>\
+    //        <td> 2020/12/30</td>\
+    //        <td> 2020/12/30</td>\
+    //        <td class="text-end"> 0</td>\
+    //        <td class="text-end"> 0</td>\
+    //        <td class="text-end"> 0</td>\
+    //        <td class="text-end"> 0</td>\
+    //        <td class="text-end"> 0</td>\
+    //        <td class="text-end"> 0</td>\
+    //        <td class="text-end"> 0</td>\
+    //        <td class="text-end"> 0</td>\
+    //        <td class="text-center"> <button type="button" class="btn btn-primary">出力</button> </td>\
+    //                                    </tr>'
     if (data.length > 0) {
         $('#total_record').text("検索結果：" + data.length + "件")
         $('#total_record_up').text("検索結果：" + data.length + "件")

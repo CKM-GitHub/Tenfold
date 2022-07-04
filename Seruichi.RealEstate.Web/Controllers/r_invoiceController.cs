@@ -33,6 +33,8 @@ namespace Seruichi.RealEstate.Web.Controllers
             {
                 return ErrorResult(validationResult);
             }
+            r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
+            model.RealECD = user.RealECD;
             var dt = bl.Get_D_Billing_List(model);
             return OKResult(DataTableToJSON(dt));
         }
