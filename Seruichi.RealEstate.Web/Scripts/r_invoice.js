@@ -152,7 +152,7 @@ function Bind_tbody(result) {
                 <td class="text-end">' + data[i]["BaseAmount"] +'</td>\
                 <td class="text-end">' + data[i]["TaxAmount"] +'</td>\
                 <td class="text-end">' + data[i]["BillingAmount"] +'</td>\
-                <td class="text-center"> <button type="button" class="btn btn-primary btn">出力</button> </td>\
+                <td class="text-center"> <button type="button" class="btn btn-primary btn" id="'+ data[i]["InvoiceNo"] + '&' + data[i]["RealECD"] + '&' + data[i]["InvoiceYYYYMM"] +'">出力</button> </td>\
             </tr>'
     }
     //html +='<tr>\

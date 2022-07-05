@@ -22,6 +22,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return RedirectToAction("Index", "r_login");
             }
 
+            ViewBag.Url = System.Web.HttpContext.Current.Request.UrlReferrer;
             r_asmc_ms_reged_listBL bl = new r_asmc_ms_reged_listBL();
             List<M_Pref> prefList = new List<M_Pref>();
             DataTable dt = bl.GetM_Pref();
@@ -55,10 +56,11 @@ namespace Seruichi.RealEstate.Web.Controllers
                             CityName = dr["CityName"].ToString()
                         }).ToList();
 
-
+            string strUrl = ViewBag.Url.Segments[1].Replace("/","");
             ViewBag.PrefCD = prefList;
             ViewBag.CityGPCD = prefcitygpcdList;
             ViewBag.CityCD = cityList;
+            //ViewBag.StrUrl = strUrl;
             return View();
         }
 

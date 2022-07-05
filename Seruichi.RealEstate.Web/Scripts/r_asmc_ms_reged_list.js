@@ -218,6 +218,7 @@ function Bind_tbody(result) {
             <td> <a class="text-heading font-semibold">'+ data[i]["住所"] + '</a> </td>\
             <td> <span class='+ _class + '>(' + data[i]["公開フラグ"] + ')</span></td>\
             <td> '+ data[i]["登録日"] + '</td>\
+            <td> '+ data[i]["有効期限日"] + '</td>\
             <td>\
             <div class="d-flex flex-row mt-2">\
             <div class="text-danger mb-1 me-2">'

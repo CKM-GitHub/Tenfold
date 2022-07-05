@@ -597,7 +597,7 @@ const common = {
                     }
                 }
 
-                if ($("#StartYear").val() != undefined && $("#EndYear").val() != undefined) {
+                if ($("#StartYear").val() != "" && $("#EndYear").val() != "") {
                     if (!common.compareYear($("#StartYear").val(), $("#EndYear").val())) {
                         $("#StartYear").showError(this.getMessage('E113'));
                         $("#StartYear").focus();
