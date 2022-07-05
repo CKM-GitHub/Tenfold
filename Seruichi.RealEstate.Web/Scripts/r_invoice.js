@@ -78,6 +78,43 @@ function addEvents() {
         };
         get_D_Billing_List(model, $form);
     });
+
+    $('#btn1').click(function () {
+
+        let model = {
+            RealECD: "RE01"
+        }
+
+        $.ajax({
+            url: '/r_invoice/GeneratePDF',
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(model),
+            responseType: 'arraybuffer',
+            headers: {
+                RequestVerificationToken: $("#_RequestVerificationToken").val(),
+            },
+            success: function (data) {
+                var atobData = atob(data);
+                var num = new Array(atobData.length);
+                for (var i = 0; i < atobData.length; i++) {
+                    num[i] = atobData.charCodeAt(i);
+                }
+                var pdfData = new Uint8Array(num);
+
+                //var blob = new Blob([pdfData], { type: 'text/plain' });
+                blob = new Blob([pdfData], { type: 'application/pdf;base64' });
+                var url = URL.createObjectURL(blob);
+
+                var a = document.createElement('a');
+                a.href = url;
+                a.download = 'File.pdf';
+                a.click();
+
+                window.open(url);
+            }
+        });
+    });
 }
 
 
