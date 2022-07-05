@@ -2,9 +2,9 @@
 
 @model Models.RealEstate.r_asmc_address.r_asmc_addressModel
 
-@{ 
-    string switch_label = (ViewBag.PageID == "r_asmc_address" ? "行政区画表示" 
-                         : ViewBag.PageID == "r_asmc_railway" ? "路線表示" 
+@{
+    string switch_label = (ViewBag.PageID == "r_asmc_address" || ViewBag.PageID == "r_asmc_ms_map_add" ? "行政区画表示"
+                         : ViewBag.PageID == "r_asmc_railway" ? "路線表示"
                          : "");
 }
 
@@ -24,7 +24,7 @@
                         <span class="form-check form-switch ms-5">
                             <input class="form-check-input" type="checkbox" role="switch" id="@switch_id"
                                    data-toggle="toggle" data-bs-toggle="collapse" data-bs-target="@toggle_jid"
-                                   aria-expanded="false" aria-controls="@toggle_id">
+                                   aria-expanded="false" aria-controls="@toggle_id" autocomplete="off">
                             <label class="form-check-label" for="@switch_id">@switch_label</label>
                         </span>
                     </h5>
@@ -68,16 +68,23 @@
                             var text1 = string.Format("({0}件/{1}社)", item03.MansionCount, item03.RealEstateCount);
                             var text2 = string.Format("({0}件)", item03.MansionCount);
                             var text3 = string.Format("({0}社)", item03.RealEstateCount);
-                            string css_label = "checkbox-inline p-3 cap-fon-div-w250 text-nowrap "
-                                            + (item03.ValidFLG == 0 ? "text-danger" : item03.ValidFLG == 1 ? "text-primary" : "text-dark");
+                            string css_icon =
+                                item03.ExpirationFlag == 1 ? "fa fa-exclamation-triangle text-warning" :
+                                item03.ValidFLG == 1 ? "fa fa-info-circle text-danger" :
+                                item03.ValidFLG == 2 ? "fa fa-info-circle cap-text-primary" :
+                                "";
 
-                            <label class="@css_label">
-                                <input type="checkbox" value="@item03.CityCD" class="@css_chkbox">
+                            <label class="heckbox-inline p-3 cap-fon-div-w270 text-nowrap text-dark">
+                                <input type="checkbox" value="@item03.CityCD" class="@css_chkbox" autocomplete="off">
                                 <span class="ps-1">
                                     @item03.CityName
-                                    <span class="js-text1">@text1</span>
-                                    <span class="js-text2 d-none">@text2</span>
-                                    <span class="js-text3 d-none">@text3</span>
+                                    <span class="ps-1 js-text1">@text1</span>
+                                    <span class="ps-1 js-text2 d-none">@text2</span>
+                                    <span class="ps-1 js-text3 d-none">@text3</span>
+                                    @if (!string.IsNullOrEmpty(css_icon))
+                                    {
+                                        <i class="@css_icon" aria-hidden="true"></i>
+                                    }
                                 </span>
                             </label>
                         }

@@ -128,8 +128,8 @@ namespace Seruichi.BL.Tenfold.t_mansion_list
             validator.CheckIsHalfWidth("StartNum", model.StartAge,7, RegexFormat.Number); //E104,E105 
             validator.CheckIsHalfWidth("EndNum", model.EndAge, 7, RegexFormat.Number); //E104,E105 
 
-            validator.CheckIsHalfWidth("StartUnit", model.StartUnit, 2, RegexFormat.Number); //E104,E105 
-            validator.CheckIsHalfWidth("EndUnit", model.EndUnit, 2, RegexFormat.Number); //E104,E105 
+            validator.CheckIsHalfWidth("StartUnit", model.StartUnit, 3, RegexFormat.Number); //E104,E105 
+            validator.CheckIsHalfWidth("EndUnit", model.EndUnit, 3, RegexFormat.Number); //E104,E105 
 
             if(!string.IsNullOrWhiteSpace(model.StartAge) && !string.IsNullOrWhiteSpace(model.EndAge))
             {

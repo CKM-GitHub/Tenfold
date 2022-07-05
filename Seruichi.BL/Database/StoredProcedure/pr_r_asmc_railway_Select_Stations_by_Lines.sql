@@ -12,6 +12,8 @@ CREATE PROCEDURE [dbo].[pr_r_asmc_railway_Select_Stations_by_Lines]
 AS
 BEGIN
 
+    DECLARE @SysDate date = GETDATE()
+
     SELECT DISTINCT
          PRF.PrefCD
         ,PRF.PrefName
@@ -23,8 +25,9 @@ BEGIN
         ,ISNULL(RES.Kensu,0)        AS RealEstateCount
         ,STN.DisplayOrder
 
-        ,ISNULL(MyRES.ValidFLG, 9)  AS ValidFLG
-        ,MyRES.ExpDate
+        ,ISNULL(MyRES.ValidFLG, 0)  AS ValidFLG
+        --ValidFLGがNULLでExistsFlgが１の場合、査定データがすべて無効か、期限切れということ
+        ,CASE WHEN MyRES.ValidFLG IS NULL THEN MyRES2.ExistsFlg ELSE 0 END AS ExpirationFlag
 
     FROM M_Pref PRF
     INNER JOIN M_Station STN ON PRF.PrefCD = STN.PrefCD
@@ -37,11 +40,13 @@ BEGIN
     --   取得した駅コードでグループ化して登録マンション数を取得
     ----------------------------------------------------------------------
     OUTER APPLY (
-                    SELECT  S1.StationCD
-                            ,Count(DISTINCT S1.MansionCD) AS Kensu
-                    FROM M_MansionStation S1
-                    WHERE S1.StationCD = STN.StationCD
-                    GROUP BY S1.StationCD
+                    SELECT  t1.StationCD
+                            ,Count(DISTINCT t1.MansionCD) AS Kensu
+                    FROM M_MansionStation t1
+                    INNER JOIN M_Mansion M ON M.MansionCD = t1.MansionCD
+                    WHERE t1.StationCD = STN.StationCD
+                    AND   M.NoDisplayFLG = 0
+                    GROUP BY t1.StationCD
                 ) MAN 
     ----------------------------------------------------------------------
     -- 登録会社数の参照
@@ -49,10 +54,15 @@ BEGIN
     --   駅コードでグループ化して事業者件数を取得
     ----------------------------------------------------------------------
     OUTER APPLY (
-                    SELECT S1.StationCD
-                        ,Count(DISTINCT S1.RealECD) AS Kensu
-                    FROM M_RECondLineSta S1
-                    WHERE S1.StationCD = STN.StationCD
+                    SELECT t1.StationCD
+                        ,Count(DISTINCT t1.RealECD) AS Kensu
+                    FROM M_RECondLineSta t1
+                    INNER JOIN M_RECondLine t2 ON t1.RealECD = t2.RealECD AND t1.ConditionSEQ = t2.ConditionSEQ 
+                    WHERE t1.StationCD = STN.StationCD
+                    AND   t1.DeleteDateTime IS NULL
+                    AND   t2.DeleteDateTime IS NULL
+                    AND  (t2.ExpDate IS NULL OR t2.ExpDate >= @SysDate)
+                    AND   t1.DisabledFlg = 0
                     GROUP BY StationCD
                 ) RES
     ----------------------------------------------------------------------
@@ -60,17 +70,28 @@ BEGIN
     ----------------------------------------------------------------------
     OUTER APPLY (
                 SELECT 
-                     MAX(t2.ValidFLG)   AS ValidFLG
-                    ,MAX(t2.ExpDate)    AS ExpDate
+                     MIN(t2.ValidFLG) + 1   AS ValidFLG
                 FROM M_RECondLineSta t1
                 INNER JOIN M_RECondLine t2 ON t1.RealECD = t2.RealECD AND t1.ConditionSEQ = t2.ConditionSEQ 
                 WHERE t1.RealECD = @RealECD
                 AND   t1.StationCD = STN.StationCD
                 AND   t1.DeleteDateTime IS NULL
                 AND   t2.DeleteDateTime IS NULL
-                AND   t2.ExpDate > GETDATE()
+                AND  (t2.ExpDate IS NULL OR t2.ExpDate >= @SysDate)
+                AND   t1.DisabledFlg = 0
                 GROUP BY StationCD 
                 ) AS   MyRES
+
+    OUTER APPLY (
+                SELECT TOP 1
+                     1 AS ExistsFlg
+                FROM M_RECondLineSta t1
+                INNER JOIN M_RECondLine t2 ON t1.RealECD = t2.RealECD AND t1.ConditionSEQ = t2.ConditionSEQ 
+                WHERE t1.RealECD = @RealECD
+                AND   t1.StationCD = STN.StationCD
+                AND   t1.DeleteDateTime IS NULL
+                AND   t2.DeleteDateTime IS NULL
+                ) AS   MyRES2
 
     WHERE STN.NoDisplayFLG = 0  --表示対象外は除く
       AND STN.LineCD IN (SELECT value FROM string_split(@LinecdCsv, ','))

@@ -155,6 +155,7 @@
     <Compile Include="Controllers\a_contactController.cs" />
     <Compile Include="Controllers\a_mypage_ahisController.cs" />
     <Compile Include="Controllers\a_mypage_plusController.cs" />
+    <Compile Include="Controllers\a_mypage_taikaiController.cs" />
     <Compile Include="Controllers\a_mypage_uinfoController.cs" />
     <Compile Include="Controllers\a_mailregisterController.cs" />
     <Compile Include="Controllers\a_mypage_whisController.cs" />
@@ -233,6 +234,7 @@
     <Content Include="Scripts\a_contact.js" />
     <Content Include="Scripts\a_mypage_ahis.js" />
     <Content Include="Scripts\a_mypage_plus.js" />
+    <Content Include="Scripts\a_mypage_taikai.js" />
     <Content Include="Scripts\a_mypage_whis.js" />
     <Content Include="Scripts\a_mypage_uinfo.js" />
     <Content Include="Scripts\a_mailregister.js" />
@@ -291,6 +293,8 @@
     <Content Include="Views\a_mypage_whis\Index.cshtml" />
     <Content Include="Views\a_assess_d\Index.cshtml" />
     <Content Include="Views\Shared\_VerificationToken.cshtml" />
+    <Content Include="Views\a_mypage_taikai\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

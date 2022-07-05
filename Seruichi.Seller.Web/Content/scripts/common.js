@@ -26,6 +26,7 @@ const messageConst = {
     E205: 'パスワードが入力されていません',
     E206: 'メールアドレスとパスワードの組合せが正しくありません',
     E207: 'この情報での登録はありません',
+    E213: 'セルイチを退会します」のチェックボックスがオフです。',
 }
 
 const commonApiUrl = {
@@ -231,6 +232,7 @@ const common = {
         form.method = "POST";
         form.action = action;
         form.submit();
+        this.showLoading();
     },
 
     removeDropDownListItems: function removeDropDownListItems(selector, placeHolder) {

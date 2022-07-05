@@ -1,0 +1,255 @@
+﻿@model Models.RealEstate.r_asmc_set_area_check_tab.M_RECondAreaSecModel
+
+@{
+    ViewBag.Title = "査定条件設定確認";
+    Layout = "~/Views/Shared/_r_withoutHeaderAndFooterLayout.cshtml";
+
+    var css1 = Model.ValidFLG == 1 ? "cap-text-primary" : "text-danger";
+    var css2 = Model.ExpDateFLG == 1 ? "text-warning" : ""; ;
+}
+@section styles{
+    @Styles.Render("~/Content/realEstate_css_common")
+}
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary">
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <div class="col-md-12 col-12 mb-3 mb-sm-0">
+                            <h1 class="h2 mb-0 ls-tight">査定条件設定確認</h1>
+                            <span class="text-muted small">査定条件＞設定＞住所・路線から設定＞住所から設定</span>
+                        </div>
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
+                            <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <h5>地域</h5>
+                    </div>
+                    <div class="card-body container">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-nowrap">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" style="width: 200px" class="text-decoration-underline">地域</th>
+                                        <th scope="col" style="width: 100px" class="text-decoration-underline">公開状況</th>
+                                        <th scope="col" style="width: 150px" class="text-decoration-underline">有効期限状況</th>
+                                        <th scope="col" style="width: auto" class="text-decoration-underline"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <a class="text-heading font-semibold" id="stationName">@Model.TownName</a>
+                                        </td>
+                                        <td><span class="@css1">@Model.ValidFLGText</span> </td>
+                                        <td><span class="@css2">@Model.ExpDateText</span>  </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <h5 class="mb-0">買取利回り率設定</h5>
+                    </div>
+                    <div class="card-body overflow-x-auto container">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-nowrap table-bordered">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" style="width: 100px;">買取利回り率</th>
+                                        <th scope="col" style="width: 100px;">駅距離(以内)</th>
+
+                                        @foreach (var capitions in ViewBag.M_RECondAreaRate.ColHeader)
+                                        {
+                                            <th scope="col" style="width: 100px;">
+                                                <span class="text-danger">@capitions[0]</span>
+                                                <span>分</span>
+                                                @*<span class="text-danger">@capitions[1]</span>*@
+                                            </th>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int rowCountRate = ViewBag.M_RECondAreaRate.RowHeader.Count;
+                                    }
+                                    @for (int i = 0; i < rowCountRate; i++)
+                                    {
+                                        var rowCaptions = ViewBag.M_RECondAreaRate.RowHeader[i];
+                                        var items = ViewBag.M_RECondAreaRate.RowData[i];
+
+                                        <tr>
+                                            @if (i == 0)
+                                            {
+                                                <th scope="row" rowspan=@rowCountRate>
+                                                    <p>築年数(以内)</p>
+                                                </th>
+                                            }
+                                            <th scope="row">
+                                                <span class="text-danger">@rowCaptions[0]</span>年@*<span class="text-danger">@rowCaptions[1]</span>*@
+                                            </th>
+                                            @foreach (var item in items)
+                                            {
+                                                <td class="text-end">
+                                                    <span class="text-danger">@item</span>%
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <h5 class="mb-0">オプション 家賃設定</h5>
+                    </div>
+                    <div class="card-body overflow-x-auto container">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-nowrap table-bordered">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" style="width: 100px;">1㎡あたりの家賃</th>
+                                        <th scope="col" style="width: 100px;">駅距離(以内)</th>
+
+                                        @foreach (var capitions in ViewBag.M_RECondAreaRent.ColHeader)
+                                        {
+                                            <th scope="col" style="width: 100px;">
+                                                <span class="text-danger">@capitions[0]</span>
+                                                <span>分</span>
+                                                @*<span class="text-danger">@capitions[1]</span>*@
+                                            </th>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int rowCountRent = ViewBag.M_RECondAreaRent.RowHeader.Count;
+                                    }
+                                    @for (int i = 0; i < rowCountRent; i++)
+                                    {
+                                        var rowCaptions = ViewBag.M_RECondAreaRent.RowHeader[i];
+                                        var items = ViewBag.M_RECondAreaRent.RowData[i];
+
+                                        <tr>
+                                            @if (i == 0)
+                                            {
+                                                <th scope="row" rowspan=@rowCountRent>
+                                                    <p>築年数(以内)</p>
+                                                </th>
+                                            }
+                                            <th scope="row">
+                                                <span class="text-danger">@rowCaptions[0]</span>年@*<span class="text-danger">@rowCaptions[1]</span>*@
+                                            </th>
+                                            @foreach (var item in items)
+                                            {
+                                                <td class="text-end">
+                                                    <p>上限<span class="text-danger ps-md-5">@item[0]</span>円</p>
+                                                    <p>下限<span class="text-danger ps-md-5">@item[1]</span>円</p>
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header d-md-inline-flex">
+                        <h5 class="mb-0">オプション 買取利回り率設定</h5>
+                    </div>
+                    <div class="card-body container">
+
+                        <div class="border table-responsive cap-con-form mx-auto">
+                            @Html.Partial("_r_asmc_M_RECondAreaOpt_list")
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header d-md-inline-flex">
+                        <h5 class="mb-0">属性項目</h5>
+                    </div>
+                    <div class="card-body overflow-x-auto container">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-nowrap border">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" style="width: 150px" class="">担当者</th>
+                                        <th scope="col" style="width: 100px" class="">公開状況</th>
+                                        <th scope="col" style="width: 100px" class="">有効期限日</th>
+                                        <th scope="col" style="width: 100px" class="">優先度</th>
+                                        <th scope="col" style="width: 100px" class="text-center">優先査定条件</th>
+                                        <th scope="col" style="width: auto" class="">備考</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex flex-row align-items-center">
+
+                                                <div class="ms-3">
+                                                    <h5>@Model.REStaffName</h5>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td> <span class="@css1">@Model.ValidFLGText</span> </td>
+                                        <td> @Model.ExpDate</td>
+                                        <td>
+                                            <div class="star-rating text-danger">
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    if (i <= Model.Priority)
+                                                    {
+                                                        <span class="fa fa-star" data-rating="@i"></span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="fa fa-star-o" data-rating="@i"></span>
+                                                    }
+                                                }
+                                                <input type="hidden" name="whatever" class="rating-value" value="@Model.Priority">
+                                            </div>
+                                        </td>
+                                        @if (Model.PrecedenceFlg == 1)
+                                        {
+                                            <td class="text-center"> ✓</td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-center"></td>
+                                        }
+                                        <td>
+                                            <textarea class="form-control custom-control" readonly rows="10">@Model.Remark</textarea>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-footer">
+                        <div class="text-right mt-3 float-end">
+                            <button type="button" class="btn btn-lg btn-secondary" onclick="window.close();">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+</div>
+

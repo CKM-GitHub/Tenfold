@@ -78,7 +78,7 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage GetBuildingAge([FromBody]string constYYYYMM)
+        public HttpResponseMessage GetBuildingAge([FromBody] string constYYYYMM)
         {
             if (string.IsNullOrEmpty(constYYYYMM))
             {
@@ -86,6 +86,48 @@ namespace Seruichi.Tenfold.Web.Controllers
             }
             CommonBL bl = new CommonBL();
             return OKResult(bl.GetBuildingAge(constYYYYMM).ToStringOrEmpty());
+        }
+
+        [HttpPost]
+        public HttpResponseMessage GetNearestStations([FromBody] JToken token)
+        {
+            string prefName = token["PrefName"].ToStringOrEmpty();
+            string cityName = token["CityName"].ToStringOrEmpty();
+            string townName = token["TownName"].ToStringOrEmpty();
+            string address = token["Address"].ToStringOrEmpty();
+
+            CommonBL blCmm = new CommonBL();
+            var longitude_latitude = blCmm.GetLongitudeAndLatitude(prefName, cityName, townName, address);
+            var nearestStations = blCmm.GetNearestStations(longitude_latitude);
+
+            if (nearestStations.Count == 0)
+            {
+                return OKResult();
+            }
+            else
+            {
+                return OKResult(base.ConvertToJson(nearestStations));
+            }
+        }
+
+        [IgnoreVerificationToken]
+        [HttpPost]
+        public HttpResponseMessage CheckBirthday([FromBody] string birthday)
+        {
+            if (string.IsNullOrEmpty(birthday))
+            {
+                return OKResult();
+            }
+
+            Validator validator = new Validator();
+            if (!validator.CheckBirthday(birthday, out string errorcd, out string formattedDate))
+            {
+                return ErrorMessageResult(errorcd, formattedDate);
+            }
+            else
+            {
+                return OKResult(formattedDate);
+            }
         }
     }
 }

@@ -47,7 +47,7 @@ namespace Seruichi.BL.Tenfold.t_admin
                 validator.CheckRequired("TenStaffName", model.TenStaffName);//E101
 
                 validator.CheckMaxLenght("TenStaffCD", model.TenStaffCD, 10);  //E105
-                validator.CheckMaxLenght("TenStaffPW", model.TenStaffPW, 10);  //E105
+                validator.CheckMaxLenght("TenStaffPW", model.TenStaffPW, 30);  //E105
                 validator.CheckMaxLenght("TenStaffName", model.TenStaffName, 15);  //E105
 
                 validator.CheckIsOnlyOneCharacter("TenStaffCD", model.TenStaffCD);  //E104
@@ -59,7 +59,7 @@ namespace Seruichi.BL.Tenfold.t_admin
             foreach (var item in model.lst_AdminModel)
             {
                 validator.CheckRequired("txtpw_" + i, item.TenStaffPW);
-                validator.CheckMaxLenght("txtpw_"+i, item.TenStaffPW, 10); 
+                validator.CheckMaxLenght("txtpw_"+i, item.TenStaffPW, 30); 
                 validator.CheckIsOnlyOneCharacter("txtpw_" + i, item.TenStaffPW);
 
                 validator.CheckRequired("txtname_" + i, item.TenStaffName);
@@ -113,7 +113,9 @@ namespace Seruichi.BL.Tenfold.t_admin
                 new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.Operator.ToStringOrNull() },
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress },
                 new SqlParameter("@M_TenfoldStaff", SqlDbType.Structured){ TypeName = "dbo.T_TenfoldStaff", Value = model.lst_AdminModel.ToDataTable() },
-                new SqlParameter("@AdminTenStaffPW", SqlDbType.VarChar){ Value = model.AdminPassword }
+                new SqlParameter("@AdminTenStaffPW", SqlDbType.VarChar){ Value = model.AdminPassword },
+                new SqlParameter("@Remarks", SqlDbType.VarChar){ Value =  model.Remark },
+                new SqlParameter("@ProcessKBN", SqlDbType.TinyInt){ Value =  model.Processing.ToByte() },
              };
 
             try
@@ -139,7 +141,7 @@ namespace Seruichi.BL.Tenfold.t_admin
                 new SqlParameter("@InvalidFLG", SqlDbType.TinyInt){ Value =  model.InvalidFLG.ToStringOrNull() },               
                 new SqlParameter("@LoginName", SqlDbType.VarChar){ Value =  model.LoginName.ToStringOrNull() },
                 new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.Operator.ToStringOrNull() },
-                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress }
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress },
              };
 
             DBAccess db = new DBAccess();

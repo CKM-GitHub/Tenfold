@@ -1,0 +1,271 @@
+﻿@model Models.Tenfold.t_reale_account.t_reale_accountModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_t_menuLayout.cshtml";
+}
+
+@section styles{
+    @Styles.Render("~/Content/tenfold_css_common")
+}
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18" id="wrapper"> 
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                @Html.Partial("t_reale_Info")
+
+                <div class="card shadow border-0 mb-7" style="border-top-left-radius: unset;border-top-right-radius: unset;">
+                    <form id="form1">
+                        <div class="card-header">
+                            <h5 class="mb-0">アカウントフラグ</h5>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+
+                                <div class="col-12 col-md-7">
+                                    <div class="p-md-5">
+                                        <div class="list-group mb-5 shadow">
+                                            <div class="list-group-item">
+                                                <div class="row align-items-center">
+                                                    <div class="col">
+                                                        <strong class="mb-2">テストアカウント</strong>
+                                                        <p class="text-muted mb-0">テストアカウントの詳細査定回数は制限にカウントされません。</p>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="checkbox" role="switch"
+                                                                   id="flexSwitchCheckDefault" name="flexSwitchCheckDefault" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="list-group shadow mb-5">
+                                            <div class="list-group-item">
+                                                <div class="row align-items-center">
+                                                    <div class="col">
+                                                        <strong class="mb-2">アカウント状態</strong>
+                                                    </div>
+                                                </div>
+                                                <div class="row align-items-center p-2">
+                                                    <div class="col-12 pb-3">
+
+                                                        <div class="list-group-item">
+                                                            <div class="row align-items-center">
+                                                                <div class="col-12">
+                                                                    <h5 class="text-danger" id="penltyOne">ペナルティのため制限中</h5>
+                                                                    <h5 class="text-success d-none" id="penltyZero">正常</h5>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <strong id="penaltyPeriod"> </strong>
+                                                                </div>
+                                                                <div class="col-12" id="penltyReason">
+                                                                     
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="list-group shadow">
+                                            <div class="list-group-item">
+                                                <input type="hidden" value="-1" id="seqPenalty" />
+                                                <div class="row align-items-center">
+                                                    <div class="col">
+                                                        <strong class="mb-2">ペナルティ設定</strong>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row align-items-center p-2">
+                                                    <div class="col-12 pb-3">
+
+                                                        <div class="list-group-item">
+                                                            <div class="row align-items-center">
+                                                                <div class="col">
+                                                                    <strong class="mb-2">ペナルティ</strong>
+                                                                    <p class="text-muted mb-0">アカウントの一時利用停止</p>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <div class="form-check form-switch">
+                                                                        <input class="form-check-input" type="checkbox" role="switch"
+                                                                               id="flexSwitchCheckDefault_Penalty" name="flexSwitchCheckDefault_Penalty" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-6">
+                                                        <label for="StartDate" class="form-label">開始日</label>
+                                                        <span class="cap-errormsg-right" id="errorStartDate"></span>
+                                                        <input class="form-control mb-2 disabled-account" id="StartDate" name="StartDate" type="date" max="2999-12-31">
+                                                    </div>
+                                                    <div class="col-12 col-md-6">
+                                                        <label for="EndDate" class="form-label">終了日</label>
+                                                        <span class="cap-errormsg-right" id="errorEndDate"></span>
+                                                        <input class="form-control mb-2 disabled-account" id="EndDate" name="EndDate" type="date" max="2999-12-31">
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <label class="form-label" for="form3Examplev4">メモ</label>
+                                                        <span class="cap-errormsg-right" id="errorpenalty"></span>
+
+                                                        <textarea class="form-control custom-control disabled-account" add-validation-maxlengthcheck="true" data-digits="500" id="penaltyArea" name="penaltyArea" rows="3"></textarea>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-5">
+                                            <div class="pt-md-5 ps-md-5 pe-md-5">
+
+                                                <div class="list-group mb-5 shadow">
+                                                    <div class="list-group-item">
+                                                        <div class="row align-items-center">
+                                                            <div class="col">
+                                                                <strong class="mb-2">ペナルティ履歴</strong>
+                                                            </div>
+                                                        </div>
+                                                        <div id="penaltyList" class="row align-items-center p-2 overflow-y-auto overflow-x-hidden" style="max-height: 320px;">
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="card shadow m-5">
+                                                <div class="card-footer">
+                                                    <div class="text-right float-end">
+
+                                                        @*<button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#modal-changesave" id="chagesCheck" onclick="CheckChanges()">
+                            変更保存
+                        </button>*@
+                                                        <button type="button" class="btn btn-lg btn-primary" id="chagesCheck" onclick="CheckChanges()">
+                                                            変更保存
+                                                        </button>
+                                                        <button type="button" class="btn btn-lg btn-default" data-bs-toggle="modal"
+                                                                data-bs-target="#modal-changecal">
+                                                            取消
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+
+                    </form>
+                </div>
+
+              
+            </div>
+            <!-- Modal -->
+            <!-- 変更保存 -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                 id="modal-changesave">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">変更保存</h4><button type="button" class="btn-close d-none" data-bs-dismiss="modal"
+                                                                     aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe pt-0 p-0">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post"
+                                          style="text-align: center;">
+                                        <h1 class="cap-icon-h1"><i class="fa fa-exclamation-circle pt-1 pb-1 ps-3 pe-3 cap-icon-i"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center">変更内容を保存しますか？</h4>
+
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-lg btn-primary"
+                                    @*data-bs-toggle="modal"
+                                    data-bs-target="#modal-changeok"*@
+                                    id="btn_save">
+                                保存
+                            </button><button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 変更取消 -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                 id="modal-changecal">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">変更取消</h4><button type="button" class="btn-close d-none" data-bs-dismiss="modal"
+                                                                     aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe pt-0 p-0">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post"
+                                          style="text-align: center;">
+                                        <h1 class="cap-icon-h1 border border-danger border-8"><i class="fa fa-exclamation-circle pt-1 pb-1 ps-3 pe-3 cap-icon-i text-danger"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center">変更内容を破棄してもよろしいですか？</h4>
+
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-lg btn-primary" data-bs-dismiss="modal" onclick="discardChanges()">破棄</button><button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 登録完了 -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                 id="modal-changeok">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">変更保存</h4><button type="button" class="btn-close d-none" data-bs-dismiss="modal"
+                                                                     aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe pt-0 p-0">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post"
+                                          style="text-align: center;">
+                                        <h1 class="cap-icon-h1"><i class="fa fa-check cap-icon-i"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center">変更内容を保存しました。</h4>
+
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-lg btn-secondary"   onclick="SetCache('#close_refresh')"   id="close_refresh" data-bs-dismiss="modal">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    @Html.Partial("t_reale_Modal")
+    @Html.Partial("_t_footer")
+    @Html.Partial("_ErrorPopup")
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/t_reale_account")
+}

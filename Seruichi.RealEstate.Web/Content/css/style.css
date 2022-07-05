@@ -45,6 +45,13 @@
 	max-width: 150px;
 }
 
+.cap-fon-div-w270 {
+	width: 270px;
+}
+
+.cap-fon-div-w150 {
+	width: 150px;
+}
 .cap-icon-h1 {
 	border-radius: 100px;
 	border: 15px solid var(--bs-green);
@@ -62,10 +69,89 @@
 	min-height: 73vh;
 }
 
+::-webkit-scrollbar {
+	height: 4px;
+	width: 5px;
+	background-color: #F5F5F5;
+	scrollbar-color: #4285F4 #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+	background-color: #4286f4b7;
+}
+
+.cap-fon-div-w250 {
+	width: 250px;
+}
+
+@media only screen and (min-width: 768px) and (max-width:1400px) { 
+
+
+	.kenbetsu h5 {
+		white-space: pre-wrap !important;
+	}
+
+	.kenbetsu .col-md-1 {
+		flex: 0 0 auto;
+		width: 13.3333%;
+	}
+
+	.kenbetsu .col-md-11 {
+		flex: 0 0 auto;
+		width: 86.66666667%;
+	}
+
+
+}
+
+@media screen and (max-width: 640px) {
+
+
+
+	.cap-text-wrap:before {
+		content: "\a";
+		white-space: pre;
+	}
+
+	.cap-repotcanvas {
+		position: relative;
+		height: 100% !important;
+		width: 1024px !important;
+	}
+	.cap-nextline::before{
+		content: "\A";
+		white-space: pre ;
+		}
+}
+
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active {
+	outline: 0px !important;
+
+	box-shadow: none !important;
+}
+
 .cap-btn-slg {
 	padding: 1.8rem 3.6rem;
 	font-size: 1.2rem;
 }
+
+.cap-max-height-row5 {
+	max-height: 150px;
+}
+
 
 
 
@@ -120,7 +206,6 @@
 	width: 100%;
 	position: absolute;
 	padding: 15px;
-	background-color: #f5f9fc !important;
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -237,6 +322,9 @@
 	#wrapper.toggled .glyphicon-chevron-right {
 		transform: rotate(0deg);
 	}
+
+
+	
 }
 
 
@@ -266,13 +354,48 @@
 	background-color: #4286f4b7;
 }
 
+.cap-form td,
+th,
+tr {
+	font-size: 0.95em !important;
+	vertical-align: middle !important;
+}
 
-@media (min-width: 1200px) {
-	.modal-xxl {
-		max-width: 1500px!important;
+
+.cap-asmc-set-table {
+	min-width: 280px !important;
+}
+
+.cap-asmc-set-table input {
+	width: 40% !important;
+}
+
+.cap-text-primary{
+color: #0b5ed7!important;
+}
+
+.form-check-input[type=checkbox]:indeterminate {
+    background-color: #0d6dfdb0!important;
+  }
+
+
+.cap-dropdown-hidearrow .dropdown-toggle::after {
+	display: none !important; 
+  }
+
+
+ .cap-hover .dropdown:hover .dropdown-menu{
+	display: block;
+}
+.cap-hover .dropdown-menu{
+	margin-top: 0;
+    background-color: #d7e6fc!important;
+	padding: 0px;
+ color: black!important;
+}
+
+#cap-fixed-button {
+	position: fixed;
+	bottom: 15vh;
+	right: 5vw;
 	}
-}
-
-.cap-planarea label{
-	min-width: 140px
-}

@@ -1,5 +1,4 @@
 ﻿using Models;
-using Models.Tenfold.t_mansion_new;
 using Seruichi.Common;
 using System;
 using System.Collections.Generic;
@@ -8,10 +7,8 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Seruichi.BL.Tenfold.t_mansion_new
+namespace Seruichi.BL
 {
    public  class t_mansion_newBL
     {
@@ -60,7 +57,7 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
             validator.CheckIsNumeric("Rooms", model.Rooms, 3, 0);
             //階建て
             validator.CheckRequiredNumber("Floors", model.Floors, true);
-            validator.CheckIsNumeric("Floors", model.Floors, 3, 0);
+            validator.CheckIsNumeric("Floors", model.Floors,2, 0);
 
             validator.CheckSelectionRequired("RightKBN", model.RightKBN);
 
@@ -76,9 +73,7 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
             validator.CheckRequired("Hirakana", model.Hirakana);
             validator.CheckIsDoubleByte("Hirakana", model.Hirakana, 50);
 
-
             validator.CheckByteCount("Remark", model.Remark, 1000);
-
 
             if (validator.IsValid)
             {
@@ -96,11 +91,8 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
                 {
                     validator.AddValidationResult("ConstYYYYMM", "E208");
                 }
-
             }
-
             string errorcd = "";
-
             ////M_Pref
             if (!string.IsNullOrEmpty(model.ZipCode1) || !string.IsNullOrEmpty(model.ZipCode2))
             {
@@ -114,13 +106,11 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
                         validator.AddValidationResult("ZipCode2", errorcd);
                 }
             }
-
             ////M_Counter
             if (!commonBL.CheckExistsCounterMaster(CounterKey.MansionCD, out errorcd))
             {
                 validator.AddValidationResult("btnShowConfirmation", errorcd);
             }
-
             return validator.GetValidationResult();
         }
 
@@ -195,7 +185,6 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
                 return "";
             }
         }
-
         public DataTable GetMansionListByMansionWord(string prefCD, string searchWord)
         {
             var sqlParams = new SqlParameter[]
@@ -253,8 +242,8 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
                 return false;
             }
         }
-         public (string, string) AddressSearch(string address)
-        {
+        public (string, string) AddressSearch(string address)
+         {
             string postUrl = "https://msearch.gsi.go.jp/address-search/AddressSearch?q=" + address;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(postUrl);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -286,6 +275,6 @@ namespace Seruichi.BL.Tenfold.t_mansion_new
             {
                 response.Close();
             }
-        }
+         }
     }
 }

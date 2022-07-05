@@ -1,10 +1,13 @@
 ﻿const _url = {};
+var TempFilepath;
 $(function () {
-    setValidation();
+    
     _url.Get_select_M_REStaff = common.appPath + '/r_staff/Get_select_M_REStaff';
     _url.save_M_REStaff = common.appPath + '/r_staff/Save_M_REStaff';
+    _url.check_Update_M_REStaff = common.appPath + '/r_staff/Check_Update_M_REStaff';
+    setValidation();
     addEvents();
-    //$('#newStaffCD').focus();
+    $("#newStaffCD").focus();
 });
 
 function setValidation() {
@@ -13,60 +16,37 @@ function setValidation() {
         var i = index + 1;
 
         $('#newProfilePhoto_' + i)
-            .addvalidation_errorElement("#CheckImageFileError_" + i)
+            .addvalidation_errorElement("#CheckImageFileError_" + i);
 
         $('#REStaffCD_' + i)
             .addvalidation_errorElement("#error_REStaffCD_" + i)
             .addvalidation_reqired()  //E101
-            .addvalidation_onebyte_character() //E104
-            .addvalidation_maxlengthCheck(10); //E105
+            .addvalidation_maxlengthCheck(10) //E105
+            .addvalidation_singlebyte_numberAlphabet(); //E104
+           
 
         $('#REStaffName_' + i)
             .addvalidation_errorElement("#error_REStaffName_" + i)
             .addvalidation_reqired()  //E101
-            .addvalidation_maxlengthCheck(30); //E105
+            .addvalidation_singlebyte_doublebyte(); //E105
+           
+            
 
         $('#REIntroduction_' + i)
             .addvalidation_errorElement("#error_REIntroduction_" + i)
-            .addvalidation_maxlengthCheck(500); //E105
+            .addvalidation_singlebyte_doublebyte(); //E105
+           
+           
 
         $('#REPassword_' + i)
             .addvalidation_errorElement("#error_REPassword_" + i)
             .addvalidation_reqired()  //E101
             .addvalidation_onebyte_character() //E104
-            .addvalidation_minlengthCheck(8)   //E110
-            .addvalidation_maxlengthCheck(20); //E105
+            .addvalidation_maxlengthCheck(20) //E105
+            .addvalidation_minlengthCheck(8); //E110
+          
     });
-
-    $('#newProfilePhoto')
-        .addvalidation_errorElement("#CheckImageFileError");
-
-    $('#newStaffCD')
-        .addvalidation_errorElement("#newStaffCDError")
-        .addvalidation_reqired()  //E101
-        .addvalidation_onebyte_character() //E104
-        .addvalidation_maxlengthCheck(10); //E105
-      //  .addvalidation_checkisexist();//E314
-
-    $('#newStaffName')
-        .addvalidation_errorElement("#newStaffNameError")
-        .addvalidation_reqired()  //E101
-        .addvalidation_maxlengthCheck(30); //E105
-
-
-    $('#newStaffIntro')
-        .addvalidation_errorElement("#newStaffIntroError")
-        .addvalidation_maxlengthCheck(500); //E105
-
-    $('#newStaffpsw')
-        .addvalidation_errorElement("#newStaffpswError")
-        .addvalidation_reqired()  //E101
-        .addvalidation_onebyte_character() //E104
-        .addvalidation_minlengthCheck(8)   //E110
-        .addvalidation_maxlengthCheck(20); //E105
-
-    //$('#btnSaveChange')
-    //    .addvalidation_errorElement("#btnSaveChangeError");
+      //.addvalidation_checkisexist();//E314
 }
 
 function addEvents() {
@@ -85,10 +65,12 @@ function addEvents() {
         }
         if (/^image/.test(files[0].type)) {
             // only image file
+           
             var reader = new FileReader(); // instance of the FileReader
             reader.readAsDataURL(files[0]); // read the local file
 
             reader.onloadend = function () {
+                //TempFilepath = this.result;
                 $(holder).addClass("uploadInProgress");
                 $(holder).find(".pic").attr("src", this.result);
                 $(holder).append(
@@ -136,20 +118,48 @@ function addEvents() {
     });
 
     
-    $(document).on("change",".form-control" ,function () {
+    $('#newStaffCD').on("change",function () {
         if ($('#newStaffCD').val().trim().length !== 0) {
+            $('#newProfilePhoto')
+                .addvalidation_errorElement("#CheckImageFileError");
             $('#newStaffCD')
                 .addvalidation_errorElement("#newStaffCDError")
                 .addvalidation_reqired()  //E101
+                .addvalidation_maxlengthCheck(10) //E105
+                .addvalidation_singlebyte_numberAlphabet();//E104
+
+            $('#newStaffName')
+                .addvalidation_errorElement("#newStaffNameError")
+                .addvalidation_reqired()  //E101
+                .addvalidation_singlebyte_doublebyte();//E105
+
+            $('#newStaffIntro')
+                .addvalidation_errorElement("#newStaffIntroError")
+                .addvalidation_singlebyte_doublebyte();//E105
+
+            $('#newStaffpsw')
+                .addvalidation_errorElement("#newStaffpswError")
+                .addvalidation_reqired()  //E101
                 .addvalidation_onebyte_character() //E104
-                .addvalidation_maxlengthCheck(10); //E105
+                .addvalidation_maxlengthCheck(20)  //E105
+                .addvalidation_minlengthCheck(8); //E110
         }
         else
         {
             $('#newStaffCD')
-           .addvalidation_errorElement("#newStaffCDError")
-           .addvalidation_reqired(); //E101
+                .removeValidation_required();
+            $('#newStaffName')
+                .removeValidation_required();
+
+            $('#newStaffpsw')
+                .removeValidation_required();
+            $('#newStaffCD').hideError(); 
+            $('#newProfilePhoto').hideError();
+            $('#newStaffName').hideError();
+            $('#newStaffIntro').hideError();
+            $('#newStaffpsw').hideError();
         }
+       
 
         const $this = $(this), $newStaffCD = $('#newStaffCD')
         if (!common.checkValidityInput($this)) {
@@ -179,25 +189,102 @@ function addEvents() {
 
     $('#btnSaveChange').on('click', function () {
         $form = $('#form1').hideChildErrors();
-
+        
         if (!common.checkValidityOnSave('#form1')) {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
-        $('#modal-changesave').modal('show');
+
+        //if (!common.checkValidityOnSave('#form1')) {
+        //    $form.getInvalidItems().get(0).focus();
+        //    return false;
+        //}
+
+        const $this = $(this), $newStaffCD = $('#newStaffCD')
+
+        //alert($newStaffCD.val());
+        //if ($newStaffCD.val() == "") {
+        //    $('#modal-changesave').modal('show');
+        //}
+
+
+        if ($newStaffCD.val() == "" || $newStaffCD.val() == undefined) {
+            let model = {};
+            model.lst_StaffModel = Update_list_M_REStaff();
+            Check_Update_M_REStaff(model, $form);
+        }
+        else {
+        if ($('#newStaffCD').val().trim().length !== 0)
+        {
+            $('#newProfilePhoto')
+                .addvalidation_errorElement("#CheckImageFileError");
+            $('#newStaffCD')
+                .addvalidation_errorElement("#newStaffCDError")
+                .addvalidation_reqired()  //E101
+                .addvalidation_maxlengthCheck(10) //E105
+                .addvalidation_singlebyte_numberAlphabet();//E104
+
+            $('#newStaffName')
+                .addvalidation_errorElement("#newStaffNameError")
+                .addvalidation_reqired()  //E101
+                .addvalidation_singlebyte_doublebyte();//E105
+
+            $('#newStaffIntro')
+                .addvalidation_errorElement("#newStaffIntroError")
+                .addvalidation_singlebyte_doublebyte();//E105
+
+            $('#newStaffpsw')
+                .addvalidation_errorElement("#newStaffpswError")
+                .addvalidation_reqired()  //E101
+                .addvalidation_onebyte_character() //E104
+                .addvalidation_maxlengthCheck(20)  //E105
+                .addvalidation_minlengthCheck(8); //E110
+        }
+        else {
+
+            $('#newStaffCD')
+                .removeValidation_required();
+            $('#newStaffName')
+                .removeValidation_required();
+                
+            $('#newStaffpsw')
+                .removeValidation_required();
+            $('#newStaffCD').hideError(); 
+            $('#newProfilePhoto').hideError();
+            $('#newStaffName').hideError();
+            $('#newStaffIntro').hideError();
+            $('#newStaffpsw').hideError();
+            
+            }
+       
+            let model = {
+                REStaffCD: $newStaffCD.val()
+            };
+
+            if (!model.REStaffCD) {
+                $($newStaffCD).hideError();
+                return;
+            }
+            common.callAjax(_url.Get_select_M_REStaff, model,
+                function (result) {
+                    if (result && result.isOK) {
+                        $($newStaffCD).hideError();
+                        const data = result.data;
+                        clear_data();
+                        $('#modal-changesave').modal('show');
+                        $('#PE315').append(common.getMessage("E315"));
+                    }
+                    if (result && !result.isOK) {
+                        const message = result.message;
+                        $('#newStaffCD').showError(common.getMessage('E314'));
+                    }
+                });
+        }
     });
 
     $('#btnOKChange').on('click', function () {
-        $form = $('#form1').hideChildErrors();
-
-        if (!common.checkValidityOnSave('#form1')) {
-            $form.getInvalidItems().get(0).focus();
-            return false;
-        }
-
+        
         const $REStaffCD = $("#newStaffCD").val(), $REStaffName = $('#newStaffName').val(), $REIntroduction = $('#newStaffIntro').val(), $REPassword = $('#newStaffpsw').val()
-        //var new_REFaceImage = $("#newpic_holder").find("img").attr("src");
-      
         let model = {
             REFaceImage: $("#newpic_holder").find("img").attr("src"),
             REStaffCD: $REStaffCD,
@@ -210,9 +297,28 @@ function addEvents() {
             PermissionInvoice: $('#New_chkInvoice').is(':checked') ? "1" : "0",
         };
 
-        model.lst_StaffModel = Update_list_M_REStaff();
-        Save_M_REStaff(model, $form)
+          model.lst_StaffModel = Update_list_M_REStaff();
+          Save_M_REStaff(model, $form)
     });
+    
+    $('#btnChangeCal').on('click', function () {
+        clear_data();
+        $('#modal-changecal').modal('show');
+        $('#PE317').append(common.getMessage("E317"));
+    });
+
+    $('#CancleOK').on('click', function ()
+    {
+        window.location.reload();
+    });
+
+    $('#btnComplete').on('click', function () {
+        window.location.reload();
+    });
+    $('#btnNoChange').on('click', function () {
+        window.location.reload();
+    });
+    
 }
 
 function Update_list_M_REStaff() {
@@ -220,7 +326,7 @@ function Update_list_M_REStaff() {
     $(".update-data").each(function (index) {
         var i = index + 1;
         const data = {
-            REFaceImage: null, //$('#newpic_holder_' + i).find("img").attr("src"),
+            REFaceImage:$('#newpic_holder_' + i).find("img").attr("src"),
             RealECD: $('#RealECD_' + i).val(),
             REStaffCD: $('#REStaffCD_' + i).val(),
             REStaffName: $('#REStaffName_' + i).val(),
@@ -237,9 +343,12 @@ function Update_list_M_REStaff() {
     return lst_update_StaffModel;
 }
 function Save_M_REStaff(model, $form) {
-    common.callAjaxWithLoading(_url.save_M_REStaff, model, this, function (result) {
+    common.callAjaxWithLoading(_url.save_M_REStaff, model, this , function (result) {
         if (result && result.isOK) {
-            window.location.reload();
+            clear_data();
+            $('#modal-changesave').modal('hide');
+            $('#modal-changeok').modal('show');
+            $('#PE316').append(common.getMessage("E316"));
         }
         if (result && !result.isOK) {
             const errors = result.data;
@@ -252,56 +361,36 @@ function Save_M_REStaff(model, $form) {
     });
 }
 
-function Check_IsExist(model, $this)
-{
-    common.callAjax(_url.Get_select_M_REStaff, model, function (result) {
-        let check = true;
+function Check_Update_M_REStaff(model, $form) {
+    common.callAjaxWithLoading(_url.check_Update_M_REStaff, model, this, function (result) {
         if (result && result.isOK) {
-            // $('#newStaffCD').hideError();
-            check = true;
+            clear_data();
+            $('#modal-changesave').modal('show');
+            $('#PE315').append(common.getMessage("E315"));
         }
         if (result && !result.isOK) {
-            if (result.message != null) {
-                const message = result.message;
-               // $this.showError(message.MessageText1);
-                //$('#newStaffCD').addvalidation_errorElement("#newStaffCDError");
-                //$('#newStaffCD').showError(common.getMessage('E314'));
-                //$('#newStaffCD').focus();
-                //$('#newStaffCD').onkeydown(false);
-                check = false;
-            }
-            //else {
-            //    const errors = result.data;
-            //    for (key in errors) {
-            //        const target = document.getElementById(key);
-            //        $(target).showError(errors[key]);
-            //        $form.getInvalidItems().get(0).focus();
-            //    }
+            clear_data();
+            $('#modal-nochange').modal('show');
+            $('#PE318').append(common.getMessage("E318"));
+                
+            //const errors = result.data;
+            //for (key in errors) {
+            //    const target = document.getElementById(key);
+            //    $(target).showError(errors[key]);
+            //    $form.getInvalidItems().get(0).focus();
             //}
         }
-        return check;
     });
 }
 
-
-
-
-function fileValidation() {
-    var fileInput = document.getElementById('file');
-    var filePath = fileInput.value;
-    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-    if (!allowedExtensions.exec(filePath)) {
-        alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
-        fileInput.value = '';
-        return false;
-    } else {
-        //Image preview
-        if (fileInput.files && fileInput.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                document.getElementById('imagePreview').innerHTML = '<img src="' + e.target.result + '"/>';
-            };
-            reader.readAsDataURL(fileInput.files[0]);
-        }
-    }
+function clear_data() {
+    $('#PE315').empty();
+    $('#PE316').empty();
+    $('#PE317').empty();
+    $('#PE318').empty();
 }
+
+
+
+
+

@@ -5,13 +5,14 @@ $(function () {
     _url.Get_DataList = common.appPath + '/r_asmc_ms_reged_list/Get_DataList';
     _url.InsertL_Log = common.appPath + '/r_asmc_ms_reged_list/Insert_l_log';   
     addEvents();
-    $('#MansionName').focus();
+    //$('#MansionName').focus();
 });
 function setValidation() {
-    $('#MansionName')
-        .addvalidation_errorElement("#errorMansionName")
-        .addvalidation_maxlengthCheck(25)//E105
-        .addvalidation_doublebyte(); 
+    //$('#MansionName')
+    //    .addvalidation_errorElement("#errorMansionName")
+    //    .addvalidation_maxlengthCheck(25)//E105
+    //    .addvalidation_doublebyte(); 
+
 
     $('#StartYear')
         .addvalidation_errorElement("#errorYear")
@@ -204,11 +205,11 @@ function Bind_tbody(result) {
         for (var i = 0; i < data.length; i++) {
 
             if (data[i]["公開フラグ"] == "未公開") {
-                _class = "text-primary";
+                _class = "text-danger";
             }
             else
             {
-                _class = "text-danger";
+                _class = "cap-text-primary";
             }
 
             html += '<tr>\

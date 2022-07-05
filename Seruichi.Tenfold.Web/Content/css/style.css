@@ -17,7 +17,9 @@
 	font-size: 13px;
 	margin: 34px;
 }
-
+.t-reale-back-might {
+	background-color: mintcream;
+}
 
 .cap-con-form {
 	max-width: 640px;
@@ -275,4 +277,10 @@
 
 .cap-planarea label{
 	min-width: 140px
+}
+
+#cap-fixed-button {
+	position: fixed;
+	bottom: 15vh;
+	right: 5vw;
 }

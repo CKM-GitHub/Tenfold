@@ -1,18 +1,16 @@
 ﻿function setValidation() {
     $('#txtBusinessHours')
         .addvalidation_errorElement("#errorBusinessHours")
-        .addvalidation_maxlengthCheck(25)//E105
-        .addvalidation_doublebyte();
+        .addvalidation_singlebyte_doublebyte();
 
     $('#txtCompanyHoliday')
         .addvalidation_errorElement("#errorCompanyHoliday")
-        .addvalidation_maxlengthCheck(50);
+        .addvalidation_singlebyte_doublebyte();
 
     $('#txtPassword')
         .addvalidation_errorElement("#errorPassword")
         .addvalidation_reqired()
         .addvalidation_singlebyte()
-        .addvalidation_passwordcompare()
         .addvalidation_minlengthCheck(8)
         .addvalidation_maxlengthCheck(20);
 
@@ -21,10 +19,13 @@
         .addvalidation_reqired()
         .addvalidation_singlebyte()
         .addvalidation_passwordcompare()
+        .addvalidation_minlengthCheck(8)
         .addvalidation_maxlengthCheck(20);
 }
 
 function addEvents(model) {
+    common.bindValidationEvent('#maindiv', '');
+
     if (model.LoginID !== 'admin') {
         $('#adminblock').addClass('d-none');
     }
@@ -41,10 +42,6 @@ function addEvents(model) {
     }
 
     Get_ModalData(model.RealECD);
-
-    $('#btnCancel').on('click', function () {
-        window.location.reload();
-    });
 
     $('#btnConfirm').on('click', function () {
         $form = $('#maindiv').hideChildErrors();
@@ -68,6 +65,10 @@ function addEvents(model) {
     $('#btnC_alert').on('click', function () {
         window.location.reload();
     });
+
+    $('#btnDestruction').on('click', function () {
+        window.location.reload();
+    })
 }
 
 function Get_ModalData(RealECD) {

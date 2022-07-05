@@ -1,4 +1,7 @@
 ﻿(function ($) {
+    $.fn.setInputModeNumber = function () {
+        return this.attr('inputmode', 'numeric');
+    };
 
     $.fn.hideChildErrors = function () {
         const $this = this;
@@ -90,6 +93,16 @@
     $.fn.removeValidation_doublebyte_kana = function () {
         return this
             .removeAttr('data-validation-doublebyte-kana');
+    };
+
+    $.fn.addvalidation_doublebyte_namae_kana = function () {
+        return this
+            .attr('data-validation-doublebyte-namae-kana', 'true')
+            .attr('inputmode', 'kana');
+    };
+    $.fn.removeValidation_doublebyte_kana = function () {
+        return this
+            .removeAttr('data-validation-doublebyte-namae-kana');
     };
 
     $.fn.addvalidation_doublebyte_hira = function () {
@@ -245,6 +258,10 @@
 
     $.fn.addvalidation_errorElement = function (errormsgElement) {
         return this.attr('data-errormsg-target', errormsgElement);
+    };
+
+    $.fn.addvalidation_emailCheck = function () {
+        return this.attr('data-validation-email', 'true');
     };
 
     function getFirstErrorMsg(selector) {

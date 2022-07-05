@@ -12,6 +12,8 @@ namespace Seruichi.Common
         public static Dictionary<string, MessageModel> MessageDictionary { get; private set; } 
             = new Dictionary<string, MessageModel>();
 
+        public static string MapsKey { get; private set; }
+
         private static string _encryptedDataCryptionKey = "";
 
         private static readonly object _lockObject = new object();
@@ -22,6 +24,7 @@ namespace Seruichi.Common
             ReadIni ini = new ReadIni();
             LogInfo = ini.GetLogInfo();
             DBInfo = ini.GetDBInfo();
+            MapsKey = ini.GetMapsKey();
             _encryptedDataCryptionKey = ini.GetDataCryptionKey();
         }
 

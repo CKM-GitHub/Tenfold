@@ -1,9 +1,11 @@
 ﻿@*r_asmc_address / r_asmc_railway 共通*@
 
 @{
-    string button_label = (ViewBag.PageID == "r_asmc_address" ? "さらに町名を絞り込む" 
-                         : ViewBag.PageID == "r_asmc_railway" ? "さらに駅を絞り込む" 
-                         : "");
+    string button_label1 = (ViewBag.PageID == "r_asmc_address" || ViewBag.PageID == "r_asmc_ms_map_add" ? "さらに町名を絞り込む"
+                          : ViewBag.PageID == "r_asmc_railway" ? "さらに駅を絞り込む"
+                          : "");
+
+    string button_label2 = (ViewBag.PageID == "r_asmc_ms_map_add" ? "地図で検索" : "新規登録");
 }
 
 <div id="sidebar-wrapper">
@@ -14,21 +16,15 @@
                 <div class="text-start">
                     <label for="disabledSelect" class="form-label">表示設定</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox_settings1" checked>
-                        <label class="form-check-label" for="defaultCheck1">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox_settings1" autocomplete="off" checked>
+                        <label class="form-check-label" for="checkbox_settings1">
                             登録マンション数
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox_settings2" checked>
-                        <label class="form-check-label" for="defaultCheck2">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox_settings2" autocomplete="off" checked>
+                        <label class="form-check-label" for="checkbox_settings2">
                             設定会社数
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox_settings3">
-                        <label class="form-check-label" for="defaultCheck3">
-                            期限切れ項目のみ表示
                         </label>
                     </div>
                 </div>
@@ -40,17 +36,23 @@
         <li>
             <div class="form-group ps-3 pe-3 pb-3">
                 <button type="button" class="btn btn-primary w-100" id="btnSearchDetail">
-                    @button_label
+                    @button_label1
                 </button>
             </div>
         </li>
         <li>
             <div class="form-group ps-3 pe-3">
                 <button type="button" class="btn btn-primary w-100" id="btnRegistration">
-                    新規登録
+                    @button_label2
                 </button>
             </div>
         </li>
     </ul>
     <div class="mt-auto pb-20"></div>
 </div>
+<div class="toggle-button">
+    <a href="#menu-toggle" class="btn" id="menu-toggle">
+        <span class="fa fa-angle-right glyphicon-chevron-right" aria-hidden="true"></span>
+    </a>
+</div>
+

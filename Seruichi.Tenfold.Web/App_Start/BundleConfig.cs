@@ -39,7 +39,7 @@ namespace Seruichi.Tenfold.Web
                       "~/Content/css/Contact-Form-Clean.css",
                       "~/Content/css/Login-Form-Clean.css",
                       "~/Content/css/Soft-UI-Aside-Navbar.css",
-                      "~/Content/css/style.css"
+                      "~/Content/css/style.css"  
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/t_login").Include(
@@ -61,6 +61,7 @@ namespace Seruichi.Tenfold.Web
                      "~/Scripts/t_dashboard.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/t_seller_assessment").Include(
+                  "~/Scripts/t_common.js",
                      "~/Scripts/t_seller_assessment.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/t_mansion_list").Include(
@@ -70,7 +71,8 @@ namespace Seruichi.Tenfold.Web
                      "~/Scripts/t_mansion_new.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/t_admin").Include(
-                     "~/Scripts/t_admin.js"));
+                     "~/Scripts/t_admin.js",
+                     "~/Scripts/t_common.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/t_reale_list").Include(
                      "~/Scripts/t_reale_list.js"));
@@ -82,6 +84,43 @@ namespace Seruichi.Tenfold.Web
 
             bundles.Add(new ScriptBundle("~/bundles/t_mansion").Include(
                      "~/Scripts/t_mansion.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/t_reale_asmhis").Include(
+                     "~/Scripts/t_reale_asmhis.js",
+                      "~/Scripts/t_common.js",
+                     "~/Content/scripts/table_header_sort.js" 
+                     ));
+
+            bundles.Add(new ScriptBundle("~/bundles/t_seller_account").Include(
+                     "~/Scripts/t_seller_account.js",
+                     "~/Scripts/t_common.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/t_seller_memo").Include(
+                     "~/Scripts/t_seller_memo.js",
+                     "~/Scripts/t_common.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/t_reale_memo").Include(
+                     "~/Scripts/t_reale_memo.js",
+                     "~/Scripts/t_common.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/t_reale_account").Include(
+                 "~/Scripts/t_reale_account.js",
+                 "~/Scripts/t_common.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/t_seller_new").Include(
+                     "~/Scripts/t_seller_new.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/t_reale_new").Include(
+                "~/Scripts/t_reale_new.js",
+                "~/Scripts/t_common.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/t_seller_profile").Include(
+                     "~/Scripts/t_seller_profile.js",
+                     "~/Scripts/t_common.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/t_reale_profile").Include(
+               "~/Scripts/t_reale_profile.js",
+               "~/Scripts/t_common.js"));
         }
     }
 }

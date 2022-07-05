@@ -1,0 +1,102 @@
+﻿@model Models.Tenfold.t_seller_memo.t_seller_memoModel
+
+@{
+    Layout = "~/Views/Shared/_t_menuLayout.cshtml";
+}
+
+@section styles{
+    @Styles.Render("~/Content/tenfold_css_common")
+}
+
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
+    <span id="loginID" class="d-none">@ViewBag.LoginID</span>
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                @Html.Partial("t_reale_Info")
+
+                <div class="card shadow border-0 mb-7" style="border-top-left-radius: unset;border-top-right-radius: unset;">
+                    <div class="card-header d-md-inline-flex">
+                        <h5 class="mb-0">メモ</h5>
+                    </div>
+
+                    <div id="display_area">
+
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary btn-floating btn-lg rounded p-4" id="cap-fixed-button">
+                <i class="fa fa-plus-circle pe-2"></i>新規メモ入力
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-com" tabindex="-1"
+                 aria-labelledby="message-com" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-b" id="message-com">メモ入力欄</h5>
+                            <span class="cap-errormsg-left" id="MemoTextError" name="MemoTextError"></span><div></div>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center text-danger">
+                            <div class="border-0  w-100">
+                                <div class="box-footer">
+                                    <div class="input-group align-middle">
+                                        <textarea id="MemoText" class="form-control custom-control" rows="5" maxlength="2000" autofocus></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="btnCancel_Edit" class="btn btn-secondary">戻る</button>
+                            <button type="button" id="btnEdit_MemoText" class="btn btn-primary">送信</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-del" tabindex="-1"
+                 aria-labelledby="message-delModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-b" id="message-delModalLabel">メモを削除する</h5>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center text-danger">
+                            重要: 「メモ」を削除すると、メモは完全に削除されます。<br>復元することはできません。
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="btnCancel_Delete" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
+                            <button type="button" id="btnDelete_MemoText" class="btn btn-primary">確定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-delok" tabindex="-1"
+                 aria-labelledby="message-delModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-b" id="message-delModalLabel">メモを削除しました</h5>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            メモを削除しました。「閉じる」ボタンをタップしてください。
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="btnDelete_OK" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        @Html.Partial("_t_footer")
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/t_seller_memo")
+}

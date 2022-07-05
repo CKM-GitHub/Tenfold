@@ -1,0 +1,420 @@
+﻿@model Models.Tenfold.t_seller_new.t_seller_newModel
+
+@{
+    ViewBag.Title = "売主新規登録";
+    Layout = "~/Views/Shared/_t_menuLayout.cshtml";
+}
+
+@section styles{
+    @Styles.Render("~/Content/tenfold_css_common")
+}
+
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
+                            <h1 class="ps-2 h2 mb-0 ls-tight">売主</h1>
+                            <span class="ps-2 text-muted small align-self-end">管理</span>
+                        </div>
+                        <div class="col-sm-6 col-12 text-sm-end">
+                        </div>
+                    </div>
+                </div>
+
+                <form class="cap-reg-form" id="form1">
+                    <div id="input_fields" class="card shadow border-0 mb-7">
+                        <div class="card-header">
+                            <h5 class="mb-0">新規登録</h5>
+                        </div>
+                        <div class="p-md-5 container">
+                            <div class="row d-flex justify-content-center align-items-center">
+                                <div class="col-12">
+                                    <div class="row g-0">
+                                        <div class="col-lg-5">
+                                            <div class="p-5">
+                                                <input type="text" id="SellerCD" name="SellerCD" class="d-none" />
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline">
+                                                        <div class="d-flex">
+                                                            <label class="form-label" for="SellerName">お名前</label>
+                                                            <span class="cap-errormsg-left" id="errorSellerName" name="errorSellerName"></span>
+                                                        </div>
+                                                        <input type="text" id="SellerName" name="SellerName" class="form-control form-control-lg" />
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline">
+                                                        <div class="d-flex">
+                                                            <label class="form-label" for="SellerKana">お名前(フリガナ)</label>
+                                                            <span class="cap-errormsg-left" id="errorSellerKana" name="errorSellerKana"></span>
+                                                        </div>
+                                                        <input type="text" id="SellerKana" name="SellerKana" class="form-control form-control-lg" />
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline">
+                                                        <div class="d-flex">
+                                                            <label class="form-label" for="Birthday">生年月日</label>
+                                                            <span class="cap-errormsg-left" id="errorBirthday" name="errorBirthday"></span>
+                                                        </div>
+                                                        <input type="date" id="Birthday" name="Birthday" class="form-control countries order-alpha limit-pop-1000000 presel-MX group-continents group-order-na cap-fon-form-w150 text-center" max="2999-12-31" maxlength="10">
+                                                    </div>
+                                                </div>
+                                                <hr class="navbar-divider mb-4 my-5 opacity-20">
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline">
+                                                        <div class="d-flex">
+                                                            <label class="form-label" for="Password">パスワード</label>
+                                                            <span class="cap-errormsg-left" id="errorPassword" name="errorPassword"></span>
+                                                        </div>
+                                                        <input type="password" id="txtPassword" name="Password" class="form-control form-control-lg" autocomplete="off" />
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline">
+                                                        <div class="d-flex">
+                                                            <label class="form-label" for="ConfirmPassword">パスワード再確認</label>
+                                                            <span class="cap-errormsg-left" id="errorConfirmPassword" name="errorConfirmPassword"></span>
+                                                        </div>
+                                                        <input type="password" id="txtConfirmPassword" name="ConfirmPassword" class="form-control form-control-lg" autocomplete="off" />
+                                                    </div>
+                                                </div>
+                                                <hr class="navbar-divider mb-4 my-5 opacity-20">
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline">
+                                                        <div class="d-flex">
+                                                            <label class="form-label" for="MemoText">メモ</label>
+                                                            <span class="cap-errormsg-left" id="errorMemoText" name="errorMemoText"></span>
+                                                        </div>
+                                                        <textarea id="MemoText" name="MemoText" class="form-control custom-control" rows="10" maxlength="1000"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-7 bg-indigo text-white">
+                                            <div class="p-5">
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-group">
+                                                        <div class="d-flex">
+                                                            <label class="form-label">郵便番号</label>
+                                                            <span class="cap-errormsg-left" id="errorZipCode" name="errorZipCode"></span>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-8 col-md-7 row">
+                                                                <div class="col-1 align-self-center">
+                                                                    <span class="text-dark">〒</span>
+                                                                </div>
+                                                                <div class="col-4 col-md-3 pe-0 ms-0 me-0 align-self-centeralign-self-center">
+                                                                    <input class="form-control text-center w-100" type="text" id="ZipCode1" name="ZipCode1" maxlength="3">
+                                                                </div>
+                                                                <div class="col-1 ps-0 pe-0 ms-0 me-0 text-center align-self-center">
+                                                                    <span class="align-self-center text-dark">―</span>
+                                                                </div>
+                                                                <div class="col-4 ps-0 pe-0 ms-0 me-0 align-self-center">
+                                                                    <input class="form-control text-center w-100" type="text" id="ZipCode2" name="ZipCode2" maxlength="4">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline form-white">
+                                                        <div class="d-flex">
+                                                            <label class="form-label" for="PrefCD">都道府県</label>
+                                                            <span class="cap-errormsg-left" id="errorPrefName" name="errorPrefName"></span>
+                                                        </div>
+
+                                                        <select class="form-select cap-fon-form-w200" name="PrefCD" id="PrefCD">
+                                                            <option selected value="">都道府県</option>
+                                                            @foreach (Models.DropDownListItem item in ViewBag.PrefDropDownListItems)
+                                                            {
+                                                                <option class="js-selectable" value="@item.Value">@item.DisplayText</option>
+                                                            }
+                                                        </select>
+                                                        <input type="text" id="PrefName" name="PrefName" class="d-none" />
+                                                        @*<select id="PrefName" name="PrefName" class="form-select cap-fon-form-w200">
+                                                <option value="東京都">東京都</option>
+                                                <option value="千葉県">千葉県</option>
+                                                <option value="神奈川県">神奈川県</option>
+                                                <option value="埼玉県">埼玉県</option>
+                                                <option value="愛知県">愛知県</option>
+                                                <option value="京都府">京都府</option>
+                                                <option value="大阪府">大阪府</option>
+                                                <option value="兵庫県">兵庫県</option>
+                                                <option value="福岡県">福岡県</option>
+                                            </select>*@
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline form-white">
+                                                        <div class="d-flex">
+                                                            <label class="form-label" for="CityName">市区町村</label>
+                                                            <span class="cap-errormsg-left" id="errorCityName" name="errorCityName"></span>
+                                                        </div>
+                                                        <input type="text" id="CityName" name="CityName" class="form-control form-control-lg" />
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline form-white">
+                                                        <div class="d-flex">
+                                                            <label class="form-label" for="TownName">住所</label>
+                                                            <span class="cap-errormsg-left" id="errorTownName" name="errorTownName"></span>
+                                                        </div>
+                                                        <input type="text" id="TownName" name="TownName" class="form-control form-control-lg" />
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline form-white">
+                                                        <div class="d-flex">
+                                                            <label class="form-label" for="Address1">建物名</label>
+                                                            <span class="cap-errormsg-left" id="errorAddress1" name="errorAddress1"></span>
+                                                        </div>
+                                                        <input type="text" id="Address1" name="Address1" class="form-control form-control-lg" />
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline form-white">
+                                                        <div class="d-flex">
+                                                            <label class="form-label" for="HousePhone">電話番号</label>
+                                                            <span class="cap-errormsg-left" id="errorHousePhone" name="errorHousePhone"></span>
+                                                        </div>
+                                                        <input type="text" id="HousePhone" name="HousePhone" class="form-control form-control-lg" />
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <div class="form-outline form-white">
+                                                        <div class="d-flex">
+                                                            <label class="form-label" for="HandyPhone">携帯番号</label>
+                                                            <span class="cap-errormsg-left" id="errorHandyPhone" name="errorHandyPhone"></span>
+                                                        </div>
+                                                        <input type="text" id="HandyPhone" name="HandyPhone" class="form-control form-control-lg" />
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <div class="form-outline form-white">
+                                                        <div class="d-flex">
+                                                            <label class="form-label" for="Fax">FAX番号</label>
+                                                            <span class="cap-errormsg-left" id="errorFax" name="errorFax"></span>
+                                                        </div>
+                                                        <input type="text" id="Fax" name="Fax" class="form-control form-control-lg" />
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <div class="form-outline form-white">
+                                                        <div class="d-flex">
+                                                            <label class="form-label" for="MailAddress">メールアドレス</label>
+                                                            <span class="cap-errormsg-left" id="errorMailAddress" name="errorMailAddress"></span>
+                                                        </div>
+                                                        <input type="email" id="MailAddress" name="MailAddress" class="form-control form-control-lg" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="text-right mt-3 float-end">
+                                <button type="button" id="btnConfirm" class="btn btn-primary">変更保存</button>&nbsp;
+                                <button type="button" id="btnCancel" class="btn btn-lg btn-default" data-bs-toggle="modal" data-bs-target="#cancelProcess">取消</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">変更内容確認</h5>
+                                <button type="button" class="close  d-none" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Card stats -->
+                                <div class="p-5 container">
+                                    <div class="row d-flex justify-content-center align-items-center h-100">
+                                        <div class="col-12">
+                                            <div class="row g-0">
+                                                <div class="col-lg-5">
+                                                    <div class="p-5">
+                                                        <div class="mb-4 pb-2">
+                                                            <div class="form-outline">
+                                                                <label class="form-label" for="m_SellerName">お名前</label>
+                                                                <input disabled type="text" id="m_SellerName" name="m_SellerName" class="form-control form-control-lg" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-4 pb-2">
+                                                            <div class="form-outline">
+                                                                <label class="form-label" for="m_SellerKana">お名前(フリガナ)</label>
+                                                                <input disabled type="text" id="m_SellerKana" name="m_SellerKana" class="form-control form-control-lg" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-4 pb-2">
+                                                            <div class="form-outline">
+                                                                <label class="form-label" for="m_Birthday">生年月日</label>
+                                                                <input disabled type="text" id="m_Birthday" name="m_Birthday" class="form-control form-control-lg text-center" />
+                                                            </div>
+                                                        </div>
+                                                        <hr class="navbar-divider mb-4 my-5 opacity-20">
+                                                        <div class="mb-4 pb-2">
+                                                            <div class="form-outline">
+                                                                <label class="form-label" for="m_MemoText">メモ</label>
+                                                                <textarea id="m_MemoText" name="m_MemoText" class="form-control custom-control" rows="10" disabled></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-7 bg-indigo text-white">
+                                                    <div class="p-5">
+                                                        <div class="mb-4 pb-2">
+                                                            <div class="row cap-fon-form-w350 form-outline form-white">
+                                                                <label class="form-label" for="m_ZipCode">郵便番号</label>
+                                                                <div class="col-12 col-md-8 d-inline-flex mb-4 mb-md-0 pb-md-0 pb-2">
+                                                                    <span class="align-self-center pe-2 text-dark">〒</span>
+                                                                    <input disabled id="m_ZipCode1" name="m_ZipCode1" class="form-control text-center w-50" type="text">
+                                                                    <span class="align-self-center pe-2 ps-2 text-dark">-</span>
+                                                                    <input disabled id="m_ZipCode2" name="m_ZipCode2" class="form-control w-50 text-center" type="text">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-4 pb-2">
+                                                            <div class="form-outline form-white">
+                                                                <label class="form-label" for="m_PrefName">都道府県</label>
+                                                                <div class="dropdown w-100">
+                                                                    <input disabled type="text" id="m_PrefName" name="m_PrefName" class="form-control form-control-lg" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-4 pb-2">
+                                                            <div class="form-outline form-white">
+                                                                <label class="form-label" for="m_CityName">市区町村</label>
+                                                                <input disabled type="text" id="m_CityName" name="m_CityName" class="form-control form-control-lg" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-4 pb-2">
+                                                            <div class="form-outline form-white">
+                                                                <label class="form-label" for="m_TownName">住所</label>
+                                                                <input disabled type="text" id="m_TownName" name="m_TownName" class="form-control form-control-lg" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-4 pb-2">
+                                                            <div class="form-outline form-white">
+                                                                <label class="form-label" for="m_Address1">建物名</label>
+                                                                <input disabled type="text" id="m_Address1" name="m_Address1" class="form-control form-control-lg" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-4 pb-2">
+                                                            <div class="form-outline form-white">
+                                                                <label class="form-label" for="m_HousePhone">電話番号</label>
+                                                                <input disabled type="text" id="m_HousePhone" name="m_HousePhone" class="form-control form-control-lg" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-4">
+                                                            <div class="form-outline form-white">
+                                                                <label class="form-label" for="m_HandyPhone">携帯番号</label>
+                                                                <input disabled type="text" id="m_HandyPhone" name="m_HandyPhone" class="form-control form-control-lg" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-4">
+                                                            <div class="form-outline form-white">
+                                                                <label class="form-label" for="m_Fax">FAX番号</label>
+                                                                <input disabled type="text" id="m_Fax" name="m_Fax" class="form-control" />
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-4">
+                                                            <div class="form-outline form-white">
+                                                                <label class="form-label" for="m_MailAddress">メールアドレス</label>
+                                                                <input disabled type="text" id="m_MailAddress" name="m_MailAddress" class="form-control form-control-lg" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Card stats -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
+                                <button type="button" id="btnProcess" class="btn btn-primary">確認</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1" id="Process_OK">
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">変更保存完了</h4>
+                                <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <section class="newsletter-subscribe">
+                                    <div class="container">
+                                        <div class="intro"></div>
+                                        <form class="d-flex justify-content-center flex-wrap mx-auto" method="post" style="text-align: center;">
+                                            <h1 class="cap-icon-h1"><i class="fa fa-check cap-icon-i"></i></h1>
+                                        </form>
+                                    </div>
+                                    <h4 class="text-center align-self-center pt-2">変更を保存しました。</h4>
+                                </section>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="btnProcess_OK" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 変更取消 -->
+                <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1" id="cancelProcess">
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">変更取消</h4>
+                                <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <section class="newsletter-subscribe pt-0 p-0">
+                                    <div class="container">
+                                        <div class="intro"></div>
+                                        <form class="d-flex justify-content-center flex-wrap mx-auto" method="post" style="text-align: center;">
+                                            <h1 class="cap-icon-h1 border border-danger border-8"><i class="fa fa-exclamation-circle pt-1 pb-1 ps-3 pe-3 cap-icon-i text-danger"></i></h1>
+                                        </form>
+                                    </div>
+                                    <h4 class="text-center align-self-center">変更内容を破棄してもよろしいですか？</h4>
+                                </section>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="btnClear" class="btn btn-lg btn-primary">破棄</button>
+                                <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        @Html.Partial("_t_footer")
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/t_seller_new")
+}

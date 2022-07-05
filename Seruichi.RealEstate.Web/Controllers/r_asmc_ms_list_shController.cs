@@ -14,8 +14,13 @@ namespace Seruichi.RealEstate.Web.Controllers
     public class r_asmc_ms_list_shController : BaseController
     {
         // GET: r_asmc_ms_list_sh
-        public ActionResult Index()
+        public ActionResult Index(string MansionName)
         {
+            if (string.IsNullOrEmpty(MansionName))
+                return RedirectToAction("BadRequest", "Error");
+            else
+                ViewBag.MansionName = MansionName;
+
             r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
             if (!SessionAuthenticationHelper.ValidateUser(user))
             {
@@ -64,7 +69,7 @@ namespace Seruichi.RealEstate.Web.Controllers
         [HttpPost]
         public ActionResult get_DisplayData(r_asmc_ms_list_shModel model)
         {
-            if (String.IsNullOrWhiteSpace(model.MansionName) && String.IsNullOrWhiteSpace(model.CityGPCD) && String.IsNullOrWhiteSpace(model.CityCD) && String.IsNullOrWhiteSpace(model.StartYear) && String.IsNullOrWhiteSpace(model.EndYear) && String.IsNullOrWhiteSpace(model.Radio_Priority))
+            if (String.IsNullOrWhiteSpace(model.MansionName) && String.IsNullOrWhiteSpace(model.CityGPCD) && String.IsNullOrWhiteSpace(model.CityCD) && String.IsNullOrWhiteSpace(model.StartYear) && String.IsNullOrWhiteSpace(model.EndYear) && (model.Unregistered =="0") && (model.Priority == "0"))
             {
                 return ErrorMessageResult("E303");
             }

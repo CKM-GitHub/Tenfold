@@ -71,7 +71,6 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
 
             AESCryption crypt = new AESCryption();
             string decryptionKey = StaticCache.GetDataCryptionKey();
-            var e = dt.AsEnumerable();
             foreach (DataRow row in dt.Rows)
             {
                 row["売主名"] = crypt.DecryptFromBase64(row.Field<string>("売主名"), decryptionKey);
@@ -89,6 +88,7 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
                 new SqlParameter("@chk_Contract", SqlDbType.TinyInt){ Value = model.chk_Contract.ToByte(0) },
                 new SqlParameter("@chk_SellerDeclined", SqlDbType.TinyInt){ Value = model.chk_SellerDeclined.ToByte(0) },
                 new SqlParameter("@chk_BuyerDeclined", SqlDbType.TinyInt){ Value = model.chk_BuyerDeclined.ToByte(0) },
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull() },
                 new SqlParameter("@Range", SqlDbType.VarChar){ Value = model.Range.ToStringOrNull() },
                 new SqlParameter("@StartDate", SqlDbType.VarChar){ Value = model.StartDate.ToStringOrNull() },
                 new SqlParameter("@EndDate", SqlDbType.VarChar){ Value = model.EndDate.ToStringOrNull() }
@@ -99,6 +99,10 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
             AESCryption crypt = new AESCryption();
             string decryptionKey = StaticCache.GetDataCryptionKey();
             var e = dt.AsEnumerable();
+            foreach (DataRow row in dt.Rows)
+            {
+                row["売主名"] = crypt.DecryptFromBase64(row.Field<string>("売主名"), decryptionKey);
+            }
             return dt;
         }
 
@@ -121,29 +125,29 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
             db.InsertUpdateDeleteData("pr_Tenfold_Insert_L_Log", false, sqlParams);
         }
 
-        public DataTable Get_Pills_Home(t_reale_purchaseModel model)
+        public DataTable get_Modal_HomeData(t_reale_purchaseModel model)
         {
             var sqlParams = new SqlParameter[]
             {
                 new SqlParameter("@SellerMansionID", SqlDbType.VarChar){ Value = model.SellerMansionID.ToStringOrNull() }
             };
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_t_seller_mansion_popup_get_pills_home", sqlParams);
+            var dt = db.SelectDatatable("pr_tenfold_get_Modal_HomeData", sqlParams);
             return dt;
         }
         
-        public DataTable Get_Pills_Profile(t_reale_purchaseModel model)
+        public DataTable get_Modal_ProfileData(t_reale_purchaseModel model)
         {
             var sqlParams = new SqlParameter[]
             {
                 new SqlParameter("@SellerMansionID", SqlDbType.VarChar){ Value = model.SellerMansionID.ToStringOrNull() }
             };
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_t_seller_mansion_popup_get_pills_profile", sqlParams);
+            var dt = db.SelectDatatable("pr_tenfold_get_Modal_ProfileData", sqlParams);
             return dt;
         }
         
-        public DataTable Get_Pills_Contact(t_reale_purchaseModel model)
+        public DataTable get_Modal_ContactData(t_reale_purchaseModel model)
         {
             var sqlParams = new SqlParameter[]
             {
@@ -151,29 +155,31 @@ namespace Seruichi.BL.Tenfold.t_reale_purchase
             };
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_t_seller_mansion_popup_get_pills_contact", sqlParams);
+            var dt = db.SelectDatatable("pr_tenfold_get_Modal_ContactData", sqlParams);
             AESCryption crypt = new AESCryption();
             string decryptionKey = StaticCache.GetDataCryptionKey();
-            for (int i = 0; i < dt.Rows.Count; i++)
+            foreach (DataRow row in dt.Rows)
             {
-                string sellerName = dt.Rows[i]["SellerName"].ToString();
-                dt.Rows[i]["SellerName"] = !string.IsNullOrEmpty(sellerName) ? crypt.DecryptFromBase64(sellerName, decryptionKey) : sellerName;
-                string SellerKana = dt.Rows[i]["SellerKana"].ToString();
-                dt.Rows[i]["SellerKana"] = !string.IsNullOrEmpty(SellerKana) ? crypt.DecryptFromBase64(SellerKana, decryptionKey) : SellerKana;
-                string TownName = dt.Rows[i]["TownName"].ToString();
-                dt.Rows[i]["TownName"] = !string.IsNullOrEmpty(TownName) ? crypt.DecryptFromBase64(TownName, decryptionKey) : TownName;
-                string Address1 = dt.Rows[i]["Address1"].ToString();
-                dt.Rows[i]["Address1"] = !string.IsNullOrEmpty(Address1) ? crypt.DecryptFromBase64(Address1, decryptionKey) : Address1;
-                string Address2 = dt.Rows[i]["Address2"].ToString();
-                dt.Rows[i]["Address2"] = !string.IsNullOrEmpty(Address2) ? crypt.DecryptFromBase64(Address2, decryptionKey) : Address2;
-                dt.Rows[i]["Address"] = dt.Rows[i]["PrefName"].ToString() + dt.Rows[i]["CityName"].ToString() + dt.Rows[i]["TownName"] + dt.Rows[i]["Address1"] + dt.Rows[i]["Address2"];
-                string Phone = dt.Rows[i]["Phone"].ToString();
-                dt.Rows[i]["Phone"] = !string.IsNullOrEmpty(Phone) ? crypt.DecryptFromBase64(Phone, decryptionKey) : Phone;
-                string Mobile_Phone = dt.Rows[i]["Mobile_Phone"].ToString();
-                dt.Rows[i]["Mobile_Phone"] = !string.IsNullOrEmpty(Mobile_Phone) ? crypt.DecryptFromBase64(Mobile_Phone, decryptionKey) : Mobile_Phone;
-                string MailAddress = dt.Rows[i]["MailAddress"].ToString();
-                dt.Rows[i]["MailAddress"] = !string.IsNullOrEmpty(MailAddress) ? crypt.DecryptFromBase64(MailAddress, decryptionKey) : MailAddress;
+                row["カナ名"] = crypt.DecryptFromBase64(row.Field<string>("カナ名"), decryptionKey);
+                row["漢字名"] = crypt.DecryptFromBase64(row.Field<string>("漢字名"), decryptionKey);
+                row["TownName"] = crypt.DecryptFromBase64(row.Field<string>("TownName"), decryptionKey);
+                row["Address1"] = crypt.DecryptFromBase64(row.Field<string>("Address1"), decryptionKey);
+                row["Address2"] = crypt.DecryptFromBase64(row.Field<string>("Address2"), decryptionKey);
+                row["固定電話"] = crypt.DecryptFromBase64(row.Field<string>("固定電話"), decryptionKey);
+                row["携帯電話"] = crypt.DecryptFromBase64(row.Field<string>("携帯電話"), decryptionKey);
+                row["メールアドレス"] = crypt.DecryptFromBase64(row.Field<string>("メールアドレス"), decryptionKey);
             }
+            return dt;
+        }
+
+        public DataTable get_Modal_DetailData(t_reale_purchaseModel model)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@AssReqID", SqlDbType.VarChar){ Value = model.AssReqID.ToStringOrNull() }
+            };
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_tenfold_get_Modal_DetailData", sqlParams);
             return dt;
         }
     }

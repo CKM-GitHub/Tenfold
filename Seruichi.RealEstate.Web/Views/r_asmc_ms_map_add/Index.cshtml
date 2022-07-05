@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "査定条件[マンション・地図]";
+    Layout = "~/Views/Shared/_r_menuLayout.cshtml";
+}
+@section styles{
+    @Styles.Render("~/Content/realEstate_css_common")
+}
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18" id="wrapper">
+    @Html.Partial("~/Views/r_asmc_address/_r_asmc_address_left_sideNavigation_menu.cshtml")
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <div class="col-md-12 col-12 mb-3 mb-sm-0">
+                            <h1 class="h2 mb-0 ls-tight"> 都道府県選択</h1>
+                            <span class="text-muted small">査定条件＞設定＞マンション指定から設定＞地図から設定</span>
+                        </div>
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
+                            <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+                        </div>
+                    </div>
+                    @Html.Action("Render_tab_menu", new { rc = ViewBag.CurrentRegionCD })
+                </div>
+                <div class="row">
+                    <div class="col-12" id="searchbox_main">
+                        @Html.Action("Render_searchbox_main", new { rc = ViewBag.CurrentRegionCD, pid = ViewBag.PageID })
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" id="searchbox_detail" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">町名選択</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="searchbox_detail_result">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
+                            <button type="button" class="btn btn-primary" id="btnRegistrationDetail">地図で検索</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        @Html.Partial("~/Views/Shared/_r_footer.cshtml")
+    </div>
+    <form id="form1" method="post" novalidate>
+        <input type="hidden" name="selected_cities" id="hdnSelected_cities" />
+        <input type="hidden" name="selected_towns" id="hdnSelected_towns" />
+    </form>
+    @Html.Partial("_ErrorModal")
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/r_asmc_ms_map_add")
+}

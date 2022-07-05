@@ -8,32 +8,41 @@ $(function () {
     _url.generate_CSV3 = common.appPath + '/t_mansion_list/Generate_CSV3';
     _url.InsertL_Log = common.appPath + '/t_mansion_list/InsertM_Mansion_L_Log';
     addEvents();
+    $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
+    $('#t_mansion_list').addClass('font-bold text-underline');
+    $('#txtApartment').focus();
+    
 });
 
 function setValidation() {
+
+    $('#txtApartment')
+        .addvalidation_errorElement("#errorApartment")
+        .addvalidation_singlebyte_doublebyte()
+        .addvalidation_doublebyte();
     
     $('#StartNum')
         .addvalidation_errorElement("#errorAge")
-        .addvalidation_onebyte_character()
+        .addvalidation_singlebyte_number()
         .addvalidation_maxlengthCheck(2)
         .addvalidation_numcompare();
 
     $('#EndNum')
         .addvalidation_errorElement("#errorAge")
-        .addvalidation_onebyte_character()
+        .addvalidation_singlebyte_number()
         .addvalidation_maxlengthCheck(2)
         .addvalidation_numcompare();
 
     $('#StartUnit')
         .addvalidation_errorElement("#errorUnit")
-        .addvalidation_onebyte_character()
-        .addvalidation_maxlengthCheck(2);
+        .addvalidation_singlebyte_number()
+        .addvalidation_maxlengthCheck(3);
 
 
     $('#EndUnit')
         .addvalidation_errorElement("#errorUnit")
-        .addvalidation_onebyte_character()
-        .addvalidation_maxlengthCheck(2);
+        .addvalidation_singlebyte_number()
+        .addvalidation_maxlengthCheck(3);
 
     $('#btnDisplay')
         .addvalidation_errorElement("#errorbtnDisplay"); //E303
@@ -289,7 +298,14 @@ function addEvents() {
         $form = $('#form1').hideChildErrors();
         window.location.href = common.appPath + '/t_mansion_new/Index';
     });
-
+       
+        $('#menu-toggle').on('click', function () {
+            if ($('#wrapper').hasClass('toggled'))
+                $('#wrapper').removeClass("toggled");
+            else
+                $('#wrapper').attr("class", "toggled");
+        });
+   
     //$(document).on('click', '.tree li  input[type="checkbox"]', function () {
     //    $(this).closest('li').find('ul input[type="checkbox"]').prop('checked', $(this).is(':checked'));
     //}).on('click', '.node-item', function () {

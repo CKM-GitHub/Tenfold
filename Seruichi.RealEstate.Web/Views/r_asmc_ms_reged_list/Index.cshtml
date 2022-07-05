@@ -34,11 +34,12 @@
                             {
                                 <li>
                                     <a>@item.PrefName </a>
-                                    @foreach (var cityGPCD in ViewBag.CityGPCD)
-                                    {
-                                        if (cityGPCD.PrefCD == item.PrefCD)
+                                    <ul>
+                                        @foreach (var cityGPCD in ViewBag.CityGPCD)
                                         {
-                                            <ul>
+                                            if (cityGPCD.PrefCD == item.PrefCD)
+                                            {
+
                                                 <li class="text-nowrap">
                                                     <span class="cap-errormsg-right" id="CheckBoxError"></span>
                                                     <input class="form-check-input node-parent" type="checkbox" value="@cityGPCD.CityGPCD">
@@ -64,14 +65,14 @@
 
                                                         }
                                                     </ul>
-                                                    }
-                                                    </li>
 
-                                            </ul>
-                                        }
-                                    }
-
-                                </li>
+                                                       }
+                                                    
+                                               </li>
+                                             }
+                                         }
+                                    </ul>
+                            </li>
                             }
 
                         </ul>
@@ -191,12 +192,12 @@
                         <table class="table table-hover table-nowrap" id="r_table_List">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" class="text-end text-decoration-underline" ordercol-direction="asc" ordercol-index="6" style="width: 100px">No.</th>
+                                    <th scope="col" class="text-end text-decoration-underline sort-by" ordercol-direction="asc" ordercol-index="6" style="width: 100px">No.</th>
                                     <th scope="col" style="width: 300px" class="text-decoration-underline sort-by" ordercol-index="1_6">マンション名</th>
                                     <th scope="col" style="width: auto" class="text-decoration-underline sort-by" ordercol-index="2_6">住所</th>
                                     <th scope="col" style="width: 50px" class="text-decoration-underline sort-by" ordercol-index="3_6">公開状況</th>
                                     <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="4_6">登録日</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="5_6">優先度</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="8_6">優先度</th>
                                     <th class="d-none" ordercol-index="6">マンションCD</th>
                                     <th class="d-none" bordercol-index="7">住所カナ</th>
                                     <th class="d-none" ordercol-index="8">Priority</th>

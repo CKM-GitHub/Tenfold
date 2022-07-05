@@ -17,7 +17,7 @@
     string css_target = "js-search-detail-chk-" + item01.CityCD;
     string css_chkbox = "js-search-detail-chk js-search-detail-chk-" + item01.CityCD;
 
-    <div class="row y-5 kenbetsu">
+    <div class="row y-5 kenbetsu cap-dropdown-hidearrow">
         <div class="col-12 col-md-2 text-md-center">
             <h5 class="pb-3 text-nowrap">@item01.CityName</h5>
             @if (item01.TownsCount > 1)
@@ -51,12 +51,34 @@
                     towntext = string.Format("{0}({1}社)", item02.TownName, item02.RealEstateCount);
                 }
 
-                string css_label = "checkbox-inline p-3 cap-fon-div-w250 text-nowrap "
-                                + (item02.ValidFLG == 0 ? "text-danger" : item02.ValidFLG == 1 ? "text-primary" : "text-dark");
+                string css_icon =
+                    item02.ExpirationFlag == 1 ? "fa fa-exclamation-triangle text-warning" :
+                    item02.ValidFLG == 1 ? "fa fa-info-circle text-danger" :
+                    item02.ValidFLG == 2 ? "fa fa-info-circle cap-text-primary" :
+                    "";
+                string a_href = "javascript:openCheckTab('" + @item02.TownCD + "');";
 
-                <label class="@css_label">
-                    <input type="checkbox" value="@item02.TownCD" class="@css_chkbox" checked>
+                <label class="cap-hover text-dark checkbox-inline p-3 cap-fon-div-w270 text-nowrap">
+                    <input type="checkbox" value="@item02.TownCD" class="@css_chkbox" autocomplete="off" checked>
                     <span class="ps-1">@towntext</span>
+                    @if (!string.IsNullOrEmpty(css_icon))
+                    {
+                        if (Model.DisabledOpenCheckTab)
+                        {
+                            <i class="@css_icon" aria-hidden="true"></i>
+                        }
+                        else
+                        {
+                            <div class="ps-1 dropdown">
+                                <button class="bg-white dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="@css_icon" aria-hidden="true"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="@a_href">最新の登録条件確認</a></li>
+                                </ul>
+                            </div>
+                        }
+                    }
                 </label>
             }
         </div>

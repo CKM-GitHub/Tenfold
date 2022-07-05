@@ -9,7 +9,7 @@ namespace Models.Tenfold.t_reale_purchase
     public class t_reale_purchaseModel
     {
         public string RealECD { get; set; }
-        public string REName { get; set; }
+        public string RealEName { get; set; }
         public byte chk_Purchase { get; set; }
         public byte chk_Checking { get; set; }
         public byte chk_Nego { get; set; }
@@ -19,6 +19,7 @@ namespace Models.Tenfold.t_reale_purchase
         public string Range { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
+        public string AssReqID { get; set; }
         public string SellerCD { get; set; }
         public string SellerMansionID { get; set; }
     }

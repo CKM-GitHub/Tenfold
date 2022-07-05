@@ -52,7 +52,7 @@ namespace Seruichi.BL.Tenfold.t_reale_list
             {
                 var sqlParams = new SqlParameter[]
              {
-                new SqlParameter("@PrefNameSelect", SqlDbType.VarChar){ Value = model.PrefNameSelect.ToStringOrNull() },                new SqlParameter("@RealEStateCom", SqlDbType.TinyInt){ Value = model.RealEStateCom.ToStringOrNull() },                new SqlParameter("@EffectiveChk", SqlDbType.TinyInt){ Value = model.EffectiveChk.ToByte(0) },                new SqlParameter("@InValidCheck", SqlDbType.TinyInt){ Value = model.InValidCheck.ToByte(0) }
+                new SqlParameter("@PrefNameSelect", SqlDbType.VarChar){ Value = model.PrefNameSelect.ToStringOrNull() },                new SqlParameter("@RealEStateCom", SqlDbType.VarChar){ Value = model.RealEStateCom.ToStringOrNull() },                new SqlParameter("@EffectiveChk", SqlDbType.TinyInt){ Value = model.EffectiveChk.ToByte(0) },                new SqlParameter("@InValidCheck", SqlDbType.TinyInt){ Value = model.InValidCheck.ToByte(0) }
              };
 
                 DBAccess db = new DBAccess();

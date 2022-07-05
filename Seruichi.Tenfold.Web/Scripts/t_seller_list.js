@@ -21,7 +21,7 @@ function setValidation() {
     $('#StartDate')
         .addvalidation_errorElement("#errorStartDate")
         .addvalidation_datecheck()
-        .addvalidation_datecompare();
+       // .addvalidation_datecompare();
 
 
     $('#EndDate')
@@ -42,30 +42,10 @@ function addEvents() {
 
     common.bindValidationEvent('#form1', '');
 
-    $('#StartDate, #EndDate').on('change', function () {
-   
-        const $this = $(this), $start= $('#StartDate').val(), $end = $('#EndDate').val()
-
-        if (!common.checkValidityInput($this)) {
-            return false;
-        }
-
-        let model = {
-            StartDate: $start,
-            EndDate: $end
-        };
-
-        if (model.StartDate && model.EndDate) {
-            if (model.StartDate < model.EndDate) {
-                $("#StartDate").hideError();
-                $("#EndDate").hideError();
-                $("#EndDate").focus();
-                return;
-            }
-            
-        }
-
+    $('#StartDate,#EndDate').on('change', function () {
+        Date_Compare();
     });
+    
     
     const $SellerName = $("#SellerName").val(), $RangeSelect = $("#RangeSelect").val(), $PrefNameSelect = $('#PrefNameSelect option:selected').text(),
         $startdate = $("#StartDate").val(), $enddate = $("#EndDate").val(), $ValidCheck = $("#ValidCheck").val(),
@@ -90,6 +70,7 @@ function addEvents() {
         let today = common.getToday();
         $('#StartDate').val(today);
         $('#EndDate').val(today);
+        Date_Compare();
     });
 
     $('#btnThisWeek').on('click', function () {
@@ -97,7 +78,7 @@ function addEvents() {
         let end = common.getToday();
         $('#StartDate').val(start);
         $('#EndDate').val(end);
-
+        Date_Compare();
     });
 
     $('#btnThisMonth').on('click', function () {
@@ -105,6 +86,7 @@ function addEvents() {
         let firstDay = common.getFirstDayofMonth();
         $('#StartDate').val(firstDay);
         $('#EndDate').val(today);
+        Date_Compare();
     });
 
     $('#btnLastMonth').on('click', function () {
@@ -112,6 +94,7 @@ function addEvents() {
         let lastdaypremonth = common.getLastDayofPreviousMonth();
         $('#StartDate').val(firstdaypremonth);
         $('#EndDate').val(lastdaypremonth);
+        Date_Compare();
 
     });
 
@@ -163,6 +146,8 @@ function addEvents() {
     });
 
     $('#btnCSV').on('click', function () {
+        $form = $('#form1').hideChildErrors();
+
         $('#total_record').text("検索結果： 0件");
         $('#total_record_up').text("検索結果： 0件");
         $('#no_record').text("");
@@ -185,7 +170,8 @@ function addEvents() {
             negtiatioinsCheck: $negtiatioinsCheck,
             endCheck: $endCheck,
         };
-        getM_SellerList(model, this);
+        $('#btnDisplay').hideError();
+        getM_SellerList(model, $form);
 
         common.callAjax(_url.generate_CSV, model,
             function (result) {
@@ -213,7 +199,6 @@ function addEvents() {
                     document.body.removeChild(downloadLink);
                 }
                 else {
-                    //alert("There is no data!");
                     $('#site-error-modal').modal('show');
                 }
             }
@@ -224,8 +209,7 @@ function addEvents() {
     $('#btnSignUp').on('click', function () {
         $form = $('#form1').hideChildErrors();
 
-        //window.location.href = '/t_seller_new/Index';
-        alert("Go to t_seller_new Form")
+        window.location.href = common.appPath + '/t_seller_new/Index';
     });
 
     $('#btnSetting').on('click', function () {
@@ -235,6 +219,25 @@ function addEvents() {
         alert("Go to t_seller_billing Form")
     });
 
+}
+function Date_Compare() {
+        $start = $('#StartDate').val(), $end = $('#EndDate').val()
+        let model = {
+            StartDate: $start,
+            EndDate: $end
+        };
+        if (model.StartDate && model.EndDate) {
+            if (model.StartDate <= model.EndDate) {
+                $("#StartDate").hideError();
+                $("#EndDate").hideError();
+                return;
+            }
+            else {
+                $("#StartDate").showError(common.getMessage('E111'));
+                $("#EndDate").showError(common.getMessage('E111'));
+                return;
+            }
+        }
 }
 function getM_SellerList(model, $form) {
     common.callAjaxWithLoading(_url.getM_SellerList, model, this, function (result) {
@@ -260,6 +263,7 @@ function Bind_tbody(result) {
     let html = "";
     let _letter = "";
     let _class = "";
+    let _class1 = "";
     let _sort_checkbox = "";
     let status = "";
     if (data.length > 0) {
@@ -289,11 +293,19 @@ function Bind_tbody(result) {
             }
 
         }
+
+        if (isEmptyOrSpaces(data[i]["無効会員"])) {
+            _class1 = "";
+        }
+        else {
+            _class1 = "fa fa-check";
+        }
+
         html += '<tr>\
             <td class= "text-end" > ' + (i + 1) + '</td>\
             <td class="'+ _sort_checkbox + '"><i class="' + _class + '">' + _letter + '</i><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td >\
             <td class="d-none"> ' + status + ' </td>\
-            <td class="text-center"> ' + data[i]["無効会員"] + ' </td>\
+            <td class="text-center"><i class="' + _class1 + '">' + '</i> </td>\
             <td> ' + data[i]["売主CD"] + ' </td>\
             <td> <a class="text-heading font-semibold text-decoration-underline" id='+ data[i]["売主CD"] + ' href="#" onclick="l_logfunction(this.id)">' + data[i]["売主名"] + '</a></td>\
             <td> ' + data[i]["居住地"] + ' </td>\

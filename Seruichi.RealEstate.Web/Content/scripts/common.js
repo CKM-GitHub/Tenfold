@@ -19,6 +19,8 @@ const messageConst = {
     E111: '日付の大小が不正です',
     E112: '１つ以上選択してください',
     E113: '値の大小が不正です',
+    E125: '正しい年月を入力してください',
+    E126: '年月の大小が不正です',
 
     E201: '査定サービスの対象外地域です',
     E202: 'メールアドレスが入力されていません',
@@ -35,7 +37,11 @@ const messageConst = {
     E312: 'スタッフIDが入力されていません',
     E313: 'スタッフIDが未入力です。',
     E314: '入力されたスタッフIDは登録済です',
-}
+    E315: '変更内容を保存しますか？',
+    E316: '変更内容を保存しました',
+    E317: '変更内容を取消しますか？',
+    E318: '更新対象項目がありませんでした',
+    }
 
 const commonApiUrl = {
     getMessage: "/api/CommonApi/GetMessage",   
@@ -48,6 +54,7 @@ const regexPattern = {
     singlebyte_numberAlpha: "^[0-9a-zA-Z]+$",
     moeney: "^[0-9,]+$",
     numeric: "^[0-9.]+$",
+    monthformat: /^\d{4}-\d{2}$/,
     dateformat: /^\d{4}-\d{2}-\d{2}$/,
     doublebyteKana: "^[ァ-ヶー　]+$",
     singlebyte_number_minus:"^[0-9-]+$",
@@ -74,7 +81,22 @@ const kanaMap = {
     'ｯ': 'ッ', 'ｬ': 'ャ', 'ｭ': 'ュ', 'ｮ': 'ョ',
     '｡': '。', '､': '、', 'ｰ': 'ー', '｢': '「', '｣': '」', '･': '・'
 };
-
+$(function () {
+    $("form").bind("keypress", function (e) {
+        if (e.keyCode == 13) {
+            if (document.activeElement.type == 'password' || document.activeElement.id == 'btnLogin' || document.activeElement.id == 'btnDisplay' || document.activeElement.id == 'btnProcess')
+                return true;
+            else return false;
+        }
+    });
+    $('#sidebar-wrapper').bind("keypress", function (e) {
+        if (e.keyCode == 13) {
+            if (document.activeElement.id == 'btnDisplay' || document.activeElement.id == 'btnProcess')
+                return true;
+            else return false;
+        }
+    });
+})
 const common = {
 
     appPath: "", //set in Layout.cshtml
@@ -90,6 +112,12 @@ const common = {
                 return msg;
             }
         });
+    },
+
+    showErrorPopup: function showErrorPopup(id) {
+        $('#site-error-modal-title').text(id);
+        $('#site-error-modal-message').text(this.getMessage(id));
+        $('#site-error-modal').modal('show');
     },
 
     querySerialize: function querySerialize(data) {
@@ -233,6 +261,7 @@ const common = {
         form.method = "POST";
         form.action = action;
         form.submit();
+        this.showLoading();
     },
 
     showLoading: function showLoading(disableSelector) {
@@ -528,47 +557,63 @@ const common = {
 
             if (isMinlengthCheck) {
                 const minLength = $ctrl.data('mindigits');
-                if (minLength == 8 && $("#newStaffpsw").val() != "")
-                {
-                    const byteLength = inputValue.length;
-                    if (byteLength < parseInt(minLength)) {
+                const byteLength = inputValue.length;
+                if (byteLength < parseInt(minLength)) {
                         $ctrl.showError(this.getMessage('E110'));
                         return;
-                    }
-                }
-                else
-                {
-                    const byteLength = inputValue.length;
-                    if (byteLength < parseInt(minLength)) {
-                        $ctrl.showError(this.getMessage('E105'));
-                        return;
-                    }
                 }
             }
 
 
             if (isDate) {
-                if (!inputValue.match(regexPattern.dateformat)) {
-                    $ctrl.showError(this.getMessage('E108'));
-                    return;
+                if ($ctrl.attr('type') == 'date') {
+                    if (!inputValue.match(regexPattern.dateformat)) {
+                        $ctrl.showError(this.getMessage('E108'));
+                        return;
+                    }
+                }
+                else if ($ctrl.attr('type') == 'month' && ($("#StartMonth").val() != "" || $("#EndMonth").val() != ""))
+                {
+                    if (!inputValue.match(regexPattern.monthformat)) {
+                        $ctrl.showError(this.getMessage('E125'));
+                        return;
+                    }
+                }
+                else {
+                    if (!inputValue.match(regexPattern.monthformat)) {
+                        $ctrl.showError(this.getMessage('E108'));
+                        return;
+                    }
                 }
             }
 
             if (isDateCompare) {
-                if (!common.compareDate($("#StartDate").val(), $("#EndDate").val())) {
-                    $("#StartDate").showError(this.getMessage('E111'));
-                    $("#EndDate").showError(this.getMessage('E111'));
-                    $("#StartDate").focus();
-                    return;
+                if ($("#StartDate").val() != undefined && $("#EndDate").val() != undefined) {
+                    if (!common.compareDate($ctrl.attr('type'), $("#StartDate").val(), $("#EndDate").val())) {
+                        $("#StartDate").showError(this.getMessage('E111'));
+                        $("#EndDate").showError(this.getMessage('E111'));
+                        $("#StartDate").focus();
+                        return;
+                    }
                 }
 
-                if ($("#StartYear").val() != "" && $("#EndYear").val() != "") {
+                if ($("#StartYear").val() != undefined && $("#EndYear").val() != undefined) {
                     if (!common.compareYear($("#StartYear").val(), $("#EndYear").val())) {
                         $("#StartYear").showError(this.getMessage('E113'));
                         $("#StartYear").focus();
                         return;
                     }
                 }
+
+                if ($("#StartMonth").val() != undefined && $("#EndMonth").val() != undefined) {
+                    if (!common.compareMonth($("#StartMonth").val(), $("#EndMonth").val())) {
+                        $("#StartMonth").showError(this.getMessage('E126'));
+                        $("#EndMonth").showError(this.getMessage('E126'));
+                        $("#StartMonth").focus();
+                        return;
+                    }
+                }
+
             }
 
             if (ischeckboxLenght) {                
@@ -607,7 +652,21 @@ const common = {
         return true;
     },
 
-    compareDate: function compareTwoDate(d1, d2) {
+    compareDate: function compareTwoDate(type, d1, d2) {
+        if (type == 'month') {
+            d1 = d1 + '-01';
+            d2 = d2 + '-' + new Date(parseInt(d2.slice(0, 4)), parseInt(d2.slice(5, 7)), 0).getDate();
+        }
+        const date1 = new Date(d1);
+        const date2 = new Date(d2);
+        let success = true;
+        if (date1 > date2) {
+            success = false;
+        }
+        return success;
+    },
+
+    compareMonth: function compareTwoMY(d1, d2) {
         const date1 = new Date(d1);
         const date2 = new Date(d2);
         let success = true;

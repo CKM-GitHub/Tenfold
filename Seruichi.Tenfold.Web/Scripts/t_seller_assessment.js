@@ -12,6 +12,9 @@ $(function () {
     _url.Get_PopupFor_Detail = common.appPath + '/t_seller_assessment/Get_PopupFor_Detail';
     _url.Get_PopupFor_Seller = common.appPath + '/t_seller_assessment/Get_PopupFor_Seller';
     addEvents();
+   
+    $('#menu_seller_assess li').children('a').removeClass("active");
+    $('#menu_seller_assess li').children('a').eq(0).addClass('active');
 });
 
 function setValidation() {
@@ -201,7 +204,7 @@ function addEvents() {
         //Get_PopupFor_Home(this.id);
 
     });
-
+    
     $('#pills-profile-tab').on('click', function () {
         $('#header1').empty();
         $('#Detail_1').empty();
@@ -339,7 +342,7 @@ function Bind_tbody(result) {
             <td class= "text-end" > ' + data[i]["NO"] + '</td>\
             <td class="'+ _sort_checkbox + '"><i class="' + _class + '">' + _letter + '</i><span class="font-semibold">' + data[i]["ステータス"] + '</span></td>\
             <td><a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal" data-bs-target="#mansion" href="#" id='+ data[i]["SellerMansionID"] + '&' + data[i]["AssReqID"] + '&' + DeepDatetime + ' onclick="Get_PopupFor_Home(this.id)">' + data[i]["マンション名＆部屋番号"] + '</a></td>\
-            <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["RealECD"] + '&t_reale_purchase' + ' onclick="l_logfunction(this.id)">' + data[i]["不動産会社"] + '</a></td>\
+            <td class="text-nowrap"><a class="text-heading font-semibold text-decoration-underline" href="'+ common.appPath + '/t_reale_purchase/Index?RealECD=' + data[i]["RealECD"] + '" id=' + data[i]["RealECD"] + '&t_reale_purchase' + ' onclick="l_logfunction(this.id)"> ' + data[i]["不動産会社"] + '</a></td>\
             <td class="text-nowrap">' + data[i]["登録日時"] + '</td>\
             <td class="text-nowrap">' + data[i]["簡易査定日時"] + '</td>\
             <td class="text-nowrap"> <a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["AssReqID"] + '&t_seller_assessment_detail' + ' onclick="l_logfunction(this.id)"> ' + data[i]["詳細査定日時"] + ' </a> </td>\
@@ -361,6 +364,7 @@ function Bind_tbody(result) {
     }
     $('#mansiontable tbody').append(html);
 }
+
 function l_logfunction(id) {
     let model = {
         LoginKBN: null,
@@ -380,12 +384,10 @@ function l_logfunction(id) {
             if (result && result.isOK) {
                 if (model.LogStatus == "t_reale_purchase") {
                     //alert("https://www.seruichi.com/t_reale_purchase?RealECD=" + model.LogId);
-
+                   //window.location.href = common.appPath + '/t_reale_purchase/Index?RealECD=' + model.LogId;
                 }
                 else if (model.LogStatus == "t_seller_assessment_detail") {
-
-                    //alert("https://www.seruichi.com/t_seller_assessment_detail?AssReqID=" + model.LogId);
-
+                    alert(common.appPath +"/t_seller_assessment_detail/Index?AssReqID=" + model.LogId);
                 }
             }
             if (result && !result.isOK) {

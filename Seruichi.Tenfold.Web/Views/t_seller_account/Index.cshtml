@@ -1,0 +1,163 @@
+﻿
+@model Models.Tenfold.t_seller_account.t_seller_accountModel
+
+@{
+    Layout = "~/Views/Shared/_t_menuLayout.cshtml";
+}
+@section styles{
+    @Styles.Render("~/Content/tenfold_css_common")
+}
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
+    <span id="loginID" class="d-none">@ViewBag.LoginID</span>
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                <!-- Card stats -->
+                @Html.Partial("t_reale_Info")
+
+                <!-- Card stats -->
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header d-md-inline-flex">
+                        <h5 class="mb-0">アカウントフラグ</h5>
+                    </div>
+                    <div class="p-md-5 container">
+                        <div class="list-group mb-5 shadow">
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-2">テストアカウント</strong>
+                                        <p class="text-muted mb-0">テストアカウントの詳細査定回数は制限にカウントされません。</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" name="chkTestFLG" id="chkTestFLG" />
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-2">無効化</strong>
+                                        <p class="text-muted mb-0">現在の登録利用可能物件枠：1件</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" name="chkInvalidFLG" id="chkInvalidFLG" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="text-right mt-3 float-end">
+                          
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-changesave" >変更保存</button>&nbsp;
+                            <button type="button" class="btn btn-default" data-bs-toggle="modal"  data-bs-target="#modal-changecal">取消</button>
+                                   
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 変更保存 -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                 id="modal-changesave">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">変更保存</h4><button type="button" class="btn-close d-none" data-bs-dismiss="modal"   aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe pt-0 p-0">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post"
+                                          style="text-align: center;">
+                                        <h1 class="cap-icon-h1"><i class="fa fa-exclamation-circle pt-1 pb-1 ps-3 pe-3 cap-icon-i"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center">変更内容を保存しますか？</h4>
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#modal-changeok" id="btnUpdate"> 保存 </button>
+                            <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 変更取消 -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                 id="modal-changecal">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">変更取消</h4><button type="button" class="btn-close d-none" data-bs-dismiss="modal"
+                                                                     aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe pt-0 p-0">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post"
+                                          style="text-align: center;">
+                                        <h1 class="cap-icon-h1 border border-danger border-8"><i class="fa fa-exclamation-circle pt-1 pb-1 ps-3 pe-3 cap-icon-i text-danger"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center">変更内容を破棄してもよろしいですか？</h4>
+
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-lg btn-primary" data-bs-dismiss="modal"  id="btnCancel">破棄</button><button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 登録完了 -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                 id="modal-changeok">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">変更保存</h4><button type="button" class="btn-close d-none" data-bs-dismiss="modal"
+                                                                     aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe pt-0 p-0">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post"
+                                          style="text-align: center;">
+                                        <h1 class="cap-icon-h1"><i class="fa fa-check cap-icon-i"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center">変更内容を保存しました。</h4>
+
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal" id="btnSuccess">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        @Html.Partial("_t_footer")
+    </div>
+</div>
+
+
+
+
+@section Scripts{
+    @Scripts.Render("~/bundles/t_seller_account")
+}
+

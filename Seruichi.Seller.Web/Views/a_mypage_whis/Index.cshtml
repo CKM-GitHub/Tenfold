@@ -1,6 +1,6 @@
 ﻿@model Models.a_mypage_whisModel
     @{
-        ViewBag.Title = "利用履歴 - セルイチ";
+        ViewBag.Title = "査定 - セルイチ";
     }
     @section styles{
         @Styles.Render("~/Content/css/a_mypage_whis")
@@ -23,8 +23,8 @@
                 @Html.Partial("_MyPageMenu")
                 <div class="card cap-form" id="page-content-wrapper">
                     <form action="index.html" method="post" enctype="multipart/form-data" role="form">
-                        <h4 class="text-center pb-0 mb-0 pt-0 mt-0"><strong>利用履歴</strong></h4>
-                        <hr class=" pt-0 mt-0">
+                        <h4 style="text-align: center;padding-top: 50px;"><strong>利用履歴</strong></h4>
+                        <hr>
                         <div class="m-auto cap-fon-form-w600">
                             <div class="row justify-content-center">
                                 <div class="col-12">
@@ -39,7 +39,7 @@
                                                             <th class="text-center" style="width: 100px;">購入日時</th>
                                                             <th class="text-end" style="width: 80px;">購入数</th>
                                                             <th class="text-end" style="width: 100px;">購入金額</th>
-                                                            <th class="text-center" style="width: 100px;">結果</th>
+                                                            <th class="text-center" style="width: 100px;">決済</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody></tbody>
@@ -47,12 +47,11 @@
                                             </div>
                                         </div>
                                         <div class="card-footer">
-
                                             <div class='pagination-container'>
                                                 <nav>
-                                                    <ul id="pager"  class="pagination justify-content-center">
+                                                    <ul id="pager" class="pagination justify-content-center">
 
-                                                        <li  class="page-item" data-page="prev">
+                                                        <li class="page-item" data-page="prev">
                                                             <span> << <span class="sr-only">(current)</span></span>
                                                         </li>
                                                         <li class="page-item" data-page="next" id="prev">

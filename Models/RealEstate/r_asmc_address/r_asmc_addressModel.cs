@@ -13,20 +13,35 @@ namespace Models.RealEstate.r_asmc_address
         public IEnumerable<r_asmc_address_City> Cities { get; set; } = new List<r_asmc_address_City>();
         public int Settings1 { get; set; }
         public int Settings2 { get; set; }
+        public bool DisabledOpenCheckTab { get; set; }
     }
 
-    public class r_asmc_address_Town
+
+
+
+
+    public class r_asmc_address_Region
     {
-        public string CityCD { get; set; }
-        public string CityName { get; set; }
-        public string TownCD { get; set; }
-        public string TownName { get; set; }
-        public string TownKana { get; set; }
-        public int MansionCount { get; set; }
-        public int RealEstateCount { get; set; }
+        public string RegionCD { get; set; }
+        public string RegionName { get; set; }
         public int DisplayOrder { get; set; }
-        public int ValidFLG { get; set; }
-        public DateTime ExpDate { get; set; }
+    }
+
+    public class r_asmc_address_Pref
+    {
+        public string PrefCD { get; set; }
+        public string PrefName { get; set; }
+        public IEnumerable<r_asmc_address_CityGroup> CityGroups { get; set; } = new List<r_asmc_address_CityGroup>();
+    }
+
+    public class r_asmc_address_CityGroup
+    {
+        public string PrefCD { get; set; }
+        public string PrefName { get; set; }
+        public string CityGroupCD { get; set; }
+        public string CityGroupName { get; set; }
+        public IEnumerable<r_asmc_address_City> Cities { get; set; } = new List<r_asmc_address_City>();
+        public int CitiesCount { get; set; }
     }
 
     public class r_asmc_address_City
@@ -43,30 +58,21 @@ namespace Models.RealEstate.r_asmc_address
         public IEnumerable<r_asmc_address_Town> Towns { get; set; } = new List<r_asmc_address_Town>();
         public int TownsCount { get; set; }
         public int ValidFLG { get; set; }
-        public DateTime ExpDate { get; set; }
+        public int ExpirationFlag { get; set; }
     }
 
-    public class r_asmc_address_CityGroup
+    public class r_asmc_address_Town
     {
-        public string PrefCD { get; set; }
-        public string PrefName { get; set; }
-        public string CityGroupCD { get; set; }
-        public string CityGroupName { get; set; }
-        public IEnumerable<r_asmc_address_City> Cities { get; set; } = new List<r_asmc_address_City>();
-        public int CitiesCount { get; set; }
-    }
-
-    public class r_asmc_address_Pref
-    {
-        public string PrefCD { get; set; }
-        public string PrefName { get; set; }
-        public IEnumerable<r_asmc_address_CityGroup> CityGroups { get; set; } = new List<r_asmc_address_CityGroup>();
-    }
-
-    public class r_asmc_address_Region
-    {
-        public string RegionCD { get; set; }
-        public string RegionName { get; set; }
+        public string CityCD { get; set; }
+        public string CityName { get; set; }
+        public string TownCD { get; set; }
+        public string TownName { get; set; }
+        public string TownKana { get; set; }
+        public int MansionCount { get; set; }
+        public int RealEstateCount { get; set; }
         public int DisplayOrder { get; set; }
+        public int ValidFLG { get; set; }
+        public int ExpirationFlag { get; set; }
     }
+
 }

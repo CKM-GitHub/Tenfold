@@ -1,8 +1,10 @@
 ﻿window.addEventListener('pageshow', function (event) {
     if (event.persisted) {
-        window.location.reload();
+        window.location.reload(); 
     }
+
 });
+
 
 //in Layout.cshtml, the database values are set
 const messageConst = {
@@ -26,6 +28,13 @@ const messageConst = {
     E205: 'パスワードが入力されていません',
     E206: 'メールアドレスとパスワードの組合せが正しくありません',
     E207: 'この情報での登録はありません',
+
+    E305: '入力された銀行は存在しません。',
+    E306: '入力された支店は存在しません。',
+    E315: '変更内容を保存しますか？',
+    E316: '変更内容を保存しました',
+    E317: '変更内容を取消しますか？',
+    E318: '更新対象項目がありませんでした',
 }
 
 const commonApiUrl = {
@@ -36,6 +45,8 @@ const commonApiUrl = {
     getDropDownListItemsOfTown: "/api/CommonApi/GetDropDownListItemsOfTown",
     getDropDownListItemsOfLine: "/api/CommonApi/GetDropDownListItemsOfLine",
     getDropDownListItemsOfStation: "/api/CommonApi/GetDropDownListItemsOfStation",
+    checkBirthday: "/api/CommonApi/CheckBirthday",
+    getNearestStations: "/api/CommonApi/GetNearestStations",
 }
 
 const regexPattern = {
@@ -47,6 +58,7 @@ const regexPattern = {
     numeric: "^[0-9.]+$",
     dateformat: /^\d{4}-\d{2}-\d{2}$/,
     doublebyteKana: /^([ァ-ンａ-ｚＡ-Ｚ０-９]+)$/,
+    doublebyteNamaeKana: "^[ァ-ヶー　]+$",
     singlebyteKana: /^([ｧ-ﾝﾞﾟa-zA-Z0-9]+)$/,
     doublebyteHira: /^([ぁ-んａ-ｚＡ-Ｚ０-９]+)$/
 }
@@ -72,7 +84,35 @@ const kanaMap = {
     'ｯ': 'ッ', 'ｬ': 'ャ', 'ｭ': 'ュ', 'ｮ': 'ョ',
     '｡': '。', '､': '、', 'ｰ': 'ー', '｢': '「', '｣': '」', '･': '・'
 };
+$(function () {
+    //$('#menu-toggle').on('click', function () {
+    //    if ($('#wrapper').hasClass('toggled'))
+    //        $('#wrapper').removeClass("toggled");
+    //    else
+    //        $('#wrapper').attr("class", "toggled");
+    //});
 
+    //code from sidebar.js
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+    $("form").bind("keypress", function (e) {
+        if (e.keyCode == 13) {
+            if (document.activeElement.type == 'password' || document.activeElement.id == 'btnLogin' || document.activeElement.id == 'btnDisplay' || document.activeElement.id == 'btnProcess')
+                return true;
+            else return false;
+        }
+    });
+    $('#sidebar-wrapper').bind("keypress", function (e) {
+        if (e.keyCode == 13) {
+            if ( document.activeElement.id == 'btnDisplay' || document.activeElement.id == 'btnProcess')
+                return true;
+            else return false;
+        }
+    });
+})
 const common = {
 
     appPath: "", //set in Layout.cshtml
@@ -231,6 +271,7 @@ const common = {
         form.method = "POST";
         form.action = action;
         form.submit();
+        this.showLoading();
     },
 
     removeDropDownListItems: function removeDropDownListItems(selector, placeHolder) {
@@ -313,8 +354,23 @@ const common = {
          });        
         return rval;
     },
+    getFullWithOneCharactertwoByteCount: function mbStrWidth(input) {
+        let len = 0;
+        for (let i = 0; i < input.length; i++) {
+            let code = input.charCodeAt(i);
+            if ((code >= 0x0020 && code <= 0x1FFF) || (code >= 0xFF61 && code <= 0xFF9F)) {
+                len += 1;
+            } else if ((code >= 0x2000 && code <= 0xFF60) || (code >= 0xFFA0)) {
+                len += 2;
+            } else {
+                len += 0;
+            }
+        }
+        return len;
+    },
 
     checkValidityInput: function checkValidityInput(ctrl) {
+        //debugger
         const $ctrl = $(ctrl);
         const type = $ctrl.attr('type');
         const name = $ctrl.attr('name');
@@ -324,6 +380,7 @@ const common = {
         const isSingleDoubleByte = $ctrl.attr("data-validation-singlebyte-doublebyte");
         const isDoubleByte = $ctrl.attr("data-validation-doublebyte");
         const isDoubleByteKana = $ctrl.attr("data-validation-doublebyte-kana");
+        const isDoubleByteNamaeKana = $ctrl.attr("data-validation-doublebyte-namae-kana");
         const isSingleByte = $ctrl.attr("data-validation-singlebyte");
         const isSingleByteNumber = $ctrl.attr("data-validation-singlebyte-number");
         const isSingleByteNumberAlpha = $ctrl.attr("data-validation-singlebyte-numberalpha");
@@ -340,7 +397,7 @@ const common = {
         const isMinlengthCheck = $ctrl.attr("data-validation-minlengthcheck");
         const isSingleByteKana = $ctrl.attr("data-validation-singlebyte-kana");
         const isDoubleByteHira = $ctrl.attr("data-validation-doublebyte-hira");
-
+        const isemailformat = $ctrl.attr("data-validation-email");
 
         let inputValue = "";
         if (type === 'radio') {
@@ -357,7 +414,7 @@ const common = {
             $ctrl.val(inputValue);
         }
 
-        if (isDoubleByte || isDoubleByteKana || isDoubleByteHira) {
+        if (isDoubleByte || isDoubleByteKana || isDoubleByteHira || isDoubleByteNamaeKana) {
             inputValue = this.replaceSingleToDouble(inputValue);
             inputValue = this.replaceSingleToDoubleKana(inputValue);
             $ctrl.val(inputValue);
@@ -366,7 +423,7 @@ const common = {
         //validation
         if (!isRequired
             && !isSingleDoubleByte
-            && !isDoubleByte && !isDoubleByteKana
+            && !isDoubleByte && !isDoubleByteKana && !isDoubleByteNamaeKana
             && !isSingleByte && !isSingleByteNumber && !isSingleByteNumberAlpha
             && !isNumeric && !isMoney && !isDate && !isMaxlengthCheck && !isOneByteCharacter && !ischeckboxLenght && !isMinlengthCheck
             && isPasswordcompare
@@ -395,11 +452,12 @@ const common = {
             }
         }
 
-        if (inputValue) {
+        if (inputValue) {            
             if (isSingleDoubleByte) {
                 const maxLength = $ctrl.attr('maxlength');
                 if (maxLength) {
-                    const byteLength = this.getStringByteCount(inputValue);
+                    /*const byteLength = this.getStringByteCount(inputValue);*/
+                    const byteLength = this.getFullWithOneCharactertwoByteCount(inputValue);
                     if (byteLength > parseInt(maxLength)) {
                         $ctrl.showError(this.getMessage('E105'));
                         return;
@@ -419,7 +477,15 @@ const common = {
                 const tem_val = common.replaceAlphabetandnumberSingleToDouble(inputValue);                
                 const regex = new RegExp(regexPattern.doublebyteKana);
                 if (!regex.test(tem_val)) {                   
-                    $ctrl.showError(this.getMessage('E107'));
+                    $ctrl.showError(this.getMessage('E104'));
+                    return;
+                }
+            }
+
+            if (isDoubleByteNamaeKana) {
+                const regex = new RegExp(regexPattern.doublebyteNamaeKana);
+                if (!regex.test(inputValue)) {
+                    $ctrl.showError(this.getMessage('E104'));
                     return;
                 }
             }
@@ -532,7 +598,15 @@ const common = {
                     $("#StartDate").focus();
                     return;
                 }
-                //else {                //    $("#StartDate").hideError(this.getMessage('E111'));                //    $("#EndDate").hideError(this.getMessage('E111'));                //    //$("#EndDate").focus();                //    return;                //}
+                
+                //else {
+                //    $("#StartDate").hideError(this.getMessage('E111'));
+                //    $("#EndDate").hideError(this.getMessage('E111'));
+                //    //$("#EndDate").focus();
+                //    return;
+
+                //}
+
             }
 
             if (isNumCompare) {
@@ -558,7 +632,7 @@ const common = {
                 if (minLength) {
                     const byteLength = inputValue.length;
                     if (byteLength < parseInt(minLength)) {
-                        $ctrl.showError(this.getMessage('E105'));
+                        $ctrl.showError(this.getMessage('E110'));
                         return;
                     }
                 }
@@ -583,7 +657,14 @@ const common = {
                 const hira_val = common.replaceAlphabetandnumberSingleToDouble(inputValue);
                 const regex = new RegExp(regexPattern.doublebyteHira);
                 if (!regex.test(hira_val)) {
-                    $ctrl.showError(this.getMessage('E107'));
+                    $ctrl.showError(this.getMessage('E104'));
+                    return;
+                }
+            }
+
+            if (isemailformat) {
+                if (!inputValue.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+                    $ctrl.showError(this.getMessage('E204'));
                     return;
                 }
             }
@@ -646,6 +727,34 @@ const common = {
             success = false;
         }
         return success;
+    },
+
+    birthdayCheck: function birthdayCheck(ctrl) {
+        var $ctrl = $(ctrl);
+        var inputValue = $ctrl.val();
+        if (!inputValue) return;
+
+        inputValue = common.replaceDoubleToSingle(inputValue);
+        inputValue = inputValue.replace('年', '/').replace('月', '/').replace('日', '');
+        inputValue = inputValue.replace(/-/g, '/');
+        $ctrl.val(inputValue);
+
+        var regex = new RegExp(regexPattern.singlebyte_number);
+        if (!regex.test(inputValue.replace(/\//g, ''))) {
+            $ctrl.showError(this.getMessage('E104'));
+            return;
+        }
+
+        common.callAjax(common.appPath + commonApiUrl.checkBirthday, $ctrl.val(), function (result) {
+            if (result) {
+                if (result.data) $ctrl.val(result.data);
+                if (result.message) {
+                    $ctrl.showError(result.message.MessageText1);
+                } else {
+                    $ctrl.hideError();
+                }
+            }
+        });
     },
 
     getToday: function getToday() {

@@ -110,7 +110,7 @@ namespace Seruichi.Common
                         }
                         transaction.Commit();
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
                         transaction.Rollback();
                         throw;

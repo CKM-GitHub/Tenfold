@@ -5,6 +5,7 @@
         const headers = table.querySelectorAll('th');
         const tableBody = table.querySelector('tbody');
         const rows = tableBody.querySelectorAll('tr');
+        let old_colIndex = 0;
 
         const left_right_headers = table.querySelectorAll('th left_sort-by');
 
@@ -28,16 +29,21 @@
 
         const sortColumn = function (index) {
             const rows = tableBody.querySelectorAll('tr');
-            var col_index = [], multiplier;
+            var col_index = [], multiplier, direction;
             if (headers[index].hasAttribute('ordercol-index'))
                 col_index = headers[index].getAttribute('ordercol-index').split('_');
             else
                 col_index[0] = index;
             // Get the current direction
-            const direction = directions[col_index[0]] || 'asc';
+            if (old_colIndex !== col_index[0]) {
+                direction = 'asc';
+                old_colIndex = col_index[0];
+            }
+            else
+                direction = directions[col_index[0]] || 'asc';
 
             // A factor based on the direction
-            if (index == 0) {
+            if (index == 0 && (headers[0].innerText == 'NO.' || headers[0].innerText == 'No.')) {
                 multiplier = 1;
                 if (headers[index].hasAttribute('ordercol-direction'))
                     multiplier = headers[index].getAttribute('ordercol-direction') === 'asc' ? 1 : -1;
@@ -170,11 +176,13 @@
             // Reverse the direction
             directions[col_index[0]] = direction === 'asc' ? 'desc' : 'asc';
 
-            // Append new row
+            // Append new row 
             var count = 0;
             newRows.forEach(function (newRow) {
-                count = count + 1;
-                newRow.querySelectorAll('td')[0].innerHTML = count;
+                if (headers[0].innerText == 'NO.' || headers[0].innerText == 'No.') {
+                    count = count + 1;
+                    newRow.querySelectorAll('td')[0].innerHTML = count;
+                }
                 tableBody.appendChild(newRow);
             });
         };
@@ -194,8 +202,14 @@
                 $(ctrl).attr('direction', 'asc');
                 multiplier = 1;
             }
-            else
-                multiplier = $(ctrl).attr('direction') === 'asc' ? 1 : -1;
+            else {
+                if (old_colIndex !== col_index[0]) {
+                    multiplier = 1;
+                    old_colIndex = col_index[0];
+                }
+                else
+                    multiplier = $(ctrl).attr('direction') === 'asc' ? 1 : -1;
+            }
 
             const newRows = Array.from(rows);
 

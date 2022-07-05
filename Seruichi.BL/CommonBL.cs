@@ -383,5 +383,11 @@ namespace Seruichi.BL
 
             return mailInfo;
         }
+
+        public List<DropDownListItem> GetDropDownListItemsOfCourse()
+        {
+            string spName = "pr_t_reale_new_Select_M_Course";
+            return GetDropDownListItems(spName);
+        }
     }
 }

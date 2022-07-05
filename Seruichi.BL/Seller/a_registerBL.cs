@@ -109,6 +109,16 @@ namespace Seruichi.BL
             //郵便番号
             validator.CheckIsHalfWidth("ZipCode1", model.ZipCode1, 3, RegexFormat.Number);
             validator.CheckIsHalfWidth("ZipCode2", model.ZipCode2, 4, RegexFormat.Number);
+            if (!validator.IsContains("ZipCode1") && !validator.IsContains("ZipCode2"))
+            {
+                if (!string.IsNullOrEmpty(model.ZipCode1) || !string.IsNullOrEmpty(model.ZipCode2))
+                {
+                    if (!CheckZipCode(model.ZipCode1, model.ZipCode2, out string errorcd, out string prefCD, out string cityName, out string townName))
+                    {
+                        validator.AddValidationResult("ZipCode1", errorcd);
+                    }
+                }
+            }
             //都道府県
             validator.CheckSelectionRequired("PrefCD", model.PrefCD);
             //市区町村
@@ -131,35 +141,28 @@ namespace Seruichi.BL
             validator.CheckIsHalfWidth("Fax", model.Fax, 15, RegexFormat.Number);
             //メールアドレス
             validator.CheckSellerMailAddress("MailAddress", model.MailAddress);
-            if (!new a_loginBL().CheckDuplicateMailAddresses(model.MailAddress))
+            if (!validator.IsContains("MailAddress"))
             {
-                validator.AddValidationResult("MailAddress", "E203"); //既に登録済みのメールアドレスです
+                if (!new a_loginBL().CheckDuplicateMailAddresses(model.MailAddress))
+                {
+                    validator.AddValidationResult("MailAddress", "E203"); //既に登録済みのメールアドレスです
+                }
             }
             //パスワード
             validator.CheckRequired("Password", model.Password);
             validator.CheckIsHalfWidth("Password", model.Password, 20);
+            if (!validator.IsContains("Password"))
+            {
+                if (model.Password.Length < 8)
+                {
+                    validator.AddValidationResult("Password", "E110");
+                }
+            }
             //パスワード（確認）
             validator.CheckRequired("ConfirmPassword", model.ConfirmPassword);
             if (!string.IsNullOrEmpty(model.ConfirmPassword) && model.Password != model.ConfirmPassword)
             {
                 validator.AddValidationResult("ConfirmPassword", "E109");
-            }
-
-            if (validator.IsValid)
-            {
-                //郵便番号
-                if (!string.IsNullOrEmpty(model.ZipCode1) || !string.IsNullOrEmpty(model.ZipCode2))
-                {
-                    if (!CheckZipCode(model.ZipCode1, model.ZipCode2, out string errorcd, out string prefCD, out string cityName, out string townName))
-                    {
-                        validator.AddValidationResult("ZipCode1", errorcd);
-                    }
-                }
-                //パスワード
-                if (model.Password.Length < 8 || model.Password.Length > 20)
-                {
-                    validator.AddValidationResult("Password", "E105");
-                }
             }
 
             return validator.GetValidationResult();

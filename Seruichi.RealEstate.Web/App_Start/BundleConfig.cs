@@ -55,7 +55,8 @@ namespace Seruichi.RealEstate.Web
                      "~/Scripts/r_login.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/r_contact").Include(
-                    "~/Scripts/r_contact.js"));
+                    "~/Scripts/r_contact.js",
+                    "~/Scripts/r_common_popup.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/r_dashboard").Include(
                     "~/Scripts/r_dashboard.js"));
@@ -74,10 +75,29 @@ namespace Seruichi.RealEstate.Web
 
             bundles.Add(new ScriptBundle("~/bundles/r_asmc_address").Include(
                     "~/Scripts/r_asmc_address.js",
-                    "~/Content/scripts/sidebar.js"));
+                    "~/Content/scripts/sidebar.js",
+                    "~/Content/scripts/hover.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/r_asmc_railway").Include(
                     "~/Scripts/r_asmc_railway.js",
+                    "~/Content/scripts/sidebar.js",
+                    "~/Content/scripts/hover.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/r_asmc_ms_map_add").Include(
+                    "~/Scripts/r_asmc_ms_map_add.js",
+                    "~/Content/scripts/sidebar.js",
+                    "~/Content/scripts/hover.js"));
+
+            bundles.Add(new StyleBundle("~/Content/r_asmc_ms_list_map").Include(
+                      "~/Content/css/style.css",
+                      "~/Content/css/index.css",
+                       "~/Content/css/tree.css"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/r_asmc_ms_list_map").Include(
+                    "~/Scripts/r_asmc_ms_list_map.js",
+                     "~/Content/scripts/tree.js",
+                     "~/Content/scripts/rating.js",
                     "~/Content/scripts/sidebar.js"));
 
             bundles.Add(new StyleBundle("~/Content/r_asmc_ms_reged_list").Include(
@@ -113,6 +133,25 @@ namespace Seruichi.RealEstate.Web
             bundles.Add(new ScriptBundle("~/bundles/r_staff").Include(
                     "~/Scripts/r_staff.js",
                      "~/Content/scripts/sidebar.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/r_temp_mes").Include(
+                    "~/Scripts/r_temp_mes.js"));
+
+           
+            bundles.Add(new ScriptBundle("~/bundles/r_auto_mes").Include(
+                    "~/Scripts/r_auto_mes.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/r_template").Include(
+                   "~/Scripts/r_template.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/r_statistic").Include(
+                   "~/Scripts/r_statistic.js",
+                   "~/Content/scripts/sidebar.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/r_invoice").Include(
+                   "~/Scripts/r_invoice.js",
+                   "~/Content/scripts/sidebar.js",
+                   "~/Content/scripts/table_header_sort.js"));
 
         }
     }

@@ -19,6 +19,9 @@ $(function () {
     _url.gotoNextPage = common.appPath + '/t_mansion_new/GotoNextPage';
     setValidation();
     addEvents();
+    $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
+    $('#t_mansion_list').addClass('font-bold text-underline');
+    $('#MansionName').focus();
 });
 
 function setValidation() {
@@ -61,6 +64,8 @@ function setValidation() {
         .addvalidation_reqired()
         .addvalidation_custom('customValidation_checkConstYYYYMM');
 
+    $('#confirm_BuildingAge').text($('#BuildingAge').text());
+
     $('#Rooms')
         .addvalidation_errorElement("#errorRooms")
         .addvalidation_reqired(true)
@@ -78,188 +83,8 @@ function setValidation() {
         .addvalidation_reqired();
 
     ////交通アクセス
-    $('#LineCD_1')
-        .addvalidation_errorElement("#errorLineCD1")
-        .addvalidation_reqired();
-    $('#StationCD_1')
-        .addvalidation_errorElement("#errorStationCD1")
-        .addvalidation_reqired();
-    $('#Distance_1')
-        .addvalidation_errorElement("#errorDistanceCD1")
-        .addvalidation_reqired();
-    $('#StationCD_2')
-        .addvalidation_errorElement("#errorStationCD2")
-        //.addvalidation_reqired();
-    $('#LineCD_2')
-        .addvalidation_errorElement("#errorLineCD2")
-        //.addvalidation_reqired();
-    $('#StationCD_3')
-        .addvalidation_errorElement("#errorStationCD3")
-        //.addvalidation_reqired();
-    $('#LineCD_3')
-        .addvalidation_errorElement("#errorLineCD3")
-        //.addvalidation_reqired();
-    $('#StationCD_4')
-        .addvalidation_errorElement("#errorStationCD4")
-        //.addvalidation_reqired();
-    $('#LineCD_4')
-        .addvalidation_errorElement("#errorLineCD4")
-        //.addvalidation_reqired();
-    $('#StationCD_5')
-        .addvalidation_errorElement("#errorStationCD5")
-        //.addvalidation_reqired();
-    $('#LineCD_5')
-        .addvalidation_errorElement("#errorLineCD5")
-        //.addvalidation_reqired();
-    $('#StationCD_6')
-        .addvalidation_errorElement("#errorStationCD6")
-        //.addvalidation_reqired();
-    $('#LineCD_6')
-        .addvalidation_errorElement("#errorLineCD6")
-        //.addvalidation_reqired();
-    $('#StationCD_7')
-        .addvalidation_errorElement("#errorStationCD7")
-        //.addvalidation_reqired();
-    $('#LineCD_7')
-        .addvalidation_errorElement("#errorLineCD7")
-        //.addvalidation_reqired();
-    $('#StationCD_8')
-        .addvalidation_errorElement("#errorStationCD8")
-        //.addvalidation_reqired();
-    $('#LineCD_8')
-        .addvalidation_errorElement("#errorLineCD8")
-        //.addvalidation_reqired();
-    $('#StationCD_9')
-        .addvalidation_errorElement("#errorStationCD9")
-        //.addvalidation_reqired();
-    $('#LineCD_9')
-        .addvalidation_errorElement("#errorLineCD9")
-        //.addvalidation_reqired();
-    $('#StationCD_10')
-        .addvalidation_errorElement("#errorStationCD10")
-        //.addvalidation_reqired();
-    $('#LineCD_10')
-        .addvalidation_errorElement("#errorLineCD10")
-        //.addvalidation_reqired();
-    $('#StationCD_11')
-        .addvalidation_errorElement("#errorStationCD11")
-        //.addvalidation_reqired();
-    $('#LineCD_11')
-        .addvalidation_errorElement("#errorLineCD11")
-        //.addvalidation_reqired();
-    $('#StationCD_12')
-        .addvalidation_errorElement("#errorStationCD12")
-        //.addvalidation_reqired();
-    $('#Distance_2')
-        .addvalidation_errorElement("#errorDistanceCD2")
-        //.addvalidation_reqired();
-    $('#StationCD_13')
-        .addvalidation_errorElement("#errorStationCD13")
-        //.addvalidation_reqired();
-    $('#LineCD_13')
-        .addvalidation_errorElement("#errorLineCD13")
-        //.addvalidation_reqired();
-    $('#StationCD_14')
-        .addvalidation_errorElement("#errorStationCD14")
-        //.addvalidation_reqired();
-    $('#LineCD_14')
-        .addvalidation_errorElement("#errorLineCD14")
-        //.addvalidation_reqired();
-    $('#StationCD_15')
-        .addvalidation_errorElement("#errorStationCD15")
-        //.addvalidation_reqired();
-    $('#LineCD_15')
-        .addvalidation_errorElement("#errorLineCD15")
-        //.addvalidation_reqired();
-    $('#StationCD_16')
-        .addvalidation_errorElement("#errorStationCD16")
-        //.addvalidation_reqired();
-    $('#LineCD_16')
-        .addvalidation_errorElement("#errorLineCD16")
-        //.addvalidation_reqired();
-    $('#StationCD_17')
-        .addvalidation_errorElement("#errorStationCD17")
-        //.addvalidation_reqired();
-    $('#LineCD_17')
-        .addvalidation_errorElement("#errorLineCD17")
-        //.addvalidation_reqired();
-    $('#StationCD_18')
-        .addvalidation_errorElement("#errorStationCD18")
-        
-    $('#LineCD_18')
-        .addvalidation_errorElement("#errorLineCD18")
-        //.addvalidation_reqired();
-    $('#StationCD_19')
-        .addvalidation_errorElement("#errorStationCD19")
-        //.addvalidation_reqired();
-    $('#LineCD_19')
-        .addvalidation_errorElement("#errorLineCD19")
-        //.addvalidation_reqired();
-    $('#StationCD_20')
-        .addvalidation_errorElement("#errorStationCD20")
-        //.addvalidation_reqired();
-    $('#LineCD_20')
-        .addvalidation_errorElement("#errorLineCD20")
-        //.addvalidation_reqired();
-    $('#Distance_3')
-        .addvalidation_errorElement("#errorDistanceCD3")
-        //.addvalidation_reqired();
-    $('#Distance_4')
-        .addvalidation_errorElement("#errorDistanceCD4")
-        //.addvalidation_reqired();
-    $('#Distance_5')
-        .addvalidation_errorElement("#errorDistanceCD5")
-        //.addvalidation_reqired();
-    $('#Distance_6')
-        .addvalidation_errorElement("#errorDistanceCD6")
-        //.addvalidation_reqired();
-    $('#Distance_7')
-        .addvalidation_errorElement("#errorDistanceCD7")
-        //.addvalidation_reqired();
-    $('#Distance_8')
-        .addvalidation_errorElement("#errorDistanceCD8")
-        //.addvalidation_reqired();
-    $('#Distance_9')
-        .addvalidation_errorElement("#errorDistanceCD9")
-        //.addvalidation_reqired();
-    $('#Distance_10')
-        .addvalidation_errorElement("#errorDistanceCD10")
-        //.addvalidation_reqired();
-    $('#Distance_11')
-        .addvalidation_errorElement("#errorDistanceCD11")
-        //.addvalidation_reqired();
-    $('#Distance_12')
-        .addvalidation_errorElement("#errorDistanceCD12")
-        //.addvalidation_reqired();
-    $('#Distance_13')
-        .addvalidation_errorElement("#errorDistanceCD13")
-        //.addvalidation_reqired();
-    $('#Distance_14')
-        .addvalidation_errorElement("#errorDistanceCD14")
-        //.addvalidation_reqired();
-    $('#Distance_15')
-        .addvalidation_errorElement("#errorDistanceCD15")
-        //.addvalidation_reqired();
-    $('#Distance_16')
-        .addvalidation_errorElement("#errorDistanceCD16")
-        //.addvalidation_reqired();
-    $('#Distance_17')
-        .addvalidation_errorElement("#errorDistanceCD17")
-        //.addvalidation_reqired();
-    $('#Distance_18')
-        .addvalidation_errorElement("#errorDistanceCD18")
-        //.addvalidation_reqired();
-    $('#Distance_19')
-        .addvalidation_errorElement("#errorDistanceCD19")
-        //.addvalidation_reqired();
-    $('#Distance_20')
-        .addvalidation_errorElement("#errorDistanceCD20")
-        //.addvalidation_reqired();
-    $('.js-stationcd')
-        .addvalidation_custom('customValidation_checkStation');
-    $('.js-distance')
-        .addvalidation_singlebyte_number()
-        .addvalidation_custom('customValidation_checkDistance');
+    ErrorLineStationDistance();
+   
     //謄本表記
     $('#Noti')
         .addvalidation_errorElement("#errorNoti")
@@ -358,21 +183,22 @@ function addEvents() {
     //都道府県
     $('#PrefCD').on('change', function () {
         const inputval = $(this).val();
+
+        removeLineAndStation();
+
         if (inputval) {
             setCityList('add', inputval);
             setTownList('remove');
             setLineList('add', inputval);
-            setStationList('remove');
-            $('.js-distance').val('').hideError();
-            //setTypeahead('#Name');
+            //setStationList('remove');
+            //$('.js-distance').val('').hideError();          
         }
         else {
             setCityList('remove');
             setTownList('remove');
-            setLineList('remove');
-            setStationList('remove');
-            $('.js-distance').val('').hideError();
-            //setTypeahead('#Name');
+            //setLineList('remove');
+            //setStationList('remove');
+            //$('.js-distance').val('').hideError();
         }
     });
     //市区町村
@@ -380,6 +206,10 @@ function addEvents() {
         setTownList('add', $('#PrefCD').val(), $(this).val());
     });
 
+    //町域、住所
+    $('#TownCD, #Address').on('change', function () {
+        displayNearestStationData();
+    });
    
     ////路線選択
     $('.js-linecd').on('change', function () {
@@ -470,9 +300,11 @@ function addEvents() {
         window.location.href = common.appPath + '/t_mansion_list/Index';
     }); 
 
-    $('#btnCancel').on('click', function () {
+    $('#btnComplete, #btnCancel').on('click', function () {
         window.location.reload();
     });
+
+   
 }
 function setScreenComfirm(data) {
     for (key in data) {
@@ -487,7 +319,7 @@ function setScreenComfirm(data) {
 
     $('#confirm_ConstYYYYMM').val($('#ConstYYYYMM').val());
     $('#confirm_RightKBN').val($('input[name="RightKBN"]:radio:checked').next().text());
-
+    $('#confirm_BuildingAge').text($('#BuildingAge').text());
     $('#confirm_Noti').text($('#Noti').text());
     $('#confirm_Katakana').text($('#Katakana').text());
     $('#confirm_Katakana1').text($('#Katakana1').text());
@@ -681,5 +513,277 @@ function getMansionWordList() {
     return array;
 }
 
+function displayNearestStationData() {
+    if ($('#hdnMansionCD').val()) return;
 
+    const model = {
+        PrefName: $('#PrefCD option:selected').text(),
+        CityName: $('#CityCD option:selected').text(),
+        TownName: $('#TownCD option:selected').text(),
+        Address: $('#Address').val()
+    }
+
+    if (model.PrefName && model.CityName && model.TownName && model.Address) {
+
+        common.showLoading();
+        common.callAjax(_url.getNearestStations, model,
+            function (result) {
+                if (result && result.isOK) {
+
+                    removeLineAndStation();
+
+                    if (result.data) {
+                        const dataArray = JSON.parse(result.data);
+                        const length = dataArray.length;
+
+                        if (length > 0) {
+                            let data = dataArray[0];
+                            for (let i = 0; i < length; i++) {
+                                data = dataArray[i];
+                                const index = i + 1;
+
+                                if (!document.getElementById('LineCD_' + index)) {
+                                    const station = $('.js-station-template').find('.js-station').clone(true);
+                                    station.find('.js-paragraph-number').text(getParagraphNumber(index))
+                                    station.find('.js-linecd').attr('id', 'LineCD_' + index);
+                                    station.find('.js-stationcd').attr('id', 'StationCD_' + index);
+                                    station.find('.js-distance').attr('id', 'Distance_' + index);
+                                    $('.js-stationContainer').append(station);
+                                }
+
+                                if (data.LineCD) {
+                                    $('#LineCD_' + index).val(data.LineCD);
+                                    setStationList('add', data.LineCD, '#StationCD_' + index, data.StationCD);
+                                }
+
+                                $('#Distance_' + index).val(data.Distance);
+
+                                if (data.Distance) {
+                                    const lastDistance = index + 1;
+                                    $('#Dline_' + lastDistance ).removeClass("bg-secondary");
+                                    $('#Dline_' + lastDistance ).find("*").prop("disabled", false);
+                                }
+                                
+                            }
+
+                        }
+                    }
+                }
+                common.hideLoading();
+            },
+            function () {
+                common.hideLoading(null, 0);
+            }
+        );
+    }
+}
+
+function removeLineAndStation() {
+    $('.js-stationContainer').children().remove();
+    for (let i = 0; i < 20; i++) {
+        const index = i + 1;
+        const station = $('.js-station-template').find('.js-station').clone(true);
+        station.find('.card').attr('id', 'Dline_' + index);
+        station.find('.js-paragraph-number').text(getParagraphNumber(index));
+        station.find('.line-error').attr('id', 'errorLineCD' + index);
+        station.find('.js-linecd').attr('id', 'LineCD_' + index);
+        station.find('.station-error').attr('id', 'errorStationCD' + index);
+        station.find('.js-stationcd').attr('id', 'StationCD_' + index);
+        station.find('.distance-error').attr('id', 'errorDistanceCD' + index);
+        station.find('.js-distance').attr('id', 'Distance_' + index);
+        $('.js-stationContainer').append(station);
+        if (i != 0) {
+            $('#Dline_' + index).addClass("bg-secondary");
+            $('#Dline_' + index).find("*").prop("disabled", true);
+        }
+    }
+    ErrorLineStationDistance();
+}
+
+function ErrorLineStationDistance() {
+    $('#LineCD_1')
+        .addvalidation_errorElement("#errorLineCD1")
+        .addvalidation_reqired();
+    $('#StationCD_1')
+        .addvalidation_errorElement("#errorStationCD1")
+        .addvalidation_reqired();
+    $('#Distance_1')
+        .addvalidation_errorElement("#errorDistanceCD1")
+      //  .addvalidation_reqired();
+    $('#LineCD_2')
+        .addvalidation_errorElement("#errorLineCD2")
+    //.addvalidation_reqired();
+    $('#StationCD_2')
+        .addvalidation_errorElement("#errorStationCD2")
+    //.addvalidation_reqired();   
+    $('#StationCD_3')
+        .addvalidation_errorElement("#errorStationCD3")
+    //.addvalidation_reqired();
+    $('#LineCD_3')
+        .addvalidation_errorElement("#errorLineCD3")
+    //.addvalidation_reqired();
+    $('#StationCD_4')
+        .addvalidation_errorElement("#errorStationCD4")
+    //.addvalidation_reqired();
+    $('#LineCD_4')
+        .addvalidation_errorElement("#errorLineCD4")
+    //.addvalidation_reqired();
+    $('#StationCD_5')
+        .addvalidation_errorElement("#errorStationCD5")
+    //.addvalidation_reqired();
+    $('#LineCD_5')
+        .addvalidation_errorElement("#errorLineCD5")
+    //.addvalidation_reqired();
+    $('#StationCD_6')
+        .addvalidation_errorElement("#errorStationCD6")
+    //.addvalidation_reqired();
+    $('#LineCD_6')
+        .addvalidation_errorElement("#errorLineCD6")
+    //.addvalidation_reqired();
+    $('#StationCD_7')
+        .addvalidation_errorElement("#errorStationCD7")
+    //.addvalidation_reqired();
+    $('#LineCD_7')
+        .addvalidation_errorElement("#errorLineCD7")
+    //.addvalidation_reqired();
+    $('#StationCD_8')
+        .addvalidation_errorElement("#errorStationCD8")
+    //.addvalidation_reqired();
+    $('#LineCD_8')
+        .addvalidation_errorElement("#errorLineCD8")
+    //.addvalidation_reqired();
+    $('#StationCD_9')
+        .addvalidation_errorElement("#errorStationCD9")
+    //.addvalidation_reqired();
+    $('#LineCD_9')
+        .addvalidation_errorElement("#errorLineCD9")
+    //.addvalidation_reqired();
+    $('#StationCD_10')
+        .addvalidation_errorElement("#errorStationCD10")
+    //.addvalidation_reqired();
+    $('#LineCD_10')
+        .addvalidation_errorElement("#errorLineCD10")
+    //.addvalidation_reqired();
+    $('#StationCD_11')
+        .addvalidation_errorElement("#errorStationCD11")
+    //.addvalidation_reqired();
+    $('#LineCD_11')
+        .addvalidation_errorElement("#errorLineCD11")
+    //.addvalidation_reqired();
+    $('#StationCD_12')
+        .addvalidation_errorElement("#errorStationCD12")
+    //.addvalidation_reqired();
+    $('#Distance_2')
+        .addvalidation_errorElement("#errorDistanceCD2")
+    //.addvalidation_reqired();
+    $('#StationCD_13')
+        .addvalidation_errorElement("#errorStationCD13")
+    //.addvalidation_reqired();
+    $('#LineCD_13')
+        .addvalidation_errorElement("#errorLineCD13")
+    //.addvalidation_reqired();
+    $('#StationCD_14')
+        .addvalidation_errorElement("#errorStationCD14")
+    //.addvalidation_reqired();
+    $('#LineCD_14')
+        .addvalidation_errorElement("#errorLineCD14")
+    //.addvalidation_reqired();
+    $('#StationCD_15')
+        .addvalidation_errorElement("#errorStationCD15")
+    //.addvalidation_reqired();
+    $('#LineCD_15')
+        .addvalidation_errorElement("#errorLineCD15")
+    //.addvalidation_reqired();
+    $('#StationCD_16')
+        .addvalidation_errorElement("#errorStationCD16")
+    //.addvalidation_reqired();
+    $('#LineCD_16')
+        .addvalidation_errorElement("#errorLineCD16")
+    //.addvalidation_reqired();
+    $('#StationCD_17')
+        .addvalidation_errorElement("#errorStationCD17")
+    //.addvalidation_reqired();
+    $('#LineCD_17')
+        .addvalidation_errorElement("#errorLineCD17")
+    //.addvalidation_reqired();
+    $('#StationCD_18')
+        .addvalidation_errorElement("#errorStationCD18")
+
+    $('#LineCD_18')
+        .addvalidation_errorElement("#errorLineCD18")
+    //.addvalidation_reqired();
+    $('#StationCD_19')
+        .addvalidation_errorElement("#errorStationCD19")
+    //.addvalidation_reqired();
+    $('#LineCD_19')
+        .addvalidation_errorElement("#errorLineCD19")
+    //.addvalidation_reqired();
+    $('#StationCD_20')
+        .addvalidation_errorElement("#errorStationCD20")
+    //.addvalidation_reqired();
+    $('#LineCD_20')
+        .addvalidation_errorElement("#errorLineCD20")
+    //.addvalidation_reqired();
+    $('#Distance_3')
+        .addvalidation_errorElement("#errorDistanceCD3")
+    //.addvalidation_reqired();
+    $('#Distance_4')
+        .addvalidation_errorElement("#errorDistanceCD4")
+    //.addvalidation_reqired();
+    $('#Distance_5')
+        .addvalidation_errorElement("#errorDistanceCD5")
+    //.addvalidation_reqired();
+    $('#Distance_6')
+        .addvalidation_errorElement("#errorDistanceCD6")
+    //.addvalidation_reqired();
+    $('#Distance_7')
+        .addvalidation_errorElement("#errorDistanceCD7")
+    //.addvalidation_reqired();
+    $('#Distance_8')
+        .addvalidation_errorElement("#errorDistanceCD8")
+    //.addvalidation_reqired();
+    $('#Distance_9')
+        .addvalidation_errorElement("#errorDistanceCD9")
+    //.addvalidation_reqired();
+    $('#Distance_10')
+        .addvalidation_errorElement("#errorDistanceCD10")
+    //.addvalidation_reqired();
+    $('#Distance_11')
+        .addvalidation_errorElement("#errorDistanceCD11")
+    //.addvalidation_reqired();
+    $('#Distance_12')
+        .addvalidation_errorElement("#errorDistanceCD12")
+    //.addvalidation_reqired();
+    $('#Distance_13')
+        .addvalidation_errorElement("#errorDistanceCD13")
+    //.addvalidation_reqired();
+    $('#Distance_14')
+        .addvalidation_errorElement("#errorDistanceCD14")
+    //.addvalidation_reqired();
+    $('#Distance_15')
+        .addvalidation_errorElement("#errorDistanceCD15")
+    //.addvalidation_reqired();
+    $('#Distance_16')
+        .addvalidation_errorElement("#errorDistanceCD16")
+    //.addvalidation_reqired();
+    $('#Distance_17')
+        .addvalidation_errorElement("#errorDistanceCD17")
+    //.addvalidation_reqired();
+    $('#Distance_18')
+        .addvalidation_errorElement("#errorDistanceCD18")
+    //.addvalidation_reqired();
+    $('#Distance_19')
+        .addvalidation_errorElement("#errorDistanceCD19")
+    //.addvalidation_reqired();
+    $('#Distance_20')
+        .addvalidation_errorElement("#errorDistanceCD20")
+    //.addvalidation_reqired();
+
+
+    $('.js-stationcd')
+        .addvalidation_custom('customValidation_checkStation');
+    $('.js-distance')
+        .addvalidation_singlebyte_number()
+        .addvalidation_custom('customValidation_checkDistance');
+}
 

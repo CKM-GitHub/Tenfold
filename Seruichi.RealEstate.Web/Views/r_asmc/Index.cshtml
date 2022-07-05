@@ -10,7 +10,6 @@
 <div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
     <div class="d-flex flex-column min-h-screen" id="page-content-wrapper">
         <main class="py-6 bg-surface-secondary">
-
             <div class="container-fluid">
                 <!-- 205 査定条件（5000）トップ -->
                 <div class="card shadow border-0 mb-7">
@@ -65,43 +64,20 @@
                                                             <div id="js-areamap_monthly_background"
                                                                  class="areamap_monthly_background js-areamap_monthly_background--04">
 
-                                                                <div class="areabox areabox--kanto">
-                                                                    <a href="#" data-chihou-name="Kanto"
-                                                                       class="bg-white border rounded rounded-lg areabox-link border border-primary js-chihou">
-                                                                        <div class="areabox-title">関東</div>
-                                                                        <div class="areabox-list pt-2">
-                                                                            東京|神奈川<br>千葉|埼玉
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="areabox areabox--tokai">
-                                                                    <a href="#" data-chihou-name="Tokai"
-                                                                       class="bg-white border rounded rounded-lg areabox-link border border-primary js-chihou">
-                                                                        <div class="areabox-title">東海</div>
-                                                                        <div class="areabox-list pt-2">
-                                                                            愛知
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
+                                                                @foreach (var region in ViewBag.MapRegions)
+                                                                {
+                                                                    var css = "areabox areabox--" + region.CssName;
+                                                                    <div class="@css">
+                                                                        <a href="#" data-chihou-name="@region.RegionCD"
+                                                                           class="bg-white border rounded rounded-lg areabox-link border border-primary js-chihou">
+                                                                            <div class="areabox-title">@region.RegionName</div>
+                                                                            <div class="areabox-list pt-2">
+                                                                                @Html.Raw(region.PrefName)
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                }
 
-                                                                <div class="areabox areabox--kansai">
-                                                                    <a href="#" data-chihou-name="Kansai"
-                                                                       class="bg-white border rounded rounded-lg areabox-link border border-primary js-chihou">
-                                                                        <div class="areabox-title">関西</div>
-                                                                        <div class="areabox-list pt-2">
-                                                                            大阪|兵庫|京都
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="areabox areabox--kyushu">
-                                                                    <a href="#" data-chihou-name="Kyushu"
-                                                                       class="bg-white border rounded rounded-lg areabox-link border border-primary js-chihou">
-                                                                        <div class="areabox-title">九州</div>
-                                                                        <div class="areabox-list pt-2">
-                                                                            福岡
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -162,10 +138,10 @@
                             </div>
                             <div class="modal-body text-center">
                                 <div class="p-5">
+                                    <span class="cap-errormsg-right" id="SearchBoxError" name="SearchBoxError"></span>
                                     <div class="input-group rounded cap-fon-form-w350 mx-auto">
-                                        <input type="search" class="form-control" placeholder="マンション検索" aria-label="Search" aria-describedby="search-addon" />
-
-                                        <button type="button" class="btn btn-primary">
+                                        <input type="search" id="SearchBox" name="SearchBox" class="form-control" placeholder="マンション検索" aria-label="Search" aria-describedby="search-addon" />
+                                        <button type="button" id="btnlist_sh" class="btn btn-primary">
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </div>
@@ -175,9 +151,15 @@
                                             data-bs-target="#mansionmap">
                                         <i class="fa fa-map" aria-hidden="true"></i><span class="p-3">地図から設定</span>
                                     </button>
-                                    <button type="button" class="btn btn-outline-success btn-lg m-5 p-5"><i class="fa fa-list-ol" aria-hidden="true"></i><span class="p-3">登録済一覧表示</span></button>
+                                    <button type="button" class="btn btn-outline-success btn-lg m-5 p-5" id="btnReg_list">
+                                        <i class="fa fa-list-ol" aria-hidden="true"></i><span class="p-3">登録済一覧表示</span>
+                                    </button>
                                 </div>
-                            </div>  <div class="modal-footer">
+                                <form id="form5200">
+                                    <input type="hidden" name="MansionName" id="form5200_mansionName" />
+                                </form>
+                            </div>
+                            <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">戻る</button>
                             </div>
                         </div>
@@ -203,44 +185,20 @@
                                                             <div id="js-areamap_monthly_background"
                                                                  class="areamap_monthly_background js-areamap_monthly_background--04">
 
+                                                                @foreach (var region in ViewBag.MapRegions)
+                                                                {
+                                                                    var css = "areabox areabox--" + region.CssName;
+                                                                    <div class="@css">
+                                                                        <a href="#" data-chihou-name="@region.RegionCD"
+                                                                           class="bg-white border rounded rounded-lg areabox-link border border-primary js-chihou-mansion">
+                                                                            <div class="areabox-title">@region.RegionName</div>
+                                                                            <div class="areabox-list pt-2">
+                                                                                @Html.Raw(region.PrefName)
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                }
 
-                                                                <div class="areabox areabox--kanto">
-                                                                    <a href="/kanto/"
-                                                                       class="bg-white border rounded rounded-lg areabox-link border border-primary">
-                                                                        <div class="areabox-title">関東</div>
-                                                                        <div class="areabox-list pt-2">
-                                                                            東京|神奈川<br>千葉|埼玉
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="areabox areabox--tokai">
-                                                                    <a href="/tokai/"
-                                                                       class="bg-white border rounded rounded-lg areabox-link border border-primary">
-                                                                        <div class="areabox-title">東海</div>
-                                                                        <div class="areabox-list pt-2">
-                                                                            愛知
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-
-                                                                <div class="areabox areabox--kansai">
-                                                                    <a href="#"
-                                                                       class="bg-white border rounded rounded-lg areabox-link border border-primary">
-                                                                        <div class="areabox-title">関西</div>
-                                                                        <div class="areabox-list pt-2">
-                                                                            大阪|兵庫|京都
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="areabox areabox--kyushu">
-                                                                    <a href="/kyushu/"
-                                                                       class="bg-white border rounded rounded-lg areabox-link border border-primary">
-                                                                        <div class="areabox-title">九州</div>
-                                                                        <div class="areabox-list pt-2">
-                                                                            福岡
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -251,18 +209,22 @@
 
                                     </div>
                                 </div>
-                            </div>  <div class="modal-footer">
+                                <form id="form5201">
+                                    <input type="hidden" name="Region" id="form5201_region" />
+                                </form>
+                            </div>
+                            <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#mansion">
                                     戻る
                                 </button>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </main>
+        @Html.Partial("~/Views/Shared/_r_footer.cshtml")
     </div>
 </div>
 

@@ -24,7 +24,7 @@
                                 <div class="justify-content-around align-items-center row">
                                     <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
 
-                                        <div class="border-end"><a type="button" href="@ViewBag.Url" class="btn btn-secondary me-2">戻る</a></div><h1 class="ps-2 h2 mb-0 ls-tight">売主</h1>
+                                        <div class="border-end"><a type="button" class="btn btn-secondary me-2 page-sellerasm-url">戻る</a></div><h1 class="ps-2 h2 mb-0 ls-tight">売主</h1>
                                         <span class="ps-2 text-muted small align-self-end">管理</span>
                                     </div>
                                     <hr class="navbar-divider my-5 opacity-20">
@@ -143,21 +143,21 @@
                 <!-- Card stats -->
                 <div class="card shadow border-0 mb-7">
                     <div class="card-header pt-2 pb-2 ps-4 pe-4">
-                        <ul class="nav nav-tabs overflow-x border-0">
+                        <ul class="nav nav-tabs overflow-x border-0"  id="menu_seller_assess">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">査定管理</a>
+                                <a class="nav-link  " name="t_seller_assessment" aria-current="page" href="#">査定管理</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">情報管理</a>
+                                <a class="nav-link" name="t_seller_profile" href="#">情報管理</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">課⾦履歴</a>
+                                <a class="nav-link" name="t_seller_billing" href="#">課⾦履歴</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">アカウントフラグ</a>
+                                <a class="nav-link" name="t_seller_account" href="#">アカウントフラグ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">メモ</a>
+                                <a class="nav-link" name="t_seller_memo" href="#">メモ</a>
                             </li>
                         </ul>
                     </div>
@@ -170,7 +170,7 @@
                         <table class="table table-hover table-nowrap sortMe" id="mansiontable">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" class="text-end text-decoration-underline" style="width: 50px">No.</th>
+                                    <th scope="col" class="text-end text-decoration-underline sort-by" ordercol-direction="asc" ordercol-index="10" style="width: 50px">No.</th>
                                     <th scope="col" style="width: 150px" class="text-decoration-underline sort-by" ordercol-index="11_10">ステータス</th>
                                     <th scope="col" style="width: auto"  class="text-decoration-underline sort-by" ordercol-index="2_10">物件（マンション、部屋番号）</th>
                                     <th scope="col" style="width: 200px" class="text-decoration-underline sort-by" ordercol-index="3_10">不動産会社</th>

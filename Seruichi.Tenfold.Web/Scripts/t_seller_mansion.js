@@ -321,11 +321,11 @@ function l_logfunction(id) {
                 else if (model.LogStatus == "t_seller_assessment_detail")
                     alert("https://www.seruichi.com/t_seller_assessment_detail?AssReqID=" + model.LogId);
                 else if (model.LogStatus == "t_seller_assessment_detail_GReal")
-                    alert("https://www.seruichi.com/t_reale_purchase?realestate=" + model.LogId);
+                    window.location.href = common.appPath + '/t_reale_purchase/Index?RealECD=' + model.LogId;
                 else if (model.LogStatus == "t_seller_assessment_detail_EReal")
-                    alert("https://www.seruichi.com/t_reale_purchase?realestate=" + model.LogId);
+                    window.location.href = common.appPath + '/t_reale_purchase/Index?RealECD=' + model.LogId;
                 else if (model.LogStatus == "t_seller_assessment_detail_IRealECD")
-                    alert("https://www.seruichi.com/t_reale_purchase?realestate=" + model.LogId);
+                    window.location.href = common.appPath + '/t_reale_purchase/Index?RealECD=' + model.LogId;
             }
             if (result && !result.isOK) {                
             }
@@ -596,6 +596,8 @@ function Bind_popup_contact(result) {
 
     let data = JSON.parse(result);
 
+    $('#_header_mantion_info_contact').append(_header_mantion_info);
+
     if (data.length > 0) {
         if (data[0]["InvalidFLG"] == "無効会員") {
             _classFlag = "text-danger";
@@ -632,8 +634,11 @@ function Bind_popup_contact(result) {
                     </div>\
                 </div>'
 
-        $('#_header_mantion_info_contact').append(_header_mantion_info);
         $('#contact-first').append(contact_first);
         $('#contact-second').append(contact_second);
+    }
+    else {
+        contact_first = '非会員による登録のため、情報がありません。'
+        $('#contact-first').append(contact_first);        
     }
 }

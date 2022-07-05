@@ -153,6 +153,19 @@ namespace Seruichi.Seller.Web
              );
             bundles.Add(new StyleBundle("~/Content/css/a_assess_d").Include(
                   "~/Content/css/a_assess_d.css"));
+
+            //a_mypage_taikai
+            bundles.Add(new StyleBundle("~/Content/css/a_mypage_taikai").Include(
+                       "~/Content/css/font-awesome.min.css",
+                       "~/Content/css/Soft-UI-Aside-Navbar.css",
+                       "~/Content/css/style.css",
+                       "~/Content/css/Clients-UI.css",
+                       "~/Content/css/Ludens-Users---25-After-Register.css",
+                       "~/Content/css/Sidebar.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/a_mypage_taikai").Include(
+                "~/Scripts/a_mypage_taikai.js"
+                ));
         }
     }
 }

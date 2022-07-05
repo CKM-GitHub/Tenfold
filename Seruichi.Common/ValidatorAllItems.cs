@@ -10,6 +10,11 @@ namespace Seruichi.Common
 
         public bool IsValid { get { return result.Count == 0; } }
 
+        public bool IsContains(string key)
+        {
+            return result.ContainsKey(key);
+        }
+
         public Dictionary<string, string> GetValidationResult()
         {
             return result;
@@ -44,6 +49,11 @@ namespace Seruichi.Common
             if (!validator.CheckSelectionRequired(inputValue, out string errorcd))
                 AddValidationResult(elementId, errorcd);
         }
+        public void CheckYM(string elementId, string inputText)
+        {
+            if (!validator.CheckAndFormatYM(inputText, out string errorcd, out string outVal))
+                AddValidationResult(elementId, errorcd);
+        }
 
         public void CheckYMDate(string elementId, string inputText)
         {
@@ -54,6 +64,11 @@ namespace Seruichi.Common
         public void CheckDate(string elementId, string inputText)
         {
             if (!validator.CheckAndFormatDate(inputText, out string errorcd, out string outVal))
+                AddValidationResult(elementId, errorcd);
+        }
+        public void CheckCompareYM(string elementId, string fromDate, string toDate)
+        {
+            if (!validator.CheckCompareYM(fromDate, toDate, out string errorcd))
                 AddValidationResult(elementId, errorcd);
         }
 
