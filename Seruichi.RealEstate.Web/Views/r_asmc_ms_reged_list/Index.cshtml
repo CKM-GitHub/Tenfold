@@ -154,7 +154,14 @@
                         <div class="mb-3 text-start">
                             <label for="disabledSelect" class="form-label">有効期限切れ</label>
                             <div class="form-check">
+                                @if (ViewBag.StrURL == "r_dashboard")
+                                {
+                                <input class="form-check-input" type="checkbox" value="1" id="defaultCheck3" name="defaultCheck3" checked>
+                                }
+                                else
+                                {
                                 <input class="form-check-input" type="checkbox" value="0" id="defaultCheck3" name="defaultCheck3">
+                                }
                                 <label class="form-check-label" for="defaultCheck3">
                                     有効期限7日前～のみ表示
                                 </label>
