@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -65,6 +71,7 @@
     <Compile Include="RealEstate\r_contact\r_contactModel.cs" />
     <Compile Include="RealEstate\r_dashboard\r_dashboardModel.cs" />
     <Compile Include="RealEstate\r_invoice\r_invoiceModel.cs" />
+    <Compile Include="RealEstate\r_invoice\r_InvoicePageEvent.cs" />
     <Compile Include="RealEstate\r_issueslist\r_issueslistModel.cs" />
     <Compile Include="RealEstate\r_login\r_loginModel.cs" />
     <Compile Include="RealEstate\r_staff\r_staffModel.cs" />
@@ -105,6 +112,8 @@
     <Compile Include="Tenfold\t_seller_new\t_seller_newModel.cs" />
     <Compile Include="Tenfold\t_seller_profile\t_seller_profileModel.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

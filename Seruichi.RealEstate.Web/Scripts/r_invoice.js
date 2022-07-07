@@ -1,6 +1,7 @@
 ﻿const _url = {};
 
 $(function () {
+    _url.GeneratePDF = common.appPath + '/r_invoice/GeneratePDF';
     _url.get_D_Billing_List = common.appPath + '/r_invoice/Get_D_Billing_List';
     setValidation();
     addEvents();
@@ -86,7 +87,7 @@ function addEvents() {
         }
 
         $.ajax({
-            url: '/r_invoice/GeneratePDF',
+            url: _url.GeneratePDF,
             type: "POST",
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(model),
