@@ -12,9 +12,13 @@
     <form id="form1">
         <div id="sidebar-wrapper">
             <ul class="navbar-nav mb-md-4 p-3 mt-5 p-md-0">
-
+                
 
                 <li>
+
+                    <button id="btn1">PDF Download</button>
+
+                @Html.ActionLink("Download", "File_Download", new { RealECD = "RE01" })
                     <div class="text-center px-xl-3 pt-3">
                         <div class="mb-3 text-start">
                             <label for="Range" class="form-label">期間指定</label>
