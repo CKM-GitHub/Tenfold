@@ -24,22 +24,24 @@ namespace Seruichi.BL.RealEstate.r_staff
             if (!string.IsNullOrEmpty(model.REStaffCD))
             {
                 if (!Get_select_M_REStaff(model, out string aa))
-                    validator.GetValidationResult().Add("REStaffCD", StaticCache.GetMessageText1("E314"));
+                    validator.GetValidationResult().Add("newStaffCD", StaticCache.GetMessageText1("E314"));
 
-                validator.CheckRequired("REStaffCD", model.REStaffCD);//E101
-                validator.CheckRequired("REStaffName", model.REStaffName);//E101
-                validator.CheckRequired("REPassword", model.REPassword);//E101
+                validator.CheckRequired("newStaffCD", model.REStaffCD);//E101
+                validator.CheckRequired("newStaffName", model.REStaffName);//E101
+                validator.CheckRequired("newStaffpsw", model.REPassword);//E101
 
-                validator.CheckMaxLenght("REStaffCD", model.REStaffCD, 10);  //E105
-                validator.CheckMaxLenght("REStaffName", model.REStaffName, 30);  //E105
-                validator.CheckMaxLenght("REIntroduction", model.REIntroduction, 500);  //E105
-                validator.CheckMaxLenght("REPassword", model.REPassword, 20);  //E105
+                validator.CheckMaxLenght("newStaffCD", model.REStaffCD, 10);  //E105
+                validator.CheckMaxLenght("newStaffName", model.REStaffName, 30);  //E105
+                validator.CheckMaxLenght("newStaffIntro", model.REIntroduction, 500);  //E105
+                validator.CheckMaxLenght("newStaffpsw", model.REPassword, 20);  //E105
 
-                validator.CheckIsOnlyOneCharacter("REStaffCD", model.REStaffCD);  //E104
-                validator.CheckIsOnlyOneCharacter("REPassword", model.REPassword);  //E104
+                validator.CheckIsOnlyOneCharacter("newStaffCD", model.REStaffCD);  //E104
+                validator.CheckIsOnlyOneCharacter("newStaffpsw", model.REPassword);  //E104
                 
 
-                validator.CheckMinLenght("REPassword", model.REPassword, 8); //E110
+                validator.CheckMinLenght("newStaffpsw", model.REPassword, 8); //E110
+
+                validator.CheckREStaffMailAddress("newStaffEmail", model.REStaffEmail);  //E104 and E105
             }
             //update M_REStaff
             int i = 1;
@@ -58,8 +60,9 @@ namespace Seruichi.BL.RealEstate.r_staff
                 validator.CheckRequired("REPassword_" + i, item.REPassword);
                 validator.CheckIsOnlyOneCharacter("REPassword_" + i, item.REPassword);
                 validator.CheckMaxLenght("REPassword_" + i, item.REPassword,20);
-                validator.CheckMinLenght("REPassword_" + i, item.REPassword, 8); 
+                validator.CheckMinLenght("REPassword_" + i, item.REPassword, 8);
 
+                validator.CheckREStaffMailAddress("REStaffEmail_" + i, model.REStaffEmail);  //E104 and E105
                 i++;
             }
             return validator.GetValidationResult();

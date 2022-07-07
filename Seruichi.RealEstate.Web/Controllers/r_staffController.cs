@@ -200,7 +200,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                                                        REStaffCD = dr["REStaffCD"].ToString(),
                                                        REStaffName = dr["REStaffName"].ToString(),
                                                        REIntroduction = dr["REIntroduction"].ToString() == ""? null : dr["REIntroduction"].ToString(),
-                                                       REStaffEmail = dr["MailAddress"].ToString(),
+                                                       REStaffEmail = dr["MailAddress"].ToString() == "" ? null : dr["MailAddress"].ToString(),
                                                        REPassword = dr["REPassword"].ToString(),
                                                        PermissionChat = dr["PermissionChat"].ToString(),
                                                        PermissionSetting = dr["PermissionSetting"].ToString(),
