@@ -113,6 +113,7 @@ namespace Seruichi.BL.RealEstate.r_staff
             dtUpdate.Columns.Add("REPassword", typeof(String));
             dtUpdate.Columns.Add("REStaffName", typeof(String));
             dtUpdate.Columns.Add("REIntroduction", typeof(String));
+            dtUpdate.Columns.Add("MailAddress", typeof(String));
 
 
             DataTable dtUpdateImage = new DataTable();
@@ -146,6 +147,7 @@ namespace Seruichi.BL.RealEstate.r_staff
                     row["REStaffName"] = model.lst_StaffModel[i].REStaffName;
                     row["REIntroduction"] = model.lst_StaffModel[i].REIntroduction;
                     row["REPassword"] = model.lst_StaffModel[i].REPassword;
+                    row["MailAddress"] = model.lst_StaffModel[i].REStaffEmail;
                     row["PermissionChat"] = model.lst_StaffModel[i].PermissionChat;
                     row["PermissionSetting"] = model.lst_StaffModel[i].PermissionSetting;
                     row["PermissionPlan"] = model.lst_StaffModel[i].PermissionPlan;
@@ -176,6 +178,7 @@ namespace Seruichi.BL.RealEstate.r_staff
                 new SqlParameter("@REPassword", SqlDbType.VarChar){ Value = model.REPassword.ToStringOrNull() },
                 new SqlParameter("@REStaffName", SqlDbType.VarChar){ Value =  model.REStaffName.ToStringOrNull() },
                 new SqlParameter("@REIntroduction", SqlDbType.VarChar){ Value =  model.REIntroduction.ToStringOrNull() },
+                new SqlParameter("@MailAddress", SqlDbType.VarChar){ Value =  model.REStaffEmail.ToStringOrNull() },
                 new SqlParameter("@PermissionChat", SqlDbType.TinyInt){ Value =  model.PermissionChat.ToByte() },
                 new SqlParameter("@PermissionSetting", SqlDbType.TinyInt){ Value =  model.PermissionSetting.ToByte() },
                 new SqlParameter("@PermissionPlan", SqlDbType.TinyInt){ Value =  model.PermissionPlan.ToByte() },
