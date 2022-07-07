@@ -360,6 +360,7 @@ function Bind_SubMennuURL() {
     });
     SellerAssessMentMenu();
 
+    target = window.location.href;
     if (target.includes('t_reale')) {
         $('#reale').removeClass('d-none');
         $('#submenu_reale').removeClass('d-none');

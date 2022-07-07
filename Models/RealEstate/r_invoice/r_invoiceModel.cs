@@ -12,5 +12,6 @@ namespace Models.RealEstate.r_invoice
         public string Range { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
+        public int Option { get; set; }
     }
 }

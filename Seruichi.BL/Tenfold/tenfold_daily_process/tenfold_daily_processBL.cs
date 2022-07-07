@@ -13,26 +13,35 @@ namespace Seruichi.BL
     public class tenfold_daily_processBL
     {
        
-        public void tenfold_daily_process_Insert_Update(string Ipaddress,int type)
+        public bool Tenfold_Daily_Process_Insert_Update(string Ipaddress,int type)
         {
             
             var sqlParams = new SqlParameter[]
                {
                 new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value =  Ipaddress}
                };
-            DBAccess db = new DBAccess();
-            if (type ==1)
-            {
-                db.InsertUpdateDeleteData("tenfold_daily_process_Update_M_RealEstate", false, sqlParams);
-            }
-            else
-            {
-                db.InsertUpdateDeleteData("pr_tenfold_daily_process_Insert_Update", false, sqlParams);
-            }
            
+            try
+            {
+                DBAccess db = new DBAccess();
+                if (type == 1)
+                {
+                    return db.InsertUpdateDeleteData("pr_tenfold_daily_process_Update_M_RealEstate", false, sqlParams);
+                }
+                else
+                {
+                    return db.InsertUpdateDeleteData("pr_tenfold_daily_process_Insert_Update", false, sqlParams);
+                }
+                 
+            }
+            catch (ExclusionException)
+            {
+                //msgid = "S004"; //他端末エラー
+                return false;
+            }
         }
 
-        public DataTable tenfold_daily_process_Select_M_Monthly()
+        public DataTable Tenfold_Daily_Process_Select_M_Monthly()
         {
 
             var sqlParams = new SqlParameter[]

@@ -69,10 +69,86 @@ namespace Seruichi.Common
             return true;
         }
 
+        public bool CheckAndFormatYM(string inputText, out string errorcd, out string outVal)
+        {
+            errorcd = "";
+            outVal = "";
+
+
+            if (string.IsNullOrEmpty(inputText)) return true;
+
+            if (!CheckIsHalfWidth(inputText, 7, out errorcd))
+            {
+                return false;
+            }
+
+            if (inputText.Length > 7)
+            {
+                errorcd = "E215"; //正しい年月を入力してください
+                return false;
+            }
+
+            var sysDateTime = Utilities.GetSysDateTime();
+
+            if (inputText.Contains("/"))
+            {
+                var split = inputText.Split('/');
+                if (split.Length == 2)
+                {
+                    //yyyyMM -> yyyy/MM/dd
+                    inputText = split[0] + "/" + split[1] + "/" + "01";
+                }
+
+            }
+            else if (inputText.Contains("-"))
+            {
+                var split = inputText.Split('-');
+                if (split.Length == 2)
+                {
+                    //yyyyMM -> yyyy/MM/dd
+                    inputText = split[0] + "/" + split[1] + "/" + "01";
+                }
+            }
+            else
+            {
+                if (inputText.Length == 6)
+                {
+                    //yyyyMM -> yyyyMMdd
+                    inputText = inputText.ToString().Substring(0, 4) + "/" + inputText.ToString().Substring(6 - 2) + "/" + "01";
+                }
+                else if (inputText.Length == 4)
+                {
+                    //yyyy -> yyyyMMdd
+                    inputText = inputText.ToString() + "/" + sysDateTime.Month.ToString().PadLeft(2, '0') + "/" + "01";
+                }
+                else if (inputText.Length == 2)
+                {
+                    //mm -> yyyyMMdd
+                    inputText = sysDateTime.Year.ToString().PadLeft(4, '0') + "/" + inputText.ToString() + "/" + "01";
+                }
+                else if (inputText.Length == 1)
+                {
+                    //m -> yyyyMMdd
+                    inputText = sysDateTime.Year.ToString().PadLeft(4, '0') + "/" + inputText.ToString().PadLeft(2, '0') + "/" + "01";
+                }
+            }
+
+            if (inputText.ToDateTime() == null)
+            {
+                errorcd = "E215"; //正しい日付を入力してください
+                return false;
+            }
+
+            outVal = inputText.ToDateTime(sysDateTime).ToString(DateTimeFormat.yyyyMMdd);
+            outVal = outVal.Substring(0, 7).Replace("-", "/");
+            return true;
+        }
+
         public bool CheckAndFormatYMDate(string inputText, out string errorcd, out string outVal)
         {
             errorcd = "";
             outVal = "";
+            
 
             if (string.IsNullOrEmpty(inputText)) return true;
 
@@ -224,6 +300,20 @@ namespace Seruichi.Common
             if (fromDate.ToDateTime() > toDate.ToDateTime())
             {
                 errorcd = "E111"; //入力された値が正しくありません ★エラーメッセージ未定
+                return false;
+            }
+            return true;
+        }
+        public bool CheckCompareYM(string fromDate, string toDate, out string errorcd)
+        {
+            errorcd = "";
+            if (string.IsNullOrEmpty(fromDate) || string.IsNullOrEmpty(toDate)) return true;
+
+            if (fromDate.Length > 10 || toDate.Length > 10) return true;
+
+            if (fromDate.ToDateTime() > toDate.ToDateTime())
+            {
+                errorcd = "E126"; //年月の大小が不正です
                 return false;
             }
             return true;

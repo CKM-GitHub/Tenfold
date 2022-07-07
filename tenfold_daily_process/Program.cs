@@ -1,52 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using Seruichi.BL;
 using Seruichi.Common;
-using System.Web.Mvc;
-using System.Net;
-using System.Net.Sockets;
-using System.Net.NetworkInformation;
 
 namespace tenfold_daily_process
 {
     class Program
     {
-       static tenfold_daily_processBL tbl = new tenfold_daily_processBL();
-        static System.Net.IPHostEntry client = new System.Net.IPHostEntry();
-        
+        static tenfold_daily_processBL tbl = new tenfold_daily_processBL();
+
         static void Main(string[] args)
         {
             Console.Title = "Tenfold_Dialy_Process";
-            NetworkInterface[] networks = NetworkInterface.GetAllNetworkInterfaces();
             string IPaddress = "";
-            foreach (NetworkInterface network in networks)
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
             {
-                foreach (IPAddress entry in network.GetIPProperties().DhcpServerAddresses)
+                if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                 {
-                    IPaddress=entry.ToString();
+                    IPaddress = ip.ToString();
                 }
             }
             StaticCache.SetIniInfo();
-            StaticCache.SetMessageCache();
-            tbl.tenfold_daily_process_Insert_Update(IPaddress, 1);
-            Console.WriteLine("Update  Successful!!!");
-            var dtMonth = tbl.tenfold_daily_process_Select_M_Monthly();
-            
-            string masterMonth = "";
+            if(!tbl.Tenfold_Daily_Process_Insert_Update(IPaddress, 1))
+            {
+                Console.WriteLine("Daily Update Unsuccess");
+                Console.ReadLine();
+            }
+            DataTable dtMonth = tbl.Tenfold_Daily_Process_Select_M_Monthly();
             if (dtMonth.Rows.Count > 0)
             {
-                masterMonth = dtMonth.Rows[0]["MasterYYYYMM"].ToString();
+                if (dtMonth.Rows[0]["MasterYYYYMM"].ToString() != DateTime.Now.ToString("yyyyMM"))
+                {
+                    if(!tbl.Tenfold_Daily_Process_Insert_Update(IPaddress, 2))
+                    {
+                        Console.WriteLine("Monthly Update Unsuccess");
+                        Console.ReadLine();
+                    }
+                }
             }
-            string thisMonth = DateTime.Now.ToString("yyyyMM");
-            if (masterMonth == thisMonth)
-            {
-                tbl.tenfold_daily_process_Insert_Update(IPaddress, 2);
-                Console.WriteLine("Success !!! ");
-            }
-            Console.ReadLine();
         }
     }
 }

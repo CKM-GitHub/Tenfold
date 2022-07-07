@@ -19,6 +19,8 @@ const messageConst = {
     E111: '日付の大小が不正です',
     E112: '１つ以上選択してください',
     E113: '値の大小が不正です',
+    E125: '正しい年月を入力してください',
+    E126: '年月の大小が不正です',
 
     E201: '査定サービスの対象外地域です',
     E202: 'メールアドレスが入力されていません',
@@ -570,6 +572,13 @@ const common = {
                         return;
                     }
                 }
+                else if ($ctrl.attr('type') == 'month' && ($("#StartMonth").val() != "" || $("#EndMonth").val() != ""))
+                {
+                    if (!inputValue.match(regexPattern.monthformat)) {
+                        $ctrl.showError(this.getMessage('E125'));
+                        return;
+                    }
+                }
                 else {
                     if (!inputValue.match(regexPattern.monthformat)) {
                         $ctrl.showError(this.getMessage('E108'));
@@ -579,11 +588,13 @@ const common = {
             }
 
             if (isDateCompare) {
-                if (!common.compareDate($ctrl.attr('type'), $("#StartDate").val(), $("#EndDate").val())) {
-                    $("#StartDate").showError(this.getMessage('E111'));
-                    $("#EndDate").showError(this.getMessage('E111'));
-                    $("#StartDate").focus();
-                    return;
+                if ($("#StartDate").val() != undefined && $("#EndDate").val() != undefined) {
+                    if (!common.compareDate($ctrl.attr('type'), $("#StartDate").val(), $("#EndDate").val())) {
+                        $("#StartDate").showError(this.getMessage('E111'));
+                        $("#EndDate").showError(this.getMessage('E111'));
+                        $("#StartDate").focus();
+                        return;
+                    }
                 }
 
                 if ($("#StartYear").val() != "" && $("#EndYear").val() != "") {
@@ -593,6 +604,16 @@ const common = {
                         return;
                     }
                 }
+
+                if ($("#StartMonth").val() != undefined && $("#EndMonth").val() != undefined) {
+                    if (!common.compareMonth($("#StartMonth").val(), $("#EndMonth").val())) {
+                        $("#StartMonth").showError(this.getMessage('E126'));
+                        $("#EndMonth").showError(this.getMessage('E126'));
+                        $("#StartMonth").focus();
+                        return;
+                    }
+                }
+
             }
 
             if (ischeckboxLenght) {                
@@ -636,6 +657,16 @@ const common = {
             d1 = d1 + '-01';
             d2 = d2 + '-' + new Date(parseInt(d2.slice(0, 4)), parseInt(d2.slice(5, 7)), 0).getDate();
         }
+        const date1 = new Date(d1);
+        const date2 = new Date(d2);
+        let success = true;
+        if (date1 > date2) {
+            success = false;
+        }
+        return success;
+    },
+
+    compareMonth: function compareTwoMY(d1, d2) {
         const date1 = new Date(d1);
         const date2 = new Date(d2);
         let success = true;

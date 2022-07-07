@@ -14,6 +14,7 @@ namespace Models.RealEstate.r_staff
         public string REStaffName { get; set; }
         public string REIntroduction { get; set; }
         public string REPassword { get; set; }
+        public string REStaffEmail { get; set; }
         public string PermissionChat { get; set; }
         public string PermissionSetting { get; set; }
         public string PermissionPlan { get; set; }
@@ -29,6 +30,7 @@ namespace Models.RealEstate.r_staff
         public string REStaffName { get; set; }
         public string REIntroduction { get; set; }
         public string REPassword { get; set; }
+        public string REStaffEmail { get; set; }
         public string PermissionChat { get; set; }
         public string PermissionSetting { get; set; }
         public string PermissionPlan { get; set; }

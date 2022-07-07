@@ -15,7 +15,7 @@ namespace Models.RealEstate.r_asmc_ms_reged_list
         public string CityGPCD { get; set; }
         public string Radio_Rating { get; set; }
         public string MansionCD { get; set; }
-
+        public string Check_Expired { get; set; }
     }
     public class M_Pref
     {
