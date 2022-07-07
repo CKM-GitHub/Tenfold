@@ -355,6 +355,7 @@ const common = {
         const ischeckboxLenght = $ctrl.attr("data-validation-checkboxlenght");
         const ispasswordcompare = $ctrl.attr("data-validation-passwordcompare");
         const isMinlengthCheck = $ctrl.attr("data-validation-minlengthcheck");
+        const isemailformat = $ctrl.attr("data-validation-email");
 
         let inputValue = "";
         if (type === 'radio') {
@@ -628,6 +629,12 @@ const common = {
                     $("#txtPassword").showError(this.getMessage('E109'));
                     $("#txtConfirmPassword").showError(this.getMessage('E109'));
                     $("#txtPassword").focus();
+                    return;
+                }
+            }
+            if (isemailformat) {
+                if (!inputValue.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+                    $ctrl.showError(this.getMessage('E104'));
                     return;
                 }
             }
