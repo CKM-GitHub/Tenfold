@@ -244,6 +244,10 @@
         return this.attr('data-errormsg-target', errormsgElement);
     };
 
+    $.fn.addvalidation_emailCheck = function () {
+        return this.attr('data-validation-email', 'true');
+    };
+
     function getFirstErrorMsg(selector) {
         var group = $('.cap-is-invalid[data-errormsg-target="' + selector + '"]');
         if (group.length > 0) {

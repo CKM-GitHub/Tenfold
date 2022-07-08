@@ -80,6 +80,7 @@
                             if (multiplier == 1) return a.localeCompare(b, "ja-JP");
                             else return b.localeCompare(a, "ja-JP");
                         }
+                        break;
 
                     case 2: var index2 = col_index[1];
                         if (rowA.querySelectorAll('td')[index2].querySelectorAll('a').length > 0) {
@@ -112,6 +113,7 @@
                                 return c.localeCompare(d, "ja-JP");
                             }
                         }
+                        break;
 
                     case 3: var index2 = col_index[1];
                         if (rowA.querySelectorAll('td')[index2].querySelectorAll('a').length > 0) {
@@ -165,6 +167,7 @@
                                 return e.localeCompare(f, "ja-JP");
                             }
                         }
+                        break;
                 }
             });
 
@@ -249,6 +252,7 @@
                             if (multiplier == 1) return a.localeCompare(b, "ja-JP");
                             else return b.localeCompare(a, "ja-JP");
                         }
+                        break;
 
                     case 2: var index2 = col_index[1];
                         if (rowA.querySelectorAll('td')[index2].querySelectorAll('a').length > 0) {
@@ -281,6 +285,7 @@
                                 return c.localeCompare(d, "ja-JP");
                             }
                         }
+                        break;
 
                     case 3: var index2 = col_index[1];
                         if (rowA.querySelectorAll('td')[index2].querySelectorAll('a').length > 0) {
@@ -334,6 +339,7 @@
                                 return e.localeCompare(f, "ja-JP");
                             }
                         }
+                        break;
                 }
             });
 

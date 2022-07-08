@@ -1,6 +1,7 @@
 ﻿const _url = {};
 
 $(function () {
+    _url.GeneratePDF = common.appPath + '/r_invoice/GeneratePDF';
     _url.get_D_Billing_List = common.appPath + '/r_invoice/Get_D_Billing_List';
     setValidation();
     addEvents();
@@ -86,7 +87,7 @@ function addEvents() {
         }
 
         $.ajax({
-            url: '/r_invoice/GeneratePDF',
+            url: _url.GeneratePDF,
             type: "POST",
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(model),
@@ -152,7 +153,7 @@ function Bind_tbody(result) {
                 <td class="text-end">' + data[i]["BaseAmount"] +'</td>\
                 <td class="text-end">' + data[i]["TaxAmount"] +'</td>\
                 <td class="text-end">' + data[i]["BillingAmount"] +'</td>\
-                <td class="text-center"> <button type="button" class="btn btn-primary btn">出力</button> </td>\
+                <td class="text-center"> <button type="button" class="btn btn-primary btn" id="'+ data[i]["InvoiceNo"] + '&' + data[i]["RealECD"] + '&' + data[i]["InvoiceYYYYMM"] +'">出力</button> </td>\
             </tr>'
     }
     //html +='<tr>\

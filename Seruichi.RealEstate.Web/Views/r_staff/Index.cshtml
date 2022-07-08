@@ -35,7 +35,7 @@
                         <li class="nav-item"> <a href="@Url.Action("Index", "r_plan")" class="nav-link font-regular">プラン変更</a></li>
                         <li class="nav-item"> <a href="@Url.Action("Index", "r_invoice")" class="nav-link font-regular">請求書</a></li>
                         <li class="nav-item"> <a href="@Url.Action("Index", "r_statistic")" class="nav-link font-regular">集計</a></li>
-                        <li class="nav-item"> <a href="@Url.Action("Index", "r_pricedown")" class="nav-link font-regular">倍率</a></li>
+                        <li class="nav-item"> <a href="@Url.Action("Index", "r_campaign")" class="nav-link font-regular">査定額キャンペーン</a></li>
                     </ul>
                 </div>
 
@@ -105,9 +105,9 @@
                                                                     </div>
                                                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
                                                                         <div class="form-group">
-                                                                            <label for="phone">紹介</label>
-                                                                            <textarea class="form-control" rows="3" value="" id="REIntroduction_@i" name="REIntroduction_@i" maxlength="500">@Staff.REIntroduction</textarea>
-                                                                            <span class="cap-errormsg-right" id="error_REIntroduction_@i"></span>
+                                                                            <label for="website">メールアドレス</label>
+                                                                            <input type="text" class="form-control" value="@Staff.REStaffEmail" id="REStaffEmail_@i" name="REStaffEmail_@i" maxlength="100">
+                                                                            <span class="cap-errormsg-right" id="error_REmail_@i"></span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
@@ -123,6 +123,13 @@
                                                                                 <input type="password" class="form-control" value="@Staff.REPassword" readonly id="REPassword_@i" name="REPassword_@i">
                                                                                 <span class="cap-errormsg-right" id="error_REPassword_@i"></span>
                                                                             }
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 pb-2">
+                                                                        <div class="form-group">
+                                                                            <label for="phone">紹介</label>
+                                                                            <textarea class="form-control" rows="3" value="" id="REIntroduction_@i" name="REIntroduction_@i" maxlength="500">@Staff.REIntroduction</textarea>
+                                                                            <span class="cap-errormsg-right" id="error_REIntroduction_@i"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -317,9 +324,9 @@
                                                                     </div>
                                                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
                                                                         <div class="form-group">
-                                                                            <label for="phone">紹介</label>
-                                                                            <textarea class="form-control" id="newStaffIntro" rows="3" maxlength="500"></textarea>
-                                                                            <span class="cap-errormsg-right" id="newStaffIntroError"></span>
+                                                                            <label for="website">メールアドレス</label>
+                                                                            <input type="text" class="form-control" value="" id="newStaffEmail" maxlength="100">
+                                                                            <span class="cap-errormsg-right" id="newStaffEmailError"></span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 pb-2">
@@ -327,6 +334,13 @@
                                                                             <label for="website">パスワード</label>
                                                                             <input type="password" class="form-control" value="" id="newStaffpsw">
                                                                             <span class="cap-errormsg-right" id="newStaffpswError"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 pb-2">
+                                                                        <div class="form-group">
+                                                                            <label for="phone">紹介</label>
+                                                                            <textarea class="form-control" id="newStaffIntro" rows="3" maxlength="500"></textarea>
+                                                                            <span class="cap-errormsg-right" id="newStaffIntroError"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
