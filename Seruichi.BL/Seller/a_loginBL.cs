@@ -118,9 +118,6 @@ namespace Seruichi.BL
         }
 
 
-
-
-
         public Dictionary<string, string> ValidateTemporaryRegistration(string mailAddress)
         {
             ValidatorAllItems validator = new ValidatorAllItems();
@@ -204,7 +201,7 @@ namespace Seruichi.BL
                     MailAddress = mailAddress,
                     SendType = SendMailInfo.SendTypes.To
                 });
-
+               
                 string url = string.Format("{0}?mail={1}&setupid={2}",
                     mailInfo.Text2, HttpUtility.UrlEncode(mailAddress), HttpUtility.UrlEncode(CertificationCD));
 
@@ -220,10 +217,6 @@ namespace Seruichi.BL
 
             return mailInfo;
         }
-
-
-
-
 
         public Dictionary<string, string> ValidateVerifyMailAddress(string sellerKana, string birthday, string handyPhone,
             out string mailAddress)
@@ -273,10 +266,6 @@ namespace Seruichi.BL
 
             return false;
         }
-
-
-
-
 
         public Dictionary<string, string> ValidateResetPassword(string sellerKana, string birthday, string mailAddress,
             out string sellerCD, out string sellerName)
@@ -379,6 +368,34 @@ namespace Seruichi.BL
                 mailInfo.BodyText = mailInfo.Text1.Replace("@@@@Name", sellerName)
                     .Replace("@@@@Time", sysDateTime.ToString("H時m分s秒"))
                     .Replace("@@@@Password", newPassword);
+            }
+            catch (Exception ex)
+            {
+                Logger.GetInstance().Error(ex);
+                mailInfo = null;
+            }
+
+            return mailInfo;
+        }
+        public SendMailInfo GetContactPersonMailInfo(DateTime ContactTime, string sellerName, string IPAddress, string mailAdd1 = null, string mailAdd2 = null, string mailAdd3 = null, string mailAdd4 = null, string mailAdd5 = null)
+        {
+            SendMailInfo mailInfo = new SendMailInfo();
+            try
+            {
+
+                CommonBL cmnBL = new CommonBL();
+                cmnBL.GetMailSender(mailInfo);
+                cmnBL.GetMailRecipients(MailKBN.Seller_MailSend, mailInfo);
+                //if only one mail exists (mailAdd1)
+                cmnBL.GetPersonMailRecipients(mailInfo, mailAdd1);
+                cmnBL.GetMailTitleAndText(MailKBN.Seller_MailSend, mailInfo);
+
+
+                mailInfo.BodyText = mailInfo.Text1
+                    .Replace("@@@@DateTime", ContactTime.ToString(DateTimeFormat.yyyyMdHmsJP))
+                    .Replace("@@@@SellerName", sellerName)
+                    .Replace("@@@@IPAddress", IPAddress)
+                    ;
             }
             catch (Exception ex)
             {
