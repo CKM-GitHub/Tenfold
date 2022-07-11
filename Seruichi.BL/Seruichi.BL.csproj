@@ -98,6 +98,7 @@
     <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionBL.cs" />
     <Compile Include="Tenfold\t_seller_memo\t_seller_memoBL.cs" />
     <Compile Include="Tenfold\t_seller_new\t_seller_newBL.cs" />
+    <Compile Include="Tenfold\t_seller_orderdetails\t_seller_orderdetailsBL.cs" />
     <Compile Include="Tenfold\t_seller_profile\t_seller_profileBL.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace Seruichi.BL
 {
@@ -385,25 +386,40 @@ namespace Seruichi.BL
         }
 
         //for at most five mail address 
-        public SendMailInfo GetPersonMailRecipients(SendMailInfo mailInfo, String mailAdd1 = null, String mailAdd2 = null, String mailAdd3 = null, String mailAdd4 = null, String mailAdd5 = null)
+        public List<SendMailInfo.Recipient> GetPersonMailRecipients(MailKBN mailKbn,SendMailInfo mailInfo, String mailAdd1 = null, String mailAdd2 = null, String mailAdd3 = null, String mailAdd4 = null, String mailAdd5 = null)
         {
-            if (mailInfo == null)
+
+            List<SendMailInfo.Recipient> recipients = new List<SendMailInfo.Recipient>();
+            var sqlParm = new SqlParameter("@MailKBN", SqlDbType.Int) { Value = (int)mailKbn };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_M_MailSendTo_Select_by_MailKBN", sqlParm);
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
-                mailInfo = new SendMailInfo();
-            }
-            string[] str = new string[] { mailAdd1, mailAdd2, mailAdd3, mailAdd4, mailAdd5 };
-            foreach (string mailAddress in str)
-            {
-                if (!String.IsNullOrEmpty(mailAddress))
+                var dr = dt.Rows[i];
+                recipients.Add(new SendMailInfo.Recipient()
                 {
-                    mailInfo.Recipients.Add(new SendMailInfo.Recipient()
+                    MailAddress = dr["SendToAddress"].ToStringOrEmpty(),
+                    SendType = (SendMailInfo.SendTypes)dr["SendType"].ToInt32(0)
+                });
+            }
+
+            //more than one mail 
+            string[] parameterList = new string[] { mailAdd1, mailAdd2, mailAdd3, mailAdd4, mailAdd5 };
+            string[] addressList = parameterList.Where(item => item != null).ToArray();
+            foreach (string mailAddress in addressList)
+            {
+                recipients.Add(new SendMailInfo.Recipient()
                     {
                         MailAddress = mailAddress,
                         SendType = SendMailInfo.SendTypes.To
                     });
-                }
             }
-            return mailInfo;
+            if (mailInfo != null)
+            {
+                mailInfo.Recipients = recipients;
+            }
+            return recipients;
         }
         public List<DropDownListItem> GetDropDownListItemsOfCourse()
         {

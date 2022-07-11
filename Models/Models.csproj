@@ -110,10 +110,12 @@
     <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionModel.cs" />
     <Compile Include="Tenfold\t_seller_memo\t_seller_memoModel.cs" />
     <Compile Include="Tenfold\t_seller_new\t_seller_newModel.cs" />
+    <Compile Include="Tenfold\t_seller_orderdetails\t_seller_orderdetailsModel.cs" />
     <Compile Include="Tenfold\t_seller_profile\t_seller_profileModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
