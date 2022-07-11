@@ -42,7 +42,7 @@ function setValidation() {
 
         $('#REStaffEmail_' + i)
             .addvalidation_errorElement("#error_REmail_" + i)
-            .addvalidation_emailCheck()//E104
+            .addvalidation_emailCheck()//E204
             .addvalidation_maxlengthCheck(100); //E105
 
     });
@@ -146,7 +146,7 @@ function addEvents() {
 
             $('#newStaffEmail')
                 .addvalidation_errorElement("#newStaffEmailError")
-                .addvalidation_emailCheck()//E104
+                .addvalidation_emailCheck()//E204
                 .addvalidation_maxlengthCheck(100); //E105
         }
         else
@@ -249,7 +249,7 @@ function addEvents() {
 
             $('#newStaffEmail')
                 .addvalidation_errorElement("#newStaffEmailError")
-                .addvalidation_emailCheck()//E104
+                .addvalidation_emailCheck()//E204
                 .addvalidation_maxlengthCheck(100); //E105
         }
         else {

@@ -160,7 +160,7 @@
     <Compile Include="Controllers\r_issueslistController.cs" />
     <Compile Include="Controllers\r_loginController.cs" />
     <Compile Include="Controllers\r_staffController.cs" />
-    <Compile Include="Controllers\r_statisticController.cs" />
+    <Compile Include="Controllers\r_statisticsController.cs" />
     <Compile Include="Controllers\r_templateController.cs" />
     <Compile Include="Controllers\r_temp_mesController.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
@@ -300,7 +300,7 @@
     <Content Include="Views\r_asmc_ms_map_add\Index.cshtml" />
     <Content Include="Views\r_asmc_ms_list_map\Index.cshtml" />
     <Content Include="Views\r_asmc_ms_list_map\r_asmc_ms_list_map_left_sideNavigation.cshtml" />
-    <Content Include="Views\r_statistic\Index.cshtml" />
+    <Content Include="Views\r_statistics\Index.cshtml" />
     <Content Include="Views\r_invoice\Index.cshtml" />
     <Content Include="Views\r_invoice\GeneratePDF.cshtml" />
   </ItemGroup>
