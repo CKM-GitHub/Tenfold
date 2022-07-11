@@ -18,6 +18,7 @@
         ChangeMailAddress = 5,
         RealEstate_ContactTenfold=6,
         RealEstate_ContactPerson=7,
+        Seller_MailSend =11,
     }
 
     public enum RegexFormat : int

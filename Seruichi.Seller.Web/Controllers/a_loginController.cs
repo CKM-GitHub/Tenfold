@@ -32,6 +32,7 @@ namespace Seruichi.Seller.Web.Controllers
         public ActionResult Login(string mailAddress, string password)
         {
             a_loginBL bl = new a_loginBL();
+            DateTime ContactTime = Utilities.GetSysDateTime();
             var validationResult = bl.ValidateLogin(mailAddress, password, out LoginUser user);
             if (validationResult.Count > 0)
             {
@@ -40,8 +41,9 @@ namespace Seruichi.Seller.Web.Controllers
             }
 
             SessionAuthenticationHelper.CreateLoginUser(user);
-
             bl.InsertLoginLog(user, base.GetClientIP());
+
+            SendMail.SendSmtp(bl.GetContactPersonMailInfo(ContactTime,user.UserName, base.GetClientIP(), mailAddress));
 
             return GotoTopPage();
         }

@@ -160,13 +160,13 @@
                         <li class="nav-item"> <a href="@Url.Action("Index", "r_plan")" class="nav-link font-regular">プラン変更</a></li>
                         <li class="nav-item"> <a href="@Url.Action("Index", "r_invoice")" class="nav-link font-regular">請求書</a></li>
                         <li class="nav-item"> <a href="#" class="nav-link active">集計</a></li>
-                        <li class="nav-item"> <a href="@Url.Action("Index", "r_pricedown")" class="nav-link font-regular">倍率</a></li>
+                        <li class="nav-item"> <a href="@Url.Action("Index", "r_pricedown")" class="nav-link font-regular">査定額キャンペーン</a></li>
                     </ul>
                 </div>
 
                 <div class="card shadow border-0 mb-7">
                     <div class="card-header d-md-inline-flex">
-                        <h5 class="mb-0">集計結果</h5><span class="ps-md-5 text-muted text-sm">集計時間 YYYY/MM/DD hh:mm:ss</span>
+                        <h5 class="mb-0">集計結果</h5><span id="t_aggregationtime" class="ps-md-5 text-muted text-sm"></span>
                     </div>
                     <div class="card-body">
                         <div class="overflow-x-auto">
@@ -176,7 +176,7 @@
                         </div>
                     </div>
                     <div class="card-footer border-0 py-5">
-                        <span class="text-muted text-sm">集計時間 YYYY/MM/DD hh:mm:ss</span>
+                        <span id="b_aggregationtime" class="text-muted text-sm"></span>
                     </div>
                 </div>
             </div>

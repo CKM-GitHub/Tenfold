@@ -384,6 +384,27 @@ namespace Seruichi.BL
             return mailInfo;
         }
 
+        //for at most five mail address 
+        public SendMailInfo GetPersonMailRecipients(SendMailInfo mailInfo, String mailAdd1 = null, String mailAdd2 = null, String mailAdd3 = null, String mailAdd4 = null, String mailAdd5 = null)
+        {
+            if (mailInfo == null)
+            {
+                mailInfo = new SendMailInfo();
+            }
+            string[] str = new string[] { mailAdd1, mailAdd2, mailAdd3, mailAdd4, mailAdd5 };
+            foreach (string mailAddress in str)
+            {
+                if (!String.IsNullOrEmpty(mailAddress))
+                {
+                    mailInfo.Recipients.Add(new SendMailInfo.Recipient()
+                    {
+                        MailAddress = mailAddress,
+                        SendType = SendMailInfo.SendTypes.To
+                    });
+                }
+            }
+            return mailInfo;
+        }
         public List<DropDownListItem> GetDropDownListItemsOfCourse()
         {
             string spName = "pr_t_reale_new_Select_M_Course";
