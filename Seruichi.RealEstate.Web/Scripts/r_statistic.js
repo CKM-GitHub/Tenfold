@@ -1,7 +1,7 @@
 ﻿const _url = {};
 
 $(function () {
-    _url.get_r_statistic_displayData = common.appPath + '/r_statistic/get_r_statistic_displayData';
+    _url.get_r_statistic_displayData = common.appPath + '/r_statistics/get_r_statistic_displayData';
     setValidation();
     addEvents();
 });

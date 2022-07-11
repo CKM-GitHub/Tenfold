@@ -10,7 +10,7 @@ using Seruichi.BL.RealEstate.r_statistic;
 
 namespace Seruichi.RealEstate.Web.Controllers
 {
-    public class r_statisticController : BaseController
+    public class r_statisticsController : BaseController
     {
         // GET: r_statistic
         public ActionResult Index()
