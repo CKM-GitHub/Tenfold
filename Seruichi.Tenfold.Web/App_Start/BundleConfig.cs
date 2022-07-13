@@ -125,6 +125,10 @@ namespace Seruichi.Tenfold.Web
             bundles.Add(new ScriptBundle("~/bundles/t_seller_orderdetails").Include(
               "~/Scripts/t_seller_orderdetails.js",
               "~/Scripts/t_common.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/t_assess_soudan").Include(
+                     "~/Scripts/t_assess_soudan.js",
+                     "~/Content/scripts/table_header_sort.js"));
         }
     }
 }

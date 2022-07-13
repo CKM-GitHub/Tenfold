@@ -139,6 +139,7 @@
     <Compile Include="Controllers\Common\CommonApiController.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
     <Compile Include="Controllers\t_adminController.cs" />
+    <Compile Include="Controllers\t_assess_soudanController.cs" />
     <Compile Include="Controllers\t_dashboardController.cs" />
     <Compile Include="Controllers\t_loginController.cs" />
     <Compile Include="Controllers\t_mansionController.cs" />
@@ -219,6 +220,7 @@
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
     <Content Include="Scripts\t_admin.js" />
+    <Content Include="Scripts\t_assess_soudan.js" />
     <Content Include="Scripts\t_common.js" />
     <Content Include="Scripts\t_dashboard.js" />
     <Content Include="Scripts\t_login.js" />
@@ -301,6 +303,7 @@
     <Content Include="Views\t_seller_profile\Index.cshtml" />
     <Content Include="Views\t_reale_profile\Index.cshtml" />
     <Content Include="Views\t_seller_orderdetails\Index.cshtml" />
+    <Content Include="Views\t_assess_soudan\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
