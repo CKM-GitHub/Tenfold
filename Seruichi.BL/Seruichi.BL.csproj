@@ -82,12 +82,14 @@
     <Compile Include="Tenfold\tenfold_billing_process\tenfold_billing_processBL.cs" />
     <Compile Include="Tenfold\tenfold_daily_process\tenfold_daily_processBL.cs" />
     <Compile Include="Tenfold\t_admin\t_adminBL.cs" />
+    <Compile Include="Tenfold\t_assess_soudan\t_assess_soudanBL.cs" />
     <Compile Include="Tenfold\t_dashboard\t_dashboardBL.cs" />
     <Compile Include="Tenfold\t_mansion\t_mansionBL.cs" />
     <Compile Include="Tenfold\t_mansion_list\t_mansion_listBL.cs" />
     <Compile Include="Tenfold\t_mansion_new\t_mansion_newBL.cs" />
     <Compile Include="Tenfold\t_reale_account\t_reale_accountBL.cs" />
     <Compile Include="Tenfold\t_reale_asmhis\t_reale_asmhisBL.cs" />
+    <Compile Include="Tenfold\t_reale_invoice\t_reale_invoiceBL.cs" />
     <Compile Include="Tenfold\t_reale_list\t_reale_listBL.cs" />
     <Compile Include="Tenfold\t_reale_memo\t_reale_memoBL.cs" />
     <Compile Include="Tenfold\t_reale_new\t_reale_newBL.cs" />
