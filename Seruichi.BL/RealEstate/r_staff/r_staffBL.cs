@@ -62,7 +62,7 @@ namespace Seruichi.BL.RealEstate.r_staff
                 validator.CheckMaxLenght("REPassword_" + i, item.REPassword,20);
                 validator.CheckMinLenght("REPassword_" + i, item.REPassword, 8);
 
-                validator.CheckREStaffMailAddress("REStaffEmail_" + i, model.REStaffEmail);  //E104 and E105
+                validator.CheckREStaffMailAddress("REStaffEmail_" + i, model.REStaffEmail);  //E204 and E105
                 i++;
             }
             return validator.GetValidationResult();
