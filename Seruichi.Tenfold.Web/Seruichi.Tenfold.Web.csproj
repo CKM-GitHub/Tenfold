@@ -146,6 +146,7 @@
     <Compile Include="Controllers\t_mansion_listController.cs" />
     <Compile Include="Controllers\t_reale_accountController.cs" />
     <Compile Include="Controllers\t_reale_asmhisController.cs" />
+    <Compile Include="Controllers\t_reale_invoiceController.cs" />
     <Compile Include="Controllers\t_reale_listController.cs" />
     <Compile Include="Controllers\t_reale_memoController.cs" />
     <Compile Include="Controllers\t_reale_newController.cs" />
@@ -229,6 +230,7 @@
     <Content Include="Scripts\t_mansion_new.js" />
     <Content Include="Scripts\t_reale_account.js" />
     <Content Include="Scripts\t_reale_asmhis.js" />
+    <Content Include="Scripts\t_reale_invoice.js" />
     <Content Include="Scripts\t_reale_list.js" />
     <Content Include="Scripts\t_reale_memo.js" />
     <Content Include="Scripts\t_reale_new.js" />
@@ -304,6 +306,7 @@
     <Content Include="Views\t_reale_profile\Index.cshtml" />
     <Content Include="Views\t_seller_orderdetails\Index.cshtml" />
     <Content Include="Views\t_assess_soudan\Index.cshtml" />
+    <Content Include="Views\t_reale_invoice\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
