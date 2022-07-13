@@ -22,8 +22,10 @@ namespace Seruichi.Tenfold.Web.Controllers
             strSellerCD = SellerCD;
             t_seller_orderdetailsBL bl = new t_seller_orderdetailsBL();
             string sellername = bl.get_t_sellerName(SellerCD);
+            string possibletime = bl.get_t_sellerPossibleTime(SellerCD);
             ViewBag.Title = "管理－売主－" + sellername;
             ViewBag.LoginID = base.GetOperator();
+            ViewBag.PossibleTime = possibletime;
             return View();
         }
 

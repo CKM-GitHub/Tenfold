@@ -35,8 +35,25 @@ namespace Seruichi.BL.Tenfold.t_seller_orderdetails
             else
                 return string.Empty;
         }
+        public string get_t_sellerPossibleTime(string SellerCD)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = SellerCD }
+            };
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_Select_M_Seller_By_SellerCD", sqlParams);
 
 
+            foreach (DataRow row in dt.Rows)
+            {
+                row["PossibleTimes"] = row.Field<int>("PossibleTimes");
+            }
+            if (dt.Rows.Count > 0)
+                return dt.Rows[0]["PossibleTimes"].ToString();
+            else
+                return string.Empty;
+        }
         public DataTable get_t_seller_Info(string model)
         {
             var sqlParams = new SqlParameter[]
@@ -64,9 +81,6 @@ namespace Seruichi.BL.Tenfold.t_seller_orderdetails
             }
             return dt;
         }
-
-
-
         public DataTable get_D_SellerPossibleData(string model)
         {
             var sqlParams = new SqlParameter[]

@@ -11,10 +11,12 @@ function addEvents() {
     let model = {
         SellerCD: common.getUrlParameter('SellerCD')
     }
-    debugger;
+    getSellerList(model, this);
+    sortTable.getSortingTable("sellertable");
+
     get_account_Data(model, this);
 
-    getSellerList(model, this);
+    
 }
 
 function get_account_Data(model, $form) {
@@ -50,22 +52,46 @@ function getSellerList(model, $form) {
         }
     });
 }
-
+function isEmptyOrSpaces(str) {
+    return str === null || str.match(/^ *$/) !== null;
+}
 function Bind_tbody(result) {
     let data = JSON.parse(result);
     let html = "";
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
+
+
+            if (isEmptyOrSpaces(data[i]["PaymentFlg"])) {
+                _letter = "";
+                _class = "ms-1 ps-1 pe-1 rounded-circle";
+                _sort_checkbox = "";
+            }
+            else {
+                _letter = data[i]["PaymentFlg"].charAt(0);
+                if (_letter == "完") {
+                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-info text-white fst-normal";
+                    _sort_checkbox = "1";
+                }
+                else if (_letter == "失") {
+                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-danger text-white fst-normal";
+                    _sort_checkbox = "2";
+                }
+               
+
+            }
+            
             html +=
                 '<tr>\
-            <td class= "text-truncate text-center" > ' + data[i]["No"] + '</td>\
-            <td class="text-truncate text-center" > ' + data[i]["PossibleID"] + ' </td >\
-            <td class="text-truncate text-center" > ' + data[i]["ChangeDateTime"] + ' </td>\
+            <td class="text-end" > ' + data[i]["No"] + '</td>\
+            <td > ' + data[i]["PossibleID"] + ' </td >\
+            <td  > ' + data[i]["ChangeDateTime"] + ' </td>\
             <td class="text-end" > ' + data[i]["ChangeCount"] + ' </td >\
             <td class="text-end" > ' + data[i]["ChangeFee"] + ' </td >\
-            <td class="text-truncate text-center" > ' + data[i]["PaymentFlg"] + ' </td >\
+            <td class="'+ _sort_checkbox + '"><i class="' + _class + '">' + _letter + '</i><span class="font-semibold"> ' + data[i]["PaymentFlg"] + '</span></td>\
+            <td class="d-none">'+ _sort_checkbox + '</td>\
             </tr>'
         }
     }
-    $('#getSellerCD tbody').append(html);
+    $('#sellertable tbody').append(html);
 }
