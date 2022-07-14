@@ -42,8 +42,9 @@ function setValidation() {
 
         $('#REStaffEmail_' + i)
             .addvalidation_errorElement("#error_REmail_" + i)
-            .addvalidation_singlebyte_doublebyte() //E105
-            .addvalidation_singlebyte_numberAlphabet();//E104
+            .addvalidation_emailCheck()//E204
+            .addvalidation_maxlengthCheck(100); //E105
+
     });
       //.addvalidation_checkisexist();//E314
 }
@@ -145,8 +146,8 @@ function addEvents() {
 
             $('#newStaffEmail')
                 .addvalidation_errorElement("#newStaffEmailError")
-                .addvalidation_singlebyte_doublebyte() //E105
-                .addvalidation_singlebyte_numberAlphabet();//E104
+                .addvalidation_emailCheck()//E204
+                .addvalidation_maxlengthCheck(100); //E105
         }
         else
         {
@@ -157,8 +158,7 @@ function addEvents() {
 
             $('#newStaffpsw')
                 .removeValidation_required();
-            //$('#newStaffEmail')
-            //    .removeValidation_singlebyte_numberAlphabet();
+            
             $('#newStaffCD').hideError(); 
             $('#newProfilePhoto').hideError();
             $('#newStaffName').hideError();
@@ -249,8 +249,8 @@ function addEvents() {
 
             $('#newStaffEmail')
                 .addvalidation_errorElement("#newStaffEmailError")
-                .addvalidation_singlebyte_doublebyte() //E105
-                .addvalidation_singlebyte_numberAlphabet();//E104
+                .addvalidation_emailCheck()//E204
+                .addvalidation_maxlengthCheck(100); //E105
         }
         else {
 
@@ -335,7 +335,14 @@ function addEvents() {
     $('#btnNoChange').on('click', function () {
         window.location.reload();
     });
-    
+
+    $('#MailAddress').on('blur', function () {
+        const $this = $(this);
+
+        if (!common.checkValidityInput($this)) {
+            return false;
+        }
+    });
 }
 
 function Update_list_M_REStaff() {
@@ -349,7 +356,7 @@ function Update_list_M_REStaff() {
             REStaffName: $('#REStaffName_' + i).val(),
             REIntroduction: $('#REIntroduction_' + i).val(),
             REPassword: $('#REPassword_' + i).val(),
-            REStaffEmail: $('#REmail_' + i).val(),
+            REStaffEmail: $('#REStaffEmail_' + i).val(),
             PermissionChat: $('#chkChat_' + i).is(':checked') ? "1" : "0",
             PermissionSetting: $('#chkSetting_' + i).is(':checked') ? "1" : "0",
             PermissionPlan: $('#chkPlan_' + i).is(':checked') ? "1" : "0",

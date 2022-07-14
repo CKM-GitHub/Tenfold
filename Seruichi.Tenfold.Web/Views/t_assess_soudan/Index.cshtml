@@ -1,0 +1,1000 @@
+﻿@model Models.Tenfold.t_assess_soudan.t_assess_soudanModel
+
+@{
+    ViewBag.Title = "処理待ち";
+    Layout = "~/Views/Shared/_t_menuLayout.cshtml";
+}
+
+@section styles{
+    @Styles.Render("~/Content/tenfold_css_common")
+}
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18" id="wrapper">
+    <form id="form1">
+        <div id="sidebar-wrapper">
+            <ul class="navbar-nav mb-md-4 p-3 mt-5 p-md-0">
+                <li>
+                    <div class="ls-wider px-xl-3" href="#">
+                    </div>
+                </li>
+                <li>
+                    <div class="text-center px-xl-3">
+                        <div class="mb-3 text-start">
+                            <label for="FreeWord" class="form-label">キーワード</label>
+                            <span class="cap-errormsg-bottom" id="errorFreeWord"></span>
+                            <input type="text" class="form-control mb-2" id="FreeWord" name="FreeWord" placeholder="キーワード入力" maxlength="50">
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="text-center px-xl-3">
+                        <div class="mb-3 text-start">
+                            <div class="mb-3 text-start">
+                                <label for="disabledSelect" class="form-label">ステータス</label>
+                                <span class="cap-errormsg-right" id="errorCheckBox" name="errorCheckBox"></span>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="untreated" name="untreated" checked>
+                                    <label class="form-check-label" for="untreated">
+                                        <i class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal">未</i>
+                                        <span class="font-semibold"> 未処理</span>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="processing" name="processing" checked>
+                                    <label class="form-check-label" for="processing">
+                                        <i class="ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal fst-normal">処</i>
+                                        <span class="font-semibold"> 処理中</span>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="solution" name="solution" checked>
+                                    <label class="form-check-label" for="solution">
+                                        <i class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal fst-normal">保</i>
+                                        <span class="font-semibold">解決</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="text-center px-xl-3">
+                        <div class="mb-3 text-start">
+                            <label for="ddlRange" class="form-label">範囲指定</label>
+                            <select id="ddlRange" name="Range" class="form-select mb-2">
+                                <option>買取依頼日</option>
+                                <option>送客予定日</option>
+                            </select>
+                            <label for="StartDate" class="form-label">開始日</label>
+                            <span class="cap-errormsg-right" id="errorStartDate"></span>
+                            <input class="form-control mb-2" id="StartDate" name="StartDate" type="date">
+                            <label for="EndDate" class="form-label">終了日</label>
+                            <span class="cap-errormsg-right" id="errorEndDate"></span>
+                            <input class="form-control mb-2" id="EndDate" name="EndDate" type="date">
+                            <div class="row mb-3">
+                                <div class="col-6"> <button type="button" id="btnToday" name="btnToday" class="btn btn-primary w-100">今日</button></div>
+                                <div class="col-6"><button type="button" id="btnThisWeek" name="btnThisWeek" class="btn btn-primary w-100">今週</button></div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-6"><button type="button" id="btnThisMonth" name="btnThisMonth" class="btn btn-primary w-100">今月</button></div>
+                                <div class="col-6"><button type="button" id="btnLastMonth" name="btnLastMonth" class="btn btn-primary w-100">先月</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="text-center px-xl-3">
+                        <div class="mb-3 text-start">
+                            <label for="M_PIC" class="form-label">管理担当</label>
+                            <select id="M_PIC" name="M_PIC" class="form-select mb-2">
+                                <option class="js-selectable" value="0">全部表示</option>
+                                @foreach (Models.DropDownListItem item in ViewBag.ContactTypeDropDownListItems)
+                                {
+                                    <option class="js-selectable" value="@item.Value" data-subject="@item.HiddenItem">@item.DisplayText</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="form-group ps-3 pe-3">
+                        <button type="button" id="btnProcess" class="btn btn-primary w-100 w-100 mb-3">表示</button>
+                    </div>
+                    <div class="form-group ps-3 pe-3">
+                        <button type="button" id="btnCSV" class="btn btn-primary w-100 w-100 mb-3">CSVダウンロード</button>
+                    </div>
+                </li>
+            </ul>
+            <div class="mt-auto pb-20"></div>
+        </div>
+    </form>
+
+    <div class="toggle-button">
+        <a href="#menu-toggle" class="btn" id="menu-toggle">
+            <span class="fa fa-angle-right glyphicon-chevron-right" aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
+                            <h1 class="h2 mb-0 ls-tight">相談確認</h1>
+                            <span class="ps-2 text-muted small align-self-end">査定依頼</span>
+                        </div>
+                    </div>
+                    <ul class="nav nav-tabs mt-0 overflow-x border-0 ps-5">
+                        <li class="nav-item"> <a href="#" class="nav-link font-regular">処理待ち</a> </li>
+                        <li class="nav-item "> <a href="#" class="nav-link active">相談確認</a> </li>
+                    </ul>
+                </div>
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <div class="d-inline-flex">
+                            <h5 class="mb-0">相談一覧</h5>
+                            <span class="ps-md-5 text-muted text-sm" id="total_record_up"></span>
+                            <span style="color: red;" class="ps-md-5 text-sm" id="no_record"></span>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-nowrap" id="tblsoudan">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col" class="text-end text-decoration-underline" style="width: 100px">No.</th>
+                                    <th scope="col" style="width: 60px" class="text-decoration-underline">ステータス</th>
+                                    <th scope="col" style="width: 100px" class="text-decoration-underline">相談ID</th>
+                                    <th scope="col" style="width: 150px" class="text-decoration-underline">売主名</th>
+                                    <th scope="col" style="width: 160px" class="text-decoration-underline">不動産会社</th>
+                                    <th scope="col" style="width: 150px" class="text-decoration-underline">管理担当</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline">相談発生日時</th>
+                                    <th scope="col" style="width: 100px" class="text-decoration-underline">相談解決日時</th>
+                                    <th scope="col" style="width: 80px" class="text-decoration-underline text-center">相談種別</th>
+                                    <th scope="col" style="width: auto" class="d-none d-md-block opacity-0">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-end"> 999999999 </td>
+                                    <td>
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            <i class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal">未</i><span class="font-semibold"> 未処理</span>
+                                        </label>
+                                    </td>
+                                    <td> A9999999 </td>
+                                    <td>
+                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
+                                           data-bs-target="#mansion">
+                                            <span class="bg-warning pt-1 pb-1 ps-2 pe-2">
+                                                Seller name Seller
+                                                name
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
+                                           data-bs-target="#mansion">
+                                            <span class="pt-1 pb-1 ps-2 pe-2">Real Estate Company Name</span>
+                                        </a>
+                                    </td>
+                                    <td>Admin Staff name</td>
+                                    <td>YYYY/MM/DD hh:mm:ss</td>
+                                    <td>999日23時間</td>
+                                    <td class="text-center">トラブル</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999999999 </td>
+                                    <td>
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            <i class="ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal fst-normal">処</i><span class="font-semibold"> 処理中</span>
+                                        </label>
+                                    </td>
+                                    <td> A9999999 </td>
+                                    <td>
+                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
+                                           data-bs-target="#mansion">
+                                            <span class="bg-warning pt-1 pb-1 ps-2 pe-2">
+                                                Seller name Seller
+                                                name
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
+                                           data-bs-target="#mansion">
+                                            <span class="pt-1 pb-1 ps-2 pe-2">Real Estate Company Name</span>
+                                        </a>
+                                    </td>
+                                    <td>Admin Staff name</td>
+                                    <td>YYYY/MM/DD hh:mm:ss</td>
+                                    <td>999日23時間</td>
+                                    <td class="text-center">トラブル</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999999999 </td>
+                                    <td>
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            <i class="ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal fst-normal">処</i><span class="font-semibold"> 処理中</span>
+                                        </label>
+                                    </td>
+                                    <td> A9999999 </td>
+                                    <td>
+                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
+                                           data-bs-target="#mansion">
+                                            <span class="bg-warning pt-1 pb-1 ps-2 pe-2">
+                                                Seller name Seller
+                                                name
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
+                                           data-bs-target="#mansion">
+                                            <span class="pt-1 pb-1 ps-2 pe-2">Real Estate Company Name</span>
+                                        </a>
+                                    </td>
+                                    <td>Admin Staff name</td>
+                                    <td>YYYY/MM/DD hh:mm:ss</td>
+                                    <td>999日23時間</td>
+                                    <td class="text-center">トラブル</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999999999 </td>
+                                    <td>
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            <i class="ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal fst-normal">処</i><span class="font-semibold"> 処理中</span>
+                                        </label>
+                                    </td>
+                                    <td> A9999999 </td>
+                                    <td>
+                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
+                                           data-bs-target="#mansion"><span class="pt-1 pb-1 ps-2 pe-2">Seller name Seller name</span></a>
+                                    </td>
+                                    <td>
+                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
+                                           data-bs-target="#mansion">
+                                            <span class="bg-warning pt-1 pb-1 ps-2 pe-2">
+                                                Real Estate Company
+                                                Name
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td>Admin Staff name</td>
+                                    <td>YYYY/MM/DD hh:mm:ss</td>
+                                    <td>999日23時間</td>
+                                    <td class="text-center">トラブル</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999999999 </td>
+                                    <td>
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            <i class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal fst-normal">保</i><span class="font-semibold">解決</span>
+                                        </label>
+                                    </td>
+                                    <td> A9999999 </td>
+                                    <td>
+                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
+                                           data-bs-target="#mansion">
+                                            <span class="bg-warning pt-1 pb-1 ps-2 pe-2">
+                                                Seller name Seller
+                                                name
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
+                                           data-bs-target="#mansion">
+                                            <span class="pt-1 pb-1 ps-2 pe-2">Real Estate Company Name</span>
+                                        </a>
+                                    </td>
+                                    <td>Admin Staff name</td>
+                                    <td>YYYY/MM/DD hh:mm:ss</td>
+                                    <td>999日23時間</td>
+                                    <td class="text-center">トラブル</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999999999 </td>
+                                    <td>
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            <i class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal fst-normal">保</i><span class="font-semibold">解決</span>
+                                        </label>
+                                    </td>
+                                    <td> A9999999 </td>
+                                    <td>
+                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
+                                           data-bs-target="#mansion"><span class="pt-1 pb-1 ps-2 pe-2">Seller name Seller name</span></a>
+                                    </td>
+                                    <td>
+                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
+                                           data-bs-target="#mansion">
+                                            <span class="bg-warning pt-1 pb-1 ps-2 pe-2">
+                                                Real Estate Company
+                                                Name
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td>Admin Staff name</td>
+                                    <td>YYYY/MM/DD hh:mm:ss</td>
+                                    <td>999日23時間</td>
+                                    <td class="text-center">トラブル</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-end"> 999999999 </td>
+                                    <td>
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            <i class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal fst-normal">保</i><span class="font-semibold">解決</span>
+                                        </label>
+                                    </td>
+                                    <td> A9999999 </td>
+                                    <td>
+                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
+                                           data-bs-target="#mansion">
+                                            <span class="bg-warning pt-1 pb-1 ps-2 pe-2">
+                                                Seller name Seller
+                                                name
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
+                                           data-bs-target="#mansion">
+                                            <span class="pt-1 pb-1 ps-2 pe-2">Real Estate Company Name</span>
+                                        </a>
+                                    </td>
+                                    <td>Admin Staff name</td>
+                                    <td>YYYY/MM/DD hh:mm:ss</td>
+                                    <td>999日23時間</td>
+                                    <td class="text-center">トラブル</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer border-0 py-5">
+                        <span class="text-muted text-sm" id="total_record_down"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- ポップアップ -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="mansion" tabindex="-1" aria-labelledby="mansion" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl cap-modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="mansionLabel">相談内容 </h5>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="col-12">
+                                        <div class="users-container">
+                                            <div class="users p-3">
+                                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link active" id="pills-info-tab" data-bs-toggle="pill" data-bs-target="#pills-info"
+                                                                type="button" role="tab" aria-controls="pills-info" aria-selected="true">
+                                                            相談管理
+                                                        </button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="pills-train-tab" data-bs-toggle="pill" data-bs-target="#pills-train"
+                                                                type="button" role="tab" aria-controls="pills-train" aria-selected="true">
+                                                            交通アクセス
+                                                        </button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
+                                                                type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                                            詳細情報
+                                                        </button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact"
+                                                                type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+                                                            売主情報
+                                                        </button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="pills-fudousan-tab" data-bs-toggle="pill" data-bs-target="#pills-fudousan"
+                                                                type="button" role="tab" aria-controls="pills-fudousan" aria-selected="false">
+                                                            不動産会社情報
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content" id="pills-tabContent">
+                                                    <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
+                                                        <section class="highlight-clean">
+                                                            <div class="intro">
+                                                                <div class="card shadow border-0">
+                                                                    <div class="card-header">
+                                                                        <h4 class="text-center fw-bold">マンション名マンション名　部屋番号<strong>マンション名</strong></h4>
+                                                                        <p class="font-monospace small text-start pt-3">
+                                                                            住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所
+                                                                        </p>
+                                                                        <p class="font-monospace small text-center pt-3">
+                                                                            買取依頼日時 YYYY/MM/DD hh:mm:ss
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-12 col-md-5">
+                                                                                <label class="form-label">ステータス</label><select class="form-select" aria-label="ステータス">
+                                                                                    <option selected>未処理</option>
+                                                                                    <option value="1">未処理</option>
+                                                                                    <option value="2">処理中</option>
+                                                                                    <option value="4">解　決</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-12 col-md-7">
+                                                                                <label class="form-label">管理担当</label><select class="form-select" aria-label="管理担当">
+                                                                                    <option selected>Admin Staff name</option>
+                                                                                    <option value="1">Admin Staff name</option>
+                                                                                    <option value="2">Admin Staff name</option>
+                                                                                    <option value="3">Admin Staff name</option>
+                                                                                    <option value="4">Admin Staff name</option>
+                                                                                    <option value="5">Admin Staff name</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-12">
+                                                                                <label class="form-label">メモ</label>
+                                                                                <div class="p-5 w-100 border-1 rounded overflow-y-auto" style="max-height: 150px;">
+                                                                                    <div class="row pb-3">
+                                                                                        <div class="col-12">
+                                                                                            <p class="text-secondary text-center">2022/03/20 10:20:30</p>
+                                                                                        </div>
+                                                                                        <div class="col-12">
+                                                                                            <p><strong>StaffName</strong></p>
+                                                                                            <div class="clearfix"></div>
+                                                                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                                                                                            <p><a class="float-right btn text-white btn-danger"> <i class="fa fa-times"></i> 削除</a></p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row pb-3">
+                                                                                        <div class="col-12">
+                                                                                            <p class="text-secondary text-center">2022/03/20 10:20:30</p>
+                                                                                        </div>
+                                                                                        <div class="col-12">
+                                                                                            <p><strong>StaffName</strong></p>
+                                                                                            <div class="clearfix"></div>
+                                                                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                                                                                            <p><a class="float-right btn text-white btn-danger"> <i class="fa fa-times"></i> 削除</a></p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row pb-3">
+                                                                                        <div class="col-12">
+                                                                                            <p class="text-secondary text-center">2022/03/20 10:20:30</p>
+                                                                                        </div>
+                                                                                        <div class="col-12">
+                                                                                            <p><strong>StaffName</strong></p>
+                                                                                            <div class="clearfix"></div>
+                                                                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                                                                                            <p><a class="float-right btn text-white btn-danger"> <i class="fa fa-times"></i> 削除</a></p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="card-footer border-0 w-100 ps-0 pe-0">
+                                                                                    <div class="box-footer">
+                                                                                        <div class="input-group align-middle">
+                                                                                            <textarea class="form-control custom-control" rows="2"></textarea>
+                                                                                            <button id="whatever" class="btn btn-large btn-primary" name="Continue" type="submit">
+                                                                                                <span>送信</span>
+                                                                                                <i class="icon-ok" style="font-size:30px; vertical-align: middle;"></i>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+
+                                                    <div class="tab-pane fade" data-bs-keyboard="false" data-bs-backdrop="static" id="pills-train" role="tabpanel"
+                                                         aria-labelledby="pills-train-tab">
+                                                        <section class="highlight-clean">
+                                                            <div>
+                                                                <div class="intro">
+                                                                    <hr class="navbar-divider my-3 opacity-20">
+                                                                    <div class="card shadow border-0">
+                                                                        <div class="card-header">
+                                                                            <h6 class="pt-1">交通アクセス</h6>
+                                                                        </div>
+                                                                        <div class="card-body ">
+                                                                            <div class=" pb-0 pm-0">
+                                                                                <div class="row justify-content-center mt-auto" id="ekikoutsu" style="overflow-x: hidden;overflow-y: auto;max-height: 450px;">
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> LineNameLineNameLineName</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> LineNameLineNameLineName</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> LineNameLineNameLineName</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> LineNameLineNameLineName</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> LineNameLineNameLineName</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> LineNameLineNameLineName</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> LineNameLineNameLineName</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> LineNameLineNameLineName</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> LineNameLineNameLineName</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
+                                                                                        <div class="card-body p-2 row">
+                                                                                            <div class="col-12">
+                                                                                                <h5> LineNameLineNameLineName</h5>
+                                                                                            </div>
+                                                                                            <div class="col-12">
+                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
+                                                                                            </div>
+                                                                                            <div class="col-12 text-end">
+                                                                                                <p class="text-dark">徒歩 99 分</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+                                                    <div class="tab-pane fade" data-bs-keyboard="false" data-bs-backdrop="static" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                        <hr class="navbar-divider my-3 opacity-20">
+                                                        <div class="card shadow border-0">
+                                                            <div class="card-header">
+                                                                <h6 class="pt-1">詳細情報</h6>
+                                                            </div>
+                                                            <div class="card-body mt-auto" style="width:100%;overflow-x: hidden;overflow-y: auto;">
+                                                                <div class="row">
+                                                                    <div class="col-md-6 col-xs-6 col-6 col-xl-4">
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>建物構造</strong><br></h6>
+                                                                                </div>
+                                                                                <div class="">
+                                                                                    <span class="align-self-start">AAAAAAAAAA<br></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>築年月</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">YYYY/MM<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>部屋番号</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">999 号室<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>専有面積</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">999.99 ㎡<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>バルコニー面積　</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">999.99 ㎡<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>主採光</strong><br></h6>
+                                                                                </div>
+                                                                                <div class="">
+                                                                                    <span class="align-self-start">AAAAAAAAAA<br></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6 col-xs-6 col-6 col-xl-4">
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>部屋数</strong><br></h6>
+                                                                                </div>
+                                                                                <div class=""><span class="align-self-start">99部屋<br></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>バス・トイレ　</strong><br></h6>
+                                                                                </div>
+                                                                                <div class="">
+                                                                                    <span class="align-self-start">AAAAAAAAAA<br></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>土地権利　</strong><br></h6>
+                                                                                </div>
+                                                                                <div class="">
+                                                                                    <span class="align-self-start">AAAAAAAAAA<br></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>現況</strong><br></h6>
+                                                                                </div>
+                                                                                <div class="">
+                                                                                    <span class="align-self-start">AAAAAAAAAA<br></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>管理方式</strong><br></h6>
+                                                                                </div>
+                                                                                <div class="">
+                                                                                    <span class="align-self-start">AAAAAAAAAA<br></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>売却希望時期　</strong><br></h6>
+                                                                                </div>
+                                                                                <div class="">
+                                                                                    <span class="align-self-start">AAAAAAAAAA<br></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6 col-xs-6 col-6 col-xl-4">
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>家賃</strong><br></h6>
+                                                                                </div>
+                                                                                <div class="">
+                                                                                    <span class="align-self-start">9,999,999円<br></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>管理賃</strong><br></h6>
+                                                                                </div>
+                                                                                <div class="">
+                                                                                    <span class="align-self-start">9,999,999円<br></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>修繕積立金</strong><br></h6>
+                                                                                </div>
+                                                                                <div class="">
+                                                                                    <span class="align-self-start">9,999,999円<br></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>その他費用</strong><br></h6>
+                                                                                </div>
+                                                                                <div class="">
+                                                                                    <span class="align-self-start">9,999,999円<br></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-inline-flex pb-1">
+                                                                            <div class="row">
+                                                                                <div class="">
+                                                                                    <h6 class="align-self-center"><strong>固定資産税</strong><br></h6>
+                                                                                </div>
+                                                                                <div class="">
+                                                                                    <span class="align-self-start">9,999,999円<br></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" data-bs-keyboard="false" data-bs-backdrop="static" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                                        <hr class="navbar-divider my-2 opacity-20">
+                                                        <div class="card shadow border-0">
+                                                            <div class="card-header">
+                                                                <h6 class="pt-1">売主情報</h6>
+                                                            </div>
+                                                            <div class="card-body mt-auto"
+                                                                 style="width:100%;overflow-x: hidden;overflow-y: auto;">
+                                                                <div class="justify-content-around align-items-center row">
+                                                                    <div class="align-items-center col-12">
+                                                                        <div class="p-md-2 p-1 row" id="info">
+                                                                            <div class="col-4">
+                                                                                <img src="https://source.unsplash.com/random/150x150?Male" class="img-thumbnail rounded img-fluid" alt="Seller">
+                                                                            </div>
+                                                                            <div class="col-8">
+                                                                                <div class="text-muted">NameNameName1</div>
+                                                                                <div class="text-muted">
+                                                                                    <h2>NameNameName2</h2>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <hr class="navbar-divider my-3 opacity-20">
+                                                                <div class="justify-content-around align-items-center row">
+                                                                    <div class="d-flex flex-column col-12 cap-profile-icon" id="info">
+                                                                        <div class="p-md-1 text-muted">
+                                                                            <span class="fa fa-id-card bg-light p-1 rounded-circle"></span>
+                                                                            R0000008
+                                                                        </div>
+                                                                        <div class="p-md-1 text-muted cap-fon-form-w500">
+                                                                            <i class="fa fa-home bg-light p-1 rounded-circle"></i>
+                                                                            AddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddress
+                                                                        </div>
+                                                                        <div class="p-md-1 pt-sm-1 text-muted">
+                                                                            <i class="fa fa-phone bg-light p-1 rounded-circle"></i> 02-6865-5551
+                                                                        </div>
+                                                                        <div class="p-md-1 pt-sm-1 text-muted">
+                                                                            <i class="fa fa-mobile bg-light p-1 ps-2 pe-2 rounded-circle"></i>
+                                                                            080-6865-5551
+                                                                        </div>
+                                                                        <div class="p-md-1 text-muted">
+                                                                            <i class="fa fa-envelope-o bg-light p-1 rounded-circle"></i>
+                                                                            AAAA999999@9999.aaaamail.com
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" data-bs-keyboard="false" data-bs-backdrop="static" id="pills-fudousan" role="tabpanel" aria-labelledby="pills-fudousan-tab">
+                                                        <hr class="navbar-divider my-2 opacity-20">
+                                                        <div class="card shadow border-0">
+                                                            <div class="card-header">
+                                                                <h6 class="pt-1">不動産会社情報</h6>
+                                                            </div>
+                                                            <div class="card-body "
+                                                                 style="width:100%;overflow-x: hidden;overflow-y: auto;min-height: 405px;">
+                                                                <div class="justify-content-around align-items-center row">
+                                                                    <div class="align-items-center col-12">
+                                                                        <div class="p-md-2 p-1 row" id="info">
+                                                                            <div class="col-4">
+                                                                                <img src="https://source.unsplash.com/random/150x150?Female" class="img-thumbnail rounded img-fluid" alt="Retail Admin">
+                                                                            </div>
+                                                                            <div class="col-8">
+                                                                                <div class="text-muted">NameNameName1</div>
+                                                                                <div class="text-muted">
+                                                                                    <h2>NameNameName2</h2>
+                                                                                </div>
+                                                                                <hr class="navbar-divider my-3 opacity-20">
+                                                                                <div class="text-muted">RealEstateCompanyName1</div>
+                                                                                <div class="text-muted">
+                                                                                    <h3>RealEstateCompanyName2</h3>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <hr class="navbar-divider my-3 opacity-20">
+                                                                <div class="justify-content-around align-items-center row">
+                                                                    <div class="d-flex flex-column col-12 cap-profile-icon" id="info">
+                                                                        <div class="p-md-1 text-muted">
+                                                                            <span class="fa fa-id-card bg-light p-1 rounded-circle"></span>
+                                                                            E0000008
+                                                                        </div>
+                                                                        <div class="p-md-1 text-muted cap-fon-form-w500">
+                                                                            <i class="fa fa-home bg-light p-1 rounded-circle"></i>
+                                                                            AddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddress
+                                                                        </div>
+                                                                        <div class="p-md-1 pt-sm-1 text-muted">
+                                                                            <i class="fa fa-phone bg-light p-1 rounded-circle"></i> 02-6865-5551
+                                                                        </div>
+                                                                        <div class="p-md-1 pt-sm-1 text-muted">
+                                                                            <i class="fa fa-mobile bg-light p-1 ps-2 pe-2 rounded-circle"></i>
+                                                                            080-6865-5551
+                                                                        </div>
+                                                                        <div class="p-md-1 text-muted">
+                                                                            <i class="fa fa-envelope-o bg-light p-1 rounded-circle"></i>
+                                                                            AAAA999999@9999.aaaamail.com
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="card shadow border-0">
+                                        <div class="card-header">
+                                            <h5 class="mb-0 text-center">内容確認</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-check pb-2">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    相談ID
+                                                </label>
+                                                <h5 class="">A9999999</h5>
+                                            </div>
+                                            <div class="form-check pb-2">
+
+                                                <label class="form-check-label text-wrap" for="flexCheckDefault">
+                                                    相談依頼者
+                                                </label>
+                                                <h5 class="">
+                                                    NameNameName（不動産会社）
+                                                </h5>
+                                            </div>
+                                            <div class="form-check pb-2">
+
+                                                <label class="form-check-label text-wrap" for="flexCheckDefault">
+                                                    相談発生日時
+                                                </label>
+                                                <h5 class="">YYYY/MM/DD hh:mm:ss</h5>
+                                            </div>
+                                            <div class="form-check pb-2">
+
+                                                <label class="form-check-label text-wrap" for="flexCheckDefault">
+                                                    相談確認
+                                                </label>
+                                                <h5 class="">トラブル</h5>
+                                            </div>
+                                            <div class="form-check pb-2">
+                                                <label class="form-check-label text-wrap" for="flexCheckDefault">
+                                                    相談内容
+                                                </label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="13"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#mansion">
+                                戻る
+                            </button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-changed">
+                                保存
+                            </button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-send">
+                                送客
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        @Html.Partial("_t_footer")
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/t_assess_soudan")
+}

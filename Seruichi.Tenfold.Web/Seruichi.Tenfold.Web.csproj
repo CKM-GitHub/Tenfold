@@ -139,12 +139,14 @@
     <Compile Include="Controllers\Common\CommonApiController.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
     <Compile Include="Controllers\t_adminController.cs" />
+    <Compile Include="Controllers\t_assess_soudanController.cs" />
     <Compile Include="Controllers\t_dashboardController.cs" />
     <Compile Include="Controllers\t_loginController.cs" />
     <Compile Include="Controllers\t_mansionController.cs" />
     <Compile Include="Controllers\t_mansion_listController.cs" />
     <Compile Include="Controllers\t_reale_accountController.cs" />
     <Compile Include="Controllers\t_reale_asmhisController.cs" />
+    <Compile Include="Controllers\t_reale_invoiceController.cs" />
     <Compile Include="Controllers\t_reale_listController.cs" />
     <Compile Include="Controllers\t_reale_memoController.cs" />
     <Compile Include="Controllers\t_reale_newController.cs" />
@@ -157,6 +159,7 @@
     <Compile Include="Controllers\t_seller_mansionController.cs" />
     <Compile Include="Controllers\t_seller_memoController.cs" />
     <Compile Include="Controllers\t_seller_newController.cs" />
+    <Compile Include="Controllers\t_seller_orderdetailsController.cs" />
     <Compile Include="Controllers\t_seller_profileController.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
     <Compile Include="Filters\BrowsingHistoryAttribute.cs" />
@@ -218,6 +221,7 @@
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
     <Content Include="Scripts\t_admin.js" />
+    <Content Include="Scripts\t_assess_soudan.js" />
     <Content Include="Scripts\t_common.js" />
     <Content Include="Scripts\t_dashboard.js" />
     <Content Include="Scripts\t_login.js" />
@@ -226,6 +230,7 @@
     <Content Include="Scripts\t_mansion_new.js" />
     <Content Include="Scripts\t_reale_account.js" />
     <Content Include="Scripts\t_reale_asmhis.js" />
+    <Content Include="Scripts\t_reale_invoice.js" />
     <Content Include="Scripts\t_reale_list.js" />
     <Content Include="Scripts\t_reale_memo.js" />
     <Content Include="Scripts\t_reale_new.js" />
@@ -237,6 +242,7 @@
     <Content Include="Scripts\t_seller_mansion.js" />
     <Content Include="Scripts\t_seller_memo.js" />
     <Content Include="Scripts\t_seller_new.js" />
+    <Content Include="Scripts\t_seller_orderdetails.js" />
     <Content Include="Scripts\t_seller_profile.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -298,6 +304,9 @@
     <Content Include="Views\t_reale_new\Index.cshtml" />
     <Content Include="Views\t_seller_profile\Index.cshtml" />
     <Content Include="Views\t_reale_profile\Index.cshtml" />
+    <Content Include="Views\t_seller_orderdetails\Index.cshtml" />
+    <Content Include="Views\t_assess_soudan\Index.cshtml" />
+    <Content Include="Views\t_reale_invoice\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

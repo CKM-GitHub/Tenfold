@@ -1,7 +1,7 @@
 ﻿const _url = {};
 
 $(function () {
-    _url.get_r_statistic_displayData = common.appPath + '/r_statistic/get_r_statistic_displayData';
+    _url.get_r_statistic_displayData = common.appPath + '/r_statistics/get_r_statistic_displayData';
     setValidation();
     addEvents();
 });
@@ -68,26 +68,26 @@ function addEvents() {
     });
 
     $('#btnThisMonth').on('click', function () {
-        $('#month').attr('checked', true);
-        $('#StartDate').prop('type', 'month');
-        $('#StartDate').prop('max', '2999-12');
-        $('#EndDate').prop('type', 'month');
-        $('#EndDate').prop('max', '2999-12');
+        $('#day').prop('checked', true);
+        $('#StartDate').prop('type', 'date');
+        $('#StartDate').prop('max', '2999-12-31');
+        $('#EndDate').prop('type', 'date');
+        $('#EndDate').prop('max', '2999-12-31');
 
-        let today = common.getToday().slice(0, 7);
-        let firstDay = common.getFirstDayofMonth().slice(0, 7);
+        let today = common.getToday();
+        let firstDay = common.getFirstDayofMonth();
         $('#StartDate').val(firstDay);
         $('#EndDate').val(today);
     });
     $('#btnLastMonth').on('click', function () {
-        $('#month').attr('checked', true);
-        $('#StartDate').prop('type', 'month');
-        $('#StartDate').prop('max', '2999-12');
-        $('#EndDate').prop('type', 'month');
-        $('#EndDate').prop('max', '2999-12');
+        $('#day').prop('checked', true);
+        $('#StartDate').prop('type', 'date');
+        $('#StartDate').prop('max', '2999-12-31');
+        $('#EndDate').prop('type', 'date');
+        $('#EndDate').prop('max', '2999-12-31');
 
-        let firstdaypremonth = common.getFirstDayofPreviousMonth().slice(0, 7);
-        let lastdaypremonth = common.getLastDayofPreviousMonth().slice(0, 7);
+        let firstdaypremonth = common.getFirstDayofPreviousMonth();
+        let lastdaypremonth = common.getLastDayofPreviousMonth();
         $('#StartDate').val(firstdaypremonth);
         $('#EndDate').val(lastdaypremonth);
     });
@@ -103,8 +103,27 @@ function addEvents() {
             return false;
         }
 
+        const formatDate = () => {
+            var aggregationtime = '';
+            let d = new Date();
+            let month = (d.getMonth() + 1).toString();
+            let day = d.getDate().toString();
+            let year = d.getFullYear();
+            if (month.length < 2) {
+                month = '0' + month;
+            }
+            if (day.length < 2) {
+                day = '0' + day;
+            }
+            aggregationtime = [year, month, day].join('/') + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+            return aggregationtime;
+        };
+
         $('#canvas').remove();
-        $('.cap-repotcanvas').append('<canvas id="canvas"><canvas>')
+        $('.cap-repotcanvas').append('<canvas id="canvas"><canvas>');
+        const d = new Date();
+        $('#t_aggregationtime').text('集計時間 ' + formatDate());
+        $('#b_aggregationtime').text('集計時間 ' + formatDate());
         var model = {
             dac_route: $('#dac_route').val(),
             dac_apartment: $('#dac_apartment').val(),
@@ -125,13 +144,14 @@ function addEvents() {
 }
 
 function check_DateDifference() {
+    debugger;
     var sdate = '';
     var edate = '';
     if ($('input[name=ryudo]:checked', '#form1').val() == 1) {
         sdate = new Date($('#StartDate').val());
         edate = new Date($('#EndDate').val());
-        if (Math.ceil(Math.abs(edate - sdate) / (1000 * 60 * 60 * 24)) > 30) {
-            $('#EndDate').showError(common.getMessage('E116'));
+        if ((Math.ceil(Math.abs(edate - sdate) / (1000 * 60 * 60 * 24))) + 1 > 30) {
+            $('#EndDate').showError(common.getMessage('E117'));
             return false;
         }
         else {
@@ -143,7 +163,7 @@ function check_DateDifference() {
         sdate = new Date($('#StartDate').val());
         edate = new Date($('#EndDate').val());
         if (Math.abs(Math.round(((edate - sdate) / 1000) / (60 * 60 * 24 * 7))) > 30) {
-            $('#EndDate').showError(common.getMessage('E117'));
+            $('#EndDate').showError(common.getMessage('E118'));
             return false;
         }
         else {
@@ -155,7 +175,7 @@ function check_DateDifference() {
         sdate = new Date($('#StartDate').val() + '-01');
         edate = new Date($('#EndDate').val() + '-' + new Date(parseInt($('#EndDate').val().slice(0, 4)), parseInt($('#EndDate').val().slice(5, 7)), 0).getDate());
         if ((((edate.getFullYear() - sdate.getFullYear()) * 12) + edate.getMonth() - sdate.getMonth()) > 24) {
-            $('#EndDate').showError(common.getMessage('E117'));
+            $('#EndDate').showError(common.getMessage('E119'));
             return false;
         }
         else {

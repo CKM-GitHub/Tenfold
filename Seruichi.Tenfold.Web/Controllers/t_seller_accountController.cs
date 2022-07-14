@@ -23,9 +23,11 @@ namespace Seruichi.Tenfold.Web.Controllers
             }
 
             t_seller_accountBL bl = new t_seller_accountBL();
-            var dt = bl.get_t_sellerName(SellerCD);
-            ViewBag.Title = "管理－売主－" + dt.Rows[0]["SellerName"].ToString();
+            string sellername = bl.get_t_sellerName(SellerCD);
+            string possibletime = bl.get_t_sellerPossibleTime(SellerCD);
+            ViewBag.Title = "管理－売主－" + sellername;
             ViewBag.LoginID = base.GetOperator();
+            ViewBag.PossibleTime = possibletime;
             return View();
         }
 
