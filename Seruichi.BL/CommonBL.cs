@@ -99,10 +99,16 @@ namespace Seruichi.BL
 
         public List<DropDownListItem> GetDropDownListItemsOfStaff_by_RealECD(string realECD)
         {
-            string spName = "pr_r_issuelist_select_DropDownListOfStaff_by_RealECD";
+            string spName = "pr_Common_Select_DropDownListOfREStaff";
             SqlParameter sqlParam = new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = realECD };
 
             return GetDropDownListItems(spName, sqlParam);
+        }
+
+        public List<DropDownListItem> GetDropDownListItemsOfTenfoldStaff()
+        {
+            string spName = "pr_Common_Select_DropDownListOfTenfoldStaff";
+            return GetDropDownListItems(spName);
         }
 
         public bool CheckExistsCounterMaster(CounterKey counterKey, out string errorID)

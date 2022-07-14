@@ -39,5 +39,136 @@ namespace Seruichi.BL.RealEstate.r_invoice
             var dt = db.SelectDatatable("pr_r_invoice_Select_D_Billing_By_RealECD", sqlParams);
             return dt;
         }
+
+        public DataTable Get_M_RealEstate_For_PDFHeader(string RealECD)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = RealECD }
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_invoice_pdf_get_M_RealEstate_For_PDFHeader", sqlParams);
+            return dt; 
+        }
+
+        public DataTable Get_D_Billing_For_PDFHeader(string invoiceNO)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@InvoiceNo", SqlDbType.VarChar) { Value = invoiceNO }
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_invoice_pdf_get_D_Billing_For_PDFHeader", sqlParams);
+            return dt;
+        }
+
+        public DataTable Get_M_Control_For_PDFHeader()
+        {
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_invoice_pdf_get_M_Control_For_PDFHeader");
+            return dt;
+        }
+        public DataTable Get_M_Image_For_PDFHeader()
+        {
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_invoice_pdf_get_M_Image_For_PDFHeader");
+            return dt;
+        }
+        public DataTable Get_Service_Registration_Block_A(string RealECD,string yyyyMM)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = RealECD },
+                new SqlParameter("@InvoiceYYYYMM", SqlDbType.VarChar){Value = yyyyMM.ToStringOrNull() }
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_invoice_pdf_Service_Registration_Block_A", sqlParams);
+            return dt;
+            
+        }
+        public DataTable Get_Contract_Area_Block_B(string RealECD, string yyyyMM)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = RealECD },
+                new SqlParameter("@InvoiceYYYYMM", SqlDbType.VarChar){Value = yyyyMM.ToStringOrNull() }
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_invoice_pdf_Contract_Area_Block_B", sqlParams);
+            return dt;
+
+        }
+        public DataTable Get_Contract_Apartments_Block_C(string RealECD, string yyyyMM)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = RealECD },
+                new SqlParameter("@InvoiceYYYYMM", SqlDbType.VarChar){Value = yyyyMM.ToStringOrNull() }
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_invoice_pdf_Contract_Apartments_Block_C", sqlParams);
+            return dt;
+
+        }
+        public DataTable Get_Customer_Send_Record_Block_D(string RealECD, string yyyyMM)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = RealECD },
+                new SqlParameter("@InvoiceYYYYMM", SqlDbType.VarChar){Value = yyyyMM.ToStringOrNull() }
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_invoice_pdf_Customer_Send_Record_Block_D", sqlParams);
+            return dt;
+
+        }
+      
+        public DataTable Get_Customer_Transfer_Record_Block_E(string RealECD, string yyyyMM)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = RealECD },
+                new SqlParameter("@InvoiceYYYYMM", SqlDbType.VarChar){Value = yyyyMM.ToStringOrNull() }
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_invoice_pdf_Customer_Transfer_Record_Block_E", sqlParams);
+            return dt;
+
+        }
+
+        public DataTable Get_Customer_Cancel_Record_Block_F(string RealECD, string yyyyMM)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = RealECD },
+                new SqlParameter("@InvoiceYYYYMM", SqlDbType.VarChar){Value = yyyyMM.ToStringOrNull() }
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_invoice_pdf_Customer_Cancel_Record_Block_F", sqlParams);
+            return dt;
+
+        }
+        public DataTable Get_M_MultPurpose_for_Footer()
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@DataID", SqlDbType.Int) { Value = 121 },
+                new SqlParameter("@DataKey", SqlDbType.Int){Value = 1 }
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_invoice_get_M_MultPurpose_for_Footer", sqlParams);
+            return dt;
+
+        }
+
     }
 }
