@@ -33,21 +33,21 @@
                                 <label for="disabledSelect" class="form-label">ステータス</label>
                                 <span class="cap-errormsg-right" id="errorCheckBox" name="errorCheckBox"></span>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="untreated" name="untreated" checked>
+                                    <input class="form-check-input" type="checkbox" value="1" id="untreated" name="untreated" checked>
                                     <label class="form-check-label" for="untreated">
                                         <i class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal">未</i>
                                         <span class="font-semibold"> 未処理</span>
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="processing" name="processing" checked>
+                                    <input class="form-check-input" type="checkbox" value="1" id="processing" name="processing" checked>
                                     <label class="form-check-label" for="processing">
                                         <i class="ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal fst-normal">処</i>
                                         <span class="font-semibold"> 処理中</span>
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="solution" name="solution" checked>
+                                    <input class="form-check-input" type="checkbox" value="1" id="solution" name="solution" checked>
                                     <label class="form-check-label" for="solution">
                                         <i class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal fst-normal">保</i>
                                         <span class="font-semibold">解決</span>
@@ -62,8 +62,8 @@
                         <div class="mb-3 text-start">
                             <label for="ddlRange" class="form-label">範囲指定</label>
                             <select id="ddlRange" name="Range" class="form-select mb-2">
-                                <option>買取依頼日</option>
-                                <option>送客予定日</option>
+                                <option value="相談発生日時">相談発生日時</option>
+                                <option value="相談解決日時">相談解決日時</option>
                             </select>
                             <label for="StartDate" class="form-label">開始日</label>
                             <span class="cap-errormsg-right" id="errorStartDate"></span>
@@ -155,198 +155,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-end"> 999999999 </td>
-                                    <td>
-                                        <label class="form-check-label" for="defaultCheck1">
-                                            <i class="ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal">未</i><span class="font-semibold"> 未処理</span>
-                                        </label>
-                                    </td>
-                                    <td> A9999999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
-                                           data-bs-target="#mansion">
-                                            <span class="bg-warning pt-1 pb-1 ps-2 pe-2">
-                                                Seller name Seller
-                                                name
-                                            </span>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
-                                           data-bs-target="#mansion">
-                                            <span class="pt-1 pb-1 ps-2 pe-2">Real Estate Company Name</span>
-                                        </a>
-                                    </td>
-                                    <td>Admin Staff name</td>
-                                    <td>YYYY/MM/DD hh:mm:ss</td>
-                                    <td>999日23時間</td>
-                                    <td class="text-center">トラブル</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999999999 </td>
-                                    <td>
-                                        <label class="form-check-label" for="defaultCheck1">
-                                            <i class="ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal fst-normal">処</i><span class="font-semibold"> 処理中</span>
-                                        </label>
-                                    </td>
-                                    <td> A9999999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
-                                           data-bs-target="#mansion">
-                                            <span class="bg-warning pt-1 pb-1 ps-2 pe-2">
-                                                Seller name Seller
-                                                name
-                                            </span>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
-                                           data-bs-target="#mansion">
-                                            <span class="pt-1 pb-1 ps-2 pe-2">Real Estate Company Name</span>
-                                        </a>
-                                    </td>
-                                    <td>Admin Staff name</td>
-                                    <td>YYYY/MM/DD hh:mm:ss</td>
-                                    <td>999日23時間</td>
-                                    <td class="text-center">トラブル</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999999999 </td>
-                                    <td>
-                                        <label class="form-check-label" for="defaultCheck1">
-                                            <i class="ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal fst-normal">処</i><span class="font-semibold"> 処理中</span>
-                                        </label>
-                                    </td>
-                                    <td> A9999999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
-                                           data-bs-target="#mansion">
-                                            <span class="bg-warning pt-1 pb-1 ps-2 pe-2">
-                                                Seller name Seller
-                                                name
-                                            </span>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
-                                           data-bs-target="#mansion">
-                                            <span class="pt-1 pb-1 ps-2 pe-2">Real Estate Company Name</span>
-                                        </a>
-                                    </td>
-                                    <td>Admin Staff name</td>
-                                    <td>YYYY/MM/DD hh:mm:ss</td>
-                                    <td>999日23時間</td>
-                                    <td class="text-center">トラブル</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999999999 </td>
-                                    <td>
-                                        <label class="form-check-label" for="defaultCheck1">
-                                            <i class="ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal fst-normal">処</i><span class="font-semibold"> 処理中</span>
-                                        </label>
-                                    </td>
-                                    <td> A9999999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
-                                           data-bs-target="#mansion"><span class="pt-1 pb-1 ps-2 pe-2">Seller name Seller name</span></a>
-                                    </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
-                                           data-bs-target="#mansion">
-                                            <span class="bg-warning pt-1 pb-1 ps-2 pe-2">
-                                                Real Estate Company
-                                                Name
-                                            </span>
-                                        </a>
-                                    </td>
-                                    <td>Admin Staff name</td>
-                                    <td>YYYY/MM/DD hh:mm:ss</td>
-                                    <td>999日23時間</td>
-                                    <td class="text-center">トラブル</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999999999 </td>
-                                    <td>
-                                        <label class="form-check-label" for="defaultCheck1">
-                                            <i class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal fst-normal">保</i><span class="font-semibold">解決</span>
-                                        </label>
-                                    </td>
-                                    <td> A9999999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
-                                           data-bs-target="#mansion">
-                                            <span class="bg-warning pt-1 pb-1 ps-2 pe-2">
-                                                Seller name Seller
-                                                name
-                                            </span>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
-                                           data-bs-target="#mansion">
-                                            <span class="pt-1 pb-1 ps-2 pe-2">Real Estate Company Name</span>
-                                        </a>
-                                    </td>
-                                    <td>Admin Staff name</td>
-                                    <td>YYYY/MM/DD hh:mm:ss</td>
-                                    <td>999日23時間</td>
-                                    <td class="text-center">トラブル</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999999999 </td>
-                                    <td>
-                                        <label class="form-check-label" for="defaultCheck1">
-                                            <i class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal fst-normal">保</i><span class="font-semibold">解決</span>
-                                        </label>
-                                    </td>
-                                    <td> A9999999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
-                                           data-bs-target="#mansion"><span class="pt-1 pb-1 ps-2 pe-2">Seller name Seller name</span></a>
-                                    </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
-                                           data-bs-target="#mansion">
-                                            <span class="bg-warning pt-1 pb-1 ps-2 pe-2">
-                                                Real Estate Company
-                                                Name
-                                            </span>
-                                        </a>
-                                    </td>
-                                    <td>Admin Staff name</td>
-                                    <td>YYYY/MM/DD hh:mm:ss</td>
-                                    <td>999日23時間</td>
-                                    <td class="text-center">トラブル</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-end"> 999999999 </td>
-                                    <td>
-                                        <label class="form-check-label" for="defaultCheck1">
-                                            <i class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal fst-normal">保</i><span class="font-semibold">解決</span>
-                                        </label>
-                                    </td>
-                                    <td> A9999999 </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
-                                           data-bs-target="#mansion">
-                                            <span class="bg-warning pt-1 pb-1 ps-2 pe-2">
-                                                Seller name Seller
-                                                name
-                                            </span>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"
-                                           data-bs-target="#mansion">
-                                            <span class="pt-1 pb-1 ps-2 pe-2">Real Estate Company Name</span>
-                                        </a>
-                                    </td>
-                                    <td>Admin Staff name</td>
-                                    <td>YYYY/MM/DD hh:mm:ss</td>
-                                    <td>999日23時間</td>
-                                    <td class="text-center">トラブル</td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>

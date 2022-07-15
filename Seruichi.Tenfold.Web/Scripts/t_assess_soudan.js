@@ -101,10 +101,10 @@ function addEvents() {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
-        $('#tblissueslist tbody').empty();
+        $('#tblsoudan tbody').empty();
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
-        get_issueslist_Data(model, $form);
+        get_t_assess_soudan_DisplayData(model, $form);
     });
 
     $('#btnCSV').on('click', function () {
@@ -113,7 +113,7 @@ function addEvents() {
             $form.getInvalidItems().get(0).focus();
             return false;
         }
-        $('#tblissueslist tbody').empty();
+        $('#tblsoudan tbody').empty();
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         get_issueslist_Data(model, $form);
@@ -172,51 +172,48 @@ function isEmptyOrSpaces(str) {
 }
 
 function Bind_DisplayData(result) {
-    let _letter = "", _class = "", _sort_checkbox = "";
+    let _letter = "", _class = "", _snbg_color = "", _rnbg_color = "";
     let data = JSON.parse(result);
     let html = "";
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
 
-            if (isEmptyOrSpaces(data[i]["ステータス名"])) {
+            if (isEmptyOrSpaces(data[i]["ステータス"])) {
                 _letter = "";
                 _class = "ms-1 ps-1 pe-1 rounded-circle";
-                _sort_checkbox = "";
             }
             else {
-                _letter = data[i]["ステータス名"].charAt(0);
-                if (_letter == "新") {
-                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white";
-                    _sort_checkbox = "1";
+                _letter = data[i]["ステータス"].charAt(0);
+                if (_letter == "未") {
+                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal";
                 }
-                else if (_letter == "交") {
-                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-info txt-dark";
-                    _sort_checkbox = "2";
+                else if (_letter == "処") {
+                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal fst-normal";
                 }
-                else if (_letter == "成") {
-                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-secondary";
-                    _sort_checkbox = "3";
+                else if (_letter == "解") {
+                    _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal fst-normal";
                 }
             }
+
+            if (data[i]["ConsultFrom"] = '1') {
+                _snbg_color = "bg-warning";
+                _rnbg_color = "";
+            }
+            else {
+                _snbg_color = "";
+                _rnbg_color = "bg-warning";
+            }
+
             html += '<tr>\
-            <td class= "text-end"> ' + data[i]["NO"] + '</td>\
-            <td class="'+ _sort_checkbox + '"><span class="' + _class + '">' + _letter + '</span><span class="font-semibold"> ' + data[i]["ステータス名"] + '</span></td>\
-            <td>'+ _sort_checkbox + '</td>\
-            <td>'+ data[i]["査定依頼ID"] + '</td>\
-            <td>'+ data[i]["売主保持物件ID"] + '</td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["査定依頼ID"] + '&r_issueslist' + '  href="#" onclick="l_logfunction(this.id)"><span>' + data[i]["物件名"] + '</span><span>' + data[i]["部屋番号"] + '</span></a></td>\
-            <td>'+ data[i]["依頼売主CD"] + '</td>\
-            <td>'+ data[i]["売主_カナ"] + '</td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" data-bs-toggle="modal" data-bs-target="#SellerDetails" id='+ data[i]["依頼売主CD"] + ' href="#" onclick="Bind_SellerDetails_Popup(this)">' + data[i]["お客様名"] + '</a></td>\
-            <td>'+ data[i]["売主_住所１"] + data[i]["売主_住所２"] + data[i]["売主_住所３"] + data[i]["売主_住所４"] + data[i]["売主_住所５"] + '</td>\
-            <td>'+ data[i]["売主_固定電話番号"] + '</td>\
-            <td>'+ data[i]["売主_携帯電話番号"] + '</td>\
-            <td>'+ data[i]["売主_メールアドレス"] + '</td>\
-            <td class="text-nowrap">'+ data[i]["買取依頼日時"] + '</td>\
-            <td class="text-nowrap"> '+ data[i]["終了日時"] + '</td>\
-            <td class="text-end text-nowrap"> '+ data[i]["査定価格"] + '</td>\
-            <td>'+ data[i]["不動産担当者CD"] + '</td>\
-            <td class="text-nowrap"> '+ data[i]["担当者名"] + '</td>\
+            <td class= "text-end"> ' + (i + 1) + '</td>\
+            <td><span class="' + _class + '">' + _letter + '</span><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
+            <td class="text-nowrap">'+ data[i]["相談ID"] + '</td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["相談ID"] + ' href="#" onclick="Display_Detail(this.id)"><span class="' + _snbg_color + ' pt-1 pb-1 ps-2 pe-2">' + data[i]["売主名"] + '</span></a></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["相談ID"] + ' href="#" onclick="Display_Detail(this.id)"><span class="' + _rnbg_color + ' pt-1 pb-1 ps-2 pe-2">' + data[i]["不動産会社"] + '</span></a></td>\
+            <td class="text-nowrap">'+ data[i]["管理担当"] + '</td>\
+            <td class="text-nowrap">'+ data[i]["相談発生日時"] + '</td>\
+            <td class="text-nowrap"> '+ data[i]["相談解決日時"] + '</td>\
+            <td class="text-center"> '+ data[i]["相談区分"] + '</td>\
             </tr>'
         }
 
