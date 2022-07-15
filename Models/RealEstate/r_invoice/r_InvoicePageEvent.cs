@@ -450,7 +450,7 @@ namespace Models.RealEstate.r_invoice
             table_header.HorizontalAlignment = 1;
             table_header.TotalWidth = 545f;
             table_header.LockedWidth = true;
-            float[] widths_header = new float[] { 90f, 210f, 65f, 90f, 90f };
+            float[] widths_header = new float[] { 75f, 290f, 40f, 70f, 70f };
             table_header.SetWidths(widths_header);
 
 
@@ -509,7 +509,7 @@ namespace Models.RealEstate.r_invoice
             table_total.HorizontalAlignment = 1;
             table_total.TotalWidth = 545f;
             table_total.LockedWidth = true;
-            float[] widths = new float[] { 90f, 210f, 65f, 90f, 90f };
+            float[] widths = new float[] { 75f, 290f, 40f, 70f, 70f };
             table_total.SetWidths(widths);
 
             string total_string = "";
@@ -604,9 +604,9 @@ namespace Models.RealEstate.r_invoice
             #endregion
 
             pdfTab.WriteSelectedRows(0, -1, document.Left, document.PageSize.Height-10, writer.DirectContent);
-            pdfTab_s.WriteSelectedRows(0, -1, document.Left, document.PageSize.Height-first_table_height, writer.DirectContent);
-            pdfTab_t.WriteSelectedRows(0, -1, document.Left, document.PageSize.Height - (first_table_height + second_table_height), writer.DirectContent);
             pdfTab_image.WriteSelectedRows(0, -1, 445, document.PageSize.Height - (first_table_height + 45), writer.DirectContent);
+            pdfTab_s.WriteSelectedRows(0, -1, document.Left, document.PageSize.Height-first_table_height, writer.DirectContent);
+            pdfTab_t.WriteSelectedRows(0, -1, document.Left, document.PageSize.Height - (first_table_height + second_table_height), writer.DirectContent);           
             pdfTab_f.WriteSelectedRows(0, -1, 445, document.PageSize.Height - (first_table_height + second_table_height), writer.DirectContent);
             table_header.WriteSelectedRows(0, -1, document.Left, document.PageSize.Height - (first_table_height + second_table_height+third_table_height + 5), writer.DirectContent);
             table_total.WriteSelectedRows(0, -1, document.Left , document.PageSize.Height - 735, writer.DirectContent);
