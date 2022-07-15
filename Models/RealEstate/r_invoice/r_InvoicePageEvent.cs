@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
@@ -30,18 +32,6 @@ namespace Models.RealEstate.r_invoice
         public int block_all_total = 0;
         public int content_table_row_count = 0;
 
-        // This is the contentbyte object of the writer
-        PdfContentByte cb;
-
-        // we will put the final number of pages in a template
-        PdfTemplate headerTemplate, footerTemplate;
-
-        // this is the BaseFont we are going to use for the header / footer
-        //BaseFont bf = null;
-
-        // This keeps track of the creation time
-        DateTime PrintTime = DateTime.Now;
-
         #region Fields
         private string _header;
         #endregion
@@ -54,50 +44,11 @@ namespace Models.RealEstate.r_invoice
         }
         #endregion
 
-        //public override void OnOpenDocument(PdfWriter writer, Document document)
-        //{
-        //    try
-        //    {
-        //        //PrintTime = DateTime.Now;
-        //        //bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-        //        cb = writer.DirectContent;
-        //        headerTemplate = cb.CreateTemplate(100, 100);
-        //        footerTemplate = cb.CreateTemplate(50, 50);
-        //    }
-        //    catch (DocumentException de)
-        //    {
-        //    }
-        //    catch (System.IO.IOException ioe)
-        //    {
-        //    }
-        //}
-
         public override void OnEndPage(PdfWriter writer, Document document)
         {
             page_Number = page_Number + 1; 
 
             base.OnEndPage(writer, document);
-
-            //PdfContentByte content = writer.DirectContent;
-            //Rectangle rectangle = new Rectangle(document.PageSize);
-            //rectangle.Left += document.LeftMargin;
-            //rectangle.Right -= document.RightMargin;
-            //rectangle.Top -= document.TopMargin;
-            //rectangle.Bottom += document.BottomMargin;
-            //rectangle.BorderWidthBottom = 2f;
-            //rectangle.BorderWidthLeft = 2f;
-            //rectangle.BorderWidthRight = 2f;
-            //content.Rectangle(rectangle.Left, rectangle.Bottom, rectangle.Width, rectangle.Height);
-            //content.SetLineWidth(2);
-            ////content.EoFill();
-            //content.Stroke();
-
-            //PdfPTable pdf_Main = new PdfPTable(1);
-            //pdf_Main.HorizontalAlignment = 1;
-            //pdf_Main.TotalWidth = 545f;
-            //float[] _widths_Main = new float[] { 545f };
-            //pdf_Main.SetWidths(_widths_Main);
-
 
             //Create PdfTable object
             PdfPTable pdfTab = new PdfPTable(4);
@@ -316,6 +267,32 @@ namespace Models.RealEstate.r_invoice
             second_table_height += pdfCell.FixedHeight;
             pdfTab_s.AddCell(pdfCell);
             //end 7
+
+            //for image
+            #region
+            PdfPTable pdfTab_image = new PdfPTable(1);
+            pdfTab_image.HorizontalAlignment = 1;
+            pdfTab_image.TotalWidth = 90f;
+            pdfTab_image.LockedWidth = true;
+            float[] _widths_image = new float[] { 90f };
+            pdfTab_image.SetWidths(_widths_image);
+
+            string aa = Convert.ToBase64String((byte[])dt_M_Image_For_PDFHeader.Rows[0]["Picture1"]);
+            string base64Image = "data:image/png;base64,"+aa;
+            Regex regex = new Regex(@"^data:image/(?<mediaType>[^;]+);base64,(?<data>.*)");
+            Match match = regex.Match(base64Image);
+            Image image = Image.GetInstance(
+                Convert.FromBase64String(match.Groups["data"].Value)
+            );
+
+            Chunk imageChunk = new Chunk(image, 0, 0);
+            pdfCell = new PdfPCell(new Phrase(imageChunk));
+            pdfCell.BorderWidth = 0;
+            pdfCell.FixedHeight = 75f;
+            pdfCell.HorizontalAlignment = Element.ALIGN_LEFT;
+            pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            pdfTab_image.AddCell(pdfCell);
+            #endregion
 
             //Create PdfTable object
             PdfPTable pdfTab_t = new PdfPTable(5);
@@ -619,6 +596,9 @@ namespace Models.RealEstate.r_invoice
             pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
             pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
             pdfCell.Border = 0;
+            pdfCell.PaddingTop = 5f;
+            pdfCell.PaddingBottom = 0;
+            pdfCell.FixedHeight = 20f;
             pdfTab_footer.AddCell(pdfCell);
             //end 1,2,3,4,5 footer
             #endregion
@@ -626,28 +606,14 @@ namespace Models.RealEstate.r_invoice
             pdfTab.WriteSelectedRows(0, -1, document.Left, document.PageSize.Height-10, writer.DirectContent);
             pdfTab_s.WriteSelectedRows(0, -1, document.Left, document.PageSize.Height-first_table_height, writer.DirectContent);
             pdfTab_t.WriteSelectedRows(0, -1, document.Left, document.PageSize.Height - (first_table_height + second_table_height), writer.DirectContent);
+            pdfTab_image.WriteSelectedRows(0, -1, 445, document.PageSize.Height - (first_table_height + 45), writer.DirectContent);
             pdfTab_f.WriteSelectedRows(0, -1, 445, document.PageSize.Height - (first_table_height + second_table_height), writer.DirectContent);
             table_header.WriteSelectedRows(0, -1, document.Left, document.PageSize.Height - (first_table_height + second_table_height+third_table_height + 5), writer.DirectContent);
             table_total.WriteSelectedRows(0, -1, document.Left , document.PageSize.Height - 735, writer.DirectContent);
             pdfTab_footer.WriteSelectedRows(0, -1, document.Left, document.PageSize.Height - 755, writer.DirectContent);
            
         }
-        //public override void OnCloseDocument(PdfWriter writer, Document document)
-        //{
-        //    base.OnCloseDocument(writer, document);
-
-        //    //headerTemplate.BeginText();
-        //    //headerTemplate.SetFontAndSize(bf, 12);
-        //    //headerTemplate.SetTextMatrix(0, 0);
-        //    //headerTemplate.ShowText((writer.PageNumber - 1).ToString());
-        //    //headerTemplate.EndText();
-
-        //    //footerTemplate.BeginText();
-        //    //footerTemplate.SetFontAndSize(bf, 12);
-        //    //footerTemplate.SetTextMatrix(0, 0);
-        //    //footerTemplate.ShowText((writer.PageNumber - 1).ToString());
-        //    //footerTemplate.EndText();
-        //}
+       
     }
 
     public class RoundRectangle : IPdfPCellEvent

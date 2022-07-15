@@ -24,7 +24,7 @@ namespace Models.Tenfold.t_assess_soudan
         public string LoginName { get; set; }
         public string IPAddress { get; set; }
         public string Page { get; set; }
-        public string Processing { get; set; }
+        public string Process { get; set; }
         public string Remarks { get; set; }
     }
 }

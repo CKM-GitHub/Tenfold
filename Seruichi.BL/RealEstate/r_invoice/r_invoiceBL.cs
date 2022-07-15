@@ -169,6 +169,30 @@ namespace Seruichi.BL.RealEstate.r_invoice
             return dt;
 
         }
+        public bool UpdateD_Billing(r_invoice_PDFModel model)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = model.RealECD },
+                new SqlParameter("@REStaffCD", SqlDbType.VarChar) { Value = model.REStaffCD },
+                new SqlParameter("@TargetYYYYMM", SqlDbType.VarChar) { Value = model.TargetYYYYMM },
+                new SqlParameter("@InvoiceYYYYMM", SqlDbType.VarChar) { Value = model.InvoiceYYYYMM },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){Value = model.LoginName },
+                new SqlParameter("@Operator", SqlDbType.VarChar) { Value = model.Operator },
+                new SqlParameter("@IPAddress", SqlDbType.VarChar) { Value = model.IPAddress },
+                new SqlParameter("@Remarks", SqlDbType.VarChar){Value = model.Remarks}
+            };
+            try
+            {
+                DBAccess db = new DBAccess();
+                return db.InsertUpdateDeleteData("pr_r_invoice_pdf_Update_D_Billing", false, sqlParams);
+            }
+            catch (ExclusionException)
+            {
+                //msgid = "S004"; //他端末エラー
+                return false;
+            }
+        }
 
     }
 }

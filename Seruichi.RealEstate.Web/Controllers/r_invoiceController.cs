@@ -302,12 +302,6 @@ namespace Seruichi.RealEstate.Web.Controllers
                             }
                         }
                         header.content_table_row_count = table.Rows.Count;
-                       
-                       // AddLastRow_To_Table(table, String.Format("{0:n0}", header.block_all_total), bold_font_9, normal_font_9);
-
-                        
-
-                        // table.WriteSelectedRows(0, -1, 25, pdfDoc.Top - 227, pdfWriter.DirectContent);
 
                         pdfDoc.Add(table);
 
@@ -323,6 +317,19 @@ namespace Seruichi.RealEstate.Web.Controllers
                     }
                 }
             }
+
+            r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
+            r_invoice_PDFModel pdf_model = new r_invoice_PDFModel();
+            pdf_model.RealECD = model.RealECD;
+            pdf_model.REStaffCD = user.REStaffCD;
+            pdf_model.TargetYYYYMM = dt_D_Billing_For_PDFHeader.Rows[0]["P年月"].ToString();
+            pdf_model.InvoiceYYYYMM = dt_D_Billing_For_PDFHeader.Rows[0]["P年月"].ToString();
+            pdf_model.LoginName = user.REStaffName;
+            pdf_model.Operator = user.REStaffCD;
+            pdf_model.IPAddress = GetClientIP();
+            pdf_model.Remarks = "請求書印刷" + model.UserName;
+            bl.UpdateD_Billing(pdf_model);
+
             return View();
         }
 
@@ -567,7 +574,7 @@ namespace Seruichi.RealEstate.Web.Controllers
             Encoding encoding = Encoding.GetEncoding("Shift_JIS");
             int length = encoding.GetByteCount(ori_text);
             string beg_text = ori_text;
-            if (length > 10)
+            if (length > len)
             {
                 beg_text = beg_text.Substring(0, len/2);
             }
@@ -653,45 +660,5 @@ namespace Seruichi.RealEstate.Web.Controllers
             }
             table.AddCell(pdfCell);
         }
-
-        public static void AddLastRow_To_Table(PdfPTable table,string total, Font font_size, Font font_size1)
-        {
-            PdfPCell pdfCell = new PdfPCell();
-
-            pdfCell = new PdfPCell(new Phrase("合　　　　計", font_size));
-            pdfCell.Colspan = 2;
-            pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
-            pdfCell.VerticalAlignment = Element.ALIGN_CENTER;
-            pdfCell.BackgroundColor = BaseColor.LIGHT_GRAY;
-            pdfCell.BorderWidthRight = 0;
-            pdfCell.CellEvent = new DottedCell(Rectangle.RIGHT_BORDER);
-            pdfCell.FixedHeight = 15f;
-            pdfCell.PaddingBottom = 1f;
-            pdfCell.PaddingTop = 1f;
-            table.AddCell(pdfCell);
-
-            pdfCell = new PdfPCell(new Phrase("", font_size1));
-            pdfCell.Colspan = 2;
-            pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
-            pdfCell.VerticalAlignment = Element.ALIGN_CENTER;
-            pdfCell.FixedHeight = 15f;
-            pdfCell.BorderWidthLeft = 0;
-            pdfCell.BorderWidthRight = 0;
-            pdfCell.CellEvent = new DottedCell(Rectangle.RIGHT_BORDER);
-            pdfCell.PaddingBottom = 1f;
-            pdfCell.PaddingTop = 1f;
-            table.AddCell(pdfCell);
-
-            pdfCell = new PdfPCell(new Phrase(total, font_size1));
-            pdfCell.Colspan = 2;
-            pdfCell.HorizontalAlignment = Element.ALIGN_RIGHT;
-            pdfCell.VerticalAlignment = Element.ALIGN_CENTER;
-            pdfCell.FixedHeight = 15f;
-            pdfCell.BorderWidthLeft = 0;
-            pdfCell.PaddingBottom = 1f;
-            pdfCell.PaddingTop = 1f;
-            table.AddCell(pdfCell);
-        }
-
     }
 }
