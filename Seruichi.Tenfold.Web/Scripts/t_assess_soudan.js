@@ -1,6 +1,7 @@
 ﻿const _url = {};
 $(function () {
     _url.get_t_assess_soudan_DisplayData = common.appPath + '/t_assess_soudan/get_t_assess_soudan_DisplayData';
+    _url.get_t_assess_soudan_CSVData = common.appPath + '/t_assess_soudan/get_t_assess_soudan_CSVData';
     _url.generate_t_assess_soudan_CSVData = common.appPath + '/t_assess_soudan/generate_t_assess_soudan_CSVData';
     _url.insert_l_log = common.appPath + '/t_assess_soudan/Insert_l_log';
     setValidation();
@@ -102,6 +103,7 @@ function addEvents() {
             return false;
         }
         $('#tblsoudan tbody').empty();
+        $('#type').val('display');
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
         get_t_assess_soudan_DisplayData(model, $form);
@@ -114,11 +116,12 @@ function addEvents() {
             return false;
         }
         $('#tblsoudan tbody').empty();
+        $('#type').val('csv');
         const fd = new FormData(document.forms.form1);
         const model = Object.fromEntries(fd);
-        get_issueslist_Data(model, $form);
+        get_t_assess_soudan_DisplayData(model, $form);
 
-        common.callAjax(_url.generate_r_issueslist_CSV, model,
+        common.callAjax(_url.get_t_assess_soudan_CSVData, model,
             function (result) {
                 //sucess
                 var table_data = result.data;
@@ -137,7 +140,7 @@ function addEvents() {
                         ("0" + m.getHours()).slice(-2) + "" +
                         ("0" + m.getMinutes()).slice(-2) + "" +
                         ("0" + m.getSeconds()).slice(-2);
-                    downloadLink.download = "案件一覧_" + dateString + ".csv";
+                    downloadLink.download = "処理待ちリスト＿相談_" + dateString + ".csv";
 
                     document.body.appendChild(downloadLink);
                     downloadLink.click();
@@ -151,7 +154,7 @@ function addEvents() {
     });
 }
 
-function get_t_assess_soudan_DisplayData(model, $form) {
+function get_t_assess_soudan_DisplayData(model, type, $form) {
     common.callAjaxWithLoading(_url.get_t_assess_soudan_DisplayData, model, this, function (result) {
         if (result && result.isOK) {
             Bind_DisplayData(result.data);
@@ -227,4 +230,8 @@ function Bind_DisplayData(result) {
         $('#no_record').text("表示可能データがありません");
     }
     $('#tblsoudan tbody').append(html);
+}
+
+function Display_Detail() {
+
 }

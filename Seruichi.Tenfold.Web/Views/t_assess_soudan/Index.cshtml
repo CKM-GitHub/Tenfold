@@ -106,6 +106,7 @@
                 </li>
             </ul>
             <div class="mt-auto pb-20"></div>
+            <input type="text" id="type" name="type" class="d-none" />
         </div>
     </form>
 
@@ -142,15 +143,15 @@
                         <table class="table table-hover table-nowrap" id="tblsoudan">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" class="text-end text-decoration-underline" style="width: 100px">No.</th>
-                                    <th scope="col" style="width: 60px" class="text-decoration-underline">ステータス</th>
-                                    <th scope="col" style="width: 100px" class="text-decoration-underline">相談ID</th>
-                                    <th scope="col" style="width: 150px" class="text-decoration-underline">売主名</th>
-                                    <th scope="col" style="width: 160px" class="text-decoration-underline">不動産会社</th>
-                                    <th scope="col" style="width: 150px" class="text-decoration-underline">管理担当</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline">相談発生日時</th>
-                                    <th scope="col" style="width: 100px" class="text-decoration-underline">相談解決日時</th>
-                                    <th scope="col" style="width: 80px" class="text-decoration-underline text-center">相談種別</th>
+                                    <th scope="col" class="text-end text-decoration-underline sort-by" ordercol-direction="asc" ordercol-index="2" style="width: 100px">No.</th>
+                                    <th scope="col" style="width: 60px" class="text-decoration-underline sort-by">ステータス</th>
+                                    <th scope="col" style="width: 100px" class="text-decoration-underline sort-by">相談ID</th>
+                                    <th scope="col" style="width: 150px" class="text-decoration-underline sort-by">売主名</th>
+                                    <th scope="col" style="width: 160px" class="text-decoration-underline sort-by">不動産会社</th>
+                                    <th scope="col" style="width: 150px" class="text-decoration-underline sort-by">管理担当</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by">相談発生日時</th>
+                                    <th scope="col" style="width: 100px" class="text-decoration-underline sort-by">相談解決日時</th>
+                                    <th scope="col" style="width: 80px" class="text-decoration-underline sort-by text-center">相談種別</th>
                                     <th scope="col" style="width: auto" class="d-none d-md-block opacity-0">&nbsp;</th>
                                 </tr>
                             </thead>
@@ -163,8 +164,9 @@
                     </div>
                 </div>
             </div>
+
             <!-- ポップアップ -->
-            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="mansion" tabindex="-1" aria-labelledby="mansion" aria-hidden="true">
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="soudan" tabindex="-1" aria-labelledby="soudan" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xl cap-modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
