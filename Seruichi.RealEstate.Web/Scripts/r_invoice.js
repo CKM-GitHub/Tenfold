@@ -79,43 +79,6 @@ function addEvents() {
         };
         get_D_Billing_List(model, $form);
     });
-    $('#btn1').on('click', function () {
-        //id = "'+ data[i]["InvoiceNo"] + '&' + data[i]["RealECD"] + '&' + data[i]["InvoiceYYYYMM"] +'"
-        let model = {
-            UserName: '0000008695',
-            RealECD: '0000000003',
-            REStaffCD: '202207'
-        }
-        $.ajax({
-            url: _url.GeneratePDF,
-            type: "POST",
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(model),
-            responseType: 'arraybuffer',
-            headers: {
-                RequestVerificationToken: $("#_RequestVerificationToken").val(),
-            },
-            success: function (data) {
-                var atobData = atob(data);
-                var num = new Array(atobData.length);
-                for (var i = 0; i < atobData.length; i++) {
-                    num[i] = atobData.charCodeAt(i);
-                }
-                var pdfData = new Uint8Array(num);
-
-                //var blob = new Blob([pdfData], { type: 'text/plain' });
-                blob = new Blob([pdfData], { type: 'application/pdf;base64' });
-                var url = URL.createObjectURL(blob);
-
-                var a = document.createElement('a');
-                a.href = url;
-                a.download = 'File.pdf';
-                a.click();
-
-                window.open(url);
-            }
-        });
-    })
 }
 
 
@@ -199,6 +162,7 @@ function Bind_tbody(result) {
 }
 
 function generatePDF(id) {
+    common.showLoading(this);
     var temp = id.split('&');
     let model = {
         UserName: temp[0],
@@ -227,12 +191,28 @@ function generatePDF(id) {
             blob = new Blob([pdfData], { type: 'application/pdf;base64' });
             var url = URL.createObjectURL(blob);
 
+            Object.defineProperty(Date.prototype, 'YYYYMMDDHHMMSS', {
+                value: function () {
+                    function pad2(n) {  // always returns a string
+                        return (n < 10 ? '0' : '') + n;
+                    }
+
+                    return this.getFullYear() +
+                        pad2(this.getMonth() + 1) +
+                        pad2(this.getDate()) +
+                        pad2(this.getHours()) +
+                        pad2(this.getMinutes()) +
+                        pad2(this.getSeconds());
+                }
+            });
+
             var a = document.createElement('a');
             a.href = url;
-            a.download = 'File.pdf';
+            a.download = '請求書_' + model.REStaffCD.slice(0, 4) + '年' + model.REStaffCD.slice(-2) + '月_' + model.RealECD + '_' + new Date().YYYYMMDDHHMMSS() + '.pdf';
             a.click();
 
             window.open(url);
+            common.hideLoading(this);
         }
     });
 }

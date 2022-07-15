@@ -102,7 +102,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                         table.HorizontalAlignment = 1;
                         table.TotalWidth = 545f;
                         table.LockedWidth = true;
-                        float[] widths = new float[] { 90f, 210f, 65f, 90f, 90f };
+                        float[] widths = new float[] { 75f, 290f, 40f, 70f, 70f };
                         table.SetWidths(widths);
                        // table.HeaderRows = 1;
 
@@ -203,7 +203,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                             for (int i = 0; i < dt_Customer_Send_Record_Block_D.Rows.Count; i++)
                             {
                                 string date = Beginning_Data(dt_Customer_Send_Record_Block_D.Rows[i]["Date"].ToString(), 10);
-                                string SellerName = Beginning_Data(crypt.DecryptFromBase64(dt_Customer_Send_Record_Block_D.Rows[i]["SellerName"].ToString(), decryptionKey), 10);
+                                string SellerName = Beginning_Data(crypt.DecryptFromBase64(dt_Customer_Send_Record_Block_D.Rows[i]["SellerName"].ToString(), decryptionKey), 16);
                                 string mansionName = Beginning_Data(dt_Customer_Send_Record_Block_D.Rows[i]["MansionName"].ToString(), 40);
                                 string title = date + " " + SellerName + " " + mansionName;
                                 string times = dt_Customer_Send_Record_Block_D.Rows[i]["times"].ToString();
@@ -233,7 +233,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                             for (int i = 0; i < dt_Customer_Transfer_Record_Block_E.Rows.Count; i++)
                             {
                                 string date = Beginning_Data(dt_Customer_Transfer_Record_Block_E.Rows[i]["Date"].ToString(), 10);
-                                string SellerName = Beginning_Data(crypt.DecryptFromBase64(dt_Customer_Transfer_Record_Block_E.Rows[i]["SellerName"].ToString(), decryptionKey), 10);
+                                string SellerName = Beginning_Data(crypt.DecryptFromBase64(dt_Customer_Transfer_Record_Block_E.Rows[i]["SellerName"].ToString(), decryptionKey), 16);
                                 string mansionName = Beginning_Data(dt_Customer_Transfer_Record_Block_E.Rows[i]["MansionName"].ToString(), 40);
                                 string title = date + " " + SellerName + " " + mansionName;
                                 string times = dt_Customer_Transfer_Record_Block_E.Rows[i]["times"].ToString();
@@ -263,7 +263,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                             for (int i = 0; i < dt_Get_Customer_Cancel_Record_Block_F.Rows.Count; i++)
                             {
                                 string date = Beginning_Data(dt_Get_Customer_Cancel_Record_Block_F.Rows[i]["Date"].ToString(), 10);
-                                string SellerName = Beginning_Data(crypt.DecryptFromBase64(dt_Get_Customer_Cancel_Record_Block_F.Rows[i]["SellerName"].ToString(), decryptionKey), 10);
+                                string SellerName = Beginning_Data(crypt.DecryptFromBase64(dt_Get_Customer_Cancel_Record_Block_F.Rows[i]["SellerName"].ToString(), decryptionKey), 16);
                                 string mansionName = Beginning_Data(dt_Get_Customer_Cancel_Record_Block_F.Rows[i]["MansionName"].ToString(), 40);
                                 string title = date + " " + SellerName + " " + mansionName;
                                 string times = dt_Get_Customer_Cancel_Record_Block_F.Rows[i]["times"].ToString();
@@ -281,12 +281,26 @@ namespace Seruichi.RealEstate.Web.Controllers
 
                         header.block_all_total += block_D_E_F_Sub_Total;
 
-                        if (row_count < 34) //row count less than 35
+                        if (row_count < 33) //row count less than 33
                         {
-                            for (int k = row_count; k < 34; k++)
+                            if (row_count == 0)
                             {
-                                AddNullRow_To_Table(table, k);
+                                int count_zero = 1;
+                                for (int k = 0; k < 33; k++)
+                                {
+                                    count_zero = k == 0 ? 1 : k;
+
+                                    AddNullRow_To_Table(table, count_zero);
+                                }
                             }
+                            else
+                            {
+                                for (int k = row_count; k < 33; k++)
+                                {
+                                    AddNullRow_To_Table(table, k);
+                                }
+                            }
+
                         }
                         else //row count greater than 35
                         {
@@ -294,7 +308,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                             int i = row_count % 33;
                             if (i != 0)
                             {
-                                while(i<33)
+                                while (i < 33)
                                 {
                                     AddNullRow_To_Table(table, i);
                                     i++;
@@ -302,12 +316,6 @@ namespace Seruichi.RealEstate.Web.Controllers
                             }
                         }
                         header.content_table_row_count = table.Rows.Count;
-                       
-                       // AddLastRow_To_Table(table, String.Format("{0:n0}", header.block_all_total), bold_font_9, normal_font_9);
-
-                        
-
-                        // table.WriteSelectedRows(0, -1, 25, pdfDoc.Top - 227, pdfWriter.DirectContent);
 
                         pdfDoc.Add(table);
 
@@ -323,6 +331,19 @@ namespace Seruichi.RealEstate.Web.Controllers
                     }
                 }
             }
+
+            r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
+            r_invoice_PDFModel pdf_model = new r_invoice_PDFModel();
+            pdf_model.RealECD = model.RealECD;
+            pdf_model.REStaffCD = user.REStaffCD;
+            pdf_model.TargetYYYYMM = dt_D_Billing_For_PDFHeader.Rows[0]["P年月"].ToString();
+            pdf_model.InvoiceYYYYMM = dt_D_Billing_For_PDFHeader.Rows[0]["P年月"].ToString();
+            pdf_model.LoginName = user.REStaffName;
+            pdf_model.Operator = user.REStaffCD;
+            pdf_model.IPAddress = GetClientIP();
+            pdf_model.Remarks = "請求書印刷" + model.UserName;
+            bl.UpdateD_Billing(pdf_model);
+
             return View();
         }
 
@@ -567,7 +588,7 @@ namespace Seruichi.RealEstate.Web.Controllers
             Encoding encoding = Encoding.GetEncoding("Shift_JIS");
             int length = encoding.GetByteCount(ori_text);
             string beg_text = ori_text;
-            if (length > 10)
+            if (length > len)
             {
                 beg_text = beg_text.Substring(0, len/2);
             }
@@ -653,45 +674,5 @@ namespace Seruichi.RealEstate.Web.Controllers
             }
             table.AddCell(pdfCell);
         }
-
-        public static void AddLastRow_To_Table(PdfPTable table,string total, Font font_size, Font font_size1)
-        {
-            PdfPCell pdfCell = new PdfPCell();
-
-            pdfCell = new PdfPCell(new Phrase("合　　　　計", font_size));
-            pdfCell.Colspan = 2;
-            pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
-            pdfCell.VerticalAlignment = Element.ALIGN_CENTER;
-            pdfCell.BackgroundColor = BaseColor.LIGHT_GRAY;
-            pdfCell.BorderWidthRight = 0;
-            pdfCell.CellEvent = new DottedCell(Rectangle.RIGHT_BORDER);
-            pdfCell.FixedHeight = 15f;
-            pdfCell.PaddingBottom = 1f;
-            pdfCell.PaddingTop = 1f;
-            table.AddCell(pdfCell);
-
-            pdfCell = new PdfPCell(new Phrase("", font_size1));
-            pdfCell.Colspan = 2;
-            pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
-            pdfCell.VerticalAlignment = Element.ALIGN_CENTER;
-            pdfCell.FixedHeight = 15f;
-            pdfCell.BorderWidthLeft = 0;
-            pdfCell.BorderWidthRight = 0;
-            pdfCell.CellEvent = new DottedCell(Rectangle.RIGHT_BORDER);
-            pdfCell.PaddingBottom = 1f;
-            pdfCell.PaddingTop = 1f;
-            table.AddCell(pdfCell);
-
-            pdfCell = new PdfPCell(new Phrase(total, font_size1));
-            pdfCell.Colspan = 2;
-            pdfCell.HorizontalAlignment = Element.ALIGN_RIGHT;
-            pdfCell.VerticalAlignment = Element.ALIGN_CENTER;
-            pdfCell.FixedHeight = 15f;
-            pdfCell.BorderWidthLeft = 0;
-            pdfCell.PaddingBottom = 1f;
-            pdfCell.PaddingTop = 1f;
-            table.AddCell(pdfCell);
-        }
-
     }
 }
