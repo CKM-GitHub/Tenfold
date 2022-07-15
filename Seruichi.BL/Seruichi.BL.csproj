@@ -70,6 +70,7 @@
     <Compile Include="Seller\a_contactBL.cs" />
     <Compile Include="Seller\a_mypage_ahisBL.cs" />
     <Compile Include="Seller\a_mypage_plusBL.cs" />
+    <Compile Include="Seller\a_mypage_reglistBL.cs" />
     <Compile Include="Seller\a_mypage_taikaiBL.cs" />
     <Compile Include="Seller\a_mypage_uinfoBL.cs" />
     <Compile Include="Seller\a_mailregisterBL.cs" />
