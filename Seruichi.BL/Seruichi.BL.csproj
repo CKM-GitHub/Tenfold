@@ -217,6 +217,7 @@
     <Content Include="Database\StoredProcedure\pr_r_temp_mes_Insert_M_REMessage.sql" />
     <Content Include="Database\StoredProcedure\pr_r_temp_mes_Select_M_REMessage_By_RealECD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_temp_mes_Update_M_REMessage.sql" />
+    <Content Include="Database\StoredProcedure\pr_Select_M_Seller_By_SellerCD.sql" />
     <Content Include="Database\StoredProcedure\pr_tenfold_daily_process_Insert_M_REMoAreaPlan.sql" />
     <Content Include="Database\StoredProcedure\pr_tenfold_daily_process_Insert_M_REMoAreaPlanSec.sql" />
     <Content Include="Database\StoredProcedure\pr_tenfold_daily_process_Insert_M_REMoIntroAmount.sql" />
@@ -251,6 +252,7 @@
     <Content Include="Database\StoredProcedure\pr_t_seller_mansion_csv_generate.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_mansion_list_Insert_L_Log.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_mansion_Select_M_SellerMansionData.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_seller_orderdetails_Select_D_SellerPossible_by_SellerCD.sql" />
     <Content Include="Database\StoredProcedure\UpdateMansionData.sql" />
     <Content Include="Database\TableType\T_MansionStationName.sql" />
     <Content Include="Database\TableType\T_MansionStation.sql" />
