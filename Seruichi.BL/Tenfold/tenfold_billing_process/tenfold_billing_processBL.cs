@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Seruichi.Common;
 using System.Data;
-using Models.Tenfold.tenfold_billing_process;
 
 namespace Seruichi.BL.Tenfold.tenfold_billing_process
 {
@@ -22,11 +21,11 @@ namespace Seruichi.BL.Tenfold.tenfold_billing_process
             return dt;
         }
 
-        public bool Tenfold_Billing_Process_Insert_Update(tenfold_billing_processModel model)
+        public bool Tenfold_Billing_Process_Insert_Update(string IpAddress)
         {
             var sqlParams = new SqlParameter[]
             {
-                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value =  model.IPAddress}
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value =  IpAddress}
             };
 
             try
