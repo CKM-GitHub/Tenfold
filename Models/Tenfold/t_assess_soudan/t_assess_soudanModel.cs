@@ -17,6 +17,9 @@ namespace Models.Tenfold.t_assess_soudan
         public string EndDate { get; set; }
         public string M_PIC { get; set; }
         public string type { get; set; }
+        public string ConsultID { get; set; }
+        public string SellerCD { get; set; }
+        public string SellerMansionID { get; set; }
 
         //L_Log
         public byte LoginKBN { get; set; }

@@ -71,5 +71,17 @@ namespace Seruichi.BL.Tenfold.t_assess_soudan
 
             return dt;
         }
+
+        public DataTable get_Modal_infotrainData(t_assess_soudanModel model)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@SellerMansionID", SqlDbType.VarChar){ Value = model.SellerMansionID.ToStringOrNull() },
+                new SqlParameter("@ConsultID", SqlDbType.VarChar){ Value = model.ConsultID.ToStringOrNull() }
+            };
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_assess_soudan_get_Modal_infotrainData", sqlParams);
+            return dt;
+        }
     }
 }

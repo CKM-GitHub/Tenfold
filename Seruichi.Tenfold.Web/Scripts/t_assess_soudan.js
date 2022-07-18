@@ -2,7 +2,7 @@
 $(function () {
     _url.get_t_assess_soudan_DisplayData = common.appPath + '/t_assess_soudan/get_t_assess_soudan_DisplayData';
     _url.get_t_assess_soudan_CSVData = common.appPath + '/t_assess_soudan/get_t_assess_soudan_CSVData';
-    _url.generate_t_assess_soudan_CSVData = common.appPath + '/t_assess_soudan/generate_t_assess_soudan_CSVData';
+    _url.get_Modal_infotrainData = common.appPath + '/t_reale_purchase/get_Modal_infotrainData';
     _url.insert_l_log = common.appPath + '/t_assess_soudan/Insert_l_log';
     setValidation();
     addEvents();
@@ -211,8 +211,8 @@ function Bind_DisplayData(result) {
             <td class= "text-end"> ' + (i + 1) + '</td>\
             <td><span class="' + _class + '">' + _letter + '</span><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
             <td class="text-nowrap">'+ data[i]["相談ID"] + '</td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["相談ID"] + ' href="#" onclick="Display_Detail(this.id)"><span class="' + _snbg_color + ' pt-1 pb-1 ps-2 pe-2">' + data[i]["売主名"] + '</span></a></td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["相談ID"] + ' href="#" onclick="Display_Detail(this.id)"><span class="' + _rnbg_color + ' pt-1 pb-1 ps-2 pe-2">' + data[i]["不動産会社"] + '</span></a></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["相談ID"] + '&' + data[i]["PurchReqDateTime"] + ' href="#" onclick="Display_Detail(this.id)"><span class="' + _snbg_color + ' pt-1 pb-1 ps-2 pe-2">' + data[i]["売主名"] + '</span></a></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["相談ID"] + '&' + data[i]["PurchReqDateTime"] + ' href="#" onclick="Display_Detail(this.id)"><span class="' + _rnbg_color + ' pt-1 pb-1 ps-2 pe-2">' + data[i]["不動産会社"] + '</span></a></td>\
             <td class="text-nowrap">'+ data[i]["管理担当"] + '</td>\
             <td class="text-nowrap">'+ data[i]["相談発生日時"] + '</td>\
             <td class="text-nowrap"> '+ data[i]["相談解決日時"] + '</td>\
@@ -232,6 +232,87 @@ function Bind_DisplayData(result) {
     $('#tblsoudan tbody').append(html);
 }
 
-function Display_Detail() {
+function Display_Detail(id) {
+    var PurchReqDateTime = '';
+    if (id.split('&')[3] == '') {
+    }
+    else {
+        var Date = id.split('&')[3];
+        var Time = id.split('&')[4];
+        PurchReqDateTime = Date + ' ' + Time;
+    }
 
+    let model = {
+        SellerMansionID: id.split('&')[0],
+        SellerCD: id.split('&')[1],
+        ConsultID: id.split('&')[2]
+    };
+    Bind_ModalPopupData(model, PurchReqDateTime);
+
+    $('#soudan').modal('show');
+}
+
+function Bind_ModalPopupData(model, PurchReqDateTime) {
+    common.callAjax(_url.get_Modal_infotrainData, model, function (result) {
+        if (result && result.isOK) {
+            Bind_Modal_ConsultData(result.data, PurchReqDateTime);
+        }
+        if (result && !result.isOK) {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                $form.getInvalidItems().get(0).focus();
+            }
+        }
+    });
+}
+
+function Bind_Modal_ConsultData(result, PurchReqDateTime) {
+    let data = JSON.parse(result);
+    let MansionInfo = "";
+    let html = "";
+    let htmlTemp = "";
+    const isEven = data.length % 2 === 0 ? 'Even' : 'Odd';
+
+    if (data.length > 0) {
+        $('#ConsultID').text(data[0]['ConsultID']);
+        $('#ConsultFrom').text(data[0]['ConsultFrom']);
+        $('#ConsultDateTime').text(data[0]['ConsultDateTime']);
+        $('#ConsultType').text(data[0]['ConsultType']);
+        $('#Consultation').text(data[0]['Consultation']);
+
+        //Display Data of MansionInfo
+        MansionInfo = '<h4 class="text-center fw-bold">' + data[0]["MansionName"] + '<strong>' + data[0]["RoomNumber"] + '</strong></h4>\
+        <p class="font-monospace small text-start pt-3">'+ data[0]["Address"] + '</p >\
+        <p class="font-monospace small text-center pt-3">' + PurchReqDateTime + '</p>'
+        $('#H_MansionInfo').append(MansionInfo);
+
+        $('#status').val(data[0]['ProgressKBN']);
+        $('#pic').val(data[0]['TenStaffName']);
+
+        //Bind Data of ekikoutsu
+        for (var i = 0; i < data.length; i++) {
+            html += '<div class="card p-1 col-12 col-md-6 shadow-sm">\
+                            <div class="card-body p-2 row">\
+                                <div class="col-12">\
+                                    <h5>'+ data[i]["LineName"] + '</h5>\
+                                </div>\
+                                <div class="col-12">\
+                                    <p class="text-dark">'+ data[i]["StationName"] + '</p>\
+                                </div>\
+                                <div class="col-12 text-end">\
+                                    <p class="text-dark">'+ data[i]["Distance"] + '</p>\
+                                </div>\
+                            </div>\
+                         </div>'
+        }
+        htmlTemp = '<div class="invisible card p-1 col-12 col-md-6 shadow-sm"> </div>'
+        if (isEven == 'Odd') {
+            $('#ekikoutsu').append(html + htmlTemp);
+        }
+        else {
+            $('#ekikoutsu').append(html);
+        }
+    }
 }
