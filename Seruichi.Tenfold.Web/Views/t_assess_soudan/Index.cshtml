@@ -216,33 +216,27 @@
                                                         <section class="highlight-clean">
                                                             <div class="intro">
                                                                 <div class="card shadow border-0">
-                                                                    <div class="card-header">
-                                                                        <h4 class="text-center fw-bold">マンション名マンション名　部屋番号<strong>マンション名</strong></h4>
-                                                                        <p class="font-monospace small text-start pt-3">
-                                                                            住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所住所
-                                                                        </p>
-                                                                        <p class="font-monospace small text-center pt-3">
-                                                                            買取依頼日時 YYYY/MM/DD hh:mm:ss
-                                                                        </p>
+                                                                    <div class="card-header" id="H_MansionInfo">
+                                                                        @*Display Data of H_MansionInfo*@
                                                                     </div>
                                                                     <div class="card-body">
                                                                         <div class="row">
                                                                             <div class="col-12 col-md-5">
-                                                                                <label class="form-label">ステータス</label><select class="form-select" aria-label="ステータス">
-                                                                                    <option selected>未処理</option>
+                                                                                <label class="form-label">ステータス</label>
+                                                                                <select class="form-select" aria-label="ステータス" id="status">
                                                                                     <option value="1">未処理</option>
                                                                                     <option value="2">処理中</option>
-                                                                                    <option value="4">解　決</option>
+                                                                                    <option value="3">解決</option>
                                                                                 </select>
                                                                             </div>
                                                                             <div class="col-12 col-md-7">
-                                                                                <label class="form-label">管理担当</label><select class="form-select" aria-label="管理担当">
-                                                                                    <option selected>Admin Staff name</option>
-                                                                                    <option value="1">Admin Staff name</option>
-                                                                                    <option value="2">Admin Staff name</option>
-                                                                                    <option value="3">Admin Staff name</option>
-                                                                                    <option value="4">Admin Staff name</option>
-                                                                                    <option value="5">Admin Staff name</option>
+                                                                                <label class="form-label">管理担当</label>
+                                                                                <select class="form-select" aria-label="管理担当" id="pic">
+                                                                                    <option class="js-selectable" value="0">全部表示</option>
+                                                                                    @foreach (Models.DropDownListItem item in ViewBag.ContactTypeDropDownListItems)
+                                                                                    {
+                                                                                        <option class="js-selectable" value="@item.Value" data-subject="@item.HiddenItem">@item.DisplayText</option>
+                                                                                    }
                                                                                 </select>
                                                                             </div>
                                                                             <div class="col-12">
@@ -314,136 +308,7 @@
                                                                         <div class="card-body ">
                                                                             <div class=" pb-0 pm-0">
                                                                                 <div class="row justify-content-center mt-auto" id="ekikoutsu" style="overflow-x: hidden;overflow-y: auto;max-height: 450px;">
-                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                                                                        <div class="card-body p-2 row">
-                                                                                            <div class="col-12">
-                                                                                                <h5> LineNameLineNameLineName</h5>
-                                                                                            </div>
-                                                                                            <div class="col-12">
-                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                                                                            </div>
-                                                                                            <div class="col-12 text-end">
-                                                                                                <p class="text-dark">徒歩 99 分</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                                                                        <div class="card-body p-2 row">
-                                                                                            <div class="col-12">
-                                                                                                <h5> LineNameLineNameLineName</h5>
-                                                                                            </div>
-                                                                                            <div class="col-12">
-                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                                                                            </div>
-                                                                                            <div class="col-12 text-end">
-                                                                                                <p class="text-dark">徒歩 99 分</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                                                                        <div class="card-body p-2 row">
-                                                                                            <div class="col-12">
-                                                                                                <h5> LineNameLineNameLineName</h5>
-                                                                                            </div>
-                                                                                            <div class="col-12">
-                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                                                                            </div>
-                                                                                            <div class="col-12 text-end">
-                                                                                                <p class="text-dark">徒歩 99 分</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                                                                        <div class="card-body p-2 row">
-                                                                                            <div class="col-12">
-                                                                                                <h5> LineNameLineNameLineName</h5>
-                                                                                            </div>
-                                                                                            <div class="col-12">
-                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                                                                            </div>
-                                                                                            <div class="col-12 text-end">
-                                                                                                <p class="text-dark">徒歩 99 分</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                                                                        <div class="card-body p-2 row">
-                                                                                            <div class="col-12">
-                                                                                                <h5> LineNameLineNameLineName</h5>
-                                                                                            </div>
-                                                                                            <div class="col-12">
-                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                                                                            </div>
-                                                                                            <div class="col-12 text-end">
-                                                                                                <p class="text-dark">徒歩 99 分</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                                                                        <div class="card-body p-2 row">
-                                                                                            <div class="col-12">
-                                                                                                <h5> LineNameLineNameLineName</h5>
-                                                                                            </div>
-                                                                                            <div class="col-12">
-                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                                                                            </div>
-                                                                                            <div class="col-12 text-end">
-                                                                                                <p class="text-dark">徒歩 99 分</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                                                                        <div class="card-body p-2 row">
-                                                                                            <div class="col-12">
-                                                                                                <h5> LineNameLineNameLineName</h5>
-                                                                                            </div>
-                                                                                            <div class="col-12">
-                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                                                                            </div>
-                                                                                            <div class="col-12 text-end">
-                                                                                                <p class="text-dark">徒歩 99 分</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                                                                        <div class="card-body p-2 row">
-                                                                                            <div class="col-12">
-                                                                                                <h5> LineNameLineNameLineName</h5>
-                                                                                            </div>
-                                                                                            <div class="col-12">
-                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                                                                            </div>
-                                                                                            <div class="col-12 text-end">
-                                                                                                <p class="text-dark">徒歩 99 分</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                                                                        <div class="card-body p-2 row">
-                                                                                            <div class="col-12">
-                                                                                                <h5> LineNameLineNameLineName</h5>
-                                                                                            </div>
-                                                                                            <div class="col-12">
-                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                                                                            </div>
-                                                                                            <div class="col-12 text-end">
-                                                                                                <p class="text-dark">徒歩 99 分</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="card p-1 col-12 col-md-6 shadow-sm">
-                                                                                        <div class="card-body p-2 row">
-                                                                                            <div class="col-12">
-                                                                                                <h5> LineNameLineNameLineName</h5>
-                                                                                            </div>
-                                                                                            <div class="col-12">
-                                                                                                <p class="text-dark">StationNameStationNameStationName</p>
-                                                                                            </div>
-                                                                                            <div class="col-12 text-end">
-                                                                                                <p class="text-dark">徒歩 99 分</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
+                                                                                    @*Bind Data of ekikoutsu*@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -750,36 +615,34 @@
                                                 <label class="form-check-label" for="flexCheckDefault">
                                                     相談ID
                                                 </label>
-                                                <h5 class="">A9999999</h5>
+                                                <h5 class="" id="ConsultID"></h5>
                                             </div>
                                             <div class="form-check pb-2">
 
                                                 <label class="form-check-label text-wrap" for="flexCheckDefault">
                                                     相談依頼者
                                                 </label>
-                                                <h5 class="">
-                                                    NameNameName（不動産会社）
-                                                </h5>
+                                                <h5 class="" id="ConsultFrom"></h5>
                                             </div>
                                             <div class="form-check pb-2">
 
                                                 <label class="form-check-label text-wrap" for="flexCheckDefault">
                                                     相談発生日時
                                                 </label>
-                                                <h5 class="">YYYY/MM/DD hh:mm:ss</h5>
+                                                <h5 class="" id="ConsultDateTime"></h5>
                                             </div>
                                             <div class="form-check pb-2">
 
                                                 <label class="form-check-label text-wrap" for="flexCheckDefault">
                                                     相談確認
                                                 </label>
-                                                <h5 class="">トラブル</h5>
+                                                <h5 class="" id="ConsultType"></h5>
                                             </div>
                                             <div class="form-check pb-2">
                                                 <label class="form-check-label text-wrap" for="flexCheckDefault">
                                                     相談内容
                                                 </label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="13"></textarea>
+                                                <textarea class="form-control" id="Consultation" rows="13"></textarea>
                                             </div>
                                         </div>
                                     </div>

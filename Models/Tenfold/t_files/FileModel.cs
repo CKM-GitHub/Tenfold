@@ -10,9 +10,9 @@ namespace Models.Tenfold.t_files
 {
     public class FileModel
     {
-        [Required(ErrorMessage = "Please select file.")]
-        [Display(Name = "Browse File")]
-        public HttpPostedFileBase[] files { get; set; }
+        //[Required(ErrorMessage = "Please select file.")]
+        //[Display(Name = "Browse File")]
+        //public HttpPostedFileBase[] files { get; set; }
 
     }
 }
