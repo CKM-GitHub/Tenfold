@@ -22,6 +22,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return RedirectToAction("Index", "r_login");
             }
 
+            ViewBag.Url = System.Web.HttpContext.Current.Request.UrlReferrer;
             r_asmc_ms_reged_listBL bl = new r_asmc_ms_reged_listBL();
             List<M_Pref> prefList = new List<M_Pref>();
             DataTable dt = bl.GetM_Pref();
@@ -55,17 +56,18 @@ namespace Seruichi.RealEstate.Web.Controllers
                             CityName = dr["CityName"].ToString()
                         }).ToList();
 
-
+            string strUrl = ViewBag.Url.Segments[1].Replace("/","");
             ViewBag.PrefCD = prefList;
             ViewBag.CityGPCD = prefcitygpcdList;
             ViewBag.CityCD = cityList;
+            ViewBag.StrURL = strUrl;
             return View();
         }
 
         [HttpPost]
         public ActionResult Get_DataList(r_asmc_ms_reged_listModel model)
         {
-            if (String.IsNullOrWhiteSpace(model.MansionName) && String.IsNullOrWhiteSpace(model.CityCD) && String.IsNullOrWhiteSpace(model.CityGPCD) && String.IsNullOrWhiteSpace(model.StartYear) && String.IsNullOrWhiteSpace(model.EndYear) && String.IsNullOrWhiteSpace(model.Radio_Rating))
+            if (String.IsNullOrWhiteSpace(model.MansionName) && String.IsNullOrWhiteSpace(model.CityCD) && String.IsNullOrWhiteSpace(model.CityGPCD) && String.IsNullOrWhiteSpace(model.StartYear) && String.IsNullOrWhiteSpace(model.EndYear) && String.IsNullOrWhiteSpace(model.Radio_Rating) && String.IsNullOrWhiteSpace(model.Check_Expired))
             {
                 return ErrorMessageResult("E303");
             }

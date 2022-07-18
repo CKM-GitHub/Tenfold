@@ -24,22 +24,24 @@ namespace Seruichi.BL.RealEstate.r_staff
             if (!string.IsNullOrEmpty(model.REStaffCD))
             {
                 if (!Get_select_M_REStaff(model, out string aa))
-                    validator.GetValidationResult().Add("REStaffCD", StaticCache.GetMessageText1("E314"));
+                    validator.GetValidationResult().Add("newStaffCD", StaticCache.GetMessageText1("E314"));
 
-                validator.CheckRequired("REStaffCD", model.REStaffCD);//E101
-                validator.CheckRequired("REStaffName", model.REStaffName);//E101
-                validator.CheckRequired("REPassword", model.REPassword);//E101
+                validator.CheckRequired("newStaffCD", model.REStaffCD);//E101
+                validator.CheckRequired("newStaffName", model.REStaffName);//E101
+                validator.CheckRequired("newStaffpsw", model.REPassword);//E101
 
-                validator.CheckMaxLenght("REStaffCD", model.REStaffCD, 10);  //E105
-                validator.CheckMaxLenght("REStaffName", model.REStaffName, 30);  //E105
-                validator.CheckMaxLenght("REIntroduction", model.REIntroduction, 500);  //E105
-                validator.CheckMaxLenght("REPassword", model.REPassword, 20);  //E105
+                validator.CheckMaxLenght("newStaffCD", model.REStaffCD, 10);  //E105
+                validator.CheckMaxLenght("newStaffName", model.REStaffName, 30);  //E105
+                validator.CheckMaxLenght("newStaffIntro", model.REIntroduction, 500);  //E105
+                validator.CheckMaxLenght("newStaffpsw", model.REPassword, 20);  //E105
 
-                validator.CheckIsOnlyOneCharacter("REStaffCD", model.REStaffCD);  //E104
-                validator.CheckIsOnlyOneCharacter("REPassword", model.REPassword);  //E104
+                validator.CheckIsOnlyOneCharacter("newStaffCD", model.REStaffCD);  //E104
+                validator.CheckIsOnlyOneCharacter("newStaffpsw", model.REPassword);  //E104
                 
 
-                validator.CheckMinLenght("REPassword", model.REPassword, 8); //E110
+                validator.CheckMinLenght("newStaffpsw", model.REPassword, 8); //E110
+
+                validator.CheckREStaffMailAddress("newStaffEmail", model.REStaffEmail);  //E104 and E105
             }
             //update M_REStaff
             int i = 1;
@@ -58,8 +60,9 @@ namespace Seruichi.BL.RealEstate.r_staff
                 validator.CheckRequired("REPassword_" + i, item.REPassword);
                 validator.CheckIsOnlyOneCharacter("REPassword_" + i, item.REPassword);
                 validator.CheckMaxLenght("REPassword_" + i, item.REPassword,20);
-                validator.CheckMinLenght("REPassword_" + i, item.REPassword, 8); 
+                validator.CheckMinLenght("REPassword_" + i, item.REPassword, 8);
 
+                validator.CheckREStaffMailAddress("REStaffEmail_" + i, model.REStaffEmail);  //E204 and E105
                 i++;
             }
             return validator.GetValidationResult();
@@ -113,6 +116,7 @@ namespace Seruichi.BL.RealEstate.r_staff
             dtUpdate.Columns.Add("REPassword", typeof(String));
             dtUpdate.Columns.Add("REStaffName", typeof(String));
             dtUpdate.Columns.Add("REIntroduction", typeof(String));
+            dtUpdate.Columns.Add("MailAddress", typeof(String));
 
 
             DataTable dtUpdateImage = new DataTable();
@@ -146,6 +150,7 @@ namespace Seruichi.BL.RealEstate.r_staff
                     row["REStaffName"] = model.lst_StaffModel[i].REStaffName;
                     row["REIntroduction"] = model.lst_StaffModel[i].REIntroduction;
                     row["REPassword"] = model.lst_StaffModel[i].REPassword;
+                    row["MailAddress"] = model.lst_StaffModel[i].REStaffEmail;
                     row["PermissionChat"] = model.lst_StaffModel[i].PermissionChat;
                     row["PermissionSetting"] = model.lst_StaffModel[i].PermissionSetting;
                     row["PermissionPlan"] = model.lst_StaffModel[i].PermissionPlan;
@@ -176,6 +181,7 @@ namespace Seruichi.BL.RealEstate.r_staff
                 new SqlParameter("@REPassword", SqlDbType.VarChar){ Value = model.REPassword.ToStringOrNull() },
                 new SqlParameter("@REStaffName", SqlDbType.VarChar){ Value =  model.REStaffName.ToStringOrNull() },
                 new SqlParameter("@REIntroduction", SqlDbType.VarChar){ Value =  model.REIntroduction.ToStringOrNull() },
+                new SqlParameter("@MailAddress", SqlDbType.VarChar){ Value =  model.REStaffEmail.ToStringOrNull() },
                 new SqlParameter("@PermissionChat", SqlDbType.TinyInt){ Value =  model.PermissionChat.ToByte() },
                 new SqlParameter("@PermissionSetting", SqlDbType.TinyInt){ Value =  model.PermissionSetting.ToByte() },
                 new SqlParameter("@PermissionPlan", SqlDbType.TinyInt){ Value =  model.PermissionPlan.ToByte() },

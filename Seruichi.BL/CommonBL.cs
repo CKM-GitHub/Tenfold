@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace Seruichi.BL
 {
@@ -98,10 +99,16 @@ namespace Seruichi.BL
 
         public List<DropDownListItem> GetDropDownListItemsOfStaff_by_RealECD(string realECD)
         {
-            string spName = "pr_r_issuelist_select_DropDownListOfStaff_by_RealECD";
+            string spName = "pr_Common_Select_DropDownListOfREStaff";
             SqlParameter sqlParam = new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = realECD };
 
             return GetDropDownListItems(spName, sqlParam);
+        }
+
+        public List<DropDownListItem> GetDropDownListItemsOfTenfoldStaff()
+        {
+            string spName = "pr_Common_Select_DropDownListOfTenfoldStaff";
+            return GetDropDownListItems(spName);
         }
 
         public bool CheckExistsCounterMaster(CounterKey counterKey, out string errorID)
@@ -384,6 +391,42 @@ namespace Seruichi.BL
             return mailInfo;
         }
 
+        //for at most five mail address 
+        public List<SendMailInfo.Recipient> GetPersonMailRecipients(MailKBN mailKbn,SendMailInfo mailInfo, String mailAdd1 = null, String mailAdd2 = null, String mailAdd3 = null, String mailAdd4 = null, String mailAdd5 = null)
+        {
+
+            List<SendMailInfo.Recipient> recipients = new List<SendMailInfo.Recipient>();
+            var sqlParm = new SqlParameter("@MailKBN", SqlDbType.Int) { Value = (int)mailKbn };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_M_MailSendTo_Select_by_MailKBN", sqlParm);
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                var dr = dt.Rows[i];
+                recipients.Add(new SendMailInfo.Recipient()
+                {
+                    MailAddress = dr["SendToAddress"].ToStringOrEmpty(),
+                    SendType = (SendMailInfo.SendTypes)dr["SendType"].ToInt32(0)
+                });
+            }
+
+            //more than one mail 
+            string[] parameterList = new string[] { mailAdd1, mailAdd2, mailAdd3, mailAdd4, mailAdd5 };
+            string[] addressList = parameterList.Where(item => item != null).ToArray();
+            foreach (string mailAddress in addressList)
+            {
+                recipients.Add(new SendMailInfo.Recipient()
+                    {
+                        MailAddress = mailAddress,
+                        SendType = SendMailInfo.SendTypes.To
+                    });
+            }
+            if (mailInfo != null)
+            {
+                mailInfo.Recipients = recipients;
+            }
+            return recipients;
+        }
         public List<DropDownListItem> GetDropDownListItemsOfCourse()
         {
             string spName = "pr_t_reale_new_Select_M_Course";

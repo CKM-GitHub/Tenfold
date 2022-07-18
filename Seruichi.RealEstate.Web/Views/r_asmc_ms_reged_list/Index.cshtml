@@ -48,31 +48,31 @@
                                                     </label>
                                                     @if (cityGPCD.AddressLevel == "2")
                                                     {
-                                                    <ul>
-                                                        @foreach (var cityCD in ViewBag.CityCD)
-                                                        {
-                                                            if ((cityCD.CityGPCD == cityGPCD.CityGPCD) && (cityGPCD.PrefCD == cityCD.PrefCD))
+                                                        <ul>
+                                                            @foreach (var cityCD in ViewBag.CityCD)
                                                             {
+                                                                if ((cityCD.CityGPCD == cityGPCD.CityGPCD) && (cityGPCD.PrefCD == cityCD.PrefCD))
+                                                                {
 
-                                                                <li>
-                                                                    <input class="form-check-input node-item" type="checkbox" value="@cityCD.CityCD">
-                                                                    <label class="form-check-label" for="flexCheckChecked">
-                                                                        @cityCD.CityName
-                                                                    </label>
-                                                                </li>
+                                                                    <li>
+                                                                        <input class="form-check-input node-item" type="checkbox" value="@cityCD.CityCD">
+                                                                        <label class="form-check-label" for="flexCheckChecked">
+                                                                            @cityCD.CityName
+                                                                        </label>
+                                                                    </li>
+
+                                                                }
 
                                                             }
+                                                        </ul>
 
-                                                        }
-                                                    </ul>
+                                                    }
 
-                                                       }
-                                                    
-                                               </li>
-                                             }
-                                         }
+                                                </li>
+                                            }
+                                        }
                                     </ul>
-                            </li>
+                                </li>
                             }
 
                         </ul>
@@ -136,7 +136,7 @@
                             </div>
 
                             <div class="ms-6">
-                                <input class="form-check-input" type="radio" name="Radios" id="RadioRating" value="1">
+                                <input class="form-check-input" type="radio" name="Radios" id="RadioRating" value="1" checked>
                                 <span class="text-danger">
                                     <span class="fa fa-star" data-rating="1"></span>
                                     <span class="fa fa-star-o" data-rating="2"></span>
@@ -144,9 +144,32 @@
                                     <span class="fa fa-star-o" data-rating="4"></span>
                                     <span class="fa fa-star-o" data-rating="5"></span>
                                 </span><span><small>以上</small></span>
+                            </div>
                         </div>
-                   </div>
-                  </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="text-center px-xl-3 pt-3">
+
+                        <div class="mb-3 text-start">
+                            <label for="disabledSelect" class="form-label">有効期限切れ</label>
+                            <div class="form-check">
+                                @if (ViewBag.StrURL == "r_dashboard")
+                                {
+                                <input class="form-check-input" type="checkbox" value="1" id="defaultCheck3" name="defaultCheck3" checked>
+                                }
+                                else
+                                {
+                                <input class="form-check-input" type="checkbox" value="0" id="defaultCheck3" name="defaultCheck3">
+                                }
+                                <label class="form-check-label" for="defaultCheck3">
+                                    有効期限7日前～のみ表示
+                                </label>
+                            </div>
+
+
+                        </div>
+                    </div>
                 </li>
                 <li>
                     <span class="cap-errormsg-right" id="errorbtnDisplay"></span>
@@ -192,15 +215,16 @@
                         <table class="table table-hover table-nowrap" id="r_table_List">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" class="text-end text-decoration-underline sort-by" ordercol-direction="asc" ordercol-index="6" style="width: 100px">No.</th>
-                                    <th scope="col" style="width: 300px" class="text-decoration-underline sort-by" ordercol-index="1_6">マンション名</th>
-                                    <th scope="col" style="width: auto" class="text-decoration-underline sort-by" ordercol-index="2_6">住所</th>
-                                    <th scope="col" style="width: 50px" class="text-decoration-underline sort-by" ordercol-index="3_6">公開状況</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="4_6">登録日</th>
-                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="8_6">優先度</th>
-                                    <th class="d-none" ordercol-index="6">マンションCD</th>
-                                    <th class="d-none" bordercol-index="7">住所カナ</th>
-                                    <th class="d-none" ordercol-index="8">Priority</th>
+                                    <th scope="col" class="text-end text-decoration-underline sort-by" ordercol-direction="asc" ordercol-index="7" style="width: 100px">No.</th>
+                                    <th scope="col" style="width: 300px" class="text-decoration-underline sort-by" ordercol-index="1_7">マンション名</th>
+                                    <th scope="col" style="width: auto" class="text-decoration-underline sort-by" ordercol-index="2_7">住所</th>
+                                    <th scope="col" style="width: 50px" class="text-decoration-underline sort-by" ordercol-index="3_7">公開状況</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="4_7">登録日時</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="5_7">有効期限</th>
+                                    <th scope="col" style="width: 180px" class="text-decoration-underline sort-by" ordercol-index="8_7">優先度</th>
+                                    <th class="d-none" ordercol-index="7">マンションCD</th>
+                                    <th class="d-none" bordercol-index="8">住所カナ</th>
+                                    <th class="d-none" ordercol-index="9">Priority</th>
 
                                 </tr>
                             </thead>

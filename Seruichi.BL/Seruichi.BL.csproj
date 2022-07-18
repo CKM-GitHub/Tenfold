@@ -70,6 +70,7 @@
     <Compile Include="Seller\a_contactBL.cs" />
     <Compile Include="Seller\a_mypage_ahisBL.cs" />
     <Compile Include="Seller\a_mypage_plusBL.cs" />
+    <Compile Include="Seller\a_mypage_reglistBL.cs" />
     <Compile Include="Seller\a_mypage_taikaiBL.cs" />
     <Compile Include="Seller\a_mypage_uinfoBL.cs" />
     <Compile Include="Seller\a_mailregisterBL.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Tenfold\tenfold_billing_process\tenfold_billing_processBL.cs" />
     <Compile Include="Tenfold\tenfold_daily_process\tenfold_daily_processBL.cs" />
     <Compile Include="Tenfold\t_admin\t_adminBL.cs" />
+    <Compile Include="Tenfold\t_assess_soudan\t_assess_soudanBL.cs" />
     <Compile Include="Tenfold\t_assess_guide\t_assess_guideBL.cs" />
     <Compile Include="Tenfold\t_dashboard\t_dashboardBL.cs" />
     <Compile Include="Tenfold\t_mansion\t_mansionBL.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Tenfold\t_mansion_new\t_mansion_newBL.cs" />
     <Compile Include="Tenfold\t_reale_account\t_reale_accountBL.cs" />
     <Compile Include="Tenfold\t_reale_asmhis\t_reale_asmhisBL.cs" />
+    <Compile Include="Tenfold\t_reale_invoice\t_reale_invoiceBL.cs" />
     <Compile Include="Tenfold\t_reale_list\t_reale_listBL.cs" />
     <Compile Include="Tenfold\t_reale_memo\t_reale_memoBL.cs" />
     <Compile Include="Tenfold\t_reale_new\t_reale_newBL.cs" />
@@ -99,6 +102,7 @@
     <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionBL.cs" />
     <Compile Include="Tenfold\t_seller_memo\t_seller_memoBL.cs" />
     <Compile Include="Tenfold\t_seller_new\t_seller_newBL.cs" />
+    <Compile Include="Tenfold\t_seller_orderdetails\t_seller_orderdetailsBL.cs" />
     <Compile Include="Tenfold\t_seller_profile\t_seller_profileBL.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +219,7 @@
     <Content Include="Database\StoredProcedure\pr_r_temp_mes_Insert_M_REMessage.sql" />
     <Content Include="Database\StoredProcedure\pr_r_temp_mes_Select_M_REMessage_By_RealECD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_temp_mes_Update_M_REMessage.sql" />
+    <Content Include="Database\StoredProcedure\pr_Select_M_Seller_By_SellerCD.sql" />
     <Content Include="Database\StoredProcedure\pr_tenfold_daily_process_Insert_M_REMoAreaPlan.sql" />
     <Content Include="Database\StoredProcedure\pr_tenfold_daily_process_Insert_M_REMoAreaPlanSec.sql" />
     <Content Include="Database\StoredProcedure\pr_tenfold_daily_process_Insert_M_REMoIntroAmount.sql" />
@@ -249,12 +254,14 @@
     <Content Include="Database\StoredProcedure\pr_t_seller_mansion_csv_generate.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_mansion_list_Insert_L_Log.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_mansion_Select_M_SellerMansionData.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_seller_orderdetails_Select_D_SellerPossible_by_SellerCD.sql" />
     <Content Include="Database\StoredProcedure\UpdateMansionData.sql" />
     <Content Include="Database\TableType\T_MansionStationName.sql" />
     <Content Include="Database\TableType\T_MansionStation.sql" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

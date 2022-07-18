@@ -1,0 +1,51 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_t_menuLayout.cshtml";
+}
+@section styles{
+    @Styles.Render("~/Content/tenfold_css_common")
+}
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                <!-- Card stats -->
+                @Html.Partial("t_reale_Info")
+                <!-- Card stats -->
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header d-md-inline-flex text-nowrap">
+                        <h5 class="mb-0">課⾦履歴</h5><div class="justify-content-end w-full"><span class="text-muted text-sm float-md-end">利用可能枠 @ViewBag.PossibleTime 件</div></span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-nowrap" id="sellertable">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col" class="text-end text-decoration-underline sort-by" style="width: 80px" ordercol-direction="asc" ordercol-index="6">No.</></th>
+                                    <th scope="col" style="width: 100px" class="text-decoration-underline sort-by" ordercol-index="1_6">利用ID</th>
+                                    <th scope="col" style="width: 150px" class="text-decoration-underline sort-by" ordercol-index="2_6">購入日時</th>
+                                    <th scope="col" style="width: 80px" class="text-end text-decoration-underline sort-by" ordercol-index="3_6">購入数</th>
+                                    <th scope="col" style="width: 130px" class=" text-end text-decoration-underline sort-by" ordercol-index="4_6">購入金額(円)</th>
+                                    <th scope="col" style="min-width: 120px;" class="text-decoration-underline sort-by" ordercol-index="5_6">決済結果</th>
+                                    <th class="d-none">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                    <div class="card-footer border-0 py-5">
+                    </div>
+                </div>
+            </div>
+        </main>
+        @Html.Partial("_t_footer")
+    </div>
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/t_seller_orderdetails")
+}
+

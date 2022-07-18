@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "a_mypage_reglist";
+}
+<header class="text-center text-white masthead cap-header">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto position-relative">
+                <h1 class="mb-2">マイページ</h1>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="clean-block clean-form dark h-100 cap-main">
+    <div class="container-fluid" id="wrapper">
+        <div class="pt-5 pb-3">
+            @Html.Partial("_MyPageMenu")
+            <div class="card cap-form">
+                <form action="index.html" method="post" enctype="multipart/form-data" role="form">
+                    <h4 style="text-align: center;padding-top: 50px;"><strong>登録物件</strong></h4>
+                    <hr>
+                    <div class="m-auto">
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover" id="sellermansiontb">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center" style="width: 50px;">No</th>
+                                                        <th class="text-start" style="width: 100px;">ステータス</th>
+                                                        <th class="text-center" style="width: 80px;">査定</th>
+                                                        <th class="text-start" style="width: 400px">物件（部屋）</th>
+                                                        <th class="text-end" style="width: 180px;">登録日時</th>
+                                                        <th class="text-end" style="width: 180px;">最終査定日時</th>
+                                                        <th class="text-end" style="width: 150px;">査定額</th>
+                                                        <th class="text-start" style="width: auto;">不動産会社</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                  
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+         id="modal-sateitype">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tourokuhouhouLabel">査定方法</h5>
+                    <button type="button" class="btn-close d-none" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+
+                    <div class="p-5">
+                        <button type="button" class="btn btn-outline-primary btn-lg pt-3 pb-3"
+                                data-bs-toggle="modal" data-bs-target="#mansionmap">
+                            <i class="fa fa-search"
+                               aria-hidden="true"></i><span class="p-3">簡易査定</span>
+                        </button>
+                        <button type="button" class="btn btn-outline-success btn-lg pt-3 pb-3">
+                            <i class="fa fa-search-plus" aria-hidden="true"></i><span class="p-3">詳細査定</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">戻る</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts{
+    @Scripts.Render("~/bundles/a_mypage_reglist")
+}
+
+

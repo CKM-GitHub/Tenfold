@@ -1,0 +1,249 @@
+﻿@model Models.Tenfold.t_reale_invoice.t_reale_invoiceModel
+
+@{
+    ViewBag.Title = "請求管理";
+    Layout = "~/Views/Shared/_t_menuLayout.cshtml";
+}
+
+@section styles{
+    @Styles.Render("~/Content/tenfold_css_common")
+}
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18" id="wrapper">
+    <form id="form1">
+        <div id="sidebar-wrapper">
+            <ul class="navbar-nav mb-md-4 p-3 mt-5 p-md-0">
+
+
+                <li>
+                    <div class="text-center px-xl-3 pt-3">
+                        <div class="mb-3 text-start">
+                            <label for="Range" class="form-label">期間指定</label>
+                            <select id="Range" class="form-select mb-2">
+                                <option>年/月</option>
+                                <option>請求データ作成年/月</option>
+                                <option>請求年/月</option>
+                                <option>口座振替年/月</option>
+                            </select>
+                            <label for="StartMonth" class="form-label">開始年/月</label>
+                            <span class="cap-errormsg-right" id="errorStartMonth"></span>
+                            <input class="form-control mb-2" type="month" min="1900-01" max="2100-12" id="StartMonth" name="StartMonth">
+
+                            <label for="disabledSelect" class="form-label">終了年/月</label>
+                            <span class="cap-errormsg-right" id="errorEndMonth"></span>
+                            <input class="form-control mb-2" type="month" min="1900-01" max="2100-12" id="EndMonth" name="EndMonth">
+                        </div>
+                    </div>
+                </li>
+
+
+
+                <li>
+                    <div class="form-group ps-3 pe-3">
+                        <button type="button" class="btn btn-primary w-100 w-100 mb-3" id="btnDisplay">表示</button>
+                    </div>
+                </li>
+
+            </ul>
+            <div class="mt-auto pb-20"></div>
+        </div>
+    </form>
+    <div class="toggle-button" name="left_side_NavigationBar_ShowHide_Icon">
+        <a href="#menu-toggle" class="btn" id="menu-toggle">
+            <span class="fa fa-angle-right glyphicon-chevron-right" aria-hidden="true"></span>
+        </a>
+    </div>
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                @Html.Partial("t_reale_Info")
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header d-md-inline-flex">
+                        <h5 class="mb-0">請求管理</h5> <span class="ps-md-5 text-muted text-sm" id="total_record_up"></span><span style="color: red;" class="ps-md-5 text-sm" id="no_record"></span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-nowrap" id="billingtable">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col" class="text-end text-decoration-underline sort-by d-none" ordercol-direction="asc" ordercol-index="1" style="width: 50px">No.</th>
+                                    <th scope="col" class="text-decoration-underline ps-5 sort-by" ordercol-index="1" style="width:100px">請求月度</th>
+                                    <th scope="col" style="width: 100px" class="text-decoration-underline sort-by" ordercol-index="2_1">請求日</th>
+                                    <th scope="col" style="width: 100px" class="text-decoration-underline sort-by" ordercol-index="3_1">口座振替日</th>
+                                    <th scope="col" style="width: 120px" class="text-decoration-underline text-end sort-by" ordercol-index="4_1">エリアプラン</th>
+                                    <th scope="col" style="width: 130px" class="text-decoration-underline text-end sort-by" ordercol-index="5_1">
+                                        マンションプラン
+                                    </th>
+                                    <th scope="col" style="width: 80px" class="text-decoration-underline text-end sort-by" ordercol-index="6_1">送客数</th>
+                                    <th scope="col" style="width: 130px" class="text-decoration-underline text-end sort-by" ordercol-index="7_1">送客手数料</th>
+                                    <th scope="col" style="width: 130px" class="text-decoration-underline text-end sort-by" ordercol-index="8_1">その他</th>
+                                    <th scope="col" style="width: 130px" class="text-decoration-underline text-end sort-by" ordercol-index="9_1">請求本体額</th>
+                                    <th scope="col" style="width: 130px" class="text-decoration-underline text-end sort-by" ordercol-index="10_1">税額</th>
+                                    <th scope="col" style="width: 130px" class="text-decoration-underline text-end sort-by" ordercol-index="11_1">総請求額</th>
+                                    <th scope="col" style="width: 150px" class="text-decoration-underline text-center">請求書</th>
+                                    <th scope="col" style="width: auto" class="text-decoration-underline text-center"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @*<tr>
+                                    <td class="ps-5"> 2020/12 </td>
+                                    <td> 2020/12/25</td>
+                                    <td> 2020/12/25</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 99</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-center"> <button type="button" class="btn btn-primary btn">出力</button> </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-5"> 2020/12 </td>
+                                    <td> 2020/12/25</td>
+                                    <td> 2020/12/25</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 99</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-center"> <button type="button" class="btn btn-primary">出力</button> </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-5"> 2020/12 </td>
+                                    <td> 2020/12/25</td>
+                                    <td> 2020/12/25</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 99</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-center"> <button type="button" class="btn btn-primary">出力</button> </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-5"> 2020/12 </td>
+                                    <td> 2020/12/25</td>
+                                    <td> 2020/12/25</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 99</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-center"> <button type="button" class="btn btn-primary">出力</button> </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-5"> 2020/12 </td>
+                                    <td> 2020/12/25</td>
+                                    <td> 2020/12/25</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 99</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-center"> <button type="button" class="btn btn-primary">出力</button> </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-5"> 2020/12 </td>
+                                    <td> 2020/12/25</td>
+                                    <td> 2020/12/25</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 99</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-center"> <button type="button" class="btn btn-primary">出力</button> </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-5"> 2020/12 </td>
+                                    <td> 2020/12/25</td>
+                                    <td> 2020/12/25</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 99</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-center"> <button type="button" class="btn btn-primary">出力</button> </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-5"> 2020/12 </td>
+                                    <td> 2020/12/25</td>
+                                    <td> 2020/12/25</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 99</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-center"> <button type="button" class="btn btn-primary">出力</button> </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-5"> 2020/12 </td>
+                                    <td> 2020/12/25</td>
+                                    <td> 2020/12/25</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 99</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-center"> <button type="button" class="btn btn-primary">出力</button> </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-5"> 2020/12 </td>
+                                    <td> 2020/12/25</td>
+                                    <td> 2020/12/25</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 99</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-end"> 9,999,999,999</td>
+                                    <td class="text-center"> <button type="button" class="btn btn-primary">出力</button> </td>
+                                </tr>*@
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card-footer border-0 py-5">
+                        <span class="text-muted text-sm" id="total_record"></span>
+                    </div>
+                </div>
+            </div>
+        </main>
+        @Html.Partial("_t_footer")
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/t_reale_invoice")
+}
+
+
+
+

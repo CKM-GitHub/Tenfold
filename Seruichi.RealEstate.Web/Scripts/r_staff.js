@@ -23,20 +23,15 @@ function setValidation() {
             .addvalidation_reqired()  //E101
             .addvalidation_maxlengthCheck(10) //E105
             .addvalidation_singlebyte_numberAlphabet(); //E104
-           
 
         $('#REStaffName_' + i)
             .addvalidation_errorElement("#error_REStaffName_" + i)
             .addvalidation_reqired()  //E101
             .addvalidation_singlebyte_doublebyte(); //E105
-           
-            
 
         $('#REIntroduction_' + i)
             .addvalidation_errorElement("#error_REIntroduction_" + i)
             .addvalidation_singlebyte_doublebyte(); //E105
-           
-           
 
         $('#REPassword_' + i)
             .addvalidation_errorElement("#error_REPassword_" + i)
@@ -44,7 +39,12 @@ function setValidation() {
             .addvalidation_onebyte_character() //E104
             .addvalidation_maxlengthCheck(20) //E105
             .addvalidation_minlengthCheck(8); //E110
-          
+
+        $('#REStaffEmail_' + i)
+            .addvalidation_errorElement("#error_REmail_" + i)
+            .addvalidation_emailCheck()//E204
+            .addvalidation_maxlengthCheck(100); //E105
+
     });
       //.addvalidation_checkisexist();//E314
 }
@@ -143,6 +143,11 @@ function addEvents() {
                 .addvalidation_onebyte_character() //E104
                 .addvalidation_maxlengthCheck(20)  //E105
                 .addvalidation_minlengthCheck(8); //E110
+
+            $('#newStaffEmail')
+                .addvalidation_errorElement("#newStaffEmailError")
+                .addvalidation_emailCheck()//E204
+                .addvalidation_maxlengthCheck(100); //E105
         }
         else
         {
@@ -153,11 +158,13 @@ function addEvents() {
 
             $('#newStaffpsw')
                 .removeValidation_required();
+            
             $('#newStaffCD').hideError(); 
             $('#newProfilePhoto').hideError();
             $('#newStaffName').hideError();
             $('#newStaffIntro').hideError();
             $('#newStaffpsw').hideError();
+            $('#newStaffEmail').hideError();
         }
        
 
@@ -239,6 +246,11 @@ function addEvents() {
                 .addvalidation_onebyte_character() //E104
                 .addvalidation_maxlengthCheck(20)  //E105
                 .addvalidation_minlengthCheck(8); //E110
+
+            $('#newStaffEmail')
+                .addvalidation_errorElement("#newStaffEmailError")
+                .addvalidation_emailCheck()//E204
+                .addvalidation_maxlengthCheck(100); //E105
         }
         else {
 
@@ -249,11 +261,15 @@ function addEvents() {
                 
             $('#newStaffpsw')
                 .removeValidation_required();
+
+            //$('#newStaffEmail')
+            //    .removeValidation_singlebyte_numberAlphabet();
             $('#newStaffCD').hideError(); 
             $('#newProfilePhoto').hideError();
             $('#newStaffName').hideError();
             $('#newStaffIntro').hideError();
             $('#newStaffpsw').hideError();
+            $('#newStaffEmail').hideError();
             
             }
        
@@ -284,13 +300,14 @@ function addEvents() {
 
     $('#btnOKChange').on('click', function () {
         
-        const $REStaffCD = $("#newStaffCD").val(), $REStaffName = $('#newStaffName').val(), $REIntroduction = $('#newStaffIntro').val(), $REPassword = $('#newStaffpsw').val()
+        const $REStaffCD = $("#newStaffCD").val(), $REStaffName = $('#newStaffName').val(), $REIntroduction = $('#newStaffIntro').val(), $REPassword = $('#newStaffpsw').val(), $REmail = $('#newStaffEmail').val()
         let model = {
             REFaceImage: $("#newpic_holder").find("img").attr("src"),
             REStaffCD: $REStaffCD,
             REStaffName: $REStaffName,
             REIntroduction: $REIntroduction,
             REPassword: $REPassword,
+            REStaffEmail: $REmail,
             PermissionChat: $('#New_chkChat').is(':checked') ? "1" : "0",
             PermissionSetting: $('#New_chkSetting').is(':checked') ? "1" : "0",
             PermissionPlan: $('#New_chkPlan').is(':checked') ? "1" : "0",
@@ -318,7 +335,14 @@ function addEvents() {
     $('#btnNoChange').on('click', function () {
         window.location.reload();
     });
-    
+
+    $('#MailAddress').on('blur', function () {
+        const $this = $(this);
+
+        if (!common.checkValidityInput($this)) {
+            return false;
+        }
+    });
 }
 
 function Update_list_M_REStaff() {
@@ -332,6 +356,7 @@ function Update_list_M_REStaff() {
             REStaffName: $('#REStaffName_' + i).val(),
             REIntroduction: $('#REIntroduction_' + i).val(),
             REPassword: $('#REPassword_' + i).val(),
+            REStaffEmail: $('#REStaffEmail_' + i).val(),
             PermissionChat: $('#chkChat_' + i).is(':checked') ? "1" : "0",
             PermissionSetting: $('#chkSetting_' + i).is(':checked') ? "1" : "0",
             PermissionPlan: $('#chkPlan_' + i).is(':checked') ? "1" : "0",
