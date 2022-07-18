@@ -312,6 +312,7 @@
     <Folder Include="bin\ja\" />
     <Folder Include="bin\roslyn\" />
     <Folder Include="Original FileUpload\" />
+    <Folder Include="Tenfold\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
