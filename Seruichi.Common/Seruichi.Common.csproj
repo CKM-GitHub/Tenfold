@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AESCryption.cs" />
+    <Compile Include="AttachmentEntity.cs" />
     <Compile Include="PasswordHash.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="MessageBL.cs" />

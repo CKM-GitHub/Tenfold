@@ -91,6 +91,12 @@ namespace Seruichi.Tenfold.Web
                      "~/Content/scripts/table_header_sort.js" 
                      ));
 
+            bundles.Add(new ScriptBundle("~/bundles/t_assess_guide").Include(
+                 "~/Scripts/t_assess_guide.js",
+                  "~/Scripts/t_common.js",
+                 "~/Content/scripts/table_header_sort.js" 
+                 ));
+
             bundles.Add(new ScriptBundle("~/bundles/t_seller_account").Include(
                      "~/Scripts/t_seller_account.js",
                      "~/Scripts/t_common.js"));
