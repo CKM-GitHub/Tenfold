@@ -91,17 +91,16 @@
     <Compile Include="ReadIni.cs" />
     <Compile Include="StaticCache.cs" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-    <None Include="Settings\Seruichi.ini" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{dc43a405-2700-495f-8e91-7e1dd6804cf7}</Project>
       <Name>Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Settings\Seruichi.ini" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
