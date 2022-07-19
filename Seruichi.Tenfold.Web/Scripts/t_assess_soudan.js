@@ -2,7 +2,10 @@
 $(function () {
     _url.get_t_assess_soudan_DisplayData = common.appPath + '/t_assess_soudan/get_t_assess_soudan_DisplayData';
     _url.get_t_assess_soudan_CSVData = common.appPath + '/t_assess_soudan/get_t_assess_soudan_CSVData';
-    _url.get_Modal_infotrainData = common.appPath + '/t_reale_purchase/get_Modal_infotrainData';
+    _url.get_Modal_infotrainData = common.appPath + '/t_assess_soudan/get_Modal_infotrainData';
+    _url.get_Modal_profileData = common.appPath + '/t_assess_soudan/get_Modal_profileData';
+    _url.get_Modal_contactData = common.appPath + '/t_assess_soudan/get_Modal_contactData';
+    _url.get_Modal_fudousanData = common.appPath + '/t_assess_soudan/get_Modal_fudousanData';
     _url.insert_l_log = common.appPath + '/t_assess_soudan/Insert_l_log';
     setValidation();
     addEvents();
@@ -211,8 +214,8 @@ function Bind_DisplayData(result) {
             <td class= "text-end"> ' + (i + 1) + '</td>\
             <td><span class="' + _class + '">' + _letter + '</span><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
             <td class="text-nowrap">'+ data[i]["相談ID"] + '</td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["相談ID"] + '&' + data[i]["PurchReqDateTime"] + ' href="#" onclick="Display_Detail(this.id)"><span class="' + _snbg_color + ' pt-1 pb-1 ps-2 pe-2">' + data[i]["売主名"] + '</span></a></td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["相談ID"] + '&' + data[i]["PurchReqDateTime"] + ' href="#" onclick="Display_Detail(this.id)"><span class="' + _rnbg_color + ' pt-1 pb-1 ps-2 pe-2">' + data[i]["不動産会社"] + '</span></a></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["相談ID"] + '&' + data[i]["RealECD"] + '&' + data[i]["PurchReqDateTime"] + ' href="#" onclick="Display_Detail(this.id)"><span class="' + _snbg_color + ' pt-1 pb-1 ps-2 pe-2">' + data[i]["売主名"] + '</span></a></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["相談ID"] + '&' + data[i]["RealECD"] + '&' + data[i]["PurchReqDateTime"] + ' href="#" onclick="Display_Detail(this.id)"><span class="' + _rnbg_color + ' pt-1 pb-1 ps-2 pe-2">' + data[i]["不動産会社"] + '</span></a></td>\
             <td class="text-nowrap">'+ data[i]["管理担当"] + '</td>\
             <td class="text-nowrap">'+ data[i]["相談発生日時"] + '</td>\
             <td class="text-nowrap"> '+ data[i]["相談解決日時"] + '</td>\
@@ -234,19 +237,23 @@ function Bind_DisplayData(result) {
 
 function Display_Detail(id) {
     var PurchReqDateTime = '';
-    if (id.split('&')[3] == '') {
+    if (id.split('&')[4] == '') {
     }
     else {
-        var Date = id.split('&')[3];
-        var Time = id.split('&')[4];
+        var Date = id.split('&')[4];
+        var Time = id.split('&')[5];
         PurchReqDateTime = Date + ' ' + Time;
     }
 
     let model = {
         SellerMansionID: id.split('&')[0],
         SellerCD: id.split('&')[1],
-        ConsultID: id.split('&')[2]
+        ConsultID: id.split('&')[2],
+        RealECD: id.split('&')[3]
     };
+
+    $('#pills-home-tab').click();
+
     Bind_ModalPopupData(model, PurchReqDateTime);
 
     $('#soudan').modal('show');
@@ -256,6 +263,48 @@ function Bind_ModalPopupData(model, PurchReqDateTime) {
     common.callAjax(_url.get_Modal_infotrainData, model, function (result) {
         if (result && result.isOK) {
             Bind_Modal_ConsultData(result.data, PurchReqDateTime);
+        }
+        if (result && !result.isOK) {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                $form.getInvalidItems().get(0).focus();
+            }
+        }
+    });
+
+    common.callAjax(_url.get_Modal_profileData, model, function (result) {
+        if (result && result.isOK) {
+            Bind_Modal_ProfileData(result.data);
+        }
+        if (result && !result.isOK) {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                $form.getInvalidItems().get(0).focus();
+            }
+        }
+    });
+
+    common.callAjax(_url.get_Modal_contactData, model, function (result) {
+        if (result && result.isOK) {
+            Bind_Modal_ContactData(result.data);
+        }
+        if (result && !result.isOK) {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                $form.getInvalidItems().get(0).focus();
+            }
+        }
+    });
+
+    common.callAjax(_url.get_Modal_fudousanData, model, function (result) {
+        if (result && result.isOK) {
+            Bind_Modal_FudousanData(result.data);
         }
         if (result && !result.isOK) {
             const errors = result.data;
@@ -314,5 +363,55 @@ function Bind_Modal_ConsultData(result, PurchReqDateTime) {
         else {
             $('#ekikoutsu').append(html);
         }
+    }
+}
+
+function Bind_Modal_ProfileData(result) {
+    var data = JSON.parse(result);
+    if (data.length > 0) {
+        $('#Building_structure').text(data[0]['建物構造']);
+        $('#Year_of_construction').text(data[0]['築年数']);
+        $('#Room_No').text(data[0]['部屋番号']);
+        $('#Area').text(data[0]['専有面積']);
+        $('#Balcony_area').text(data[0]['バルコニー面積']);
+        $('#Sunlighting').text(data[0]['主採光']);
+        $('#Number_of_rooms').text(data[0]['間取り']);
+        $('#Bathrooms_and_toilets').text(data[0]['バス・トイレ']);
+        $('#land_rights').text(data[0]['土地権利']);
+        $('#present_state').text(data[0]['現況']);
+        $('#management_system').text(data[0]['管理方式']);
+        $('#Desired_time_of_sale').text(data[0]['売却希望時期']);
+        $('#rent_fee').text(data[0]['家賃'] + '円');
+        $('#management_fee').text(data[0]['管理費'] + '円');
+        $('#repair_fee').text(data[0]['修繕積立金'] + '円');
+        $('#etc_fee').text(data[0]['その他費用'] + '円');
+        $('#tax').text(data[0]['固定資産税'] + '円');
+    }
+}
+
+function Bind_Modal_ContactData(result) {
+    var data = JSON.parse(result);
+    if (data.length > 0) {
+        $('#Name_Katakana').text(data[0]['カナ名']);
+        $('#Name_Kanji').text(data[0]['漢字名']);
+        $('#pc_SellerCD').text(data[0]['ユーザーCD']);
+        $('#pc_Address').text(data[0]['PrefName'] + data[0]['CityName'] + data[0]['TownName'] + data[0]['Address1'] + data[0]['Address2']);
+        $('#pc_Phone').text(data[0]['固定電話']);
+        $('#pc_Mobile_phone').text(data[0]['携帯電話']);
+        $('#pc_mail_address').text(data[0]['メールアドレス']);
+    }
+}
+
+function Bind_Modal_FudousanData(result) {
+    var data = JSON.parse(result);
+    if (data.length > 0) {
+        $('#REStaffName').text(data[0]['REStaffName']);
+        $('#REKana').text(data[0]['REKana']);
+        $('#REName').text(data[0]['REName']);
+        $('#RealECD').text(data[0]['RealECD']);
+        $('#REAddress').text(data[0]['REAddress']);
+        $('#REHousePhone').text(data[0]['REHousePhone']);
+        $('#REFax').text(data[0]['REFax']);
+        $('#REMailAddress').text(data[0]['REMailAddress']);
     }
 }

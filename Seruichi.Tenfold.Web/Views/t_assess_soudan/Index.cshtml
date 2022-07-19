@@ -317,6 +317,7 @@
                                                             </div>
                                                         </section>
                                                     </div>
+
                                                     <div class="tab-pane fade" data-bs-keyboard="false" data-bs-backdrop="static" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                                         <hr class="navbar-divider my-3 opacity-20">
                                                         <div class="card shadow border-0">
@@ -332,7 +333,7 @@
                                                                                     <h6 class="align-self-center"><strong>建物構造</strong><br></h6>
                                                                                 </div>
                                                                                 <div class="">
-                                                                                    <span class="align-self-start">AAAAAAAAAA<br></span>
+                                                                                    <span class="align-self-start" id="Building_structure"><br></span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -341,7 +342,7 @@
                                                                                 <div class="">
                                                                                     <h6 class="align-self-center"><strong>築年月</strong><br></h6>
                                                                                 </div>
-                                                                                <div class=""><span class="align-self-start">YYYY/MM<br></span></div>
+                                                                                <div class=""><span class="align-self-start" id="Year_of_construction"><br></span></div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="d-inline-flex pb-1">
@@ -349,7 +350,7 @@
                                                                                 <div class="">
                                                                                     <h6 class="align-self-center"><strong>部屋番号</strong><br></h6>
                                                                                 </div>
-                                                                                <div class=""><span class="align-self-start">999 号室<br></span></div>
+                                                                                <div class=""><span class="align-self-start" id="Room_No"><br></span></div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="d-inline-flex pb-1">
@@ -357,7 +358,7 @@
                                                                                 <div class="">
                                                                                     <h6 class="align-self-center"><strong>専有面積</strong><br></h6>
                                                                                 </div>
-                                                                                <div class=""><span class="align-self-start">999.99 ㎡<br></span></div>
+                                                                                <div class=""><span class="align-self-start" id="Area"><br></span></div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="d-inline-flex pb-1">
@@ -365,7 +366,7 @@
                                                                                 <div class="">
                                                                                     <h6 class="align-self-center"><strong>バルコニー面積　</strong><br></h6>
                                                                                 </div>
-                                                                                <div class=""><span class="align-self-start">999.99 ㎡<br></span></div>
+                                                                                <div class=""><span class="align-self-start" id="Balcony_area"><br></span></div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="d-inline-flex pb-1">
@@ -374,7 +375,7 @@
                                                                                     <h6 class="align-self-center"><strong>主採光</strong><br></h6>
                                                                                 </div>
                                                                                 <div class="">
-                                                                                    <span class="align-self-start">AAAAAAAAAA<br></span>
+                                                                                    <span class="align-self-start" id="Sunlighting"><br></span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -385,7 +386,7 @@
                                                                                 <div class="">
                                                                                     <h6 class="align-self-center"><strong>部屋数</strong><br></h6>
                                                                                 </div>
-                                                                                <div class=""><span class="align-self-start">99部屋<br></span></div>
+                                                                                <div class=""><span class="align-self-start" id="Number_of_rooms"><br></span></div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="d-inline-flex pb-1">
@@ -394,7 +395,7 @@
                                                                                     <h6 class="align-self-center"><strong>バス・トイレ　</strong><br></h6>
                                                                                 </div>
                                                                                 <div class="">
-                                                                                    <span class="align-self-start">AAAAAAAAAA<br></span>
+                                                                                    <span class="align-self-start" id="Bathrooms_and_toilets"><br></span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -404,7 +405,7 @@
                                                                                     <h6 class="align-self-center"><strong>土地権利　</strong><br></h6>
                                                                                 </div>
                                                                                 <div class="">
-                                                                                    <span class="align-self-start">AAAAAAAAAA<br></span>
+                                                                                    <span class="align-self-start" id="land_rights"><br></span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -414,7 +415,7 @@
                                                                                     <h6 class="align-self-center"><strong>現況</strong><br></h6>
                                                                                 </div>
                                                                                 <div class="">
-                                                                                    <span class="align-self-start">AAAAAAAAAA<br></span>
+                                                                                    <span class="align-self-start" id="present_state"><br></span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -424,7 +425,7 @@
                                                                                     <h6 class="align-self-center"><strong>管理方式</strong><br></h6>
                                                                                 </div>
                                                                                 <div class="">
-                                                                                    <span class="align-self-start">AAAAAAAAAA<br></span>
+                                                                                    <span class="align-self-start" id="management_system"><br></span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -434,7 +435,7 @@
                                                                                     <h6 class="align-self-center"><strong>売却希望時期　</strong><br></h6>
                                                                                 </div>
                                                                                 <div class="">
-                                                                                    <span class="align-self-start">AAAAAAAAAA<br></span>
+                                                                                    <span class="align-self-start" id="Desired_time_of_sale"><br></span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -446,7 +447,7 @@
                                                                                     <h6 class="align-self-center"><strong>家賃</strong><br></h6>
                                                                                 </div>
                                                                                 <div class="">
-                                                                                    <span class="align-self-start">9,999,999円<br></span>
+                                                                                    <span class="align-self-start" id="rent_fee"><br></span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -456,7 +457,7 @@
                                                                                     <h6 class="align-self-center"><strong>管理賃</strong><br></h6>
                                                                                 </div>
                                                                                 <div class="">
-                                                                                    <span class="align-self-start">9,999,999円<br></span>
+                                                                                    <span class="align-self-start" id="management_fee"><br></span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -466,7 +467,7 @@
                                                                                     <h6 class="align-self-center"><strong>修繕積立金</strong><br></h6>
                                                                                 </div>
                                                                                 <div class="">
-                                                                                    <span class="align-self-start">9,999,999円<br></span>
+                                                                                    <span class="align-self-start" id="repair_fee"><br></span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -476,7 +477,7 @@
                                                                                     <h6 class="align-self-center"><strong>その他費用</strong><br></h6>
                                                                                 </div>
                                                                                 <div class="">
-                                                                                    <span class="align-self-start">9,999,999円<br></span>
+                                                                                    <span class="align-self-start" id="etc_fee"><br></span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -486,7 +487,7 @@
                                                                                     <h6 class="align-self-center"><strong>固定資産税</strong><br></h6>
                                                                                 </div>
                                                                                 <div class="">
-                                                                                    <span class="align-self-start">9,999,999円<br></span>
+                                                                                    <span class="align-self-start" id="tax"><br></span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -495,6 +496,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                     <div class="tab-pane fade" data-bs-keyboard="false" data-bs-backdrop="static" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                                                         <hr class="navbar-divider my-2 opacity-20">
                                                         <div class="card shadow border-0">
@@ -510,9 +512,9 @@
                                                                                 <img src="https://source.unsplash.com/random/150x150?Male" class="img-thumbnail rounded img-fluid" alt="Seller">
                                                                             </div>
                                                                             <div class="col-8">
-                                                                                <div class="text-muted">NameNameName1</div>
+                                                                                <div class="text-muted" id="Name_Katakana"></div>
                                                                                 <div class="text-muted">
-                                                                                    <h2>NameNameName2</h2>
+                                                                                    <h2 id="Name_Kanji"></h2>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -522,29 +524,26 @@
                                                                 <div class="justify-content-around align-items-center row">
                                                                     <div class="d-flex flex-column col-12 cap-profile-icon" id="info">
                                                                         <div class="p-md-1 text-muted">
-                                                                            <span class="fa fa-id-card bg-light p-1 rounded-circle"></span>
-                                                                            R0000008
+                                                                            <span class="fa fa-id-card bg-light p-1 rounded-circle"></span> <span id="pc_SellerCD"></span>
                                                                         </div>
                                                                         <div class="p-md-1 text-muted cap-fon-form-w500">
-                                                                            <i class="fa fa-home bg-light p-1 rounded-circle"></i>
-                                                                            AddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddress
+                                                                            <span class="fa fa-home bg-light p-1 rounded-circle"></span> <span id="pc_Address"></span>
                                                                         </div>
                                                                         <div class="p-md-1 pt-sm-1 text-muted">
-                                                                            <i class="fa fa-phone bg-light p-1 rounded-circle"></i> 02-6865-5551
+                                                                            <span class="fa fa-phone bg-light p-1 rounded-circle"></span> <span id="pc_Phone"></span>
                                                                         </div>
                                                                         <div class="p-md-1 pt-sm-1 text-muted">
-                                                                            <i class="fa fa-mobile bg-light p-1 ps-2 pe-2 rounded-circle"></i>
-                                                                            080-6865-5551
+                                                                            <span class="fa fa-mobile bg-light p-1 ps-2 pe-2 rounded-circle"></span> <span id="pc_Mobile_phone"></span>
                                                                         </div>
                                                                         <div class="p-md-1 text-muted">
-                                                                            <i class="fa fa-envelope-o bg-light p-1 rounded-circle"></i>
-                                                                            AAAA999999@9999.aaaamail.com
+                                                                            <span class="fa fa-envelope-o bg-light p-1 rounded-circle"></span> <span id="pc_mail_address"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                     <div class="tab-pane fade" data-bs-keyboard="false" data-bs-backdrop="static" id="pills-fudousan" role="tabpanel" aria-labelledby="pills-fudousan-tab">
                                                         <hr class="navbar-divider my-2 opacity-20">
                                                         <div class="card shadow border-0">
@@ -560,14 +559,13 @@
                                                                                 <img src="https://source.unsplash.com/random/150x150?Female" class="img-thumbnail rounded img-fluid" alt="Retail Admin">
                                                                             </div>
                                                                             <div class="col-8">
-                                                                                <div class="text-muted">NameNameName1</div>
                                                                                 <div class="text-muted">
-                                                                                    <h2>NameNameName2</h2>
+                                                                                    <h2 id="REStaffName"></h2>
                                                                                 </div>
                                                                                 <hr class="navbar-divider my-3 opacity-20">
-                                                                                <div class="text-muted">RealEstateCompanyName1</div>
+                                                                                <div class="text-muted" id="REKana"></div>
                                                                                 <div class="text-muted">
-                                                                                    <h3>RealEstateCompanyName2</h3>
+                                                                                    <h3 id="REName"></h3>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -577,23 +575,19 @@
                                                                 <div class="justify-content-around align-items-center row">
                                                                     <div class="d-flex flex-column col-12 cap-profile-icon" id="info">
                                                                         <div class="p-md-1 text-muted">
-                                                                            <span class="fa fa-id-card bg-light p-1 rounded-circle"></span>
-                                                                            E0000008
+                                                                            <span class="fa fa-id-card bg-light p-1 rounded-circle"></span> <span id="RealECD"></span>
                                                                         </div>
                                                                         <div class="p-md-1 text-muted cap-fon-form-w500">
-                                                                            <i class="fa fa-home bg-light p-1 rounded-circle"></i>
-                                                                            AddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddressAddress
+                                                                            <i class="fa fa-home bg-light p-1 rounded-circle"></i> <span id="REAddress"></span>
                                                                         </div>
                                                                         <div class="p-md-1 pt-sm-1 text-muted">
-                                                                            <i class="fa fa-phone bg-light p-1 rounded-circle"></i> 02-6865-5551
+                                                                            <i class="fa fa-phone bg-light p-1 rounded-circle"></i> <span id="REHousePhone"></span>
                                                                         </div>
                                                                         <div class="p-md-1 pt-sm-1 text-muted">
-                                                                            <i class="fa fa-mobile bg-light p-1 ps-2 pe-2 rounded-circle"></i>
-                                                                            080-6865-5551
+                                                                            <i class="fa fa-mobile bg-light p-1 ps-2 pe-2 rounded-circle"></i> <span id="REFax"></span>
                                                                         </div>
                                                                         <div class="p-md-1 text-muted">
-                                                                            <i class="fa fa-envelope-o bg-light p-1 rounded-circle"></i>
-                                                                            AAAA999999@9999.aaaamail.com
+                                                                            <i class="fa fa-envelope-o bg-light p-1 rounded-circle"></i> <span id="REMailAddress"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
