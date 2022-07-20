@@ -126,6 +126,7 @@
     <Compile Include="RealEstate\r_template\r_templateModel.cs" />
     <Compile Include="RealEstate\r_temp_mes\r_temp_mesModel.cs" />
     <Compile Include="Seller\a_assess_dModel.cs" />
+    <Compile Include="Seller\a_mansion_updateModel.cs" />
     <Compile Include="Seller\a_mypage_ahisModel.cs" />
     <Compile Include="Seller\a_mypage_plusModel.cs" />
     <Compile Include="Seller\a_mypage_taikaiModel.cs" />

@@ -179,6 +179,10 @@ namespace Seruichi.Seller.Web
                       "~/Content/css/Ludens-Users---25-After-Register.css",
                       "~/Content/css/Sidebar.css"
                       ));
+
+            //a_mansion_update ---------- 
+            bundles.Add(new ScriptBundle("~/bundles/a_mansion_update").Include(
+                   "~/Scripts/a_mansion_update.js"));
         }
     }
 }
