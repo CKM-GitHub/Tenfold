@@ -73,5 +73,29 @@ namespace Seruichi.Tenfold.Web.Controllers
             var dt = bl.get_Modal_infotrainData(model);
             return OKResult(DataTableToJSON(dt));
         }
+
+        [HttpPost]
+        public ActionResult get_Modal_profileData(t_assess_soudanModel model)
+        {
+            t_assess_soudanBL bl = new t_assess_soudanBL();
+            var dt = bl.get_Modal_profileData(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult get_Modal_contactData(t_assess_soudanModel model)
+        {
+            t_assess_soudanBL bl = new t_assess_soudanBL();
+            var dt = bl.get_Modal_contactData(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult get_Modal_fudousanData(t_assess_soudanModel model)
+        {
+            t_assess_soudanBL bl = new t_assess_soudanBL();
+            var dt = bl.get_Modal_fudousanData(model);
+            return OKResult(DataTableToJSON(dt));
+        }
     }
 }

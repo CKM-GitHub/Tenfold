@@ -171,7 +171,6 @@ namespace Seruichi.Seller.Web
             bundles.Add(new ScriptBundle("~/bundles/a_mypage_reglist").Include(
                    "~/Scripts/a_mypage_reglist.js"));
             bundles.Add(new StyleBundle("~/Content/css/a_mypage_reglist").Include(
-                        "~/Content/css/a_mypage_reglist.css",
                       "~/Content/css/font-awesome.min.css",
                       "~/Content/css/Soft-UI-Aside-Navbar.css",
                       "~/Content/css/style.css",
