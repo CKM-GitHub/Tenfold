@@ -20,5 +20,26 @@ namespace Seruichi.BL.Tenfold.tenfold_billing_process
             var dt = db.SelectDatatable("pr_tenfold_console_process", sqlParams);
             return dt;
         }
+
+        public bool Tenfold_Billing_Process_Insert_Update(string IpAddress)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value =  IpAddress}
+            };
+
+            try
+            {
+                DBAccess db = new DBAccess();
+                
+                return db.InsertUpdateDeleteData("pr_tenfold_billing_process", false, sqlParams);
+                
+            }
+            catch (ExclusionException)
+            {
+                //msgid = "S004"; //他端末エラー
+                return false;
+            }
+        }
     }
 }

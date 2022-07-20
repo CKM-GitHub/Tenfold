@@ -44,6 +44,30 @@ namespace Seruichi.Common
                 CommandTimeout = GetValue("Database", "CommandTimeout").ToInt32(30) //未指定時、デフォルト値
             };
         }
+        public AttachmentEntity GetAttachmentInfo()
+        {
+            try
+            {
+                string maxsize = GetValue("ATTACHMENT", "MAX_SIZE");
+                string maxfile = GetValue("ATTACHMENT", "MAX_FILE");
+                string exts = GetValue("ATTACHMENT", "EXTENSION");
+                string destin = GetValue("ATTACHMENT", "DESTINATION");
+                if (!string.IsNullOrEmpty(maxsize) && !string.IsNullOrEmpty(maxfile) && !string.IsNullOrEmpty(exts) && !string.IsNullOrEmpty("destin"))
+                    return new AttachmentEntity()
+                    {
+                        Max_Size = maxsize,
+                        Max_File = maxfile,
+                        Exts = exts,
+                        Destin=destin
+                    };
+                else
+                   return new AttachmentEntity();
+            }
+            catch
+            {
+                throw new InitialSetupException("INIファイルが正しく設定されていません。");
+            }
+        }
 
         public LogInfoEntity GetLogInfo()
         {

@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using System.Text.Json;
 
 namespace Seruichi.Tenfold.Web.Controllers
 {
@@ -148,6 +149,35 @@ namespace Seruichi.Tenfold.Web.Controllers
             else
             {
                 return val;
+            }
+        }
+        
+        protected string GetUnsupportedMediaTypeResult()
+        {
+            return JsonSerializer.Serialize(new { MessageID = "415", MessageText1 = "Unsupported Media Type", MessageIcon = "error" });
+        }
+
+        protected string GetBadRequestResult()
+        {
+            return  JsonSerializer.Serialize(new { MessageID = "400", MessageText1 = "Bad Request", MessageIcon = "error" });
+        }
+
+        protected string GetSuccessResult()
+        {
+            return JsonSerializer.Serialize(new { Code = "success" });
+        }
+        protected string GetErrorResult(string messageid, string returnValue = "")
+        {
+            if (messageid.Length > 0)
+            {
+                var message = StaticCache.GetMessage(messageid);
+                return JsonSerializer.Serialize(
+                    new { message.MessageID, message.MessageText1, message.MessageIcon, ReturnValue = returnValue });
+            }
+            else
+            {
+                return JsonSerializer.Serialize(
+                    new { MessageID = "Error", MessageText1 = "エラーが発生しました。", MessageIcon = "error", ReturnValue = returnValue });
             }
         }
     }

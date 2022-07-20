@@ -1,4 +1,5 @@
 ﻿using Models;
+using Models.Common;
 using System.Collections.Generic;
 
 namespace Seruichi.Common
@@ -8,16 +9,16 @@ namespace Seruichi.Common
         public static DBInfoEntity DBInfo { get; private set; }
 
         public static LogInfoEntity LogInfo { get; private set; }
-
+        public static AttachmentEntity AttachmentInfo{ get; private set; }
         public static Dictionary<string, MessageModel> MessageDictionary { get; private set; } 
-            = new Dictionary<string, MessageModel>();
+            = new Dictionary<string, MessageModel>(); 
 
         public static string MapsKey { get; private set; }
 
         private static string _encryptedDataCryptionKey = "";
 
         private static readonly object _lockObject = new object();
-
+      //  public static string AttachedFilePath = @"C:\Tenfold\Attachment\TF\T_assess_guide\";  //{ get; private set; }
 
         public static void SetIniInfo()
         {
@@ -25,6 +26,7 @@ namespace Seruichi.Common
             LogInfo = ini.GetLogInfo();
             DBInfo = ini.GetDBInfo();
             MapsKey = ini.GetMapsKey();
+            AttachmentInfo = ini.GetAttachmentInfo();
             _encryptedDataCryptionKey = ini.GetDataCryptionKey();
         }
 
@@ -75,6 +77,6 @@ namespace Seruichi.Common
         {
             AESCryption cypt = new AESCryption();
             return cypt.DecryptFromBase64(_encryptedDataCryptionKey, AESCryption.DefaultKey);
-        }
+        } 
     }
 }

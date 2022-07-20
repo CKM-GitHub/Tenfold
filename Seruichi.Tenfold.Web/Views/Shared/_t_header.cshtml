@@ -58,7 +58,19 @@
             <!-- Nav -->
             <div class="navbar-nav mx-lg-auto">
                 <a class="nav-item nav-link text-underline-hover" id="t_dashboard" href="@Url.Action("Index", "t_dashboard")" aria-current="page">ダッシュボード</a>
-                <a class="nav-item nav-link text-underline-hover" href="#">査定依頼</a>
+                @*<a class="nav-item nav-link text-underline-hover" href="@Url.Action("Index", "t_assess_guide")">査定依頼</a>*@
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle text-underline-hover" href="#" id="navbarDropdownMenuLink1"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        査定依頼
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                        <a class="dropdown-item shadow-hover text-underline-hover" id="t_assess_guide" href="@Url.Action("Index", "t_assess_guide")">処理待ち</a>
+                        <a class="dropdown-item shadow-hover text-underline-hover" id="t_assess_list" href="@Url.Action("Index", "t_assess_list")">査定依頼一覧</a>
+                    </div>
+                </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-underline-hover" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         管理
@@ -80,11 +92,11 @@
                     <a class="nav-item nav-link" href="@Url.Action("Logout", "t_login")">ログアウト</a>
                 </div>
                 <!-- Action
-                <div class="d-flex align-items-lg-center mt-3 mt-lg-0">
-                    <a href="#" class="btn btn-sm btn-primary w-full w-lg-auto">
+    <div class="d-flex align-items-lg-center mt-3 mt-lg-0">
+        <a href="#" class="btn btn-sm btn-primary w-full w-lg-auto">
 
-                    </a>
-                </div>-->
+        </a>
+    </div>-->
             </div>
             <div class="navbar-nav d-flex">
                 <div class="nav-item">
