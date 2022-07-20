@@ -239,48 +239,16 @@
                                                                                     }
                                                                                 </select>
                                                                             </div>
-                                                                            <div class="col-12">
+                                                                            <div id="div_comment" class="col-12">
                                                                                 <label class="form-label">メモ</label>
-                                                                                <div class="p-5 w-100 border-1 rounded overflow-y-auto" style="max-height: 150px;">
-                                                                                    <div class="row pb-3">
-                                                                                        <div class="col-12">
-                                                                                            <p class="text-secondary text-center">2022/03/20 10:20:30</p>
-                                                                                        </div>
-                                                                                        <div class="col-12">
-                                                                                            <p><strong>StaffName</strong></p>
-                                                                                            <div class="clearfix"></div>
-                                                                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-                                                                                            <p><a class="float-right btn text-white btn-danger"> <i class="fa fa-times"></i> 削除</a></p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row pb-3">
-                                                                                        <div class="col-12">
-                                                                                            <p class="text-secondary text-center">2022/03/20 10:20:30</p>
-                                                                                        </div>
-                                                                                        <div class="col-12">
-                                                                                            <p><strong>StaffName</strong></p>
-                                                                                            <div class="clearfix"></div>
-                                                                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-                                                                                            <p><a class="float-right btn text-white btn-danger"> <i class="fa fa-times"></i> 削除</a></p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row pb-3">
-                                                                                        <div class="col-12">
-                                                                                            <p class="text-secondary text-center">2022/03/20 10:20:30</p>
-                                                                                        </div>
-                                                                                        <div class="col-12">
-                                                                                            <p><strong>StaffName</strong></p>
-                                                                                            <div class="clearfix"></div>
-                                                                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-                                                                                            <p><a class="float-right btn text-white btn-danger"> <i class="fa fa-times"></i> 削除</a></p>
-                                                                                        </div>
-                                                                                    </div>
+                                                                                <div id="consultRes_comment" class="p-5 w-100 border-1 rounded overflow-y-auto" style="max-height: 150px;">
                                                                                 </div>
                                                                                 <div class="card-footer border-0 w-100 ps-0 pe-0">
                                                                                     <div class="box-footer">
                                                                                         <div class="input-group align-middle">
-                                                                                            <textarea class="form-control custom-control" rows="2"></textarea>
-                                                                                            <button id="whatever" class="btn btn-large btn-primary" name="Continue" type="submit">
+                                                                                            <span class="cap-errormsg-right" id="errorcomment"></span>
+                                                                                            <textarea id="comment" name="comment" class="form-control custom-control" rows="2"></textarea>
+                                                                                            <button id="btn_addcomment" class="btn btn-large btn-primary" name="Continue" type="submit">
                                                                                                 <span>送信</span>
                                                                                                 <i class="icon-ok" style="font-size:30px; vertical-align: middle;"></i>
                                                                                             </button>
@@ -556,7 +524,7 @@
                                                                     <div class="align-items-center col-12">
                                                                         <div class="p-md-2 p-1 row" id="info">
                                                                             <div class="col-4">
-                                                                                <img src="https://source.unsplash.com/random/150x150?Female" class="img-thumbnail rounded img-fluid" alt="Retail Admin">
+                                                                                <img id="REImage" class="img-thumbnail rounded img-fluid" alt="Retail Admin">
                                                                             </div>
                                                                             <div class="col-8">
                                                                                 <div class="text-muted">
@@ -644,15 +612,70 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#mansion">
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#soudan">
                                 戻る
                             </button>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-changed">
+                            <button type="button" id="btnSave" class="btn btn-primary">
                                 保存
                             </button>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-send">
+                            <button type="button" id="btnSave_Visitor" class="btn btn-danger">
                                 送客
                             </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-del" tabindex="-1"
+                 aria-labelledby="message-delModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-b" id="message-delModalLabel">メモを削除する</h5>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center text-danger">
+                            重要: 「メモ」を削除すると、メモは完全に削除されます。<br>復元することはできません。
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="btnCancel_Delete" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
+                            <button type="button" id="btnDelete_Comment" class="btn btn-primary">確定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-delok" tabindex="-1"
+                 aria-labelledby="message-delModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-b" id="message-delModalLabel">メモを削除しました</h5>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            メモを削除しました。「閉じる」ボタンをタップしてください。
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="btnDelete_OK" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="message-addok" tabindex="-1"
+                 aria-labelledby="message-delModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-b" id="message-delModalLabel">変更保存完了</h5>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            変更を保存しました。
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="btnAdd_OK" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
                         </div>
                     </div>
                 </div>
