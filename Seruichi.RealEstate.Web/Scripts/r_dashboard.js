@@ -4,12 +4,19 @@ $(function () {
     _url.GetREFaceImg = common.appPath + '/r_dashboard/GetREFaceImg';
     _url.GetREStaffName = common.appPath + '/r_dashboard/GetREStaffName';
     _url.GetREName = common.appPath + '/r_dashboard/GetREName';
+    _url.GetCustomerInfo = common.appPath + '/r_dashboard/GetCustomerInfo';
+    _url.GetSpecificplan = common.appPath + '/r_dashboard/GetSpecificplan';
+    _url.GetArea = common.appPath + '/r_dashboard/GetArea';
+    _url.GetWay = common.appPath + '/r_dashboard/GetWay';
+    _url.GetApartment = common.appPath + '/r_dashboard/GetApartment';
     _url.GetOldestDate = common.appPath + '/r_dashboard/GetOldestDate';
     _url.GetOldestDatecount = common.appPath + '/r_dashboard/GetOldestDatecount';
     _url.GetNewRequestData = common.appPath + '/r_dashboard/GetNewRequestData';
     _url.GetNegotiationsData = common.appPath + '/r_dashboard/GetNegotiationsData';
     _url.GetNumberOfCompletedData = common.appPath + '/r_dashboard/GetNumberOfCompletedData';
     _url.GetNumberOfDeclineData = common.appPath + '/r_dashboard/GetNumberOfDeclineData';
+
+    addEvents();
 });
 
 $(document).ready(function () {
@@ -59,6 +66,70 @@ $(document).ready(function () {
             if (length > 0) {
                 let data = dataArray[0];
                 $('#companyName').text(data.REName);
+            }
+        }
+    )
+    common.callAjaxWithLoading(_url.GetCustomerInfo, model, this,
+        function (result) {
+            const dataArray = JSON.parse(result.data);
+            const length = dataArray.length;
+
+            if (length > 0) {
+                let data = dataArray[0];
+                $('#sendCustomer').text(data.total);
+                $('#reaminCusAllowance').text(data.IntroTimes);
+            }
+        }
+    )
+    common.callAjaxWithLoading(_url.GetSpecificplan, model, this,
+        function (result) {
+            const dataArray = JSON.parse(result.data);
+            const length = dataArray.length;
+
+            if (length > 0) {
+                let data = dataArray[0];
+                $('#planName').text(data.ManPlanName);
+                $('#MaxnumRegistration').text(data.MaxNumber);
+                $('#publishRegistration').text(data.TourokuSu);
+            }
+        }
+    )
+    common.callAjaxWithLoading(_url.GetArea, model, this,
+        function (result) {
+            const dataArray = JSON.parse(result.data);
+            const length = dataArray.length;
+            if (length > 0) {
+                let data = dataArray[0];
+                if (data.Num != 0)
+                    $('#btnAddress').prop("disabled", false);
+                else 
+                    $('#btnAddress').prop("disabled", true);
+            }
+        }
+    )
+    common.callAjaxWithLoading(_url.GetWay, model, this,
+        function (result) {
+            const dataArray = JSON.parse(result.data);
+            const length = dataArray.length;
+            if (length > 0) {
+                let data = dataArray[0];
+                if (data.Num != 0)
+                    $('#btnrailway').prop("disabled", false);
+                else
+                    $('#btnrailway').prop("disabled", true);
+            }
+        }
+    )
+    common.callAjaxWithLoading(_url.GetApartment, model, this,
+        function (result) {
+            const dataArray = JSON.parse(result.data);
+            const length = dataArray.length;
+            if (length > 0) {
+                let data = dataArray[0];
+                if (data.Num != 0)
+                    $('#btnregedlist').prop("disabled", false);
+                else
+                    $('#btnregedlist').prop("disabled", true);
             }
         }
     )
@@ -138,3 +209,20 @@ $(document).ready(function () {
     )
 
 });
+
+function addEvents() {
+    common.bindValidationEvent('#form1', '');
+
+    $('#btnAddress').on('click', function () {
+        //window.location.href = common.appPath + '/r_asmc_address/Index';
+        alert("Go to r_asmc_address Form")
+    });
+
+    $('#btnrailway').on('click', function () {
+        window.location.href = common.appPath + '/r_asmc_railway/Index';
+    });
+
+    $('#btnregedlist').on('click', function () {
+        window.location.href = common.appPath + '/r_asmc_ms_reged_list/Index';
+    });
+}

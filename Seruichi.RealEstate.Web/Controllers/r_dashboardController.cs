@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Models.RealEstate.r_dashboard;
 using Seruichi.BL.RealEstate.r_dashboard;
+using Seruichi.BL.RealEstate.r_asmc;
 using System.Data;
 
 namespace Seruichi.RealEstate.Web.Controllers
@@ -17,7 +18,10 @@ namespace Seruichi.RealEstate.Web.Controllers
         // GET: r_dashboard
         public ActionResult Index()
         {
+            r_asmcBL bl = new r_asmcBL();
+            ViewBag.MapRegions = bl.GetRegions();
             return View();
+           
         }
 
         [HttpPost]
@@ -48,6 +52,56 @@ namespace Seruichi.RealEstate.Web.Controllers
             model.RealECD = base.GetOperator("RealECD");
             r_dashboardBL bl = new r_dashboardBL();
             var dt = bl.GetREName(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult GetCustomerInfo(r_dashboardModel model)
+        {
+            //model.RealECD = strRealECD;
+            model.RealECD = base.GetOperator("RealECD");
+            r_dashboardBL bl = new r_dashboardBL();
+            var dt = bl.GetCustomerInfo(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult GetSpecificplan(r_dashboardModel model)
+        {
+            //model.RealECD = strRealECD;
+            model.RealECD = base.GetOperator("RealECD");
+            r_dashboardBL bl = new r_dashboardBL();
+            var dt = bl.GetSpecificplan(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult GetArea(r_dashboardModel model)
+        {
+            //model.RealECD = strRealECD;
+            model.RealECD = base.GetOperator("RealECD");
+            r_dashboardBL bl = new r_dashboardBL();
+            var dt = bl.GetArea(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult GetWay(r_dashboardModel model)
+        {
+            //model.RealECD = strRealECD;
+            model.RealECD = base.GetOperator("RealECD");
+            r_dashboardBL bl = new r_dashboardBL();
+            var dt = bl.GetWay(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult GetApartment(r_dashboardModel model)
+        {
+            //model.RealECD = strRealECD;
+            model.RealECD = base.GetOperator("RealECD");
+            r_dashboardBL bl = new r_dashboardBL();
+            var dt = bl.GetApartment(model);
             return OKResult(DataTableToJSON(dt));
         }
 
