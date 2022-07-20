@@ -84,7 +84,9 @@
     <Compile Include="Tenfold\tenfold_billing_process\tenfold_billing_processBL.cs" />
     <Compile Include="Tenfold\tenfold_daily_process\tenfold_daily_processBL.cs" />
     <Compile Include="Tenfold\t_admin\t_adminBL.cs" />
+    <Compile Include="Tenfold\t_assess_list\t_assess_listBL.cs" />
     <Compile Include="Tenfold\t_assess_soudan\t_assess_soudanBL.cs" />
+    <Compile Include="Tenfold\t_assess_guide\t_assess_guideBL.cs" />
     <Compile Include="Tenfold\t_dashboard\t_dashboardBL.cs" />
     <Compile Include="Tenfold\t_mansion\t_mansionBL.cs" />
     <Compile Include="Tenfold\t_mansion_list\t_mansion_listBL.cs" />
@@ -200,10 +202,15 @@
     <Content Include="Database\StoredProcedure\pr_r_asmc_address_Select_M_Region.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_address_Select_Towns_by_Cities.sql" />
     <Content Include="Database\StoredProcedure\pr_r_contact_Insert_D_Contact.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectCountFromV_RECondAreaSec.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectCountFromV_RECondLineSta.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectCountFromV_RECondMan.sql" />
     <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectForOldestDate.sql" />
     <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectForOldestDatecount.sql" />
     <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectForREName.sql" />
     <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectForREStaffName.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectForSendCustomerInfo.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectForSpecificPlan.sql" />
     <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectNumForNegotiations.sql" />
     <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectNumForNewRequest.sql" />
     <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectNumForNumberOfCompleted.sql" />
@@ -220,6 +227,7 @@
     <Content Include="Database\StoredProcedure\pr_r_temp_mes_Select_M_REMessage_By_RealECD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_temp_mes_Update_M_REMessage.sql" />
     <Content Include="Database\StoredProcedure\pr_Select_M_Seller_By_SellerCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_tenfold_billing_process.sql" />
     <Content Include="Database\StoredProcedure\pr_tenfold_daily_process_Insert_M_REMoAreaPlan.sql" />
     <Content Include="Database\StoredProcedure\pr_tenfold_daily_process_Insert_M_REMoAreaPlanSec.sql" />
     <Content Include="Database\StoredProcedure\pr_tenfold_daily_process_Insert_M_REMoIntroAmount.sql" />

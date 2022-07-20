@@ -36,6 +36,24 @@ function Bind_Company_Data() {
         });
     }
 }
+function addNaShi() {
+    var html = '\
+                    <div class="card m-1 p-0 count-list-no">\
+                        <div class="card-body mt-1 pt-1 mb-1 pb-1">\
+                            <div class="d-flex justify-content-between">\
+                                <div class="d-flex flex-row align-items-center">\
+                                    <div class="ms-3">\
+                                        <p class="small mb-0" style="color:red;">添付ファイルなし</p>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </div>\
+                    </div>';
+    $('#FileList').html('');
+    $('#FileList').append(html);
+    $('#inputFile').val(null);
+}
+
 
 function Bind_CompanyInfo(model, result) {
     var data = JSON.parse(result);
@@ -104,9 +122,99 @@ function Bind_SellerInfo(model, result) {
     }
 }
 //End script code of t_reale_Info.cshtml
+function isNullAndUndef(variable) {
 
+    return (variable !== null && variable !== undefined);
+}
 //Start script code of t_reale_Modal.cshtml -> Row No. 64 ~ 
-function Bind_ModalDetails(id) {
+function Bind_ModalDetails(id, requestInfo) {
+    if (requestInfo) {
+        $('#req_MansionName').text(requestInfo.split('&')[0]);
+        $('#req_RoomNumber').text(' ' + requestInfo.split('&')[1]);
+        $('#req_Address').text(requestInfo.split('&')[2]);
+        $('#req_Purchase').text('買取依頼日時 ' + requestInfo.split('&')[3]);
+
+        $('#req_ddlstatus').val(requestInfo.split('&')[4]);
+        $('#req_ddlStaff').val(requestInfo.split('&')[5]);//req_SendDate
+
+        $('#req_SendDate').val(requestInfo.split('&')[6]);//req_SendDate
+        $('#req_SendCompany').val(requestInfo.split('&')[7]);//req_SendDate
+        $('#req_remarks').val(requestInfo.split('&')[8]);//req_SendDate
+
+
+        if (requestInfo.split('&')[9] === 'null')
+            $('#Chk_req_Name_Kanji').prop('checked', true);
+        else
+            $('#Chk_req_Name_Kanji').prop('checked', false);
+
+
+        if (requestInfo.split('&')[10] === 'null')
+            $('#Chk_req_pc_Address').prop('checked', true);
+
+        else
+            $('#Chk_req_pc_Address').prop('checked', false);
+
+
+        if (requestInfo.split('&')[11] === 'null')
+            $('#Chk_req_pc_phone').prop('checked', true);
+        else
+            $('#Chk_req_pc_phone').prop('checked', false);
+
+        if (requestInfo.split('&')[12] === 'null')
+            $('#Chk_req_pc_mail_address').prop('checked', true);
+        else
+            $('#Chk_req_pc_mail_address').prop('checked', false);
+
+        if (requestInfo.split('&')[13] === 'null')
+            $('#Chk_CopyInfo').prop('checked', true);
+        else
+            $('#Chk_CopyInfo').prop('checked', false);
+        $('#hdn_AssReID').val((requestInfo.split('&')[14]));
+
+        let model1 = {
+            IntroReqID: $('#hdn_AssReID').val()
+        }
+        common.callAjax(_url.get_t_assess_guide_AttachFiles, model1, function (result) {
+            if (result && result.isOK) {
+                var data = JSON.parse(result.data)
+                if (data.length) {
+                    var html = '';
+                    for (var i = 0; i < data.length; i++) {
+                        var ext = data[i]["AttachFileName"] + data[i]["AttachFileType"];
+                        var idDelete = 'attach_' + data[i]["IntroReqID"] + '_' + data[i]["AttachSEQ"] + '_' + data[i]["AttachFileUserCD"];
+                        var idDown = 'down_' + data[i]["IntroReqID"] + '_' + data[i]["AttachSEQ"] + '_' + data[i]["AttachFileUserCD"];
+
+                        html += '<div class="card m-1 p-0 count-list-original" >\
+                <div class="card-body mt-1 pt-1 mb-1 pb-1">\
+                    <div class="d-flex justify-content-between">\
+                        <div class="d-flex flex-row align-items-center">\
+                            <div class="ms-3">\
+                                <a href="#" id="'+ idDown +'" onclick="downloadAttach(this)" class="text-underline">\
+                                    <h5>'+ ext + '</h5>\
+                                </a>\
+                                <p class="small mb-0">アップロード日時：'+ data[i]["AttachFileDateTime1"] + '</p>\
+                                <p class="small mb-0"> ('+ data[i]["AttachFileSize"] + ')</p>\
+                            </div>\
+                        </div>\
+                        <div class="d-flex flex-row align-items-center">\
+                            <a href="#" class="text-secondary" id="'+ idDelete + '" onclick="CloseTemp(this)"><i class="fa fa-close"></i></a>\
+                        </div>\
+                    </div>\
+                </div></div>';
+                    }
+                    $('#list_AttachItem').val('');
+                    $('#FileList').html('');
+                    $('#FileList').append(html);
+                }
+                else {
+                    addNaShi();
+                }
+            }
+        });
+
+    }
+
+    
     var DeepAssDateTime = '';
     if (id.split('&')[3] == '') {
     }
@@ -261,6 +369,13 @@ function Bind_Modal_ContactData(result) {
         $('#pc_Phone').text(data[0]['固定電話']);
         $('#pc_Mobile_phone').text(data[0]['携帯電話']);
         $('#pc_mail_address').text(data[0]['メールアドレス']);
+
+        //request
+        $('#req_Name_Kanji').text(data[0]['漢字名']);
+        $('#req_pc_Address').text(data[0]['PrefName'] + data[0]['CityName'] + data[0]['TownName'] + data[0]['Address1'] + data[0]['Address2']);
+        $('#req_pc_Phone').text(data[0]['固定電話']);
+        $('#req_pc_Mobile_phone').text(data[0]['携帯電話']);
+        $('#req_pc_mail_address').text(data[0]['メールアドレス']);
     }
 }
 

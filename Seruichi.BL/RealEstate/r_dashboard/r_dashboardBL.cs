@@ -53,6 +53,71 @@ namespace Seruichi.BL.RealEstate.r_dashboard
             return dt;
         }
 
+        public DataTable GetCustomerInfo(r_dashboardModel model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@realECD", SqlDbType.VarChar){ Value = model.RealECD.ToString() }
+
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_dashboard_SelectForSendCustomerInfo", sqlParams);
+            return dt;
+        }
+
+        public DataTable GetSpecificplan(r_dashboardModel model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@realECD", SqlDbType.VarChar){ Value = model.RealECD.ToString() }
+
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_dashboard_SelectForSpecificPlan", sqlParams);
+            return dt;
+        }
+
+        public DataTable GetArea(r_dashboardModel model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@realECD", SqlDbType.VarChar){ Value = model.RealECD.ToString() }
+
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_dashboard_SelectCountFromV_RECondAreaSec", sqlParams);
+            return dt;
+        }
+
+        public DataTable GetWay(r_dashboardModel model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@realECD", SqlDbType.VarChar){ Value = model.RealECD.ToString() }
+
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_dashboard_SelectCountFromV_RECondLineSta", sqlParams);
+            return dt;
+        }
+
+        public DataTable GetApartment(r_dashboardModel model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@realECD", SqlDbType.VarChar){ Value = model.RealECD.ToString() }
+
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_dashboard_SelectCountFromV_RECondMan", sqlParams);
+            return dt;
+        }
+
         public DataTable GetOldestDate(r_dashboardModel model)
         {
             var sqlParams = new SqlParameter[]

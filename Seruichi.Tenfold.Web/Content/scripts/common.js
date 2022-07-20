@@ -47,6 +47,7 @@ const commonApiUrl = {
     getDropDownListItemsOfStation: "/api/CommonApi/GetDropDownListItemsOfStation",
     checkBirthday: "/api/CommonApi/CheckBirthday",
     getNearestStations: "/api/CommonApi/GetNearestStations",
+   
 }
 
 const regexPattern = {
@@ -252,9 +253,10 @@ const common = {
             timeout: 100000,
         }).done(function (data) {
             if (successCallback) {
+                
                 successCallback(data);
             }
-        }).fail(function (XMLHttpRequest, status, e) {
+        }).fail(function (XMLHttpRequest, status, e) { 
             common.redirectErrorPage(XMLHttpRequest.status);
             if (failCallback) {
                 failCallback();
