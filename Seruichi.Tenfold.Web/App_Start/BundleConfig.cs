@@ -141,6 +141,10 @@ namespace Seruichi.Tenfold.Web
                     "~/Scripts/t_reale_invoice.js",
                     "~/Scripts/t_common.js",
                     "~/Content/scripts/table_header_sort.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/t_assess_list").Include(
+                   "~/Scripts/t_assess_list.js",
+                   "~/Content/scripts/table_header_sort.js"));
         }
     }
 }

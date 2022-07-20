@@ -83,6 +83,7 @@
     <Compile Include="Tenfold\tenfold_billing_process\tenfold_billing_processBL.cs" />
     <Compile Include="Tenfold\tenfold_daily_process\tenfold_daily_processBL.cs" />
     <Compile Include="Tenfold\t_admin\t_adminBL.cs" />
+    <Compile Include="Tenfold\t_assess_list\t_assess_listBL.cs" />
     <Compile Include="Tenfold\t_assess_soudan\t_assess_soudanBL.cs" />
     <Compile Include="Tenfold\t_assess_guide\t_assess_guideBL.cs" />
     <Compile Include="Tenfold\t_dashboard\t_dashboardBL.cs" />

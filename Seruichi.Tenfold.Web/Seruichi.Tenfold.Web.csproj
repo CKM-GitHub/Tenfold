@@ -180,6 +180,7 @@
     <Compile Include="Controllers\Common\CustomException.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
     <Compile Include="Controllers\t_adminController.cs" />
+    <Compile Include="Controllers\t_assess_listController.cs" />
     <Compile Include="Controllers\t_assess_soudanController.cs" />
     <Compile Include="Controllers\t_assess_guideController.cs" />
     <Compile Include="Controllers\t_dashboardController.cs" />
@@ -263,6 +264,7 @@
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
     <Content Include="Scripts\t_admin.js" />
+    <Content Include="Scripts\t_assess_list.js" />
     <Content Include="Scripts\t_assess_soudan.js" />
     <Content Include="Scripts\t_assess_guide.js" />
     <Content Include="Scripts\t_common.js" />
@@ -355,6 +357,7 @@
     <Content Include="Views\t_assess_guide\Index.cshtml" />
     <Content Include="Views\Shared\t_assess_submenu.cshtml" />
     <Content Include="Views\Shared\t_assess_guide_popup.cshtml" />
+    <Content Include="Views\t_assess_list\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
