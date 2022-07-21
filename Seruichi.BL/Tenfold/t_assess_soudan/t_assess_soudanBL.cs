@@ -154,6 +154,7 @@ namespace Seruichi.BL.Tenfold.t_assess_soudan
             {
                 new SqlParameter("@Range", SqlDbType.VarChar){ Value = model.Range.ToStringOrNull() },
                 new SqlParameter("@M_PIC", SqlDbType.VarChar){ Value = model.M_PIC.ToStringOrNull() },
+                new SqlParameter("@type", SqlDbType.VarChar){ Value = model.type.ToStringOrNull() },
                 new SqlParameter("@ConsultID", SqlDbType.VarChar){ Value = model.ConsultID.ToStringOrNull() },
                 new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.LoginID.ToStringOrNull() },
                 new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.LoginName.ToStringOrNull() },
