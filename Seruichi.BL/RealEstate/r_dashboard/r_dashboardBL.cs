@@ -53,6 +53,33 @@ namespace Seruichi.BL.RealEstate.r_dashboard
             return dt;
         }
 
+        
+        public DataTable GetRegionCDbyPref(r_dashboardModel model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@prefCD", SqlDbType.VarChar){ Value = model.PrefCD.ToString() }
+
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_dashboard_selectRegionbyM_Pref", sqlParams);
+            return dt;
+        }
+
+        public DataTable GetRegionCDbyStation(r_dashboardModel model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@StationCD", SqlDbType.VarChar){ Value = model.StationCD.ToString() }
+
+             };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_r_dashboard_selectRegionbyM_Station", sqlParams);
+            return dt;
+        }
+
         public DataTable GetCustomerInfo(r_dashboardModel model)
         {
             var sqlParams = new SqlParameter[]

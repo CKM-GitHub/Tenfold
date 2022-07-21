@@ -15,6 +15,9 @@ $(function () {
     _url.GetNegotiationsData = common.appPath + '/r_dashboard/GetNegotiationsData';
     _url.GetNumberOfCompletedData = common.appPath + '/r_dashboard/GetNumberOfCompletedData';
     _url.GetNumberOfDeclineData = common.appPath + '/r_dashboard/GetNumberOfDeclineData';
+    _url.GetRegionCDbyPref = common.appPath + '/r_dashboard/GetRegionCDbyPref';
+    _url.GetRegionCDbyStation = common.appPath + '/r_dashboard/GetRegionCDbyStation';
+    
 
     addEvents();
 });
@@ -26,7 +29,7 @@ $(document).ready(function () {
         RealECD: null,
         REStaffCD: null,
         ConfDateTime: null,
-        Oldestdate:null
+        Oldestdate: null,
     };
     common.callAjaxWithLoading(_url.GetREFaceImg, model, this,
         function (result) {
@@ -100,10 +103,14 @@ $(document).ready(function () {
             const length = dataArray.length;
             if (length > 0) {
                 let data = dataArray[0];
-                if (data.Num != 0)
+                if (data.Num != 0) {
                     $('#btnAddress').prop("disabled", false);
+                    $('#textdanger').text("有効期限切れ間近の査定条件があります！");
+                    $('#btnAddress').val(data.PrefCD);
+                }
                 else 
                     $('#btnAddress').prop("disabled", true);
+                    
             }
         }
     )
@@ -113,8 +120,11 @@ $(document).ready(function () {
             const length = dataArray.length;
             if (length > 0) {
                 let data = dataArray[0];
-                if (data.Num != 0)
+                if (data.Num != 0) {
                     $('#btnrailway').prop("disabled", false);
+                    $('#textdanger').text("有効期限切れ間近の査定条件があります！");
+                    $('#btnrailway').val(data.StationCD);
+                }
                 else
                     $('#btnrailway').prop("disabled", true);
             }
@@ -126,8 +136,10 @@ $(document).ready(function () {
             const length = dataArray.length;
             if (length > 0) {
                 let data = dataArray[0];
-                if (data.Num != 0)
+                if (data.Num != 0) {
                     $('#btnregedlist').prop("disabled", false);
+                    $('#textdanger').text("有効期限切れ間近の査定条件があります！");
+                }
                 else
                     $('#btnregedlist').prop("disabled", true);
             }
@@ -214,12 +226,35 @@ function addEvents() {
     common.bindValidationEvent('#form1', '');
 
     $('#btnAddress').on('click', function () {
-        //window.location.href = common.appPath + '/r_asmc_address/Index';
-        alert("Go to r_asmc_address Form")
+        let model = {
+            prefCD: $('#btnAddress').val(),
+        };
+        common.callAjaxWithLoading(_url.GetRegionCDbyPref, model, this,
+            function (result) {
+                const dataArray = JSON.parse(result.data);
+                const length = dataArray.length;
+                if (length > 0) {
+                    let data = dataArray[0];
+                    window.location.href = common.appPath + '/r_asmc_address/Index?rc=' + data.RegionCD;
+                }
+            }
+        )
     });
 
     $('#btnrailway').on('click', function () {
-        window.location.href = common.appPath + '/r_asmc_railway/Index';
+        let model = {
+            StationCD: $('#btnrailway').val(),
+        };
+        common.callAjaxWithLoading(_url.GetRegionCDbyStation, model, this,
+            function (result) {
+                const dataArray = JSON.parse(result.data);
+                const length = dataArray.length;
+                if (length > 0) {
+                    let data = dataArray[0];
+                    window.location.href = common.appPath + '/r_asmc_railway/Index?rc=' + data.RegionCD;
+                }
+            }
+        )
     });
 
     $('#btnregedlist').on('click', function () {
