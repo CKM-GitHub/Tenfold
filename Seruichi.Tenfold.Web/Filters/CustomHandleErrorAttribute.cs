@@ -46,24 +46,29 @@ namespace Seruichi.Tenfold.Web
 
         private void HandleAjaxRequestException(ExceptionContext filterContext, int statusCode)
         {
-            if (filterContext.ExceptionHandled)
+            try
             {
-                return;
-            }
-
-            filterContext.ExceptionHandled = true;
-            filterContext.HttpContext.Response.Clear();
-            filterContext.HttpContext.Response.StatusCode = statusCode == 0 ? (int)HttpStatusCode.InternalServerError : statusCode;
-            filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
-            filterContext.Result = new JsonResult
-            {
-                Data = new
+                if (filterContext.ExceptionHandled)
                 {
-                    Message = filterContext.Exception.ToString(),
-                    Message2 = filterContext.ToString()
-                },
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
+                    return;
+                }
+                filterContext.HttpContext.Response.SuppressFormsAuthenticationRedirect = true;
+
+                filterContext.ExceptionHandled = true;
+                filterContext.HttpContext.Response.Clear();
+                filterContext.HttpContext.Response.StatusCode = statusCode == 0 ? (int)HttpStatusCode.InternalServerError : statusCode;
+                filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
+                filterContext.Result = new JsonResult
+                {
+                    Data = new
+                    {
+                        Message = filterContext.Exception.ToString(),
+                        Message2 = filterContext.ToString()
+                    },
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+            catch { }
         }
     }
 }

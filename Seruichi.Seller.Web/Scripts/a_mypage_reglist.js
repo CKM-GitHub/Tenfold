@@ -97,7 +97,7 @@ function Bind_tbody(result) {
             <button type="button"   class="btn btn-primary" data-bs-target="#modal-sateitype"  data-bs-toggle="modal"\
              "'+ _enable + '"> 査定</button> </a>\
             </td>\
-             <td class="text-start"><a class="text-heading font-semibold text-decoration-underline" href="'+ common.appPath + '/a_mansion_update/Index?Sellermansioncd=' + data[i]["SellerMansionID"] + '" id=' + data[i]["SellerMansionID"] + '&a_mansion_update> ' + data[i]["マンション名＆部屋番号"] + '</a></td>\
+             <td class="text-start"><a class="text-heading font-semibold text-decoration-underline" href="'+ common.appPath + '/a_mansion_update/Index?sellerMansionID=' + data[i]["SellerMansionID"] + '" id=' + data[i]["SellerMansionID"] + '&a_mansion_update> ' + data[i]["マンション名＆部屋番号"] + '</a></td>\
              <td class="text-start" >' + data[i]["登録日時"] + ' </td >\
              <td class="text-end"> <a onclick="setIdMansion('+ param + ')" href="#" data-bs-toggle="modal"\
                 data-bs-target="#exampleModal"\

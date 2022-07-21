@@ -198,6 +198,7 @@
     <Compile Include="Controllers\t_seller_accountController.cs" />
     <Compile Include="Controllers\t_seller_assessmentController.cs" />
     <Compile Include="Controllers\t_mansion_newController.cs" />
+    <Compile Include="Controllers\t_seller_configController.cs" />
     <Compile Include="Controllers\t_seller_listController.cs" />
     <Compile Include="Controllers\t_seller_mansionController.cs" />
     <Compile Include="Controllers\t_seller_memoController.cs" />
@@ -358,6 +359,7 @@
     <Content Include="Views\Shared\t_assess_submenu.cshtml" />
     <Content Include="Views\Shared\t_assess_guide_popup.cshtml" />
     <Content Include="Views\t_assess_list\Index.cshtml" />
+    <Content Include="Views\t_seller_config\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

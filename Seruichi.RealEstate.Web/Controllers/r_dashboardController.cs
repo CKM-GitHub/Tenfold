@@ -86,6 +86,22 @@ namespace Seruichi.RealEstate.Web.Controllers
         }
 
         [HttpPost]
+        public ActionResult GetRegionCDbyPref(r_dashboardModel model)
+        {
+            r_dashboardBL bl = new r_dashboardBL();
+            var dt = bl.GetRegionCDbyPref(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult GetRegionCDbyStation(r_dashboardModel model)
+        {
+            r_dashboardBL bl = new r_dashboardBL();
+            var dt = bl.GetRegionCDbyStation(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
         public ActionResult GetWay(r_dashboardModel model)
         {
             //model.RealECD = strRealECD;

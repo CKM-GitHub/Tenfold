@@ -19,6 +19,8 @@ namespace Models.RealEstate.r_dashboard
         //public byte PermissionInvoice { get; set; }
         public DateTime ConfDateTime { get; set; }
         //public string Oldestdate { get; set; }
-       
+        public String PrefCD { get; set; }
+        public String StationCD { get; set; }
+
     }
 }

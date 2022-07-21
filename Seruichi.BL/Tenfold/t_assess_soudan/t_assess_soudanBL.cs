@@ -76,11 +76,27 @@ namespace Seruichi.BL.Tenfold.t_assess_soudan
         {
             var sqlParams = new SqlParameter[]
             {
-                new SqlParameter("@SellerMansionID", SqlDbType.VarChar){ Value = model.SellerMansionID.ToStringOrNull() },
-                new SqlParameter("@ConsultID", SqlDbType.VarChar){ Value = model.ConsultID.ToStringOrNull() }
+                new SqlParameter("@SellerMansionID", SqlDbType.VarChar){ Value = model.SellerMansionID.ToStringOrNull() }
             };
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_t_assess_soudan_get_Modal_infotrainData", sqlParams);
+            var dt = db.SelectDatatable("pr_tenfold_get_Modal_HomeData", sqlParams);
+            return dt;
+        }
+
+        public DataTable modify_Modal_consultResData(t_assess_soudanModel model)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@ResponseSEQ", SqlDbType.VarChar){ Value = model.ResponseSEQ.ToStringOrNull() },
+                new SqlParameter("@ConsultID", SqlDbType.VarChar){ Value = model.ConsultID.ToStringOrNull() },
+                new SqlParameter("@type", SqlDbType.VarChar){ Value = model.type.ToStringOrNull() },
+                new SqlParameter("@comment", SqlDbType.VarChar){ Value = model.comment.ToStringOrNull() },
+                new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.LoginID.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.LoginName.ToStringOrNull() },
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress }
+            };
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_assess_soudan_Modify_ConsultResData", sqlParams);
             return dt;
         }
 
@@ -129,6 +145,23 @@ namespace Seruichi.BL.Tenfold.t_assess_soudan
 
             DBAccess db = new DBAccess();
             var dt = db.SelectDatatable("pr_tenfold_get_Modal_FudousanData", sqlParams);
+            return dt;
+        }
+
+        public DataTable modify_consultData(t_assess_soudanModel model)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@Range", SqlDbType.VarChar){ Value = model.Range.ToStringOrNull() },
+                new SqlParameter("@M_PIC", SqlDbType.VarChar){ Value = model.M_PIC.ToStringOrNull() },
+                new SqlParameter("@type", SqlDbType.VarChar){ Value = model.type.ToStringOrNull() },
+                new SqlParameter("@ConsultID", SqlDbType.VarChar){ Value = model.ConsultID.ToStringOrNull() },
+                new SqlParameter("@LoginID", SqlDbType.VarChar){ Value = model.LoginID.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.LoginName.ToStringOrNull() },
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress }
+            };
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_assess_soudan_Modify_ConsultData", sqlParams);
             return dt;
         }
     }

@@ -1,11 +1,15 @@
 ﻿const _url = {};
+const _session = {};
 $(function () {
     _url.get_t_assess_soudan_DisplayData = common.appPath + '/t_assess_soudan/get_t_assess_soudan_DisplayData';
     _url.get_t_assess_soudan_CSVData = common.appPath + '/t_assess_soudan/get_t_assess_soudan_CSVData';
     _url.get_Modal_infotrainData = common.appPath + '/t_assess_soudan/get_Modal_infotrainData';
+    _url.get_Modal_consultResData = common.appPath + '/t_assess_soudan/get_Modal_consultResData';
+    _url.modify_Modal_consultResData = common.appPath + '/t_assess_soudan/modify_Modal_consultResData';
     _url.get_Modal_profileData = common.appPath + '/t_assess_soudan/get_Modal_profileData';
     _url.get_Modal_contactData = common.appPath + '/t_assess_soudan/get_Modal_contactData';
     _url.get_Modal_fudousanData = common.appPath + '/t_assess_soudan/get_Modal_fudousanData';
+    _url.modify_consultData = common.appPath + '/t_assess_soudan/modify_consultData';
     _url.insert_l_log = common.appPath + '/t_assess_soudan/Insert_l_log';
     setValidation();
     addEvents();
@@ -28,12 +32,19 @@ function setValidation() {
         .addvalidation_maxlengthCheck(50);
 
     $('.form-check-input')
-        .addvalidation_errorElement("#CheckBoxError")
+        .addvalidation_errorElement("#errorCheckBox")
         .addvalidation_checkboxlenght(); //E112
+
+    $('.comment')
+        .addvalidation_errorElement("#errorcomment")
+        .addvalidation_reqired()
+        .addvalidation_maxlengthCheck(2000)
+        .addvalidation_singlebyte_doublebyte();
 }
 
 function addEvents() {
     common.bindValidationEvent('#form1', '');
+    common.bindValidationEvent('#div_comment', '');
 
     $('#StartDate, #EndDate').on('change', function () {
         const $this = $(this), $start = $('#StartDate').val(), $end = $('#EndDate').val();
@@ -76,23 +87,31 @@ function addEvents() {
     }).change();
 
     $('#btnToday').on('click', function () {
+        $("#StartDate").hideError();
+        $("#EndDate").hideError();
         let today = common.getToday();
         $('#StartDate').val(today);
         $('#EndDate').val(today);
     });
     $('#btnThisWeek').on('click', function () {
+        $("#StartDate").hideError();
+        $("#EndDate").hideError();
         let start = common.getDayaweekbeforetoday();
         let end = common.getToday();
         $('#StartDate').val(start);
         $('#EndDate').val(end);
     });
     $('#btnThisMonth').on('click', function () {
+        $("#StartDate").hideError();
+        $("#EndDate").hideError();
         let today = common.getToday();
         let firstDay = common.getFirstDayofMonth();
         $('#StartDate').val(firstDay);
         $('#EndDate').val(today);
     });
     $('#btnLastMonth').on('click', function () {
+        $("#StartDate").hideError();
+        $("#EndDate").hideError();
         let firstdaypremonth = common.getFirstDayofPreviousMonth();
         let lastdaypremonth = common.getLastDayofPreviousMonth();
         $('#StartDate').val(firstdaypremonth);
@@ -155,6 +174,55 @@ function addEvents() {
             }
         )
     });
+
+    $('#btn_addcomment').on('click', function () {
+        $form = $('#div_comment').hideChildErrors();
+        if (!common.checkValidityOnSave('#div_comment')) {
+            $form.getInvalidItems().get(0).focus();
+            return false;
+        }
+        var model = {
+            ConsultID: _session.ConsultID,
+            comment: $('textarea#comment').val(),
+            type: 'insert'
+        }
+        Add_Comment(model);
+        $form = $('#div_comment').hideChildErrors();
+    });
+
+    $('#btnAdd_OK').on('click', function () {
+        $('#btnProcess').trigger('click');
+    });
+
+    $('#btnSave').on('click', function () {
+        var model = {
+            Range: $('#status').val(),
+            M_PIC: $('#pic').val(),
+            ConsultID: _session.ConsultID,
+            type: 'save'
+        }
+        modify_ConsultData(model);
+    });
+
+    $('#note_check').on('change', function () {
+        this.value = this.checked ? 1 : 0;
+        if (this.value == 1)
+            $('#btnSend').removeClass('disabled');
+        else
+            $('#btnSend').addClass('disabled');
+    });
+
+    $('#btnSend').on('click', function () {
+        var model = {
+            ConsultID: _session.ConsultID,
+            type: 'send'
+        }
+        modify_ConsultSendData(model);
+    });
+
+    $('#btnSend_OK').on('click', function () {
+        $('#btnProcess').trigger('click');
+    });
 }
 
 function get_t_assess_soudan_DisplayData(model, type, $form) {
@@ -178,7 +246,7 @@ function isEmptyOrSpaces(str) {
 }
 
 function Bind_DisplayData(result) {
-    let _letter = "", _class = "", _snbg_color = "", _rnbg_color = "";
+    let _letter = "", _status = "", _class = "", _snbg_color = "", _rnbg_color = "";
     let data = JSON.parse(result);
     let html = "";
     if (data.length > 0) {
@@ -187,17 +255,21 @@ function Bind_DisplayData(result) {
             if (isEmptyOrSpaces(data[i]["ステータス"])) {
                 _letter = "";
                 _class = "ms-1 ps-1 pe-1 rounded-circle";
+                _status = "0";
             }
             else {
                 _letter = data[i]["ステータス"].charAt(0);
                 if (_letter == "未") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal";
+                    _status = "1";
                 }
                 else if (_letter == "処") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal fst-normal";
+                    _status = "2";
                 }
                 else if (_letter == "解") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal fst-normal";
+                    _status = "3";
                 }
             }
 
@@ -214,12 +286,13 @@ function Bind_DisplayData(result) {
             <td class= "text-end"> ' + (i + 1) + '</td>\
             <td><span class="' + _class + '">' + _letter + '</span><span class="font-semibold"> ' + data[i]["ステータス"] + '</span></td>\
             <td class="text-nowrap">'+ data[i]["相談ID"] + '</td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["相談ID"] + '&' + data[i]["RealECD"] + '&' + data[i]["PurchReqDateTime"] + ' href="#" onclick="Display_Detail(this.id)"><span class="' + _snbg_color + ' pt-1 pb-1 ps-2 pe-2">' + data[i]["売主名"] + '</span></a></td>\
-            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["相談ID"] + '&' + data[i]["RealECD"] + '&' + data[i]["PurchReqDateTime"] + ' href="#" onclick="Display_Detail(this.id)"><span class="' + _rnbg_color + ' pt-1 pb-1 ps-2 pe-2">' + data[i]["不動産会社"] + '</span></a></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id="'+ data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["相談ID"] + '&' + data[i]["RealECD"] + '&' + data[i]["PurchReqDateTime"].replace(" ", "&") + '" data-bs-toggle="modal" data-bs-target="#soudan" href="#" onclick="Display_Detail(this.id, this)"><span class="' + _snbg_color + ' pt-1 pb-1 ps-2 pe-2">' + data[i]["売主名"] + '</span></a></td>\
+            <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id="'+ data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["相談ID"] + '&' + data[i]["RealECD"] + '&' + data[i]["PurchReqDateTime"].replace(" ", "&") + '" data-bs-toggle="modal" data-bs-target="#soudan" href="#" onclick="Display_Detail(this.id, this)"><span class="' + _rnbg_color + ' pt-1 pb-1 ps-2 pe-2">' + data[i]["不動産会社"] + '</span></a></td>\
             <td class="text-nowrap">'+ data[i]["管理担当"] + '</td>\
             <td class="text-nowrap">'+ data[i]["相談発生日時"] + '</td>\
             <td class="text-nowrap"> '+ data[i]["相談解決日時"] + '</td>\
             <td class="text-center"> '+ data[i]["相談区分"] + '</td>\
+            <td class="d-none">' + data[i]["相談ID"] + '&' + data[i]["M_ConsultForm"] + '&' + data[i]["ConsultDateTime"] + '&' + data[i]["相談区分"] + '&' + data[i]["Consultation"] + '&' + _status + '&' + data[i]["TenStaffCD"] + '</td>\
             </tr>'
         }
 
@@ -235,7 +308,7 @@ function Bind_DisplayData(result) {
     $('#tblsoudan tbody').append(html);
 }
 
-function Display_Detail(id) {
+function Display_Detail(id, ctrl) {
     var PurchReqDateTime = '';
     if (id.split('&')[4] == '') {
     }
@@ -252,17 +325,25 @@ function Display_Detail(id) {
         RealECD: id.split('&')[3]
     };
 
-    $('#pills-home-tab').click();
+    _session.ConsultID = model.ConsultID;
+
+    $('#pills-info-tab').click();
+    var mc_data = $(ctrl).parent().closest('tr').children('td:eq(9)').text();
+    $('#ConsultID').text(mc_data.split('&')[0]);
+    $('#ConsultFrom').text(mc_data.split('&')[1]);
+    $('#ConsultDateTime').text(mc_data.split('&')[2]);
+    $('#ConsultType').text(mc_data.split('&')[3]);
+    $('#Consultation').text(mc_data.split('&')[4]);
+    $('#status').val(mc_data.split('&')[5]);
+    $('#pic').val(mc_data.split('&')[6]);
 
     Bind_ModalPopupData(model, PurchReqDateTime);
-
-    $('#soudan').modal('show');
 }
 
 function Bind_ModalPopupData(model, PurchReqDateTime) {
     common.callAjax(_url.get_Modal_infotrainData, model, function (result) {
         if (result && result.isOK) {
-            Bind_Modal_ConsultData(result.data, PurchReqDateTime);
+            Bind_Modal_InfoTrainData(result.data, PurchReqDateTime);
         }
         if (result && !result.isOK) {
             const errors = result.data;
@@ -273,6 +354,8 @@ function Bind_ModalPopupData(model, PurchReqDateTime) {
             }
         }
     });
+
+    Bind_Comment(model);
 
     common.callAjax(_url.get_Modal_profileData, model, function (result) {
         if (result && result.isOK) {
@@ -317,28 +400,37 @@ function Bind_ModalPopupData(model, PurchReqDateTime) {
     });
 }
 
-function Bind_Modal_ConsultData(result, PurchReqDateTime) {
+function Bind_Comment(model) {
+    common.callAjax(_url.get_Modal_consultResData, model, function (result) {
+        if (result && result.isOK) {
+            Bind_Modal_ConsultResData(result.data);
+        }
+        if (result && !result.isOK) {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                $form.getInvalidItems().get(0).focus();
+            }
+        }
+    });
+}
+
+function Bind_Modal_InfoTrainData(result, PurchReqDateTime) {
     let data = JSON.parse(result);
     let MansionInfo = "";
     let html = "";
     let htmlTemp = "";
     const isEven = data.length % 2 === 0 ? 'Even' : 'Odd';
+    $('#H_MansionInfo').empty();
+    $('#ekikoutsu').empty();
 
     if (data.length > 0) {
-        $('#ConsultID').text(data[0]['ConsultID']);
-        $('#ConsultFrom').text(data[0]['ConsultFrom']);
-        $('#ConsultDateTime').text(data[0]['ConsultDateTime']);
-        $('#ConsultType').text(data[0]['ConsultType']);
-        $('#Consultation').text(data[0]['Consultation']);
-
         //Display Data of MansionInfo
         MansionInfo = '<h4 class="text-center fw-bold">' + data[0]["MansionName"] + '<strong>' + data[0]["RoomNumber"] + '</strong></h4>\
         <p class="font-monospace small text-start pt-3">'+ data[0]["Address"] + '</p >\
-        <p class="font-monospace small text-center pt-3">' + PurchReqDateTime + '</p>'
+        <p class="font-monospace small text-center pt-3">買取依頼日時 ' + PurchReqDateTime + '</p>'
         $('#H_MansionInfo').append(MansionInfo);
-
-        $('#status').val(data[0]['ProgressKBN']);
-        $('#pic').val(data[0]['TenStaffName']);
 
         //Bind Data of ekikoutsu
         for (var i = 0; i < data.length; i++) {
@@ -364,6 +456,27 @@ function Bind_Modal_ConsultData(result, PurchReqDateTime) {
             $('#ekikoutsu').append(html);
         }
     }
+}
+
+function Bind_Modal_ConsultResData(result) {
+    $('#consultRes_comment').empty();
+    var data = JSON.parse(result);
+    var html = '';
+    for (var i = 0; i < data.length; i++) {
+        html += '<div class="row pb-3">\
+                    <div class="col-12" >\
+                        <p class="text-secondary text-center">' + data[i]['入力日時'] + '</p>\
+                    </div>\
+                    <div class="col-12">\
+                        <p><strong>' + data[i]['入力スタッフCD'] + '</strong></p>\
+                        <div class="clearfix"></div>\
+                        <p>' + data[i]['コメント'] + '</p>\
+                        <p><a class="float-right btn text-white btn-danger" onclick="Delete_ConsultResData(\'' + data[i]['ResponseSEQ'] + '\',\'' + data[i]['ConsultID'] + '\')"> <i class="fa fa-times"></i> 削除</a></p>\
+                    </div>\
+                </div >';
+    }
+
+    $('#consultRes_comment').append(html);
 }
 
 function Bind_Modal_ProfileData(result) {
@@ -405,6 +518,7 @@ function Bind_Modal_ContactData(result) {
 function Bind_Modal_FudousanData(result) {
     var data = JSON.parse(result);
     if (data.length > 0) {
+        $('#REImage').prop('src', 'data:image/gif;base64,' + data[0]['REFaceImage']);
         $('#REStaffName').text(data[0]['REStaffName']);
         $('#REKana').text(data[0]['REKana']);
         $('#REName').text(data[0]['REName']);
@@ -414,4 +528,83 @@ function Bind_Modal_FudousanData(result) {
         $('#REFax').text(data[0]['REFax']);
         $('#REMailAddress').text(data[0]['REMailAddress']);
     }
+}
+
+function Delete_ConsultResData(ResponseSEQ, ConsultID) {
+    var model = {
+        ResponseSEQ: ResponseSEQ,
+        ConsultID: ConsultID,
+        type: 'delete'
+    }
+
+    common.callAjaxWithLoadingSync(_url.modify_Modal_consultResData, model, this, function (result) {
+        if (result && result.isOK) {
+            var model = {
+                ConsultID: _session.ConsultID
+            }
+            Bind_Comment(model);
+        }
+        else {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                this.getInvalidItems().get(0).focus();
+            }
+        }
+    });
+}
+
+function Add_Comment(model) {
+    common.callAjaxWithLoadingSync(_url.modify_Modal_consultResData, model, this, function (result) {
+        if (result && result.isOK) {
+            $('textarea#comment').val('');
+            var model = {
+                ConsultID: _session.ConsultID
+            }
+            Bind_Comment(model);
+        }
+        else {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                this.getInvalidItems().get(0).focus();
+            }
+        }
+    });
+}
+
+function modify_ConsultData(model) {
+    common.callAjaxWithLoadingSync(_url.modify_consultData, model, this, function (result) {
+        if (result && result.isOK) {
+            $('#soudan').modal('hide');
+            $('#message-changed').modal('show');
+        }
+        else {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                this.getInvalidItems().get(0).focus();
+            }
+        }
+    });
+}
+
+function modify_ConsultSendData(model) {
+    common.callAjaxWithLoadingSync(_url.modify_consultData, model, this, function (result) {
+        if (result && result.isOK) {
+            $('#modal-send').modal('hide');
+            $('#modal-sendok').modal('show');
+        }
+        else {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                this.getInvalidItems().get(0).focus();
+            }
+        }
+    });
 }
