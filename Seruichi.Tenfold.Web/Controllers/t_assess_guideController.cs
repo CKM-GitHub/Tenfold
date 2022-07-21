@@ -9,9 +9,12 @@ using System.Web.Mvc;
 using Seruichi.BL.Tenfold.t_assess_guide;
 using Models.Tenfold.t_assess_guide;
 using System.IO;
-using System.Net.Http;
-using System.Net;
+using System.Net;  
+using System.Web.Http;
 using System.Net.Http.Headers;
+using System.Net.Http;
+using Models.Tenfold.t_reale_purchase;
+using Seruichi.BL.Tenfold.t_reale_purchase;
 
 namespace Seruichi.Tenfold.Web.Controllers
 {
@@ -38,37 +41,42 @@ namespace Seruichi.Tenfold.Web.Controllers
             {
                 return ErrorResult(validationResult);
             }
-
+            var res = new DataTable();
             var dt = bl.get_t_asses_guide_DisplayData(model);
             if (model.IsCSV)
             {
-                dt.Columns["AssessType"].ColumnName = "種類";
-                dt.Columns["SendCustomer"].ColumnName = "送客";
-                dt.Columns["AssessReqID"].ColumnName = "査定依頼ID";
+
                 dt.Columns["SellerMansionID"].ColumnName = "物件CD";
-                dt.Columns["MansionName"].ColumnName = "物件名";
-                dt.Columns["RoomNo"].ColumnName = "部屋";
                 dt.Columns["SellerCD"].ColumnName = "売主CD";
-                dt.Columns["SellerName"].ColumnName = "売主名";
+                dt.Columns["RoomNumber"].ColumnName = "部屋";
 
-                dt.Columns["InsertDate"].ColumnName = "登録日時";
-                dt.Columns["EasyDate"].ColumnName = "簡易査定日時";
-                dt.Columns["DeepDate"].ColumnName = "詳細査定日時";
-                dt.Columns["PurchaseDate"].ColumnName = "買取依頼日時";
-                dt.Columns["AssessAmount"].ColumnName = "買取依頼金額";
-                dt.Columns["IntroDate"].ColumnName = "送客日時";
-                dt.Columns["Rank"].ColumnName = "ランキング";
-
-                dt.Columns.Remove("RoomNumber");
-
-                // SetColumnsOrder(dt);
-
-                dt.AcceptChanges();
-
+                //部屋
+                res = SetColumnsOrder(dt); 
+                res.AcceptChanges();
+                return OKResult(DataTableToJSON(res));
             }
             return OKResult(DataTableToJSON(dt));
         }
-
+        private DataTable SetColumnsOrder(DataTable dt)
+        {
+            string[] str = new string[] { "No", "ステータス", "査定ID", "物件CD", "物件名", "部屋", "住所", "売主CD", "売主名", "不動産会社CD", "不動産会社", "管理担当", "登録日時", "簡易査定日時", "詳細査定日時", "買取依頼日時", "経過時間", "送客予定日" };
+            var colList = dt.Columns;
+            var dtClone = dt.Clone();
+            foreach (DataColumn col in dtClone.Columns)
+            {
+                if (!str.Contains(col.ColumnName))
+                    dt.Columns.Remove(dt.Columns[col.ColumnName]);
+                dt.AcceptChanges(); 
+                
+            }
+            int i = 0;
+            foreach (var col in str)
+            { 
+                dt.Columns[col].SetOrdinal(i);
+                i++;
+            }
+            return dt;
+        }
         public ActionResult get_t_assess_guide_AttachFiles(t_assess_guideModel model)
         {
             t_assess_guideBL bl = new t_assess_guideBL();
@@ -106,8 +114,10 @@ namespace Seruichi.Tenfold.Web.Controllers
 
             return OKResult();
         }
-        public ActionResult DownloadAttachZippedFilePath(t_assess_guideModel model)
+        public ActionResult DownloadAttachZippedFilePath(t_assess_guideModel model )
         {
+            if (model.AttachSEQ == null && Session["OctetBytesDownload"] != null)
+                return File(Session["OctetBytesDownload"] as byte[], "application/force-download", model.AttachFileName);
             t_assess_guideBL bl = new t_assess_guideBL();
             if (!string.IsNullOrEmpty(model.AttachSEQ.Trim()))
             {
@@ -126,16 +136,32 @@ namespace Seruichi.Tenfold.Web.Controllers
             {  //SaveLog 
                 bl.AttachFileDownLog(model);
                 bytes = System.IO.File.ReadAllBytes(Path.Combine(outPath, model.AttachFileName));
-                //Delete DownedFile
-                if (System.IO.File.Exists(Path.Combine(outPath, model.AttachFileName)))
+                Session["OctetBytesDownload"] = bytes;
+                ////Delete DownedFile
+                if (model.AttachSEQ == null)
                 {
-                    System.IO.File.Delete(Path.Combine(outPath, model.AttachFileName));
-                }
-            }
-            else
+                    if (System.IO.File.Exists(Path.Combine(outPath, model.AttachFileName)))
+                    {
+                        System.IO.File.Delete(Path.Combine(outPath, model.AttachFileName));
+                    }
+                } 
+                return File(bytes, "application/force-download", model.AttachFileName);
+            } 
                 return this.HttpNotFound();
-          
-            return File(bytes, "application/octet-stream", model.AttachFileName);
+
+        } 
+        public ActionResult Insert_L_Log(t_reale_purchase_l_log_Model model)
+        {
+            t_reale_purchaseBL bl = new t_reale_purchaseBL();
+            model.LoginID = base.GetOperator();
+            model.LoginName = base.GetOperatorName();
+            model.IPAddress = base.GetClientIP();
+            model.LoginKBN = 3;
+            model.RealECD = null;
+            model.Page = "t_assess_guide";
+            //model.Processing = model.LogFlg == "3" ? "csv" : "display"; 
+            bl.Insert_L_Log(model);
+            return OKResult();
         }
     }
 }

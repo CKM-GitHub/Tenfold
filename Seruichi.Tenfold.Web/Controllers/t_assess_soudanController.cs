@@ -75,6 +75,29 @@ namespace Seruichi.Tenfold.Web.Controllers
         }
 
         [HttpPost]
+        public ActionResult get_Modal_consultResData(t_assess_soudanModel model)
+        {
+            t_assess_soudanBL bl = new t_assess_soudanBL();
+            model.type = "select";
+            model.LoginID = base.GetOperator();
+            model.LoginName = base.GetOperatorName();
+            model.IPAddress = base.GetClientIP();
+            var dt = bl.modify_Modal_consultResData(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult modify_Modal_consultResData(t_assess_soudanModel model)
+        {
+            t_assess_soudanBL bl = new t_assess_soudanBL();
+            model.LoginID = base.GetOperator();
+            model.LoginName = base.GetOperatorName();
+            model.IPAddress = base.GetClientIP();
+            var dt = bl.modify_Modal_consultResData(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
         public ActionResult get_Modal_profileData(t_assess_soudanModel model)
         {
             t_assess_soudanBL bl = new t_assess_soudanBL();
@@ -95,6 +118,17 @@ namespace Seruichi.Tenfold.Web.Controllers
         {
             t_assess_soudanBL bl = new t_assess_soudanBL();
             var dt = bl.get_Modal_fudousanData(model);
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult modify_consultData(t_assess_soudanModel model)
+        {
+            t_assess_soudanBL bl = new t_assess_soudanBL();
+            model.LoginID = base.GetOperator();
+            model.LoginName = base.GetOperatorName();
+            model.IPAddress = base.GetClientIP();
+            var dt = bl.modify_consultData(model);
             return OKResult(DataTableToJSON(dt));
         }
     }

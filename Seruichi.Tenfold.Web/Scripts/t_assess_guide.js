@@ -10,11 +10,13 @@ $(function () {
     _url.get_t_assess_guide_AttachFiles = common.appPath + '/t_assess_guide/get_t_assess_guide_AttachFiles';
     _url.get_t_assess_guide_DeleteFiles = common.appPath + '/t_assess_guide/DeleteAttachZippedFilePath';
     _url.get_t_assess_guide_DownlaodFiles = common.appPath + '/t_assess_guide/DownloadAttachZippedFilePath';
-    
+    _url.Insert_L_Log = common.appPath + '/t_assess_guide/Insert_L_Log';
     addEvents(); 
 });
 function setValidation() { 
-
+    $('.form-areamansion')
+        .addvalidation_errorElement("#CheckBoxError")
+        .addvalidation_checkboxlenght(); //E112
     $('#StartDate')
         .addvalidation_errorElement("#errorStartDate")
         .addvalidation_datecheck() //E108
@@ -190,8 +192,8 @@ function addEvents() {
         Kanritantou: $("#ddlStaff").val(),
         StartDate: $("#StartDate").val(),
         EndDate: $("#EndDate").val(),
-        IsCSV: false
-
+        IsCSV: false,
+        LogFlg: 2
     };
 
     get_purchase_Data(model, this, 'page_load');
@@ -215,7 +217,9 @@ function addEvents() {
             Kanritantou: $("#ddlStaff").val(),
             StartDate: $("#StartDate").val(),
             EndDate: $("#EndDate").val(),
-            IsCSV: false
+            IsCSV: false,
+            LogFlg: 2
+
         };
 
         get_purchase_Data(model, $form, 'Display');
@@ -229,28 +233,31 @@ function addEvents() {
         }
         $('#tblPurchaseDetails tbody').empty();
 
-        model = {
-            RealECD: common.getUrlParameter('RealECD'),
-            Chk_Area: $("#Chk_Area").val(),
-            Chk_Mansion: $("#Chk_Mansion").val(),
-            Chk_SendCustomer: $("#Chk_SendCustomer").val(),
-            Chk_Top5: $("#Chk_Top5").val(),
-            Chk_Top5Out: $("#Chk_Top5Out").val(),
-            Chk_NonMemberSeller: $("#Chk_NonMemberSeller").val(),
+       let modelCSV = {
+            Key: $("#Key").val(),
+            Chk_MiShouri: $("#Chk_MiShouri").val(),
+            Chk_Shouri: $("#Chk_Shouri").val(),
+            Chk_YouKakunin: $("#Chk_YouKakunin").val(),
+            Chk_HouShuu: $("#Chk_HouShuu").val(),
+            Chk_Soukyaku: $("#Chk_Soukyaku").val(),
             Range: $("#ddlRange").val(),
+            Kanritantou: $("#ddlStaff").val(),
             StartDate: $("#StartDate").val(),
-            EndDate: $("#EndDate").val(),
-            IsCSV: true
+           EndDate: $("#EndDate").val(),
+           IsCSV: false,
+           LogFlg: 1
         };
-        get_purchase_Data(model, $form, 'csv');
-        common.callAjax(_url.get_t_reale_purchase_CSVData, model,
+        get_purchase_Data(modelCSV, $form, 'csv');
+        modelCSV.IsCSV = true;
+        modelCSV.LogFlg = 3;
+        common.callAjax(_url.get_t_reale_purchase_DisplayData, modelCSV,
             function (result) {
                 //sucess
                 var table_data = result.data;
 
                 var csv = common.getJSONtoCSV(table_data);
                 if (!(csv == "ERROR")) {
-                    l_logfunction(model.RealECD + ' ' + $('#r_REName').text(), 'csv', '');
+                    l_logfunction('000' + ' ' + $('#r_REName').text(), 'csv', '');
                     var downloadLink = document.createElement("a");
                     var blob = new Blob(["\ufeff", csv]);
                     var url = URL.createObjectURL(blob);
@@ -263,8 +270,7 @@ function addEvents() {
                         ("0" + m.getHours()).slice(-2) + "" +
                         ("0" + m.getMinutes()).slice(-2) + "" +
                         ("0" + m.getSeconds()).slice(-2);
-                    downloadLink.download = "不動産会社査定状況リスト_" + dateString + ".csv";
-                    //"不動産会社査定状況リスト_YYYYMMDD_HHMMSS.csv"
+                    downloadLink.download = "処理待ちリスト_" + dateString + ".csv"; 
                     document.body.appendChild(downloadLink);
                     downloadLink.click();
                     document.body.removeChild(downloadLink);
@@ -278,16 +284,37 @@ function addEvents() {
 
 
 }
+function l_logfunction(remark, Process, id) {
 
+    let model = {
+        LoginKBN: '3',
+        LoginID: null,
+        RealECD: null,
+        LoginName: null,
+        IPAddress: null,
+        Processing: Process,
+        Remarks: remark,
+    };
+    common.callAjax(_url.Insert_L_Log, model, function (result) {
+        if (result && result.isOK) {
+            if (remark == 't_seller_assessment ' + id) {
+                window.location.href = window.location.href.replace('t_assess_guide', 't_seller_assessment').replace('#','') + "?SellerCD=" + id;
+            }
+            else if (remark == 't_reale_profile ' + id) {
+                window.location.href = window.location.href.replace('t_assess_guide', 't_reale_profile').replace('#', '')  + "?RealECD=" + id;
+            }
+        }
+    });
+}
 function get_purchase_Data(model, $form, state) {
-    model.IsCSV = false;
+    //model.IsCSV = false;
     common.callAjaxWithLoading(_url.get_t_reale_purchase_DisplayData, model, this, function (result) {
 
         if (result && result.isOK) {
 
             Bind_DisplayData(result.data);
-            //if (state == 'Display')
-            //    l_logfunction(model.RealECD + ' ' + $('#r_REName').text(), 'display', '');
+            if (state == 'Display')
+                l_logfunction('000' + ' ' + $('#r_REName').text(), 'display', '');
         }
 
         if (result && !result.isOK) {
@@ -326,29 +353,30 @@ function Bind_DisplayData(result) {
             else if (sts == '送客済')
                 sts = '<i class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal fst-normal">保</i><span\
             class="font-semibold" > 送客済</span>';
-
+            var paramSeller = '\'t_seller_assessment ' + data[i]["SellerCD"] + '\',\'' + 'link' + '\',\'' + data[i]["SellerCD"] + '\'';
+            var paramSellerRealeProfile = '\'t_reale_profile ' + data[i]["不動産会社CD"] + '\',\'' + 'link' + '\',\'' + data[i]["不動産会社CD"] + '\'';
             var DeepDatetime = data[i]["DeepDate"].replace(" ", "&");
-            var requestInfo = data[i]["MansionName"] + '&' + data[i]["RoomNumber"] + '&' + data[i]["Address"] + '&' + data[i]["買取依頼日時"] + '&' + data[i]["ProgressKBN"] + '&' + data[i]["TenStaffCD"] + '&' + data[i]["IntroPlanDate"] + '&' + data[i]["不動産会社"] + '&' + data[i]["Remark"] + '&'+
-                data[i]["NameConfDateTime"] + '&' + data[i]["AddressConfDateTime"] + '&' + data[i]["TelConfDateTime"] + '&' + data[i]["MailConfDateTime"] + '&' + data[i]["RegistConfDateTime"] + '&' + data[i]["IntroReqID"]  ;
+            var requestInfo = data[i]["MansionName"] + '&' + data[i]["RoomNumber"] + '&' + data[i]["Address"] + '&' + data[i]["買取依頼日時"] + '&' + data[i]["ProgressKBN"] + '&' + data[i]["TenStaffCD"] + '&' + data[i]["IntroPlanDate"] + '&' + data[i]["不動産会社"] + '&' + data[i]["Remark"] + '&' +
+                data[i]["NameConfDateTime"] + '&' + data[i]["AddressConfDateTime"] + '&' + data[i]["TelConfDateTime"] + '&' + data[i]["MailConfDateTime"] + '&' + data[i]["RegistConfDateTime"] + '&' + data[i]["IntroReqID"];
             //let requestInfo = {
             //    MansionName: data[i]["MansionName"] 
             //}
             html += '<tr>\
             <td class="text-end">'+ data[i]["No"] + '</td>\
             <td><label class="form-check-label" for="defaultCheck1">\
-              '+ sts +' </td>\
+              '+ sts + ' </td>\
                 <td> '+ data[i]["査定ID"] + ' </td>\
                 <td> <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"\
              <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["AssessReqID"] + '&' + DeepDatetime + ' data-bs-toggle="modal" data-bs-target="#mansion" href="#" onclick="Bind_ModalDetails(this.id,\'' + requestInfo + '\')"><span>' + data[i]["物件名"] + '</span></a></td>\
-    <td> <a class="text-heading font-semibold text-decoration-underline" href="#"> '+ data[i]["売主名"]+'\
+    <td> <a class="text-heading font-semibold text-decoration-underline" onclick="l_logfunction(' + paramSeller +')" href="#"> '+ data[i]["売主名"] + '\
              </a></td>\
-                <td> <a class="text-heading font-semibold text-decoration-underline" href="#"> '+ data[i]["不動産会社"] +'\
+                <td> <a class="text-heading font-semibold text-decoration-underline" onclick="l_logfunction(' + paramSellerRealeProfile +')" href="#"> '+ data[i]["不動産会社"] + '\
               </a></td>\
-                <td> '+ data[i]["管理担当"] +'</td>\
-                <td> '+ data[i]["買取依頼日時"] +'</td>\
-               <td>'+ data[i]["経過時間"] +'</td>\
-                <td> '+ data[i]["送客予定日"] +'</td>\
-            </tr>'  
+                <td> '+ data[i]["管理担当"] + '</td>\
+                <td> '+ data[i]["買取依頼日時"] + '</td>\
+               <td>'+ data[i]["経過時間"] + '</td>\
+                <td> '+ data[i]["送客予定日"] + '</td>\
+            </tr>'
         }
         $('#total_record').text("検索結果： " + data.length + "件");
         $('#total_record_up').text("検索結果： " + data.length + "件");
@@ -359,6 +387,8 @@ function Bind_DisplayData(result) {
         $('#no_record').text("表示可能データがありません");
     }
     $('#tblPurchaseDetails tbody').append(html);
+    $('#anchor_guide').addClass("active");
+
 }
 
 function dropFiles(files, obj) {
@@ -402,21 +432,33 @@ function deleteFileFromServer() {
         }
         
     })
-}
+} 
 function downloadAttach(e) {
     let modeldown = {
-        AttachSEQ: $(e).attr('id')
-    }
-    common.callAjax(_url.get_t_assess_guide_DownlaodFiles, modeldown, function (result) {
-        if (result && result.isOK) {
-            alert(result.data)
-            // 
-        }
-        else {
-            alert(result.data)
-        }
+        AttachSEQ: $(e).attr('id'),
+        FileName: $(e).text()
+    } 
+    $.ajax({
+        url: _url.get_t_assess_guide_DownlaodFiles,
+        type: "POST",
+        contentType: 'application/json; charset=utf-8', 
+        data: JSON.stringify(modeldown),
+        headers: {
+            RequestVerificationToken: $("#_RequestVerificationToken").val(),
+        },
+        async: true,
+        timeout: 100000,
+    }).done(function (data) { 
+        var downloadLink = document.createElement("a"); 
+        downloadLink.href = _url.get_t_assess_guide_DownlaodFiles;
+        downloadLink.download = modeldown.FileName.trim(); 
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        
+    }).fail(function (XMLHttpRequest, status, e) { 
 
-    })
+    });
 }
 function sendFileToServer(fileData, status) {
     fileData.delete('UserCD'); 
@@ -462,28 +504,8 @@ function calltoApiController_FileUploadHandle(url, fileData, callback, callbacke
             alert(err.status + ":" + err.statusText);
             if (callbackerror) callbackerror();
         }
-        //, oncomplete: function () {
-        //    $('.statusbar').hide();
-        //}
         
     };
-    //if (callbackprogress) {
-    //    obj.xhr = function () {
-    //        var xhrobj = $.ajaxSettings.xhr();
-    //        if (xhrobj.upload) {
-    //            xhrobj.upload.addEventListener('progress', function (event) {
-    //                var percent = 0;
-    //                var position = event.loaded || event.position;
-    //                var total = event.total;
-    //                if (event.lengthComputable) {
-    //                    percent = parseInt(position / total * 10000) / 100;
-    //                }
-    //                callbackprogress(percent);
-    //            }, false);
-    //        }
-    //        return xhrobj;
-    //    }
-    //}
     var jqXHR = $.ajax(obj);
 }
  
