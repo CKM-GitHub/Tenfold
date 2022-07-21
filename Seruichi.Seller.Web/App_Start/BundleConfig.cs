@@ -171,7 +171,6 @@ namespace Seruichi.Seller.Web
             bundles.Add(new ScriptBundle("~/bundles/a_mypage_reglist").Include(
                    "~/Scripts/a_mypage_reglist.js"));
             bundles.Add(new StyleBundle("~/Content/css/a_mypage_reglist").Include(
-                        "~/Content/css/a_mypage_reglist.css",
                       "~/Content/css/font-awesome.min.css",
                       "~/Content/css/Soft-UI-Aside-Navbar.css",
                       "~/Content/css/style.css",
@@ -179,6 +178,10 @@ namespace Seruichi.Seller.Web
                       "~/Content/css/Ludens-Users---25-After-Register.css",
                       "~/Content/css/Sidebar.css"
                       ));
+
+            //a_mansion_update ---------- 
+            bundles.Add(new ScriptBundle("~/bundles/a_mansion_update").Include(
+                   "~/Scripts/a_mansion_update.js"));
         }
     }
 }

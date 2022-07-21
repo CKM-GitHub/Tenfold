@@ -1,6 +1,8 @@
-﻿
-@{
-    ViewBag.Title = "a_mypage_reglist";
+﻿@{
+    ViewBag.Title = "査定 - セルイチ";
+}
+@section styles{
+    @Styles.Render("~/Content/css/a_mypage_reglist")
 }
 <header class="text-center text-white masthead cap-header">
     <div class="overlay"></div>
@@ -39,9 +41,7 @@
                                                         <th class="text-start" style="width: auto;">不動産会社</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                  
-                                                </tbody>
+                                                <tbody></tbody>
                                             </table>
                                         </div>
                                     </div>
@@ -64,14 +64,14 @@
                             aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-
+                    <input type="hidden" id="assessreqid" value="0" />
                     <div class="p-5">
                         <button type="button" class="btn btn-outline-primary btn-lg pt-3 pb-3"
-                                data-bs-toggle="modal" data-bs-target="#mansionmap">
+                                data-bs-toggle="modal" data-bs-target="#mansionmap" id="btn_assess">
                             <i class="fa fa-search"
                                aria-hidden="true"></i><span class="p-3">簡易査定</span>
                         </button>
-                        <button type="button" class="btn btn-outline-success btn-lg pt-3 pb-3">
+                        <button type="button" class="btn btn-outline-success btn-lg pt-3 pb-3" id="btn_chat">
                             <i class="fa fa-search-plus" aria-hidden="true"></i><span class="p-3">詳細査定</span>
                         </button>
                     </div>
