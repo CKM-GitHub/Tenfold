@@ -180,27 +180,38 @@ function addEvents() {
     });
 
     $('#btnAdd_OK').on('click', function () {
-        var model = {
-            ConsultID: _session.ConsultID
-        }
-        Bind_Comment(model);
-    });
-
-    $('#btnDelete_OK').on('click', function () {
-        var model = {
-            ConsultID: _session.ConsultID
-        }
-        Bind_Comment(model);
+        $('#btnProcess').trigger('click');
     });
 
     $('#btnSave').on('click', function () {
         var model = {
             Range: $('#status').val(),
             M_PIC: $('#pic').val(),
-            ConsultID: _session.ConsultID
+            ConsultID: _session.ConsultID,
+            type: 'save'
         }
         modify_ConsultData(model);
-    })
+    });
+
+    $('#note_check').on('change', function () {
+        this.value = this.checked ? 1 : 0;
+        if (this.value == 1)
+            $('#btnSend').removeClass('disabled');
+        else
+            $('#btnSend').addClass('disabled');
+    });
+
+    $('#btnSend').on('click', function () {
+        var model = {
+            ConsultID: _session.ConsultID,
+            type: 'send'
+        }
+        modify_ConsultSendData(model);
+    });
+
+    $('#btnSend_OK').on('click', function () {
+        $('#btnProcess').trigger('click');
+    });
 }
 
 function get_t_assess_soudan_DisplayData(model, type, $form) {
@@ -509,23 +520,13 @@ function Delete_ConsultResData(ResponseSEQ, ConsultID) {
         ConsultID: ConsultID,
         type: 'delete'
     }
-    $('#btnCancel_Delete').off("click");
-    $('#btnCancel_Delete').on('click', function () {
-        $('#btnDelete_Comment').off("click");
-    });
-    $('#btnDelete_Comment').on('click', function () {
-        Delete(model);
-    });
-    $('#message-del').modal('show');
-}
-
-function Delete(model) {
-    $('#message-del').modal('hide');
 
     common.callAjaxWithLoadingSync(_url.modify_Modal_consultResData, model, this, function (result) {
         if (result && result.isOK) {
-            $('#btnDelete_Comment').removeAttr('onclick');
-            $('#message-delok').modal('show');
+            var model = {
+                ConsultID: _session.ConsultID
+            }
+            Bind_Comment(model);
         }
         else {
             const errors = result.data;
@@ -541,7 +542,10 @@ function Delete(model) {
 function Add_Comment(model) {
     common.callAjaxWithLoadingSync(_url.modify_Modal_consultResData, model, this, function (result) {
         if (result && result.isOK) {
-            $('#message-addok').modal('show');
+            var model = {
+                ConsultID: _session.ConsultID
+            }
+            Bind_Comment(model);
         }
         else {
             const errors = result.data;
@@ -558,6 +562,24 @@ function modify_ConsultData(model) {
     common.callAjaxWithLoadingSync(_url.modify_consultData, model, this, function (result) {
         if (result && result.isOK) {
             $('#soudan').modal('hide');
+            $('#message-changed').modal('show');
+        }
+        else {
+            const errors = result.data;
+            for (key in errors) {
+                const target = document.getElementById(key);
+                $(target).showError(errors[key]);
+                this.getInvalidItems().get(0).focus();
+            }
+        }
+    });
+}
+
+function modify_ConsultSendData(model) {
+    common.callAjaxWithLoadingSync(_url.modify_consultData, model, this, function (result) {
+        if (result && result.isOK) {
+            $('#modal-send').modal('hide');
+            $('#modal-sendok').modal('show');
         }
         else {
             const errors = result.data;
