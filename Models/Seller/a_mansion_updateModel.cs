@@ -30,6 +30,7 @@ namespace Models.Seller
         public byte Direction { get; set; }
         public string FloorType { get; set; }
         public string FloorType2 { get; set; }
+        public string AdditionalRooms { get; set; }
         public byte BathKBN { get; set; }
         public byte RightKBN { get; set; }
         public byte CurrentKBN { get; set; }
@@ -40,8 +41,12 @@ namespace Models.Seller
         public string ExtraFee { get; set; }
         public string PropertyTax { get; set; }
         public byte DesiredTime { get; set; }
-
+        public string Remark { get; set; }
+        public decimal Longitude { get; set; }
+        public decimal Latitude { get; set; }
+        public string SellerName { get; set; }
         public List<MansionStation> MansionStationList { get; set; } = new List<MansionStation>();
         public string MansionStationListJson { get; set; }
+        public string SellerCD { get; set; }
     }
 }

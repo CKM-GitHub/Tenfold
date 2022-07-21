@@ -164,8 +164,67 @@ namespace Seruichi.BL.Seller
             };
 
             DBAccess db = new DBAccess();
-            var dt = db.SelectDatatable("pr_a_mansion_update_Select_M_SellerMansion_Data", sqlParams);
+            var dt = db.SelectDatatable("pr_a_mansion_update_select_line_station_distance_by_SellerMansionID", sqlParams);
             return dt;
+        }
+        public bool UpdateSellerMansionData(a_mansion_updateModel model, out string msgid)
+        {
+            msgid = "";
+
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@SellerMansionID", SqlDbType.VarChar){ Value = model.SellerMansionID.ToStringOrNull() },
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = model.SellerCD.ToStringOrNull() },
+                new SqlParameter("@MansionName", SqlDbType.VarChar){ Value = model.MansionName.ToStringOrNull() },
+                new SqlParameter("@MansionCD", SqlDbType.VarChar){ Value = model.MansionCD.ToStringOrNull() },
+                new SqlParameter("@PrefCD", SqlDbType.VarChar){ Value = model.PrefCD.ToStringOrNull() },
+                new SqlParameter("@PrefName", SqlDbType.VarChar){ Value = model.PrefName.ToStringOrNull() },
+                new SqlParameter("@CityCD", SqlDbType.VarChar){ Value = model.CityCD.ToStringOrNull() },
+                new SqlParameter("@CityName", SqlDbType.VarChar){ Value = model.CityName.ToStringOrNull() },
+                new SqlParameter("@TownCD", SqlDbType.VarChar){ Value = model.TownCD.ToStringOrNull() },
+                new SqlParameter("@TownName", SqlDbType.VarChar){ Value = model.TownName.ToStringOrNull() },
+                new SqlParameter("@Address", SqlDbType.VarChar){ Value = model.Address.ToStringOrNull() },
+                new SqlParameter("@StructuralKBN", SqlDbType.TinyInt){ Value = model.StructuralKBN.ToByte(0) },
+                new SqlParameter("@Floors", SqlDbType.Int){ Value = model.Floors.ToInt32(0) },
+                new SqlParameter("@ConstYYYYMM", SqlDbType.Int){ Value = model.ConstYYYYMM.Replace("/", "").ToInt32(0) },
+                new SqlParameter("@Rooms", SqlDbType.Int){ Value = model.Rooms.ToInt32(0) },
+                new SqlParameter("@LocationFloor", SqlDbType.Int){ Value = model.LocationFloor.ToInt32(0) },
+                new SqlParameter("@RoomNumber", SqlDbType.VarChar){ Value = model.RoomNumber.ToStringOrNull() },
+                new SqlParameter("@RoomArea", SqlDbType.Decimal){ Value = model.RoomArea.ToDecimal(0) },
+                new SqlParameter("@BalconyKBN", SqlDbType.TinyInt){ Value = model.BalconyKBN.ToByte(0) },
+                new SqlParameter("@BalconyArea", SqlDbType.Decimal){ Value = model.BalconyArea.ToDecimal(0) },
+                new SqlParameter("@Direction", SqlDbType.TinyInt){ Value = model.Direction.ToByte(0) },
+                new SqlParameter("@FloorType", SqlDbType.Int){ Value = model.FloorType.ToInt32(0) + model.AdditionalRooms.ToInt32(0) },
+                new SqlParameter("@FloorType1", SqlDbType.Int){ Value = model.FloorType.ToInt32(0) },
+                new SqlParameter("@FloorType2", SqlDbType.TinyInt){ Value = model.FloorType2.ToByte(0) },
+                new SqlParameter("@BathKBN", SqlDbType.TinyInt){ Value = model.BathKBN.ToByte(0) },
+                new SqlParameter("@RightKBN", SqlDbType.TinyInt){ Value = model.RightKBN.ToByte(0) },
+                new SqlParameter("@CurrentKBN", SqlDbType.TinyInt){ Value = model.CurrentKBN.ToByte(0) },
+                new SqlParameter("@ManagementKBN", SqlDbType.TinyInt){ Value = model.ManagementKBN.ToByte(0) },
+                new SqlParameter("@RentFee", SqlDbType.Money){ Value = model.RentFee.ToDecimal(0) },
+                new SqlParameter("@ManagementFee", SqlDbType.Money){ Value = model.ManagementFee.ToDecimal(0) },
+                new SqlParameter("@RepairFee", SqlDbType.Money){ Value = model.RepairFee.ToDecimal(0) },
+                new SqlParameter("@ExtraFee", SqlDbType.Money){ Value = model.ExtraFee.ToDecimal(0) },
+                new SqlParameter("@PropertyTax", SqlDbType.Money){ Value = model.PropertyTax.ToDecimal(0) },
+                new SqlParameter("@DesiredTime", SqlDbType.TinyInt){ Value = model.DesiredTime.ToByte(0) },
+                new SqlParameter("@Longitude", SqlDbType.Decimal){ Value = model.Longitude.ToDecimal(0) },
+                new SqlParameter("@Latitude", SqlDbType.Decimal){ Value = model.Latitude.ToDecimal(0) },
+                new SqlParameter("@Operator", SqlDbType.VarChar){ Value = model.Operator.ToStringOrNull() },
+                new SqlParameter("@IPAddress", SqlDbType.VarChar){ Value = model.IPAddress.ToStringOrNull() },
+                new SqlParameter("@LoginName", SqlDbType.VarChar){ Value = model.SellerName.ToStringOrNull() },
+                new SqlParameter("@SellerMansionStationTable", SqlDbType.Structured) { TypeName = "dbo.T_MansionStation", Value = model.MansionStationList.ToDataTable() },
+            };
+
+            try
+            {
+                DBAccess db = new DBAccess();
+                return db.InsertUpdateDeleteData("pr_a_mansion_update_SellerMansionData_update", false, sqlParams);
+            }
+            catch (ExclusionException)
+            {
+                //msgid = "S004"; //他端末エラー
+                return false;
+            }
         }
     }
 }

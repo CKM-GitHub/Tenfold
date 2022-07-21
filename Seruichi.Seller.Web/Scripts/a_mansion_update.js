@@ -18,7 +18,7 @@ $(function () {
     _url.getMansinoData = common.appPath + '/a_index/GetMansionData';
     _url.checkAll = common.appPath + '/a_mansion_update/CheckAll';
 
-    //_url.insertSellerMansionData = common.appPath + '/a_index/InsertSellerMansionData';
+    _url.updateSellerMansionData = common.appPath + '/a_mansion_update/UpdateSellerMansionData';
     //_url.gotoNextPage = common.appPath + '/a_index/GotoNextPage';
 
     setValidation();
@@ -26,14 +26,14 @@ $(function () {
     createBloodhound();
     setTypeahead('#MansionName');
     $('#BalconyKBN1').prop('checked', true).change();
-    ('#MansionName').focus();
+    $('#MansionName').focus();
 
     Bind_Update_Data();
 });
 
 function Bind_Update_Data() {
     setLineList('add', $('#PrefCD').val());
-    setlineStationDistanceBySellerMansionID($("#SellerMansionID").val());
+    setlineStationDistanceBySellerMansionID($("#SellerMansionID").val(), $('#PrefCD').val());
    /* setMansionWordByMansionCD($('#MansionCD').val());*/
     setBuildingAge($("#ConstYYYYMM").val());
 }
@@ -328,7 +328,7 @@ function addEvents() {
 
     //登録
     $('#btnRegistration').on('click', function () {
-        common.callAjaxWithLoading(_url.insertSellerMansionData, updateData, this, function (result) {
+        common.callAjaxWithLoading(_url.updateSellerMansionData, updateData, this, function (result) {
             if (result && result.isOK) {
                 //sucess
                 $('#modal_1').modal('hide');
@@ -343,10 +343,9 @@ function addEvents() {
         });
     });
 
-    //閉じる（登録完了）
-    $('#btnCompleted').on('click', function () {
-        const form = document.forms.formCompleted;
-        common.callSubmit(form, _url.gotoNextPage);
+    //Go to a_mypage_reglist page
+    $('#btn_back_a_mypage_reglist').on('click', function () {
+        window.location.href = common.appPath + '/a_mypage_reglist/Index';
     });
 }
 
@@ -724,32 +723,52 @@ function getParagraphNumber(number) {
     if (number === 20) return '⑳'
 }
 
-function setlineStationDistanceBySellerMansionID(SellerMansionID) {
+function setlineStationDistanceBySellerMansionID(SellerMansionID,PrefCD) {
     common.callAjax(_url.getlineStationDistanceBySellerMansionID, { SellerMansionID: SellerMansionID },
         function (result) {
             if (result && result.isOK) {
                 const dataArray = JSON.parse(result.data);
                 for (let i = 0; i < dataArray.length; i++) {
+
                     const data = dataArray[i];
                     const j = i + 1;
-
-                    setLineList('add', PrefCD, '#LineCD_' + j, data.LineCD);
-                    // $('#LineCD_' + j).val(data.LineCD);
-
-                    if (data.LineCD) {
-                        setStationList('add', data.LineCD, '#StationCD_' + j, data.StationCD);
+                    if (dataArray.length < 3) {
+                        setLineList('add', PrefCD, '#LineCD_' + j, data.LineCD);
+                        if (data.LineCD) {
+                            setStationList('add', data.LineCD, '#StationCD_' + j, data.StationCD);
+                        }
+                        $('#Distance_' + j).val(data.Distance)
                     }
+                    else {
+                        if (j < 4) {
+                            setLineList('add', PrefCD, '#LineCD_' + j, data.LineCD);
+                            if (data.LineCD) {
+                                setStationList('add', data.LineCD, '#StationCD_' + j, data.StationCD);
+                            }
 
-                    $('#Distance_' + j).val(data.Distance)
+                            $('#Distance_' + j).val(data.Distance)
+                        }
+                        else {
+                            const stationContainer = $('.js-stationContainer');
 
-                    $('#Dline_' + j).removeClass("bg-secondary");
-                    $('#Dline_' + j).find("*").prop("disabled", false);
+                            const station = $('.js-station-template').find('.js-station').clone(true);
+                            station.find('.js-paragraph-number').text(getParagraphNumber(j))
+                            station.find('.js-linecd').attr('id', 'LineCD_' + j);
+                            station.find('.js-stationcd').attr('id', 'StationCD_' + j);
+                            station.find('.js-distance').attr('id', 'Distance_' + j);
+                            stationContainer.append(station);
+
+                            setLineList('add', PrefCD, '#LineCD_' + j, data.LineCD);
+                            if (data.LineCD) {
+                                setStationList('add', data.LineCD, '#StationCD_' + j, data.StationCD);
+                            }
+
+                            $('#Distance_' + j).val(data.Distance)
+                        
+                       }
+                    }
                 }
-                const l = dataArray.length + 1;
-                $('#Dline_' + l).removeClass("bg-secondary");
-                $('#Dline_' + l).find("*").prop("disabled", false);
-
-                // setLineList('add', PrefCD, '#LineCD_' + l);
+                
             }
         });
 }
@@ -769,4 +788,54 @@ function setBuildingAge(age) {
                 $('#BuildingAge').text('（築　年）')
         }
     })
+}
+
+function setScreenComfirm(data) {
+    for (key in data) {
+        const target = document.getElementById('confirm_' + key);
+        if (target) $(target).val(data[key]);
+    }
+
+    $('#confirm_PrefCD').val(data.PrefName);
+    $('#confirm_CityCD').val(data.CityName);
+    $('#confirm_TownCD').val(data.TownName);
+    $('#confirm_FloorType2').val(data.FloorType2Name);
+
+    $('#confirm_StructuralKBN').val($('input[name="StructuralKBN"]:radio:checked').next().text());
+
+    $('#confirm_ConstYYYYMM').val($('#ConstYYYYMM').val());
+    $('#confirm_BuildingAge').text($('#BuildingAge').text());
+
+    $('#confirm_BalconyKBN1').prop('checked', $('#BalconyKBN1').prop('checked'));
+    $('#confirm_BalconyKBN2').prop('checked', $('#BalconyKBN2').prop('checked'));
+
+    $('#confirm_Direction').val($('input[name="Direction"]:radio:checked').next().text());
+    $('#confirm_BathKBN').val($('input[name="BathKBN"]:radio:checked').next().text());
+    $('#confirm_RightKBN').val($('input[name="RightKBN"]:radio:checked').next().text());
+    $('#confirm_CurrentKBN').val($('input[name="CurrentKBN"]:radio:checked').next().text());
+    $('#confirm_ManagementKBN').val($('input[name="ManagementKBN"]:radio:checked').next().text());
+    $('#confirm_DesiredTime').val($('input[name="DesiredTime"]:radio:checked').next().text());
+
+    const stationContainer = $('.js-confirm-stationContainer');
+    stationContainer.children().remove();
+
+    let index = 0;
+    $('.js-stationContainer .js-station').each(function () {
+        const $this = $(this);
+        const data = {
+            LineCD: $this.find('.js-linecd').val(),
+            LineName: $this.find('.js-linecd option:selected').text(),
+            StationName: $this.find('.js-stationcd option:selected').text(),
+            Distance: $this.find('.js-distance').val()
+        }
+        if (data.LineName) {
+            const station = $('.js-confirm-station-template').find('.js-confirm-station').clone(true);
+            index++;
+            station.find('.js-paragraph-number').text(getParagraphNumber(index))
+            station.find('.js-linecd').attr('id', 'confirm_LineCD_' + index).val(data.LineName);
+            station.find('.js-stationcd').attr('id', 'confirm_StationCD_' + index).val(data.StationName);
+            station.find('.js-distance').attr('id', 'confirm_Distance_' + index).val(data.Distance);
+            stationContainer.append(station);
+        }
+    });
 }
