@@ -14,12 +14,12 @@ namespace Seruichi.Seller.Web.Controllers
     public class a_mansion_updateController : BaseController
     {
         // GET: a_mansion_update
-        public ActionResult Index()
+        public ActionResult Index(string sellerMansionID)
         {
-            //if (string.IsNullOrEmpty(sellerMansionID))
-            //    return BadRequestResult();
+            if (string.IsNullOrEmpty(sellerMansionID))
+                return BadRequestResult();
 
-            string sellerMansionID = "SEL0000104";
+            //string sellerMansionID = "SEL0000104";
 
             a_mansion_updateBL a_bl = new a_mansion_updateBL();
             a_mansion_updateModel model =Assign_Model_Value(a_bl.Get_M_SellerMansion_Data(sellerMansionID));
