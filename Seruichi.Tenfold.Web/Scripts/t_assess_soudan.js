@@ -14,6 +14,8 @@ $(function () {
     setValidation();
     addEvents();
     $('#FreeWord').focus();
+    $('#navbarDropdownMenuLink1').addClass('font-bold active text-underline');
+    $('#t_assess_guide').addClass('font-bold text-underline');
 });
 
 function setValidation() {
