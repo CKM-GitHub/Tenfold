@@ -25,7 +25,7 @@ $(function () {
     addEvents();
     createBloodhound();
     setTypeahead('#MansionName');
-    $('#BalconyKBN1').prop('checked', true).change();
+   // $('#BalconyKBN1').prop('checked', true).change();
     $('#MansionName').focus();
 
     Bind_Update_Data();
