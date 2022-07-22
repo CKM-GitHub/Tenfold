@@ -14,7 +14,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	Select Count(*)as Num From V_RECondLineSta
-                       Where  RealECD = @realECD
+	Select Top 1 StationCD, Count(*)as Num  From V_RECondLineSta
+                       Where  RealECD = @realECD and 期限切れ間近=1 group by StationCD
 END
 GO
