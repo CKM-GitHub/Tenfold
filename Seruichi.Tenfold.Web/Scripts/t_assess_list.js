@@ -83,18 +83,18 @@ function addEvents() {
         }
     }).change();
 
-    $('.hide').on('change', function () {
-        this.value = this.checked ? 1 : 0;
-        if ($("input[type=checkbox]:checked").length > 0) {
-            $('.form-check-input').hideError();
-        }
-        if ($(this).is(':checked')) {
-            document.getElementById("Hide").setAttribute("class", "ms-1 ps-1 pe-1 rounded-circle bg-danger text-white");
-        }
-        else {
-            document.getElementById("Hide").setAttribute("class", "ms-1 ps-1 pe-1 rounded-circle bg-black text-white");
-        }
-    }).change();
+    //$('.hide').on('change', function () {
+    //    this.value = this.checked ? 1 : 0;
+    //    if ($("input[type=checkbox]:checked").length > 0) {
+    //        $('.form-check-input').hideError();
+    //    }
+    //    if ($(this).is(':checked')) {
+    //        document.getElementById("Hide").setAttribute("class", "ms-1 ps-1 pe-1 rounded-circle bg-danger text-white");
+    //    }
+    //    else {
+    //        document.getElementById("Hide").setAttribute("class", "ms-1 ps-1 pe-1 rounded-circle bg-black text-white");
+    //    }
+    //}).change();
 
     $('#btnToday').on('click', function () {
         let today = common.getToday();
