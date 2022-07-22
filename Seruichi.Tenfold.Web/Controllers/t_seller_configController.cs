@@ -14,6 +14,11 @@ namespace Seruichi.Tenfold.Web.Controllers
         // GET: t_seller_config
         public ActionResult Index()
         {
+            string flg = GetSuperAdminFLG();
+            if (flg != "1")
+            {
+                return RedirectToAction("Login", "t_login");
+            }
             return View();
         }
 
