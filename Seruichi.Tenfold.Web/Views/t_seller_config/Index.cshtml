@@ -38,7 +38,8 @@
                                                     <div class="text-center">
                                                         <h5>査定可能枠数</h5>
                                                         <div class="d-inline-flex pt-5">
-                                                            <input type="text" id="form3Examplev4" class="form-control text-end" value="9,999" />
+                                                            <p class="text-danger text-nowrap text-center" id="errorslots"></p>
+                                                            <input type="text" id="slotsNum" class="form-control text-end" />
                                                             <p class="ps-2 d-xl-flex align-items-xl-end text-nowrap">件</p>
                                                         </div>
                                                     </div>
@@ -53,7 +54,8 @@
                                                     <div class="text-center">
                                                         <h5>成約時増枠数</h5>
                                                         <div class="d-inline-flex pt-5">
-                                                            <input type="text" id="form3Examplev4" class="form-control text-end" value="9,999" />
+                                                            <p class="text-danger text-nowrap text-center" id="erroradditions"></p>
+                                                            <input type="text" id="additionslotsNum" class="form-control text-end" />
                                                             <p class="ps-2 d-xl-flex align-items-xl-end text-nowrap">件</p>
                                                         </div>
                                                     </div>
@@ -68,7 +70,8 @@
                                                     <div class="text-center">
                                                         <h5>査定枠追加時の請求額</h5>
                                                         <div class="d-inline-flex pt-5">
-                                                            <input type="text" id="form3Examplev4" class="form-control text-end" value="9,999" />
+                                                            <p class="text-danger text-nowrap text-center" id="errorBilled"></p>
+                                                            <input type="text" id="Amountbilled" class="form-control text-end" />
                                                             <p class="ps-2 d-xl-flex align-items-xl-end text-nowrap">円</p>
                                                         </div>
                                                     </div>
@@ -83,7 +86,8 @@
                                                     <div class="text-center">
                                                         <h5>再査定に課金が必要な期間</h5>
                                                         <div class="d-inline-flex pt-5">
-                                                            <input type="text" id="form3Examplev4" class="form-control text-end" value="9,999" />
+                                                            <p class="text-danger text-nowrap text-center" id="errorReassessment"></p>
+                                                            <input type="text" id="reassessment" class="form-control text-end" />
                                                             <p class="ps-2 d-xl-flex align-items-xl-end text-nowrap">か月</p>
                                                         </div>
                                                     </div>
@@ -100,8 +104,8 @@
                     </div>
                     <div class="card-footer">
                         <div class="text-right mt-3 float-end">
-                            <button type="button" class="btn btn-primary">変更保存</button>&nbsp;
-                            <button type="button" class="btn btn-default">取消</button>
+                            <button type="button" class="btn btn-primary" id="btnSave">変更保存</button>&nbsp;
+                            <button type="button" class="btn btn-default" id="btnCancel">取消</button>
                         </div>
                     </div>
                 </div>
@@ -110,4 +114,8 @@
         @Html.Partial("_t_footer")
     </div>
 </div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/t_seller_config")
+}
 

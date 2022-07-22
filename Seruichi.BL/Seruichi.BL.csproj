@@ -100,6 +100,7 @@
     <Compile Include="Tenfold\t_reale_purchase\t_reale_purchaseBL.cs" />
     <Compile Include="Tenfold\t_seller_account\t_seller_accountBL.cs" />
     <Compile Include="Tenfold\t_seller_assessment\t_seller_assessmentBL.cs" />
+    <Compile Include="Tenfold\t_seller_config\t_seller_configBL.cs" />
     <Compile Include="Tenfold\t_seller_list\t_seller_listBL.cs" />
     <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionBL.cs" />
     <Compile Include="Tenfold\t_seller_memo\t_seller_memoBL.cs" />
