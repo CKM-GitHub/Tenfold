@@ -52,7 +52,7 @@ namespace Seruichi.Seller.Web.Controllers
 
 
         [HttpPost]
-        public ActionResult InsertD_AssReqProgress(a_mypage_reglistModel model)
+        public ActionResult InsertD_Assessment(a_mypage_reglistModel model)
         {
             string SellerCD = base.GetOperator();
             a_mypage_reglistBL bl = new a_mypage_reglistBL();
@@ -63,7 +63,7 @@ namespace Seruichi.Seller.Web.Controllers
             model.PageID = "a_mypage_reglist";
             model.ProcessKBN = "link";
             model.Remarks = model.SellerCD;
-            bl.InsertD_AssReqProgress(model);
+            bl.InsertD_Assessment(model);
             return OKResult();
 
         }
@@ -84,6 +84,18 @@ namespace Seruichi.Seller.Web.Controllers
             bl.Insert_L_Log(model);
             return OKResult();
 
+        }
+
+
+
+        [HttpPost]
+        public ActionResult get_t_sellerPossibleTime()
+        {
+            string SellerCD = base.GetOperator();
+            a_mypage_reglistBL bl = new a_mypage_reglistBL();
+            var dt = bl.get_t_sellerPossibleTime(SellerCD);
+
+            return OKResult(DataTableToJSON(dt));
         }
     }
 }

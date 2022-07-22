@@ -25,7 +25,6 @@ namespace Seruichi.BL.Seller
 
             AESCryption crypt = new AESCryption();
             string decryptionKey = StaticCache.GetDataCryptionKey();
-            var dr = dt.Rows[0];
             return dt;
         }
 
@@ -89,7 +88,7 @@ namespace Seruichi.BL.Seller
 
 
 
-        public void InsertD_AssReqProgress(a_mypage_reglistModel model)
+        public void InsertD_Assessment(a_mypage_reglistModel model)
         {
             var sqlParams = new SqlParameter[]
              {
@@ -102,7 +101,7 @@ namespace Seruichi.BL.Seller
              };
 
             DBAccess db = new DBAccess();
-            db.InsertUpdateDeleteData("", false, sqlParams);
+            db.InsertUpdateDeleteData("pr_a_mypage_reglist_Insert_Assessment", false, sqlParams);
         }
         public void Insert_L_Log(a_mypage_reglistModel model)
         {
@@ -121,6 +120,26 @@ namespace Seruichi.BL.Seller
 
             DBAccess db = new DBAccess();
             db.InsertUpdateDeleteData("pr_t_seller_mansion_list_Insert_L_Log", false, sqlParams);
+        }
+
+
+        public DataTable get_t_sellerPossibleTime(string SellerCD)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = SellerCD }
+            };
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_Select_M_Seller_By_SellerCD", sqlParams);
+
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+            var e = dt.AsEnumerable();
+            foreach (DataRow row in dt.Rows)
+            {
+                row["HandyPhone"] = crypt.DecryptFromBase64(row.Field<string>("HandyPhone"), decryptionKey);
+            }
+            return dt;
         }
     }
 }
