@@ -83,6 +83,19 @@ function addEvents() {
         }
     }).change();
 
+    //$('.hide').on('change', function () {
+    //    this.value = this.checked ? 1 : 0;
+    //    if ($("input[type=checkbox]:checked").length > 0) {
+    //        $('.form-check-input').hideError();
+    //    }
+    //    if ($(this).is(':checked')) {
+    //        document.getElementById("Hide").setAttribute("class", "ms-1 ps-1 pe-1 rounded-circle bg-danger text-white");
+    //    }
+    //    else {
+    //        document.getElementById("Hide").setAttribute("class", "ms-1 ps-1 pe-1 rounded-circle bg-black text-white");
+    //    }
+    //}).change();
+
     $('#btnToday').on('click', function () {
         let today = common.getToday();
         $('#StartDate').val(today);
@@ -232,17 +245,16 @@ function Bind_tbody(result) {
         html += '<tr>\
             <td class= "text-end">' + data[i]["NO"] + '</td>\
             <td class="'+ _sort_checkbox + '"><i class="' + _class + '">' + _letter + '</i><span class="font-semibold">' + data[i]["ステータス"] + '</span></td>\
-            <td>'+ data[i]["査定ID"] +'</td>\
-            <td><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["AssReqID"] + '&t_chat&' + data[i]["AssReqID"] + ' onclick="l_logfunction(this.id)"> ' + data[i]["マンション名＆部屋番号"] +'</a> </td>\
-            <td><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["SellerCD"] + '&t_seller_assessment&' + data[i]["売主名"] + ' onclick="l_logfunction(this.id)"> ' + data[i]["売主名"] +'</a> </td>\
-            <td><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["RealECD"] + '&t_reale_purchase&' + data[i]["不動産会社"] + ' onclick="l_logfunction(this.id)"> ' + data[i]["不動産会社"] +'</a> </td>\
-            <td>'+ data[i]["買取依頼日時"] +'</td>\
-            <td>'+ data[i]["送客日時"] +'</td>\
-            <td>'+ data[i]["成約日時"] +'</td>\
-            <td>'+ data[i]["辞退日時"] +'</td>\
-            <td class="d-none"> '+ data[i]["査定ID"] + '</td>\
+            <td class="text-nowrap">'+ data[i]["査定ID"] +'</td>\
+            <td class="text-nowrap"><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["AssReqID"] + '&t_chat&' + data[i]["AssReqID"] + ' onclick="l_logfunction(this.id)"> ' + data[i]["マンション名＆部屋番号"] +'</a> </td>\
+            <td class="text-nowrap"><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["SellerCD"] + '&t_seller_assessment&' + data[i]["売主名"] + ' onclick="l_logfunction(this.id)"> ' + data[i]["売主名"] +'</a> </td>\
+            <td class="text-nowrap"><a class="text-heading font-semibold text-decoration-underline" href="#" id='+ data[i]["RealECD"] + '&t_reale_purchase&' + data[i]["不動産会社"] + ' onclick="l_logfunction(this.id)"> ' + data[i]["不動産会社"] +'</a> </td>\
+            <td class="text-nowrap">'+ data[i]["買取依頼日時"] +'</td>\
+            <td class="text-nowrap">'+ data[i]["送客日時"] +'</td>\
+            <td class="text-nowrap">'+ data[i]["成約日時"] +'</td>\
+            <td class="text-nowrap">'+ data[i]["辞退日時"] +'</td>\
+            <td class="d-none">'+ data[i]["AssID"] + '</td>\
             <td class="d-none">'+ _sort_checkbox + '</td>\
-            <td class="d-none"></td>\
             </tr>'
     }
     if (data.length > 0) {

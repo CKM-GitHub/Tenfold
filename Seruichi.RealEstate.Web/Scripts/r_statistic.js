@@ -144,7 +144,6 @@ function addEvents() {
 }
 
 function check_DateDifference() {
-    debugger;
     var sdate = '';
     var edate = '';
     if ($('input[name=ryudo]:checked', '#form1').val() == 1) {
@@ -298,6 +297,10 @@ function bind_r_statistic_Data(result) {
                         display: true,
                         scaleLabel: {
                             display: true,
+                        },
+                        ticks: {
+                            suggestedMin: 0,
+                            suggestedMax: 50,
                         },
                     }]
                 }

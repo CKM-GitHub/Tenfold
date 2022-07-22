@@ -25,7 +25,7 @@ $(function () {
     addEvents();
     createBloodhound();
     setTypeahead('#MansionName');
-    $('#BalconyKBN1').prop('checked', true).change();
+   // $('#BalconyKBN1').prop('checked', true).change();
     $('#MansionName').focus();
 
     Bind_Update_Data();
@@ -234,6 +234,7 @@ function addEvents() {
         const suffix = id.slice(-2).replace('_', '');
         const inputval = $(this).val();
         if (inputval) {
+            $('#LineCD_1').hideError();
             setStationList('add', inputval, '#StationCD_' + suffix);
         }
         else {
@@ -319,9 +320,17 @@ function addEvents() {
                 $('#modal_1').modal('show');
             }
             if (result && result.data) {
+                
                 //error
                 common.setValidationErrors(result.data);
                 common.setFocusFirstError($form);
+
+                for (key in result.data) {
+                    const target = document.getElementById(key);
+                    if (target == "LineCD_1") {
+                        $('#errorMansionStationInfo').attr('style', 'display:block');
+                    }
+                }
             }
         });
     });
@@ -351,8 +360,8 @@ function addEvents() {
 
 function displayNearestStationData() {
 
-    if ($('#hdnMansionCD').val()) return;
-
+    // if ($('#hdnMansionCD').val()) return;
+    $('#errorMansionStationInfo').attr('style', 'display: none');
     const model = {
         PrefName: $('#PrefCD option:selected').text(),
         CityName: $('#CityCD option:selected').text(),
