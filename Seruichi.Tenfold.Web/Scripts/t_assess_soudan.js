@@ -32,7 +32,7 @@ function setValidation() {
         .addvalidation_maxlengthCheck(50);
 
     $('.form-check-input')
-        .addvalidation_errorElement("#CheckBoxError")
+        .addvalidation_errorElement("#errorCheckBox")
         .addvalidation_checkboxlenght(); //E112
 
     $('.comment')
@@ -44,6 +44,7 @@ function setValidation() {
 
 function addEvents() {
     common.bindValidationEvent('#form1', '');
+    common.bindValidationEvent('#div_comment', '');
 
     $('#StartDate, #EndDate').on('change', function () {
         const $this = $(this), $start = $('#StartDate').val(), $end = $('#EndDate').val();
@@ -86,23 +87,31 @@ function addEvents() {
     }).change();
 
     $('#btnToday').on('click', function () {
+        $("#StartDate").hideError();
+        $("#EndDate").hideError();
         let today = common.getToday();
         $('#StartDate').val(today);
         $('#EndDate').val(today);
     });
     $('#btnThisWeek').on('click', function () {
+        $("#StartDate").hideError();
+        $("#EndDate").hideError();
         let start = common.getDayaweekbeforetoday();
         let end = common.getToday();
         $('#StartDate').val(start);
         $('#EndDate').val(end);
     });
     $('#btnThisMonth').on('click', function () {
+        $("#StartDate").hideError();
+        $("#EndDate").hideError();
         let today = common.getToday();
         let firstDay = common.getFirstDayofMonth();
         $('#StartDate').val(firstDay);
         $('#EndDate').val(today);
     });
     $('#btnLastMonth').on('click', function () {
+        $("#StartDate").hideError();
+        $("#EndDate").hideError();
         let firstdaypremonth = common.getFirstDayofPreviousMonth();
         let lastdaypremonth = common.getLastDayofPreviousMonth();
         $('#StartDate').val(firstdaypremonth);
@@ -173,7 +182,9 @@ function addEvents() {
             return false;
         }
         var model = {
-            comment: $('textarea#comment').val()
+            ConsultID: _session.ConsultID,
+            comment: $('textarea#comment').val(),
+            type: 'insert'
         }
         Add_Comment(model);
         $form = $('#div_comment').hideChildErrors();
@@ -235,7 +246,7 @@ function isEmptyOrSpaces(str) {
 }
 
 function Bind_DisplayData(result) {
-    let _letter = "", _class = "", _snbg_color = "", _rnbg_color = "";
+    let _letter = "", _status = "", _class = "", _snbg_color = "", _rnbg_color = "";
     let data = JSON.parse(result);
     let html = "";
     if (data.length > 0) {
@@ -244,17 +255,21 @@ function Bind_DisplayData(result) {
             if (isEmptyOrSpaces(data[i]["ステータス"])) {
                 _letter = "";
                 _class = "ms-1 ps-1 pe-1 rounded-circle";
+                _status = "0";
             }
             else {
                 _letter = data[i]["ステータス"].charAt(0);
                 if (_letter == "未") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-primary text-white fst-normal fst-normal";
+                    _status = "1";
                 }
                 else if (_letter == "処") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-warning text-white fst-normal fst-normal";
+                    _status = "2";
                 }
                 else if (_letter == "解") {
                     _class = "ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal fst-normal";
+                    _status = "3";
                 }
             }
 
@@ -277,7 +292,7 @@ function Bind_DisplayData(result) {
             <td class="text-nowrap">'+ data[i]["相談発生日時"] + '</td>\
             <td class="text-nowrap"> '+ data[i]["相談解決日時"] + '</td>\
             <td class="text-center"> '+ data[i]["相談区分"] + '</td>\
-            <td class="d-none">' + data[i]["相談ID"] + '&' + data[i]["M_ConsultForm"] + '&' + data[i]["ConsultDateTime"] + '&' + data[i]["相談区分"] + '&' + data[i]["Consultation"] + '&' + data[i]["ProgressKBN"] + '&' + data[i]["TenStaffCD"] + '</td>\
+            <td class="d-none">' + data[i]["相談ID"] + '&' + data[i]["M_ConsultForm"] + '&' + data[i]["ConsultDateTime"] + '&' + data[i]["相談区分"] + '&' + data[i]["Consultation"] + '&' + _status + '&' + data[i]["TenStaffCD"] + '</td>\
             </tr>'
         }
 
@@ -444,6 +459,7 @@ function Bind_Modal_InfoTrainData(result, PurchReqDateTime) {
 }
 
 function Bind_Modal_ConsultResData(result) {
+    $('#consultRes_comment').empty();
     var data = JSON.parse(result);
     var html = '';
     for (var i = 0; i < data.length; i++) {
@@ -542,6 +558,7 @@ function Delete_ConsultResData(ResponseSEQ, ConsultID) {
 function Add_Comment(model) {
     common.callAjaxWithLoadingSync(_url.modify_Modal_consultResData, model, this, function (result) {
         if (result && result.isOK) {
+            $('textarea#comment').val('');
             var model = {
                 ConsultID: _session.ConsultID
             }

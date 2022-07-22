@@ -14,12 +14,12 @@ namespace Seruichi.Seller.Web.Controllers
     public class a_mansion_updateController : BaseController
     {
         // GET: a_mansion_update
-        public ActionResult Index()
+        public ActionResult Index(string sellerMansionID)
         {
-            //if (string.IsNullOrEmpty(sellerMansionID))
-            //    return BadRequestResult();
+            if (string.IsNullOrEmpty(sellerMansionID))
+                return BadRequestResult();
 
-            string sellerMansionID = "SEL0000115";
+            //string sellerMansionID = "SEL0000104";
 
             a_mansion_updateBL a_bl = new a_mansion_updateBL();
             a_mansion_updateModel model =Assign_Model_Value(a_bl.Get_M_SellerMansion_Data(sellerMansionID));
@@ -104,5 +104,39 @@ namespace Seruichi.Seller.Web.Controllers
             var dt = a_bl.GetLineStationDistanceBySellerMansionID(SellerMansionID);
             return OKResult(DataTableToJSON(dt));
         }
+
+        // Ajax: UpdateSellerMansionData
+        [HttpPost]
+        public ActionResult UpdateSellerMansionData(a_mansion_updateModel model)
+        {
+            if (model == null)
+            {
+                return BadRequestResult();
+            }
+
+            CommonBL blCmm = new CommonBL();
+            var longitude_latitude = blCmm.GetLongitudeAndLatitude(model.PrefName, model.CityName, model.TownName, model.Address);
+            model.Longitude = longitude_latitude[0];
+            model.Latitude = longitude_latitude[1];
+            model.SellerCD = base.GetOperator();
+            model.SellerName = base.GetOperatorName();
+            model.Operator = base.GetOperator();
+            model.IPAddress = base.GetClientIP();
+            model.MansionStationList = ConvertJsonToObject<List<MansionStation>>(model.MansionStationListJson);
+
+            a_mansion_updateBL bl = new a_mansion_updateBL();
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
+            if (!bl.UpdateSellerMansionData(model, out string errorcd))
+            {
+                return ErrorMessageResult(errorcd);
+            }
+
+            return OKResult();
+        }
+        
     }
 }

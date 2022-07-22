@@ -1,4 +1,6 @@
 ﻿
+using Models;
+using Models.Seller;
 using Seruichi.BL;
 using Seruichi.BL.Seller;
 using System;
@@ -27,6 +29,61 @@ namespace Seruichi.Seller.Web.Controllers
             var dt = bl.get_displaydata(SellerCD);
 
             return OKResult(DataTableToJSON(dt));
+        }
+
+
+        [HttpPost]
+        public ActionResult InsertD_AssReq(a_mypage_reglistModel model)
+        {
+            string SellerCD = base.GetOperator();
+            a_mypage_reglistBL bl = new a_mypage_reglistBL();
+            model.LoginKBN = 3;
+            model.LoginID = base.GetOperator();
+            model.RealECD = null;
+            model.LoginName = base.GetOperatorName();
+            model.IPAddress = base.GetClientIP();
+            model.PageID = "a_mypage_reglist";
+            model.ProcessKBN = "link";
+            model.Remarks = model.SellerCD;
+            bl.InsertD_AssReq(model);
+            return OKResult();
+
+        }
+
+
+        [HttpPost]
+        public ActionResult InsertD_AssReqProgress(a_mypage_reglistModel model)
+        {
+            string SellerCD = base.GetOperator();
+            a_mypage_reglistBL bl = new a_mypage_reglistBL();
+            model.SellerCD = base.GetOperator();
+            model.LoginID = base.GetOperator();
+            model.SellerName = base.GetOperatorName();
+            model.IPAddress = base.GetClientIP();
+            model.PageID = "a_mypage_reglist";
+            model.ProcessKBN = "link";
+            model.Remarks = model.SellerCD;
+            bl.InsertD_AssReqProgress(model);
+            return OKResult();
+
+        }
+
+        [HttpPost]
+        public ActionResult InsertL_Log(a_mypage_reglistModel model)
+        {
+            string SellerCD = base.GetOperator();
+            a_mypage_reglistBL bl = new a_mypage_reglistBL();
+            model.LoginKBN = 3;
+            model.LoginID = base.GetOperator();
+            model.RealECD = null;
+            model.LoginName = base.GetOperatorName();
+            model.IPAddress = base.GetClientIP();
+            model.PageID = "a_mypage_reglist";
+            model.ProcessKBN = "link";
+            model.Remarks = model.SellerCD;
+            bl.Insert_L_Log(model);
+            return OKResult();
+
         }
     }
 }
