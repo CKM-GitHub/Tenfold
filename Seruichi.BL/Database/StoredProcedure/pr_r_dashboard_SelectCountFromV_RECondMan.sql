@@ -15,6 +15,6 @@ BEGIN
 
     -- Insert statements for procedure here
 	Select Count(*)as Num From V_RECondMan
-                       Where  RealECD = @realECD
+                       Where  RealECD = @realECD and 期限切れ間近=1
 END
 GO
