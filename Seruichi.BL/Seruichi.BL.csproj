@@ -216,6 +216,8 @@
     <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectNumForNumberOfCompleted.sql" />
     <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectNumForNumberOfDecline.sql" />
     <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectREFaceImage.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_dashboard_selectRegionbyM_Pref.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_dashboard_selectRegionbyM_Station.sql" />
     <Content Include="Database\StoredProcedure\pr_r_login_Insert_L_Login.sql" />
     <Content Include="Database\StoredProcedure\pr_r_login_Select_M_RealEstate_by_RealECD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_login_Select_M_REStaff_by_RealECD_and_REStaffCD.sql" />
