@@ -4,13 +4,14 @@ $(function () {
     _url.gotoNextPage = common.appPath + '/r_asmc_railway/GotoNextPage';
     _url.openCheckTab = common.appPath + '/r_asmc_set_train_check_tab/Index';
     addEvents();
+    $('#checkbox_expired').change();
 });
 
 function addEvents() {
     $(document).on('click', '.js-btn-select', function () {
         $this = $(this);
         const css = $this.data('target-class');
-        $('.' + css).prop('checked', true);
+        $('.' + css + ':not(:disabled)').prop('checked', true);
     });
 
     $(document).on('click', '.js-btn-deselect', function () {
@@ -45,6 +46,11 @@ function addEvents() {
         }
     });
 
+    $('#checkbox_expired').on('change', function () {
+        const chk = $(this).prop('checked');
+        $('.js-no-expired').prop('disabled', chk);
+    });
+
     $('#btnSearchDetail').on('click', function () {
 
         let linecdCsv = '';
@@ -58,9 +64,10 @@ function addEvents() {
         }
 
         model = {
-            linecdCsv : linecdCsv.slice(0, -1),
-            settings1 : $('#checkbox_settings1').prop('checked')? 1 : 0,
-            settings2 : $('#checkbox_settings2').prop('checked')? 1 : 0
+            linecdCsv: linecdCsv.slice(0, -1),
+            settings1: $('#checkbox_settings1').prop('checked') ? 1 : 0,
+            settings2: $('#checkbox_settings2').prop('checked') ? 1 : 0,
+            expiredOnly: $('#checkbox_expired').prop('checked') ? 1 : 0,
         };
 
         common.callAjax(_url.render_searchbox_detail, model, function (result) {
@@ -76,7 +83,7 @@ function addEvents() {
         });
     });
 
-    $('#btnRegistration').on('click', function () {
+    $('#btnRegister').on('click', function () {
         let linecdCsv = '';
         $('.js-search-chk:checked').each(function () {
             linecdCsv += $(this).val() + ",";
@@ -109,7 +116,7 @@ function addEvents() {
 
 function openCheckTab(stationCD) {
     const query = {
-        sc : stationCD
+        sc: stationCD
     }
     let newwin = window.open(_url.openCheckTab + common.querySerialize(query));
 }

@@ -51,6 +51,7 @@
     <Compile Include="RealEstate\r_asmc_ms_map_add\r_asmc_ms_map_addBL.cs" />
     <Compile Include="RealEstate\r_asmc_ms_list_sh\r_asmc_ms_list_shBL.cs" />
     <Compile Include="RealEstate\r_asmc_ms_reged_list\r_asmc_ms_reged_listBL.cs" />
+    <Compile Include="RealEstate\r_asmc_set_ms\r_asmc_set_msBL.cs" />
     <Compile Include="RealEstate\r_asmc_set_area_check_tab\r_asmc_set_area_check_tabBL.cs" />
     <Compile Include="RealEstate\r_asmc_set_train_check_tab\r_asmc_set_train_check_tabBL.cs" />
     <Compile Include="RealEstate\r_asmc_railway\r_asmc_railwayBL.cs" />
@@ -113,8 +114,6 @@
   <ItemGroup>
     <Content Include="Database\Function\fn_GetMaxBuiltYearMonth.sql" />
     <Content Include="Database\Function\fn_GetMinBuiltYearMonth.sql" />
-    <Content Include="Database\Function\fn_GetCondOptValueText.sql" />
-    <Content Include="Database\Function\fn_GetCondOptOptionKBNName.sql" />
     <Content Include="Database\Function\fn_GetBuildingAge.sql" />
     <Content Include="Database\StoredProcedure\pr_a_assess_d_Insert_D_IntroReq_D_AssReqProgress_D_AssessResult.sql" />
     <Content Include="Database\StoredProcedure\pr_a_assess_d_Select_Screen_by_AssReqID.sql" />
@@ -138,6 +137,7 @@
     <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Update_M_Seller.sql" />
     <Content Include="Database\StoredProcedure\pr_a_contact_Insert_D_Contact.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_whis_Select_D_SellerPossible_by_SellerCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfTemplate_for_ManOpt.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_LineChange.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfMultPurpose.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfContactType.sql" />
@@ -184,6 +184,16 @@
     <Content Include="Database\StoredProcedure\pr_r_asmc_set_area_check_tab_Select_M_RECondAreaRent_by_ConditionSEQ.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_set_area_check_tab_Select_M_RECondAreaSec_by_TownCD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_set_area_check_tab_Select_V_RECondAreaSec.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_area_check_tab_Select_V_RECondAreaSec_by_CityCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_area_check_tab_Select_V_RECondAreaSec_by_TownCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_ms_Check_Exists_TemplateName.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_ms_Insert_RECondMan_All.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_ms_Insert_Template.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_ms_Select_M_RECondManOpt_by_ConditionSEQ.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_ms_Select_M_RECondManRate_by_ConditionSEQ.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_ms_Select_M_RECondManRent_by_ConditionSEQ.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_ms_Select_M_TemplateOpt_by_TemplateNo.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_ms_Select_V_RECondMan_by_MansionCD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_set_train_check_tab_Select_V_RECondLineSta.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_set_train_check_tab_Select_M_RECondLineOpt_by_ConditionSEQ.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_set_train_check_tab_Select_M_RECondLineRent_by_ConditionSEQ.sql" />
@@ -194,6 +204,7 @@
     <Content Include="Database\StoredProcedure\pr_r_asmc_address_Select_Cities_by_RegionCD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_address_Select_M_Region.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_address_Select_Towns_by_Cities.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_train_check_tab_Select_V_RECondLineSta_by_StationCD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_contact_Insert_D_Contact.sql" />
     <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectForOldestDate.sql" />
     <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectForOldestDatecount.sql" />

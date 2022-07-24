@@ -19,7 +19,6 @@ namespace Seruichi.Seller.Web.Controllers
                 return RedirectToAction("Index", "a_login");
             }
 
-            //TempData["a_mypage_uinfo"] = "CheckRedirect";
             return RedirectToAction("Index", "a_mypage_uinfo");
         }
 
@@ -27,11 +26,6 @@ namespace Seruichi.Seller.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            //if (string.IsNullOrEmpty(TempData["a_mypage_uinfo"].ToStringOrEmpty()))
-            //{
-            //    return RedirectToAction("BadRequest", "Error");
-            //}
-
             LoginUser user = SessionAuthenticationHelper.GetUserFromSession();
 
             a_mypage_uinfoBL bl = new a_mypage_uinfoBL();

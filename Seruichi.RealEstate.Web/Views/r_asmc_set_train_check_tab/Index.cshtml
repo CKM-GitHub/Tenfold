@@ -4,8 +4,8 @@
     ViewBag.Title = "査定条件設定確認";
     Layout = "~/Views/Shared/_r_withoutHeaderAndFooterLayout.cshtml";
 
-    var css1 = Model.ValidFLG == 1 ? "cap-text-primary" : "text-danger";
-    var css2 = Model.ExpDateFLG == 1 ? "text-warning" : ""; ;
+    var css1 = Model.ValidFLG == 0 ? "cap-text-primary" : Model.ValidFLG == 1 ? "text-danger" : "";
+    var css2 = Model.Expired == 1 ? "text-warning" : ""; ;
 }
 @section styles{
     @Styles.Render("~/Content/realEstate_css_common")
@@ -66,7 +66,7 @@
                                         <th scope="col" style="width: 100px;">買取利回り率</th>
                                         <th scope="col" style="width: 100px;">駅距離(以内)</th>
 
-                                        @foreach (var capitions in ViewBag.M_RECondLineRate.ColHeader)
+                                        @foreach (var capitions in ViewBag.RECondLineRate.ColHeader)
                                         {
                                             <th scope="col" style="width: 100px;">
                                                 <span class="text-danger">@capitions[0]</span>
@@ -78,12 +78,12 @@
                                 </thead>
                                 <tbody>
                                     @{
-                                        int rowCountRate = ViewBag.M_RECondLineRate.RowHeader.Count;
+                                        int rowCountRate = ViewBag.RECondLineRate.RowHeader.Count;
                                     }
                                     @for (int i = 0; i < rowCountRate; i++)
                                     {
-                                        var rowCaptions = ViewBag.M_RECondLineRate.RowHeader[i];
-                                        var items = ViewBag.M_RECondLineRate.RowData[i];
+                                        var rowCaptions = ViewBag.RECondLineRate.RowHeader[i];
+                                        var items = ViewBag.RECondLineRate.RowData[i];
 
                                         <tr>
                                             @if (i == 0)
@@ -119,7 +119,7 @@
                                     <tr>
                                         <th scope="col" style="width: 100px;">1㎡あたりの家賃</th>
                                         <th scope="col" style="width: 100px;">駅距離(以内)</th>
-                                        @foreach (var capitions in ViewBag.M_RECondLineRent.ColHeader)
+                                        @foreach (var capitions in ViewBag.RECondLineRent.ColHeader)
                                         {
                                             <th scope="col" style="width: 100px;">
                                                 <span class="text-danger">@capitions[0]</span>
@@ -131,12 +131,12 @@
                                 </thead>
                                 <tbody>
                                     @{
-                                        int rowCountRent = ViewBag.M_RECondLineRent.RowHeader.Count;
+                                        int rowCountRent = ViewBag.RECondLineRent.RowHeader.Count;
                                     }
                                     @for (int i = 0; i < rowCountRent; i++)
                                     {
-                                        var rowCaptions = ViewBag.M_RECondLineRent.RowHeader[i];
-                                        var items = ViewBag.M_RECondLineRent.RowData[i];
+                                        var rowCaptions = ViewBag.RECondLineRent.RowHeader[i];
+                                        var items = ViewBag.RECondLineRent.RowData[i];
                                         <tr>
                                             @if (i == 0)
                                             {
@@ -169,7 +169,7 @@
                     <div class="card-body container">
 
                         <div class="border table-responsive cap-con-form mx-auto">
-                            @Html.Partial("_r_asmc_M_RECondLineOpt_list")
+                            @Html.Partial("_r_asmc_RECondLineOptTable")
                         </div>
                     </div>
                 </div>

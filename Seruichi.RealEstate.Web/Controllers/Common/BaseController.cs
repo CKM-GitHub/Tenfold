@@ -113,6 +113,16 @@ namespace Seruichi.RealEstate.Web.Controllers
             return Session[BrowsingHistoryAttribute.PREVIOUS_URL].ToStringOrEmpty();
         }
 
+        protected string GetPreviousController()
+        {
+            var arrayURL = Session[BrowsingHistoryAttribute.PREVIOUS_URL].ToStringOrEmpty().Split('/');
+            if (arrayURL.Length >= 2)
+            {
+                return arrayURL[1];
+            }
+            return "";
+        }
+
         protected T GetFromQueryString<T>() where T : new()
         {
             var obj = new T();

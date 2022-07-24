@@ -12,8 +12,8 @@
         public string EndDistance { get; set; }
         public string StartRooms { get; set; }
         public string EndRooms { get; set; }
-        public string Unregistered { get; set; }
-        public string Priority { get; set; }
+        public byte Unregistered { get; set; }
+        public int Priority { get; set; }
     }
 
     public class M_Pref_CityGP_City_Town

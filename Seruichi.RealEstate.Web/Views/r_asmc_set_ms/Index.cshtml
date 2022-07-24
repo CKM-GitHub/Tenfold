@@ -1,0 +1,816 @@
+﻿@model Models.RealEstate.r_asmc_set_ms.r_asmc_set_ms_Model
+
+@{
+    ViewBag.Title = "査定設定[マンション]";
+    Layout = "~/Views/Shared/_r_menuLayout.cshtml";
+}
+@section styles{
+    @Styles.Render("~/Content/r_asmc_set_ms")
+}
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <div class="col-md-12 col-12 mb-3 mb-sm-0">
+                            <h1 class="h2 mb-0 ls-tight">査定条件設定(マンション)</h1>
+                            <span class="text-muted small">査定条件＞設定＞マンション指定から設定＞地図から設定</span>
+                        </div>
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
+                                  <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+                        </div>
+                    </div>
+                    <div class="ps-5 pt-2 ">
+                        <div class="row">
+                            <div class="col-12 border-end-md-2">
+                                <div class="w-100">
+                                    <div class="card-body mb-0 pb-0">
+                                        <div class="row">
+                                            <div class="col-auto">
+                                                <div class="icon icon-shape bg-dark text-white text-lg rounded-circle">
+                                                    <i class="fa fa-building" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <span id="MansionCD" hidden>@Model.MansionCD</span>
+                                                <span id="MansionName"class="h3 font-bold mb-0">@Model.MansionName</span>
+                                                <span class="h6 font-semibold text-muted text-sm d-block mb-2">住所 : <span id="Address">@Model.Address</span></span>
+                                                <span class="h6 font-semibold text-muted text-sm d-block">登録会社数 : <span id="RealEstateCount">@Model.RealEstateCount</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="navbar-divider my-5 opacity-90">
+
+                    <ul class="nav nav-pills mb-3 ps-5" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
+                                    type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                                買取利回り率設定
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-rent-tab" data-bs-toggle="pill" data-bs-target="#pills-rent"
+                                    type="button" role="tab" aria-controls="pills-rent" aria-selected="false">
+                                家賃設定
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-opt-tab" data-bs-toggle="pill" data-bs-target="#pills-opt"
+                                    type="button" role="tab" aria-controls="pills-opt" aria-selected="false">
+                                オプション
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-attribute-tab" data-bs-toggle="pill" data-bs-target="#pills-attribute"
+                                    type="button" role="tab" aria-controls="pills-attribute" aria-selected="false">
+                                属性項目
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div class="card shadow border-0 mb-7">
+                            <div class="card-header">
+                                <h5 class="mb-0">買取利回り率設定</h5>
+                            </div>
+                            @*<div class="card-body overflow-x-auto w-md-80 mx-auto">*@
+                            <div class="card-body overflow-x-auto mx-auto">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-nowrap table-bordered w-auto">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col" style="width: 100px;">買取利回り率</th>
+                                                <td>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control text-end w-24" maxlength="7" name="Rate" id="Rate" value="@Model.Rate">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">%</span>
+                                                        </div>
+                                                    </div>
+                                                    <span class="cap-errormsg-bottom" style="font-size:1em;" id="errorRate"></span>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" data-bs-keyboard="false" data-bs-backdrop="static" id="pills-rent" role="tabpanel"
+                         aria-labelledby="pills-rent-tab">
+                        <div class="card shadow border-0 mb-7">
+                            <div class="card-header">
+                                <h5 class="mb-0">家賃設定</h5>
+                            </div>
+                            <div class="card-body overflow-x-auto max-w-md-full mx-auto">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-nowrap table-bordered">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col" style="width: 100px;">1㎡あたりの家賃</th>
+                                                <td>
+                                                    <div class="pb-2">
+                                                        <div class="input-group">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text">上限</span>
+                                                            </div>
+                                                            <input type="text" class="form-control text-end" maxlength="13" name="RentHigh" id="RentHigh" value="@Model.RentHigh">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text">円</span>
+                                                            </div>
+                                                        </div>
+                                                        <span class="cap-errormsg-bottom" style="font-size:1em;" id="errorRentHigh"></span>
+                                                    </div>
+                                                    <div class="input-group">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">下限</span>
+                                                        </div>
+                                                        <input type="text" class="form-control text-end" maxlength="13" name="RentLow" id="RentLow" value="@Model.RentLow">
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text">円</span>
+                                                        </div>
+                                                    </div>
+                                                    <span class="cap-errormsg-bottom" style="font-size:1em;" id="errorRentLow"></span>
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" data-bs-keyboard="false" data-bs-backdrop="static" id="pills-opt" role="tabpanel"
+                         aria-labelledby="pills-opt-tab">
+                        <div class="card shadow border-0 mb-7">
+                            <div class="card-header d-md-inline-flex">
+                                <h5 class="mb-0">オプション</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-md-flex align-items-start container-fluid mx-auto">
+                                    <div class="w-100 border shadow p-5">
+                                        <div class="row">
+                                            <div class="col-12 col-md-4 overflow-y-auto p-3 border ">
+                                                <div class="nav flex-md-column nav-pills me-3" id="v-pills-tab" role="tablist"
+                                                     aria-orientation="vertical">
+                                                    <button class="nav-link js-opt-button active" id="optpanel1-tab-btn" data-bs-toggle="pill"
+                                                            data-bs-target="#optpanel1-tab" type="button" role="tab" aria-controls="optpanel1-tab"
+                                                            aria-selected="true" data-cap-optkbn="1">
+                                                        総戸数
+                                                    </button>
+                                                    <button class="nav-link js-opt-button" id="optpanel2-tab-btn" data-bs-toggle="pill"
+                                                            data-bs-target="#optpanel2-tab" type="button" role="tab" aria-controls="optpanel2-tab"
+                                                            aria-selected="false" data-cap-optkbn="2">
+                                                        所在階
+                                                    </button>
+                                                    <button class="nav-link js-opt-button" id="optpanel4-tab-btn" data-bs-toggle="pill"
+                                                            data-bs-target="#optpanel4-tab" type="button" role="tab" aria-controls="optpanel4-tab"
+                                                            aria-selected="false" data-cap-optkbn="4">
+                                                        専有面積
+                                                    </button>
+                                                    <button class="nav-link js-opt-button" id="optpanel5-tab-btn" data-bs-toggle="pill"
+                                                            data-bs-target="#optpanel5-tab" type="button" role="tab" aria-controls="optpanel5-tab"
+                                                            aria-selected="false" data-cap-optkbn="5">
+                                                        バルコニー
+                                                    </button>
+                                                    <button class="nav-link js-opt-button" id="optpanel6-tab-btn" data-bs-toggle="pill"
+                                                            data-bs-target="#optpanel6-tab" type="button" role="tab" aria-controls="optpanel6-tab"
+                                                            aria-selected="false" data-cap-optkbn="6">
+                                                        主採光
+                                                    </button>
+                                                    <button class="nav-link js-opt-button" id="optpanel8-tab-btn" data-bs-toggle="pill"
+                                                            data-bs-target="#optpanel8-tab" type="button" role="tab" aria-controls="optpanel8-tab"
+                                                            aria-selected="false" data-cap-optkbn="8">
+                                                        部屋数
+                                                    </button>
+                                                    <button class="nav-link js-opt-button" id="optpanel9-tab-btn" data-bs-toggle="pill"
+                                                            data-bs-target="#optpanel9-tab" type="button" role="tab" aria-controls="optpanel9-tab"
+                                                            aria-selected="false" data-cap-optkbn="9">
+                                                        バス・トイレ
+                                                    </button>
+                                                    <button class="nav-link js-opt-button" id="optpanel10-tab-btn" data-bs-toggle="pill"
+                                                            data-bs-target="#optpanel10-tab" type="button" role="tab" aria-controls="optpanel10-tab"
+                                                            aria-selected="false" data-cap-optkbn="10">
+                                                        土地権利
+                                                    </button>
+                                                    <button class="nav-link js-opt-button" id="optpanel11-tab-btn" data-bs-toggle="pill"
+                                                            data-bs-target="#optpanel11-tab" type="button" role="tab" aria-controls="optpanel11-tab"
+                                                            aria-selected="false" data-cap-optkbn="11">
+                                                        賃貸状況
+                                                    </button>
+                                                    <button class="nav-link js-opt-button" id="optpanel12-tab-btn" data-bs-toggle="pill"
+                                                            data-bs-target="#optpanel12-tab" type="button" role="tab" aria-controls="optpanel12-tab"
+                                                            aria-selected="false" data-cap-optkbn="12">
+                                                        管理状況
+                                                    </button>
+                                                    <button class="nav-link js-opt-button" id="optpanel13-tab-btn" data-bs-toggle="pill"
+                                                            data-bs-target="#optpanel13-tab" type="button" role="tab" aria-controls="optpanel13-tab"
+                                                            aria-selected="false" data-cap-optkbn="13">
+                                                        売却希望時期
+                                                    </button>
+                                                </div>
+                                                <hr class="navbar-divider my-5 opacity-90">
+                                                <p class="text-center">
+                                                    <button type="button" class="btn-sm btn-primary p-1 m-0 text-nowrap"
+                                                            data-bs-toggle="modal" data-bs-target="#TemplateModal">
+                                                        テンプレート読込
+                                                    </button>
+                                                </p>
+                                            </div>
+                                            <div class="col-12 col-md-8  p-3">
+                                                <span class="small text-danger">※買取利回り率のプラス・マイナスをご確認の上入力してください。</span>
+                                                <hr class="navbar-divider my-5 opacity-90">
+                                                <div class="tab-content" id="v-pills-tabContent">
+                                                    <div class="tab-pane show active" id="optpanel1-tab" role="tabpanel" 
+                                                         aria-labelledby="optpanel1-tab-btn">
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-3 pe-0 me-0">
+                                                                    <input type="text" class="form-control text-end w-100" maxlength="3" id="Opt1_Value">
+                                                                </div>
+                                                                <div class="col-9 ps-1 ms-0">
+                                                                    <span class="form-control-plaintext text-start">戸以内査定・買取対象外</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane" id="optpanel2-tab" role="tabpanel" aria-labelledby="optpanel2-tab">
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                               name="Opt2_OptionKBN" id="Opt2_OptionKBN1" value="2">
+                                                                        <label class="form-check-label" for="Opt2_OptionKBN1">
+                                                                            1階査定・買取対象外
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                               name="Opt2_OptionKBN" id="Opt2_OptionKBN2" value="3">
+                                                                        <label class="form-check-label" for="Opt2_OptionKBN2">
+                                                                            <div class="row">
+                                                                                <div class="col-12 pe-0 me-0"><span>最上階 買取利回り率設定</span></div>
+                                                                                <div class="col-md-4 pe-0 me-0">
+                                                                                    <input type="text" class="form-control w-100 text-end"
+                                                                                           maxlength="7" id="Opt2_IncDecRate" disabled>
+                                                                                </div>
+                                                                                <div class="col-md-3 ps-1 ms-0">
+                                                                                    <span class="form-control-plaintext text-start">%</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane" id="optpanel4-tab" role="tabpanel" aria-labelledby="optpanel4-tab">
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <div class="d-inline-flex">
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="form-control text-end" maxlength="3" id="Opt4_Value">
+                                                                        <div class="input-group-append">
+                                                                            <span class="input-group-text">㎡</span>
+                                                                        </div>
+                                                                        <div class="input-group-append">
+                                                                            <button class="btn btn-secondary dropdown-toggle input-group-text ps-1 pe-1"
+                                                                                    type="button" id="Opt4_handlingOptionKBN" data-bs-toggle="dropdown"
+                                                                                    aria-expanded="false" data-cap-value-selected="1">
+                                                                                以内
+                                                                            </button>
+                                                                            <ul class="dropdown-menu" aria-labelledby="Opt4_handlingOptionKBN">
+                                                                                <li><a class="dropdown-item js-opt-li" data-cap-value="1" style="cursor:pointer">以内</a></li>
+                                                                                <li><a class="dropdown-item js-opt-li" data-cap-value="4" style="cursor:pointer">～&emsp;</a></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 align-self-center">査定・買取対象外</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane" id="optpanel5-tab" role="tabpanel" aria-labelledby="optpanel5-tab-btn">
+                                                        <p>バルコニーなし査定・買取対象外</p>
+                                                    </div>
+                                                    <div class="tab-pane" id="optpanel6-tab" role="tabpanel" aria-labelledby="optpanel6-tab-btn">
+                                                        <p>北向け 査定・買取対象外</p>
+                                                    </div>
+                                                    <div class="tab-pane" id="optpanel8-tab" role="tabpanel" aria-labelledby="optpanel8-tab-btn">
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="cok-12 col-md-7">
+                                                                    <div class="d-inline-flex pt-md-5">
+                                                                        <div class="input-group">
+                                                                            <input type="text" class="form-control text-end" maxlength="3" id="Opt8_Value">
+                                                                            <div class="input-group-append">
+                                                                                <span class="input-group-text">部屋</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-md-5">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                               name="Opt8_NotApplicableFLG" id="Opt8_NotApplicableFLG1" value="0">
+                                                                        <label class="form-check-label" for="Opt8_NotApplicableFLG1">
+                                                                            <div class="row">
+                                                                                <div class="col-12 pe-0 me-0"><span>買取利回り率設定</span></div>
+                                                                                <div class="col-md-6 pe-0 me-0">
+                                                                                    <input type="text" class="form-control w-100 text-end"
+                                                                                           maxlength="7" id="Opt8_IncDecRate" disabled>
+                                                                                </div>
+                                                                                <div class="col-md-3 ps-1 ms-0">
+                                                                                    <span class="form-control-plaintext text-start">%</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                               name="Opt8_NotApplicableFLG" id="Opt8_NotApplicableFLG2" value="1">
+                                                                        <label class="form-check-label" for="Opt8_NotApplicableFLG2">
+                                                                            査定・買取対象外
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane" id="optpanel9-tab" role="tabpanel" aria-labelledby="optpanel9-tab-btn">
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="cok-12 col-md-5">
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="radio"
+                                                                                       name="Opt9_CategoryKBN" id="Opt9_CategoryKBN1" value="1">
+                                                                                <label class="form-check-label" for="Opt9_CategoryKBN1">
+                                                                                    セパレート
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="radio"
+                                                                                       name="Opt9_CategoryKBN" id="Opt9_CategoryKBN2" value="2">
+                                                                                <label class="form-check-label" for="Opt9_CategoryKBN2">
+                                                                                    ユニットバス
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="form-check disabled">
+                                                                                <input class="form-check-input" type="radio"
+                                                                                       name="Opt9_CategoryKBN" id="Opt9_CategoryKBN3" value="3">
+                                                                                <label class="form-check-label" for="Opt9_CategoryKBN3">
+                                                                                    シャワーブース
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-md-5">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                               name="Opt9_NotApplicableFLG" id="Opt9_NotApplicableFLG1" value="0">
+                                                                        <label class="form-check-label" for="Opt9_NotApplicableFLG1">
+                                                                            <div class="row">
+                                                                                <div class="col-12 pe-0 me-0"><span>買取利回り率設定</span></div>
+                                                                                <div class="col-md-6 pe-0 me-0">
+                                                                                    <input type="text" class="form-control w-100 text-end"
+                                                                                           maxlength="7" id="Opt9_IncDecRate" disabled>
+                                                                                </div>
+                                                                                <div class="col-md-3 ps-1 ms-0">
+                                                                                    <span class="form-control-plaintext text-start">%</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </label>
+                                                                    </div>
+
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                               name="Opt9_NotApplicableFLG" id="Opt9_NotApplicableFLG2" value="1">
+                                                                        <label class="form-check-label" for="Opt9_NotApplicableFLG2">
+                                                                            査定・買取対象外
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane" id="optpanel10-tab" role="tabpanel" aria-labelledby="optpanel10-tab-btn">
+                                                        <p>借地権査定・買取対象外</p>
+                                                    </div>
+                                                    <div class="tab-pane" id="optpanel11-tab" role="tabpanel" aria-labelledby="optpanel11-tab-btn">
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="cok-12 col-md-5">
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <div class="form-check disabled">
+                                                                                <input class="form-check-input" type="radio"
+                                                                                       name="Opt11_CategoryKBN" id="Opt11_CategoryKBN1" value="1">
+                                                                                <label class="form-check-label" for="Opt11_CategoryKBN1">
+                                                                                    賃貸中
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="radio"
+                                                                                       name="Opt11_CategoryKBN" id="Opt11_CategoryKBN2" value="2">
+                                                                                <label class="form-check-label" for="Opt11_CategoryKBN2">
+                                                                                    サブリース
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="form-check disabled">
+                                                                                <input class="form-check-input" type="radio"
+                                                                                       name="Opt11_CategoryKBN" id="Opt11_CategoryKBN3" value="3">
+                                                                                <label class="form-check-label" for="Opt11_CategoryKBN3">
+                                                                                    空室
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-md-5">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                               name="Opt11_NotApplicableFLG" id="Opt11_NotApplicableFLG1" value="0">
+                                                                        <label class="form-check-label" for="Opt11_NotApplicableFLG1">
+                                                                            <div class="row">
+                                                                                <div class="col-12 pe-0 me-0"><span>買取利回り率設定</span></div>
+                                                                                <div class="col-md-6 pe-0 me-0">
+                                                                                    <input type="text" class="form-control w-100 text-end"
+                                                                                           maxlength="7" id="Opt11_IncDecRate" disabled>
+                                                                                </div>
+                                                                                <div class="col-md-3 ps-1 ms-0">
+                                                                                    <span class="form-control-plaintext text-start">%</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                               name="Opt11_NotApplicableFLG" id="Opt11_NotApplicableFLG2" value="1">
+                                                                        <label class="form-check-label" for="Opt11_NotApplicableFLG2">
+                                                                            査定・買取対象外
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane" id="optpanel12-tab" role="tabpanel" aria-labelledby="optpanel12-tab-btn">
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <div class="cok-12 col-md-5">
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input" type="radio"
+                                                                                       name="Opt12_CategoryKBN" id="Opt12_CategoryKBN1" value="1">
+                                                                                <label class="form-check-label" for="Opt12_CategoryKBN1">
+                                                                                    自主管理
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="form-check disabled">
+                                                                                <input class="form-check-input" type="radio"
+                                                                                       name="Opt12_CategoryKBN" id="Opt12_CategoryKBN2" value="2">
+                                                                                <label class="form-check-label" for="Opt12_CategoryKBN2">
+                                                                                    管理委託
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-md-5">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                               name="Opt12_NotApplicableFLG" id="Opt12_NotApplicableFLG1" value="0">
+                                                                        <label class="form-check-label" for="Opt12_NotApplicableFLG1">
+                                                                            <div class="row">
+                                                                                <div class="col-12 pe-0 me-0"><span>買取利回り率設定</span></div>
+                                                                                <div class="col-md-6 pe-0 me-0">
+                                                                                    <input type="text" class="form-control w-100 text-end"
+                                                                                           maxlength="7" id="Opt12_IncDecRate" disabled>
+                                                                                </div>
+                                                                                <div class="col-md-3 ps-1 ms-0">
+                                                                                    <span class="form-control-plaintext text-start">%</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio"
+                                                                               name="Opt12_NotApplicableFLG" id="Opt12_NotApplicableFLG2" value="1">
+                                                                        <label class="form-check-label" for="Opt12_NotApplicableFLG2">
+                                                                            査定・買取対象外
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane" id="optpanel13-tab" role="tabpanel" aria-labelledby="optpanel13-tab-btn">
+                                                        <div class="d-inline-flex pt-md-5">
+                                                            <div class="form-check pe-2">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="Opt13_CategoryKBN" id="Opt13_CategoryKBN1" value="1">
+                                                                <label class="form-check-label" for="Opt13_CategoryKBN1">
+                                                                    2週間以上
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check disabled pe-2">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="Opt13_CategoryKBN" id="Opt13_CategoryKBN2" value="2">
+                                                                <label class="form-check-label" for="Opt13_CategoryKBN2">
+                                                                    1ヶ月以上
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check disabled pe-2">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="Opt13_CategoryKBN" id="Opt13_CategoryKBN3" value="3">
+                                                                <label class="form-check-label" for="Opt13_CategoryKBN3">
+                                                                    3ヶ月以上
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check disabled pe-2">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="Opt13_CategoryKBN" id="Opt13_CategoryKBN4" value="4">
+                                                                <label class="form-check-label" for="Opt13_CategoryKBN4">
+                                                                    6ヶ月以上
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check disabled pe-2">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="Opt13_CategoryKBN" id="Opt13_CategoryKBN5" value="5">
+                                                                <label class="form-check-label" for="Opt13_CategoryKBN5">
+                                                                    1年以上
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check disabled">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="Opt13_CategoryKBN" id="Opt13_CategoryKBN6" value="6">
+                                                                <label class="form-check-label" for="Opt13_CategoryKBN6">
+                                                                    その他
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <label class="form-check-label">
+                                                            査定・買取対象外
+                                                        </label>
+                                                    </div>
+                                                    <hr class="navbar-divider my-5 opacity-90">
+                                                    <span class="cap-errormsg-bottom text-end js-opt-error" id="errorOpt1"></span>
+                                                    <span class="cap-errormsg-bottom text-end js-opt-error" id="errorOpt2"></span>
+                                                    <span class="cap-errormsg-bottom text-end js-opt-error" id="errorOpt4"></span>
+                                                    <span class="cap-errormsg-bottom text-end js-opt-error" id="errorOpt8"></span>
+                                                    <span class="cap-errormsg-bottom text-end js-opt-error" id="errorOpt9"></span>
+                                                    <span class="cap-errormsg-bottom text-end js-opt-error" id="errorOpt11"></span>
+                                                    <span class="cap-errormsg-bottom text-end js-opt-error" id="errorOpt12"></span>
+                                                    <span class="cap-errormsg-bottom text-end js-opt-error" id="errorOpt13"></span>
+                                                    <div class="text-end">
+                                                        <button type="button" class="btn btn-secondary" id="btnOptReset">リセット</button>
+                                                        <button type="button" class="btn btn-primary" id="btnOptAdd">追加</button>
+                                                        <input type="hidden" id="hdnSelectedKBN" value="1"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ps-md-5 pe-md-5 w-100 pt-5 pt-md-0">
+                                        <span class="cap-errormsg-bottom" id="errorTableOpt"></span>
+                                        <div class="border table-responsive shadow">
+                                            <div id="tableOptContainer">
+                                                @Html.Partial("_r_asmc_RECondManOptTable")
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-attribute" role="tabpanel" aria-labelledby="pills-attribute-tab">
+                        <div class="card shadow border-0 mb-7">
+                            <div class="card-header">
+                                <h5 class="mb-0">属性項目</h5>
+                            </div>
+                            <div class="card-body overflow-x-auto">
+                                <div class="row d-flex justify-content-center align-items-center h-100">
+                                    <div class="col-12">
+                                        <div class="row g-0">
+                                            <div class="col-lg-2 bg-indigo p-md-5">
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline cap-fon-form-w200">
+                                                        <h5 class="pb-2">担当者</h5>
+                                                        <select class="form-select" name="REStaffCD" id="REStaffCD">
+                                                            @if (String.IsNullOrEmpty(Model.REStaffCD))
+                                                            {
+                                                                <option selected value="">なし</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="">なし</option>
+                                                            }
+                                                            @foreach (Models.DropDownListItem item in ViewBag.REStaffDropDownListItems)
+                                                            {
+                                                                if (item.Value == Model.REStaffCD)
+                                                                {
+                                                                    <option selected class="js-selectable" value="@item.Value">@item.DisplayText</option>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <option class="js-selectable" value="@item.Value">@item.DisplayText</option>
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline cap-fon-form-w200">
+                                                        <h5 class="pb-2">有効期限日</h5>
+                                                        <input type="date" class="form-control form-control-lg text-center"
+                                                               name="ExpDate" id="ExpDate" value="@Model.ExpDate" />
+                                                        <div class="d-flex">
+                                                            <button type="button" class="btn btn-primary p-2 m-1 js-btn-addmonth" data-cap-addend="1">1ヶ月</button>
+                                                            <button type="button" class="btn btn-primary p-2 m-1 js-btn-addmonth" data-cap-addend="2">2ヶ月</button>
+                                                            <button type="button" class="btn btn-primary p-2 m-1 js-btn-addmonth" data-cap-addend="3">3ヶ月</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 p-md-5">
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline">
+                                                        <h5 class="pb-2">優先度</h5>
+                                                        <div class="d-inline-flex">
+                                                            @if (Model.Priority > 0)
+                                                            {
+                                                                <input class="form-check-input" type="checkbox" id="PriorityCheck" checked>
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-check-input" type="checkbox" id="PriorityCheck">
+                                                            }
+                                                            <div class="ps-3 star-rating text-danger">
+                                                                @for (int i = 1; i <= 5; i++)
+                                                                {
+                                                                    if (i <= Model.Priority)
+                                                                    {
+                                                                        <span class="fa fa-star" data-rating="@i"></span>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span class="fa fa-star-o" data-rating="@i"></span>
+                                                                    }
+                                                                }
+                                                                <input type="hidden" name="Priority" id="Priority" class="rating-value" value="@Model.Priority">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr class="navbar-divider mb-4 my-5 opacity-20 pt-0 pb-0 mt-0 mb-0">
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline">
+                                                        <h5 class="pb-2">優先査定条件</h5>
+                                                        <div class="d-inline-flex">
+                                                            @if (Model.PrecedenceFlg > 0)
+                                                            {
+                                                                <input class="form-check-input" type="checkbox" name="PrecedenceFlg" id="PrecedenceFlg" checked>
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-check-input" type="checkbox" name="PrecedenceFlg" id="PrecedenceFlg">
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr class="navbar-divider mb-4 my-5 opacity-20 pt-0 pb-0 mt-0 mb-0">
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline">
+                                                        <h5 class="pb-2">査定・買取不可</h5>
+                                                        <div class="d-inline-flex">
+                                                            @if (Model.NotApplicableFlg > 0)
+                                                            {
+                                                                <input class="form-check-input" type="checkbox" name="NotApplicableFlg" id="NotApplicableFlg" checked>
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-check-input" type="checkbox" name="NotApplicableFlg" id="NotApplicableFlg">
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 p-md-5">
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline">
+                                                        <h5 class="pb-2">備考</h5>
+                                                        <textarea class="form-control custom-control" rows="5"
+                                                                  maxlength="500" name="Remark" id="Remark">@Model.Remark</textarea>
+                                                        <span class="cap-errormsg-bottom text-start" id="errorRemark"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="ValidFLG" id="hdnValidFLG" value="@Model.ValidFLG" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-footer">
+                        <div class="text-right mt-3 float-end">
+                            <input type="hidden" id="ValidationResult" value="@Model.ValidationResultJson"/>
+                            <button type="button" class="btn btn-lg btn-primary" id="btnShowConfirmation" data-bs-toggle="modal"
+                                    data-bs-target="#checkModal">
+                                確認
+                            </button>
+                            <button type="button" class="btn btn-lg btn-default" data-bs-toggle="modal"
+                                    data-bs-target="#modal-changecal">
+                                取消
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- テンプレート -->
+            <div class="modal fade" id="TemplateModal" tabindex="-1" aria-labelledby="TemplateModal"
+                 data-bs-keyboard="false" data-bs-backdrop="static" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="TemplateModal-Title">テンプレート読込</h5>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="w-100">
+                                <label class="form-label" for="form3Examplev4">テンプレート選択</label>
+                                <select class="form-select w-100" name="TemplateSelect" id="TemplateSelect">
+                                    @foreach (Models.DropDownListItem item in ViewBag.TemplateDropDownListItems)
+                                    {
+                                        <option class="js-selectable" value="@item.Value">@item.DisplayText</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="mt-0 pt-0">
+                                <small class="text-primary text-nowrap">画面上で設定中の条件は一旦クリアされます。</small>
+                            </div>
+                            <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                            @if (ViewBag.TemplateDropDownListItems.Count == 0)
+                            {
+                                <button type="button" class="btn btn-lg btn-primary" id="btnLoadTemplate" disabled>読込</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-lg btn-primary" id="btnLoadTemplate">読込</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 変更取消 -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                 id="modal-changecal">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">変更取消</h4>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe pt-0 p-0">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post"
+                                          style="text-align: center;">
+                                        <h1 class="cap-icon-h1 border border-danger border-8"><i class="fa fa-exclamation-circle pt-1 pb-1 ps-3 pe-3 cap-icon-i text-danger"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center">変更内容を破棄してもよろしいですか？</h4>
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-lg btn-primary" id="btnDiscard">破棄</button>
+                            <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+@Html.Partial("_ConfirmationMsgPopup")
+@section Scripts{
+    @Scripts.Render("~/bundles/r_asmc_set_ms")
+}

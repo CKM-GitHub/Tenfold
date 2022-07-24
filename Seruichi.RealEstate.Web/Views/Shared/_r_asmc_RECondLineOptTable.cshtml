@@ -1,0 +1,57 @@
+﻿<table class="table table-hover table-nowrap" id="tableOpt">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">条件名</th>
+            <th scope="col">条件内容</th>
+            <th scope="col">買取利回り率</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.RECondLineOptList)
+        {
+            var jsonData = Newtonsoft.Json.JsonConvert.SerializeObject(item);
+            var cmmBl = new Seruichi.BL.CommonBL();
+            var optionKbnName = cmmBl.Get_RECondOpt_OptionKBNName(item.OptionKBN);
+            var valueText = cmmBl.Get_RECondOpt_ValueText(item.OptionKBN, item.CategoryKBN, item.Value1);
+            var handlingText1 = cmmBl.Get_RECondOpt_HandlingKBN1Text(item.HandlingKBN1);
+            var notApplicableText = cmmBl.Get_RECondOpt_NotApplicableFLGText(item.NotApplicableFLG);
+            <tr>
+                <!--条件名-->
+                @if (ViewBag.InputMode)
+                {
+                    <td><a class="text-danger"><i class="fa fa-close pe-1 js-opt-xbtn"></i></a>@optionKbnName</td>
+                }
+                else
+                {
+                    <td>@optionKbnName</td>
+                }
+                <!--条件内容-->
+                @if (item.OptionKBN == 1)
+                {
+                    <td>総戸数 <span class="text-danger">@valueText</span>戸 以内</td>
+                }
+                else if (item.OptionKBN == 4)
+                {
+                    <td><span class="text-danger">@valueText</span>㎡<span class="text-danger">@handlingText1</span></td>
+                }
+                else if (item.OptionKBN == 8)
+                {
+                    <td><span class="text-danger">@valueText</span>部屋</td>
+                }
+                else
+                {
+                    <td><span class="text-danger">@valueText</span></td>
+                }
+                <!--買取利回り率-->
+                @if (item.NotApplicableFLG == 1)
+                {
+                    <td>@notApplicableText</td>
+                }
+                else
+                {
+                    <td><span class="text-danger">@item.IncDecRate</span>%</td>
+                }
+                <td hidden>@jsonData</td>
+            </tr>}
+    </tbody>
+</table>

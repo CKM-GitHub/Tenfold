@@ -18,7 +18,7 @@ namespace Seruichi.BL.RealEstate.r_asmc_set_train_check_tab
             };
 
             DBAccess db = new DBAccess();
-            DataTable dt = db.SelectDatatable("pr_r_asmc_set_train_check_tab_Select_M_RECondLineSta_by_StationCD", sqlParams);
+            DataTable dt = db.SelectDatatable("pr_r_asmc_set_train_check_tab_Select_V_RECondLineSta_by_StationCD", sqlParams);
 
             if (dt.Rows.Count == 0)
             {
@@ -26,9 +26,7 @@ namespace Seruichi.BL.RealEstate.r_asmc_set_train_check_tab
             }
             else
             {
-                var model = dt.Rows[0].ToEntity<M_RECondLineStaModel>();
-                model = GetV_RECondLineSta(model);
-                return model;
+                return dt.Rows[0].ToEntity<M_RECondLineStaModel>();
             }
         }
 
@@ -204,32 +202,6 @@ namespace Seruichi.BL.RealEstate.r_asmc_set_train_check_tab
             DataTable dt = db.SelectDatatable("pr_r_asmc_set_train_check_tab_Select_M_RECondLineOpt_by_ConditionSEQ", sqlParams);
 
             return dt.AsEnumerableEntity<M_RECondLineOptRow>().ToList();
-        }
-
-
-        public M_RECondLineStaModel GetV_RECondLineSta(M_RECondLineStaModel model)
-        {
-            var sqlParams = new SqlParameter[]
-            {
-                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD },
-                new SqlParameter("@StationCD", SqlDbType.VarChar){ Value = model.StationCD },
-                new SqlParameter("@ConditionSEQ", SqlDbType.Int){ Value = model.ConditionSEQ },
-            };
-
-            DBAccess db = new DBAccess();
-            DataTable dt = db.SelectDatatable("pr_r_asmc_set_train_check_tab_Select_V_RECondLineSta", sqlParams);
-
-            if (dt.Rows.Count > 0)
-            {
-                DataRow dr = dt.Rows[0];
-                model.REStaffName = dr["REStaffName"].ToStringOrEmpty();
-                model.ExpDate = dr["ExpDate"].ToStringOrEmpty();
-                model.Priority = dr["Priority"].ToInt32(0);
-                model.PrecedenceFlg = dr["PrecedenceFlg"].ToByte(0);
-                model.Remark = dr["Remark"].ToStringOrEmpty();
-            }
-
-            return model;
         }
     }
 }
