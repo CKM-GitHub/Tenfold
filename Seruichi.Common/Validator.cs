@@ -590,7 +590,7 @@ namespace Seruichi.Common
 
             if (!Utilities.IsValidEmail(mailAddress))
             {
-                errorcd = "E104";
+                errorcd = "E204";
                 return false;
             }
 

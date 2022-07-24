@@ -34,5 +34,7 @@ namespace Models.Tenfold.t_reale_purchase
         public string Page { get; set; }
         public string Processing { get; set; }
         public string Remarks { get; set; }
+        public string LogFlg { get; set; }
+        public string ProcessKBN { get; set; }
     }
 }

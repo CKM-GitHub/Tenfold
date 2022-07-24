@@ -47,6 +47,7 @@ const commonApiUrl = {
     getDropDownListItemsOfStation: "/api/CommonApi/GetDropDownListItemsOfStation",
     checkBirthday: "/api/CommonApi/CheckBirthday",
     getNearestStations: "/api/CommonApi/GetNearestStations",
+   
 }
 
 const regexPattern = {
@@ -252,9 +253,10 @@ const common = {
             timeout: 100000,
         }).done(function (data) {
             if (successCallback) {
+                
                 successCallback(data);
             }
-        }).fail(function (XMLHttpRequest, status, e) {
+        }).fail(function (XMLHttpRequest, status, e) { 
             common.redirectErrorPage(XMLHttpRequest.status);
             if (failCallback) {
                 failCallback();
@@ -585,9 +587,19 @@ const common = {
             }
 
             if (isDate) {
-                if (!inputValue.match(regexPattern.dateformat)) {
+                if ($ctrl.attr('type') == 'month' && ($("#StartMonth").val() != "" || $("#EndMonth").val() != ""))
+                {
+                    if (!inputValue.match(regexPattern.monthformat)) {
+                        $ctrl.showError(this.getMessage('E125'));
+                        return;
+                    }
+                }
+                else
+                {
+                   if (!inputValue.match(regexPattern.dateformat)) {
                     $ctrl.showError(this.getMessage('E108'));
                     return;
+                    }
                 }
             }
 
@@ -597,6 +609,15 @@ const common = {
                     $("#EndDate").showError(this.getMessage('E111'));
                     $("#StartDate").focus();
                     return;
+                }
+
+                if ($("#StartMonth").val() != undefined && $("#EndMonth").val() != undefined) {
+                    if (!common.compareMonth($("#StartMonth").val(), $("#EndMonth").val())) {
+                        $("#StartMonth").showError(this.getMessage('E126'));
+                        $("#EndMonth").showError(this.getMessage('E126'));
+                        $("#StartMonth").focus();
+                        return;
+                    }
                 }
                 
                 //else {
@@ -691,6 +712,16 @@ const common = {
     },
 
     compareDate: function compareTwoDate(d1, d2) {
+        const date1 = new Date(d1);
+        const date2 = new Date(d2);
+        let success = true;
+        if (date1 > date2) {
+            success = false;
+        }
+        return success;
+    },
+
+    compareMonth: function compareTwoMY(d1, d2) {
         const date1 = new Date(d1);
         const date2 = new Date(d2);
         let success = true;

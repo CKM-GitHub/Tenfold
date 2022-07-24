@@ -9,7 +9,31 @@ namespace Seruichi.BL.Tenfold.t_seller_account
 {
     public class t_seller_accountBL
     {
-        public DataTable get_t_sellerName(string SellerCD)
+        public string get_t_sellerName(string SellerCD)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@SellerCD", SqlDbType.VarChar){ Value = SellerCD },
+                new SqlParameter("@Type", SqlDbType.TinyInt){ Value = 0 }
+            };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("pr_t_get_SellerInfo", sqlParams);
+
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+            var e = dt.AsEnumerable();
+            foreach (DataRow row in dt.Rows)
+            {
+                row["SellerName"] = crypt.DecryptFromBase64(row.Field<string>("SellerName"), decryptionKey);
+            }
+            if (dt.Rows.Count > 0)
+                return dt.Rows[0]["SellerName"].ToString();
+            else
+                return string.Empty;
+        }
+
+        public string get_t_sellerPossibleTime(string SellerCD)
         {
             var sqlParams = new SqlParameter[]
             {
@@ -20,17 +44,17 @@ namespace Seruichi.BL.Tenfold.t_seller_account
             DBAccess db = new DBAccess();
             var dt = db.SelectDatatable("pr_t_seller_account_Select_M_Seller_By_SellerCD", sqlParams);
 
-            AESCryption crypt = new AESCryption();
-            string decryptionKey = StaticCache.GetDataCryptionKey();
-            var e = dt.AsEnumerable();
+           
             foreach (DataRow row in dt.Rows)
             {
-                row["SellerName"] = crypt.DecryptFromBase64(row.Field<string>("SellerName"), decryptionKey);
+                row["PossibleTimes"] =row.Field<int>("PossibleTimes");
             }
-            return dt;
+            if (dt.Rows.Count > 0)
+                return dt.Rows[0]["PossibleTimes"].ToString();
+            else
+                return string.Empty;
         }
 
-       
         public DataTable get_t_seller_Info(t_seller_accountModel model)
         {
             var sqlParams = new SqlParameter[]

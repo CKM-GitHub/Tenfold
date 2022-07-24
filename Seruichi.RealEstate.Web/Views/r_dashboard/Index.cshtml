@@ -29,7 +29,7 @@
                             <div class="card mb-5">
                                 <div class="card-body text-center mb-5 mb-md-0">
                                     @*<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-                                         class="rounded-circle img-fluid" id="imgProfile" style="width: 150px;">*@
+                    class="rounded-circle img-fluid" id="imgProfile" style="width: 150px;">*@
                                     <img alt="avatar"
                                          class="rounded-circle img-fluid" id="imgProfile" style="width: 150px;">
                                     <h5 class="my-1" id="staffName"></h5>
@@ -42,97 +42,197 @@
                         </div>
 
                         <div class="col-12 col-md-9">
-                            <div class="card shadow border-0 mb-6">
-                                <div class="card-header">
-                                    <h5 class="mb-0">
-                                        情報
-                                    </h5>
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="card shadow border-0 mb-6">
+                                        <div class="card-header">
+                                            <h5 class="mb-0">
+                                                送客可能枠
+
+                                            </h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="float-start">
+                                                <div class=" float-start pb-2">
+                                                    <span class="h6 font-semibold text-muted text-sm d-block mb-2">当月送客可能枠</span>
+                                                    <span class="h3 font-bold mb-0 ps-10" id="sendCustomer"></span>
+                                                </div>
+
+                                                <div class="ps-10 pe-10 float-start pb-2">
+                                                    <span class="h6 font-semibold text-muted text-sm d-block mb-2">残りの送客可能枠</span>
+                                                    <span class="h3 font-bold mb-0 ps-12" id="reaminCusAllowance"></span>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
                                 </div>
+                                <div class="col-12 col-md-8">
+                                    <div class="card shadow border-0 mb-6">
+                                        <div class="card-header">
+                                            <h5 class="mb-0">
+                                                特定マンションプラン
+
+                                            </h5>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="float-start">
+                                                <div class="float-start pb-2">
+                                                    <span class="h6 font-semibold text-muted text-sm d-block mb-2">プラン名</span>
+                                                    <span class="h3 font-bold mb-0 ps-12" id="planName"></span>
+                                                </div>
+                                                <div class="ps-10 pe-10 float-start pb-2">
+                                                    <span class="h6 font-semibold text-muted text-sm d-block mb-2">登録可能上限数</span>
+                                                    <span class="h3 font-bold mb-0 ps-12" id="MaxnumRegistration"></span>
+                                                </div> <div class="ps-10 pe-10 float-start pb-2">
+                                                    <span class="h6 font-semibold text-muted text-sm d-block mb-2">公開済登録数</span>
+                                                    <span class="h3 font-bold mb-0 ps-12" id="publishRegistration"></span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="card shadow border-0 mb-6">
+                                        <div class="card-header">
+                                            <h5 class="mb-0">
+                                                有効期限切れ間近の査定条件
+
+                                            </h5>
+                                        </div>
+                                        <div class="card-body" id="show">
+                                            <div class="col-12">
+                                                <div class=" pb-0 mb-0">
+                                                    <p class="text-danger ps-md-16" id="textdanger"></p>
+                                                    <div class="card-body">
+                                                        <div class="row ps-md-3">
+                                                            <div class="col-md-4 ps-md-10 pe-md-10 float-start">
+                                                                <span class="h6 font-semibold text-muted text-sm d-block ">エリア</span>
+                                                                <span class="h3 font-bold mb-0 ps-md-5 text-nowrap">
+                                                                    <button type="button"
+                                                                            class="btn btn-primary" id="btnAddress" value="0" disabled>
+                                                                        査定条件の設定
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+
+                                                            <div class="col-md-4 ps-md-10 pe-md-10 float-sm-start">
+                                                                <span class="h6 font-semibold text-muted text-sm d-block">路線</span>
+                                                                <span class="h3 font-bold mb-0 ps-md-5 text-nowrap">
+                                                                    <button type="button"
+                                                                            class="btn btn-primary" id="btnrailway" value="0" disabled>
+                                                                        査定条件の設定
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-md-4 ps-md-10 pe-md-10 float-sm-start">
+                                                                <span class="h6 font-semibold text-muted text-sm d-block">マンション</span>
+                                                                <span class="h3 font-bold mb-0 ps-md-5 text-nowrap">
+                                                                    <button type="button"
+                                                                            class="btn btn-primary" id="btnregedlist" disabled>
+                                                                        査定条件の設定
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
 
-                            <!-- Card stats -->
+                                <!-- Card stats -->
                             <div class="row g-6 mb-5">
-                                <div class="col-xl-6 col-sm-6 col-12">
-                                    <div class="card shadow border-0">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <span class="h6 font-semibold text-muted text-sm d-block mb-2">新規依頼</span>
-                                                    <span class="h3 font-bold mb-0" id="newRequest"></span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    <div class="col-xl-6 col-sm-6 col-12">
+                                        <div class="card shadow border-0">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">新規依頼</span>
+                                                        <span class="h3 font-bold mb-0" id="newRequest"></span>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-sm-6 col-12">
+                                        <div class="card shadow border-0">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">交渉中</span>
+                                                        <span class="h3 font-bold mb-0" id="negotiations"></span>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
+                                                            <i class="fa fa-comments" aria-hidden="true"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-sm-6 col-12">
+                                        <div class="card shadow border-0">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">累計成約</span>
+                                                        <span class="h3 font-bold mb-0" id="NumCompleted"></span>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <div class="icon icon-shape bg-info text-white text-lg rounded-circle">
+                                                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-sm-6 col-12">
+                                        <div class="card shadow border-0">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">累計辞退</span>
+                                                        <span class="h3 font-bold mb-0" id="NumDecline"></span>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <div class="icon icon-shape bg-warning text-white text-lg rounded-circle">
+                                                            <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-6 col-sm-6 col-12">
-                                    <div class="card shadow border-0">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <span class="h6 font-semibold text-muted text-sm d-block mb-2">交渉中</span>
-                                                    <span class="h3 font-bold mb-0" id="negotiations"></span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
-                                                        <i class="fa fa-comments" aria-hidden="true"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-sm-6 col-12">
-                                    <div class="card shadow border-0">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <span class="h6 font-semibold text-muted text-sm d-block mb-2">累計成約</span>
-                                                    <span class="h3 font-bold mb-0" id="NumCompleted"></span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="icon icon-shape bg-info text-white text-lg rounded-circle">
-                                                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-sm-6 col-12">
-                                    <div class="card shadow border-0">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <span class="h6 font-semibold text-muted text-sm d-block mb-2">累計辞退</span>
-                                                    <span class="h3 font-bold mb-0" id="NumDecline"></span>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="icon icon-shape bg-warning text-white text-lg rounded-circle">
-                                                        <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
 
                 </div>
-            </main>
+</main>
             @Html.Partial("~/Views/Shared/_r_footer.cshtml")
         </form>
     </div>

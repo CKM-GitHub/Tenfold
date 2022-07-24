@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,14 +33,60 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
-      <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.6.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.6.0.0\lib\net461\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=6.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.1\lib\net461\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.6.0.0\lib\net461\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.6.0.0\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.0\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +99,7 @@
     <Compile Include="Common\DropDownListItem.cs" />
     <Compile Include="Common\Enumrators.cs" />
     <Compile Include="Common\MansionStation.cs" />
+    <Compile Include="Common\MessageInfo.cs" />
     <Compile Include="Common\MessageModel.cs" />
     <Compile Include="Common\SendMailInfo.cs" />
     <Compile Include="Common\LoginUser.cs" />
@@ -74,6 +123,7 @@
     <Compile Include="RealEstate\r_com_profile\r_com_profileModel.cs" />
     <Compile Include="RealEstate\r_contact\r_contactModel.cs" />
     <Compile Include="RealEstate\r_dashboard\r_dashboardModel.cs" />
+    <Compile Include="RealEstate\r_invoice\PDF_Font.cs" />
     <Compile Include="RealEstate\r_invoice\r_invoiceModel.cs" />
     <Compile Include="RealEstate\r_invoice\r_InvoicePageEvent.cs" />
     <Compile Include="RealEstate\r_issueslist\r_issueslistModel.cs" />
@@ -83,8 +133,10 @@
     <Compile Include="RealEstate\r_template\r_templateModel.cs" />
     <Compile Include="RealEstate\r_temp_mes\r_temp_mesModel.cs" />
     <Compile Include="Seller\a_assess_dModel.cs" />
+    <Compile Include="Seller\a_mansion_updateModel.cs" />
     <Compile Include="Seller\a_mypage_ahisModel.cs" />
     <Compile Include="Seller\a_mypage_plusModel.cs" />
+    <Compile Include="Seller\a_mypage_reglistModel.cs" />
     <Compile Include="Seller\a_mypage_taikaiModel.cs" />
     <Compile Include="Seller\a_mypage_whisModel.cs" />
     <Compile Include="Seller\a_mypage_uinfo_passwordModel.cs" />
@@ -98,26 +150,43 @@
     <Compile Include="Tenfold\tenfold_billing_process\tenfold_billing_processModel.cs" />
     <Compile Include="Tenfold\tenfold_daily_process\tenfold_daily_processModel.cs" />
     <Compile Include="Tenfold\t_admin\t_adminModel.cs" />
+    <Compile Include="Tenfold\t_assess_guide\t_assess_guideModel.cs" />
+    <Compile Include="Tenfold\t_assess_list\t_assess_listModel.cs" />
+    <Compile Include="Tenfold\t_assess_soudan\t_assess_soudanModel.cs" />
     <Compile Include="Tenfold\t_dashboard\t_dashboardModel.cs" />
     <Compile Include="Tenfold\t_mansion\t_mansionModel.cs" />
     <Compile Include="Tenfold\t_mansion_list\t_mansion_listModel.cs" />
     <Compile Include="Tenfold\t_mansion_new\t_mansion_newModel.cs" />
     <Compile Include="Tenfold\t_reale_account\t_reale_accountModel.cs" />
     <Compile Include="Tenfold\t_reale_asmhis\t_reale_asmhisModel.cs" />
+    <Compile Include="Tenfold\t_reale_invoice\t_reale_invoiceModel.cs" />
     <Compile Include="Tenfold\t_reale_list\t_reale_listModel.cs" />
     <Compile Include="Tenfold\t_reale_memo\t_reale_memoModel.cs" />
     <Compile Include="Tenfold\t_reale_new\t_reale_newModel.cs" />
     <Compile Include="Tenfold\t_reale_purchase\t_reale_purchaseModel.cs" />
     <Compile Include="Tenfold\t_seller_account\t_seller_accountModel.cs" />
     <Compile Include="Tenfold\t_seller_assessment\t_seller_assessmentModel.cs" />
+    <Compile Include="Tenfold\t_seller_config\t_seller_configModel.cs" />
     <Compile Include="Tenfold\t_seller_list\t_seller_listModel.cs" />
     <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionModel.cs" />
     <Compile Include="Tenfold\t_seller_memo\t_seller_memoModel.cs" />
     <Compile Include="Tenfold\t_seller_new\t_seller_newModel.cs" />
+    <Compile Include="Tenfold\t_seller_orderdetails\t_seller_orderdetailsModel.cs" />
     <Compile Include="Tenfold\t_seller_profile\t_seller_profileModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tenfold\t_files\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.1\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.1\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.1\build\Microsoft.Extensions.Logging.Abstractions.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.1\build\Microsoft.Extensions.Logging.Abstractions.targets'))" />
+  </Target>
 </Project>

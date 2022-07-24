@@ -153,8 +153,10 @@
     <Content Include="Content\css\a_mypage_ahis_1.css" />
     <Compile Include="Controllers\a_assess_dController.cs" />
     <Compile Include="Controllers\a_contactController.cs" />
+    <Compile Include="Controllers\a_mansion_updateController.cs" />
     <Compile Include="Controllers\a_mypage_ahisController.cs" />
     <Compile Include="Controllers\a_mypage_plusController.cs" />
+    <Compile Include="Controllers\a_mypage_reglistController.cs" />
     <Compile Include="Controllers\a_mypage_taikaiController.cs" />
     <Compile Include="Controllers\a_mypage_uinfoController.cs" />
     <Compile Include="Controllers\a_mailregisterController.cs" />
@@ -232,8 +234,10 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Scripts\a_assess_d.js" />
     <Content Include="Scripts\a_contact.js" />
+    <Content Include="Scripts\a_mansion_update.js" />
     <Content Include="Scripts\a_mypage_ahis.js" />
     <Content Include="Scripts\a_mypage_plus.js" />
+    <Content Include="Scripts\a_mypage_reglist.js" />
     <Content Include="Scripts\a_mypage_taikai.js" />
     <Content Include="Scripts\a_mypage_whis.js" />
     <Content Include="Scripts\a_mypage_uinfo.js" />
@@ -295,6 +299,8 @@
     <Content Include="Views\Shared\_VerificationToken.cshtml" />
     <Content Include="Views\a_mypage_taikai\Index.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Views\a_mypage_reglist\Index.cshtml" />
+    <Content Include="Views\a_mansion_update\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

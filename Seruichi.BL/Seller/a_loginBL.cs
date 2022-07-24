@@ -385,9 +385,9 @@ namespace Seruichi.BL
 
                 CommonBL cmnBL = new CommonBL();
                 cmnBL.GetMailSender(mailInfo);
-                cmnBL.GetMailRecipients(MailKBN.Seller_MailSend, mailInfo);
-                //if only one mail exists (mailAdd1)
-                cmnBL.GetPersonMailRecipients(mailInfo, mailAdd1);
+                //mail more than one mail 
+                //if only one mail exists (mailAdd1) 
+                cmnBL.GetPersonMailRecipients(MailKBN.Seller_MailSend,mailInfo, mailAdd1);
                 cmnBL.GetMailTitleAndText(MailKBN.Seller_MailSend, mailInfo);
 
 

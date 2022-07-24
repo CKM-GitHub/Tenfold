@@ -4,7 +4,6 @@ $(function () {
     _url.Insert_D_SellerPossible_OK = common.appPath + '/a_mypage_plus/Insert_D_SellerPossible_OK';
     _url.Insert_D_SellerPossible_NG = common.appPath + '/a_mypage_plus/Insert_D_SellerPossible_NG';
     addEvents();
-
     $('#mypage_plus').addClass('active');
 });
 
@@ -106,6 +105,7 @@ function Get_Calculate_extra_charge(model, $form) {
         if (result && result.isOK) {
 
             Bind_Charges(result.data);
+           
         }
         if (result && !result.isOK) {
             const errors = result.data;
@@ -136,5 +136,19 @@ function Bind_Charges(result) {
         html_after = $afterValue;
         $('#extraCharge').append(html);
         $('#afterValue').append(html_after);
+        Button_Ctrl(data[0]["Change_Count"]);
     }
 }
+
+function Button_Ctrl(isZero)
+{
+    if (isZero == 0) {
+        document.getElementById("btnPayment").setAttribute("class", "btn btn-primary btn-lg disabled");
+    }
+    else
+    {
+        document.getElementById("btnPayment").setAttribute("class", "btn btn-primary btn-lg");
+    }
+}
+
+

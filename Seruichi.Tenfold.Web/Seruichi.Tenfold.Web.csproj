@@ -45,6 +45,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aspose.Zip, Version=22.6.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.Zip.22.6.0\lib\net40\Aspose.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetZip, Version=1.16.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.16.0\lib\net40\DotNetZip.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -53,9 +62,40 @@
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.4.5.1\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.4.5.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.6.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=6.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.6.0.5\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -137,14 +177,19 @@
     <Compile Include="Controllers\Common\BaseApiController.cs" />
     <Compile Include="Controllers\Common\BaseController.cs" />
     <Compile Include="Controllers\Common\CommonApiController.cs" />
+    <Compile Include="Controllers\Common\CustomException.cs" />
     <Compile Include="Controllers\Common\ErrorController.cs" />
     <Compile Include="Controllers\t_adminController.cs" />
+    <Compile Include="Controllers\t_assess_listController.cs" />
+    <Compile Include="Controllers\t_assess_soudanController.cs" />
+    <Compile Include="Controllers\t_assess_guideController.cs" />
     <Compile Include="Controllers\t_dashboardController.cs" />
     <Compile Include="Controllers\t_loginController.cs" />
     <Compile Include="Controllers\t_mansionController.cs" />
     <Compile Include="Controllers\t_mansion_listController.cs" />
     <Compile Include="Controllers\t_reale_accountController.cs" />
     <Compile Include="Controllers\t_reale_asmhisController.cs" />
+    <Compile Include="Controllers\t_reale_invoiceController.cs" />
     <Compile Include="Controllers\t_reale_listController.cs" />
     <Compile Include="Controllers\t_reale_memoController.cs" />
     <Compile Include="Controllers\t_reale_newController.cs" />
@@ -153,10 +198,12 @@
     <Compile Include="Controllers\t_seller_accountController.cs" />
     <Compile Include="Controllers\t_seller_assessmentController.cs" />
     <Compile Include="Controllers\t_mansion_newController.cs" />
+    <Compile Include="Controllers\t_seller_configController.cs" />
     <Compile Include="Controllers\t_seller_listController.cs" />
     <Compile Include="Controllers\t_seller_mansionController.cs" />
     <Compile Include="Controllers\t_seller_memoController.cs" />
     <Compile Include="Controllers\t_seller_newController.cs" />
+    <Compile Include="Controllers\t_seller_orderdetailsController.cs" />
     <Compile Include="Controllers\t_seller_profileController.cs" />
     <Compile Include="Filters\ApiExceptionAttribute.cs" />
     <Compile Include="Filters\BrowsingHistoryAttribute.cs" />
@@ -218,6 +265,9 @@
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
     <Content Include="Scripts\t_admin.js" />
+    <Content Include="Scripts\t_assess_list.js" />
+    <Content Include="Scripts\t_assess_soudan.js" />
+    <Content Include="Scripts\t_assess_guide.js" />
     <Content Include="Scripts\t_common.js" />
     <Content Include="Scripts\t_dashboard.js" />
     <Content Include="Scripts\t_login.js" />
@@ -226,6 +276,7 @@
     <Content Include="Scripts\t_mansion_new.js" />
     <Content Include="Scripts\t_reale_account.js" />
     <Content Include="Scripts\t_reale_asmhis.js" />
+    <Content Include="Scripts\t_reale_invoice.js" />
     <Content Include="Scripts\t_reale_list.js" />
     <Content Include="Scripts\t_reale_memo.js" />
     <Content Include="Scripts\t_reale_new.js" />
@@ -233,10 +284,12 @@
     <Content Include="Scripts\t_reale_purchase.js" />
     <Content Include="Scripts\t_seller_account.js" />
     <Content Include="Scripts\t_seller_assessment.js" />
+    <Content Include="Scripts\t_seller_config.js" />
     <Content Include="Scripts\t_seller_list.js" />
     <Content Include="Scripts\t_seller_mansion.js" />
     <Content Include="Scripts\t_seller_memo.js" />
     <Content Include="Scripts\t_seller_new.js" />
+    <Content Include="Scripts\t_seller_orderdetails.js" />
     <Content Include="Scripts\t_seller_profile.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -262,6 +315,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="bin\ja\" />
     <Folder Include="bin\roslyn\" />
+    <Folder Include="Original FileUpload\" />
+    <Folder Include="Tenfold\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -298,6 +353,14 @@
     <Content Include="Views\t_reale_new\Index.cshtml" />
     <Content Include="Views\t_seller_profile\Index.cshtml" />
     <Content Include="Views\t_reale_profile\Index.cshtml" />
+    <Content Include="Views\t_seller_orderdetails\Index.cshtml" />
+    <Content Include="Views\t_assess_soudan\Index.cshtml" />
+    <Content Include="Views\t_reale_invoice\Index.cshtml" />
+    <Content Include="Views\t_assess_guide\Index.cshtml" />
+    <Content Include="Views\Shared\t_assess_submenu.cshtml" />
+    <Content Include="Views\Shared\t_assess_guide_popup.cshtml" />
+    <Content Include="Views\t_assess_list\Index.cshtml" />
+    <Content Include="Views\t_seller_config\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
@@ -346,7 +409,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\System.Text.Json.6.0.5\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Text.Json.6.0.5\build\System.Text.Json.targets'))" />
   </Target>
+  <Import Project="..\packages\System.Text.Json.6.0.5\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.5\build\System.Text.Json.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
