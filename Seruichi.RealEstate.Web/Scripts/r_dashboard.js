@@ -235,7 +235,7 @@ function addEvents() {
                 const length = dataArray.length;
                 if (length > 0) {
                     let data = dataArray[0];
-                    window.location.href = common.appPath + '/r_asmc_address/Index?rc=' + data.RegionCD;
+                    window.location.href = common.appPath + '/r_asmc_address/Index?rc=' + data.RegionCD + '&op=1';
                 }
             }
         )
@@ -251,7 +251,7 @@ function addEvents() {
                 const length = dataArray.length;
                 if (length > 0) {
                     let data = dataArray[0];
-                    window.location.href = common.appPath + '/r_asmc_railway/Index?rc=' + data.RegionCD;
+                    window.location.href = common.appPath + '/r_asmc_railway/Index?rc=' + data.RegionCD + '&op=1';
                 }
             }
         )

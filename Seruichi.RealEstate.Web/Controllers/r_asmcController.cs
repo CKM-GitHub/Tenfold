@@ -25,7 +25,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return RedirectToAction("BadRequest", "Error");
             }
 
-            return RedirectToAction("Index", "r_asmc_railway", new { rc = regionCD, op = "" });
+            return RedirectToAction("Index", "r_asmc_railway", new { rc = regionCD });
         }
 
         [HttpPost]
@@ -37,7 +37,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return RedirectToAction("BadRequest", "Error");
             }
 
-            return RedirectToAction("Index", "r_asmc_address", new { rc = regionCD, op = "" });
+            return RedirectToAction("Index", "r_asmc_address", new { rc = regionCD });
         }
 
         [HttpPost]
@@ -49,7 +49,7 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return RedirectToAction("BadRequest", "Error");
             }
 
-            return RedirectToAction("Index", "r_asmc_ms_map_add", new { rc = regionCD, op = "" });
+            return RedirectToAction("Index", "r_asmc_ms_map_add", new { rc = regionCD });
         }
 
         [HttpPost]
