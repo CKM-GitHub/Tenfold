@@ -122,7 +122,7 @@ namespace Models.RealEstate.r_invoice
             pdfCell.BorderWidth = 0;
             pdfTab.AddCell(pdfCell);
 
-            pdfCell = new PdfPCell(new Phrase(dt_D_Billing_For_PDFHeader.Rows[0]["InvoiceNo"].ToString(), normal_font_9));
+            pdfCell = new PdfPCell(new Phrase("No." + dt_D_Billing_For_PDFHeader.Rows[0]["InvoiceNo"].ToString(), normal_font_9));
             pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
             pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
             pdfCell.FixedHeight = 14f;
@@ -172,7 +172,8 @@ namespace Models.RealEstate.r_invoice
                 strREname = REname;
             pdfCell = new PdfPCell(new Phrase(strREname + "  御中", normal_font_10));
             pdfCell.Rowspan = 3;
-            pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
+            pdfCell.HorizontalAlignment = Element.ALIGN_LEFT;
+            //pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
             pdfCell.VerticalAlignment = Element.ALIGN_BOTTOM;
             pdfCell.BorderWidth = 0;
             pdfCell.BorderWidthBottom = 0.1f;
@@ -208,7 +209,7 @@ namespace Models.RealEstate.r_invoice
             //end 1,2,3
 
             // start 4
-            pdfCell = new PdfPCell(new Phrase("お客様コード"+ dt_M_RealEstate_pdfheader.Rows[0]["UserCode"].ToString(), normal_font_8));           
+            pdfCell = new PdfPCell(new Phrase("お客様コード "+ dt_M_RealEstate_pdfheader.Rows[0]["UserCode"].ToString(), normal_font_8));           
             pdfCell.HorizontalAlignment = Element.ALIGN_RIGHT;
             pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
             pdfCell.BorderWidth = 0;
@@ -307,7 +308,8 @@ namespace Models.RealEstate.r_invoice
             pdfCell.Rowspan = 2;
             pdfCell.FixedHeight = 28f;
             pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
-            pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;           
+            pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            pdfCell.BackgroundColor = BaseColor.LIGHT_GRAY;
             pdfTab_t.AddCell(pdfCell);
 
             pdfCell = new PdfPCell(new Phrase("ご入金額", bold_font_8));
@@ -315,6 +317,7 @@ namespace Models.RealEstate.r_invoice
             pdfCell.FixedHeight = 28f;
             pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
             pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            pdfCell.BackgroundColor = BaseColor.LIGHT_GRAY;
             pdfTab_t.AddCell(pdfCell);
 
             pdfCell = new PdfPCell(new Phrase("繰越金額", bold_font_8));
@@ -322,30 +325,37 @@ namespace Models.RealEstate.r_invoice
             pdfCell.FixedHeight = 28f;
             pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
             pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            pdfCell.BackgroundColor = BaseColor.LIGHT_GRAY;
             pdfTab_t.AddCell(pdfCell);
 
             pdfCell = new PdfPCell(new Phrase("合計", bold_font_8));
             pdfCell.FixedHeight = 14f;
             pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
             pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            pdfCell.BackgroundColor = BaseColor.LIGHT_GRAY;
             pdfTab_t.AddCell(pdfCell);
 
-            pdfCell = new PdfPCell(new Phrase("今回ご請求額", bold_font_8));
-            pdfCell.FixedHeight = 14f;
-            pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
-            pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
-            pdfTab_t.AddCell(pdfCell);
-
+            //pdfCell = new PdfPCell(new Phrase("今回ご請求額", bold_font_8));
             pdfCell = new PdfPCell(new Phrase("内訳（本体/税）", bold_font_8));
             pdfCell.FixedHeight = 14f;
             pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
             pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            pdfCell.BackgroundColor = BaseColor.LIGHT_GRAY;
+            pdfTab_t.AddCell(pdfCell);
+
+            //pdfCell = new PdfPCell(new Phrase("内訳（本体/税）", bold_font_8));
+            pdfCell = new PdfPCell(new Phrase("今回ご請求額", bold_font_8));
+            pdfCell.FixedHeight = 14f;
+            pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
+            pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            pdfCell.BackgroundColor = BaseColor.LIGHT_GRAY;
             pdfTab_t.AddCell(pdfCell);
 
             pdfCell = new PdfPCell(new Phrase("税率(10%)", bold_font_8));
             pdfCell.FixedHeight = 14f;
             pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
             pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            pdfCell.BackgroundColor = BaseColor.LIGHT_GRAY;
             third_table_height += 28;
             pdfTab_t.AddCell(pdfCell);
             //end 1,2
@@ -459,19 +469,20 @@ namespace Models.RealEstate.r_invoice
             pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
             pdfCell.BackgroundColor = BaseColor.LIGHT_GRAY;
             pdfCell.BorderWidthRight = 0;
+            pdfCell.Colspan = 2;
             pdfCell.CellEvent = new DottedCell(Rectangle.RIGHT_BORDER);
             pdfCell.FixedHeight = 20f;
             table_header.AddCell(pdfCell);
 
-            pdfCell = new PdfPCell(new Phrase(""));
-            pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
-            pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
-            pdfCell.BackgroundColor = BaseColor.LIGHT_GRAY;
-            pdfCell.BorderWidthLeft = 0;
-            pdfCell.BorderWidthRight = 0;
-            pdfCell.CellEvent = new DottedCell(Rectangle.RIGHT_BORDER);
-            pdfCell.FixedHeight = 20f;
-            table_header.AddCell(pdfCell);
+            //pdfCell = new PdfPCell(new Phrase(""));
+            //pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
+            //pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            //pdfCell.BackgroundColor = BaseColor.LIGHT_GRAY;
+            //pdfCell.BorderWidthLeft = 0;
+            //pdfCell.BorderWidthRight = 0;
+            //pdfCell.CellEvent = new DottedCell(Rectangle.RIGHT_BORDER);
+            //pdfCell.FixedHeight = 20f;
+            //table_header.AddCell(pdfCell);
 
             pdfCell = new PdfPCell(new Phrase("数量", bold_font_9));
             pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
@@ -493,7 +504,7 @@ namespace Models.RealEstate.r_invoice
             pdfCell.FixedHeight = 20f;
             table_header.AddCell(pdfCell);
 
-            pdfCell = new PdfPCell(new Phrase("金額(税抜", bold_font_9));
+            pdfCell = new PdfPCell(new Phrase("金額(税抜)", bold_font_9));
             pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
             pdfCell.VerticalAlignment = Element.ALIGN_MIDDLE;
             pdfCell.BackgroundColor = BaseColor.LIGHT_GRAY;
