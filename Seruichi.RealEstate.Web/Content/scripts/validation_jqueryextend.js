@@ -144,19 +144,25 @@
     };
 
 
-    $.fn.addvalidation_numeric = function (integerdigits, decimaldigits) {
-        return this
+    $.fn.addvalidation_numeric = function (integerdigits, decimaldigits, allowminus) {
+        const $this = this;
+        $this
             .attr('data-validation-numeric', 'true')
             .attr('data-integerdigits', integerdigits)
             .attr('data-decimaldigits', decimaldigits)
             .attr('inputmode', 'decimal')
             .attr('autocomplete', 'off');
+        if (allowminus) {
+            $this.attr('data-allowminus', 'true');
+        }
+        return $this;
     };
     $.fn.removeValidation_numeric = function () {
         return this
             .removeAttr('data-validation-numeric')
             .removeAttr('data-integerdigits')
-            .removeAttr('data-decimaldigits');
+            .removeAttr('data-decimaldigits')
+            .removeAttr('data-allowminus');
     };
 
 

@@ -6,6 +6,7 @@ namespace Models.RealEstate.r_asmc_address
     public class r_asmc_addressModel
     {
         public IEnumerable<r_asmc_address_Pref> Prefectures { get; set; } = new List<r_asmc_address_Pref>();
+        public bool IsShowCheckTab { get; set; }
     }
 
     public class r_asmc_addressDetailModel
@@ -13,7 +14,8 @@ namespace Models.RealEstate.r_asmc_address
         public IEnumerable<r_asmc_address_City> Cities { get; set; } = new List<r_asmc_address_City>();
         public int Settings1 { get; set; }
         public int Settings2 { get; set; }
-        public bool DisabledOpenCheckTab { get; set; }
+        public int ExpiredOnly { get; set; }
+        public bool IsShowCheckTab { get; set; } = true;
     }
 
 
@@ -58,7 +60,8 @@ namespace Models.RealEstate.r_asmc_address
         public IEnumerable<r_asmc_address_Town> Towns { get; set; } = new List<r_asmc_address_Town>();
         public int TownsCount { get; set; }
         public int ValidFLG { get; set; }
-        public int ExpirationFlag { get; set; }
+        public int Expired { get; set; }
+        public bool IsShowCheckTab { get; set; }
     }
 
     public class r_asmc_address_Town
@@ -72,7 +75,7 @@ namespace Models.RealEstate.r_asmc_address
         public int RealEstateCount { get; set; }
         public int DisplayOrder { get; set; }
         public int ValidFLG { get; set; }
-        public int ExpirationFlag { get; set; }
+        public int Expired { get; set; }
     }
 
 }

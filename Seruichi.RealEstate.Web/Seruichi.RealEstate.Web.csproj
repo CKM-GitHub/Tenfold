@@ -145,8 +145,10 @@
     <Compile Include="Controllers\Common\ErrorController.cs" />
     <Compile Include="Controllers\r_asmc_ms_list_mapController.cs" />
     <Compile Include="Controllers\r_asmc_ms_map_addController..cs" />
-    <Compile Include="Controllers\r_asmc_set_area_check_tabController..cs" />
-    <Compile Include="Controllers\r_asmc_set_train_check_tabController..cs" />
+    <Compile Include="Controllers\r_asmc_set_area_check_tabController.cs" />
+    <Compile Include="Controllers\r_asmc_set_ms_checkController.cs" />
+    <Compile Include="Controllers\r_asmc_set_msController.cs" />
+    <Compile Include="Controllers\r_asmc_set_train_check_tabController.cs" />
     <Compile Include="Controllers\r_asmc_railwayController..cs" />
     <Compile Include="Controllers\r_asmc_addressController..cs" />
     <Compile Include="Controllers\r_asmc_ms_list_shController.cs" />
@@ -224,6 +226,9 @@
     <Content Include="Content\fonts\ionicons.eot" />
     <Content Include="Content\fonts\ionicons.ttf" />
     <Content Include="Content\fonts\ionicons.woff" />
+    <Content Include="Scripts\r_asmc_set_common.js" />
+    <Content Include="Scripts\r_asmc_set_ms_check.js" />
+    <Content Include="Scripts\r_asmc_set_ms.js" />
     <Content Include="Scripts\r_asmc_ms_list_map.js" />
     <Content Include="Scripts\r_asmc_ms_map_add.js" />
     <Content Include="Scripts\r_asmc_railway.js" />
@@ -269,6 +274,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\r_asmc_set_area\" />
+    <Folder Include="Views\r_asmc_set_train\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -294,8 +301,8 @@
     <Content Include="Views\Shared\_r_withoutHeaderAndFooterLayout.cshtml" />
     <Content Include="Views\Shared\_ErrorModal.cshtml" />
     <Content Include="Views\r_asmc_set_train_check_tab\Index.cshtml" />
-    <Content Include="Views\r_asmc_set_train_check_tab\_r_asmc_M_RECondLineOpt_list.cshtml" />
-    <Content Include="Views\r_asmc_set_area_check_tab\_r_asmc_M_RECondAreaOpt_list.cshtml" />
+    <Content Include="Views\Shared\_r_asmc_RECondLineOptTable.cshtml" />
+    <Content Include="Views\Shared\_r_asmc_RECondAreaOptTable.cshtml" />
     <Content Include="Views\r_asmc_set_area_check_tab\Index.cshtml" />
     <Content Include="Views\r_asmc_ms_map_add\Index.cshtml" />
     <Content Include="Views\r_asmc_ms_list_map\Index.cshtml" />
@@ -303,6 +310,10 @@
     <Content Include="Views\r_statistics\Index.cshtml" />
     <Content Include="Views\r_invoice\Index.cshtml" />
     <Content Include="Views\r_invoice\GeneratePDF.cshtml" />
+    <Content Include="Views\r_asmc_set_ms\Index.cshtml" />
+    <Content Include="Views\r_asmc_set_ms_check\Index.cshtml" />
+    <Content Include="Views\Shared\_r_asmc_RECondManOptTable.cshtml" />
+    <Content Include="Views\Shared\_ConfirmationMsgPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

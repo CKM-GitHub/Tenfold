@@ -3,13 +3,14 @@ $(function () {
     _url.render_searchbox_detail = common.appPath + '/r_asmc_ms_map_add/Render_searchbox_detail';
     _url.gotoNextPage = common.appPath + '/r_asmc_ms_map_add/GotoNextPage';
     addEvents();
+    $('#checkbox_expired').change();
 });
 
 function addEvents() {
     $(document).on('click', '.js-btn-select', function () {
         $this = $(this);
         const css = $this.data('target-class');
-        $('.' + css).prop('checked', true);
+        $('.' + css + ':not(:disabled)').prop('checked', true);
     });
 
     $(document).on('click', '.js-btn-deselect', function () {
@@ -44,6 +45,11 @@ function addEvents() {
         }
     });
 
+    $('#checkbox_expired').on('change', function () {
+        const chk = $(this).prop('checked');
+        $('.js-no-expired').prop('disabled', chk);
+    });
+
     $('#btnSearchDetail').on('click', function () {
 
         let citycdCsv = '';
@@ -57,9 +63,10 @@ function addEvents() {
         }
 
         model = {
-            citycdCsv : citycdCsv.slice(0, -1),
-            settings1 : $('#checkbox_settings1').prop('checked')? 1 : 0,
-            settings2 : $('#checkbox_settings2').prop('checked')? 1 : 0
+            citycdCsv: citycdCsv.slice(0, -1),
+            settings1: $('#checkbox_settings1').prop('checked') ? 1 : 0,
+            settings2: $('#checkbox_settings2').prop('checked') ? 1 : 0,
+            expiredOnly: $('#checkbox_expired').prop('checked') ? 1 : 0,
         };
 
         common.callAjax(_url.render_searchbox_detail, model, function (result) {
@@ -75,7 +82,7 @@ function addEvents() {
         });
     });
 
-    $('#btnRegistration').on('click', function () {
+    $('#btnRegister').on('click', function () {
         let citycdCsv = '';
         $('.js-search-chk:checked').each(function () {
             citycdCsv += $(this).val() + ",";

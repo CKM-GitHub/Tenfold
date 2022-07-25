@@ -7,18 +7,19 @@ namespace Seruichi.RealEstate.Web.Controllers
     {
         // GET: r_asmc_set_area_check_tab
         [HttpGet]
-        public ActionResult Index(string tc)
+        public ActionResult Index(string cc, string tc)
         {
-            if (string.IsNullOrEmpty(tc))
+            if (string.IsNullOrEmpty(cc) && string.IsNullOrEmpty(tc))
             {
                 return RedirectToAction("BadRequest", "Error");
             }
 
             r_asmc_set_area_check_tabBL bl = new r_asmc_set_area_check_tabBL();
-            var model = bl.GetM_RECondAreaSec(base.GetOperator("RealECD"), tc);
-            ViewBag.M_RECondAreaRate = bl.GetM_RECondAreaRate(model);
-            ViewBag.M_RECondAreaRent = bl.GetM_RECondAreaRent(model);
-            ViewBag.M_RECondAreaOpt = bl.GetM_RECondAreaOpt(model);
+            var model = bl.GetM_RECondAreaSec(base.GetOperator("RealECD"), cc, tc);
+            ViewBag.RECondAreaRate = bl.GetM_RECondAreaRate(model);
+            ViewBag.RECondAreaRent = bl.GetM_RECondAreaRent(model);
+            ViewBag.RECondAreaOptList = bl.GetM_RECondAreaOpt(model);
+            ViewBag.InputMode = false;
             return View(model);
         }
     }

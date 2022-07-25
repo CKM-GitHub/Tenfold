@@ -9,16 +9,31 @@ namespace Seruichi.BL.RealEstate.r_asmc_set_area_check_tab
 {
     public class r_asmc_set_area_check_tabBL
     {
-        public M_RECondAreaSecModel GetM_RECondAreaSec(string realECD, string townCD)
+        public M_RECondAreaSecModel GetM_RECondAreaSec(string realECD, string cityCD, string townCD)
         {
-            var sqlParams = new SqlParameter[]
-            {
-                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = realECD },
-                new SqlParameter("@TownCD", SqlDbType.VarChar){ Value = townCD },
-            };
-
+            SqlParameter[] sqlParams;
             DBAccess db = new DBAccess();
-            DataTable dt = db.SelectDatatable("pr_r_asmc_set_area_check_tab_Select_M_RECondAreaSec_by_TownCD", sqlParams);
+            DataTable dt;
+
+            if (!string.IsNullOrEmpty(cityCD))
+            {
+                sqlParams = new SqlParameter[]
+                {
+                    new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = realECD },
+                    new SqlParameter("@CityCD", SqlDbType.VarChar){ Value = cityCD },
+                };
+                dt = db.SelectDatatable("pr_r_asmc_set_area_check_tab_Select_V_RECondAreaSec_by_CityCD", sqlParams);
+            }
+            else
+            {
+                sqlParams = new SqlParameter[]
+                {
+                    new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = realECD },
+                    new SqlParameter("@TownCD", SqlDbType.VarChar){ Value = townCD },
+                };
+                dt = db.SelectDatatable("pr_r_asmc_set_area_check_tab_Select_V_RECondAreaSec_by_TownCD", sqlParams);
+
+            }
 
             if (dt.Rows.Count == 0)
             {
@@ -26,9 +41,7 @@ namespace Seruichi.BL.RealEstate.r_asmc_set_area_check_tab
             }
             else
             {
-                var model = dt.Rows[0].ToEntity<M_RECondAreaSecModel>();
-                model = GetV_RECondAreaSec(model);
-                return model;
+                return dt.Rows[0].ToEntity<M_RECondAreaSecModel>();
             }
         }
 
@@ -204,32 +217,6 @@ namespace Seruichi.BL.RealEstate.r_asmc_set_area_check_tab
             DataTable dt = db.SelectDatatable("pr_r_asmc_set_area_check_tab_Select_M_RECondAreaOpt_by_ConditionSEQ", sqlParams);
 
             return dt.AsEnumerableEntity<M_RECondAreaOptRow>().ToList();
-        }
-
-
-        public M_RECondAreaSecModel GetV_RECondAreaSec(M_RECondAreaSecModel model)
-        {
-            var sqlParams = new SqlParameter[]
-            {
-                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD },
-                new SqlParameter("@TownCD", SqlDbType.VarChar){ Value = model.TownCD },
-                new SqlParameter("@ConditionSEQ", SqlDbType.Int){ Value = model.ConditionSEQ },
-            };
-
-            DBAccess db = new DBAccess();
-            DataTable dt = db.SelectDatatable("pr_r_asmc_set_area_check_tab_Select_V_RECondAreaSec", sqlParams);
-
-            if (dt.Rows.Count > 0)
-            {
-                DataRow dr = dt.Rows[0];
-                model.REStaffName = dr["REStaffName"].ToStringOrEmpty();
-                model.ExpDate = dr["ExpDate"].ToStringOrEmpty();
-                model.Priority = dr["Priority"].ToInt32(0);
-                model.PrecedenceFlg = dr["PrecedenceFlg"].ToByte(0);
-                model.Remark = dr["Remark"].ToStringOrEmpty();
-            }
-
-            return model;
         }
     }
 }

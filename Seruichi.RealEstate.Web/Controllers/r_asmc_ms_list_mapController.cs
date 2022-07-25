@@ -11,19 +11,40 @@ namespace Seruichi.RealEstate.Web.Controllers
         // GET: r_asmc_ms_list_map
         public ActionResult Index()
         {
-            string selected_cities = TempData["selected_cities"].ToStringOrEmpty();
-            string selected_towns = TempData["selected_towns"].ToStringOrEmpty();
+            string selected_cities = Session[SessionKey.r_asmc_ms_list_map_cities].ToStringOrEmpty();
+            string selected_towns = Session[SessionKey.r_asmc_ms_list_map_towns].ToStringOrEmpty();
+            Session[SessionKey.r_asmc_ms_list_map_cities] = null;
+            Session[SessionKey.r_asmc_ms_list_map_towns] = null;
 
-            if (string.IsNullOrEmpty(selected_cities) && string.IsNullOrEmpty(selected_towns))
+            var model = Session[SessionKey.r_asmc_set_ms_conditions] as r_asmc_ms_list_mapModel;
+            Session[SessionKey.r_asmc_set_ms_conditions] = null;
+
+            var previousController = base.GetPreviousController();
+            if (previousController == "r_asmc_set_ms_check")
             {
-                return RedirectToAction("Index", "r_asmc");
+                if (model == null)
+                {
+                    return RedirectToAction("Index", "r_asmc");
+                }
+                selected_cities = model.CityCDList;
+                selected_towns = model.TownCDList;
+                ViewBag.IsRestore = true;
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(selected_cities) && string.IsNullOrEmpty(selected_towns))
+                {
+                    return RedirectToAction("Index", "r_asmc");
+                }
+                model = new r_asmc_ms_list_mapModel();
+                ViewBag.IsRestore = false;
             }
 
             r_asmc_ms_list_mapBL bl = new r_asmc_ms_list_mapBL();
             ViewBag.TreeItem = bl.Get_Pref_CityGP_City_Town(selected_cities, selected_towns);
             ViewBag.CityCDList = selected_cities;
             ViewBag.TownCDList = selected_towns;
-            return View();
+            return View(model);
         }
 
         [HttpPost]
@@ -45,6 +66,7 @@ namespace Seruichi.RealEstate.Web.Controllers
         {
             string mansionCD = Request.Form["MansionCD"].ToStringOrEmpty();
             string mansionName = Request.Form["MansionName"].ToStringOrEmpty();
+            string conditionJson = Request.Form["ConditionJson"].ToStringOrEmpty();
 
             if (string.IsNullOrEmpty(mansionCD) && string.IsNullOrEmpty(mansionName))
             {
@@ -64,6 +86,10 @@ namespace Seruichi.RealEstate.Web.Controllers
             r_asmc_ms_list_mapBL bl = new r_asmc_ms_list_mapBL();
             bl.Insert_L_Log(model);
 
+            if (!string.IsNullOrEmpty(conditionJson))
+            {
+                Session[SessionKey.r_asmc_set_ms_conditions] = ConvertJsonToObject<r_asmc_ms_list_mapModel>(conditionJson);
+            }
             return RedirectToAction("Index", "r_asmc_set_ms", new { mc = mansionCD });
         }
     }

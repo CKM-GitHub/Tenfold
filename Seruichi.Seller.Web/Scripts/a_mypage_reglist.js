@@ -142,8 +142,10 @@ $('#btn_chat').on('click', function () {
 });
 
 $('#btn_assessment').on('click', function () {
-    const fd = new FormData(document.forms.form1);
-    const model = Object.fromEntries(fd);
+    let model = {
+        
+        AssKBN:1
+    }
     common.callAjax(_url.InsertD_Assessment, model,
         function (result) {
             if (result && result.isOK) {
@@ -173,7 +175,6 @@ $('#btn_plus').on('click', function () {
 });
 
 $('#btn_next').on('click', function () {
-    debugger;
     let model = {
         SellerCD: null
     }
@@ -183,7 +184,6 @@ $('#btn_next').on('click', function () {
                 let data = JSON.parse(result.data);
                 if (data.length > 0) {
                     for (var i = 0; i < data.length; i++) {
-                        debugger;
                         $('#handyphone').val(data[i]["HandyPhone"]);
                         $('#modal-phonenumcheck').modal('show');
                     }
@@ -203,7 +203,15 @@ $('#checkmobile').on('click', function () {
 
 $('#result').on('click', function () {
     $('#timeover').modal('show');
-
+    let model = {
+        AssKBN: 2
+    }
+    common.callAjax(_url.InsertD_Assessment, model,
+        function (result) {
+            if (result && result.isOK) {
+                window.location.href = common.appPath + '/a_assess_d/Index';
+            }
+        });
 });
 
 function l_logfunction(link) {

@@ -43,7 +43,7 @@
                 string css_target = "js-search-chk-" + item02.CityGroupCD;
                 string css_chkbox = "js-search-chk js-search-chk-" + item02.CityGroupCD;
 
-                <div class="row y-5 kenbetsu">
+                <div class="row y-5 kenbetsu cap-dropdown-hidearrow">
                     <div class="col-12 col-md-1 text-md-center align-self-center d-flex d-md-block">
                         <h5 class="pb-1 text-nowrap align-self-center">@item02.CityGroupName</h5>
                         @if (item02.CitiesCount > 1)
@@ -69,13 +69,15 @@
                             var text2 = string.Format("({0}件)", item03.MansionCount);
                             var text3 = string.Format("({0}社)", item03.RealEstateCount);
                             string css_icon =
-                                item03.ExpirationFlag == 1 ? "fa fa-exclamation-triangle text-warning" :
+                                item03.Expired == 1 ? "fa fa-exclamation-triangle text-warning" :
+                                item03.ValidFLG == 0 ? "fa fa-info-circle cap-text-primary" :
                                 item03.ValidFLG == 1 ? "fa fa-info-circle text-danger" :
-                                item03.ValidFLG == 2 ? "fa fa-info-circle cap-text-primary" :
                                 "";
+                            string a_href = "javascript:openCheckTabCity('" + @item03.CityCD + "');";
+                            string css_chkbox2 = css_chkbox + (item03.Expired == 1 ? "" : " js-no-expired");
 
-                            <label class="heckbox-inline p-3 cap-fon-div-w270 text-nowrap text-dark">
-                                <input type="checkbox" value="@item03.CityCD" class="@css_chkbox" autocomplete="off">
+                            <label class="cap-hover heckbox-inline p-3 cap-fon-div-w270 text-nowrap text-dark">
+                                <input type="checkbox" value="@item03.CityCD" class="@css_chkbox2" autocomplete="off">
                                 <span class="ps-1">
                                     @item03.CityName
                                     <span class="ps-1 js-text1">@text1</span>
@@ -83,7 +85,22 @@
                                     <span class="ps-1 js-text3 d-none">@text3</span>
                                     @if (!string.IsNullOrEmpty(css_icon))
                                     {
-                                        <i class="@css_icon" aria-hidden="true"></i>
+                                        if (Model.IsShowCheckTab && item03.IsShowCheckTab)
+                                        {
+                                            <div class="ps-1 dropdown">
+                                                <button class="bg-white dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="@css_icon" aria-hidden="true"></i>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="@a_href">最新の登録条件確認</a></li>
+                                                </ul>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <i class="@css_icon" aria-hidden="true"></i>
+                                        }
+
                                     }
                                 </span>
                             </label>

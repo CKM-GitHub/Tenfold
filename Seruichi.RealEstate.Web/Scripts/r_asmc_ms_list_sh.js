@@ -343,7 +343,7 @@ function MansionName_Click(ctrl) {
     common.callAjax(_url.InsertL_Log, model,
         function (result) {
             if (result && result.isOK) {
-                window.location.href = common.appPath + '/r_asmc_set_ms/Index?MansionCD=' + ctrl.id;
+                window.location.href = common.appPath + '/r_asmc_set_ms/Index?mc=' + ctrl.id;
             }
         });
 }

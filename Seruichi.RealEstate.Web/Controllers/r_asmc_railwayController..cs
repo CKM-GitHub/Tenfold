@@ -1,4 +1,5 @@
-﻿using Models.RealEstate.r_asmc_address;
+﻿using Models.RealEstate;
+using Models.RealEstate.r_asmc_address;
 using Seruichi.BL.RealEstate.r_asmc_address;
 using Seruichi.BL.RealEstate.r_asmc_railway;
 using Seruichi.Common;
@@ -10,7 +11,7 @@ namespace Seruichi.RealEstate.Web.Controllers
     {
         // GET: r_asmc_railway
         [HttpGet]
-        public ActionResult Index(string rc)
+        public ActionResult Index(string rc, string op)
         {
             if (string.IsNullOrEmpty(rc))
             {
@@ -19,6 +20,7 @@ namespace Seruichi.RealEstate.Web.Controllers
 
             ViewBag.PageID = "r_asmc_railway";
             ViewBag.CurrentRegionCD = rc;
+            ViewBag.ExpiredCheck = (op == "1");
             return View();
         }
 
@@ -47,11 +49,12 @@ namespace Seruichi.RealEstate.Web.Controllers
             }
 
             ViewBag.PageID = pid;
+            model.IsShowCheckTab = false; //「登録条件確認」は表示しない
             return PartialView("~/Views/r_asmc_address/_r_asmc_address_searchbox_main.cshtml", model);
         }
 
         [HttpPost]
-        public ActionResult Render_searchbox_detail(string linecdCsv, int settings1, int settings2)
+        public ActionResult Render_searchbox_detail(string linecdCsv, int settings1, int settings2, int expiredOnly)
         {
             r_asmc_addressDetailModel model;
             if (string.IsNullOrEmpty(linecdCsv))
@@ -66,6 +69,8 @@ namespace Seruichi.RealEstate.Web.Controllers
 
             model.Settings1 = settings1;
             model.Settings2 = settings2;
+            model.ExpiredOnly = expiredOnly;
+            model.IsShowCheckTab = true; //「登録条件確認」を表示
             return PartialView("~/Views/r_asmc_address/_r_asmc_address_searchbox_detail.cshtml", model);
         }
 
@@ -80,8 +85,8 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return RedirectToAction("BadRequest", "Error");
             }
 
-            TempData["selected_lines"] = selected_lines_csv;
-            TempData["selected_stations"] = selected_stations_csv;
+            Session[SessionKey.r_asmc_set_train_lines] = selected_lines_csv;
+            Session[SessionKey.r_asmc_set_train_stations] = selected_stations_csv;
             return RedirectToAction("Index", "r_asmc_set_train");
         }
 
