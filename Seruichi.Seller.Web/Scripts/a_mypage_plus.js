@@ -80,7 +80,7 @@ function addEvents() {
 
                 let model = {
                     Change_Count: $typeNum,
-                    ChangeFee: $extraCharge,
+                    ChangeFee: 0,
                     Possible_Time: $afterValue
                 };
                 common.callAjax(_url.Insert_D_SellerPossible_NG, model, function (result) {
