@@ -209,7 +209,7 @@ $('#result').on('click', function () {
     common.callAjax(_url.InsertD_Assessment, model,
         function (result) {
             if (result && result.isOK) {
-                $('#modal-1').modal('show');
+                window.location.href = common.appPath + '/a_assess_d/Index';
             }
         });
 });

@@ -79,5 +79,14 @@ namespace Seruichi.Seller.Web.Controllers
 
             return OKResult(DataTableToJSON(dt));
         }
+
+        [HttpPost]
+        public ActionResult get_d_AssReqdata(a_mypage_reglistModel model)
+        {
+            a_mypage_reglistBL bl = new a_mypage_reglistBL();
+            var dt = bl.get_d_AssReqdata(model);
+
+            return OKResult(DataTableToJSON(dt));
+        }
     }
 }

@@ -83,5 +83,21 @@ namespace Seruichi.BL.Seller
             }
             return dt;
         }
+
+        public DataTable get_d_AssReqdata(a_mypage_reglistModel model)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@AssReqID", SqlDbType.VarChar){ Value = model.AssReqID.ToStringOrNull() },
+            };
+
+            DBAccess db = new DBAccess();
+            var dt = db.SelectDatatable("a_mypage_reglist_Select_D_AssReq", sqlParams);
+
+
+            AESCryption crypt = new AESCryption();
+            string decryptionKey = StaticCache.GetDataCryptionKey();
+            return dt;
+        }
     }
 }
