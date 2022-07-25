@@ -1,0 +1,220 @@
+﻿
+@{
+    ViewBag.Title = "セルイチ管理機能";
+    Layout = "~/Views/Shared/_t_menuLayout.cshtml";
+}
+
+@section styles{
+    @Styles.Render("~/Content/tenfold_css_common")
+}
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                
+                    <div class="card shadow border-0 mb-7">
+
+                        <div class="card-header">
+
+                            <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
+
+                                <div class="border-end"><button type="button" class="btn btn-secondary me-2">戻る</button></div><h1 class="ps-2 h2 mb-0 ls-tight">売主</h1>
+                                <span class="ps-2 text-muted small align-self-end">管理</span>
+                            </div>
+                            <hr class="navbar-divider my-5 opacity-20">
+                            <div class="d-inline-flex"><h5 class="mb-0">設定</h5></div>
+                        </div>
+                        <div class="card-body container">
+                            <div class="col-12 py-3">
+                                <form class="mx-auto" method="post" enctype="multipart/form-data" role="form" id="form1">
+                                    <div class="m-auto">
+
+                                        <div class="row justify-content-center">
+                                            <div class="col-12 col-md-3">
+                                                <div class="">
+                                                    <div class="card-body">
+                                                        <div class="text-center">
+                                                            <h5>査定可能枠数</h5>
+                                                            <div class="d-inline-flex pt-5">
+                                                                @*<p class="text-danger text-nowrap text-center" id="errorslots"></p>*@
+                                                                <span class="cap-errormsg-right" id="errorslots"></span>
+                                                                <input type="text" id="slotsNum" name="SlotsNum" class="form-control text-end" />
+                                                                <p class="ps-2 d-xl-flex align-items-xl-end text-nowrap">件</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <div class="">
+                                                    <div class="card-body">
+                                                        <div class="text-center">
+                                                            <h5>成約時増枠数</h5>
+                                                            <div class="d-inline-flex pt-5">
+                                                                @*<p class="text-danger text-nowrap text-center" id="erroradditions"></p>*@
+                                                                <span class="cap-errormsg-right" id="erroradditions"></span>
+                                                                <input type="text" id="additionslotsNum" name="Additionslots" class="form-control text-end" />
+                                                                <p class="ps-2 d-xl-flex align-items-xl-end text-nowrap">件</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <div class="">
+                                                    <div class="card-body">
+                                                        <div class="text-center">
+                                                            <h5>査定枠追加時の請求額</h5>
+                                                            <div class="d-inline-flex pt-5">
+                                                                @*<p class="text-danger text-nowrap text-center" id="errorBilled"></p>*@
+                                                                <span class="cap-errormsg-right" id="errorBilled"></span>
+                                                                <input type="text" id="Amountbilled" name="AmountBilled" class="form-control text-end" />
+                                                                <p class="ps-2 d-xl-flex align-items-xl-end text-nowrap">円</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <div class="">
+                                                    <div class="card-body">
+                                                        <div class="text-center">
+                                                            <h5>再査定に課金が必要な期間</h5>
+                                                            <div class="d-inline-flex pt-5">
+                                                                @*<p class="text-danger text-nowrap text-center" id="errorReassessment"></p>*@
+                                                                <span class="cap-errormsg-right" id="errorReassessment"></span>
+                                                                <input type="text" id="reassessment" name="Reassessment" class="form-control text-end" />
+                                                                <p class="ps-2 d-xl-flex align-items-xl-end text-nowrap">か月</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="text-right mt-3 float-end">
+                                <button type="button" class="btn btn-lg btn-primary"  id="btnConfirm">
+                                    変更保存
+                                </button>
+                                <button type="button" class="btn btn-lg btn-default" data-bs-toggle="modal"
+                                        data-bs-target="#modal-changecal">
+                                    取消
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                
+            </div>
+            <!-- 変更保存 -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                 id="modal-changesave">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">変更保存</h4><button type="button" class="btn-close d-none" data-bs-dismiss="modal"
+                                                                     aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe pt-0 p-0">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post"
+                                          style="text-align: center;">
+                                        <h1 class="cap-icon-h1"><i class="fa fa-exclamation-circle pt-1 pb-1 ps-3 pe-3 cap-icon-i"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center">変更内容を保存しますか？</h4>
+
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#modal-changeok" id="btnSave">
+                                保存
+                            </button><button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 変更取消 -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                 id="modal-changecal">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">変更取消</h4><button type="button" class="btn-close d-none" data-bs-dismiss="modal"
+                                                                     aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe pt-0 p-0">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post"
+                                          style="text-align: center;">
+                                        <h1 class="cap-icon-h1 border border-danger border-8"><i class="fa fa-exclamation-circle pt-1 pb-1 ps-3 pe-3 cap-icon-i text-danger"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center">変更内容を破棄してもよろしいですか？</h4>
+
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-lg btn-primary" data-bs-dismiss="modal" id="btnClose">破棄</button>
+                            <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 登録完了 -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                 id="modal-changeok">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">変更保存</h4><button type="button" class="btn-close d-none" data-bs-dismiss="modal"
+                                                                     aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe pt-0 p-0">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post"
+                                          style="text-align: center;">
+                                        <h1 class="cap-icon-h1"><i class="fa fa-check cap-icon-i"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center">変更内容を保存しました。</h4>
+
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        @Html.Partial("_t_footer")
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/t_seller_config")
+}
+

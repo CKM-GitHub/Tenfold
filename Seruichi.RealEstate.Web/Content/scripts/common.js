@@ -120,6 +120,25 @@ const common = {
         $('#site-error-modal').modal('show');
     },
 
+    showConfirmPopup: function showConfirmPopup(id, callbackYes, callbackNo) {
+        let msg = this.getMessage(id);
+        if (!msg) {
+            msg = id;
+            id = '';
+        }
+
+        $('#site-confirmation-modal-title').text(id);
+        $('#site-confirmation-modal-message').text(msg);
+        $('#site-confirmation-modal').modal('show');
+
+        if (callbackYes) {
+            $('#site-confirmation-modal-yes').click(callbackYes);
+        }
+        if (callbackNo) {
+            $('#site-confirmation-modal-no').click(callbackNo);
+        }
+    },
+
     querySerialize: function querySerialize(data) {
         const encode = window.encodeURIComponent;
         let key, value, type, i, max;
@@ -251,7 +270,7 @@ const common = {
             }
         });
     },
-    callSubmit: function callSubmit(form, action) {
+    callSubmit: function callSubmit(form, action, fd) {
         const input = document.createElement('input');
         input.setAttribute('type', 'hidden');
         input.setAttribute('name', 'RequestVerificationToken');
@@ -260,6 +279,13 @@ const common = {
 
         form.method = "POST";
         form.action = action;
+        if (fd) {
+            form.addEventListener("formdata", eve => {
+                for (const [name, value] of fd.entries()) {
+                    eve.formData.append(name, value)
+                }
+            })
+        }
         form.submit();
         this.showLoading();
     },
@@ -356,6 +382,7 @@ const common = {
         const ispasswordcompare = $ctrl.attr("data-validation-passwordcompare");
         const isMinlengthCheck = $ctrl.attr("data-validation-minlengthcheck");
         const isemailformat = $ctrl.attr("data-validation-email");
+        const isAllowMinus = $ctrl.attr("data-allowminus");
 
         let inputValue = "";
         if (type === 'radio') {
@@ -488,6 +515,17 @@ const common = {
             }
 
             if (isNumeric) {
+                let isMinus = false;
+                if (isAllowMinus) {
+                    if (inputValue.substr(0, 1) === '-') {
+                        inputValue = inputValue.substr(1);
+                        isMinus = true;
+                    } else if (inputValue.substr(-1) === '-') {
+                        inputValue = inputValue.slice(0, -1);
+                        isMinus = true;
+                    }
+                }
+
                 const regex = new RegExp(regexPattern.numeric);
                 if (!regex.test(inputValue)) {
                     $ctrl.showError(this.getMessage('E104'));
@@ -513,10 +551,12 @@ const common = {
                         decpart = (decpart + '0'.repeat(decdigits)).slice(0, decdigits);
                     }
                     inputValue = intpart + '.' + decpart;
+                    if (isMinus) inputValue = '-' + inputValue;
                     $ctrl.val(inputValue);
                 }
                 else {
                     inputValue = intpart;
+                    if (isMinus) inputValue = '-' + inputValue;
                     $ctrl.val(intpart);
                 }
             }

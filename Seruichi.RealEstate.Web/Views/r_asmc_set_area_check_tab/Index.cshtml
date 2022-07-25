@@ -4,8 +4,8 @@
     ViewBag.Title = "査定条件設定確認";
     Layout = "~/Views/Shared/_r_withoutHeaderAndFooterLayout.cshtml";
 
-    var css1 = Model.ValidFLG == 1 ? "cap-text-primary" : "text-danger";
-    var css2 = Model.ExpDateFLG == 1 ? "text-warning" : ""; ;
+    var css1 = Model.ValidFLG == 0 ? "cap-text-primary" : Model.ValidFLG == 1 ? "text-danger" : "";
+    var css2 = Model.Expired == 1 ? "text-warning" : ""; ;
 }
 @section styles{
     @Styles.Render("~/Content/realEstate_css_common")
@@ -68,7 +68,7 @@
                                         <th scope="col" style="width: 100px;">買取利回り率</th>
                                         <th scope="col" style="width: 100px;">駅距離(以内)</th>
 
-                                        @foreach (var capitions in ViewBag.M_RECondAreaRate.ColHeader)
+                                        @foreach (var capitions in ViewBag.RECondAreaRate.ColHeader)
                                         {
                                             <th scope="col" style="width: 100px;">
                                                 <span class="text-danger">@capitions[0]</span>
@@ -80,12 +80,12 @@
                                 </thead>
                                 <tbody>
                                     @{
-                                        int rowCountRate = ViewBag.M_RECondAreaRate.RowHeader.Count;
+                                        int rowCountRate = ViewBag.RECondAreaRate.RowHeader.Count;
                                     }
                                     @for (int i = 0; i < rowCountRate; i++)
                                     {
-                                        var rowCaptions = ViewBag.M_RECondAreaRate.RowHeader[i];
-                                        var items = ViewBag.M_RECondAreaRate.RowData[i];
+                                        var rowCaptions = ViewBag.RECondAreaRate.RowHeader[i];
+                                        var items = ViewBag.RECondAreaRate.RowData[i];
 
                                         <tr>
                                             @if (i == 0)
@@ -122,7 +122,7 @@
                                         <th scope="col" style="width: 100px;">1㎡あたりの家賃</th>
                                         <th scope="col" style="width: 100px;">駅距離(以内)</th>
 
-                                        @foreach (var capitions in ViewBag.M_RECondAreaRent.ColHeader)
+                                        @foreach (var capitions in ViewBag.RECondAreaRent.ColHeader)
                                         {
                                             <th scope="col" style="width: 100px;">
                                                 <span class="text-danger">@capitions[0]</span>
@@ -134,12 +134,12 @@
                                 </thead>
                                 <tbody>
                                     @{
-                                        int rowCountRent = ViewBag.M_RECondAreaRent.RowHeader.Count;
+                                        int rowCountRent = ViewBag.RECondAreaRent.RowHeader.Count;
                                     }
                                     @for (int i = 0; i < rowCountRent; i++)
                                     {
-                                        var rowCaptions = ViewBag.M_RECondAreaRent.RowHeader[i];
-                                        var items = ViewBag.M_RECondAreaRent.RowData[i];
+                                        var rowCaptions = ViewBag.RECondAreaRent.RowHeader[i];
+                                        var items = ViewBag.RECondAreaRent.RowData[i];
 
                                         <tr>
                                             @if (i == 0)
@@ -172,7 +172,7 @@
                     <div class="card-body container">
 
                         <div class="border table-responsive cap-con-form mx-auto">
-                            @Html.Partial("_r_asmc_M_RECondAreaOpt_list")
+                            @Html.Partial("_r_asmc_RECondAreaOptTable")
                         </div>
                     </div>
 

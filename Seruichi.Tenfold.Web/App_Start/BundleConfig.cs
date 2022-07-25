@@ -145,6 +145,9 @@ namespace Seruichi.Tenfold.Web
             bundles.Add(new ScriptBundle("~/bundles/t_assess_list").Include(
                    "~/Scripts/t_assess_list.js",
                    "~/Content/scripts/table_header_sort.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/t_seller_config").Include(
+                   "~/Scripts/t_seller_config.js"));
         }
     }
 }

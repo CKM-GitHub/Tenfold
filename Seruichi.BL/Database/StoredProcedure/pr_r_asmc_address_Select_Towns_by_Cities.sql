@@ -26,9 +26,8 @@ BEGIN
         ,ISNULL(RES.Kensu,0)        AS RealEstateCount
         ,ADR.DisplayOrder
 
-        ,ISNULL(MyRES.ValidFLG, 0)  AS ValidFLG
-        --ValidFLGがNULLでExistsFlgが１の場合、査定データがすべて無効か、期限切れということ
-        ,CASE WHEN MyRES.ValidFLG IS NULL THEN MyRES2.ExistsFlg ELSE 0 END AS ExpirationFlag
+        ,ISNULL(MyRES.ValidFLG, 9)  AS ValidFLG
+        ,ISNULL(MyRES2.Expired, 0)  AS Expired
 
     FROM M_Address   ADR          ---住所マスタ 
     ----------------------------------------------------------------------
@@ -71,20 +70,22 @@ BEGIN
                 AND   t1.TownCD = ADR.TownCD
                 AND   t1.DeleteDateTime IS NULL
                 AND   t2.DeleteDateTime IS NULL
-                AND  (t2.ExpDate IS NULL OR t2.ExpDate >= @SysDate)
+                AND  (t2.ExpDate IS NULL OR t2.ExpDate >= DATEADD(d, 7, @SysDate))
                 AND   t1.DisabledFlg = 0
                 GROUP BY CityCD 
                 ) AS   MyRES
 
     OUTER APPLY (
                 SELECT TOP 1
-                     1 AS ExistsFlg
+                     1 AS Expired
                 FROM M_RECondAreaSec t1
                 INNER JOIN M_RECondArea t2 ON t1.RealECD = t2.RealECD AND t1.ConditionSEQ = t2.ConditionSEQ 
                 WHERE t1.RealECD = @RealECD
                 AND   t1.TownCD = ADR.TownCD
                 AND   t1.DeleteDateTime IS NULL
                 AND   t2.DeleteDateTime IS NULL
+                AND   t2.ExpDate < DATEADD(d, 7, @SysDate)
+                AND   t1.DisabledFlg = 0
                 ) AS   MyRES2
 
     WHERE ADR.NoDisplayFLG = 0  --表示対象外は除く

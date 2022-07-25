@@ -25,8 +25,8 @@ BEGIN
         ,ISNULL(RES.Kensu,0)        AS RealEstateCount
         ,ADR.DisplayOrder
 
-        ,ISNULL(MyRES.ValidFLG, 0)  AS ValidFLG
-        ,CASE WHEN MyRES2.ExpExistsFlg = 1 OR  MyRES3.AllDisabledFlg = 1 THEN 1 ELSE 0 END AS ExpirationFlag
+        ,ISNULL(MyRES.ValidFLG, 9)  AS ValidFLG
+        ,ISNULL(MyRES2.Expired, 0)  AS Expired
 
     FROM M_Address    ADR --住所マスタ
     INNER JOIN M_Pref PRF ON ADR.PrefCD = PRF.PrefCD   -- 地方マスタ 
@@ -63,13 +63,13 @@ BEGIN
     ----------------------------------------------------------------------
     OUTER APPLY (
                     SELECT 
-                        MIN(t1.ValidFLG) + 1   AS ValidFLG
+                        MIN(t1.ValidFLG) AS ValidFLG
                     FROM M_RECondMan t1
                     INNER JOIN M_Mansion M ON M.MansionCD = t1.MansionCD 
                     WHERE t1.RealECD = @RealECD
                     AND   M.CityCD = ADR.CityCD
                     AND   t1.DeleteDateTime IS NULL
-                    AND  (t1.ExpDate IS NULL OR t1.ExpDate >= @SysDate)
+                    AND  (t1.ExpDate IS NULL OR t1.ExpDate >= DATEADD(d, 7, @SysDate))
                     AND   t1.DisabledFlg = 0
                     AND   M.NoDisplayFLG = 0
                     GROUP BY CityCD 
@@ -78,28 +78,16 @@ BEGIN
     --期限切れの有効データ
     OUTER APPLY (
                     SELECT TOP 1
-                        1 AS ExpExistsFlg 
+                        1 AS Expired 
                     FROM M_RECondMan t1
                     INNER JOIN M_Mansion M ON M.MansionCD = t1.MansionCD 
                     WHERE t1.RealECD = @RealECD
                     AND   M.CityCD = ADR.CityCD
                     AND   t1.DeleteDateTime IS NULL
-                    AND   t1.ExpDate < @SysDate
+                    AND   t1.ExpDate < DATEADD(d, 7, @SysDate)
                     AND   t1.DisabledFlg = 0
                     AND   M.NoDisplayFLG = 0
                 ) AS   MyRES2
-
-    --すべて無効
-    OUTER APPLY (
-                    SELECT
-                        MIN(DisabledFlg) AS AllDisabledFlg
-                    FROM M_RECondMan t1
-                    INNER JOIN M_Mansion M ON M.MansionCD = t1.MansionCD 
-                    WHERE t1.RealECD = @RealECD
-                    AND   M.CityCD = ADR.CityCD
-                    AND   t1.DeleteDateTime IS NULL
-                    AND   M.NoDisplayFLG = 0
-                ) AS   MyRES3
 
     WHERE ADR.NoDisplayFLG = 0  --表示対象外は除く
       AND ADR.AddressLevel = 2  --AddressLevel=1 は除く

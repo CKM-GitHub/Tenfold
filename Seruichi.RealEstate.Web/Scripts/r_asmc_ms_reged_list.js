@@ -4,7 +4,8 @@ let Exp_Checkbox = 0;
 $(function () {
     setValidation();
     _url.Get_DataList = common.appPath + '/r_asmc_ms_reged_list/Get_DataList';
-    _url.InsertL_Log = common.appPath + '/r_asmc_ms_reged_list/Insert_l_log';   
+    _url.InsertL_Log = common.appPath + '/r_asmc_ms_reged_list/Insert_l_log'; 
+    _url.Update_M_RECondMan = common.appPath + '/r_asmc_ms_reged_list/Update_M_RECondMan';
     addEvents();
     //$('#MansionName').focus();
 });
@@ -74,8 +75,6 @@ function addEvents() {
         this.value = this.checked ? 1 : 0;
         Exp_Checkbox = this.value;
     });
-
-
     sortTable.getSortingTable("r_table_List");
     if ($('#defaultCheck3').val() == 1)
     {
@@ -86,6 +85,8 @@ function addEvents() {
     $('#btnDisplay').on('click', function () {
         AddData();
     });
+
+
 
     ////////$(document).on('click', '.tree li  input[type="checkbox"]', function () {
     ////////    $(this).closest('li').find('ul input[type="checkbox"]').prop('checked', $(this).is(':checked'));
@@ -234,19 +235,32 @@ function Bind_tbody(result) {
     if (data.length > 0) {
         for (var i = 0; i < data.length; i++) {
 
-            if (data[i]["公開フラグ"] == "未公開") {
-                _class = "text-danger";
+            if (data[i]["プラン対象"] == "対象")
+            {
+                _tclass = '<span class="text-white bg-primary pt-1 pb-1 ps-4 pe-4">対象</span>';
             }
             else
             {
-                _class = "cap-text-primary";
+                _tclass = '<span class="text-white bg-danger pt-1 pb-1 ps-2 pe-2">対象外</span>';
+            }
+
+            if (data[i]["公開フラグ"] == "未公開") {
+                //_class = "text-danger";
+                _div = '<div class="dropdown"><button class="btn btn-sm cap-text-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false"> (未公開) </button></div>';
+            }
+            else
+            {
+                //_class = "cap-text-primary";
+                _div = '<div class="dropdown"><button class="btn btn-sm dropdown-toggle text-danger" type="button" data-bs-toggle="dropdown" aria-expanded="false"> (公開済) </button>\
+                      <ul class="dropdown-menu"><li><a class="dropdown-item" href="#" id='+ data[i]["マンションCD"] + '&未公開に戻す onclick="Unpublish_Function(this.id)">未公開に戻す</a></li></ul></div>';
             }
 
             html += '<tr>\
             <td class= "text-end">' + data[i]["NO"] + '</td>\
             <td> <a class="text-heading font-semibold text-decoration-underline" href="#"  onclick="l_logfunction(this.id)" id='+ data[i]["マンションCD"] + '&' + data[i]["マンション名"]+'>'+ data[i]["マンション名"] + '</a> </td>\
-            <td> <a class="text-heading font-semibold">'+ data[i]["住所"] + '</a> </td>\
-            <td> <span class='+ _class + '>(' + data[i]["公開フラグ"] + ')</span></td>\
+            <td> <a class="text-heading font-semibold">'+ data[i]["住所"] + '</a></td>\
+            <td>'+ _tclass +'</td>\
+            <td>'+ _div +'</td>\
             <td> '+ data[i]["登録日"] + '</td>\
             <td> '+ data[i]["有効期限日"] + '</td>\
             <td>\
@@ -275,6 +289,24 @@ function Bind_tbody(result) {
    
 }
 
+function Unpublish_Function(id)
+{
+    if (id.split('&')[1] = "未公開に戻す")
+    {
+        let model = {
+            MansionCD: id.split('&')[0],
+        };
+        common.callAjax(_url.Update_M_RECondMan , model,
+            function (result) {
+                if (result && result.isOK) {
+                    AddData();
+                    }
+                if (result && !result.isOK) {
+
+                }
+            });
+    }
+}
 
 function l_logfunction(id) {
     
@@ -296,8 +328,8 @@ function l_logfunction(id) {
             if (result && result.isOK) {
                 if (model.PageID == "r_asmc_ms_reged_list")
                 {
-                    // window.location.href = common.appPath + '/r_asmc_set_ms/Index?MansionCD=' + model.MansionCD;
-                    alert("https://www.seruichi.com/r_asmc_set_ms/Index?MansionCD=" + model.MansionCD)
+                    window.location.href = common.appPath + '/r_asmc_set_ms/Index?mc=' + model.MansionCD;
+                    //alert("https://www.seruichi.com/r_asmc_set_ms/Index?MansionCD=" + model.MansionCD)
                 }
             }
             if (result && !result.isOK) {

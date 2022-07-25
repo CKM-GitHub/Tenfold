@@ -97,5 +97,16 @@ namespace Seruichi.BL.RealEstate.r_asmc_ms_reged_list
             DBAccess db = new DBAccess();
             db.InsertUpdateDeleteData("pr_RealEstate_Insert_L_Log", false, sqlParams);
         }
+
+        public void Update_M_RECondMan(r_asmc_ms_reged_listModel model)
+        {
+            var sqlParams = new SqlParameter[]
+             {
+                new SqlParameter("@RealECD", SqlDbType.VarChar){ Value = model.RealECD.ToStringOrNull() },
+                new SqlParameter("@MansionCD", SqlDbType.VarChar){ Value =  model.MansionCD.ToStringOrNull() },
+             };
+            DBAccess db = new DBAccess();
+            db.InsertUpdateDeleteData("pr_r_asmc_ms_reged_list_Update_M_RECondMan", false, sqlParams);
+        }
     }
 }

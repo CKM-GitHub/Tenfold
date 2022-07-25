@@ -14,7 +14,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	Select Count(*)as Num From V_RECondAreaSec 
-                       Where  RealECD = @realECD
+	Select Top 1 PrefCD,Count(*)as Num  From  V_RECondAreaSec  
+	Where  RealECD = @realECD and 期限切れ間近=1 group by PrefCD
 END
 GO

@@ -49,11 +49,25 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="1" id="solution" name="solution" checked>
                                     <label class="form-check-label" for="solution">
-                                        <i class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal fst-normal">保</i>
+                                        <i class="ms-1 ps-1 pe-1 rounded-circle bg-success text-white fst-normal fst-normal">解</i>
                                         <span class="font-semibold">解決</span>
                                     </label>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="text-center px-xl-3">
+                        <div class="mb-3 text-start">
+                            <label for="M_PIC" class="form-label">管理担当</label>
+                            <select id="M_PIC" name="M_PIC" class="form-select mb-2">
+                                <option class="js-selectable" value="0">全部表示</option>
+                                @foreach (Models.DropDownListItem item in ViewBag.ContactTypeDropDownListItems)
+                                {
+                                    <option class="js-selectable" value="@item.Value" data-subject="@item.HiddenItem">@item.DisplayText</option>
+                                }
+                            </select>
                         </div>
                     </div>
                 </li>
@@ -83,20 +97,6 @@
                     </div>
                 </li>
                 <li>
-                    <div class="text-center px-xl-3">
-                        <div class="mb-3 text-start">
-                            <label for="M_PIC" class="form-label">管理担当</label>
-                            <select id="M_PIC" name="M_PIC" class="form-select mb-2">
-                                <option class="js-selectable" value="0">全部表示</option>
-                                @foreach (Models.DropDownListItem item in ViewBag.ContactTypeDropDownListItems)
-                                {
-                                    <option class="js-selectable" value="@item.Value" data-subject="@item.HiddenItem">@item.DisplayText</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-                </li>
-                <li>
                     <div class="form-group ps-3 pe-3">
                         <button type="button" id="btnProcess" class="btn btn-primary w-100 w-100 mb-3">表示</button>
                     </div>
@@ -119,18 +119,8 @@
     <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
         <main class="py-6 bg-surface-secondary">
             <div class="container-fluid">
-                <div class="card shadow border-0 mb-7">
-                    <div class="card-header">
-                        <div class="col-md-12 col-12 mb-3 mb-sm-0 d-flex">
-                            <h1 class="h2 mb-0 ls-tight">相談確認</h1>
-                            <span class="ps-2 text-muted small align-self-end">査定依頼</span>
-                        </div>
-                    </div>
-                    <ul class="nav nav-tabs mt-0 overflow-x border-0 ps-5">
-                        <li class="nav-item"> <a href="#" class="nav-link font-regular">処理待ち</a> </li>
-                        <li class="nav-item "> <a href="#" class="nav-link active">相談確認</a> </li>
-                    </ul>
-                </div>
+                @Html.Partial("t_assess_submenu")
+
                 <div class="card shadow border-0 mb-7">
                     <div class="card-header">
                         <div class="d-inline-flex">
@@ -239,48 +229,16 @@
                                                                                     }
                                                                                 </select>
                                                                             </div>
-                                                                            <div class="col-12">
+                                                                            <div id="div_comment" class="col-12">
                                                                                 <label class="form-label">メモ</label>
-                                                                                <div class="p-5 w-100 border-1 rounded overflow-y-auto" style="max-height: 150px;">
-                                                                                    <div class="row pb-3">
-                                                                                        <div class="col-12">
-                                                                                            <p class="text-secondary text-center">2022/03/20 10:20:30</p>
-                                                                                        </div>
-                                                                                        <div class="col-12">
-                                                                                            <p><strong>StaffName</strong></p>
-                                                                                            <div class="clearfix"></div>
-                                                                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-                                                                                            <p><a class="float-right btn text-white btn-danger"> <i class="fa fa-times"></i> 削除</a></p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row pb-3">
-                                                                                        <div class="col-12">
-                                                                                            <p class="text-secondary text-center">2022/03/20 10:20:30</p>
-                                                                                        </div>
-                                                                                        <div class="col-12">
-                                                                                            <p><strong>StaffName</strong></p>
-                                                                                            <div class="clearfix"></div>
-                                                                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-                                                                                            <p><a class="float-right btn text-white btn-danger"> <i class="fa fa-times"></i> 削除</a></p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="row pb-3">
-                                                                                        <div class="col-12">
-                                                                                            <p class="text-secondary text-center">2022/03/20 10:20:30</p>
-                                                                                        </div>
-                                                                                        <div class="col-12">
-                                                                                            <p><strong>StaffName</strong></p>
-                                                                                            <div class="clearfix"></div>
-                                                                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-                                                                                            <p><a class="float-right btn text-white btn-danger"> <i class="fa fa-times"></i> 削除</a></p>
-                                                                                        </div>
-                                                                                    </div>
+                                                                                <div id="consultRes_comment" class="p-5 w-100 border-1 rounded overflow-y-auto" style="max-height: 150px;">
                                                                                 </div>
                                                                                 <div class="card-footer border-0 w-100 ps-0 pe-0">
                                                                                     <div class="box-footer">
+                                                                                        <span class="cap-errormsg-right" id="errorcomment"></span>
                                                                                         <div class="input-group align-middle">
-                                                                                            <textarea class="form-control custom-control" rows="2"></textarea>
-                                                                                            <button id="whatever" class="btn btn-large btn-primary" name="Continue" type="submit">
+                                                                                            <textarea id="comment" name="comment" class="form-control custom-control" rows="2"></textarea>
+                                                                                            <button id="btn_addcomment" class="btn btn-large btn-primary" name="Continue" type="submit">
                                                                                                 <span>送信</span>
                                                                                                 <i class="icon-ok" style="font-size:30px; vertical-align: middle;"></i>
                                                                                             </button>
@@ -508,9 +466,6 @@
                                                                 <div class="justify-content-around align-items-center row">
                                                                     <div class="align-items-center col-12">
                                                                         <div class="p-md-2 p-1 row" id="info">
-                                                                            <div class="col-4">
-                                                                                <img src="https://source.unsplash.com/random/150x150?Male" class="img-thumbnail rounded img-fluid" alt="Seller">
-                                                                            </div>
                                                                             <div class="col-8">
                                                                                 <div class="text-muted" id="Name_Katakana"></div>
                                                                                 <div class="text-muted">
@@ -556,7 +511,7 @@
                                                                     <div class="align-items-center col-12">
                                                                         <div class="p-md-2 p-1 row" id="info">
                                                                             <div class="col-4">
-                                                                                <img src="https://source.unsplash.com/random/150x150?Female" class="img-thumbnail rounded img-fluid" alt="Retail Admin">
+                                                                                <img id="REImage" class="img-thumbnail rounded img-fluid" alt="Retail Admin">
                                                                             </div>
                                                                             <div class="col-8">
                                                                                 <div class="text-muted">
@@ -644,15 +599,96 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#mansion">
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#soudan">
                                 戻る
                             </button>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-changed">
+                            <button type="button" id="btnSave" class="btn btn-primary">
                                 保存
                             </button>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-send">
+                            <button type="button" id="btnSendConfirm" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-send">
                                 送客
                             </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" id="modal-send" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">確認</h5>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="exampleFormControlSelect1">注意事項</label>
+                            <div style="max-height: 200px;overflow-y: scroll;" class="border">
+                                この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。この文章はダミーです。文字
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="form-check pt-3">
+                                    <input class="confirm-check form-check-input" type="checkbox" value="" id="note_check" name="note_check">
+                                    <label class="form-check-label" for="note_check"> 注意事項を確認しました。</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal-send">
+                                戻る
+                            </button>
+                            <button type="button" id="btnSend" class="btn btn-success disabled">
+                                解決
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1" id="modal-sendok">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">解決</h4>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post" style="text-align: center;">
+                                        <h1 class="cap-icon-h1"><i class="fa fa-check cap-icon-i"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center pt-2">ステータスを解決に変更しました。</h4>
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="btnSend_OK" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1" id="message-changed">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">変更保存完了</h4>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post" style="text-align: center;">
+                                        <h1 class="cap-icon-h1"><i class="fa fa-check cap-icon-i"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center pt-2">変更を保存しました。</h4>
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="btnAdd_OK" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
                         </div>
                     </div>
                 </div>

@@ -16,9 +16,10 @@ namespace Seruichi.RealEstate.Web.Controllers
 
             r_asmc_set_train_check_tabBL bl = new r_asmc_set_train_check_tabBL();
             var model = bl.GetM_RECondLineSta(base.GetOperator("RealECD"), sc);
-            ViewBag.M_RECondLineRate = bl.GetM_RECondLineRate(model);
-            ViewBag.M_RECondLineRent = bl.GetM_RECondLineRent(model);
-            ViewBag.M_RECondLineOpt = bl.GetM_RECondLineOpt(model);
+            ViewBag.RECondLineRate = bl.GetM_RECondLineRate(model);
+            ViewBag.RECondLineRent = bl.GetM_RECondLineRent(model);
+            ViewBag.RECondLineOptList = bl.GetM_RECondLineOpt(model);
+            ViewBag.InputMode = false;
             return View(model);
         }
     }

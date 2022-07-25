@@ -51,6 +51,7 @@
     <Compile Include="RealEstate\r_asmc_ms_map_add\r_asmc_ms_map_addBL.cs" />
     <Compile Include="RealEstate\r_asmc_ms_list_sh\r_asmc_ms_list_shBL.cs" />
     <Compile Include="RealEstate\r_asmc_ms_reged_list\r_asmc_ms_reged_listBL.cs" />
+    <Compile Include="RealEstate\r_asmc_set_ms\r_asmc_set_msBL.cs" />
     <Compile Include="RealEstate\r_asmc_set_area_check_tab\r_asmc_set_area_check_tabBL.cs" />
     <Compile Include="RealEstate\r_asmc_set_train_check_tab\r_asmc_set_train_check_tabBL.cs" />
     <Compile Include="RealEstate\r_asmc_railway\r_asmc_railwayBL.cs" />
@@ -62,12 +63,14 @@
     <Compile Include="RealEstate\r_invoice\r_invoiceBL.cs" />
     <Compile Include="RealEstate\r_issueslist\r_issueslistBL.cs" />
     <Compile Include="RealEstate\r_login\r_loginBL.cs" />
+    <Compile Include="RealEstate\r_sendcus_max\r_sendcus_maxBL.cs" />
     <Compile Include="RealEstate\r_staff\r_staffBL.cs" />
     <Compile Include="RealEstate\r_statistic\r_statisticBL.cs" />
     <Compile Include="RealEstate\r_template\r_templateBL.cs" />
     <Compile Include="RealEstate\r_temp_mes\r_temp_mesBL.cs" />
     <Compile Include="Seller\a_assess_dBL.cs" />
     <Compile Include="Seller\a_contactBL.cs" />
+    <Compile Include="Seller\a_mansion_updateBL.cs" />
     <Compile Include="Seller\a_mypage_ahisBL.cs" />
     <Compile Include="Seller\a_mypage_plusBL.cs" />
     <Compile Include="Seller\a_mypage_reglistBL.cs" />
@@ -99,6 +102,7 @@
     <Compile Include="Tenfold\t_reale_purchase\t_reale_purchaseBL.cs" />
     <Compile Include="Tenfold\t_seller_account\t_seller_accountBL.cs" />
     <Compile Include="Tenfold\t_seller_assessment\t_seller_assessmentBL.cs" />
+    <Compile Include="Tenfold\t_seller_config\t_seller_configBL.cs" />
     <Compile Include="Tenfold\t_seller_list\t_seller_listBL.cs" />
     <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionBL.cs" />
     <Compile Include="Tenfold\t_seller_memo\t_seller_memoBL.cs" />
@@ -119,8 +123,6 @@
   <ItemGroup>
     <Content Include="Database\Function\fn_GetMaxBuiltYearMonth.sql" />
     <Content Include="Database\Function\fn_GetMinBuiltYearMonth.sql" />
-    <Content Include="Database\Function\fn_GetCondOptValueText.sql" />
-    <Content Include="Database\Function\fn_GetCondOptOptionKBNName.sql" />
     <Content Include="Database\Function\fn_GetBuildingAge.sql" />
     <Content Include="Database\StoredProcedure\pr_a_assess_d_Insert_D_IntroReq_D_AssReqProgress_D_AssessResult.sql" />
     <Content Include="Database\StoredProcedure\pr_a_assess_d_Select_Screen_by_AssReqID.sql" />
@@ -144,6 +146,7 @@
     <Content Include="Database\StoredProcedure\pr_a_mypage_uinfo_Update_M_Seller.sql" />
     <Content Include="Database\StoredProcedure\pr_a_contact_Insert_D_Contact.sql" />
     <Content Include="Database\StoredProcedure\pr_a_mypage_whis_Select_D_SellerPossible_by_SellerCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfTemplate_for_ManOpt.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_LineChange.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfMultPurpose.sql" />
     <Content Include="Database\StoredProcedure\pr_Common_Select_DropDownListOfContactType.sql" />
@@ -190,6 +193,16 @@
     <Content Include="Database\StoredProcedure\pr_r_asmc_set_area_check_tab_Select_M_RECondAreaRent_by_ConditionSEQ.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_set_area_check_tab_Select_M_RECondAreaSec_by_TownCD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_set_area_check_tab_Select_V_RECondAreaSec.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_area_check_tab_Select_V_RECondAreaSec_by_CityCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_area_check_tab_Select_V_RECondAreaSec_by_TownCD.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_ms_Check_Exists_TemplateName.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_ms_Insert_RECondMan_All.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_ms_Insert_Template.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_ms_Select_M_RECondManOpt_by_ConditionSEQ.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_ms_Select_M_RECondManRate_by_ConditionSEQ.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_ms_Select_M_RECondManRent_by_ConditionSEQ.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_ms_Select_M_TemplateOpt_by_TemplateNo.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_ms_Select_V_RECondMan_by_MansionCD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_set_train_check_tab_Select_V_RECondLineSta.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_set_train_check_tab_Select_M_RECondLineOpt_by_ConditionSEQ.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_set_train_check_tab_Select_M_RECondLineRent_by_ConditionSEQ.sql" />
@@ -200,6 +213,7 @@
     <Content Include="Database\StoredProcedure\pr_r_asmc_address_Select_Cities_by_RegionCD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_address_Select_M_Region.sql" />
     <Content Include="Database\StoredProcedure\pr_r_asmc_address_Select_Towns_by_Cities.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_asmc_set_train_check_tab_Select_V_RECondLineSta_by_StationCD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_contact_Insert_D_Contact.sql" />
     <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectCountFromV_RECondAreaSec.sql" />
     <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectCountFromV_RECondLineSta.sql" />
@@ -215,6 +229,8 @@
     <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectNumForNumberOfCompleted.sql" />
     <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectNumForNumberOfDecline.sql" />
     <Content Include="Database\StoredProcedure\pr_r_dashboard_SelectREFaceImage.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_dashboard_selectRegionbyM_Pref.sql" />
+    <Content Include="Database\StoredProcedure\pr_r_dashboard_selectRegionbyM_Station.sql" />
     <Content Include="Database\StoredProcedure\pr_r_login_Insert_L_Login.sql" />
     <Content Include="Database\StoredProcedure\pr_r_login_Select_M_RealEstate_by_RealECD.sql" />
     <Content Include="Database\StoredProcedure\pr_r_login_Select_M_REStaff_by_RealECD_and_REStaffCD.sql" />
@@ -255,6 +271,8 @@
     <Content Include="Database\StoredProcedure\pr_t_reale_asmhis_get_DisplayData.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_account_Select_M_Seller_By_SellerCD.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_account_Update_M_Seller.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_seller_config_InsertUpdateMultipurpose.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_seller_config_SelectFromMultipurpose.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_List_csv_generate.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_list_Select_DropDownlistofPref.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_List_Select_M_SellerData.sql" />
