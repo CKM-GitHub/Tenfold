@@ -24,6 +24,37 @@ namespace Seruichi.BL.Tenfold.t_seller_config
             return dt;
         }
 
+        public Dictionary<string, string> ValidateAll(t_seller_configModel model)
+        {
+            ValidatorAllItems validator = new ValidatorAllItems();
+            if(model.DataID == "112")
+            {
+                validator.CheckRequired("SlotsNum", model.Num);//E101
+                validator.CheckMaxLenght("SlotsNum", model.Num, 2);//E105
+                validator.CheckIsOnlyOneCharacter("SlotsNum", model.Num);  //E104
+            }
+            else if(model.DataID == "108")
+            {
+                validator.CheckRequired("Additionslots", model.Num);//E101
+                validator.CheckMaxLenght("Additionslots", model.Num, 2);//E105
+                validator.CheckIsOnlyOneCharacter("Additionslots", model.Num);  //E104
+            }
+            else if (model.DataID == "107")
+            {
+                validator.CheckRequired("AmountBilled", model.Num);//E101
+                validator.CheckMaxLenght("AmountBilled", model.Num, 5);//E105
+                validator.CheckIsOnlyOneCharacter("AmountBilled", model.Num);  //E104
+            }
+            else if (model.DataID == "114")
+            {
+                validator.CheckRequired("Reassessment", model.Num);//E101
+                validator.CheckMaxLenght("Reassessment", model.Num, 3);//E105
+                validator.CheckIsOnlyOneCharacter("Reassessment", model.Num);  //E104
+            }
+
+            return validator.GetValidationResult();
+        }
+
         public void InsertUpdateToMultipurpose(t_seller_configModel model)
         {
             var sqlParams = new SqlParameter[]

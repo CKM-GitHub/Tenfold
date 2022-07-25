@@ -34,6 +34,11 @@ namespace Seruichi.Tenfold.Web.Controllers
         public ActionResult InsertUpdateToMultipurpose(t_seller_configModel model)
         {
             t_seller_configBL bl = new t_seller_configBL();
+            var validationResult = bl.ValidateAll(model);
+            if (validationResult.Count > 0)
+            {
+                return ErrorResult(validationResult);
+            }
             bl.InsertUpdateToMultipurpose(model);
             return OKResult();
 
