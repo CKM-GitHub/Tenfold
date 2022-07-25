@@ -16,6 +16,7 @@ namespace Seruichi.RealEstate.Web.Controllers
         // GET: r_asmc_ms_reged_list
         public ActionResult Index()
         {
+            string strUrl = string.Empty;
             r_loginModel user = SessionAuthenticationHelper.GetUserFromSession();
             if (!SessionAuthenticationHelper.ValidateUser(user))
             {
@@ -55,8 +56,10 @@ namespace Seruichi.RealEstate.Web.Controllers
                             CityCD = dr["CityCD"].ToString(),
                             CityName = dr["CityName"].ToString()
                         }).ToList();
-
-            string strUrl = ViewBag.Url.Segments[1].Replace("/","");
+            if (ViewBag.Url !=null)
+            {
+                strUrl = ViewBag.Url.Segments[1].Replace("/", "");
+            }
             ViewBag.PrefCD = prefList;
             ViewBag.CityGPCD = prefcitygpcdList;
             ViewBag.CityCD = cityList;
@@ -107,6 +110,16 @@ namespace Seruichi.RealEstate.Web.Controllers
             model.ProcessKBN = "link";
             model.Remarks = "r_asmc_set_ms" +" "+model.MansionCD+" "+ model.MansionName;
             return model;
+        }
+
+        [HttpPost]
+        public ActionResult Update_M_RECondMan(r_asmc_ms_reged_listModel model)
+        {
+            r_asmc_ms_reged_listBL bl = new r_asmc_ms_reged_listBL();
+            model.RealECD = base.GetOperator("RealECD");
+            model = Getlogdata(model);
+            bl.Update_M_RECondMan(model);
+            return OKResult();
         }
     }
 }
