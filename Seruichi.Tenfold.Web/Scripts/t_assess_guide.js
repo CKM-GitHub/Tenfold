@@ -10,6 +10,8 @@ $(function () {
     _url.get_t_assess_guide_AttachFiles = common.appPath + '/t_assess_guide/get_t_assess_guide_AttachFiles';
     _url.get_t_assess_guide_DeleteFiles = common.appPath + '/t_assess_guide/DeleteAttachZippedFilePath';
     _url.get_t_assess_guide_DownlaodFiles = common.appPath + '/t_assess_guide/DownloadAttachZippedFilePath';
+    _url.get_t_assess_guide_DeliveredView = common.appPath + '/t_assess_guide/ViewedProcess';
+    _url.get_t_assess_guide_SaveChanges = common.appPath + '/t_assess_guide/SaveChanges';
     _url.Insert_L_Log = common.appPath + '/t_assess_guide/Insert_L_Log';
     addEvents(); 
 });
@@ -104,7 +106,45 @@ function CloseTemp(e) {
     }
      
 }
-function addEvents() { 
+function addEvents() {
+    $("#Chk_req_Name_Kanji,#Chk_req_pc_Address,#Chk_req_pc_mail_address,#Chk_req_pc_phone,#Chk_CopyInfo").on('change', function (e) {
+        Check3Steps(e);
+    })
+    $("#chk_IsAgreed").on('change', function (e) {
+        if ($('#chk_IsAgreed').is(":checked") && $('#hdn_IsAgreedAll').val() == '1') {
+            $('#send_customer2').removeAttr("disabled"); 
+        }
+        else {  
+            $('#send_customer2').prop("disabled", "disabled"); 
+        }
+
+    })
+    $("#return_button").on('click', function () {
+        $('#SendCustomer_1').prop("disabled", "disabled");
+        $('#hdn_IsSendOK').val('0');
+        $('#send_customer2').prop("disabled", "disabled");
+        $('#hdn_IsAgreedAll').val('0');
+
+        if ($('#hdn_NeedRefresh').val() == '1')
+            $('#btnDisplay').click();
+    })
+    $("#SendCustomer_1").on('click', function () {
+        $('#hdn_IsAgreedAll').val('1');
+        $('#chk_IsAgreed').prop('checked', false);
+        $('#send_customer2').prop("disabled", "disabled");
+    })
+    $("#send_customer2").on('click', function () {
+        UploadDropFiles(1);
+    })
+    $("#return_button2").on('click', function () {
+        $('#send_customer2').prop(("disabled", "disabled"));
+        $('#hdn_IsAgreedAll').val('0');
+
+    })
+    $("#return_SendDoneOk2,#RefreshClick").on('click', function () {
+        $('#btnDisplay').click();
+    })
+
     $('#inputFile').on('change', function (e) {
         var files = $(this).prop('files')
         filesDataTemp = files;
@@ -176,11 +216,7 @@ function addEvents() {
         $('#EndDate').val(lastdaypremonth);
         //Date_Compare();
 
-    });
-    //$('#subMenu li').children('a').on('click', function () {
-    //    $('#subMenu li').children('a').removeClass("active");
-    //    $(this).addClass('active');
-    //});
+    }); 
     let model = {
         Key: $("#Key").val(),
         Chk_MiShouri: $("#Chk_MiShouri").val(),
@@ -280,7 +316,21 @@ function addEvents() {
                 }
             }
         )
-    });
+    }); 
+}
+
+function Check3Steps() {
+    if ($('#Chk_req_Name_Kanji').is(":checked") && $('#Chk_req_pc_Address').is(":checked") && $('#Chk_req_pc_mail_address').is(":checked") && $('#Chk_req_pc_phone').is(":checked") && $('#Chk_CopyInfo').is(":checked")) {
+        if ($('#hdn_IsSendOK').val() == '1') {
+            $('#SendCustomer_1').removeAttr("disabled"); 
+        }
+        else {  
+            $('#SendCustomer_1').prop("disabled", "disabled");
+        } 
+    }
+    else
+        $('#SendCustomer_1').prop("disabled", "disabled");
+
 
 
 }
@@ -367,10 +417,10 @@ function Bind_DisplayData(result) {
               '+ sts + ' </td>\
                 <td> '+ data[i]["査定ID"] + ' </td>\
                 <td> <a class="text-heading font-semibold text-decoration-underline" data-bs-toggle="modal"\
-             <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["AssessReqID"] + '&' + DeepDatetime + ' data-bs-toggle="modal" data-bs-target="#mansion" href="#" onclick="Bind_ModalDetails(this.id,\'' + requestInfo + '\')"><span>' + data[i]["物件名"] + '</span></a></td>\
-    <td> <a class="text-heading font-semibold text-decoration-underline" onclick="l_logfunction(' + paramSeller +')" href="#"> '+ data[i]["売主名"] + '\
+             <td><a class="text-heading font-semibold text-decoration-underline text-nowrap" id='+ data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["AssessReqID"] + '&' + DeepDatetime + ' data-bs-toggle="modal" data-bs-target="#mansion" href="#" onclick="Bind_ModalDetails_Show(this.id,\'' + requestInfo + '\')"><span>' + data[i]["物件名"] + '</span></a></td>\
+    <td> <a class="text-heading font-semibold text-decoration-underline" onclick="l_logfunction(' + paramSeller + ')" href="#"> ' + data[i]["売主名"] + '\
              </a></td>\
-                <td> <a class="text-heading font-semibold text-decoration-underline" onclick="l_logfunction(' + paramSellerRealeProfile +')" href="#"> '+ data[i]["不動産会社"] + '\
+                <td> <a class="text-heading font-semibold text-decoration-underline" onclick="l_logfunction(' + paramSellerRealeProfile + ')" href="#"> ' + data[i]["不動産会社"] + '\
               </a></td>\
                 <td> '+ data[i]["管理担当"] + '</td>\
                 <td> '+ data[i]["買取依頼日時"] + '</td>\
@@ -387,10 +437,43 @@ function Bind_DisplayData(result) {
         $('#no_record').text("表示可能データがありません");
     }
     $('#tblPurchaseDetails tbody').append(html);
+    $('.nav-link').removeClass("active");
     $('#anchor_guide').addClass("active");
 
 }
-
+function Bind_ModalDetails_Show(id, request) { 
+    $('#pills-info-tab').addClass("active");
+    $('#hdn_NeedRefresh').val(request.split('&')[4]);
+    //Insert View hdn_NeedRefresh
+    let model = {
+        Key: $("#Key").val(),
+        Chk_MiShouri: $("#Chk_MiShouri").val(),
+        Chk_Shouri: $("#Chk_Shouri").val(),
+        Chk_YouKakunin: $("#Chk_YouKakunin").val(),
+        Chk_HouShuu: $("#Chk_HouShuu").val(),
+        Chk_Soukyaku: $("#Chk_Soukyaku").val(),
+        Range: $("#ddlRange").val(),
+        Kanritantou: $("#ddlStaff").val(),
+        StartDate: $("#StartDate").val(),
+        EndDate: $("#EndDate").val(),
+        IntroReqID: request.split('&')[14],
+        ProcessKBN: request.split('&')[4],
+        IsCSV: false,
+        LogFlg: 1
+    };
+    common.callAjax(_url.get_t_assess_guide_DeliveredView, model, function (result) {
+        if (result && result.isOK) {
+            let data = JSON.parse(result.data);
+            if (data.length) {
+                var i = 0;
+                var id = data[i]["SellerMansionID"] + '&' + data[i]["SellerCD"] + '&' + data[i]["AssessReqID"] + '&' + data[i]["DeepDate"].replace(" ", "&")
+                var requestInfo = data[i]["MansionName"] + '&' + data[i]["RoomNumber"] + '&' + data[i]["Address"] + '&' + data[i]["買取依頼日時"] + '&' + data[i]["ProgressKBN"] + '&' + data[i]["TenStaffCD"] + '&' + data[i]["IntroPlanDate"] + '&' + data[i]["不動産会社"] + '&' + data[i]["Remark"] + '&' +
+                    data[i]["NameConfDateTime"] + '&' + data[i]["AddressConfDateTime"] + '&' + data[i]["TelConfDateTime"] + '&' + data[i]["MailConfDateTime"] + '&' + data[i]["RegistConfDateTime"] + '&' + data[i]["IntroReqID"] + '&' + data[i]["SendOK"];
+                Bind_ModalDetails(id, requestInfo);
+            }
+        }
+    })
+}
 function dropFiles(files, obj) {
     if (files != null && files != 'undefined') {
         formData = new FormData();
@@ -406,9 +489,63 @@ function dropFiles(files, obj) {
     }
     deleteFileFromServer();
 }
-function UploadDropFiles() { 
+function UploadDropFiles(IsBypass) { 
     dropFiles(filesDataTemp, $('#fileStatus')); 
     $('#inputFile').val(null);
+    t_Assess_Guide_SaveChanges(IsBypass);
+}
+let model_Cache = {
+    IntroReqID: null,
+    NameConf: 0,
+    AddressConf: 0,
+    TelConf: 0,
+    MailConf: 0,
+    RegisConf:0,
+    TenStaffCD: null,
+    ProcessKBN: 0,
+    IntroPlanDate: null,
+    Remark: null,
+    IsSomethingChanged:0
+}
+function t_Assess_Guide_SaveChanges(IsBypass)
+{
+    let c_model_Cache = {
+        IntroReqID: $('#hdn_AssReID').val(),
+        NameConf: $('#Chk_req_Name_Kanji').is(":checked")? 1:0,
+        AddressConf: $('#Chk_req_pc_Address').is(":checked") ? 1 : 0,
+        TelConf: $('#Chk_req_pc_phone').is(":checked") ? 1 : 0,
+        MailConf: $('#Chk_req_pc_mail_address').is(":checked") ? 1 : 0,
+        RegisConf: $('#Chk_CopyInfo').is(":checked") ? 1 : 0,
+        TenStaffCD: $('#req_ddlStaff').val(),
+        ProcessKBN: $('#req_ddlstatus').val(),
+        IntroPlanDate: $('#req_SendDate').val(),
+        Remark: $('#req_remarks').val(),
+        IsSomethingChanged: 0
+    }
+    let model = {
+        IntroReqID: c_model_Cache.IntroReqID,
+        NameConf: model_Cache.NameConf == c_model_Cache.NameConf ? 0 : 1,
+        AddressConf: model_Cache.AddressConf == c_model_Cache.AddressConf ? 0 : 1,
+        TelConf: model_Cache.TelConf == c_model_Cache.TelConf ? 0 : 1,
+        MailConf: model_Cache.MailConf == c_model_Cache.MailConf ? 0 : 1,
+        RegisConf: model_Cache.RegisConf == c_model_Cache.RegisConf ? 0 : 1,
+        TenStaffCD: c_model_Cache.TenStaffCD,
+        ProcessKBN: c_model_Cache.ProcessKBN,
+        IntroPlanDate: c_model_Cache.IntroPlanDate,
+        Remark: c_model_Cache.Remark,
+        IsSomethingChanged: 1,
+        IsByPass: (IsBypass ==1 )? 1 : 0
+    }
+    common.callAjax(_url.get_t_assess_guide_SaveChanges, model, function (result) {
+        if (result && result.isOK) {
+            if (IsBypass == 1)
+                $('#modal-sendok').modal('show');
+            else
+            $('#modal-changed').modal('show')
+        }
+        else
+            $('#site-error-modal').modal('show');
+    });
 }
 function createFileStatusbar() {
     this.statusbar = $('<div class="statusbar"></div>');
@@ -421,7 +558,7 @@ function createFileStatusbar() {
 }
 var formData = new FormData();
 var fileCount = 0;
-var url_uploadFiles = _url.get_t_assess_guide_url_uploadFiles;//'@Url.Action("UploadFiles", "api/InputBukkenShousaiApi")'; //_url.get_t_assess_guide_url_uploadFiles;// 
+var url_uploadFiles = _url.get_t_assess_guide_url_uploadFiles; 
 function deleteFileFromServer() {
     let modeldelete = {
         AttachSEQ: $('#list_AttachItem').val()

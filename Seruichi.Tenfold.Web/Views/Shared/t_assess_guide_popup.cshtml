@@ -371,8 +371,9 @@
                                 <div class="form-check pb-2">
                                     <input class="form-check-input" type="checkbox" value="" id="Chk_req_Name_Kanji">
                                     <label class="form-check-label" for="Chk_req_Name_Kanji">
-                                        売主名<h5 class="" id="req_Name_Kanji"> </h5>
+                                        売主名
                                     </label>
+                                    <h5 class="" id="req_Name_Kanji"> </h5>
                                 </div>
                                 <div class="form-check pb-2">
                                     <input class="form-check-input" type="checkbox" value="" id="Chk_req_pc_Address">
@@ -411,10 +412,13 @@
 
                                 </div>
                                 <div class="drop_wrap">
-                                    <input type="hidden" id="hdn_AssReID" value=""/>
-                                    <input type="hidden" id="list_AttachItem" value=""/>
-                                    <div id="dragDropArea"  >
-                                       
+                                    <input type="hidden" id="hdn_AssReID" value="" />
+                                    <input type="hidden" id="list_AttachItem" value="" />
+                                    <input type="hidden" id="hdn_IsSendOK" value="0" />
+                                    <input type="hidden" id="hdn_NeedRefresh" value="0" />
+                                    <input type="hidden" id="hdn_IsAgreedAll" value="0" /> 
+                                    <div id="dragDropArea">
+
                                         <div class="drop_buttons">
                                             <input type="file" name="inputFile" id="inputFile" size="5" accept=@ViewBag.Exts maxsize=@ViewBag.Size multiple nofocus>
                                             <div id="btnInputFile">
@@ -438,9 +442,9 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#mansion">戻る</button>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="UploadDropFiles()" data-bs-target="#modal-changed">保存</button>
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-send">送客</button>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" id="return_button" data-bs-target="#mansion">戻る</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="UploadDropFiles()">保存</button> @*data-bs-target="#modal-changed"*@
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" id="SendCustomer_1" disabled="disabled" data-bs-target="#modal-send">送客</button>
             </div>
 
         </div>
@@ -467,7 +471,7 @@
                 </section>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                <button type="button" class="btn btn-secondary" id="RefreshClick" data-bs-dismiss="modal">閉じる</button>
             </div>
         </div>
     </div>
@@ -486,20 +490,20 @@
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
                     <div class="form-check pt-3">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                        <label class="form-check-label" for="defaultCheck1">
+                        <input class="form-check-input" type="checkbox" value="0" id="chk_IsAgreed">
+                        <label class="form-check-label" for="chk_IsAgreed">
                             注意事項を確認しました。
                         </label>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" id="return_button2"
                         data-bs-target="#mansion">
                     戻る
                 </button>
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                        data-bs-target="#modal-sendok">
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" id="send_customer2">
+                    @*data-bs-target="#modal-sendok"*@
                     送客
                 </button>
 
@@ -528,7 +532,7 @@
                 </section>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="return_SendDoneOk2">閉じる</button>
             </div>
         </div>
     </div>

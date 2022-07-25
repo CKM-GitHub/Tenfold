@@ -44,19 +44,17 @@ namespace Seruichi.Tenfold.Web.Controllers
             var res = new DataTable();
             var dt = bl.get_t_asses_guide_DisplayData(model);
             if (model.IsCSV)
-            {
-
+            { 
                 dt.Columns["SellerMansionID"].ColumnName = "物件CD";
                 dt.Columns["SellerCD"].ColumnName = "売主CD";
-                dt.Columns["RoomNumber"].ColumnName = "部屋";
-
-                //部屋
+                dt.Columns["RoomNumber"].ColumnName = "部屋"; 
                 res = SetColumnsOrder(dt); 
                 res.AcceptChanges();
                 return OKResult(DataTableToJSON(res));
             }
             return OKResult(DataTableToJSON(dt));
         }
+
         private DataTable SetColumnsOrder(DataTable dt)
         {
             string[] str = new string[] { "No", "ステータス", "査定ID", "物件CD", "物件名", "部屋", "住所", "売主CD", "売主名", "不動産会社CD", "不動産会社", "管理担当", "登録日時", "簡易査定日時", "詳細査定日時", "買取依頼日時", "経過時間", "送客予定日" };
@@ -162,6 +160,31 @@ namespace Seruichi.Tenfold.Web.Controllers
             //model.Processing = model.LogFlg == "3" ? "csv" : "display"; 
             bl.Insert_L_Log(model);
             return OKResult();
+        }
+        public ActionResult ViewedProcess(t_assess_guideModel model)
+        {
+            t_assess_guideBL bl = new t_assess_guideBL();
+            if (bl.ViewedProcess(model))
+            {
+                var dt = bl.get_t_asses_guide_DisplayData(model);
+                var dtres = dt.Select("IntroReqID = '" + model.IntroReqID + "'").CopyToDataTable(); 
+                return OKResult(DataTableToJSON(dtres));
+            }
+            else
+                return base.HttpNotFound();
+        }
+        public ActionResult SaveChanges(t_assess_guideModel model)
+        {
+            t_assess_guideBL bl = new t_assess_guideBL();
+            model.IpAddress = base.GetClientIP();
+            if (bl.SaveChanges(model))
+            {
+                //var dt = bl.get_t_asses_guide_DisplayData(model);
+                //var dtres = dt.Select("IntroReqID = '" + model.IntroReqID + "'").CopyToDataTable();
+                return OKResult();
+            }
+            else
+                return base.HttpNotFound();
         }
     }
 }

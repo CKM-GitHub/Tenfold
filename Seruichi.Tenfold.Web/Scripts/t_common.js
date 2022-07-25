@@ -126,70 +126,86 @@ function isNullAndUndef(variable) {
 
     return (variable !== null && variable !== undefined);
 }
-//Start script code of t_reale_Modal.cshtml -> Row No. 64 ~ 
-function Bind_ModalDetails(id, requestInfo) {
-    if (requestInfo) {
-        $('#req_MansionName').text(requestInfo.split('&')[0]);
-        $('#req_RoomNumber').text(' ' + requestInfo.split('&')[1]);
-        $('#req_Address').text(requestInfo.split('&')[2]);
-        $('#req_Purchase').text('買取依頼日時 ' + requestInfo.split('&')[3]);
+function Bind_Assess_Guide_View(id, requestInfo) {
+    
+    $('#req_MansionName').text(requestInfo.split('&')[0]);
+    $('#req_RoomNumber').text(' ' + requestInfo.split('&')[1]);
+    $('#req_Address').text(requestInfo.split('&')[2]);
+    $('#req_Purchase').text('買取依頼日時 ' + requestInfo.split('&')[3]);
 
-        $('#req_ddlstatus').val(requestInfo.split('&')[4]);
-        $('#req_ddlStaff').val(requestInfo.split('&')[5]);//req_SendDate
+    $('#req_ddlstatus').val(requestInfo.split('&')[4]); model_Cache.ProcessKBN = $('#req_ddlstatus').val();
+    $('#req_ddlStaff').val(requestInfo.split('&')[5]); model_Cache.TenStaffCD = $('#req_ddlStaff').val();
 
-        $('#req_SendDate').val(requestInfo.split('&')[6]);//req_SendDate
-        $('#req_SendCompany').val(requestInfo.split('&')[7]);//req_SendDate
-        $('#req_remarks').val(requestInfo.split('&')[8]);//req_SendDate
-
-
-        if (requestInfo.split('&')[9] === 'null')
-            $('#Chk_req_Name_Kanji').prop('checked', true);
-        else
-            $('#Chk_req_Name_Kanji').prop('checked', false);
+    $('#req_SendDate').val(requestInfo.split('&')[6]); model_Cache.IntroPlanDate = $('#req_SendDate').val();
+    $('#req_SendCompany').val(requestInfo.split('&')[7]);
+    $('#req_remarks').val(requestInfo.split('&')[8]); model_Cache.Remark = $('#req_remarks').val();
 
 
-        if (requestInfo.split('&')[10] === 'null')
-            $('#Chk_req_pc_Address').prop('checked', true);
+    if (requestInfo.split('&')[9] === 'null') {
+        $('#Chk_req_Name_Kanji').prop('checked', true);
+        $('#Chk_req_Name_Kanji').prop('value', 1);
+        model_Cache.NameConf = 1;
+    }
+    else 
+        $('#Chk_req_Name_Kanji').prop('checked', false);
 
-        else
-            $('#Chk_req_pc_Address').prop('checked', false);
+
+    if (requestInfo.split('&')[10] === 'null') {
+        $('#Chk_req_pc_Address').prop('checked', true);
+        $('#Chk_req_pc_Address').prop('value', 1);
+        model_Cache.AddressConf = 1; 
+    }
+    else
+        $('#Chk_req_pc_Address').prop('checked', false);
 
 
-        if (requestInfo.split('&')[11] === 'null')
-            $('#Chk_req_pc_phone').prop('checked', true);
-        else
-            $('#Chk_req_pc_phone').prop('checked', false);
+    if (requestInfo.split('&')[11] === 'null') {
+        $('#Chk_req_pc_phone').prop('checked', true);
+        $('#Chk_req_pc_phone').prop('value', 1);
+        model_Cache.TelConf = 1; 
+    }
+    else
+        $('#Chk_req_pc_phone').prop('checked', false);
 
-        if (requestInfo.split('&')[12] === 'null')
-            $('#Chk_req_pc_mail_address').prop('checked', true);
-        else
-            $('#Chk_req_pc_mail_address').prop('checked', false);
+    if (requestInfo.split('&')[12] === 'null') {
+        $('#Chk_req_pc_mail_address').prop('checked', true);
+        $('#Chk_req_pc_mail_address').prop('value', 1);
+        model_Cache.TelConf = 1; 
+    }
+    else
+        $('#Chk_req_pc_mail_address').prop('checked', false);
 
-        if (requestInfo.split('&')[13] === 'null')
-            $('#Chk_CopyInfo').prop('checked', true);
-        else
-            $('#Chk_CopyInfo').prop('checked', false);
-        $('#hdn_AssReID').val((requestInfo.split('&')[14]));
+    if (requestInfo.split('&')[13] === 'null') {
+        $('#Chk_CopyInfo').prop('checked', true);
+        $('#Chk_CopyInfo').prop('value', 1);
+        model_Cache.RegisConf = 1;
+    }
+    else
+        $('#Chk_CopyInfo').prop('checked', false);
+     
+    $('#hdn_AssReID').val((requestInfo.split('&')[14]));
+    model_Cache.IntroReqID = $('#hdn_AssReID').val();
+    $('#hdn_IsSendOK').val((requestInfo.split('&')[15]));
+    //hdn_IsSendOK
+    let model1 = {
+        IntroReqID: $('#hdn_AssReID').val()
+    }
+    common.callAjax(_url.get_t_assess_guide_AttachFiles, model1, function (result) {
+        if (result && result.isOK) {
+            var data = JSON.parse(result.data)
+            if (data.length) {
+                var html = '';
+                for (var i = 0; i < data.length; i++) {
+                    var ext = data[i]["AttachFileName"] + data[i]["AttachFileType"];
+                    var idDelete = 'attach_' + data[i]["IntroReqID"] + '_' + data[i]["AttachSEQ"] + '_' + data[i]["AttachFileUserCD"];
+                    var idDown = 'down_' + data[i]["IntroReqID"] + '_' + data[i]["AttachSEQ"] + '_' + data[i]["AttachFileUserCD"];
 
-        let model1 = {
-            IntroReqID: $('#hdn_AssReID').val()
-        }
-        common.callAjax(_url.get_t_assess_guide_AttachFiles, model1, function (result) {
-            if (result && result.isOK) {
-                var data = JSON.parse(result.data)
-                if (data.length) {
-                    var html = '';
-                    for (var i = 0; i < data.length; i++) {
-                        var ext = data[i]["AttachFileName"] + data[i]["AttachFileType"];
-                        var idDelete = 'attach_' + data[i]["IntroReqID"] + '_' + data[i]["AttachSEQ"] + '_' + data[i]["AttachFileUserCD"];
-                        var idDown = 'down_' + data[i]["IntroReqID"] + '_' + data[i]["AttachSEQ"] + '_' + data[i]["AttachFileUserCD"];
-
-                        html += '<div class="card m-1 p-0 count-list-original" >\
+                    html += '<div class="card m-1 p-0 count-list-original" >\
                 <div class="card-body mt-1 pt-1 mb-1 pb-1">\
                     <div class="d-flex justify-content-between">\
                         <div class="d-flex flex-row align-items-center">\
                             <div class="ms-3">\
-                                <a href="#" id="'+ idDown +'" onclick="downloadAttach(this)" class="text-underline">\
+                                <a href="#" id="'+ idDown + '" onclick="downloadAttach(this)" class="text-underline">\
                                     <h5>'+ ext + '</h5>\
                                 </a>\
                                 <p class="small mb-0">アップロード日時：'+ data[i]["AttachFileDateTime1"] + '</p>\
@@ -201,19 +217,25 @@ function Bind_ModalDetails(id, requestInfo) {
                         </div>\
                     </div>\
                 </div></div>';
-                    }
-                    $('#list_AttachItem').val('');
-                    $('#FileList').html('');
-                    $('#FileList').append(html);
                 }
-                else {
-                    addNaShi();
-                }
+                $('#list_AttachItem').val('');
+                $('#FileList').html('');
+                $('#FileList').append(html);
             }
-        });
+            else {
+                addNaShi();
+            }
+        }
+    });
 
-    }
 
+
+}
+//Start script code of t_reale_Modal.cshtml -> Row No. 64 ~ 
+function Bind_ModalDetails(id, requestInfo) {
+    if (requestInfo) { 
+        Bind_Assess_Guide_View(id, requestInfo);
+    } 
     
     var DeepAssDateTime = '';
     if (id.split('&')[3] == '') {

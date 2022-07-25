@@ -32,11 +32,8 @@ namespace Models.Tenfold.t_assess_guide
         public byte Chk_NonMemberSeller { get; set; }
         public bool IsCSV { get; set; }
         public string Kanritantou { get; set; }
-        //public string BukkenNO { get; set; }
-        //public int BukkenFileRows { get; set; }
-        //public byte BukkenFileShurui { get; set; }
-        //public string BukkenFileName { get; set; }
-        public string HiddenUpdateDatetime { get; set; }
+        public string AssID { get; set; }
+        public string ProcessKBN { get; set; } 
         public string UserCD { get; set; }
         public string IntroReqID { get; set; }
         public string AttachSEQ { get; set; }
@@ -47,6 +44,17 @@ namespace Models.Tenfold.t_assess_guide
         public string ZippedFileName { get; set; }
         public string AttachFilePath { get; set; }
         public string AttachFileZippedFullPathName { get; set; }
+        public string NameConf { get; set; }
+        public string TelConf { get; set; }
+        public string MailConf { get; set; }
+        public string AddressConf { get; set;}
+        public string RegisConf { get; set; }
+        public string Remark { get; set; } 
+        public string TenStaffCD { get; set; }
+        public string IntroPlanDate { get; set; }
+        public string IpAddress { get; set; }
+        public string IsSomethingChanged { get; set; }
+        public string IsByPass { get; set; }
     }
     public class t_assess_guide_L_Log_Model
     {
