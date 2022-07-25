@@ -45,7 +45,7 @@ namespace Seruichi.BL.RealEstate.r_asmc_ms_list_map
                 && string.IsNullOrEmpty(model.StartYear) && string.IsNullOrEmpty(model.EndYear)
                 && string.IsNullOrEmpty(model.StartDistance) && string.IsNullOrEmpty(model.EndDistance)
                 && string.IsNullOrEmpty(model.StartRooms) && string.IsNullOrEmpty(model.EndRooms)
-                && string.IsNullOrEmpty(model.Priority))
+                && model.Priority == 0)
             {
                 validator.AddValidationResult("btnDisplay", "E303");
             }
@@ -68,7 +68,7 @@ namespace Seruichi.BL.RealEstate.r_asmc_ms_list_map
                 new SqlParameter("@RoomsFrom", SqlDbType.Int){ Value = model.StartRooms },
                 new SqlParameter("@RoomsTo", SqlDbType.Int){ Value = model.EndRooms },
                 new SqlParameter("@Unregistered", SqlDbType.TinyInt){ Value = model.Unregistered.ToByte(0) },
-                new SqlParameter("@Priority", SqlDbType.TinyInt){ Value = model.Priority.ToByte(0) },
+                new SqlParameter("@Priority", SqlDbType.TinyInt){ Value = model.Priority.ToInt32(0) },
              };
 
             DBAccess db = new DBAccess();

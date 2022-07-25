@@ -9,9 +9,9 @@ namespace Models.RealEstate.r_asmc_set_train_check_tab
         public string StationCD { get; set; }
         public int ConditionSEQ { get; set; }
         public string StationName { get; set; }
-        public byte ValidFLG { get; set; }
+        public int ValidFLG { get; set; }
         public string ValidFLGText { get; set; }
-        public int ExpDateFLG { get; set; } //1:有効期限切れ
+        public int Expired { get; set; } //1:有効期限切れ
         public string ExpDateText { get; set; }
         public string REStaffName { get; set; }
         public string ExpDate { get; set; }
@@ -34,14 +34,7 @@ namespace Models.RealEstate.r_asmc_set_train_check_tab
         public List<List<string[]>> RowData = new List<List<string[]>>();   //List item -> [RentHigh1, RentLow1][RentHigh2, RentLow2]...
     }
 
-    public class M_RECondLineOptRow
+    public class M_RECondLineOptRow : r_asmc_set_train.RECondLineOptTable
     {
-        public int OptionKBN { get; set; }
-        public string OptionKBNName { get; set; }
-        public string ValueText { get; set; }
-        public string HandlingKBNText { get; set; }
-        public byte NotApplicableFLG { get; set; }
-        public string NotApplicableFLGText { get; set; }
-        public string IncDecRate { get; set; }
     }
 }

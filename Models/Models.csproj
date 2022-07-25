@@ -106,10 +106,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ValidationModel.cs" />
     <Compile Include="RealEstate\RealEstate_L_Log_Model.cs" />
+    <Compile Include="RealEstate\r_asmc_set_area\r_asmc_set_areaModel.cs" />
+    <Compile Include="RealEstate\r_asmc_set_train\r_asmc_set_trainModel.cs" />
+    <Compile Include="RealEstate\SessionKey.cs" />
     <Compile Include="RealEstate\r_asmc\r_asmc_Region.cs" />
     <Compile Include="RealEstate\r_asmc_ms_list_map\r_asmc_ms_list_mapModel.cs" />
     <Compile Include="RealEstate\r_asmc_ms_map_add\r_asmc_ms_map_addModel.cs" />
     <Compile Include="RealEstate\r_asmc_railway\r_asmc_railwayModel.cs" />
+    <Compile Include="RealEstate\r_asmc_set_ms\r_asmc_set_msModel.cs" />
     <Compile Include="RealEstate\r_asmc_set_area_check_tab\r_asmc_set_area_check_tabModel.cs" />
     <Compile Include="RealEstate\r_asmc_set_train_check_tab\r_asmc_set_train_check_tabModel.cs" />
     <Compile Include="RealEstate\r_asmc_address\r_asmc_addressModel.cs" />
@@ -162,6 +166,7 @@
     <Compile Include="Tenfold\t_reale_purchase\t_reale_purchaseModel.cs" />
     <Compile Include="Tenfold\t_seller_account\t_seller_accountModel.cs" />
     <Compile Include="Tenfold\t_seller_assessment\t_seller_assessmentModel.cs" />
+    <Compile Include="Tenfold\t_seller_config\t_seller_configModel.cs" />
     <Compile Include="Tenfold\t_seller_list\t_seller_listModel.cs" />
     <Compile Include="Tenfold\t_seller_mansion\t_seller_mansionModel.cs" />
     <Compile Include="Tenfold\t_seller_memo\t_seller_memoModel.cs" />

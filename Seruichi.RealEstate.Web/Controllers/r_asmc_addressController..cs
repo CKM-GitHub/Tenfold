@@ -1,4 +1,5 @@
-﻿using Models.RealEstate.r_asmc_address;
+﻿using Models.RealEstate;
+using Models.RealEstate.r_asmc_address;
 using Seruichi.BL.RealEstate.r_asmc_address;
 using Seruichi.Common;
 using System.Web.Mvc;
@@ -9,7 +10,7 @@ namespace Seruichi.RealEstate.Web.Controllers
     {
         // GET: r_asmc_address
         [HttpGet]
-        public ActionResult Index(string rc)
+        public ActionResult Index(string rc, string op)
         {
             if (string.IsNullOrEmpty(rc))
             {
@@ -18,6 +19,7 @@ namespace Seruichi.RealEstate.Web.Controllers
 
             ViewBag.PageID = "r_asmc_address";
             ViewBag.CurrentRegionCD = rc;
+            ViewBag.ExpiredCheck = (op == "1");
             return View();
         }
 
@@ -46,11 +48,12 @@ namespace Seruichi.RealEstate.Web.Controllers
             }
 
             ViewBag.PageID = pid;
+            model.IsShowCheckTab = true; //「登録条件確認」を表示
             return PartialView("_r_asmc_address_searchbox_main", model);
         }
 
         [HttpPost]
-        public ActionResult Render_searchbox_detail(string citycdCsv, int settings1, int settings2)
+        public ActionResult Render_searchbox_detail(string citycdCsv, int settings1, int settings2, int expiredOnly)
         {
             r_asmc_addressDetailModel model;
             if (string.IsNullOrEmpty(citycdCsv))
@@ -65,6 +68,8 @@ namespace Seruichi.RealEstate.Web.Controllers
 
             model.Settings1 = settings1;
             model.Settings2 = settings2;
+            model.ExpiredOnly = expiredOnly;
+            model.IsShowCheckTab = true; //「登録条件確認」を表示
             return PartialView("_r_asmc_address_searchbox_detail", model);
         }
 
@@ -79,8 +84,8 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return RedirectToAction("BadRequest", "Error");
             }
 
-            TempData["selected_cities"] = selected_cities_csv;
-            TempData["selected_towns"] = selected_towns_csv;
+            Session[SessionKey.r_asmc_set_area_cities] = selected_cities_csv;
+            Session[SessionKey.r_asmc_set_area_towns] = selected_towns_csv;
             return RedirectToAction("Index", "r_asmc_set_area");
         }
 

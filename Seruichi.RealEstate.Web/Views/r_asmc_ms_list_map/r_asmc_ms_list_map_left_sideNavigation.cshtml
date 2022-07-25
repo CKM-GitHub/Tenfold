@@ -1,4 +1,6 @@
-﻿<form id="form1">
+﻿@model Models.RealEstate.r_asmc_ms_list_map.r_asmc_ms_list_mapModel
+
+<form id="form1">
     <div id="sidebar-wrapper">
         <ul class="navbar-nav mb-md-4 p-3 mt-5 p-md-0" id="form1">
             <li>
@@ -6,7 +8,7 @@
                     <div class="mb-3 text-start">
                         <label for="MansionName" class="form-label">マンション</label>
                         <span class="cap-errormsg-right" id="errorMansionName"></span>
-                        <input type="text" class="form-control mb-2" value="@ViewBag.MansionName" id="MansionName" name="MansionName" placeholder="マンション名" maxlength="50">
+                        <input type="text" class="form-control mb-2" value="@Model.MansionName" id="MansionName" name="MansionName" placeholder="マンション名" maxlength="50">
                     </div>
                 </div>
             </li>
@@ -100,10 +102,10 @@
                     <span class="cap-errormsg-right" id="errorYear"></span>
                     <div class="form-group input-group mb-3">
                         <span class="cap-errormsg-right" id="errorStartYear"></span>
-                        <input type="text" class="form-control rounded" id="StartYear" name="StartYear">
+                        <input type="text" class="form-control rounded" id="StartYear" name="StartYear" value="@Model.StartYear">
                         <span class="input-group-inline text-center align-self-center p-2">年 ~ </span>
                         <span class="cap-errormsg-right" id="errorEndYear"></span>
-                        <input type="text" class="form-control rounded" id="EndYear" name="EndYear">
+                        <input type="text" class="form-control rounded" id="EndYear" name="EndYear" value="@Model.EndYear">
                         <span class="input-group-inline text-center align-self-center p-2">年</span>
                     </div>
                 </div>
@@ -114,10 +116,10 @@
                     <span class="cap-errormsg-right" id="errorDistance"></span>
                     <div class="form-group input-group mb-3">
                         <span class="cap-errormsg-right" id="errorStartDistance"></span>
-                        <input type="text" class="form-control rounded" id="StartDistance" name="StartDistance">
+                        <input type="text" class="form-control rounded" id="StartDistance" name="StartDistance" value="@Model.StartDistance">
                         <span class="input-group-inline text-center align-self-center p-2">分 ~</span>
                         <span class="cap-errormsg-right" id="errorEndDistance"></span>
-                        <input type="text" class="form-control rounded" id="EndDistance" name="EndDistance">
+                        <input type="text" class="form-control rounded" id="EndDistance" name="EndDistance" value="@Model.EndDistance">
                         <span class="input-group-inline text-center align-self-center p-2">分</span>
                     </div>
                 </div>
@@ -128,10 +130,10 @@
                     <span class="cap-errormsg-right" id="errorRooms"></span>
                     <div class="form-group input-group mb-3">
                         <span class="cap-errormsg-right" id="errorStartRooms"></span>
-                        <input type="text" class="form-control rounded" id="StartRooms" name="StartRooms">
+                        <input type="text" class="form-control rounded" id="StartRooms" name="StartRooms" value="@Model.StartRooms">
                         <span class="input-group-inline text-center align-self-center p-2">戸 ~</span>
                         <span class="cap-errormsg-right" id="errorEndRooms"></span>
-                        <input type="text" class="form-control rounded" id="EndRooms" name="EndRooms">
+                        <input type="text" class="form-control rounded" id="EndRooms" name="EndRooms" value="@Model.EndRooms">
                         <span class="input-group-inline text-center align-self-center p-2">戸</span>
                     </div>
                 </div>
@@ -139,14 +141,35 @@
             <li>
                 <div class="form-group ps-3 pe-3">
                     <div class="form-check pb-3">
-                        <input class="form-check-input" type="checkbox" value="1" id="Unregistered" name="Unregistered">
+                        @if (Model.Unregistered == 1 || ViewBag.IsRestore == false)
+                        {
+                            <input class="form-check-input" type="checkbox" value="1" id="Unregistered" name="Unregistered" checked>
+                        }
+                        else
+                        {
+                            <input class="form-check-input" type="checkbox" value="1" id="Unregistered" name="Unregistered">
+                        }
                         <label class="form-check-label" for="Unregistered">未登録マンション表示</label>
                     </div>
                     <div class="form-check pb-3">
-                        <input class="form-check-input" type="checkbox" value="" id="chkPriority" name="chkPriority">
+                        @if (Model.Priority > 0)
+                        {
+                            <input class="form-check-input" type="checkbox" value="" id="chkPriority" name="chkPriority" checked>
+                        }
+                        else
+                        {
+                            <input class="form-check-input" type="checkbox" value="" id="chkPriority" name="chkPriority">
+                        }
                         <label class="form-check-label" for="chkPriority">優先度</label>
                         <div class="ms-6">
-                            <input class="form-check-input Priority" type="radio" name="Priority" id="Priority4" value="4">
+                            @if (Model.Priority == 4)
+                            {
+                                <input class="form-check-input Priority" type="radio" name="Priority" id="Priority4" value="4" checked>
+                            }
+                            else
+                            {
+                                <input class="form-check-input Priority" type="radio" name="Priority" id="Priority4" value="4">
+                            }
                             <span class="text-danger">
                                 <span class="fa fa-star" data-rating="1"></span>
                                 <span class="fa fa-star" data-rating="2"></span>
@@ -156,7 +179,14 @@
                             </span><span><small>以上</small></span>
                         </div>
                         <div class="ms-6">
-                            <input class="form-check-input Priority" type="radio" name="Priority" id="Priority3" value="3">
+                            @if (Model.Priority == 3)
+                            {
+                                <input class="form-check-input Priority" type="radio" name="Priority" id="Priority3" value="3" checked>
+                            }
+                            else
+                            {
+                                <input class="form-check-input Priority" type="radio" name="Priority" id="Priority3" value="3">
+                            }
                             <span class="text-danger">
                                 <span class="fa fa-star" data-rating="1"></span>
                                 <span class="fa fa-star" data-rating="2"></span>
@@ -166,7 +196,14 @@
                             </span><span><small>以上</small></span>
                         </div>
                         <div class="ms-6">
-                            <input class="form-check-input Priority" type="radio" name="Priority" id="Priority2" value="2">
+                            @if (Model.Priority == 2)
+                            {
+                                <input class="form-check-input Priority" type="radio" name="Priority" id="Priority2" value="2" checked>
+                            }
+                            else
+                            {
+                                <input class="form-check-input Priority" type="radio" name="Priority" id="Priority2" value="2">
+                            }
                             <span class="text-danger">
                                 <span class="fa fa-star" data-rating="1"></span>
                                 <span class="fa fa-star" data-rating="2"></span>
@@ -176,7 +213,14 @@
                             </span><span><small>以上</small></span>
                         </div>
                         <div class="ms-6">
-                            <input class="form-check-input Priority" type="radio" name="Priority" id="Priority1" value="1" checked>
+                            @if (Model.Priority == 1)
+                            {
+                                <input class="form-check-input Priority" type="radio" name="Priority" id="Priority1" value="1" checked>
+                            }
+                            else
+                            {
+                                <input class="form-check-input Priority" type="radio" name="Priority" id="Priority1" value="1">
+                            }
                             <span class="text-danger">
                                 <span class="fa fa-star" data-rating="1"></span>
                                 <span class="fa fa-star-o" data-rating="2"></span>

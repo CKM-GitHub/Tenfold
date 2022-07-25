@@ -1,0 +1,361 @@
+﻿@model Models.RealEstate.r_asmc_set_ms.r_asmc_set_ms_Model
+
+@{
+    ViewBag.Title = "査定条件設定確認[マンション]";
+    Layout = "~/Views/Shared/_r_menuLayout.cshtml";
+}
+@section styles{
+    @Styles.Render("~/Content/r_asmc_set_ms_check")
+}
+
+<div class="d-flex flex-column min-vh-100 bg-surface-secondary mt-18">
+    <div class="d-flex flex-column min-h-screen bg-surface-secondary" id="page-content-wrapper">
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                <div class="card shadow border-0 mb-7">
+
+                    <div class="card-header">
+
+                        <div class="col-md-12 col-12 mb-3 mb-sm-0">
+
+                            <h1 class="h2 mb-0 ls-tight">査定条件設定確認</h1>
+                            <span class="text-muted small">査定条件＞設定＞マンション指定から設定＞地図から設定</span>
+                        </div>
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <!--<div class="mx-n1"> <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1"> <span class=" pe-2">
+                          <i class="fa fa-suitcase" aria-hidden="true"></i> </span> <span>接客モード</span> </a> </div>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <h5>マンション情報</h5>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-dark text-white text-lg rounded-circle">
+                                    <i class="fa fa-building" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <span class="h3 font-bold mb-0">@Model.MansionName</span>
+                                <span class="h6 font-semibold text-muted text-sm d-block mb-2">住所 : <span>@Model.Address</span></span>
+                                <span class="h6 font-semibold text-muted text-sm d-block">登録会社数 : <span>@Model.RealEstateCount</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card shadow border-0 mb-7">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">買取利回り率設定</h5>
+                                    </div>
+                                    <div class="card-body overflow-x-auto w-md-64 mx-auto">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-nowrap table-bordered">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th scope="col" style="width: 100px;">買取利回り率</th>
+                                                        <td class="text-end">
+                                                            <span class="text-danger" id="Rate">@Model.Rate</span>%
+                                                        </td>
+                                                    </tr>
+                                                </thead>
+
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card shadow border-0 mb-7">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">家賃設定</h5>
+                                    </div>
+                                    <div class="card-body overflow-x-auto w-md-80 container">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-nowrap table-bordered">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th scope="col" style="width: 100px;">1㎡あたりの家賃</th>
+                                                        <td class="text-end">
+                                                            <p>上限<span class="text-danger ps-md-5">@Model.RentHigh</span>円</p>
+                                                            <p>下限<span class="text-danger ps-md-5">@Model.RentLow</span>円</p>
+                                                        </td>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="card shadow border-0 mb-7">
+                            <div class="card-header d-md-inline-flex">
+                                <h5 class="mb-0">オプション</h5>
+                            </div>
+                            <div class="card-body container">
+
+                                <div class="border table-responsive cap-con-form mx-auto">
+                                    @Html.Partial("_r_asmc_RECondManOptTable")
+                                </div>
+                            </div>
+                            <div class="card-footer text-end">
+                                @if (Model.RECondManOptList.Any())
+                                {
+                                    <button type="button" class="btn btn-primary text-nowrap"
+                                            data-bs-toggle="modal" data-bs-target="#TemplateModal">
+                                        テンプレート保存
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button disabled type="button" class="btn btn-primary text-nowrap">
+                                        テンプレート保存
+                                    </button>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-header d-md-inline-flex">
+                        <h5 class="mb-0">属性項目</h5>
+                    </div>
+                    <div class="card-body overflow-x-auto container">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-nowrap border">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" style="width: 150px" class="">担当者</th>
+                                        <th scope="col" style="width: 100px" class="">公開状況</th>
+                                        <th scope="col" style="width: 100px" class="">有効期限日</th>
+                                        <th scope="col" style="width: 100px" class="">優先度</th>
+                                        <th scope="col" style="width: 100px" class="text-center">優先査定条件</th>
+                                        <th scope="col" style="width: 100px" class="text-center">査定・買取不可</th>
+                                        <th scope="col" style="width: auto" class="">備考</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        @{
+                                            Seruichi.BL.CommonBL cmmBl = new Seruichi.BL.CommonBL();
+                                        }
+                                        <td>
+                                            <div class="d-flex flex-row align-items-center">
+
+                                                <div class="ms-3">
+                                                    <h5>@Model.REStaffName</h5>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td> <span class="cap-text-primary">@cmmBl.Get_RECond_ValidFLGText(Model.ValidFLG)</span> </td>
+                                        <td> @Model.ExpDate.Replace("-", "/")</td>
+                                        <td>
+                                            <div class="star-rating text-danger">
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    if (i <= Model.Priority)
+                                                    {
+                                                        <span class="fa fa-star" data-rating="@i"></span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="fa fa-star-o" data-rating="@i"></span>
+                                                    }
+                                                }
+                                                <input type="hidden" name="whatever" class="rating-value" value="0">
+                                            </div>
+                                        </td>
+                                        <td class="text-center">@cmmBl.Get_RECond_PrecedenceFlgText(Model.PrecedenceFlg)</td>
+                                        <td class="text-center">@cmmBl.Get_RECond_NotApplicableFLGText(Model.NotApplicableFlg)</td>
+                                        <td>
+                                            <textarea class="form-control custom-control" readonly rows="10">@Model.Remark</textarea>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="AssessmentSimulation">
+                    <div class="card shadow border-0 mb-7">
+                        <div class="card-header d-md-inline-flex">
+                            <h5 class="mb-0">査定シミュレーション</h5>
+                        </div>
+                        <div class="card-body container">
+
+                            <div class="row g-6 mb-5">
+
+                                <div class="col-xl-5 col-sm-5 col-12  mx-auto">
+                                    <div class="card shadow border-0">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-2 d-none d-md-block">
+                                                </div>
+                                                <div class="col-12 col-md-10">
+                                                    <span class="h3 font-bold mb-0">@Model.MansionName</span>
+                                                    <div class="d-flex pb-2">
+                                                        <div class="align-middle align-self-center pe-1">
+                                                            <span class="h6 font-semibold text-muted text-sm d-block mb-2 text-nowrap">想定家賃(円) :</span>
+                                                        </div>
+                                                        <div>
+                                                            <input type="text" class="form-control text-end" name="EstimatedRent" id="EstimatedRent" style="max-width: 150px;">
+                                                            <span class="cap-errormsg-bottom" id="errorEstimatedRent"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-end">
+                                                <button type="button" class="btn btn-primary" id="btnDisplayPrice">推定価格表示</button>
+                                            </div>
+                                            <hr class="navbar-divider my-5 opacity-90">
+                                            <span class="h5 font-semibold text-muted text-sm d-block mb-2 text-end">
+                                                推定価格 : <span class="h4 text-danger" id="EstimatedPrice">0</span>円
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow border-0 mb-7">
+                    <div class="card-footer">
+                        <div class="text-right mt-3 float-end">
+                            <button type="button" class="btn btn-lg btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#SaveModal">
+                                登録
+                            </button>
+                            <button type="button" class="btn btn-lg btn-default" id="btnBack">戻る</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- テンプレート -->
+            <div class="modal fade" id="TemplateModal" tabindex="-1" aria-labelledby="TemplateModal"
+                 data-bs-keyboard="false" data-bs-backdrop="static" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="TemplateModal-Title">テンプレート保存</h5>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="w-100">
+                                <label class="form-label" for="TemplateName">テンプレート名</label>
+                                <input type="text" class="form-control" aria-describedby="TemplateName"
+                                       maxlength="50" name="TemplateName" id="TemplateName">
+                                <span class="cap-errormsg-bottom" id="errorTemplateName"></span>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">戻る</button>
+                            <button type="button" class="btn btn-lg btn-primary" id="btnSaveTemplate">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 登録 -->
+            <div class="modal fade" id="SaveModal" tabindex="-1" aria-labelledby="SaveModal" data-bs-keyboard="false"
+                 data-bs-backdrop="static" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="SaveModal-Title">登録オプション</h5>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row pb-2">
+                                <div class="col-1">
+                                    <input class="form-check-input" type="checkbox" id="ValidFLGCheck">
+                                </div>
+                                <div class="col-auto">
+                                    <label class="form-check-label" for="ValidFLGCheck">同時に公開</label>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">戻る</button>
+                            <button type="button" class="btn btn-lg btn-primary" id="btnRegister">
+                                登録
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 登録完了 -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                 id="SaveCompletedModal">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">登録完了</h4>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe pt-0 p-0">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post"
+                                          style="text-align: center;">
+                                        <h1 class="cap-icon-h1"><i class="fa fa-check cap-icon-i"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center"><strong>査定条件</strong>登録完了。</h4>
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-lg btn-primary btn-lg" type="button" id="btnCompleted">査定条件</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- テンプレート保存完了 -->
+            <div class="modal fade" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" tabindex="-1"
+                 id="TemplateCompletedModal">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">テンプレート保存完了</h4>
+                            <button type="button" class="btn-close d-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <section class="newsletter-subscribe">
+                                <div class="container">
+                                    <div class="intro"></div>
+                                    <form class="d-flex justify-content-center flex-wrap mx-auto" method="post"
+                                          style="text-align: center;">
+                                        <h1 class="cap-icon-h1"><i class="fa fa-check cap-icon-i"></i></h1>
+                                    </form>
+                                </div>
+                                <h4 class="text-center align-self-center pt-2">テンプレートを保存しました。</h4>
+                            </section>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/r_asmc_set_ms_check")
+}

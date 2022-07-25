@@ -10,6 +10,7 @@ namespace Seruichi.BL
 {
     public class CommonBL
     {
+        //DropDownList
         private List<DropDownListItem> GetDropDownListItems(string spName, params SqlParameter[] sqlParams)
         {
             var items = new List<DropDownListItem>();
@@ -105,6 +106,23 @@ namespace Seruichi.BL
             return GetDropDownListItems(spName, sqlParam);
         }
 
+        public List<DropDownListItem> GetDropDownListItemsOfTemplate_for_ManOpt(string realECD)
+        {
+            string spName = "pr_Common_Select_DropDownListOfTemplate_for_ManOpt";
+            SqlParameter sqlParam = new SqlParameter("@RealECD", SqlDbType.VarChar) { Value = realECD };
+
+            return GetDropDownListItems(spName, sqlParam);
+        }
+        public List<DropDownListItem> GetDropDownListItemsOfCourse()
+        {
+            string spName = "pr_t_reale_new_Select_M_Course";
+            return GetDropDownListItems(spName);
+        }
+
+
+
+
+
         public List<DropDownListItem> GetDropDownListItemsOfTenfoldStaff()
         {
             string spName = "pr_Common_Select_DropDownListOfTenfoldStaff";
@@ -126,6 +144,10 @@ namespace Seruichi.BL
 
             return true;
         }
+
+
+
+
 
         public decimal[] GetLongitudeAndLatitude(params string[] address)
         {
@@ -293,6 +315,7 @@ namespace Seruichi.BL
             }
             return SellerName;
         }
+
         public string GetMansionNamebyMansioncd(string mansionCD)
         {
             string mansionName = string.Empty;
@@ -306,6 +329,7 @@ namespace Seruichi.BL
             }
             return mansionName;
         }
+
         public string GetRealEstateNamebyRealECD(string realECD)
         {
             string rename = string.Empty;
@@ -427,10 +451,117 @@ namespace Seruichi.BL
             }
             return recipients;
         }
-        public List<DropDownListItem> GetDropDownListItemsOfCourse()
+
+        public string Get_RECondOpt_OptionKBNName(int optionKbn)
         {
-            string spName = "pr_t_reale_new_Select_M_Course";
-            return GetDropDownListItems(spName);
+            switch (optionKbn)
+            {
+                case  1 : return "総戸数";
+                case  2 : return "所在階";
+                case  3 : return "所在階";
+                case  4 : return "専有面積";
+                case  5 : return "バルコニー";
+                case  6 : return "主採光";
+                case  7 : return "角部屋";
+                case  8 : return "部屋数";
+                case  9 : return "バストイレ";
+                case  10 : return "土地権利";
+                case  11 : return "賃貸状況";
+                case  12 : return "管理状況";
+                case  13 : return "売却希望時期";
+                default: return "";
+            }
+        }
+
+        public string Get_RECondOpt_ValueText(int optionKbn, int categoryKbn, int value1)
+        {
+            switch (optionKbn)
+            {
+                case 2: return "1階";
+                case 3: return "最上階";
+                case 5: return "バルコニーなし";
+                case 6: return "北向き";
+                case 7: return "角部屋";
+                case 10: return "借地権";
+            }
+
+            if (optionKbn == 9)
+            {
+                switch (categoryKbn)
+                {
+                    case 1: return "セパレート";
+                    case 2: return "ユニットバス";
+                    case 3: return "シャワーブース";
+                    default: return "";
+                }
+            }
+
+            if (optionKbn == 11)
+            {
+                switch (categoryKbn)
+                {
+                    case 1: return "賃貸中";
+                    case 2: return "サブリース";
+                    case 3: return "空室";
+                    default: return "";
+                }
+            }
+
+            if (optionKbn == 12)
+            {
+                switch (categoryKbn)
+                {
+                    case 1: return "自主管理";
+                    case 2: return "管理委託";
+                    default: return "";
+                }
+            }
+
+            if (optionKbn == 13)
+            {
+                switch (categoryKbn)
+                {
+                    case 1: return "2週間以上";
+                    case 2: return "1ヶ月以上";
+                    case 3: return "3ヶ月以上";
+                    case 4: return "6ヶ月以上";
+                    case 5: return "1年以上";
+                    case 6: return "その他";
+                    default: return "";
+                }
+            }
+
+            return value1.ToStringOrEmpty();
+        }
+
+        public string Get_RECondOpt_HandlingKBN1Text(int handlingKbn1)
+        {
+            switch (handlingKbn1)
+            {
+                case 1: return "以内";
+                case 2: return "～";
+                default: return "";
+            }
+        }
+
+        public string Get_RECondOpt_NotApplicableFLGText(int notApplicableFlg)
+        {
+            return notApplicableFlg == 1 ? "査定・買取対象外" : "";
+        }
+
+        public string Get_RECond_ValidFLGText(int validFlg)
+        {
+            return validFlg == 1 ? "(公開済)" : "(未公開)";
+        }
+
+        public string Get_RECond_PrecedenceFlgText(int precedenceFlg)
+        {
+            return precedenceFlg == 1? "優先" : "通常";
+        }
+
+        public string Get_RECond_NotApplicableFLGText(int notApplicableFlg)
+        {
+            return notApplicableFlg == 1 ? "査定買取対象外" : "";
         }
     }
 }

@@ -296,8 +296,8 @@ function l_logfunction(id) {
             if (result && result.isOK) {
                 if (model.PageID == "r_asmc_ms_reged_list")
                 {
-                    // window.location.href = common.appPath + '/r_asmc_set_ms/Index?MansionCD=' + model.MansionCD;
-                    alert("https://www.seruichi.com/r_asmc_set_ms/Index?MansionCD=" + model.MansionCD)
+                    window.location.href = common.appPath + '/r_asmc_set_ms/Index?mc=' + model.MansionCD;
+                    //alert("https://www.seruichi.com/r_asmc_set_ms/Index?MansionCD=" + model.MansionCD)
                 }
             }
             if (result && !result.isOK) {

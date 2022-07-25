@@ -52,18 +52,26 @@
                 }
 
                 string css_icon =
-                    item02.ExpirationFlag == 1 ? "fa fa-exclamation-triangle text-warning" :
+                    item02.Expired == 1 ? "fa fa-exclamation-triangle text-warning" :
+                    item02.ValidFLG == 0 ? "fa fa-info-circle cap-text-primary" :
                     item02.ValidFLG == 1 ? "fa fa-info-circle text-danger" :
-                    item02.ValidFLG == 2 ? "fa fa-info-circle cap-text-primary" :
                     "";
                 string a_href = "javascript:openCheckTab('" + @item02.TownCD + "');";
 
                 <label class="cap-hover text-dark checkbox-inline p-3 cap-fon-div-w270 text-nowrap">
-                    <input type="checkbox" value="@item02.TownCD" class="@css_chkbox" autocomplete="off" checked>
+                    @if (Model.ExpiredOnly == 1 && item02.Expired == 0)
+                    {
+                        <input type="checkbox" value="@item02.TownCD" class="@css_chkbox" autocomplete="off" disabled>
+
+                    }
+                    else
+                    {
+                        <input type="checkbox" value="@item02.TownCD" class="@css_chkbox" autocomplete="off" checked>
+                    }
                     <span class="ps-1">@towntext</span>
                     @if (!string.IsNullOrEmpty(css_icon))
                     {
-                        if (Model.DisabledOpenCheckTab)
+                        if (!Model.IsShowCheckTab || (Model.ExpiredOnly == 1 && item02.Expired == 0))
                         {
                             <i class="@css_icon" aria-hidden="true"></i>
                         }
