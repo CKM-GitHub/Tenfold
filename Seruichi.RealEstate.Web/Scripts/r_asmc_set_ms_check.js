@@ -4,7 +4,7 @@ $(function () {
     _url.saveTemplate = common.appPath + '/r_asmc_set_ms_check/SaveTemplate';
     _url.insertAll = common.appPath + '/r_asmc_set_ms_check/InsertAll';
     _url.gotoBack = common.appPath + '/r_asmc_set_ms_check/GotoBack';
-    _url.gotoAsmcTop = common.appPath + '/r_asmc_set_ms_check/GotoAsmcTop';
+    _url.gotoFirstPage = common.appPath + '/r_asmc_set_ms_check/GotoFirstPage';
 
     setValidation();
     addEvents();
@@ -94,12 +94,9 @@ function addEvents() {
 
     //登録完了
     $('#btnCompleted').on('click', function () {
-        const fd = new FormData();
-        fd.append('asmcTopPage', $(this).data('asmc-top-page'));
-
         const form = document.createElement("form");
         document.body.append(form);
-        common.callSubmit(form, _url.gotoAsmcTop, fd);
+        common.callSubmit(form, _url.gotoFirstPage);
     });
 
     //戻る

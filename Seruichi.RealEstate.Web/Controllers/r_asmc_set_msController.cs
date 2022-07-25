@@ -97,8 +97,9 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return View("Index", model);
             }
 
+            Session[SessionKey.r_asmc_set_ms_referrer] = base.GetPreviousUrl();
             Session[SessionKey.r_asmc_set_ms_data] = model;
-            return RedirectToAction("Index", "r_asmc_set_ms_check", new { tp = base.GetPreviousController()});
+            return RedirectToAction("Index", "r_asmc_set_ms_check");
         }
     }
 }

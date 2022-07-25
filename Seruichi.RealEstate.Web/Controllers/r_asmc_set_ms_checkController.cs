@@ -11,7 +11,7 @@ namespace Seruichi.RealEstate.Web.Controllers
     {
         // GET: r_asmc_set_ms_check
         [HttpGet]
-        public ActionResult Index(string tp)
+        public ActionResult Index()
         {
             var model = Session[SessionKey.r_asmc_set_ms_data] as r_asmc_set_ms_Model;
             if (model == null)
@@ -19,7 +19,6 @@ namespace Seruichi.RealEstate.Web.Controllers
                 return RedirectToAction("BadRequest", "Error");
             }
 
-            ViewBag.AsmcTopPage = tp;
             ViewBag.RECondManOptList = model.RECondManOptList;
             ViewBag.InputMode = false;
             return View(model);
@@ -117,11 +116,15 @@ namespace Seruichi.RealEstate.Web.Controllers
             return RedirectToAction("Index", "r_asmc_set_ms", new { mc = model.MansionCD });
         }
 
-        // Ajax: GotoAsmcTop
+        // Ajax: GotoFirstPage
         [HttpPost]
-        public ActionResult GotoAsmcTop(string asmcTopPage)
+        public ActionResult GotoFirstPage(string pageName)
         {
-            return RedirectToAction("Index", asmcTopPage);
+            var url = Session[SessionKey.r_asmc_set_ms_referrer].ToStringOrEmpty();
+            Session[SessionKey.r_asmc_set_ms_referrer] = null;
+
+            return Redirect(url);
+            //return RedirectToAction("Index", pageName);
         }
 
     }

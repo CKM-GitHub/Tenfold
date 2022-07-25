@@ -11,6 +11,7 @@
         public static readonly string r_asmc_ms_list_map_cities = "r_asmc_ms_list_map_cities";
         public static readonly string r_asmc_ms_list_map_towns = "r_asmc_ms_list_map_towns";
 
+        public static readonly string r_asmc_set_ms_referrer = "r_asmc_set_ms_referrer";
         public static readonly string r_asmc_set_ms_conditions = "r_asmc_set_ms_conditions";
         public static readonly string r_asmc_set_ms_data = "r_asmc_set_ms_data";
     }
