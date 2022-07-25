@@ -56,10 +56,10 @@ namespace Seruichi.RealEstate.Web.Controllers
                             CityCD = dr["CityCD"].ToString(),
                             CityName = dr["CityName"].ToString()
                         }).ToList();
-            if (ViewBag.Url !=null)
-            {
+            //if (ViewBag.Url !=null)
+            //{
                 strUrl = ViewBag.Url.Segments[1].Replace("/", "");
-            }
+           // }
             ViewBag.PrefCD = prefList;
             ViewBag.CityGPCD = prefcitygpcdList;
             ViewBag.CityCD = cityList;
