@@ -6,12 +6,15 @@ $(function () {
     _url.SelectFromMultipurpose = common.appPath + '/t_seller_config/SelectFromMultipurpose';
     _url.InsertUpdateToMultipurpose = common.appPath + '/t_seller_config/InsertUpdateToMultipurpose';
     _url.InsertL_Log = common.appPath + '/t_seller_config/InsertL_Log';
+
     setValidation();
     addEvents();
+
+    $('#navbarDropdownMenuLink').addClass('font-bold active text-underline');
+    $('#t_seller_config').addClass('font-bold text-underline');
 });
 
 function setValidation() {
-
     $('#slotsNum')
         .addvalidation_errorElement("#errorslots")
         .addvalidation_reqired()
@@ -24,18 +27,17 @@ function setValidation() {
         .addvalidation_onebyte_character()
         .addvalidation_maxlengthCheck(2);
 
-
     $('#Amountbilled')
         .addvalidation_errorElement("#errorBilled")
         .addvalidation_reqired()
         .addvalidation_onebyte_character()
-        .addvalidation_maxlengthCheck(2);
+        .addvalidation_maxlengthCheck(5);
 
     $('#reassessment')
         .addvalidation_errorElement("#errorReassessment")
         .addvalidation_reqired()
         .addvalidation_onebyte_character()
-        .addvalidation_maxlengthCheck(2);
+        .addvalidation_maxlengthCheck(3);
 }
 
 $(document).ready(function () {
@@ -121,121 +123,173 @@ $(document).ready(function () {
 });
 
 function addEvents() {
+    common.bindValidationEvent('#form1', '');
+
+    $('#btnConfirm').on('click', function () {
+
+        if (!common.checkValidityOnSave('#form1')) {
+            $form.getInvalidItems().get(0).focus();
+            return false;
+        }
+        $('#modal-changesave').modal("show");
+    });
+
+
     $('#btnSave').on('click', function () {
-
+        
         const $this = $(this), $slots = $('#slotsNum').val(), $additionslots = $('#additionslotsNum').val(),
-            $billed = $('#Amountbilled').val(), $reassessment = $('#reassessment').val()
-
-        if (SlotsNum != $slots) {
-            let mode = 0;
-            if (SlotsNum == 0) {
-                mode = 1;
-            }
-            else {
-                mode = 2;
-            }
-            let model1 = {
-                DataID: 112,
-                Num: $slots,
-                Mode: mode
-            };
-            common.callAjaxWithLoading(_url.InsertUpdateToMultipurpose, model1, this,
-                function (result) {
-                    if (result && result.isOK) {
-                       
-                    }
-                    
+            $billed = $('#Amountbilled').val(), $reassessment = $('#reassessment').val();
+            if (SlotsNum != $slots) {
+                let mode = 0;
+                if (SlotsNum == 0) {
+                    mode = 1;
                 }
-            )
+                else {
+                    mode = 2;
+                }
+                let model1 = {
+                    DataID: 112,
+                    Num: $slots,
+                    Mode: mode
+                };
+                common.callAjaxWithLoading(_url.InsertUpdateToMultipurpose, model1, this,
+                    function (result) {
+                        if (result && result.isOK) {
 
-        }
-
-        if (Additionslots != $additionslots) {
-            let mode = 0;
-            if (Additionslots == 0) {
-                mode = 1;
-            }
-            else {
-                mode = 2;
-            }
-
-            let model1 = {
-                DataID: 108,
-                Num: $additionslots,
-                Mode: mode,
-            };
-            common.callAjaxWithLoading(_url.InsertUpdateToMultipurpose, model1, this,
-                function (result) {
-                    if (result && result.isOK) {
+                        }
+                        else if (result && !result.isOK) {
+                            $('#modal-changeok').modal('hide');
+                            const errors = result.data;
+                            for (key in errors) {
+                                const target = document.getElementById(key);
+                                $(target).showError(errors[key]);
+                                $form.getInvalidItems().get(0).focus();
+                            }
+                        }
 
                     }
-                }
-            )
-        }
+                )
 
-        if (AmountBilled != $billed) {
-            let mode = 0;
-            if (AmountBilled == 0) {
-                mode = 1;
             }
-            else {
-                mode = 2;
+
+            if (Additionslots != $additionslots) {
+                let mode = 0;
+                if (Additionslots == 0) {
+                    mode = 1;
+                }
+                else {
+                    mode = 2;
+                }
+
+                let model1 = {
+                    DataID: 108,
+                    Num: $additionslots,
+                    Mode: mode,
+                };
+                common.callAjaxWithLoading(_url.InsertUpdateToMultipurpose, model1, this,
+                    function (result) {
+                        if (result && result.isOK) {
+
+                        }
+                        else if (result && !result.isOK) {
+                            $('#modal-changesave').modal('hide');
+                            const errors = result.data;
+                            for (key in errors) {
+                                const target = document.getElementById(key);
+                                $(target).showError(errors[key]);
+                                $form.getInvalidItems().get(0).focus();
+                            }
+                        }
+                    }
+                )
             }
-            
-            let model1 = {
-                DataID: 107,
-                Num: $billed,
-                Mode: mode
-            };
-            common.callAjaxWithLoading(_url.InsertUpdateToMultipurpose, model1, this,
-                function (result) {
-                    if (result && result.isOK) {
+
+            if (AmountBilled != $billed) {
+                let mode = 0;
+                if (AmountBilled == 0) {
+                    mode = 1;
+                }
+                else {
+                    mode = 2;
+                }
+
+                let model1 = {
+                    DataID: 107,
+                    Num: $billed,
+                    Mode: mode
+                };
+                common.callAjaxWithLoading(_url.InsertUpdateToMultipurpose, model1, this,
+                    function (result) {
+                        if (result && result.isOK) {
+
+                        }
+                        else if (result && !result.isOK) {
+                            $('#modal-changesave').modal('hide');
+                            const errors = result.data;
+                            for (key in errors) {
+                                const target = document.getElementById(key);
+                                $(target).showError(errors[key]);
+                                $form.getInvalidItems().get(0).focus();
+                            }
+                        }
 
                     }
+                )
+            }
+
+            if (Reassessment != $reassessment) {
+                let mode = 0;
+                if (Reassessment == 0) {
+                    mode = 1;
                 }
-            )
-        }
+                else {
+                    mode = 2;
+                }
 
-        if (Reassessment != $reassessment) {
-            let mode = 0;
-            if (Reassessment == 0) {
-                mode = 1;
-            }
-            else {
-                mode = 2;
-            }
+                let model1 = {
+                    DataID: 114,
+                    Num: $reassessment,
+                    Mode: mode
+                };
+                common.callAjaxWithLoading(_url.InsertUpdateToMultipurpose, model1, this,
+                    function (result) {
+                        if (result && result.isOK) {
 
-            let model1 = {
-                DataID: 114,
-                Num: $reassessment,
-                Mode: mode
-            };
-            common.callAjaxWithLoading(_url.InsertUpdateToMultipurpose, model1, this,
-                function (result) {
-                    if (result && result.isOK) {
+                        }
+                        else if (result && !result.isOK) {
+                            $('#modal-changesave').modal('hide');
+                            const errors = result.data;
+                            for (key in errors) {
+                                const target = document.getElementById(key);
+                                $(target).showError(errors[key]);
+                                $form.getInvalidItems().get(0).focus();
+                            }
+                        }
 
                     }
-                    
-                }
-            )
-        }
+                )
+            }
 
-        let model = {
-            LoginKBN: null,
-            LoginID: null,
-            RealECD: null,
-            LoginName: null,
-            IPAddress: null,
-            Page: null,
-            Processing: null,
-            Remarks: null
-        }
-        common.callAjax(_url.InsertL_Log, model,
-            function (result) {
-                if (result && result.isOK) {
-                    alert("Insert/Update Successfully!!")
-                }
-            });
+            let model = {
+                LoginKBN: null,
+                LoginID: null,
+                RealECD: null,
+                LoginName: null,
+                IPAddress: null,
+                Page: null,
+                Processing: null,
+                Remarks: null
+            }
+            common.callAjax(_url.InsertL_Log, model,
+                function (result) {
+                    if (result && result.isOK) {
+                        window.location.reload();
+                    }
+                });
+        
+    });
 
+    $('#btnClose').on('click', function () {
+        window.location.reload();
     });
 }

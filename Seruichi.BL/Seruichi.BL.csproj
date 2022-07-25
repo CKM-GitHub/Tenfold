@@ -270,6 +270,8 @@
     <Content Include="Database\StoredProcedure\pr_t_reale_asmhis_get_DisplayData.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_account_Select_M_Seller_By_SellerCD.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_account_Update_M_Seller.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_seller_config_InsertUpdateMultipurpose.sql" />
+    <Content Include="Database\StoredProcedure\pr_t_seller_config_SelectFromMultipurpose.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_List_csv_generate.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_list_Select_DropDownlistofPref.sql" />
     <Content Include="Database\StoredProcedure\pr_t_seller_List_Select_M_SellerData.sql" />

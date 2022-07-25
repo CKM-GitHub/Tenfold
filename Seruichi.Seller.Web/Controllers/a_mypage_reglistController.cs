@@ -32,25 +32,7 @@ namespace Seruichi.Seller.Web.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult InsertD_AssReq(a_mypage_reglistModel model)
-        {
-            string SellerCD = base.GetOperator();
-            a_mypage_reglistBL bl = new a_mypage_reglistBL();
-            model.LoginKBN = 3;
-            model.LoginID = base.GetOperator();
-            model.RealECD = null;
-            model.LoginName = base.GetOperatorName();
-            model.IPAddress = base.GetClientIP();
-            model.PageID = "a_mypage_reglist";
-            model.ProcessKBN = "link";
-            model.Remarks = model.SellerCD;
-            bl.InsertD_AssReq(model);
-            return OKResult();
-
-        }
-
-
+      
         [HttpPost]
         public ActionResult InsertD_Assessment(a_mypage_reglistModel model)
         {
@@ -94,6 +76,15 @@ namespace Seruichi.Seller.Web.Controllers
             string SellerCD = base.GetOperator();
             a_mypage_reglistBL bl = new a_mypage_reglistBL();
             var dt = bl.get_t_sellerPossibleTime(SellerCD);
+
+            return OKResult(DataTableToJSON(dt));
+        }
+
+        [HttpPost]
+        public ActionResult get_d_AssReqdata(a_mypage_reglistModel model)
+        {
+            a_mypage_reglistBL bl = new a_mypage_reglistBL();
+            var dt = bl.get_d_AssReqdata(model);
 
             return OKResult(DataTableToJSON(dt));
         }
