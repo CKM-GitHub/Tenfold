@@ -75,24 +75,6 @@ function addEvents() {
         this.value = this.checked ? 1 : 0;
         Exp_Checkbox = this.value;
     });
-    //$('.dropdown').on('change', function () {
-    //    //$form = $('#form1').hideChildErrors();
-    //    //if (!common.checkValidityOnSave('#form1')) {
-    //    //    $form.getInvalidItems().get(0).focus();
-    //    //    return false;
-    //    //}
-
-    //    //$Unpublish = $("#Unpublish").val()
-    //    alert($("#Unpublish").val());
-    //});
-
-    //$('#Unpublish').on('click', function ()
-    //{
-    //    alert(123);
-
-    //});
-
-
     sortTable.getSortingTable("r_table_List");
     if ($('#defaultCheck3').val() == 1)
     {
@@ -309,7 +291,6 @@ function Bind_tbody(result) {
 
 function Unpublish_Function(id)
 {
-    alert(id.split('&')[1]);
     if (id.split('&')[1] = "未公開に戻す")
     {
         let model = {
