@@ -37,7 +37,7 @@ function setValidation() {
         .addvalidation_errorElement("#errorCheckBox")
         .addvalidation_checkboxlenght(); //E112
 
-    $('.comment')
+    $('#comment')
         .addvalidation_errorElement("#errorcomment")
         .addvalidation_reqired()
         .addvalidation_maxlengthCheck(2000)
@@ -275,7 +275,7 @@ function Bind_DisplayData(result) {
                 }
             }
 
-            if (data[i]["ConsultFrom"] = '1') {
+            if (data[i]["ConsultFrom"] == '1') {
                 _snbg_color = "bg-warning";
                 _rnbg_color = "";
             }
