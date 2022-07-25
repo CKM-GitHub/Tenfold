@@ -63,6 +63,7 @@
     <Compile Include="RealEstate\r_invoice\r_invoiceBL.cs" />
     <Compile Include="RealEstate\r_issueslist\r_issueslistBL.cs" />
     <Compile Include="RealEstate\r_login\r_loginBL.cs" />
+    <Compile Include="RealEstate\r_sendcus_max\r_sendcus_maxBL.cs" />
     <Compile Include="RealEstate\r_staff\r_staffBL.cs" />
     <Compile Include="RealEstate\r_statistic\r_statisticBL.cs" />
     <Compile Include="RealEstate\r_template\r_templateBL.cs" />

@@ -161,6 +161,7 @@
     <Compile Include="Controllers\r_invoiceController.cs" />
     <Compile Include="Controllers\r_issueslistController.cs" />
     <Compile Include="Controllers\r_loginController.cs" />
+    <Compile Include="Controllers\r_sendcus_maxController.cs" />
     <Compile Include="Controllers\r_staffController.cs" />
     <Compile Include="Controllers\r_statisticsController.cs" />
     <Compile Include="Controllers\r_templateController.cs" />
@@ -244,6 +245,7 @@
     <Content Include="Scripts\r_invoice.js" />
     <Content Include="Scripts\r_issueslist.js" />
     <Content Include="Scripts\r_login.js" />
+    <Content Include="Scripts\r_sendcus_max.js" />
     <Content Include="Scripts\r_staff.js" />
     <Content Include="Scripts\r_statistic.js" />
     <Content Include="Scripts\r_template.js" />
@@ -314,6 +316,7 @@
     <Content Include="Views\r_asmc_set_ms_check\Index.cshtml" />
     <Content Include="Views\Shared\_r_asmc_RECondManOptTable.cshtml" />
     <Content Include="Views\Shared\_ConfirmationMsgPopup.cshtml" />
+    <Content Include="Views\r_sendcus_max\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

@@ -170,6 +170,9 @@ namespace Seruichi.RealEstate.Web
             bundles.Add(new ScriptBundle("~/bundles/r_asmc_set_ms_check").Include(
                 "~/Scripts/r_asmc_set_ms_check.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/r_sendcus_max").Include(
+                "~/Scripts/r_sendcus_max.js"));
+
         }
     }
 }

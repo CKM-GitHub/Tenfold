@@ -108,6 +108,7 @@
     <Compile Include="RealEstate\RealEstate_L_Log_Model.cs" />
     <Compile Include="RealEstate\r_asmc_set_area\r_asmc_set_areaModel.cs" />
     <Compile Include="RealEstate\r_asmc_set_train\r_asmc_set_trainModel.cs" />
+    <Compile Include="RealEstate\r_sendcus_max\r_sendcus_maxModel.cs" />
     <Compile Include="RealEstate\SessionKey.cs" />
     <Compile Include="RealEstate\r_asmc\r_asmc_Region.cs" />
     <Compile Include="RealEstate\r_asmc_ms_list_map\r_asmc_ms_list_mapModel.cs" />
